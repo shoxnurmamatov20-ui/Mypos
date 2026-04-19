@@ -117,6 +117,9 @@ importers:
       '@mypos/design-tokens':
         specifier: workspace:*
         version: link:../../packages/design-tokens
+      '@mypos/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@mypos/utils':
         specifier: workspace:*
         version: link:../../packages/utils

@@ -66,5 +66,63 @@
     "deleted": "Удалено",
     "save_failed": "Ошибка сохранения",
     "delete_failed": "Ошибка удаления"
+  },
+  "tables": {
+    "title": "Столы",
+    "subtitle": "Управление столами и планом зала",
+    "views": {
+      "list": "Список",
+      "floor_plan": "План зала"
+    },
+    "categories_title": "Категории",
+    "add_table": "Добавить стол",
+    "edit_table": "Редактировать стол",
+    "add_category": "Добавить категорию",
+    "edit_category": "Редактировать категорию",
+    "fields": {
+      "name": "Название",
+      "capacity": "Вместимость",
+      "category": "Категория",
+      "status": "Статус",
+      "shape": "Форма",
+      "position": "Позиция (X, Y)"
+    },
+    "name_uz": "Название (UZ)",
+    "name_ru": "Название (RU)",
+    "name_en": "Название (EN)",
+    "sort_order": "Порядок",
+    "is_active": "Активна",
+    "capacity": "Вместимость",
+    "no_category": "Без категории",
+    "change_status": "Изменить статус",
+    "tables_count_suffix": "столов",
+    "unassigned": "Не размещённые столы",
+    "status": {
+      "available": "Свободен",
+      "occupied": "Занят",
+      "reserved": "Резерв",
+      "disabled": "Отключён"
+    },
+    "shapes": {
+      "round": "Круглый",
+      "square": "Квадратный",
+      "rectangle": "Прямоугольный",
+      "oval": "Овальный"
+    },
+    "save": "Сохранить",
+    "saving": "Сохранение...",
+    "cancel": "Отмена",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "loading": "Загрузка...",
+    "empty_tables": "Столов нет. Добавьте новый стол.",
+    "empty_categories": "Категорий нет.",
+    "confirm_delete": "Удалить стол \"{name}\"?",
+    "confirm_delete_category": "Удалить категорию \"{name}\"?",
+    "created": "Создано",
+    "updated": "Обновлено",
+    "deleted": "Удалено",
+    "save_failed": "Ошибка сохранения",
+    "delete_failed": "Ошибка удаления"
   }
 }

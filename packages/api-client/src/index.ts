@@ -17,3 +17,16 @@ export type {
   ResourceResponse,
   PaginatedResponse,
 } from './menu';
+export { tablesApi } from './tables';
+export type {
+  Table,
+  TableCategory,
+  TableStatus,
+  TableShape,
+  CreateTableInput,
+  UpdateTableInput,
+  CreateTableCategoryInput,
+  UpdateTableCategoryInput,
+  UpdateTableStatusInput,
+  ListTablesParams,
+} from './tables';

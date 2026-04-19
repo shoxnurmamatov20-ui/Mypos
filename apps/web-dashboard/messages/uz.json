@@ -66,5 +66,63 @@
     "deleted": "O'chirildi",
     "save_failed": "Saqlashda xatolik",
     "delete_failed": "O'chirishda xatolik"
+  },
+  "tables": {
+    "title": "Stollar",
+    "subtitle": "Stollar va xona planshkasini boshqarish",
+    "views": {
+      "list": "Ro'yxat",
+      "floor_plan": "Xonaning planshkasi"
+    },
+    "categories_title": "Kategoriyalar",
+    "add_table": "Stol qo'shish",
+    "edit_table": "Stolni tahrirlash",
+    "add_category": "Kategoriya qo'shish",
+    "edit_category": "Kategoriyani tahrirlash",
+    "fields": {
+      "name": "Nomi",
+      "capacity": "Sig'imi",
+      "category": "Kategoriya",
+      "status": "Holat",
+      "shape": "Shakli",
+      "position": "Joylashuv (X, Y)"
+    },
+    "name_uz": "Nomi (UZ)",
+    "name_ru": "Nomi (RU)",
+    "name_en": "Nomi (EN)",
+    "sort_order": "Tartib",
+    "is_active": "Faol",
+    "capacity": "Sig'imi",
+    "no_category": "Kategoriya yo'q",
+    "change_status": "Holatni o'zgartirish",
+    "tables_count_suffix": "ta stol",
+    "unassigned": "Joylashtirilmagan stollar",
+    "status": {
+      "available": "Bo'sh",
+      "occupied": "Band",
+      "reserved": "Rezerv",
+      "disabled": "O'chirilgan"
+    },
+    "shapes": {
+      "round": "Dumaloq",
+      "square": "Kvadrat",
+      "rectangle": "To'rtburchak",
+      "oval": "Oval"
+    },
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda...",
+    "cancel": "Bekor qilish",
+    "edit": "Tahrirlash",
+    "delete": "O'chirish",
+    "loading": "Yuklanmoqda...",
+    "empty_tables": "Stollar yo'q. Yangi stol qo'shing.",
+    "empty_categories": "Kategoriyalar yo'q.",
+    "confirm_delete": "\"{name}\" stolni o'chirishni tasdiqlaysizmi?",
+    "confirm_delete_category": "\"{name}\" kategoriyasini o'chirishni tasdiqlaysizmi?",
+    "created": "Yaratildi",
+    "updated": "Yangilandi",
+    "deleted": "O'chirildi",
+    "save_failed": "Saqlashda xatolik",
+    "delete_failed": "O'chirishda xatolik"
   }
 }

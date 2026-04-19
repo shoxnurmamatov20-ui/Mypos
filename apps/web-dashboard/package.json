@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@mypos/api-client": "workspace:*",
     "@mypos/design-tokens": "workspace:*",
+    "@mypos/ui": "workspace:*",
     "@mypos/utils": "workspace:*",
     "@mypos/validation": "workspace:*",
     "@tanstack/react-query": "^5.62.0",

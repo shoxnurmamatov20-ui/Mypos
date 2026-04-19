@@ -66,5 +66,63 @@
     "deleted": "Deleted",
     "save_failed": "Save failed",
     "delete_failed": "Delete failed"
+  },
+  "tables": {
+    "title": "Tables",
+    "subtitle": "Manage tables and floor plan",
+    "views": {
+      "list": "List",
+      "floor_plan": "Floor plan"
+    },
+    "categories_title": "Categories",
+    "add_table": "Add table",
+    "edit_table": "Edit table",
+    "add_category": "Add category",
+    "edit_category": "Edit category",
+    "fields": {
+      "name": "Name",
+      "capacity": "Capacity",
+      "category": "Category",
+      "status": "Status",
+      "shape": "Shape",
+      "position": "Position (X, Y)"
+    },
+    "name_uz": "Name (UZ)",
+    "name_ru": "Name (RU)",
+    "name_en": "Name (EN)",
+    "sort_order": "Sort order",
+    "is_active": "Active",
+    "capacity": "Capacity",
+    "no_category": "No category",
+    "change_status": "Change status",
+    "tables_count_suffix": "tables",
+    "unassigned": "Unassigned tables",
+    "status": {
+      "available": "Available",
+      "occupied": "Occupied",
+      "reserved": "Reserved",
+      "disabled": "Disabled"
+    },
+    "shapes": {
+      "round": "Round",
+      "square": "Square",
+      "rectangle": "Rectangle",
+      "oval": "Oval"
+    },
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading...",
+    "empty_tables": "No tables yet. Add a new one.",
+    "empty_categories": "No categories yet.",
+    "confirm_delete": "Delete table \"{name}\"?",
+    "confirm_delete_category": "Delete category \"{name}\"?",
+    "created": "Created",
+    "updated": "Updated",
+    "deleted": "Deleted",
+    "save_failed": "Save failed",
+    "delete_failed": "Delete failed"
   }
 }

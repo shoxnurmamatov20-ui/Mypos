@@ -17,6 +17,10 @@
     "./client": {
       "types": "./src/client.ts",
       "default": "./src/client.ts"
+    },
+    "./tables": {
+      "types": "./src/tables.ts",
+      "default": "./src/tables.ts"
     }
   },
   "scripts": {
