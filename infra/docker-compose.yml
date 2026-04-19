@@ -36,7 +36,7 @@ services:
       POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
       TZ: Asia/Tashkent
     ports:
-      - "5432:5432"
+      - "55432:5432"   # Host 55432 to avoid clash with other local Postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
@@ -67,7 +67,7 @@ services:
     container_name: mypos-redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "56379:6379"   # Host 56379 to avoid clash with other local Redis
     volumes:
       - redis_data:/data
     command:
