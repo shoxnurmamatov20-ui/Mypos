@@ -2,5 +2,69 @@
   "home": {
     "title": "MyPOS",
     "subtitle": "Your restaurant, reimagined"
+  },
+  "auth": {
+    "login": {
+      "page_title": "Login — MyPOS",
+      "title": "Sign in",
+      "subtitle": "Your restaurant, reimagined",
+      "identifier": "Email or phone",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in...",
+      "success": "Welcome, {name}!",
+      "error_generic": "Invalid credentials",
+      "error_network": "No internet connection",
+      "footer": "All rights reserved"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome, {name}",
+    "logout": "Logout"
+  },
+  "menu": {
+    "title": "Menu",
+    "subtitle": "Manage categories and items",
+    "tabs": {
+      "categories": "Categories",
+      "items": "Items"
+    },
+    "add_category": "Add category",
+    "edit_category": "Edit category",
+    "add_item": "Add item",
+    "edit_item": "Edit item",
+    "name_uz": "Name (UZ)",
+    "name_ru": "Name (RU)",
+    "name_en": "Name (EN)",
+    "description_uz": "Description (UZ)",
+    "category": "Category",
+    "color": "Color",
+    "icon": "Icon",
+    "sort_order": "Sort order",
+    "is_active": "Active",
+    "is_new": "New",
+    "is_featured": "Featured",
+    "has_discount": "Has discount",
+    "price_uzs": "Price (UZS)",
+    "image_url": "Image URL",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "new": "New",
+    "inactive": "Inactive",
+    "loading": "Loading...",
+    "empty_categories": "No categories yet. Add a new one.",
+    "empty_items": "No items yet. Add a new one.",
+    "need_category_first": "Add at least one category first",
+    "items_count_suffix": "items",
+    "confirm_delete_category": "Delete category \"{name}\"?",
+    "confirm_delete_item": "Delete item \"{name}\"?",
+    "created": "Created",
+    "updated": "Updated",
+    "deleted": "Deleted",
+    "save_failed": "Save failed",
+    "delete_failed": "Delete failed"
   }
 }

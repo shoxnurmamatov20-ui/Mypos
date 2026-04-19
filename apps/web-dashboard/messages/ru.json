@@ -2,5 +2,69 @@
   "home": {
     "title": "MyPOS",
     "subtitle": "Умный ресторан"
+  },
+  "auth": {
+    "login": {
+      "page_title": "Вход — MyPOS",
+      "title": "Вход в систему",
+      "subtitle": "Умный ресторан",
+      "identifier": "Email или телефон",
+      "password": "Пароль",
+      "submit": "Войти",
+      "submitting": "Вход...",
+      "success": "Добро пожаловать, {name}!",
+      "error_generic": "Неверные данные для входа",
+      "error_network": "Нет подключения к интернету",
+      "footer": "Все права защищены"
+    }
+  },
+  "dashboard": {
+    "welcome": "Добро пожаловать, {name}",
+    "logout": "Выйти"
+  },
+  "menu": {
+    "title": "Меню",
+    "subtitle": "Управление категориями и блюдами",
+    "tabs": {
+      "categories": "Категории",
+      "items": "Блюда"
+    },
+    "add_category": "Добавить категорию",
+    "edit_category": "Редактировать категорию",
+    "add_item": "Добавить блюдо",
+    "edit_item": "Редактировать блюдо",
+    "name_uz": "Название (UZ)",
+    "name_ru": "Название (RU)",
+    "name_en": "Название (EN)",
+    "description_uz": "Описание (UZ)",
+    "category": "Категория",
+    "color": "Цвет",
+    "icon": "Иконка",
+    "sort_order": "Порядок",
+    "is_active": "Активно",
+    "is_new": "Новое",
+    "is_featured": "Избранное",
+    "has_discount": "Есть скидка",
+    "price_uzs": "Цена (сум)",
+    "image_url": "URL изображения",
+    "save": "Сохранить",
+    "saving": "Сохранение...",
+    "cancel": "Отмена",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "new": "Новое",
+    "inactive": "Неактивно",
+    "loading": "Загрузка...",
+    "empty_categories": "Категорий нет. Добавьте новую категорию.",
+    "empty_items": "Блюд нет. Добавьте новое блюдо.",
+    "need_category_first": "Сначала добавьте хотя бы одну категорию",
+    "items_count_suffix": "блюд",
+    "confirm_delete_category": "Удалить категорию \"{name}\"?",
+    "confirm_delete_item": "Удалить блюдо \"{name}\"?",
+    "created": "Создано",
+    "updated": "Обновлено",
+    "deleted": "Удалено",
+    "save_failed": "Ошибка сохранения",
+    "delete_failed": "Ошибка удаления"
   }
 }

@@ -2,5 +2,69 @@
   "home": {
     "title": "MyPOS",
     "subtitle": "Restoraningizning aqli"
+  },
+  "auth": {
+    "login": {
+      "page_title": "Kirish — MyPOS",
+      "title": "Tizimga kirish",
+      "subtitle": "Restoraningizning aqli",
+      "identifier": "Email yoki telefon",
+      "password": "Parol",
+      "submit": "Kirish",
+      "submitting": "Kirilmoqda...",
+      "success": "Xush kelibsiz, {name}!",
+      "error_generic": "Kirish ma'lumotlari noto'g'ri",
+      "error_network": "Internet aloqasi yo'q",
+      "footer": "Barcha huquqlar himoyalangan"
+    }
+  },
+  "dashboard": {
+    "welcome": "Xush kelibsiz, {name}",
+    "logout": "Chiqish"
+  },
+  "menu": {
+    "title": "Menyu",
+    "subtitle": "Kategoriyalar va taomlarni boshqarish",
+    "tabs": {
+      "categories": "Kategoriyalar",
+      "items": "Taomlar"
+    },
+    "add_category": "Kategoriya qo'shish",
+    "edit_category": "Kategoriyani tahrirlash",
+    "add_item": "Taom qo'shish",
+    "edit_item": "Taomni tahrirlash",
+    "name_uz": "Nomi (UZ)",
+    "name_ru": "Nomi (RU)",
+    "name_en": "Nomi (EN)",
+    "description_uz": "Tavsif (UZ)",
+    "category": "Kategoriya",
+    "color": "Rang",
+    "icon": "Ikonka",
+    "sort_order": "Tartib",
+    "is_active": "Faol",
+    "is_new": "Yangi",
+    "is_featured": "Tanlangan",
+    "has_discount": "Chegirma bor",
+    "price_uzs": "Narx (so'm)",
+    "image_url": "Rasm URL",
+    "save": "Saqlash",
+    "saving": "Saqlanmoqda...",
+    "cancel": "Bekor qilish",
+    "edit": "Tahrirlash",
+    "delete": "O'chirish",
+    "new": "Yangi",
+    "inactive": "Nofaol",
+    "loading": "Yuklanmoqda...",
+    "empty_categories": "Kategoriyalar yo'q. Yangi kategoriya qo'shing.",
+    "empty_items": "Taomlar yo'q. Yangi taom qo'shing.",
+    "need_category_first": "Avval kamida bitta kategoriya qo'shing",
+    "items_count_suffix": "ta taom",
+    "confirm_delete_category": "\"{name}\" kategoriyasini o'chirishni tasdiqlaysizmi?",
+    "confirm_delete_item": "\"{name}\" taomini o'chirishni tasdiqlaysizmi?",
+    "created": "Yaratildi",
+    "updated": "Yangilandi",
+    "deleted": "O'chirildi",
+    "save_failed": "Saqlashda xatolik",
+    "delete_failed": "O'chirishda xatolik"
   }
 }
