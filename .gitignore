@@ -1,0 +1,108 @@
+# Legacy archive (kept on disk, not tracked in git)
+_legacy-*/
+
+# Claude Code — local session settings (keep .claude/agents/ and commands/ tracked)
+.claude/settings.local.json
+
+# Dependencies
+node_modules/
+.pnpm-store/
+vendor/
+composer.phar
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.expo/
+.expo-shared/
+*.tsbuildinfo
+
+# Turbo
+.turbo/
+
+# Testing
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+.playwright/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+!.env.example
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Laravel (apps/api)
+apps/api/bootstrap/cache/
+apps/api/storage/*.key
+apps/api/storage/app/*
+!apps/api/storage/app/.gitignore
+apps/api/storage/debugbar/*
+!apps/api/storage/debugbar/.gitignore
+apps/api/storage/framework/cache/data/*
+!apps/api/storage/framework/cache/data/.gitignore
+apps/api/storage/framework/sessions/*
+!apps/api/storage/framework/sessions/.gitignore
+apps/api/storage/framework/views/*
+!apps/api/storage/framework/views/.gitignore
+apps/api/storage/logs/*
+!apps/api/storage/logs/.gitignore
+apps/api/.phpunit.result.cache
+apps/api/.phpstan.cache
+apps/api/vendor/
+apps/api/public/storage
+apps/api/public/hot
+apps/api/public/build/
+apps/api/auth.json
+
+# Mobile / Expo
+*.orig.*
+web-build/
+ios/
+android/
+.eas/
+
+# Docker
+infra/docker/postgres/data/
+infra/docker/redis/data/
+infra/docker/minio/data/
+infra/docker/meilisearch/data/
+
+# Generated
+packages/api-client/src/generated/
+docs/api/openapi.yml.bak
+
+# Secrets
+*.pem
+*.key
+*.p8
+*.p12
+*.jks
+*.mobileprovision
+!infra/docker/*/*.key.example

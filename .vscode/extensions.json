@@ -1,0 +1,35 @@
+{
+  "recommendations": [
+    "biomejs.biome",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next",
+    "dbaeumer.vscode-eslint",
+
+    "expo.vscode-expo-tools",
+
+    "bmewburn.vscode-intelephense-client",
+    "xdebug.php-debug",
+    "open-southeners.laravel-pint",
+    "amiralizadeh9480.laravel-extra-intellisense",
+    "onecentlin.laravel-blade",
+    "ryannaddy.laravel-artisan",
+
+    "ms-azuretools.vscode-docker",
+    "hashicorp.terraform",
+
+    "github.copilot",
+    "github.vscode-pull-request-github",
+
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+
+    "yoavbls.pretty-ts-errors",
+    "usernamehw.errorlens",
+    "gruntfuggly.todo-tree",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-russian",
+
+    "mikestead.dotenv",
+    "editorconfig.editorconfig"
+  ]
+}

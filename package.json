@@ -1,0 +1,34 @@
+{
+  "name": "mypos",
+  "private": true,
+  "version": "0.1.0",
+  "description": "MyPOS — Markaziy Osiyo uchun #1 Restaurant Operating System",
+  "author": "MyPOS Team",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "docker:up": "docker compose -f infra/docker-compose.yml up -d",
+    "docker:down": "docker compose -f infra/docker-compose.yml down",
+    "docker:logs": "docker compose -f infra/docker-compose.yml logs -f",
+    "prepare": "husky || true"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.0",
+    "turbo": "^2.3.0",
+    "typescript": "^5.9.2",
+    "husky": "^9.1.7"
+  }
+}

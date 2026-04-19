@@ -1,0 +1,180 @@
+# MyPOS — Local Development Infrastructure
+#
+# Services:
+#   - postgres    : PostgreSQL 17 (main DB)
+#   - redis       : Redis 7.4 (cache, queue, Reverb pub/sub)
+#   - meilisearch : Search (Laravel Scout driver)
+#   - minio       : S3-compatible object storage (files, images)
+#   - caddy       : Reverse proxy with auto-HTTPS (commented in dev)
+#
+# Usage:
+#   pnpm docker:up       # Start all
+#   pnpm docker:down     # Stop all
+#   pnpm docker:logs     # Tail logs
+#
+# Access:
+#   postgres    : localhost:5432  (user: mypos / pwd: mypos_local_pwd)
+#   redis       : localhost:6379
+#   meilisearch : http://localhost:7700
+#   minio       : http://localhost:9000 (API), http://localhost:9001 (console)
+#
+# Data persists in named volumes — survives `docker compose down`.
+# Use `docker compose down -v` to wipe.
+
+name: mypos
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: mypos-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mypos
+      POSTGRES_USER: mypos
+      POSTGRES_PASSWORD: mypos_local_pwd
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+      TZ: Asia/Tashkent
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=200"
+      - "-c"
+      - "shared_buffers=256MB"
+      - "-c"
+      - "effective_cache_size=1GB"
+      - "-c"
+      - "work_mem=16MB"
+      - "-c"
+      - "maintenance_work_mem=128MB"
+      - "-c"
+      - "log_min_duration_statement=500"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mypos -d mypos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mypos
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: mypos-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command:
+      - "redis-server"
+      - "--appendonly"
+      - "yes"
+      - "--maxmemory"
+      - "512mb"
+      - "--maxmemory-policy"
+      - "allkeys-lru"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - mypos
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.11
+    container_name: mypos-meilisearch
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: mypos_meili_local
+      MEILI_ENV: development
+      MEILI_LOG_LEVEL: INFO
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch_data:/meili_data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:7700/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mypos
+
+  minio:
+    image: minio/minio:latest
+    container_name: mypos-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: mypos_minio_local
+      MINIO_ROOT_PASSWORD: mypos_minio_local_secret
+      MINIO_DOMAIN: localhost
+    ports:
+      - "9000:9000"   # API
+      - "9001:9001"   # Web console
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mypos
+
+  minio-setup:
+    image: minio/mc:latest
+    container_name: mypos-minio-setup
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 mypos_minio_local mypos_minio_local_secret;
+      mc mb --ignore-existing local/mypos-local;
+      mc anonymous set public local/mypos-local;
+      exit 0;
+      "
+    networks:
+      - mypos
+
+  # Caddy is commented out for local dev — Next.js/Laravel serve directly.
+  # Uncomment for production-like local with HTTPS.
+  # caddy:
+  #   image: caddy:2-alpine
+  #   container_name: mypos-caddy
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+  #     - caddy_data:/data
+  #     - caddy_config:/config
+  #   networks:
+  #     - mypos
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  meilisearch_data:
+    driver: local
+  minio_data:
+    driver: local
+  # caddy_data:
+  #   driver: local
+  # caddy_config:
+  #   driver: local
+
+networks:
+  mypos:
+    driver: bridge
+    name: mypos-network

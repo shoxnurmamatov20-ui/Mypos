@@ -1,0 +1,48 @@
+# MyPOS Caddy configuration (production-style local).
+# For local dev, Next.js + Laravel serve on their own ports directly.
+# Use this for production or production-like testing.
+
+{
+    # admin off  # uncomment in prod
+    email admin@mypos.uz
+}
+
+# Marketing site
+mypos.local {
+    reverse_proxy web-marketing:3000
+}
+
+# Dashboard (manager / owner)
+app.mypos.local {
+    reverse_proxy web-dashboard:3001
+}
+
+# Super Admin Advanced
+ops.mypos.local {
+    reverse_proxy web-superadmin:3002
+}
+
+# Super Admin — Filament
+admin.mypos.local {
+    reverse_proxy api:8000
+}
+
+# Consumer web
+consumer.mypos.local {
+    reverse_proxy web-consumer:3003
+}
+
+# QR menu PWA
+menu.mypos.local {
+    reverse_proxy web-qr:3004
+}
+
+# API
+api.mypos.local {
+    reverse_proxy api:8000
+}
+
+# WebSocket (Reverb)
+ws.mypos.local {
+    reverse_proxy api:8080
+}
