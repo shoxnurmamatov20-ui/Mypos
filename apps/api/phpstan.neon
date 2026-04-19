@@ -1,0 +1,25 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app/
+        - config/
+        - database/
+        - routes/
+        - tests/
+
+    level: 8
+
+    excludePaths:
+        - app/Console/Kernel.php
+        - bootstrap/app.php
+        - vendor
+
+    ignoreErrors:
+        # Facade calls
+        - '#Dynamic call to static method#'
+        # Eloquent magic
+        - '#Call to an undefined method .*::find\(\)#'
+        - '#Call to an undefined method .*::where\(\)#'
+        - '#Call to an undefined method .*::create\(\)#'

@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "MyPOS POS",
+    "slug": "mypos-pos-terminal",
+    "version": "0.1.0",
+    "orientation": "landscape",
+    "icon": "./assets/icon.png",
+    "scheme": "mypos-pos",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "uz.mypos.pos",
+      "requireFullScreen": true
+    },
+    "android": {
+      "package": "uz.mypos.pos",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#EA7C69"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-secure-store",
+      "expo-localization"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

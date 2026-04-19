@@ -1,0 +1,36 @@
+{
+  "app": {
+    "name": "MyPOS",
+    "tagline": "Restoraningizning aqli"
+  },
+  "actions": {
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "delete": "O'chirish",
+    "edit": "Tahrirlash",
+    "create": "Yaratish",
+    "update": "Yangilash",
+    "close": "Yopish",
+    "confirm": "Tasdiqlash",
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "search": "Qidirish",
+    "loading": "Yuklanmoqda..."
+  },
+  "validation": {
+    "required": "Bu maydon to'ldirilishi shart",
+    "min": "Kamida {min} ta belgi bo'lishi kerak",
+    "max": "Ko'pi bilan {max} ta belgi bo'lishi kerak",
+    "email": "To'g'ri email kiriting",
+    "phone": "Telefon raqami noto'g'ri",
+    "password_weak": "Parol zaif"
+  },
+  "errors": {
+    "generic": "Xatolik yuz berdi",
+    "network": "Internet aloqasi yo'q",
+    "unauthorized": "Avtorizatsiya kerak",
+    "forbidden": "Ruxsat yo'q",
+    "not_found": "Topilmadi",
+    "server": "Server xatoligi"
+  }
+}

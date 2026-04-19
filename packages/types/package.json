@@ -1,0 +1,24 @@
+{
+  "name": "@mypos/types",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./order": "./src/order.ts",
+    "./menu": "./src/menu.ts",
+    "./table": "./src/table.ts",
+    "./employee": "./src/employee.ts",
+    "./tenant": "./src/tenant.ts",
+    "./customer": "./src/customer.ts",
+    "./common": "./src/common.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}
