@@ -1,49 +1,93 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Domain\Tenant\Models\Tenant;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+/**
+ * @property int $id
+ * @property string $uuid
+ * @property string|null $tenant_id
+ * @property string $name
+ * @property string $email
+ * @property string|null $phone
+ * @property string $locale
+ * @property string|null $avatar_url
+ * @property string $password
+ * @property bool $is_super_admin
+ * @property \Illuminate\Support\Carbon|null $last_login_at
+ * @property string|null $last_login_ip
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ */
+class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use HasApiTokens;
+    use HasRoles;
+    use Notifiable;
+    use SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
+        'uuid',
+        'tenant_id',
         'name',
         'email',
+        'phone',
+        'locale',
+        'avatar_url',
         'password',
+        'is_super_admin',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    protected static function booted(): void
+    {
+        static::creating(function (User $user): void {
+            if ($user->uuid === null || $user->uuid === '') {
+                $user->uuid = (string) Str::uuid();
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
+            'last_login_at' => 'datetime',
+            'is_super_admin' => 'boolean',
             'password' => 'hashed',
         ];
+    }
+
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    /**
+     * Filament access — only super admins can reach the /admin panel.
+     * Tenant users have their own dashboards.
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->is_super_admin === true;
     }
 }

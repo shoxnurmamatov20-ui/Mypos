@@ -111,9 +111,18 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.10.0(react-hook-form@7.72.1(react@19.2.5))
+      '@mypos/api-client':
+        specifier: workspace:*
+        version: link:../../packages/api-client
       '@mypos/design-tokens':
         specifier: workspace:*
         version: link:../../packages/design-tokens
+      '@mypos/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      '@mypos/validation':
+        specifier: workspace:*
+        version: link:../../packages/validation
       '@tanstack/react-query':
         specifier: ^5.62.0
         version: 5.99.2(react@19.2.5)

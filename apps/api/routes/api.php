@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,13 +25,18 @@ Route::prefix('v1')->group(function () {
         ]);
     })->name('v1.health');
 
-    // Domain routes will be registered here as modules land.
-    // Example:
-    // Route::middleware('auth:sanctum')->group(function () {
-    //     Route::apiResource('menu-items', MenuItemController::class);
-    // });
-});
+    // --- Auth (public) ---
+    Route::prefix('auth')->group(function () {
+        Route::post('/login', [AuthController::class, 'login'])
+            ->middleware('throttle:10,1')
+            ->name('v1.auth.login');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+        // --- Auth (authenticated) ---
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::get('/me', [AuthController::class, 'me'])->name('v1.auth.me');
+            Route::post('/logout', [AuthController::class, 'logout'])->name('v1.auth.logout');
+        });
+    });
+
+    // Domain routes will be registered here as modules land.
 });

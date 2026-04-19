@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@mypos/api-client": "workspace:*",
     "@mypos/design-tokens": "workspace:*",
+    "@mypos/utils": "workspace:*",
+    "@mypos/validation": "workspace:*",
     "@tanstack/react-query": "^5.62.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.468.0",
