@@ -23,5 +23,6 @@ h4 {
 }
 
 ::selection {
-  @apply bg-brand-200 text-brand-900;
+  background-color: #FFC3B2;
+  color: #5A2419;
 }
