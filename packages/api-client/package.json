@@ -21,6 +21,14 @@
     "./tables": {
       "types": "./src/tables.ts",
       "default": "./src/tables.ts"
+    },
+    "./menu": {
+      "types": "./src/menu.ts",
+      "default": "./src/menu.ts"
+    },
+    "./orders": {
+      "types": "./src/orders.ts",
+      "default": "./src/orders.ts"
     }
   },
   "scripts": {

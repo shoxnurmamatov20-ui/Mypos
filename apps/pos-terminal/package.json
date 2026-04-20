@@ -13,7 +13,11 @@
     "clean": "rm -rf .expo node_modules .turbo"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@mypos/api-client": "workspace:*",
     "@mypos/design-tokens": "workspace:*",
+    "@mypos/ui": "workspace:*",
+    "@mypos/utils": "workspace:*",
     "@tanstack/react-query": "^5.62.0",
     "expo": "~54.0.0",
     "expo-constants": "~18.0.0",

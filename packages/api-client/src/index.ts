@@ -30,3 +30,17 @@ export type {
   UpdateTableStatusInput,
   ListTablesParams,
 } from './tables';
+export { ordersApi } from './orders';
+export type {
+  Order,
+  OrderItem,
+  OrderItemModifier,
+  OrderAmounts,
+  OrderType,
+  OrderStatus,
+  PaymentStatus,
+  CreateOrderInput,
+  CreateOrderItemInput,
+  UpdateOrderStatusInput,
+  ListOrdersParams,
+} from './orders';
