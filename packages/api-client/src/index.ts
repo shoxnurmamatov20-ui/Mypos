@@ -38,7 +38,7 @@ export type {
   OrderAmounts,
   OrderType,
   OrderStatus,
-  PaymentStatus,
+  OrderPaymentStatus,
   CreateOrderInput,
   CreateOrderItemInput,
   UpdateOrderStatusInput,
@@ -72,3 +72,57 @@ export type {
   UpdateCustomerInput,
   ListCustomersParams,
 } from './customers';
+export { employeesApi, shiftsApi, clockApi } from './employees';
+export type {
+  Employee,
+  EmployeeStatus,
+  EmployeePosition,
+  EmployeeStatusBadge,
+  EmployeePositionBadge,
+  EmployeeUserSummary,
+  EmployeeDocument,
+  Shift,
+  ShiftStatus,
+  ShiftStatusBadge,
+  ClockSource,
+  ClockInput,
+  CreateEmployeeInput,
+  UpdateEmployeeInput,
+  ListEmployeesParams,
+  ScheduleShiftInput,
+  ListShiftsParams,
+} from './employees';
+export { paymentsApi } from './payments';
+export type {
+  Payment,
+  PaymentProvider,
+  PaymentStatus,
+  CreatePaymentIntentInput,
+  CreatePaymentIntentResponse,
+  RefundPaymentInput,
+} from './payments';
+export { notificationsApi } from './notifications';
+export type {
+  NotificationChannel,
+  NotificationStatus,
+  NotificationTemplate,
+  NotificationLog,
+  NotificationPreference,
+  ListNotificationsParams,
+  UpdatePreferenceInput,
+} from './notifications';
+export { inventoryApi } from './inventory';
+export type {
+  Ingredient,
+  IngredientCategory,
+  Recipe,
+  StockMovement,
+  StockMovementReason,
+  Supplier,
+  CreateIngredientInput,
+  UpdateIngredientInput,
+  CreateRecipeInput,
+  StockAdjustmentInput,
+  ValuationItem,
+  ValuationResponse,
+} from './inventory';

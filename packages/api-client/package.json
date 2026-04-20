@@ -41,6 +41,18 @@
     "./customers": {
       "types": "./src/customers.ts",
       "default": "./src/customers.ts"
+    },
+    "./employees": {
+      "types": "./src/employees.ts",
+      "default": "./src/employees.ts"
+    },
+    "./payments": {
+      "types": "./src/payments.ts",
+      "default": "./src/payments.ts"
+    },
+    "./inventory": {
+      "types": "./src/inventory.ts",
+      "default": "./src/inventory.ts"
     }
   },
   "scripts": {

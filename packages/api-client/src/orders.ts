@@ -21,7 +21,7 @@ export type OrderStatus =
   | 'cancelled'
   | 'refunded';
 
-export type PaymentStatus =
+export type OrderPaymentStatus =
   | 'unpaid'
   | 'partial'
   | 'paid'
@@ -64,7 +64,7 @@ export type Order = {
   order_no: string;
   type: OrderType;
   status: OrderStatus;
-  payment_status: PaymentStatus;
+  payment_status: OrderPaymentStatus;
   payment_method: string | null;
   table_id: string | null;
   table?: Table | null;

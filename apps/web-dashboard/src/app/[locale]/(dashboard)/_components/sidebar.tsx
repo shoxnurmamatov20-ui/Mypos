@@ -36,7 +36,7 @@ function buildGroups(locale: string): NavGroup[] {
       key: 'operations',
       items: [
         { key: 'dashboard', href: `${base}/overview`, icon: Home },
-        { key: 'orders', href: `${base}/orders`, icon: ShoppingCart, tbd: true },
+        { key: 'orders', href: `${base}/orders`, icon: ShoppingCart },
         { key: 'tables', href: `${base}/tables`, icon: TableIcon },
       ],
     },
@@ -51,7 +51,7 @@ function buildGroups(locale: string): NavGroup[] {
       key: 'business',
       items: [
         { key: 'reports', href: `${base}/reports`, icon: BarChart3 },
-        { key: 'employees', href: `${base}/employees`, icon: Users, tbd: true },
+        { key: 'employees', href: `${base}/employees`, icon: Users },
         { key: 'customers', href: `${base}/customers`, icon: Heart, tbd: true },
       ],
     },

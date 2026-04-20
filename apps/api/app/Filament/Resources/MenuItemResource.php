@@ -303,6 +303,13 @@ class MenuItemResource extends Resource
             ]);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            MenuItemResource\RelationManagers\RecipesRelationManager::class,
+        ];
+    }
+
     public static function getPages(): array
     {
         return [

@@ -10,6 +10,7 @@ use App\Domain\Order\Enums\OrderStatus;
 use App\Domain\Order\Models\Order;
 use App\Domain\Order\Models\OrderItem;
 use App\Domain\Table\Models\Table;
+use App\Events\Order\OrderPlaced;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Order\CreateOrderRequest;
 use App\Http\Resources\V1\Order\OrderResource;
@@ -54,6 +55,8 @@ class OrderController extends Controller
         abort_if($user === null, 401);
 
         $order = $create($user, $request->validated());
+
+        OrderPlaced::dispatch($order);
 
         return response()->json(
             ['data' => OrderResource::make($order)],

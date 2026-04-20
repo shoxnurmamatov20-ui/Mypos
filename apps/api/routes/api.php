@@ -1,13 +1,17 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Menu\MenuCategoryController;
 use App\Http\Controllers\Api\V1\Menu\MenuItemController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
+use App\Http\Controllers\Api\V1\Payment\PaymentController;
 use App\Http\Controllers\Api\V1\Public\PublicMenuController;
 use App\Http\Controllers\Api\V1\Public\PublicOrderController;
 use App\Http\Controllers\Api\V1\Table\TableCategoryController;
 use App\Http\Controllers\Api\V1\Table\TableController;
+use App\Http\Controllers\Api\V1\Webhook\ClickWebhookController;
+use App\Http\Controllers\Api\V1\Webhook\PaymeWebhookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +42,12 @@ Route::prefix('v1')->group(function () {
         Route::post('/menu/{slug}/orders', [PublicOrderController::class, 'store'])
             ->middleware('throttle:30,1')
             ->name('v1.public.orders.store');
+    });
+
+    // --- Public payment webhooks (no auth, no CSRF) ---
+    Route::prefix('webhooks')->group(function () {
+        Route::post('/click', [ClickWebhookController::class, 'handle'])->name('v1.webhooks.click');
+        Route::post('/payme', [PaymeWebhookController::class, 'handle'])->name('v1.webhooks.payme');
     });
 
     // --- Auth (public login + authenticated me/logout) ---
@@ -91,6 +101,23 @@ Route::prefix('v1')->group(function () {
             Route::get('/stats/summary', [OrderController::class, 'summary'])->name('v1.orders.stats.summary');
             Route::get('/{order}', [OrderController::class, 'show'])->name('v1.orders.show');
             Route::patch('/{order}/status', [OrderController::class, 'updateStatus'])->name('v1.orders.status');
+        });
+
+        // Customers
+        Route::prefix('customers')->group(function () {
+            Route::get('/', [CustomerController::class, 'index'])->name('v1.customers.index');
+            Route::post('/', [CustomerController::class, 'store'])->name('v1.customers.store');
+            Route::get('/{customer}', [CustomerController::class, 'show'])->name('v1.customers.show');
+            Route::patch('/{customer}', [CustomerController::class, 'update'])->name('v1.customers.update');
+            Route::delete('/{customer}', [CustomerController::class, 'destroy'])->name('v1.customers.destroy');
+        });
+
+        // Payments
+        Route::prefix('payments')->group(function () {
+            Route::post('/', [PaymentController::class, 'store'])->name('v1.payments.store');
+            Route::get('/{payment}', [PaymentController::class, 'show'])->name('v1.payments.show');
+            Route::post('/{payment}/capture', [PaymentController::class, 'captureCash'])->name('v1.payments.capture');
+            Route::post('/{payment}/refund', [PaymentController::class, 'refund'])->name('v1.payments.refund');
         });
     });
 });

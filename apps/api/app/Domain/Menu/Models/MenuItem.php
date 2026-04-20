@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Menu\Models;
 
+use App\Domain\Inventory\Models\Recipe;
 use App\Domain\Shared\Concerns\BelongsToTenant;
 use Database\Factories\MenuItemFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -85,6 +87,11 @@ class MenuItem extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(MenuCategory::class, 'category_id');
+    }
+
+    public function recipes(): HasMany
+    {
+        return $this->hasMany(Recipe::class, 'menu_item_id');
     }
 
     public function name(string $locale = 'uz'): string

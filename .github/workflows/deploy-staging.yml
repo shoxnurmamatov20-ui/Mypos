@@ -1,0 +1,79 @@
+name: Deploy Staging (build artifacts)
+
+# Placeholder deployment pipeline.
+# Triggers on push to main and via manual dispatch.
+# Builds all web apps and uploads the static outputs as CI artifacts so
+# a future step can hand them off to Coolify via webhook.
+# NOTE: this workflow does NOT push or deploy anywhere yet.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+env:
+  NODE_VERSION: '22'
+  PNPM_VERSION: '10.28.2'
+
+concurrency:
+  group: deploy-staging-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build web apps
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - web-dashboard
+          - web-marketing
+          - kds
+          - web-qr
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck ${{ matrix.app }}
+        run: pnpm --filter @mypos/${{ matrix.app }} typecheck
+
+      - name: Build ${{ matrix.app }}
+        run: pnpm --filter @mypos/${{ matrix.app }} build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+
+      - name: Upload ${{ matrix.app }} artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-build-${{ github.sha }}
+          path: |
+            apps/${{ matrix.app }}/.next
+            !apps/${{ matrix.app }}/.next/cache
+          retention-days: 7
+          if-no-files-found: warn
+
+  deploy-notice:
+    name: Deploy placeholder
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: |
+          echo "All web apps built successfully."
+          echo "Real deploy step (Coolify webhook) will be wired up later."
+          echo "Artifacts are attached to this run for manual promotion."

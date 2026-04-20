@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "title": "MyPOS — The brain of your restaurant",
+    "description": "MyPOS is the modern restaurant management platform for Uzbekistan and Central Asia. POS, KDS, QR menu, analytics and AI assistant in one place.",
+    "og_title": "MyPOS — The brain of your restaurant",
+    "og_description": "Power your restaurant with an intelligent management platform. Start free, scale when you're ready.",
+    "keywords": "restaurant, POS, checkout, menu, QR menu, restaurant management, Uzbekistan, KDS, Click, Payme"
+  },
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "login": "Sign in",
+    "try_free": "Try free",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu"
+  },
+  "hero": {
+    "badge": "Central Asia's #1 restaurant platform",
+    "title": "The brain of your restaurant",
+    "subtitle": "Manage orders, menu, staff and analytics on a single platform. Works with Click, Payme and Uzum — even offline.",
+    "cta_primary": "Try free",
+    "cta_secondary": "Watch demo",
+    "dashboard_alt": "MyPOS dashboard",
+    "dashboard_caption": "Manager Dashboard",
+    "dashboard_subtitle": "Today's revenue, top items and staff KPIs at a glance",
+    "stats": {
+      "restaurants": "restaurants",
+      "orders": "orders",
+      "uptime": "reliable uptime"
+    }
+  },
+  "features": {
+    "section_label": "Features",
+    "title": "Everything your restaurant needs",
+    "subtitle": "From POS terminal to AI assistant — unified on a single platform.",
+    "items": {
+      "pos": {
+        "title": "POS Terminal",
+        "desc": "Lightning-fast checkout: 2 seconds per order. Offline mode, receipt printer, Click/Payme integration."
+      },
+      "kds": {
+        "title": "Kitchen Display",
+        "desc": "Digital order screen for the kitchen. Prep timers, queue view and automatic alerts."
+      },
+      "qr_menu": {
+        "title": "QR Menu",
+        "desc": "Guests scan a QR at the table and order themselves. Translated to UZ, RU and EN."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "desc": "Daily revenue, top dishes, staff KPIs. Export to PDF and Excel."
+      },
+      "ai": {
+        "title": "AI Assistant",
+        "desc": "Powered by Claude: menu translations, demand forecasting and inventory optimization."
+      },
+      "telegram": {
+        "title": "Telegram Bot",
+        "desc": "Customers order via Telegram. Order and delivery notifications are automatic."
+      }
+    }
+  },
+  "how": {
+    "section_label": "How it works",
+    "title": "Get started in 3 steps",
+    "subtitle": "No special hardware required — open it on a tablet and start selling right away.",
+    "steps": {
+      "one": {
+        "label": "Step 1",
+        "title": "Sign up",
+        "desc": "Create your account in 30 seconds using phone or email."
+      },
+      "two": {
+        "label": "Step 2",
+        "title": "Onboard your restaurant",
+        "desc": "Add menu, tables and staff. Our AI assistant or Excel import will help."
+      },
+      "three": {
+        "label": "Step 3",
+        "title": "Start selling",
+        "desc": "Open the POS, take your first order. Revenue goes straight to your account."
+      }
+    }
+  },
+  "pricing": {
+    "section_label": "Pricing",
+    "title": "A plan for every restaurant",
+    "subtitle": "Start free. Scale as you grow. No hidden fees.",
+    "per_month": "/mo",
+    "most_popular": "Most popular",
+    "cta": "Get started",
+    "cta_contact": "Contact us",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "price_uzs": "0",
+        "price_usd": "$0",
+        "tagline": "For new openings",
+        "features": [
+          "1 location, 2 staff",
+          "100 orders per month",
+          "Basic POS",
+          "MyPOS watermark"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "price_uzs": "390,000 UZS",
+        "price_usd": "$29",
+        "tagline": "For small cafes and restaurants",
+        "features": [
+          "1 location, 10 staff",
+          "Unlimited orders",
+          "KDS and Manager Dashboard",
+          "Click and Payme integration",
+          "Reports and receipt printing"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "price_uzs": "1,290,000 UZS",
+        "price_usd": "$99",
+        "tagline": "For growing chains",
+        "features": [
+          "3 locations, 30 staff",
+          "Everything in Starter",
+          "QR menu and loyalty",
+          "Telegram bot and reservations",
+          "Inventory and 500 SMS/mo"
+        ]
+      },
+      "business": {
+        "name": "Business",
+        "price_uzs": "3,900,000 UZS",
+        "price_usd": "$299",
+        "tagline": "For large chains",
+        "features": [
+          "10 locations, 100 staff",
+          "Everything in Pro",
+          "Multi-location dashboard",
+          "AI assistant and API access",
+          "Priority support"
+        ]
+      }
+    }
+  },
+  "testimonials": {
+    "section_label": "Testimonials",
+    "title": "What restaurant owners say",
+    "items": {
+      "one": {
+        "quote": "After switching to MyPOS the queue at the register disappeared. Orders are prepared twice as fast and the staff loves it.",
+        "author": "Sardor Xolmatov",
+        "role": "Choyxona Navruz — Tashkent"
+      },
+      "two": {
+        "quote": "QR menu lets guests order themselves. Waiter costs dropped 30% and revenue went up.",
+        "author": "Gulnora Ergasheva",
+        "role": "Caffe Bella — Samarkand"
+      },
+      "three": {
+        "quote": "Thanks to AI reports we discovered which dishes were unprofitable. We reworked the menu and margin grew 18%.",
+        "author": "Rustam Aliyev",
+        "role": "Osh Markazi — Bukhara"
+      }
+    }
+  },
+  "faq": {
+    "section_label": "FAQ",
+    "title": "Frequently asked questions",
+    "items": {
+      "payments": {
+        "q": "Do Click and Payme work?",
+        "a": "Yes. MyPOS integrates with all major Uzbek payment rails: Click, Payme, Uzum, Apelsin and Humo/Uzcard. Receipts print automatically."
+      },
+      "offline": {
+        "q": "Does it work offline?",
+        "a": "Yes. The POS accepts orders in offline mode. Data syncs to the server automatically when the connection is restored."
+      },
+      "hardware": {
+        "q": "Do I need special hardware?",
+        "a": "No. MyPOS runs on any Android or iOS tablet, phone or computer. A receipt printer makes it nicer but isn't required."
+      },
+      "setup": {
+        "q": "How long does setup take?",
+        "a": "About 30 minutes. After signup, our AI assistant helps import your menu from Excel or photos."
+      },
+      "staff": {
+        "q": "How do my staff learn it?",
+        "a": "The interface is simple — training takes about 10 minutes. Guides and video lessons are available in UZ, RU and EN."
+      },
+      "migration": {
+        "q": "How do I migrate from another system?",
+        "a": "We'll migrate your data from iCiko, Poster or Excel free of charge. The service is included in Pro and Business plans."
+      },
+      "security": {
+        "q": "Is my data safe?",
+        "a": "Yes. Servers are hosted in Uzbekistan (UZCLOUD), data is encrypted, daily backups are taken, and we comply with Uzbek data protection law."
+      },
+      "support": {
+        "q": "What about support?",
+        "a": "Telegram and email support for all plans. Business tier gets 24/7 priority support and a dedicated account manager."
+      }
+    }
+  },
+  "cta": {
+    "title": "Start today",
+    "subtitle": "First 14 days free. No credit card required. Cancel anytime.",
+    "button": "Try free",
+    "secondary": "Request a demo"
+  },
+  "footer": {
+    "tagline": "A modern restaurant operating system for Central Asia.",
+    "product": "Product",
+    "company": "Company",
+    "support": "Support",
+    "legal": "Legal",
+    "features": "Features",
+    "pricing": "Pricing",
+    "integrations": "Integrations",
+    "mobile_apps": "Mobile apps",
+    "about": "About",
+    "blog": "Blog",
+    "careers": "Careers",
+    "partners": "Partners",
+    "contact": "Contact",
+    "docs": "Documentation",
+    "status": "Status",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "contact_sales": "Sales",
+    "phone": "+998 71 200 00 00",
+    "email": "hello@mypos.uz",
+    "address": "Tashkent, Uzbekistan",
+    "copyright": "{year} MyPOS. All rights reserved.",
+    "lang_label": "Language"
+  },
+  "features_page": {
+    "title": "MyPOS features",
+    "subtitle": "Everything you need to run your restaurant — on one platform."
+  },
+  "pricing_page": {
+    "title": "Transparent, fair pricing",
+    "subtitle": "No hidden fees. Change your plan at any time."
+  },
+  "about_page": {
+    "title": "About us",
+    "subtitle": "MyPOS is built by restaurant people for restaurant people.",
+    "mission_title": "Our mission",
+    "mission": "Bring world-class technology to every restaurant in Central Asia — simple, affordable and delightful.",
+    "vision_title": "Our values",
+    "vision": "Customer intimacy, quality, speed and openness. Every decision is grounded in these four principles.",
+    "team_title": "Team",
+    "team": "We're based in Tashkent and serve Uzbekistan and Central Asia. Local expertise with global quality."
+  },
+  "contact_page": {
+    "title": "Get in touch",
+    "subtitle": "Got a question? Write to us — we reply within one business day.",
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Your full name",
+      "email": "Email",
+      "email_placeholder": "you@restaurant.uz",
+      "phone": "Phone",
+      "phone_placeholder": "+998 __ ___ __ __",
+      "restaurant": "Restaurant name",
+      "restaurant_placeholder": "Cafe / Restaurant / Choyxona",
+      "message": "Message",
+      "message_placeholder": "How can we help?",
+      "submit": "Send",
+      "success": "Message sent. We'll get back to you soon.",
+      "note": "This form is a demo — it will be wired to an API at launch."
+    },
+    "channels_title": "Other ways to reach us",
+    "channels": {
+      "phone": "Phone",
+      "email": "Email",
+      "telegram": "Telegram",
+      "address": "Address"
+    }
+  },
+  "blog_page": {
+    "title": "MyPOS Blog",
+    "subtitle": "Restaurant business, technology and inspiration stories.",
+    "coming_soon": "Coming soon",
+    "coming_soon_desc": "First articles are in the works. They'll appear here when ready."
+  }
+}

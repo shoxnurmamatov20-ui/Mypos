@@ -1,0 +1,87 @@
+name: Yangi xususiyat taklifi
+description: MyPOS'ga yangi xususiyat yoki yaxshilanish taklif qilish
+title: "[FEAT] "
+labels: ["feature", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Taklifingiz uchun rahmat! Tavsiflar iloji boricha aniq bo'lsin —
+        bu muhokamani tezlashtiradi.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Muammo yoki ehtiyoj
+      description: Qanday muammoni hal qilmoqchisiz? Foydalanuvchi nima qila olmayapti?
+      placeholder: "Masalan: Ofitsiant stol uchun chekni bo'lib to'lay olmayapti."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Taklif qilinayotgan yechim
+      description: Qanday xususiyat qo'shilishi kerak? Interfeys qanday ko'rinadi?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Ko'rib chiqilgan muqobillar (ixtiyoriy)
+      description: Boshqa qanday yo'llar bilan yechish mumkin edi?
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Tizim qismi
+      options:
+        - apps/api (Laravel)
+        - apps/web-dashboard (Next.js)
+        - apps/pos-terminal (Expo)
+        - apps/kds (Next.js)
+        - apps/web-qr (Next.js)
+        - apps/web-marketing (Next.js)
+        - apps/telegram-bot
+        - packages/ (shared)
+        - infra/ (Docker / Coolify)
+        - Yangi modul
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Muhimlik darajasi
+      options:
+        - Kritik (bizga hoziroq kerak)
+        - Yuqori (yaqin oy ichida)
+        - O'rta (roadmap'da bo'lsa yaxshi)
+        - Past (qachon imkoniyat bo'lsa)
+    validations:
+      required: true
+
+  - type: textarea
+    id: users
+    attributes:
+      label: Kim foydalanadi?
+      description: "Bu xususiyat qaysi foydalanuvchi uchun? (Ofitsiant, menejer, kassir, mijoz va h.k.)"
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Qabul qilish mezonlari (ixtiyoriy)
+      description: Xususiyat bajarilgan deb hisoblash uchun qanday shartlar bajarilishi kerak?
+      placeholder: |
+        - [ ] Foydalanuvchi stol uchun chekni 2 qismga bo'la oladi
+        - [ ] Har bir qism alohida to'lov usulini tanlab to'laydi
+        - [ ] Chek natijasi chop etiladi
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Tekshirish
+      options:
+        - label: Men bu xususiyatni qidirib ko'rdim va shu kabi issue mavjud emasligiga ishonch hosil qildim
+          required: true

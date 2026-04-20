@@ -1,0 +1,103 @@
+name: Xatolik haqida xabar
+description: Tizimdagi xatolik yoki nosozlikni xabar qilish
+title: "[BUG] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Xatolik haqida xabar berganingiz uchun rahmat. Iloji boricha ko'proq
+        ma'lumot bering — bu muammoni tezroq hal qilishga yordam beradi.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Qisqacha tavsif
+      description: Muammo nima ekanligini bir-ikki gapda yozing.
+      placeholder: "Masalan: Buyurtma yaratilganda to'g'ri summa ko'rinmayapti."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Takrorlash qadamlari
+      description: Xatoni qayta paydo qilish uchun aniq qadamlarni yozing.
+      placeholder: |
+        1. Web-dashboard'ga kirish
+        2. Buyurtmalar ro'yxatiga o'tish
+        3. Yangi buyurtma qo'shish
+        4. Xatolik paydo bo'ladi
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Kutilgan natija
+      description: Nima bo'lishi kerak edi?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Haqiqiy natija
+      description: Nima bo'ldi? Agar bo'lsa, xatolik xabari yoki ekran rasmi qo'shing.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Tizim qismi
+      description: Muammo qaysi qismda?
+      options:
+        - apps/api (Laravel)
+        - apps/web-dashboard (Next.js)
+        - apps/pos-terminal (Expo)
+        - apps/kds (Next.js)
+        - apps/web-qr (Next.js)
+        - apps/web-marketing (Next.js)
+        - apps/telegram-bot
+        - packages/ (shared)
+        - infra/ (Docker / Coolify)
+        - Boshqa / noma'lum
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Jiddiylik darajasi
+      options:
+        - Kritik (ishlatib bo'lmaydi)
+        - Yuqori (muhim funksiya buzilgan)
+        - O'rta (noqulaylik bor)
+        - Past (kosmetik)
+    validations:
+      required: true
+
+  - type: input
+    id: env
+    attributes:
+      label: Muhit
+      description: "Browser, OS, versiya va hokazo"
+      placeholder: "Chrome 131 / Windows 11 / web-dashboard v0.1.0"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Loglar / ekran rasmlari (ixtiyoriy)
+      description: Konsol xabarlari, serverning javobi yoki rasm qo'shing.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Tekshirish
+      options:
+        - label: Men bu xatolikni qidirib ko'rdim va shu kabi issue mavjud emasligiga ishonch hosil qildim
+          required: true
+        - label: Men maxfiy ma'lumotlar (parol, token, telefon raqami) kiritmadim
+          required: true
