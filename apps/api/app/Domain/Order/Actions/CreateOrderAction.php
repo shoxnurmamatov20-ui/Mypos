@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Order\Actions;
 
+use App\Domain\Inventory\Actions\ConsumeIngredientsForOrderAction;
 use App\Domain\Menu\Models\MenuItem;
 use App\Domain\Order\Enums\OrderStatus;
 use App\Domain\Order\Enums\OrderType;
@@ -12,10 +13,16 @@ use App\Domain\Order\Models\OrderItem;
 use App\Domain\Table\Models\Table;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class CreateOrderAction
 {
+    public function __construct(
+        private readonly ConsumeIngredientsForOrderAction $consumeIngredients,
+    ) {}
+
     /**
      * @param array{
      *   type: string,
@@ -34,7 +41,7 @@ class CreateOrderAction
             ]);
         }
 
-        return DB::transaction(function () use ($actor, $input): Order {
+        $order = DB::transaction(function () use ($actor, $input): Order {
             // Load menu items in bulk for price/name snapshots (tenant-scoped via Global Scope)
             $menuItemIds = collect($input['items'])->pluck('menu_item_id')->unique()->values()->all();
             $menuItems = MenuItem::query()
@@ -105,6 +112,19 @@ class CreateOrderAction
 
             return $order->load(['items', 'table']);
         });
+
+        // Auto-deduct ingredient stock based on recipes. Non-blocking: a missing
+        // or invalid recipe MUST NOT fail the order creation flow.
+        try {
+            ($this->consumeIngredients)($order);
+        } catch (Throwable $e) {
+            Log::warning('Inventory auto-deduct failed for order ' . $order->id, [
+                'order_id' => $order->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        return $order;
     }
 
     private function generateOrderNo(string $tenantId): string

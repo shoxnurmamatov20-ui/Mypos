@@ -1,0 +1,68 @@
+name: CI Filament (PHP)
+
+# Focused Laravel / Filament checks.
+# The main ci.yml "api" job already runs Pint + PHPStan (level 8) + Pest
+# against a full Postgres/Redis stack. This workflow re-runs the static
+# analysis portion on a lighter matrix so Filament-only PRs fail fast
+# without needing the database fixture cycle.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/api/**'
+      - '.github/workflows/ci-filament.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/api/**'
+      - '.github/workflows/ci-filament.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-analysis:
+    name: Pint + PHPStan (level 8)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    defaults:
+      run:
+        working-directory: apps/api
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_pgsql, redis, bcmath, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: apps/api/vendor
+          key: composer-${{ hashFiles('apps/api/composer.lock') }}
+          restore-keys: composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Prepare env
+        run: |
+          cp .env.example .env
+          php artisan key:generate --ansi
+
+      - name: Pint (formatter check)
+        run: vendor/bin/pint --test
+
+      - name: Verify PHPStan binary present
+        run: test -x vendor/bin/phpstan || (echo "phpstan missing" && exit 1)
+
+      - name: PHPStan (level 8)
+        run: vendor/bin/phpstan analyse --memory-limit=1G --no-progress

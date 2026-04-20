@@ -63,3 +63,12 @@ export type {
   PlaceQrOrderInput,
   PlaceQrOrderItemInput,
 } from './public';
+export { customersApi } from './customers';
+export type {
+  Customer,
+  LoyaltyAccount,
+  LoyaltyTier,
+  CreateCustomerInput,
+  UpdateCustomerInput,
+  ListCustomersParams,
+} from './customers';

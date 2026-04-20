@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "title": "MyPOS — Restoraningizning aqli",
+    "description": "MyPOS — O'zbekiston va Markaziy Osiyo restoranlari uchun zamonaviy boshqaruv tizimi. POS, KDS, QR menyu, analitika va AI yordamchi — hammasi bir joyda.",
+    "og_title": "MyPOS — Restoraningizning aqli",
+    "og_description": "Restoraningizni aqli boshqaruv tizimi bilan kuchaytiring. Bepul boshlang, kerak bo'lganda kengaytiring.",
+    "keywords": "restoran, POS, kassa, menyu, QR menyu, restoran boshqaruv, O'zbekiston, KDS, Click, Payme"
+  },
+  "nav": {
+    "features": "Imkoniyatlar",
+    "pricing": "Narxlar",
+    "about": "Biz haqimizda",
+    "contact": "Aloqa",
+    "blog": "Blog",
+    "login": "Kirish",
+    "try_free": "Bepul sinab ko'rish",
+    "open_menu": "Menyuni ochish",
+    "close_menu": "Menyuni yopish"
+  },
+  "hero": {
+    "badge": "Markaziy Osiyo uchun #1 restoran tizimi",
+    "title": "Restoraningizning aqli",
+    "subtitle": "Bitta platforma orqali buyurtmalar, menyu, xodimlar va analitikani boshqaring. Click, Payme va Uzum bilan birga ishlaydi — offline rejimda ham.",
+    "cta_primary": "Bepul sinab ko'rish",
+    "cta_secondary": "Ko'rish",
+    "dashboard_alt": "MyPOS boshqaruv paneli",
+    "dashboard_caption": "Manager Dashboard",
+    "dashboard_subtitle": "Bugungi tushum, top taomlar va xodimlar ko'rsatkichlari",
+    "stats": {
+      "restaurants": "restoran",
+      "orders": "buyurtma",
+      "uptime": "ishonchli uptime"
+    }
+  },
+  "features": {
+    "section_label": "Imkoniyatlar",
+    "title": "Restoraning uchun zarur hamma narsa",
+    "subtitle": "POS terminaldan AI yordamchigacha — bir platformada birlashgan.",
+    "items": {
+      "pos": {
+        "title": "POS Terminal",
+        "desc": "Tezkor kassa: buyurtmaga 2 soniya. Offline rejim, chek printeri, Click/Payme integratsiyasi."
+      },
+      "kds": {
+        "title": "Kitchen Display",
+        "desc": "Oshxonaga raqamli buyurtma ekrani. Tayyorlash vaqti, navbat va avtomatik ogohlantirishlar."
+      },
+      "qr_menu": {
+        "title": "QR Menyu",
+        "desc": "Mijoz stol ustidagi QR-ni skanerlab buyurtma beradi. Tarjimalar UZ/RU/EN."
+      },
+      "analytics": {
+        "title": "Analitika",
+        "desc": "Kunlik tushum, top taomlar, xodimlar KPI. PDF va Excel eksport."
+      },
+      "ai": {
+        "title": "AI Yordamchi",
+        "desc": "Claude asosida: menyu tarjimalari, talabni bashorat qilish va inventarni optimallashtirish."
+      },
+      "telegram": {
+        "title": "Telegram Bot",
+        "desc": "Mijozlar Telegram orqali buyurtma beradi. Xabar va yetkazib berish xabarnomalari avtomatik."
+      }
+    }
+  },
+  "how": {
+    "section_label": "Qanday ishlaydi",
+    "title": "3 qadamda boshlang",
+    "subtitle": "Hech qanday uskuna kerak emas — planshetingizda ochib, darhol sota boshlang.",
+    "steps": {
+      "one": {
+        "label": "1-qadam",
+        "title": "Ro'yxatdan o'tish",
+        "desc": "Telefon raqam yoki email bilan 30 soniyada ro'yxatdan o'ting."
+      },
+      "two": {
+        "label": "2-qadam",
+        "title": "Restoranni sozlash",
+        "desc": "Menyu, stollar va xodimlaringizni kiriting. Sizga Excel import yoki AI yordamchi yordam beradi."
+      },
+      "three": {
+        "label": "3-qadam",
+        "title": "Sotishni boshlash",
+        "desc": "POS-ni oching, birinchi buyurtmani qabul qiling. Tushum hisobingizga tushadi."
+      }
+    }
+  },
+  "pricing": {
+    "section_label": "Narxlar",
+    "title": "Har bir restoran uchun tarif",
+    "subtitle": "Bepul boshlang. Biznesingiz o'ssa — kengaytiring. Yashirin to'lovlar yo'q.",
+    "per_month": "/oy",
+    "most_popular": "Mashhur tanlov",
+    "cta": "Boshlash",
+    "cta_contact": "Biz bilan bog'laning",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "price_uzs": "0",
+        "price_usd": "$0",
+        "tagline": "Yangi ochilayotgan joylar uchun",
+        "features": [
+          "1 filial, 2 xodim",
+          "Oyiga 100 buyurtma",
+          "Bazaviy POS",
+          "MyPOS vatermark"
+        ]
+      },
+      "starter": {
+        "name": "Starter",
+        "price_uzs": "390,000 so'm",
+        "price_usd": "$29",
+        "tagline": "Kichik kafe va restoranlar uchun",
+        "features": [
+          "1 filial, 10 xodim",
+          "Cheksiz buyurtma",
+          "KDS va Manager Dashboard",
+          "Click va Payme integratsiyasi",
+          "Hisobotlar va chek printi"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "price_uzs": "1,290,000 so'm",
+        "price_usd": "$99",
+        "tagline": "O'rtacha tarmoqlar uchun",
+        "features": [
+          "3 filial, 30 xodim",
+          "Starter + hammasi",
+          "QR menyu va Loyalty",
+          "Telegram bot va rezervatsiya",
+          "Inventar va SMS 500/oy"
+        ]
+      },
+      "business": {
+        "name": "Business",
+        "price_uzs": "3,900,000 so'm",
+        "price_usd": "$299",
+        "tagline": "Katta tarmoqlar uchun",
+        "features": [
+          "10 filial, 100 xodim",
+          "Pro + hammasi",
+          "Multi-location dashboard",
+          "AI yordamchi va API access",
+          "Ustuvor qo'llab-quvvatlash"
+        ]
+      }
+    }
+  },
+  "testimonials": {
+    "section_label": "Mijozlar",
+    "title": "Restoran egalari nima deyishadi",
+    "items": {
+      "one": {
+        "quote": "MyPOS-ga o'tganimizdan keyin kassa navbati yo'qoldi. Buyurtma 2 barobar tez tayyorlanmoqda, xodimlar ham rozi.",
+        "author": "Sardor Xolmatov",
+        "role": "Choyxona Navruz — Toshkent"
+      },
+      "two": {
+        "quote": "QR menyu orqali mijozlar o'zlari buyurtma berishni boshladi. Ofisiant xarajatlari 30% ga tushdi, tushum esa oshdi.",
+        "author": "Gulnora Ergasheva",
+        "role": "Caffe Bella — Samarqand"
+      },
+      "three": {
+        "quote": "AI hisobotlari tufayli qaysi taom foydasiz ekanini bilib oldik. Menyuni optimallashtirdik va marja 18% ga oshdi.",
+        "author": "Rustam Aliyev",
+        "role": "Osh Markazi — Buxoro"
+      }
+    }
+  },
+  "faq": {
+    "section_label": "Savollar",
+    "title": "Ko'p beriladigan savollar",
+    "items": {
+      "payments": {
+        "q": "Click va Payme ishlaydimi?",
+        "a": "Ha, MyPOS O'zbekistondagi barcha asosiy to'lov tizimlari bilan integratsiyalashgan: Click, Payme, Uzum, Apelsin va Humo/Uzcard kartalari. To'lov kvitansiyasi avtomatik chop etiladi."
+      },
+      "offline": {
+        "q": "Internet bo'lmasa, offline ishlay oladimi?",
+        "a": "Ha. POS terminal offline rejimda ham buyurtma qabul qila oladi. Internet tiklangach, ma'lumotlar avtomatik serverga sinxronlanadi."
+      },
+      "hardware": {
+        "q": "Maxsus uskuna kerakmi?",
+        "a": "Yo'q. MyPOS oddiy Android yoki iOS planshet, telefon va kompyuterlarda ishlaydi. Printer va chek apparati bo'lsa — yanada qulay."
+      },
+      "setup": {
+        "q": "Sozlash qancha vaqt oladi?",
+        "a": "O'rtacha 30 daqiqa. Ro'yxatdan o'tgach, AI yordamchi menyuni Excel yoki rasmdan import qilishda yordam beradi."
+      },
+      "staff": {
+        "q": "Xodimlarim qanday o'rganadi?",
+        "a": "Interfeys soddaligi tufayli o'rganish 10 daqiqada bajariladi. UZ/RU/EN tillarida qo'llanma va video darslar mavjud."
+      },
+      "migration": {
+        "q": "Boshqa tizimdan qanday ko'chib o'tish mumkin?",
+        "a": "Biz sizga iCiko, Poster yoki Excel'dan bepul ma'lumotlarni ko'chirib berish xizmatini taklif qilamiz. Pro va Business tariflarga kiradi."
+      },
+      "security": {
+        "q": "Ma'lumotlar xavfsizmi?",
+        "a": "Ha. Serverlar O'zbekiston hududida (UZCLOUD) joylashgan, ma'lumotlar shifrlangan, kundalik backup olinadi va O'zbekiston Ma'lumotlar himoyasi qonuniga mos keladi."
+      },
+      "support": {
+        "q": "Qo'llab-quvvatlash qanday?",
+        "a": "Barcha tariflar uchun Telegram va email qo'llab-quvvatlashi. Business tarifida 24/7 ustuvor yo'nalish va shaxsiy menejer."
+      }
+    }
+  },
+  "cta": {
+    "title": "Bugun boshlang",
+    "subtitle": "Birinchi 14 kun bepul. Kredit karta kerak emas. Istalgan vaqtda bekor qiling.",
+    "button": "Bepul sinab ko'rish",
+    "secondary": "Demo so'rash"
+  },
+  "footer": {
+    "tagline": "Markaziy Osiyo uchun zamonaviy restoran operatsion tizimi.",
+    "product": "Mahsulot",
+    "company": "Kompaniya",
+    "support": "Yordam",
+    "legal": "Huquqiy",
+    "features": "Imkoniyatlar",
+    "pricing": "Narxlar",
+    "integrations": "Integratsiyalar",
+    "mobile_apps": "Mobil ilovalar",
+    "about": "Biz haqimizda",
+    "blog": "Blog",
+    "careers": "Vakansiyalar",
+    "partners": "Hamkorlar",
+    "contact": "Aloqa",
+    "docs": "Hujjatlar",
+    "status": "Status",
+    "privacy": "Maxfiylik",
+    "terms": "Foydalanish shartlari",
+    "contact_sales": "Sotuv bo'limi",
+    "phone": "+998 71 200 00 00",
+    "email": "hello@mypos.uz",
+    "address": "Toshkent sh., O'zbekiston",
+    "copyright": "{year} MyPOS. Barcha huquqlar himoyalangan.",
+    "lang_label": "Til"
+  },
+  "features_page": {
+    "title": "MyPOS imkoniyatlari",
+    "subtitle": "Restoraningizni boshqarish uchun kerakli hamma narsa — bitta platformada."
+  },
+  "pricing_page": {
+    "title": "Shaffof va adolatli narxlar",
+    "subtitle": "Yashirin to'lovlar yo'q. Istalgan vaqtda tarifni o'zgartiring."
+  },
+  "about_page": {
+    "title": "Biz haqimizda",
+    "subtitle": "MyPOS — restoran egalari uchun restoran egalari tomonidan yaratilgan.",
+    "mission_title": "Missiyamiz",
+    "mission": "Markaziy Osiyodagi har bir restoranga global darajadagi texnologiya berish — sodda, qulay va arzon.",
+    "vision_title": "Qadriyatlarimiz",
+    "vision": "Mijozga yaqinlik, sifat, tezlik va ochiqlik. Har bir qaror shu to'rt tamoyil asosida qabul qilinadi.",
+    "team_title": "Jamoa",
+    "team": "Biz Toshkentda joylashgan, O'zbekiston va Markaziy Osiyoga xizmat qilamiz. Mahalliy ekspertiza va global sifat."
+  },
+  "contact_page": {
+    "title": "Biz bilan bog'laning",
+    "subtitle": "Savolingiz bormi? Bizga yozing — bir ish kuni ichida javob beramiz.",
+    "form": {
+      "name": "Ism",
+      "name_placeholder": "Ism familiyangiz",
+      "email": "Email",
+      "email_placeholder": "siz@restoran.uz",
+      "phone": "Telefon",
+      "phone_placeholder": "+998 __ ___ __ __",
+      "restaurant": "Restoran nomi",
+      "restaurant_placeholder": "Kafe / Restoran / Choyxona",
+      "message": "Xabar",
+      "message_placeholder": "Biz sizga qanday yordam bera olamiz?",
+      "submit": "Yuborish",
+      "success": "Xabaringiz yuborildi. Tez orada javob beramiz.",
+      "note": "Ushbu forma demo ko'rinishida — ishga tushirilganda API bilan bog'lanadi."
+    },
+    "channels_title": "Boshqa aloqa kanallari",
+    "channels": {
+      "phone": "Telefon",
+      "email": "Email",
+      "telegram": "Telegram",
+      "address": "Manzil"
+    }
+  },
+  "blog_page": {
+    "title": "MyPOS Blog",
+    "subtitle": "Restoran biznesi, texnologiya va ilhom hikoyalari.",
+    "coming_soon": "Tez orada",
+    "coming_soon_desc": "Birinchi maqolalarimiz yozilmoqda. Tayyor bo'lgach, shu yerga joylashtiramiz."
+  }
+}

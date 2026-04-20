@@ -37,6 +37,10 @@
     "./public": {
       "types": "./src/public.ts",
       "default": "./src/public.ts"
+    },
+    "./customers": {
+      "types": "./src/customers.ts",
+      "default": "./src/customers.ts"
     }
   },
   "scripts": {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Payment\Providers;
 
 use App\Domain\Order\Models\Order;
-use App\Domain\Payment\Actions\CapturePaymentAction;
 use App\Domain\Payment\Enums\PaymentProvider;
 use App\Domain\Payment\Enums\PaymentStatus;
 use App\Domain\Payment\Models\Payment;

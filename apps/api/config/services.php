@@ -35,4 +35,17 @@ return [
         ],
     ],
 
+    'click' => [
+        'service_id' => env('CLICK_SERVICE_ID'),
+        'merchant_id' => env('CLICK_MERCHANT_ID'),
+        'secret_key' => env('CLICK_SECRET_KEY'),
+        'merchant_user_id' => env('CLICK_MERCHANT_USER_ID'),
+    ],
+
+    'payme' => [
+        'merchant_id' => env('PAYME_MERCHANT_ID'),
+        'secret_key' => env('PAYME_SECRET_KEY'),
+        'test_mode' => env('PAYME_TEST_MODE', true),
+    ],
+
 ];
