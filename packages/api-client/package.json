@@ -33,6 +33,10 @@
     "./stats": {
       "types": "./src/stats.ts",
       "default": "./src/stats.ts"
+    },
+    "./public": {
+      "types": "./src/public.ts",
+      "default": "./src/public.ts"
     }
   },
   "scripts": {

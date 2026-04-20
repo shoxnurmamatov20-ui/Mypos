@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Tenant\Models;
 
+use Database\Factories\TenantFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,6 +35,8 @@ use App\Models\User;
  */
 class Tenant extends Model
 {
+    /** @use HasFactory<TenantFactory> */
+    use HasFactory;
     use HasUuids;
     use SoftDeletes;
 

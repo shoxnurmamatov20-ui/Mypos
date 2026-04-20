@@ -1,0 +1,9 @@
+{
+  "name": "MyPOS Menu",
+  "short_name": "MyPOS",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#EA7C69",
+  "icons": []
+}
