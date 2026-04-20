@@ -185,8 +185,8 @@ class IngredientResource extends Resource
                             ->default(StockMovementReason::Adjustment->value),
                         Forms\Components\Textarea::make('notes')->label('Izoh')->rows(2),
                     ])
-                    ->action(function (array $data, Ingredient $record, AdjustStockAction $adjust): void {
-                        $adjust([
+                    ->action(function (array $data, Ingredient $record): void {
+                        app(AdjustStockAction::class)([
                             'ingredient_id' => $record->id,
                             'delta' => $data['delta'],
                             'reason' => $data['reason'],

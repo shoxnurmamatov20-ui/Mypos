@@ -1,5 +1,3 @@
-import type { Markup } from 'telegraf';
-import type { InlineKeyboardMarkup } from 'telegraf/types';
 import { t } from '../i18n.js';
 import {
   categoriesKeyboard,
@@ -11,9 +9,7 @@ import {
   listCategories,
   listItemsByCategory,
 } from '../services/menu-service.js';
-import type { BotContext } from '../types.js';
-
-type InlineKb = Markup<InlineKeyboardMarkup>;
+import type { BotContext, InlineKb } from '../types.js';
 
 export async function menuCommand(ctx: BotContext): Promise<void> {
   await showCategories(ctx);

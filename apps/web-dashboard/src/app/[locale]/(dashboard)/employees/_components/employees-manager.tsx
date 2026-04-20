@@ -22,7 +22,7 @@ export function EmployeesManager() {
   });
 
   const employees: Employee[] = employeesQuery.data?.data ?? [];
-  const total: number = employeesQuery.data?.meta?.total ?? 0;
+  const total: number = employees.length;
 
   return (
     <div>

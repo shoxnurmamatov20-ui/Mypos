@@ -1,11 +1,7 @@
-import type { Markup } from 'telegraf';
-import type { InlineKeyboardMarkup } from 'telegraf/types';
 import { t } from '../i18n.js';
 import { cartKeyboard, formatPrice } from '../keyboards.js';
 import { cartTotal } from '../services/user-session.js';
-import type { BotContext } from '../types.js';
-
-type InlineKb = Markup<InlineKeyboardMarkup>;
+import type { BotContext, InlineKb } from '../types.js';
 
 export async function cartCommand(ctx: BotContext): Promise<void> {
   await renderCart(ctx);

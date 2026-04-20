@@ -79,9 +79,7 @@ export function itemDetailKeyboard(itemId: string, lang: Lang) {
   ]);
 }
 
-export function cartKeyboard(
-  session: UserSession,
-): ReturnType<typeof Markup.inlineKeyboard> {
+export function cartKeyboard(session: UserSession) {
   const lang = session.lang;
   const removeButtons: InlineKeyboardButton.CallbackButton[][] =
     session.cart.map((line) => [

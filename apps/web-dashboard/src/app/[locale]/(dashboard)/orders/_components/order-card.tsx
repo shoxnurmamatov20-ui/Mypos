@@ -72,11 +72,20 @@ export function OrderCard({
     }
   };
 
+  const handleCardKey = (e: React.KeyboardEvent<HTMLDivElement>): void => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
-      className="group flex flex-col gap-3 rounded-xl border border-neutral-200 bg-white p-4 text-left transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand-500"
+      onKeyDown={handleCardKey}
+      className="group flex cursor-pointer flex-col gap-3 rounded-xl border border-neutral-200 bg-white p-4 text-left transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand-500"
     >
       <div className="flex items-start justify-between gap-2">
         <div>
@@ -121,6 +130,6 @@ export function OrderCard({
             : t(action.labelKey as 'orders.actions.start_preparing')}
         </button>
       )}
-    </button>
+    </div>
   );
 }

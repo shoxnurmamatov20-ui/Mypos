@@ -1,5 +1,9 @@
 import type { Context, Scenes } from 'telegraf';
-import type { Update } from 'telegraf/types';
+import type { InlineKeyboardMarkup, Update } from 'telegraf/types';
+
+/** Convenient alias for `Markup.inlineKeyboard(...)` return type.
+ *  Structural shape of `{ reply_markup }` matches the Markup class instance. */
+export type InlineKb = { reply_markup: InlineKeyboardMarkup };
 
 export type Lang = 'uz' | 'ru' | 'en';
 

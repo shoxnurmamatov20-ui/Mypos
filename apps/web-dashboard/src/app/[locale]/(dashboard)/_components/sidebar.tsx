@@ -2,6 +2,7 @@
 
 import {
   BarChart3,
+  Beaker,
   Heart,
   Home,
   type LucideIcon,
@@ -45,6 +46,7 @@ function buildGroups(locale: string): NavGroup[] {
       items: [
         { key: 'menu', href: `${base}/menu`, icon: UtensilsCrossed },
         { key: 'categories', href: `${base}/menu`, icon: UtensilsCrossed },
+        { key: 'inventory', href: `${base}/inventory`, icon: Beaker },
       ],
     },
     {

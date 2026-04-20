@@ -5,6 +5,10 @@ use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Employee\ClockController;
 use App\Http\Controllers\Api\V1\Employee\EmployeeController;
 use App\Http\Controllers\Api\V1\Employee\ShiftController;
+use App\Http\Controllers\Api\V1\Inventory\IngredientController;
+use App\Http\Controllers\Api\V1\Inventory\InventoryReportController;
+use App\Http\Controllers\Api\V1\Inventory\RecipeController;
+use App\Http\Controllers\Api\V1\Inventory\StockMovementController;
 use App\Http\Controllers\Api\V1\Menu\MenuCategoryController;
 use App\Http\Controllers\Api\V1\Menu\MenuItemController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
@@ -134,6 +138,22 @@ Route::prefix('v1')->group(function () {
         // Clock in/out
         Route::post('/clock/in', [ClockController::class, 'clockIn'])->name('v1.clock.in');
         Route::post('/clock/out', [ClockController::class, 'clockOut'])->name('v1.clock.out');
+
+        // Inventory
+        Route::prefix('inventory')->group(function () {
+            Route::get('/ingredients', [IngredientController::class, 'index'])->name('v1.inventory.ingredients.index');
+            Route::post('/ingredients', [IngredientController::class, 'store'])->name('v1.inventory.ingredients.store');
+            Route::get('/ingredients/{ingredient}', [IngredientController::class, 'show'])->name('v1.inventory.ingredients.show');
+            Route::patch('/ingredients/{ingredient}', [IngredientController::class, 'update'])->name('v1.inventory.ingredients.update');
+            Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('v1.inventory.ingredients.destroy');
+            Route::post('/ingredients/{ingredient}/adjust', [StockMovementController::class, 'adjust'])->name('v1.inventory.ingredients.adjust');
+            Route::get('/ingredients/{ingredient}/movements', [StockMovementController::class, 'index'])->name('v1.inventory.movements.index');
+            Route::get('/recipes', [RecipeController::class, 'index'])->name('v1.inventory.recipes.index');
+            Route::post('/recipes', [RecipeController::class, 'store'])->name('v1.inventory.recipes.store');
+            Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('v1.inventory.recipes.destroy');
+            Route::get('/low-stock', [InventoryReportController::class, 'lowStock'])->name('v1.inventory.low_stock');
+            Route::get('/valuation', [InventoryReportController::class, 'valuation'])->name('v1.inventory.valuation');
+        });
 
         // Payments
         Route::prefix('payments')->group(function () {
