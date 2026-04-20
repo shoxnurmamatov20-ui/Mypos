@@ -124,5 +124,50 @@
     "deleted": "Удалено",
     "save_failed": "Ошибка сохранения",
     "delete_failed": "Ошибка удаления"
+  },
+  "reports": {
+    "title": "Отчёты",
+    "subtitle": "Ключевые метрики бизнеса",
+    "date_range": {
+      "from": "С",
+      "to": "По",
+      "presets": {
+        "today": "Сегодня",
+        "week": "Неделя",
+        "month": "Месяц",
+        "quarter": "Квартал",
+        "year": "Год"
+      }
+    },
+    "metrics": {
+      "total_orders": "Всего заказов",
+      "total_revenue": "Общая выручка",
+      "avg_order": "Средний чек",
+      "orders_today": "Заказов сегодня"
+    },
+    "charts": {
+      "daily_revenue_title": "Выручка по дням",
+      "top_items_title": "Топ 5 блюд",
+      "status_distribution_title": "Заказы по статусу",
+      "count": "Количество"
+    },
+    "status": {
+      "pending": "Ожидает",
+      "preparing": "Готовится",
+      "ready": "Готов",
+      "served": "Подано",
+      "completed": "Завершён",
+      "cancelled": "Отменён"
+    },
+    "payment_methods": {
+      "cash": "Наличные",
+      "card": "Карта",
+      "click": "Click",
+      "payme": "Payme",
+      "uzum": "Uzum"
+    },
+    "loading": "Загрузка...",
+    "empty": "Нет данных за выбранный период",
+    "load_failed": "Не удалось загрузить отчёты"
   }
 }

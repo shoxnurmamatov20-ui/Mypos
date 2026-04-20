@@ -1,0 +1,36 @@
+{
+  "name": "@mypos/kds",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3006",
+    "build": "next build",
+    "start": "next start --port 3006",
+    "lint": "biome check .",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf .next .turbo"
+  },
+  "dependencies": {
+    "@mypos/api-client": "workspace:*",
+    "@mypos/design-tokens": "workspace:*",
+    "@mypos/ui": "workspace:*",
+    "@mypos/utils": "workspace:*",
+    "@tanstack/react-query": "^5.62.0",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.468.0",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.5.0",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.9.2"
+  }
+}

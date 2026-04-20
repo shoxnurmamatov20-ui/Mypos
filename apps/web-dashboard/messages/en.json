@@ -124,5 +124,50 @@
     "deleted": "Deleted",
     "save_failed": "Save failed",
     "delete_failed": "Delete failed"
+  },
+  "reports": {
+    "title": "Reports",
+    "subtitle": "Business performance at a glance",
+    "date_range": {
+      "from": "From",
+      "to": "To",
+      "presets": {
+        "today": "Today",
+        "week": "Week",
+        "month": "Month",
+        "quarter": "Quarter",
+        "year": "Year"
+      }
+    },
+    "metrics": {
+      "total_orders": "Total orders",
+      "total_revenue": "Total revenue",
+      "avg_order": "Avg order value",
+      "orders_today": "Orders today"
+    },
+    "charts": {
+      "daily_revenue_title": "Daily revenue",
+      "top_items_title": "Top 5 items",
+      "status_distribution_title": "Orders by status",
+      "count": "Count"
+    },
+    "status": {
+      "pending": "Pending",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "served": "Served",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "payment_methods": {
+      "cash": "Cash",
+      "card": "Card",
+      "click": "Click",
+      "payme": "Payme",
+      "uzum": "Uzum"
+    },
+    "loading": "Loading...",
+    "empty": "No data for the selected range",
+    "load_failed": "Failed to load reports"
   }
 }

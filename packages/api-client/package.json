@@ -29,6 +29,10 @@
     "./orders": {
       "types": "./src/orders.ts",
       "default": "./src/orders.ts"
+    },
+    "./stats": {
+      "types": "./src/stats.ts",
+      "default": "./src/stats.ts"
     }
   },
   "scripts": {

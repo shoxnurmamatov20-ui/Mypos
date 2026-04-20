@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             DemoTenantSeeder::class,
             DemoMenuSeeder::class,
             DemoTablesSeeder::class,
+            DemoOrdersSeeder::class,
         ]);
     }
 }

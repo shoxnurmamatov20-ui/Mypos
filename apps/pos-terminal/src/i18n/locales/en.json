@@ -2,5 +2,70 @@
   "home": {
     "title": "MyPOS",
     "subtitle": "The brain of your restaurant"
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "MyPOS POS Terminal",
+    "identifier": "Email or phone",
+    "identifier_placeholder": "owner@demo.mypos.uz",
+    "password": "Password",
+    "password_placeholder": "••••••••",
+    "submit": "Sign in",
+    "submitting": "Signing in...",
+    "error": "Sign-in failed",
+    "welcome": "Welcome"
+  },
+  "pos": {
+    "tables": "Tables",
+    "menu": "Menu",
+    "cart": "Cart",
+    "select_table": "Select a table",
+    "selected_table": "Selected table",
+    "no_table": "No table selected",
+    "place_order": "Place order",
+    "placing_order": "Placing...",
+    "logout": "Log out",
+    "no_items": "No items",
+    "no_tables": "No tables",
+    "no_categories": "No categories",
+    "all_categories": "All",
+    "subtotal": "Subtotal",
+    "search_menu": "Search menu",
+    "order_placed": "Order sent",
+    "capacity": "Capacity",
+    "seats": "seats"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Cart is empty",
+    "empty_hint": "Pick items from the menu",
+    "increment": "Increase",
+    "decrement": "Decrease",
+    "remove": "Remove",
+    "total": "Total",
+    "confirm_order": "Confirm order",
+    "item_count": "{{count}} items",
+    "notes_placeholder": "Notes (optional)"
+  },
+  "table_status": {
+    "available": "Available",
+    "occupied": "Occupied",
+    "reserved": "Reserved",
+    "disabled": "Disabled"
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "network": "Network error. Please try again",
+    "select_table_first": "Select a table first",
+    "cart_empty": "Cart is empty",
+    "load_tables": "Failed to load tables",
+    "load_menu": "Failed to load menu",
+    "place_order": "Failed to place order"
+  },
+  "common": {
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading..."
   }
 }

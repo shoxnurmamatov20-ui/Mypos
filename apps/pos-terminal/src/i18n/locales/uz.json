@@ -2,5 +2,70 @@
   "home": {
     "title": "MyPOS",
     "subtitle": "Restoraningizning aqli"
+  },
+  "login": {
+    "title": "Tizimga kirish",
+    "subtitle": "MyPOS POS Terminal",
+    "identifier": "Email yoki telefon",
+    "identifier_placeholder": "owner@demo.mypos.uz",
+    "password": "Parol",
+    "password_placeholder": "••••••••",
+    "submit": "Kirish",
+    "submitting": "Kirilmoqda...",
+    "error": "Kirish amalga oshmadi",
+    "welcome": "Xush kelibsiz"
+  },
+  "pos": {
+    "tables": "Stollar",
+    "menu": "Menyu",
+    "cart": "Savat",
+    "select_table": "Stolni tanlang",
+    "selected_table": "Tanlangan stol",
+    "no_table": "Stol tanlanmagan",
+    "place_order": "Buyurtma berish",
+    "placing_order": "Yuborilmoqda...",
+    "logout": "Chiqish",
+    "no_items": "Mahsulotlar mavjud emas",
+    "no_tables": "Stollar mavjud emas",
+    "no_categories": "Kategoriyalar mavjud emas",
+    "all_categories": "Barchasi",
+    "subtotal": "Jami",
+    "search_menu": "Menyudan qidirish",
+    "order_placed": "Buyurtma yuborildi",
+    "capacity": "Sig'im",
+    "seats": "kishi"
+  },
+  "cart": {
+    "title": "Savat",
+    "empty": "Savat bo'sh",
+    "empty_hint": "Menyudan mahsulot tanlang",
+    "increment": "Ko'paytirish",
+    "decrement": "Kamaytirish",
+    "remove": "O'chirish",
+    "total": "Jami summa",
+    "confirm_order": "Buyurtmani tasdiqlang",
+    "item_count": "{{count}} ta mahsulot",
+    "notes_placeholder": "Izoh (ixtiyoriy)"
+  },
+  "table_status": {
+    "available": "Bo'sh",
+    "occupied": "Band",
+    "reserved": "Bron qilingan",
+    "disabled": "Ishlamaydi"
+  },
+  "errors": {
+    "generic": "Xatolik yuz berdi",
+    "network": "Tarmoq xatosi. Iltimos, qayta urining",
+    "select_table_first": "Avval stolni tanlang",
+    "cart_empty": "Savat bo'sh",
+    "load_tables": "Stollarni yuklab bo'lmadi",
+    "load_menu": "Menyuni yuklab bo'lmadi",
+    "place_order": "Buyurtmani yuborib bo'lmadi"
+  },
+  "common": {
+    "retry": "Qayta urinish",
+    "cancel": "Bekor qilish",
+    "confirm": "Tasdiqlash",
+    "loading": "Yuklanmoqda..."
   }
 }

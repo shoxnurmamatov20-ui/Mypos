@@ -44,3 +44,22 @@ export type {
   UpdateOrderStatusInput,
   ListOrdersParams,
 } from './orders';
+export { statsApi } from './stats';
+export type {
+  OrderSummary,
+  OrdersByStatus,
+  DailyRevenuePoint,
+  TopItem,
+  TopTable,
+  PaymentMethodStat,
+  SummaryParams,
+} from './stats';
+export { publicApi } from './public';
+export type {
+  PublicTenant,
+  PublicMenuCategory,
+  PublicMenuItem,
+  PublicMenuResponse,
+  PlaceQrOrderInput,
+  PlaceQrOrderItemInput,
+} from './public';

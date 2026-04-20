@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Menu\MenuCategoryController;
 use App\Http\Controllers\Api\V1\Menu\MenuItemController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
+use App\Http\Controllers\Api\V1\Public\PublicMenuController;
+use App\Http\Controllers\Api\V1\Public\PublicOrderController;
 use App\Http\Controllers\Api\V1\Table\TableCategoryController;
 use App\Http\Controllers\Api\V1\Table\TableController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +29,16 @@ Route::prefix('v1')->group(function () {
             'timezone' => config('app.timezone'),
         ]);
     })->name('v1.health');
+
+    // --- Public (unauthenticated) endpoints for QR-menu PWA ---
+    Route::prefix('public')->group(function () {
+        Route::get('/menu/{slug}', [PublicMenuController::class, 'show'])
+            ->middleware('throttle:60,1')
+            ->name('v1.public.menu.show');
+        Route::post('/menu/{slug}/orders', [PublicOrderController::class, 'store'])
+            ->middleware('throttle:30,1')
+            ->name('v1.public.orders.store');
+    });
 
     // --- Auth (public login + authenticated me/logout) ---
     Route::prefix('auth')->group(function () {
@@ -75,6 +87,8 @@ Route::prefix('v1')->group(function () {
         Route::prefix('orders')->group(function () {
             Route::get('/', [OrderController::class, 'index'])->name('v1.orders.index');
             Route::post('/', [OrderController::class, 'store'])->name('v1.orders.store');
+            // Stats routes must be registered BEFORE /{order} to avoid route binding conflicts.
+            Route::get('/stats/summary', [OrderController::class, 'summary'])->name('v1.orders.stats.summary');
             Route::get('/{order}', [OrderController::class, 'show'])->name('v1.orders.show');
             Route::patch('/{order}/status', [OrderController::class, 'updateStatus'])->name('v1.orders.status');
         });

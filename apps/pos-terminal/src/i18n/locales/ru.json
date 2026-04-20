@@ -2,5 +2,70 @@
   "home": {
     "title": "MyPOS",
     "subtitle": "Интеллект вашего ресторана"
+  },
+  "login": {
+    "title": "Вход в систему",
+    "subtitle": "MyPOS POS Терминал",
+    "identifier": "Email или телефон",
+    "identifier_placeholder": "owner@demo.mypos.uz",
+    "password": "Пароль",
+    "password_placeholder": "••••••••",
+    "submit": "Войти",
+    "submitting": "Вход...",
+    "error": "Не удалось войти",
+    "welcome": "Добро пожаловать"
+  },
+  "pos": {
+    "tables": "Столы",
+    "menu": "Меню",
+    "cart": "Корзина",
+    "select_table": "Выберите стол",
+    "selected_table": "Выбранный стол",
+    "no_table": "Стол не выбран",
+    "place_order": "Оформить заказ",
+    "placing_order": "Отправка...",
+    "logout": "Выйти",
+    "no_items": "Товары отсутствуют",
+    "no_tables": "Столы отсутствуют",
+    "no_categories": "Категории отсутствуют",
+    "all_categories": "Все",
+    "subtotal": "Итого",
+    "search_menu": "Поиск по меню",
+    "order_placed": "Заказ отправлен",
+    "capacity": "Вместимость",
+    "seats": "чел."
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": "Корзина пуста",
+    "empty_hint": "Выберите товар из меню",
+    "increment": "Увеличить",
+    "decrement": "Уменьшить",
+    "remove": "Удалить",
+    "total": "Общая сумма",
+    "confirm_order": "Подтвердите заказ",
+    "item_count": "{{count}} товаров",
+    "notes_placeholder": "Комментарий (необязательно)"
+  },
+  "table_status": {
+    "available": "Свободен",
+    "occupied": "Занят",
+    "reserved": "Забронирован",
+    "disabled": "Неактивен"
+  },
+  "errors": {
+    "generic": "Произошла ошибка",
+    "network": "Ошибка сети. Пожалуйста, повторите",
+    "select_table_first": "Сначала выберите стол",
+    "cart_empty": "Корзина пуста",
+    "load_tables": "Не удалось загрузить столы",
+    "load_menu": "Не удалось загрузить меню",
+    "place_order": "Не удалось оформить заказ"
+  },
+  "common": {
+    "retry": "Повторить",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "loading": "Загрузка..."
   }
 }

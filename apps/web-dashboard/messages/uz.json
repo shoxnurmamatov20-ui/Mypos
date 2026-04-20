@@ -124,5 +124,50 @@
     "deleted": "O'chirildi",
     "save_failed": "Saqlashda xatolik",
     "delete_failed": "O'chirishda xatolik"
+  },
+  "reports": {
+    "title": "Hisobotlar",
+    "subtitle": "Biznes ko'rsatkichlari bir qarashda",
+    "date_range": {
+      "from": "Boshlanish",
+      "to": "Tugash",
+      "presets": {
+        "today": "Bugun",
+        "week": "Hafta",
+        "month": "Oy",
+        "quarter": "Chorak",
+        "year": "Yil"
+      }
+    },
+    "metrics": {
+      "total_orders": "Jami buyurtmalar",
+      "total_revenue": "Jami tushum",
+      "avg_order": "O'rtacha buyurtma",
+      "orders_today": "Bugungi buyurtmalar"
+    },
+    "charts": {
+      "daily_revenue_title": "Kunlik tushum",
+      "top_items_title": "Top 5 taom",
+      "status_distribution_title": "Buyurtmalar holati",
+      "count": "Soni"
+    },
+    "status": {
+      "pending": "Kutilmoqda",
+      "preparing": "Tayyorlanmoqda",
+      "ready": "Tayyor",
+      "served": "Berildi",
+      "completed": "Yakunlangan",
+      "cancelled": "Bekor qilingan"
+    },
+    "payment_methods": {
+      "cash": "Naqd",
+      "card": "Karta",
+      "click": "Click",
+      "payme": "Payme",
+      "uzum": "Uzum"
+    },
+    "loading": "Yuklanmoqda...",
+    "empty": "Tanlangan davr uchun ma'lumot yo'q",
+    "load_failed": "Hisobotlarni yuklashda xatolik"
   }
 }
