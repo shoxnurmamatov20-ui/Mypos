@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\Table\Models;
 
 use App\Domain\Shared\Concerns\BelongsToTenant;
+use Database\Factories\TableFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +29,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Table extends Model
 {
+    /** @use HasFactory<TableFactory> */
+    use HasFactory;
     use HasUuids;
     use BelongsToTenant;
     use SoftDeletes;
@@ -58,5 +62,10 @@ class Table extends Model
     public function isAvailable(): bool
     {
         return $this->status === 'available';
+    }
+
+    protected static function newFactory(): TableFactory
+    {
+        return TableFactory::new();
     }
 }

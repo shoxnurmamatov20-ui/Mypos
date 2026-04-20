@@ -3,6 +3,47 @@
     "title": "MyPOS",
     "subtitle": "Умный ресторан"
   },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Произошла ошибка"
+  },
+  "nav": {
+    "dashboard": "Панель",
+    "orders": "Заказы",
+    "tables": "Столы",
+    "menu": "Меню",
+    "categories": "Категории",
+    "reports": "Отчёты",
+    "employees": "Сотрудники",
+    "customers": "Клиенты",
+    "settings": "Ресторан",
+    "profile": "Профиль",
+    "logout": "Выйти",
+    "groups": {
+      "operations": "Операции",
+      "menu": "Меню",
+      "business": "Бизнес",
+      "settings": "Настройки"
+    }
+  },
+  "top_bar": {
+    "search_placeholder": "Поиск...",
+    "notifications": "Уведомления",
+    "user_menu": "Меню пользователя",
+    "language": "Язык"
+  },
+  "overview": {
+    "welcome": "Добро пожаловать, {name}",
+    "welcome_generic": "Добро пожаловать",
+    "subtitle": "Краткий взгляд на сегодняшние показатели",
+    "more_coming": "Новые виджеты скоро появятся",
+    "stats": {
+      "orders": "Заказов сегодня",
+      "revenue": "Выручка сегодня (сум)",
+      "active_tables": "Активные столы",
+      "customers": "Клиенты сегодня"
+    }
+  },
   "auth": {
     "login": {
       "page_title": "Вход — MyPOS",

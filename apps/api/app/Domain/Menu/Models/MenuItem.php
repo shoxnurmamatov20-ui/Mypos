@@ -41,6 +41,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class MenuItem extends Model
 {
+    /** @use HasFactory<MenuItemFactory> */
+    use HasFactory;
     use HasUuids;
     use BelongsToTenant;
     use SoftDeletes;
@@ -105,5 +107,10 @@ class MenuItem extends Model
             return $this->price_amount;
         }
         return (int) round($this->price_amount * (100 - $this->discount_percent) / 100);
+    }
+
+    protected static function newFactory(): MenuItemFactory
+    {
+        return MenuItemFactory::new();
     }
 }

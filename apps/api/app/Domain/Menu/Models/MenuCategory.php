@@ -73,4 +73,9 @@ class MenuCategory extends Model
     {
         return $this->name[$locale] ?? $this->name['uz'] ?? '';
     }
+
+    protected static function newFactory(): MenuCategoryFactory
+    {
+        return MenuCategoryFactory::new();
+    }
 }

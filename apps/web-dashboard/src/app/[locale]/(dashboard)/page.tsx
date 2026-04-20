@@ -1,20 +1,14 @@
-import { getTranslations } from 'next-intl/server';
-import { DashboardOverview } from './_components/dashboard-overview';
+import { redirect } from 'next/navigation';
 
-export async function generateMetadata() {
-  const t = await getTranslations('nav');
-  return { title: `${t('dashboard')} — MyPOS` };
-}
-
-export default async function HomePage() {
-  const t = await getTranslations('nav');
-
-  return (
-    <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10">
-      <header className="mb-8">
-        <h1 className="font-display text-3xl font-bold text-neutral-900">{t('dashboard')}</h1>
-      </header>
-      <DashboardOverview />
-    </div>
-  );
+// This file is an artifact of route-group scaffolding. The canonical home page
+// lives in the outer /[locale]/page.tsx redirect; both resolve to /{locale}
+// and perform the same redirect so behavior is identical regardless of which
+// Next.js selects.
+export default async function DashboardGroupRoot({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect(`/${locale}/overview`);
 }

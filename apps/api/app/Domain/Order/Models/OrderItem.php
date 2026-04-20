@@ -6,7 +6,9 @@ namespace App\Domain\Order\Models;
 
 use App\Domain\Menu\Models\MenuItem;
 use App\Domain\Shared\Concerns\BelongsToTenant;
+use Database\Factories\OrderItemFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +29,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class OrderItem extends Model
 {
+    /** @use HasFactory<OrderItemFactory> */
+    use HasFactory;
     use HasUuids;
     use BelongsToTenant;
     use SoftDeletes;
@@ -57,5 +61,10 @@ class OrderItem extends Model
     public function menuItem(): BelongsTo
     {
         return $this->belongsTo(MenuItem::class, 'menu_item_id');
+    }
+
+    protected static function newFactory(): OrderItemFactory
+    {
+        return OrderItemFactory::new();
     }
 }

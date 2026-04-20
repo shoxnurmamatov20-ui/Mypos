@@ -3,6 +3,47 @@
     "title": "MyPOS",
     "subtitle": "Your restaurant, reimagined"
   },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "tables": "Tables",
+    "menu": "Items",
+    "categories": "Categories",
+    "reports": "Reports",
+    "employees": "Employees",
+    "customers": "Customers",
+    "settings": "Restaurant",
+    "profile": "Profile",
+    "logout": "Logout",
+    "groups": {
+      "operations": "Operations",
+      "menu": "Menu",
+      "business": "Business",
+      "settings": "Settings"
+    }
+  },
+  "top_bar": {
+    "search_placeholder": "Search...",
+    "notifications": "Notifications",
+    "user_menu": "User menu",
+    "language": "Language"
+  },
+  "overview": {
+    "welcome": "Welcome, {name}",
+    "welcome_generic": "Welcome",
+    "subtitle": "A glance at today's metrics",
+    "more_coming": "More widgets coming soon",
+    "stats": {
+      "orders": "Orders today",
+      "revenue": "Revenue today (UZS)",
+      "active_tables": "Active tables",
+      "customers": "Customers today"
+    }
+  },
   "auth": {
     "login": {
       "page_title": "Login — MyPOS",

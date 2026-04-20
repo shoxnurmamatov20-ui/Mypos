@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\Table\Models;
 
 use App\Domain\Shared\Concerns\BelongsToTenant;
+use Database\Factories\TableCategoryFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,6 +22,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class TableCategory extends Model
 {
+    /** @use HasFactory<TableCategoryFactory> */
+    use HasFactory;
     use HasUuids;
     use BelongsToTenant;
     use SoftDeletes;
@@ -47,5 +51,10 @@ class TableCategory extends Model
     public function name(string $locale = 'uz'): string
     {
         return $this->name[$locale] ?? $this->name['uz'] ?? '';
+    }
+
+    protected static function newFactory(): TableCategoryFactory
+    {
+        return TableCategoryFactory::new();
     }
 }

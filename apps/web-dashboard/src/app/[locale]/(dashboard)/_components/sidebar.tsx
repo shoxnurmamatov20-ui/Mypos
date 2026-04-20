@@ -35,7 +35,7 @@ function buildGroups(locale: string): NavGroup[] {
     {
       key: 'operations',
       items: [
-        { key: 'dashboard', href: base, icon: Home },
+        { key: 'dashboard', href: `${base}/overview`, icon: Home },
         { key: 'orders', href: `${base}/orders`, icon: ShoppingCart, tbd: true },
         { key: 'tables', href: `${base}/tables`, icon: TableIcon },
       ],
@@ -50,7 +50,7 @@ function buildGroups(locale: string): NavGroup[] {
     {
       key: 'business',
       items: [
-        { key: 'reports', href: `${base}/reports`, icon: BarChart3, tbd: true },
+        { key: 'reports', href: `${base}/reports`, icon: BarChart3 },
         { key: 'employees', href: `${base}/employees`, icon: Users, tbd: true },
         { key: 'customers', href: `${base}/customers`, icon: Heart, tbd: true },
       ],
@@ -65,10 +65,7 @@ function buildGroups(locale: string): NavGroup[] {
   ];
 }
 
-function isItemActive(href: string, pathname: string, localeBase: string): boolean {
-  if (href === localeBase) {
-    return pathname === localeBase || pathname === `${localeBase}/`;
-  }
+function isItemActive(href: string, pathname: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -84,7 +81,6 @@ export function Sidebar({ locale, onNavigate, onClose, showCloseButton = false }
   const tGroups = useTranslations('nav.groups');
   const pathname = usePathname();
   const groups = buildGroups(locale);
-  const localeBase = `/${locale}`;
 
   return (
     <aside className="flex h-full w-60 flex-col bg-neutral-900 text-neutral-100">
@@ -121,9 +117,9 @@ export function Sidebar({ locale, onNavigate, onClose, showCloseButton = false }
                       href={item.href}
                       label={tNav(item.key)}
                       icon={item.icon}
-                      isActive={isItemActive(item.href, pathname, localeBase)}
+                      isActive={isItemActive(item.href, pathname)}
                       tbd={item.tbd ?? false}
-                      onNavigate={onNavigate ?? (() => undefined)}
+                      {...(onNavigate ? { onNavigate } : {})}
                     />
                   </li>
                 ))}

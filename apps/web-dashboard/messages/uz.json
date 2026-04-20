@@ -3,6 +3,47 @@
     "title": "MyPOS",
     "subtitle": "Restoraningizning aqli"
   },
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi"
+  },
+  "nav": {
+    "dashboard": "Boshqaruv paneli",
+    "orders": "Buyurtmalar",
+    "tables": "Stollar",
+    "menu": "Mahsulotlar",
+    "categories": "Kategoriyalar",
+    "reports": "Hisobotlar",
+    "employees": "Xodimlar",
+    "customers": "Mijozlar",
+    "settings": "Restoran",
+    "profile": "Profilim",
+    "logout": "Chiqish",
+    "groups": {
+      "operations": "Operatsiyalar",
+      "menu": "Menyu",
+      "business": "Biznes",
+      "settings": "Sozlamalar"
+    }
+  },
+  "top_bar": {
+    "search_placeholder": "Qidirish...",
+    "notifications": "Bildirishnomalar",
+    "user_menu": "Foydalanuvchi menyusi",
+    "language": "Til"
+  },
+  "overview": {
+    "welcome": "Xush kelibsiz, {name}",
+    "welcome_generic": "Xush kelibsiz",
+    "subtitle": "Bugungi ko'rsatkichlaringizga qisqa nazar",
+    "more_coming": "Yangi vidjetlar tez orada qo'shiladi",
+    "stats": {
+      "orders": "Bugungi buyurtmalar",
+      "revenue": "Bugungi tushum (so'm)",
+      "active_tables": "Faol stollar",
+      "customers": "Bugungi mijozlar"
+    }
+  },
   "auth": {
     "login": {
       "page_title": "Kirish — MyPOS",

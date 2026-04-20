@@ -41,7 +41,7 @@ function actingAsTenantOwner(?Tenant $tenant = null): User
         'is_super_admin' => false,
     ]);
 
-    Role::findOrCreate('owner', 'sanctum');
+    Role::findOrCreate('owner', 'web');
     $user->assignRole('owner');
 
     return $user;
@@ -57,7 +57,7 @@ function actingAsSuperAdmin(): User
         'is_super_admin' => true,
     ]);
 
-    Role::findOrCreate('super_admin', 'sanctum');
+    Role::findOrCreate('super_admin', 'web');
     $user->assignRole('super_admin');
 
     return $user;

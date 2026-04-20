@@ -7,7 +7,9 @@ namespace App\Domain\Order\Models;
 use App\Domain\Shared\Concerns\BelongsToTenant;
 use App\Domain\Table\Models\Table;
 use App\Models\User;
+use Database\Factories\OrderFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,6 +46,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Order extends Model
 {
+    /** @use HasFactory<OrderFactory> */
+    use HasFactory;
     use HasUuids;
     use BelongsToTenant;
     use SoftDeletes;
@@ -93,5 +97,10 @@ class Order extends Model
     public function employee(): BelongsTo
     {
         return $this->belongsTo(User::class, 'employee_id');
+    }
+
+    protected static function newFactory(): OrderFactory
+    {
+        return OrderFactory::new();
     }
 }

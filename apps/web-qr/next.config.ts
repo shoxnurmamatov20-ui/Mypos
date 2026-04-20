@@ -3,7 +3,12 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: 'standalone',
-  transpilePackages: ['@mypos/design-tokens', '@mypos/ui'],
+  transpilePackages: [
+    '@mypos/api-client',
+    '@mypos/design-tokens',
+    '@mypos/ui',
+    '@mypos/utils',
+  ],
   experimental: {
     typedRoutes: true,
   },

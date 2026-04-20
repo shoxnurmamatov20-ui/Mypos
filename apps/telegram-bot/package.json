@@ -1,0 +1,26 @@
+{
+  "name": "@mypos/telegram-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@mypos/api-client": "workspace:*",
+    "@mypos/utils": "workspace:*",
+    "dotenv": "^16.4.5",
+    "telegraf": "^4.16.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.2"
+  }
+}

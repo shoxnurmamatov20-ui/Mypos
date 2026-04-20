@@ -75,6 +75,11 @@ class Tenant extends Model
         return $this->hasMany(User::class);
     }
 
+    protected static function newFactory(): TenantFactory
+    {
+        return TenantFactory::new();
+    }
+
     public function isActive(): bool
     {
         return $this->status === 'active' && $this->suspended_at === null;
