@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
+use App\Http\Controllers\Api\V1\Employee\ClockController;
+use App\Http\Controllers\Api\V1\Employee\EmployeeController;
+use App\Http\Controllers\Api\V1\Employee\ShiftController;
 use App\Http\Controllers\Api\V1\Menu\MenuCategoryController;
 use App\Http\Controllers\Api\V1\Menu\MenuItemController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
@@ -111,6 +114,26 @@ Route::prefix('v1')->group(function () {
             Route::patch('/{customer}', [CustomerController::class, 'update'])->name('v1.customers.update');
             Route::delete('/{customer}', [CustomerController::class, 'destroy'])->name('v1.customers.destroy');
         });
+
+        // Employees
+        Route::prefix('employees')->group(function () {
+            Route::get('/', [EmployeeController::class, 'index'])->name('v1.employees.index');
+            Route::post('/', [EmployeeController::class, 'store'])->name('v1.employees.store');
+            Route::get('/{employee}', [EmployeeController::class, 'show'])->name('v1.employees.show');
+            Route::patch('/{employee}', [EmployeeController::class, 'update'])->name('v1.employees.update');
+            Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('v1.employees.destroy');
+        });
+
+        // Shifts
+        Route::prefix('shifts')->group(function () {
+            Route::get('/', [ShiftController::class, 'index'])->name('v1.shifts.index');
+            Route::post('/', [ShiftController::class, 'store'])->name('v1.shifts.store');
+            Route::delete('/{shift}', [ShiftController::class, 'destroy'])->name('v1.shifts.destroy');
+        });
+
+        // Clock in/out
+        Route::post('/clock/in', [ClockController::class, 'clockIn'])->name('v1.clock.in');
+        Route::post('/clock/out', [ClockController::class, 'clockOut'])->name('v1.clock.out');
 
         // Payments
         Route::prefix('payments')->group(function () {
