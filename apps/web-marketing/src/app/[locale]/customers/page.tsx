@@ -18,7 +18,7 @@ type Stat = { value: string; label: string };
 type Section = { heading: string; text: string };
 
 const STORIES: readonly StoryConfig[] = [
-  { id: 'osh-markazi', emoji: '🍚', icon: TrendingUp, bg: 'bg-warning-soft' },
+  { id: 'osh-markazi', emoji: '🍚', icon: TrendingUp, bg: 'bg-parchment' },
   { id: 'pizza-house', emoji: '🍕', icon: Clock, bg: 'bg-coral-tint' },
   { id: 'cafe-aroma', emoji: '☕', icon: Users, bg: 'bg-parchment' },
 ];

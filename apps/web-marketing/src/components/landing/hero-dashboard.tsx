@@ -22,7 +22,7 @@ const ORDERS: Order[] = [
 const STATUS_CLASSES: Record<Order['status'], string> = {
   ready: 'bg-success-soft text-success-text',
   preparing: 'bg-coral-tint text-coral',
-  pending: 'bg-warning-soft text-warning-text',
+  pending: 'bg-parchment text-ink-muted-80',
 };
 
 /**
@@ -61,9 +61,9 @@ export function HeroDashboard() {
         {/* Mock browser chrome */}
         <div className="flex items-center gap-xs border-b border-hairline-soft bg-parchment px-md py-xs">
           <div className="flex gap-xxs">
-            <span className="h-3 w-3 rounded-pill bg-error" />
-            <span className="h-3 w-3 rounded-pill bg-warning" />
-            <span className="h-3 w-3 rounded-pill bg-success" />
+            <span className="h-3 w-3 rounded-pill bg-[#e0e0e0]" />
+            <span className="h-3 w-3 rounded-pill bg-[#e0e0e0]" />
+            <span className="h-3 w-3 rounded-pill bg-[#e0e0e0]" />
           </div>
           <div className="ml-xxs flex-1 rounded-md bg-canvas px-sm py-xxs font-mono text-fine-print text-ink-muted-48">
             dashboard.mypos.uz

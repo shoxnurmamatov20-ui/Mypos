@@ -64,7 +64,7 @@ export function Step3Tables() {
       </div>
 
       {total > 100 && (
-        <p role="alert" className="mt-md rounded-pearl bg-warning-soft px-md py-xs text-caption text-warning-text">
+        <p role="alert" className="mt-md rounded-pearl bg-error-soft px-md py-xs text-caption text-error">
           {tErr('too_many_tables')}
         </p>
       )}

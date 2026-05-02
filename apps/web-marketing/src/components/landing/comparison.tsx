@@ -44,9 +44,9 @@ function StatusIcon({ status }: { status: Status }) {
     return (
       <span
         aria-label="partial"
-        className="inline-flex h-7 w-7 items-center justify-center rounded-pill bg-warning-soft"
+        className="inline-flex h-7 w-7 items-center justify-center rounded-pill bg-parchment"
       >
-        <Minus className="h-4 w-4 text-warning-text" strokeWidth={3} />
+        <Minus className="h-4 w-4 text-ink-muted-48" strokeWidth={3} />
       </span>
     );
   }
