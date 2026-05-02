@@ -1,4 +1,4 @@
-import { Calendar, Clock, Globe, Headphones } from 'lucide-react';
+import { Calendar, Clock, Globe, Headphones } from '@phosphor-icons/react/dist/ssr';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { DemoForm } from '@/components/landing/demo-form';
@@ -45,7 +45,7 @@ export default async function DemoPage({ params }: Props) {
               {PERKS.map(({ icon: Icon, key }) => (
                 <div key={key} className="flex items-start gap-md">
                   <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-card bg-coral-tint text-coral">
-                    <Icon className="h-6 w-6" aria-hidden="true" />
+                    <Icon size={24} weight="duotone" aria-hidden="true" />
                   </span>
                   <div>
                     <h3 className="font-display font-semibold text-body-strong text-ink">

@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CircleNotch } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 
 type Props = {
@@ -33,7 +33,7 @@ export function WizardNavButtons({
           disabled={loading}
           className="inline-flex items-center gap-xxs rounded-pill border border-hairline-soft bg-canvas px-md py-xs font-display font-semibold text-caption-strong text-ink transition-transform duration-fast active:scale-95 disabled:opacity-50"
         >
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+          <ArrowLeft size={16} weight="bold" aria-hidden="true" />
           {t('back')}
         </button>
       )}
@@ -45,11 +45,11 @@ export function WizardNavButtons({
         className="inline-flex items-center gap-xxs rounded-pill bg-tenant px-lg py-xs font-display font-semibold text-caption-strong text-tenant-on-primary transition-transform duration-fast active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? (
-          <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+          <CircleNotch size={16} weight="bold" className="animate-spin" aria-hidden="true" />
         ) : (
           <>
             {t(nextLabelKey)}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <ArrowRight size={16} weight="bold" aria-hidden="true" />
           </>
         )}
       </button>

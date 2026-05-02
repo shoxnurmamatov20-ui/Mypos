@@ -5,20 +5,16 @@ type Props = {
   className?: string;
 };
 
-/**
- * MyPOS wordmark — Apple-style monochrome inline mark + ink wordmark.
- * Tile + monogram + label, no gradients.
- */
 export function Logo({ locale, className }: Props) {
   return (
     <Link
       href={`/${locale}`}
-      className={`inline-flex items-center gap-xs text-body-strong text-ink font-display font-semibold transition-transform duration-fast active:scale-95 ${className ?? ''}`}
+      className={`inline-flex items-center gap-xs font-display text-body-strong font-semibold text-ink transition-transform duration-fast active:scale-95 ${className ?? ''}`}
       aria-label="MyPOS"
     >
       <span
         aria-hidden="true"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-pearl bg-coral text-white"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-[14px] bg-[#101211] text-coral shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]"
       >
         <svg
           width="18"
@@ -33,15 +29,10 @@ export function Logo({ locale, className }: Props) {
             fill="currentColor"
             opacity="0.2"
           />
-          <path
-            d="M8 9h8M8 13h5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
+          <path d="M8 9h8M8 13h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
       </span>
-      <span>MyPOS</span>
+      <span className="text-[19px]">MyPOS</span>
     </Link>
   );
 }

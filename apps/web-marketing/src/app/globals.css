@@ -15,12 +15,14 @@
   }
 
   body {
-    background-color: #ffffff;
+    background:
+      linear-gradient(180deg, rgba(247, 250, 247, 0.92) 0%, rgba(255, 255, 255, 1) 36%),
+      #ffffff;
     color: #1d1d1f;
     font-family: var(--font-sans);
     font-size: 17px;
     line-height: 1.47;
-    letter-spacing: -0.374px;
+    letter-spacing: 0;
   }
 
   h1,
@@ -37,22 +39,35 @@
   }
 }
 
-/* Cyrillic display tracking — reduce 20% per Apple discipline */
-[lang='ru'] .tracking-hero,
-[lang='kz'] .tracking-hero,
-[lang='uz-Cyrl'] .tracking-hero {
-  letter-spacing: -1.92px;
-}
-
 /* Tabular numerals for prices/counts/timers */
 .tabular {
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum';
 }
 
-/* Apple frosted-glass sub-nav */
+/* Frosted global navigation */
 .frosted-nav {
-  background-color: rgba(245, 245, 247, 0.8);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+}
+
+.ops-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+.modern-gradient {
+  background:
+    linear-gradient(135deg, rgba(234, 124, 105, 0.18), rgba(80, 209, 170, 0.12) 42%, transparent 72%),
+    linear-gradient(180deg, #151918 0%, #101211 100%);
+}
+
+.soft-checker {
+  background-image:
+    linear-gradient(rgba(16, 18, 17, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 18, 17, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
 }

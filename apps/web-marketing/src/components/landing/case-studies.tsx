@@ -1,16 +1,23 @@
 'use client';
 
-import { ArrowRight, Clock, type LucideIcon, TrendingUp, Users } from 'lucide-react';
-import { BowlFood, Coffee, Pizza } from '@phosphor-icons/react';
-import type { Icon as PhosphorIcon } from '@phosphor-icons/react';
+import {
+  ArrowRight,
+  BowlFood,
+  Clock,
+  Coffee,
+  type Icon,
+  Pizza,
+  TrendUp,
+  Users,
+} from '@phosphor-icons/react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
 type CaseConfig = {
   id: string;
-  CardIcon: PhosphorIcon;
-  metricIcon: LucideIcon;
+  CardIcon: Icon;
+  MetricIcon: Icon;
   metricValueKey: string;
   metricLabelKey: string;
 };
@@ -19,31 +26,26 @@ const CASES: readonly CaseConfig[] = [
   {
     id: 'osh-markazi',
     CardIcon: BowlFood,
-    metricIcon: TrendingUp,
+    MetricIcon: TrendUp,
     metricValueKey: 'case1_metric_value',
     metricLabelKey: 'case1_metric_label',
   },
   {
     id: 'pizza-house',
     CardIcon: Pizza,
-    metricIcon: Clock,
+    MetricIcon: Clock,
     metricValueKey: 'case2_metric_value',
     metricLabelKey: 'case2_metric_label',
   },
   {
     id: 'cafe-aroma',
     CardIcon: Coffee,
-    metricIcon: Users,
+    MetricIcon: Users,
     metricValueKey: 'case3_metric_value',
     metricLabelKey: 'case3_metric_label',
   },
 ];
 
-/**
- * Apple-style customer story tiles — parchment background,
- * canvas card with hairline ring, Phosphor thin icon header on pearl,
- * tabular metric, single coral accent.
- */
 export function CaseStudies() {
   const t = useTranslations('case_studies');
   const locale = useLocale();
@@ -63,7 +65,7 @@ export function CaseStudies() {
 
         <StaggerGroup className="mb-xl grid gap-md md:grid-cols-3">
           {CASES.map((caseStudy, i) => {
-            const MetricIcon = caseStudy.metricIcon;
+            const MetricIcon = caseStudy.MetricIcon;
             const CardIcon = caseStudy.CardIcon;
             const caseKey = `case${i + 1}` as const;
 
@@ -85,7 +87,7 @@ export function CaseStudies() {
                   <div className="flex flex-1 flex-col p-lg">
                     <div className="mb-md flex items-center gap-xs border-b border-hairline-soft pb-md">
                       <div className="flex h-12 w-12 items-center justify-center rounded-pearl bg-coral-tint">
-                        <MetricIcon aria-hidden="true" className="h-6 w-6 text-coral" />
+                        <MetricIcon size={24} weight="light" aria-hidden="true" className="text-coral" />
                       </div>
                       <div>
                         <p className="tabular text-display-md text-ink font-display font-semibold">
@@ -106,7 +108,7 @@ export function CaseStudies() {
 
                     <div className="mt-md inline-flex items-center gap-xxs text-caption-strong text-coral font-display">
                       {t('read_story')}
-                      <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                      <ArrowRight size={16} weight="bold" aria-hidden="true" />
                     </div>
                   </div>
                 </Link>
@@ -121,7 +123,7 @@ export function CaseStudies() {
             className="inline-flex h-12 items-center gap-xs rounded-pill bg-pearl px-lg text-body text-ink shadow-hairline-ring transition-transform duration-fast active:scale-95"
           >
             {t('view_all')}
-            <ArrowRight aria-hidden="true" className="h-5 w-5" />
+            <ArrowRight size={20} weight="bold" aria-hidden="true" />
           </Link>
         </FadeUp>
       </div>

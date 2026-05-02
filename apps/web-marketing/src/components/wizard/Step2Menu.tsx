@@ -1,6 +1,6 @@
 'use client';
 
-import { Loader2, Sparkles, Trash2, Upload } from 'lucide-react';
+import { CircleNotch, Sparkle, Trash, UploadSimple } from '@phosphor-icons/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { generateMenu, OnboardingApiError } from '@/lib/wizard-api';
@@ -106,12 +106,12 @@ export function Step2Menu() {
           >
             {generating ? (
               <>
-                <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+                <CircleNotch size={20} weight="bold" className="animate-spin" aria-hidden="true" />
                 {t('generating')}
               </>
             ) : (
               <>
-                <Sparkles className="h-5 w-5" aria-hidden="true" />
+                <Sparkle size={20} weight="fill" aria-hidden="true" />
                 {t('generate_cta')}
               </>
             )}
@@ -123,7 +123,7 @@ export function Step2Menu() {
             htmlFor="csv-upload"
             className="inline-flex cursor-pointer items-center gap-xs rounded-pill border border-hairline-soft bg-canvas px-lg py-xs font-display font-semibold text-caption-strong text-ink transition-transform duration-fast active:scale-95 hover:border-coral/40 hover:text-coral"
           >
-            <Upload className="h-5 w-5" aria-hidden="true" />
+            <UploadSimple size={20} weight="bold" aria-hidden="true" />
             {t('csv_cta')}
             <input
               id="csv-upload"
@@ -279,7 +279,7 @@ function ItemRow({
           onClick={onRemove}
           className="inline-flex items-center justify-center rounded-pearl p-xxs text-ink-muted-48 transition-colors duration-fast hover:bg-error-soft hover:text-error"
         >
-          <Trash2 className="h-4 w-4" aria-hidden="true" />
+          <Trash size={16} weight="bold" aria-hidden="true" />
         </button>
       </td>
     </tr>

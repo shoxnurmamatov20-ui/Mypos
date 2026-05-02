@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Minus, X } from 'lucide-react';
+import { Check, Minus, X } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { FadeUp } from './animations';
 
@@ -34,9 +34,9 @@ function StatusIcon({ status }: { status: Status }) {
     return (
       <span
         aria-label="yes"
-        className="inline-flex h-7 w-7 items-center justify-center rounded-pill bg-coral-tint"
+        className="inline-flex h-7 w-7 items-center justify-center rounded-pill bg-coral-tint text-coral"
       >
-        <Check className="h-4 w-4 text-coral" strokeWidth={3} />
+        <Check size={16} weight="bold" />
       </span>
     );
   }
@@ -44,18 +44,18 @@ function StatusIcon({ status }: { status: Status }) {
     return (
       <span
         aria-label="partial"
-        className="inline-flex h-7 w-7 items-center justify-center rounded-pill bg-parchment"
+        className="inline-flex h-7 w-7 items-center justify-center rounded-pill bg-parchment text-ink-muted-48"
       >
-        <Minus className="h-4 w-4 text-ink-muted-48" strokeWidth={3} />
+        <Minus size={16} weight="bold" />
       </span>
     );
   }
   return (
     <span
       aria-label="no"
-      className="inline-flex h-7 w-7 items-center justify-center rounded-pill bg-parchment"
+      className="inline-flex h-7 w-7 items-center justify-center rounded-pill bg-parchment text-ink-muted-48"
     >
-      <X className="h-4 w-4 text-ink-muted-48" strokeWidth={3} />
+      <X size={16} weight="bold" />
     </span>
   );
 }

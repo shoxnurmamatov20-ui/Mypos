@@ -1,4 +1,4 @@
-import { Eye, Target, Users } from 'lucide-react';
+import { Eye, Target, Users } from '@phosphor-icons/react/dist/ssr';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CtaSection } from '@/components/landing/cta-section';
@@ -50,7 +50,7 @@ export default async function AboutPage({
                 className="rounded-card border border-hairline-soft bg-canvas p-lg shadow-hairline-ring"
               >
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-pearl bg-coral-tint text-coral">
-                  <Icon className="h-6 w-6" aria-hidden="true" />
+                  <Icon size={24} weight="duotone" aria-hidden="true" />
                 </div>
                 <h2 className="mt-md font-display font-semibold text-title text-ink">
                   {card.title}

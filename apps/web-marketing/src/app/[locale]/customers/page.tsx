@@ -1,4 +1,12 @@
-import { Clock, type LucideIcon, TrendingUp, Users } from 'lucide-react';
+import type { Icon } from '@phosphor-icons/react';
+import {
+  BowlFood,
+  Clock,
+  Coffee,
+  Pizza,
+  TrendUp,
+  Users,
+} from '@phosphor-icons/react/dist/ssr';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CtaSection } from '@/components/landing/cta-section';
@@ -9,8 +17,8 @@ type Props = {
 
 type StoryConfig = {
   id: string;
-  emoji: string;
-  icon: LucideIcon;
+  CardIcon: Icon;
+  metricIcon: Icon;
   bg: string;
 };
 
@@ -18,9 +26,9 @@ type Stat = { value: string; label: string };
 type Section = { heading: string; text: string };
 
 const STORIES: readonly StoryConfig[] = [
-  { id: 'osh-markazi', emoji: '🍚', icon: TrendingUp, bg: 'bg-parchment' },
-  { id: 'pizza-house', emoji: '🍕', icon: Clock, bg: 'bg-coral-tint' },
-  { id: 'cafe-aroma', emoji: '☕', icon: Users, bg: 'bg-parchment' },
+  { id: 'osh-markazi', CardIcon: BowlFood, metricIcon: TrendUp, bg: 'bg-parchment' },
+  { id: 'pizza-house', CardIcon: Pizza, metricIcon: Clock, bg: 'bg-coral-tint' },
+  { id: 'cafe-aroma', CardIcon: Coffee, metricIcon: Users, bg: 'bg-parchment' },
 ];
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -56,7 +64,8 @@ export default async function CustomersPage({ params }: Props) {
       <section className="bg-canvas py-section">
         <div className="mx-auto max-w-5xl space-y-[80px] px-md">
           {STORIES.map((story, i) => {
-            const Icon = story.icon;
+            const CardIcon = story.CardIcon;
+            const MetricIcon = story.metricIcon;
             const key = `case${i + 1}` as const;
             const stats = t.raw(`${key}.stats`) as Stat[];
             const sections = t.raw(`${key}.sections`) as Section[];
@@ -66,9 +75,12 @@ export default async function CustomersPage({ params }: Props) {
                 <div
                   className={`${story.bg} mb-md flex flex-col items-center gap-xl rounded-card p-xl md:flex-row`}
                 >
-                  <span aria-hidden="true" className="text-9xl">
-                    {story.emoji}
-                  </span>
+                  <CardIcon
+                    size={120}
+                    weight="thin"
+                    className="text-ink-muted-48"
+                    aria-hidden="true"
+                  />
                   <div className="flex-1 text-center md:text-left">
                     <h2 className="font-display font-semibold text-display-sm text-ink">
                       {t(`${key}.name`)}
@@ -91,9 +103,11 @@ export default async function CustomersPage({ params }: Props) {
                       key={stat.label}
                       className="rounded-card border border-hairline-soft bg-canvas p-lg text-center"
                     >
-                      <Icon
+                      <MetricIcon
+                        size={32}
+                        weight="light"
                         aria-hidden="true"
-                        className="mx-auto mb-sm h-8 w-8 text-coral"
+                        className="mx-auto mb-sm text-coral"
                       />
                       <p className="tabular font-display font-semibold text-display-sm text-ink">
                         {stat.value}

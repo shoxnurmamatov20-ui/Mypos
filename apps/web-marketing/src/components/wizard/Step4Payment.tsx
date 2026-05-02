@@ -1,14 +1,13 @@
 'use client';
 
-import type { LucideIcon } from 'lucide-react';
-import { Banknote, Check, CreditCard, Wallet } from 'lucide-react';
+import { Check, CreditCard, type Icon, Money, Wallet } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { PAYMENT_PROVIDERS, type PaymentProvider } from '@/lib/wizard-schemas';
 import { useWizardStore } from '@/lib/wizard-store';
 import { WizardNavButtons } from './WizardNavButtons';
 
-const PROVIDER_ICONS: Record<PaymentProvider, LucideIcon> = {
-  cash: Banknote,
+const PROVIDER_ICONS: Record<PaymentProvider, Icon> = {
+  cash: Money,
   click: Wallet,
   payme: Wallet,
   card: CreditCard,
@@ -59,7 +58,7 @@ export function Step4Payment() {
                   selected ? 'bg-coral text-white' : 'bg-parchment text-ink-muted-80',
                 ].join(' ')}
               >
-                <Icon className="h-6 w-6" aria-hidden="true" />
+                <Icon size={24} weight="duotone" aria-hidden="true" />
               </span>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-xs">
@@ -68,9 +67,10 @@ export function Step4Payment() {
                   </span>
                   {selected && (
                     <Check
-                      className="h-4 w-4 text-coral"
+                      size={16}
+                      weight="bold"
                       aria-label="selected"
-                      strokeWidth={3}
+                      className="text-coral"
                     />
                   )}
                 </div>

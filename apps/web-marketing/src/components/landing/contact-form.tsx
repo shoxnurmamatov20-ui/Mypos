@@ -1,6 +1,6 @@
 'use client';
 
-import { Send } from 'lucide-react';
+import { PaperPlaneRight } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -20,7 +20,7 @@ export function ContactForm() {
         className="rounded-card border border-hairline-soft bg-success-soft p-xl text-center"
       >
         <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-pill bg-success text-white">
-          <Send className="h-5 w-5" aria-hidden="true" />
+          <PaperPlaneRight size={20} weight="fill" aria-hidden="true" />
         </div>
         <p className="mt-md font-display font-semibold text-title text-success-text">
           {t('success')}
@@ -91,7 +91,7 @@ export function ContactForm() {
         type="submit"
         className="inline-flex w-full items-center justify-center gap-xs rounded-pill bg-tenant px-lg py-xs font-display font-semibold text-caption-strong text-tenant-on-primary transition-transform duration-fast active:scale-95"
       >
-        <Send className="h-4 w-4" aria-hidden="true" />
+        <PaperPlaneRight size={16} weight="fill" aria-hidden="true" />
         {t('submit')}
       </button>
 

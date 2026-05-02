@@ -1,6 +1,6 @@
 'use client';
 
-import { Globe } from 'lucide-react';
+import { Globe } from '@phosphor-icons/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState, useTransition } from 'react';
@@ -53,7 +53,7 @@ export function LanguageSwitcher({ align = 'right' }: { align?: 'left' | 'right'
         aria-label={t('lang_label')}
         className="inline-flex h-9 items-center gap-xs rounded-pearl bg-pearl px-sm text-caption-strong text-ink shadow-hairline-ring transition-transform duration-fast active:scale-95"
       >
-        <Globe className="h-4 w-4" aria-hidden="true" />
+        <Globe size={16} weight="duotone" aria-hidden="true" />
         <span>{labels[locale] ?? locale.toUpperCase()}</span>
       </button>
       {open ? (

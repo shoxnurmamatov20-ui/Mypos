@@ -1,6 +1,6 @@
 'use client';
 
-import { Minus, Plus } from 'lucide-react';
+import { Minus, Plus } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { step3Schema } from '@/lib/wizard-schemas';
 import { useWizardStore } from '@/lib/wizard-store';
@@ -103,7 +103,7 @@ function CounterField({
           className="flex w-12 items-center justify-center bg-parchment text-ink-muted-80 transition-colors duration-fast hover:bg-pearl disabled:opacity-50"
           disabled={value <= min}
         >
-          <Minus className="h-4 w-4" aria-hidden="true" />
+          <Minus size={16} weight="bold" aria-hidden="true" />
         </button>
         <input
           type="number"
@@ -123,7 +123,7 @@ function CounterField({
           className="flex w-12 items-center justify-center bg-parchment text-ink-muted-80 transition-colors duration-fast hover:bg-pearl disabled:opacity-50"
           disabled={value >= max}
         >
-          <Plus className="h-4 w-4" aria-hidden="true" />
+          <Plus size={16} weight="bold" aria-hidden="true" />
         </button>
       </div>
       <p className="mt-xxs text-fine-print text-ink-muted-48">{hint}</p>

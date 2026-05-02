@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle2, Clock, Coins, TrendingUp } from 'lucide-react';
+import { CheckCircle, Clock, Coins, type Icon, TrendUp } from '@phosphor-icons/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { FadeUp } from './animations';
@@ -143,7 +143,7 @@ export function RoiCalculator() {
                   label={t('monthly_savings')}
                 />
                 <Stat
-                  icon={TrendingUp}
+                  icon={TrendUp}
                   value={`${Math.max(0, roiPercent)}%`}
                   label={t('roi_label')}
                 />
@@ -153,7 +153,7 @@ export function RoiCalculator() {
                   label={t('payback_label')}
                 />
                 <Stat
-                  icon={CheckCircle2}
+                  icon={CheckCircle}
                   value={formatUZS(myposCost, locale)}
                   label={t('mypos_cost')}
                 />
@@ -227,17 +227,17 @@ function SliderRow({
 }
 
 function Stat({
-  icon: Icon,
+  icon: IconComp,
   value,
   label,
 }: {
-  icon: React.ComponentType<{ className?: string; 'aria-hidden'?: boolean }>;
+  icon: Icon;
   value: string;
   label: string;
 }) {
   return (
     <div className="rounded-card bg-tile-dark-2 p-md">
-      <Icon className="mb-xs h-5 w-5 text-on-dark-muted" aria-hidden />
+      <IconComp size={20} weight="light" className="mb-xs text-on-dark-muted" aria-hidden="true" />
       <p className="tabular text-tagline text-on-dark font-display font-semibold">{value}</p>
       <p className="mt-xxs text-fine-print text-on-dark-muted">{label}</p>
     </div>

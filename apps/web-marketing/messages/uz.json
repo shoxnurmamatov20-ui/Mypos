@@ -40,6 +40,14 @@
     "dashboard_caption": "Manager Dashboard",
     "dashboard_subtitle": "Bugungi tushum, top taomlar va xodimlar ko'rsatkichlari",
     "dashboard_revenue_today": "Bugungi tushum",
+    "dashboard_live": "Jonli",
+    "dashboard_table_map": "Zal xaritasi",
+    "dashboard_active_zones": "8 faol zona",
+    "dashboard_kds_queue": "KDS navbat",
+    "dashboard_payments": "To'lovlar",
+    "dashboard_control_room": "QR menyu, POS, xodimlar va yetkazish signallari bitta boshqaruv markazida.",
+    "dashboard_rush_hour": "Pik vaqt",
+    "dashboard_faster": "2.4x tezroq",
     "status_ready": "Tayyor",
     "status_cooking": "Tayyorlanmoqda",
     "status_new": "Yangi",
@@ -321,25 +329,13 @@
     ],
     "restaurant_title": "Restoran",
     "restaurant_desc": "Stollar boshqaruvi, kuryer yetkazib berish, KDS oshxona ekrani, modifikatorlar va katta menyu.",
-    "restaurant_features": [
-      "Stollar va xona",
-      "KDS oshxona display",
-      "Yetkazib berish boshqaruvi"
-    ],
+    "restaurant_features": ["Stollar va xona", "KDS oshxona display", "Yetkazib berish boshqaruvi"],
     "fastfood_title": "Fast Food",
     "fastfood_desc": "Self-service kiosk, drive-thru, mobil buyurtma va minimal vaqtda ko'p buyurtma.",
-    "fastfood_features": [
-      "Self-service kiosk",
-      "Mobil buyurtma",
-      "Yuqori tezlik"
-    ],
+    "fastfood_features": ["Self-service kiosk", "Mobil buyurtma", "Yuqori tezlik"],
     "bar_title": "Bar va Pub",
     "bar_desc": "Tezkor open tab, yosh tekshirish, smena hisoboti, alkogolli ichimliklar uchun maxsus.",
-    "bar_features": [
-      "Open tab boshqaruvi",
-      "Smena hisoboti",
-      "Yosh tekshirish"
-    ]
+    "bar_features": ["Open tab boshqaruvi", "Smena hisoboti", "Yosh tekshirish"]
   },
   "comparison": {
     "label": "TAQQOSLASH",
@@ -399,8 +395,14 @@
       "Inventarizatsiya va xom ashyo nazorati"
     ],
     "cafe_solutions": [
-      { "title": "Tezkor buyurtma", "desc": "Touch-screen kassir va modifikatorlar 30 sekundda buyurtmani qabul qiladi." },
-      { "title": "Mijoz profili", "desc": "Har bir mijoz tarixi, sevimli ichimliklari, doimiy chegirmalar." },
+      {
+        "title": "Tezkor buyurtma",
+        "desc": "Touch-screen kassir va modifikatorlar 30 sekundda buyurtmani qabul qiladi."
+      },
+      {
+        "title": "Mijoz profili",
+        "desc": "Har bir mijoz tarixi, sevimli ichimliklari, doimiy chegirmalar."
+      },
       { "title": "Loyallik dasturi", "desc": "Avtomatik ball, daraja va mukofotlar tizimi." },
       { "title": "Mobil ilova", "desc": "Mijozlar telefonidan oldindan buyurtma berishi mumkin." }
     ],
@@ -414,10 +416,22 @@
       "Yetkazib berish operatsiyasi murakkab"
     ],
     "restaurant_solutions": [
-      { "title": "Stollar boshqaruvi", "desc": "Vizual stollar xaritasi, real-time holat, QR-menyu integratsiyasi." },
-      { "title": "KDS oshxona ekrani", "desc": "Buyurtmalar darhol oshxonaga, status yangilanishlari, vaqt nazorati." },
-      { "title": "Yetkazib berish", "desc": "Kuryer ilovasi, marshrut optimizatsiya, mijoz kuzatuvi." },
-      { "title": "Modifikatorlar", "desc": "Murakkab menyular: o'lchamlar, qo'shimchalar, allergenlar, ratsion." }
+      {
+        "title": "Stollar boshqaruvi",
+        "desc": "Vizual stollar xaritasi, real-time holat, QR-menyu integratsiyasi."
+      },
+      {
+        "title": "KDS oshxona ekrani",
+        "desc": "Buyurtmalar darhol oshxonaga, status yangilanishlari, vaqt nazorati."
+      },
+      {
+        "title": "Yetkazib berish",
+        "desc": "Kuryer ilovasi, marshrut optimizatsiya, mijoz kuzatuvi."
+      },
+      {
+        "title": "Modifikatorlar",
+        "desc": "Murakkab menyular: o'lchamlar, qo'shimchalar, allergenlar, ratsion."
+      }
     ],
     "fastfood_meta_title": "Fast Food POS — MyPOS",
     "fastfood_meta_description": "Fast food uchun tezkor POS. Self-service kiosk, mobil buyurtma.",
@@ -444,9 +458,18 @@
       "Smena oxirida hisob-kitob murakkab"
     ],
     "bar_solutions": [
-      { "title": "Open Tab", "desc": "Mijoz nomi/stoli bilan ochiq schyot, oxirida bittada to'lov." },
-      { "title": "Alkogol nazorati", "desc": "Har bir butulkadan qancha ketganini avtomatik hisoblash." },
-      { "title": "Smena hisoboti", "desc": "Har bir bartender uchun alohida hisobot, nimaga sotgani." },
+      {
+        "title": "Open Tab",
+        "desc": "Mijoz nomi/stoli bilan ochiq schyot, oxirida bittada to'lov."
+      },
+      {
+        "title": "Alkogol nazorati",
+        "desc": "Har bir butulkadan qancha ketganini avtomatik hisoblash."
+      },
+      {
+        "title": "Smena hisoboti",
+        "desc": "Har bir bartender uchun alohida hisobot, nimaga sotgani."
+      },
       { "title": "Yosh tekshirish", "desc": "Buyurtmada yosh kiritishni majburiy qilish." }
     ]
   },
@@ -468,9 +491,18 @@
         { "value": "−50%", "label": "Xizmat vaqti" }
       ],
       "sections": [
-        { "heading": "Muammo", "text": "Restoran an'anaviy ravishda ishlardi: qog'oz hisob-kitob, telefon orqali buyurtma. Yosh mijozlarni jalb qilish qiyinlashdi." },
-        { "heading": "Yechim", "text": "MyPOS to'liq tizimi: POS, mobil ilova, QR-menyu, KDS. 1 hafta ichida sozlandi." },
-        { "heading": "Natija", "text": "3 oydan keyin: tushum 34% ga oshdi, mobil ilova orqali buyurtmalar oylik 8 ming ga yetdi." }
+        {
+          "heading": "Muammo",
+          "text": "Restoran an'anaviy ravishda ishlardi: qog'oz hisob-kitob, telefon orqali buyurtma. Yosh mijozlarni jalb qilish qiyinlashdi."
+        },
+        {
+          "heading": "Yechim",
+          "text": "MyPOS to'liq tizimi: POS, mobil ilova, QR-menyu, KDS. 1 hafta ichida sozlandi."
+        },
+        {
+          "heading": "Natija",
+          "text": "3 oydan keyin: tushum 34% ga oshdi, mobil ilova orqali buyurtmalar oylik 8 ming ga yetdi."
+        }
       ]
     },
     "case2": {
@@ -485,9 +517,18 @@
         { "value": "−65%", "label": "Xato buyurtma" }
       ],
       "sections": [
-        { "heading": "Muammo", "text": "4 ta filial, har birida boshqa-boshqa tizim. Markazlashtirilgan hisobot yo'q. Pizza tayyorlash vaqti 18 daqiqa." },
-        { "heading": "Yechim", "text": "Multi-tenant MyPOS — 4 filial bitta dashboardda. Har bir oshxonada KDS." },
-        { "heading": "Natija", "text": "Tayyorlash vaqti 11 daqiqa. Mijozlar baho 4.2 dan 4.7 ga ko'tarildi." }
+        {
+          "heading": "Muammo",
+          "text": "4 ta filial, har birida boshqa-boshqa tizim. Markazlashtirilgan hisobot yo'q. Pizza tayyorlash vaqti 18 daqiqa."
+        },
+        {
+          "heading": "Yechim",
+          "text": "Multi-tenant MyPOS — 4 filial bitta dashboardda. Har bir oshxonada KDS."
+        },
+        {
+          "heading": "Natija",
+          "text": "Tayyorlash vaqti 11 daqiqa. Mijozlar baho 4.2 dan 4.7 ga ko'tarildi."
+        }
       ]
     },
     "case3": {
@@ -502,9 +543,18 @@
         { "value": "+45%", "label": "O'rtacha chek" }
       ],
       "sections": [
-        { "heading": "Muammo", "text": "Mijozlar bir marta keladi va ketadi. Kim qaysi qahvani sevishini hech kim eslay olmaydi." },
-        { "heading": "Yechim", "text": "MyPOS mijoz CRM, loyallik ball, mobil ilova orqali oldindan buyurtma." },
-        { "heading": "Natija", "text": "Mijoz bazasi 12 ming ga yetdi. Har hafta 73% qaytib keladi." }
+        {
+          "heading": "Muammo",
+          "text": "Mijozlar bir marta keladi va ketadi. Kim qaysi qahvani sevishini hech kim eslay olmaydi."
+        },
+        {
+          "heading": "Yechim",
+          "text": "MyPOS mijoz CRM, loyallik ball, mobil ilova orqali oldindan buyurtma."
+        },
+        {
+          "heading": "Natija",
+          "text": "Mijoz bazasi 12 ming ga yetdi. Har hafta 73% qaytib keladi."
+        }
       ]
     }
   },

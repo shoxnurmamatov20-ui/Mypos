@@ -1,6 +1,6 @@
 'use client';
 
-import { Check } from 'lucide-react';
+import { Check } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { TOTAL_WIZARD_STEPS, useWizardStore, type WizardStep } from '@/lib/wizard-store';
 
@@ -44,7 +44,7 @@ export function WizardProgress() {
                 ].join(' ')}
               >
                 {completed ? (
-                  <Check className="h-4 w-4" aria-hidden="true" strokeWidth={3} />
+                  <Check size={16} weight="bold" aria-hidden="true" />
                 ) : (
                   <span>{n}</span>
                 )}

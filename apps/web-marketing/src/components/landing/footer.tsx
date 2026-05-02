@@ -1,15 +1,10 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
-import { TelegramLogo } from '@phosphor-icons/react/dist/ssr';
+import { Envelope, MapPin, Phone, TelegramLogo } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './language-switcher';
 import { Logo } from './logo';
 import { Newsletter } from './newsletter';
 
-/**
- * Apple-style footer — parchment background, dense-link 2.41 leading,
- * 64px section-tight padding, hairline column separators.
- */
 export function Footer() {
   const t = useTranslations('footer');
   const locale = useLocale();
@@ -53,44 +48,37 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-parchment border-t border-hairline-soft">
+    <footer className="border-t border-black/[0.06] bg-[#F7FAF7]">
       <div className="mx-auto max-w-7xl px-md py-section-tight sm:px-lg lg:px-xl">
-        <div className="grid gap-xl lg:grid-cols-[1.2fr_2fr] lg:gap-xxl">
+        <div className="grid gap-xl lg:grid-cols-[1.1fr_2fr] lg:gap-xxl">
           <div>
             <Logo locale={locale} />
-            <p className="mt-md max-w-xs text-caption text-ink-muted-80">
-              {t('tagline')}
-            </p>
-            <ul className="mt-md space-y-xs text-caption text-ink-muted-80">
+            <p className="mt-md max-w-sm text-caption text-ink-muted-80">{t('tagline')}</p>
+
+            <ul className="mt-lg space-y-xs text-caption text-ink-muted-80">
               <li className="flex items-center gap-xs">
-                <Phone className="h-4 w-4 text-coral" aria-hidden="true" />
-                <a
-                  href={`tel:${t('phone').replace(/\s/g, '')}`}
-                  className="transition-colors duration-fast hover:text-coral"
-                >
+                <Phone size={16} weight="duotone" className="text-coral" aria-hidden="true" />
+                <a href={`tel:${t('phone').replace(/\s/g, '')}`} className="hover:text-coral">
                   {t('phone')}
                 </a>
               </li>
               <li className="flex items-center gap-xs">
-                <Mail className="h-4 w-4 text-coral" aria-hidden="true" />
-                <a
-                  href={`mailto:${t('email')}`}
-                  className="transition-colors duration-fast hover:text-coral"
-                >
+                <Envelope size={16} weight="duotone" className="text-coral" aria-hidden="true" />
+                <a href={`mailto:${t('email')}`} className="hover:text-coral">
                   {t('email')}
                 </a>
               </li>
               <li className="flex items-center gap-xs">
-                <MapPin className="h-4 w-4 text-coral" aria-hidden="true" />
+                <MapPin size={16} weight="duotone" className="text-coral" aria-hidden="true" />
                 <span>{t('address')}</span>
               </li>
               <li className="flex items-center gap-xs">
-                <TelegramLogo className="h-4 w-4 text-coral" weight="fill" aria-hidden="true" />
+                <TelegramLogo size={16} weight="fill" className="text-coral" aria-hidden="true" />
                 <a
                   href="https://t.me/mypos_uz"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="transition-colors duration-fast hover:text-coral"
+                  className="hover:text-coral"
                 >
                   @mypos_uz
                 </a>
@@ -102,13 +90,14 @@ export function Footer() {
             </div>
           </div>
 
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-lg sm:grid-cols-4">
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-md sm:grid-cols-4">
             {groups.map((group) => (
-              <div key={group.title}>
-                <div className="text-caption-strong text-ink font-display">
-                  {group.title}
-                </div>
-                <ul className="mt-sm" style={{ lineHeight: '2.41' }}>
+              <div
+                key={group.title}
+                className="rounded-card border border-black/[0.06] bg-white p-md"
+              >
+                <div className="font-display text-caption-strong text-ink">{group.title}</div>
+                <ul className="mt-sm space-y-xs">
                   {group.links.map((link) => (
                     <li key={link.label}>
                       <Link
@@ -125,7 +114,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-xl flex flex-col items-start justify-between gap-md border-t border-hairline-soft pt-md text-fine-print text-ink-muted-48 sm:flex-row sm:items-center">
+        <div className="mt-xl flex flex-col items-start justify-between gap-md border-t border-black/[0.06] pt-md text-fine-print text-ink-muted-48 sm:flex-row sm:items-center">
           <span>&copy; {t('copyright', { year: String(year) })}</span>
           <LanguageSwitcher align="left" />
         </div>

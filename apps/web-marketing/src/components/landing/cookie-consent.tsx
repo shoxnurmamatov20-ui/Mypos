@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Cookie, X } from 'lucide-react';
+import { Cookie, X } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
@@ -47,7 +47,7 @@ export function CookieConsent() {
           <div className="rounded-card bg-canvas p-md shadow-hairline-ring">
             <div className="flex items-start gap-xs">
               <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-pearl bg-coral-tint">
-                <Cookie className="h-5 w-5 text-coral" aria-hidden="true" />
+                <Cookie size={20} weight="duotone" className="text-coral" aria-hidden="true" />
               </span>
               <div className="flex-1">
                 <h3 className="text-body-strong text-ink font-display font-semibold">
@@ -77,7 +77,7 @@ export function CookieConsent() {
                 className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-pearl text-ink-muted-48 transition-colors duration-fast hover:bg-parchment hover:text-ink"
                 aria-label={t('close')}
               >
-                <X className="h-4 w-4" aria-hidden="true" />
+                <X size={16} weight="bold" aria-hidden="true" />
               </button>
             </div>
           </div>

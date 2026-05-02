@@ -1,6 +1,6 @@
 'use client';
 
-import { Star } from 'lucide-react';
+import { Star } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
@@ -48,9 +48,9 @@ export function Testimonials() {
                     {t(`items.${key}.role`)}
                   </div>
                 </div>
-                <div className="flex text-coral" aria-hidden="true">
+                <div className="flex gap-[1px] text-coral" aria-hidden="true">
                   {[0, 1, 2, 3, 4].map((i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                    <Star key={i} size={14} weight="fill" />
                   ))}
                 </div>
               </div>

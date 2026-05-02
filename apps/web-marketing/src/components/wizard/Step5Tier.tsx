@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Sparkles } from 'lucide-react';
+import { Check, Sparkle } from '@phosphor-icons/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { OnboardingApiError, submitOnboarding } from '@/lib/wizard-api';
@@ -134,7 +134,7 @@ function TierCard({
     >
       {highlight && !selected && (
         <span className="-top-3 -translate-x-1/2 absolute left-1/2 inline-flex items-center gap-xxs rounded-pill bg-tenant px-sm py-xxs font-display font-semibold text-fine-print text-tenant-on-primary uppercase">
-          <Sparkles className="h-3 w-3" aria-hidden="true" />
+          <Sparkle size={12} weight="fill" aria-hidden="true" />
           {t('most_popular')}
         </span>
       )}
@@ -157,9 +157,10 @@ function TierCard({
             className="flex items-start gap-xs"
           >
             <Check
-              className="mt-0.5 h-4 w-4 shrink-0 text-success-text"
+              size={16}
+              weight="bold"
               aria-hidden="true"
-              strokeWidth={2.5}
+              className="mt-0.5 shrink-0 text-success-text"
             />
             <span>{t(`${tier}.features.${i}`)}</span>
           </li>
@@ -168,7 +169,7 @@ function TierCard({
 
       {selected && (
         <span className="absolute top-md right-md inline-flex h-6 w-6 items-center justify-center rounded-pill bg-coral text-white">
-          <Check className="h-4 w-4" aria-hidden="true" strokeWidth={3} />
+          <Check size={16} weight="bold" aria-hidden="true" />
         </span>
       )}
     </button>

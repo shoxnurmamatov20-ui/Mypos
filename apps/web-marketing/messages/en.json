@@ -40,6 +40,14 @@
     "dashboard_caption": "Manager Dashboard",
     "dashboard_subtitle": "Today's revenue, top items and staff KPIs at a glance",
     "dashboard_revenue_today": "Revenue today",
+    "dashboard_live": "Live",
+    "dashboard_table_map": "Table map",
+    "dashboard_active_zones": "8 active zones",
+    "dashboard_kds_queue": "KDS queue",
+    "dashboard_payments": "Payments",
+    "dashboard_control_room": "QR menu, POS, staff and delivery signals in one control room.",
+    "dashboard_rush_hour": "Rush hour",
+    "dashboard_faster": "2.4x faster",
     "status_ready": "Ready",
     "status_cooking": "Cooking",
     "status_new": "New",
@@ -321,25 +329,13 @@
     ],
     "restaurant_title": "Restaurant",
     "restaurant_desc": "Table management, courier delivery, kitchen display, modifiers and large menus.",
-    "restaurant_features": [
-      "Tables and rooms",
-      "KDS kitchen display",
-      "Delivery management"
-    ],
+    "restaurant_features": ["Tables and rooms", "KDS kitchen display", "Delivery management"],
     "fastfood_title": "Fast Food",
     "fastfood_desc": "Self-service kiosk, drive-thru, mobile ordering and high throughput in minimal time.",
-    "fastfood_features": [
-      "Self-service kiosk",
-      "Mobile ordering",
-      "High throughput"
-    ],
+    "fastfood_features": ["Self-service kiosk", "Mobile ordering", "High throughput"],
     "bar_title": "Bar & Pub",
     "bar_desc": "Quick open tabs, age verification, shift reports and built specifically for alcohol service.",
-    "bar_features": [
-      "Open tab management",
-      "Shift reports",
-      "Age verification"
-    ]
+    "bar_features": ["Open tab management", "Shift reports", "Age verification"]
   },
   "comparison": {
     "label": "COMPARISON",
@@ -399,8 +395,14 @@
       "Inventory and ingredient control"
     ],
     "cafe_solutions": [
-      { "title": "Quick ordering", "desc": "Touch-screen register and modifiers — orders accepted in 30 seconds." },
-      { "title": "Guest profile", "desc": "Every guest's history, favorite drinks and personal discounts." },
+      {
+        "title": "Quick ordering",
+        "desc": "Touch-screen register and modifiers — orders accepted in 30 seconds."
+      },
+      {
+        "title": "Guest profile",
+        "desc": "Every guest's history, favorite drinks and personal discounts."
+      },
       { "title": "Loyalty program", "desc": "Automated points, tiers and rewards." },
       { "title": "Mobile app", "desc": "Guests can pre-order from their phone." }
     ],
@@ -414,10 +416,19 @@
       "Complex delivery operations"
     ],
     "restaurant_solutions": [
-      { "title": "Table management", "desc": "Visual table map, real-time status, QR-menu integration." },
-      { "title": "Kitchen display", "desc": "Orders go straight to the kitchen with status updates and time tracking." },
+      {
+        "title": "Table management",
+        "desc": "Visual table map, real-time status, QR-menu integration."
+      },
+      {
+        "title": "Kitchen display",
+        "desc": "Orders go straight to the kitchen with status updates and time tracking."
+      },
       { "title": "Delivery", "desc": "Courier app, route optimization and customer tracking." },
-      { "title": "Modifiers", "desc": "Complex menus: sizes, add-ons, allergens and dietary options." }
+      {
+        "title": "Modifiers",
+        "desc": "Complex menus: sizes, add-ons, allergens and dietary options."
+      }
     ],
     "fastfood_meta_title": "Fast Food POS — MyPOS",
     "fastfood_meta_description": "A fast POS for fast food. Self-service kiosk, mobile ordering.",
@@ -430,9 +441,15 @@
     ],
     "fastfood_solutions": [
       { "title": "Kiosk", "desc": "Customers order and pay themselves." },
-      { "title": "Mobile ordering", "desc": "Order through the app, pick up instantly when you arrive." },
+      {
+        "title": "Mobile ordering",
+        "desc": "Order through the app, pick up instantly when you arrive."
+      },
       { "title": "Combo management", "desc": "Combos and bundle promos with automatic pricing." },
-      { "title": "Fast checkout", "desc": "Click, Payme, cash — every payment method in one place." }
+      {
+        "title": "Fast checkout",
+        "desc": "Click, Payme, cash — every payment method in one place."
+      }
     ],
     "bar_meta_title": "Bar POS — MyPOS",
     "bar_meta_description": "A specialized POS for bars and pubs. Open tabs, shifts, alcohol control.",
@@ -444,8 +461,14 @@
       "Complex end-of-shift reconciliation"
     ],
     "bar_solutions": [
-      { "title": "Open Tab", "desc": "Open tabs by guest name or table, settled with one payment at the end." },
-      { "title": "Alcohol control", "desc": "Automatic tracking of how much pours from each bottle." },
+      {
+        "title": "Open Tab",
+        "desc": "Open tabs by guest name or table, settled with one payment at the end."
+      },
+      {
+        "title": "Alcohol control",
+        "desc": "Automatic tracking of how much pours from each bottle."
+      },
       { "title": "Shift reports", "desc": "Per-bartender reports of what they sold." },
       { "title": "Age verification", "desc": "Mandatory age entry on every relevant order." }
     ]
@@ -468,9 +491,18 @@
         { "value": "−50%", "label": "Service time" }
       ],
       "sections": [
-        { "heading": "The problem", "text": "The restaurant ran the old-fashioned way: paper accounting, phone orders. Attracting younger guests was getting harder." },
-        { "heading": "The solution", "text": "The full MyPOS stack: POS, mobile app, QR menu, KDS. Set up within a single week." },
-        { "heading": "The result", "text": "After 3 months: revenue grew 34% and mobile-app orders reached 8,000 a month." }
+        {
+          "heading": "The problem",
+          "text": "The restaurant ran the old-fashioned way: paper accounting, phone orders. Attracting younger guests was getting harder."
+        },
+        {
+          "heading": "The solution",
+          "text": "The full MyPOS stack: POS, mobile app, QR menu, KDS. Set up within a single week."
+        },
+        {
+          "heading": "The result",
+          "text": "After 3 months: revenue grew 34% and mobile-app orders reached 8,000 a month."
+        }
       ]
     },
     "case2": {
@@ -485,9 +517,18 @@
         { "value": "−65%", "label": "Order errors" }
       ],
       "sections": [
-        { "heading": "The problem", "text": "4 locations, each with its own system. No centralized reporting. Pizza prep time was 18 minutes." },
-        { "heading": "The solution", "text": "Multi-tenant MyPOS — all 4 locations in one dashboard, KDS in every kitchen." },
-        { "heading": "The result", "text": "Prep time down to 11 minutes. Customer rating climbed from 4.2 to 4.7." }
+        {
+          "heading": "The problem",
+          "text": "4 locations, each with its own system. No centralized reporting. Pizza prep time was 18 minutes."
+        },
+        {
+          "heading": "The solution",
+          "text": "Multi-tenant MyPOS — all 4 locations in one dashboard, KDS in every kitchen."
+        },
+        {
+          "heading": "The result",
+          "text": "Prep time down to 11 minutes. Customer rating climbed from 4.2 to 4.7."
+        }
       ]
     },
     "case3": {
@@ -502,9 +543,18 @@
         { "value": "+45%", "label": "Average ticket" }
       ],
       "sections": [
-        { "heading": "The problem", "text": "Guests would come once and leave. Nobody could remember who liked which coffee." },
-        { "heading": "The solution", "text": "MyPOS guest CRM, loyalty points and pre-orders through the mobile app." },
-        { "heading": "The result", "text": "Customer base grew to 12,000. 73% come back every week." }
+        {
+          "heading": "The problem",
+          "text": "Guests would come once and leave. Nobody could remember who liked which coffee."
+        },
+        {
+          "heading": "The solution",
+          "text": "MyPOS guest CRM, loyalty points and pre-orders through the mobile app."
+        },
+        {
+          "heading": "The result",
+          "text": "Customer base grew to 12,000. 73% come back every week."
+        }
       ]
     }
   },

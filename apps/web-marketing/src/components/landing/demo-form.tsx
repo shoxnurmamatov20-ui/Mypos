@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Calendar, CheckCircle2, Loader2 } from 'lucide-react';
+import { Calendar, CheckCircle, CircleNotch } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -62,7 +62,7 @@ export function DemoForm({ locale: _locale }: { locale: string }) {
         className="rounded-card border border-hairline-soft bg-success-soft p-[80px] text-center shadow-hairline-ring"
       >
         <div className="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-pill bg-success">
-          <CheckCircle2 className="h-10 w-10 text-white" strokeWidth={2.5} aria-hidden="true" />
+          <CheckCircle size={40} weight="fill" className="text-white" aria-hidden="true" />
         </div>
         <h2 className="mt-md font-display font-semibold text-display-sm text-ink">
           {t('success_title')}
@@ -220,10 +220,10 @@ export function DemoForm({ locale: _locale }: { locale: string }) {
         className="inline-flex w-full items-center justify-center gap-xs rounded-pill bg-tenant px-lg py-sm font-display font-semibold text-body-strong text-tenant-on-primary transition-transform duration-fast active:scale-95 disabled:opacity-60"
       >
         {submitting ? (
-          <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+          <CircleNotch size={20} weight="bold" className="animate-spin" aria-hidden="true" />
         ) : (
           <>
-            <Calendar className="h-5 w-5" aria-hidden="true" />
+            <Calendar size={20} weight="duotone" aria-hidden="true" />
             {t('submit')}
           </>
         )}

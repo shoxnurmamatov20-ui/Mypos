@@ -1,4 +1,4 @@
-import { Newspaper } from 'lucide-react';
+import { Newspaper } from '@phosphor-icons/react/dist/ssr';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
@@ -36,7 +36,7 @@ export default async function BlogPage({
       <section className="bg-canvas py-section">
         <div className="mx-auto max-w-2xl rounded-card border border-dashed border-hairline-soft bg-parchment px-md py-xl text-center">
           <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-pearl bg-coral-tint text-coral">
-            <Newspaper className="h-6 w-6" aria-hidden="true" />
+            <Newspaper size={24} weight="duotone" aria-hidden="true" />
           </div>
           <h2 className="mt-md font-display font-semibold text-title text-ink">
             {t('coming_soon')}

@@ -1,5 +1,4 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
-import { TelegramLogo } from '@phosphor-icons/react/dist/ssr';
+import { Envelope, MapPin, Phone, TelegramLogo } from '@phosphor-icons/react/dist/ssr';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ContactForm } from '@/components/landing/contact-form';
@@ -36,25 +35,25 @@ export default async function ContactPage({
 
   const channels: Channel[] = [
     {
-      renderIcon: () => <Phone className="h-5 w-5" aria-hidden={true} />,
+      renderIcon: () => <Phone size={20} weight="duotone" aria-hidden={true} />,
       label: t('channels.phone'),
       value: tFooter('phone'),
       href: `tel:${tFooter('phone').replace(/\s/g, '')}`,
     },
     {
-      renderIcon: () => <Mail className="h-5 w-5" aria-hidden={true} />,
+      renderIcon: () => <Envelope size={20} weight="duotone" aria-hidden={true} />,
       label: t('channels.email'),
       value: tFooter('email'),
       href: `mailto:${tFooter('email')}`,
     },
     {
-      renderIcon: () => <TelegramLogo className="h-5 w-5" weight="fill" aria-hidden={true} />,
+      renderIcon: () => <TelegramLogo size={20} weight="fill" aria-hidden={true} />,
       label: t('channels.telegram'),
       value: '@mypos_uz',
       href: 'https://t.me/mypos_uz',
     },
     {
-      renderIcon: () => <MapPin className="h-5 w-5" aria-hidden={true} />,
+      renderIcon: () => <MapPin size={20} weight="duotone" aria-hidden={true} />,
       label: t('channels.address'),
       value: tFooter('address'),
     },

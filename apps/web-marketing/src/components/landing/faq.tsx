@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDown } from 'lucide-react';
+import { CaretDown } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -52,8 +52,10 @@ export function Faq() {
                   <span className="text-body-strong text-ink font-display">
                     {t(`items.${key}.q`)}
                   </span>
-                  <ChevronDown
-                    className={`h-5 w-5 flex-shrink-0 text-ink-muted-48 transition-transform duration-base ${
+                  <CaretDown
+                    size={18}
+                    weight="bold"
+                    className={`flex-shrink-0 text-ink-muted-48 transition-transform duration-base ${
                       open ? 'rotate-180 text-coral' : ''
                     }`}
                     aria-hidden="true"

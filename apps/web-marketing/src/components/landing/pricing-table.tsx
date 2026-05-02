@@ -1,6 +1,6 @@
 'use client';
 
-import { Check } from 'lucide-react';
+import { ArrowRight, Check } from '@phosphor-icons/react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { FadeUp, StaggerGroup, StaggerItem } from './animations';
@@ -14,23 +14,19 @@ const PLANS: { key: PlanKey; highlight: boolean; featureCount: number }[] = [
   { key: 'business', highlight: false, featureCount: 5 },
 ];
 
-/**
- * Apple plan-card row — canvas background, hairline cards, single highlight.
- * The highlighted plan gets a coral hairline ring + "most popular" pill above.
- */
 export function PricingTable() {
   const t = useTranslations('pricing');
   const locale = useLocale();
 
   return (
-    <section id="pricing" className="bg-canvas">
+    <section id="pricing" className="bg-[#F7FAF7]">
       <div className="mx-auto max-w-7xl px-md py-section sm:px-lg lg:px-xl">
-        <FadeUp className="mx-auto max-w-2xl text-center">
-          <span className="text-tagline text-coral font-display">{t('section_label')}</span>
-          <h2 className="mt-sm text-display-lg text-ink font-display font-semibold">
+        <FadeUp className="mx-auto max-w-3xl text-center">
+          <span className="font-display text-tagline text-coral">{t('section_label')}</span>
+          <h2 className="mt-sm font-display text-display-lg font-semibold text-ink">
             {t('title')}
           </h2>
-          <p className="mx-auto mt-md max-w-xl text-lead text-ink font-display">
+          <p className="mx-auto mt-md max-w-xl font-display text-lead text-ink-muted-80">
             {t('subtitle')}
           </p>
         </FadeUp>
@@ -70,47 +66,74 @@ function PricingCard({
   const priceUsd = t(`plans.${planKey}.price_usd`);
 
   const cardClass = highlight
-    ? 'relative h-full rounded-card bg-canvas p-lg'
-    : 'relative h-full rounded-card bg-canvas p-lg';
-  const cardStyle = highlight
-    ? { boxShadow: 'inset 0 0 0 2px #EA7C69' }
-    : { boxShadow: 'inset 0 0 0 1px rgba(0, 0, 0, 0.04)' };
+    ? 'relative h-full rounded-card bg-[#101211] p-lg text-white shadow-[0_28px_80px_rgba(16,18,17,0.22)]'
+    : 'relative h-full rounded-card border border-black/[0.06] bg-white p-lg shadow-[0_18px_50px_rgba(16,18,17,0.06)]';
 
   const ctaClass = highlight
-    ? 'mt-lg inline-flex h-12 w-full items-center justify-center rounded-pill bg-tenant text-body text-tenant-on-primary transition-transform duration-fast active:scale-95'
-    : 'mt-lg inline-flex h-12 w-full items-center justify-center rounded-pill bg-pearl text-body text-ink transition-transform duration-fast active:scale-95';
+    ? 'mt-lg inline-flex h-12 w-full items-center justify-center gap-xs rounded-pill bg-tenant px-lg text-body-strong text-tenant-on-primary transition-transform duration-fast active:scale-95'
+    : 'mt-lg inline-flex h-12 w-full items-center justify-center gap-xs rounded-pill bg-[#101211] px-lg text-body-strong text-white transition-transform duration-fast active:scale-95';
 
   return (
-    <div className={cardClass} style={cardStyle}>
+    <div className={cardClass}>
       {highlight ? (
-        <span className="-top-3 -translate-x-1/2 absolute left-1/2 rounded-pill bg-coral px-sm py-xxs text-caption-strong text-white">
+        <span className="mb-md inline-flex rounded-pill bg-coral px-sm py-xxs text-caption-strong text-white">
           {t('most_popular')}
         </span>
       ) : null}
 
-      <div className="text-tagline text-ink font-display font-semibold">{name}</div>
-      <div className="mt-xxs text-caption text-ink-muted-80">{tagline}</div>
+      <div
+        className={
+          highlight
+            ? 'font-display text-title font-semibold text-white'
+            : 'font-display text-title font-semibold text-ink'
+        }
+      >
+        {name}
+      </div>
+      <div
+        className={
+          highlight ? 'mt-xxs text-caption text-white/60' : 'mt-xxs text-caption text-ink-muted-80'
+        }
+      >
+        {tagline}
+      </div>
 
       <div className="mt-md">
-        <div className="tabular text-display-md text-ink font-display font-semibold">
+        <div
+          className={
+            highlight
+              ? 'tabular font-display text-display-md font-semibold text-white'
+              : 'tabular font-display text-display-md font-semibold text-ink'
+          }
+        >
           {priceUzs}
         </div>
-        <div className="mt-xxs text-caption text-ink-muted-48">
+        <div
+          className={
+            highlight
+              ? 'mt-xxs text-caption text-white/[0.48]'
+              : 'mt-xxs text-caption text-ink-muted-48'
+          }
+        >
           {priceUsd}
-          {planKey !== 'free' ? (
-            <span className="text-ink-muted-48"> {t('per_month')}</span>
-          ) : null}
+          {planKey !== 'free' ? <span> {t('per_month')}</span> : null}
         </div>
       </div>
 
-      <ul className="mt-lg space-y-xs text-body text-ink">
+      <ul
+        className={
+          highlight
+            ? 'mt-lg space-y-xs text-body text-white/[0.74]'
+            : 'mt-lg space-y-xs text-body text-ink'
+        }
+      >
         {Array.from({ length: featureCount }).map((_, i) => (
           <li
             // biome-ignore lint/suspicious/noArrayIndexKey: list order is stable by i18n
             key={i}
             className="flex items-start gap-xs"
           >
-            <Check className="mt-1 h-4 w-4 flex-shrink-0 text-coral" aria-hidden="true" />
+            <Check size={16} weight="bold" className="mt-1 flex-shrink-0 text-coral" aria-hidden="true" />
             <span>{t(`plans.${planKey}.features.${i}`)}</span>
           </li>
         ))}
@@ -121,6 +144,7 @@ function PricingCard({
         className={ctaClass}
       >
         {planKey === 'business' ? t('cta_contact') : t('cta')}
+        <ArrowRight size={16} weight="bold" aria-hidden="true" />
       </Link>
     </div>
   );

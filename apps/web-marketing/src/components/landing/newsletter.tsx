@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { CheckCircle2, Loader2, Mail } from 'lucide-react';
+import { CheckCircle, CircleNotch, Envelope } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -26,7 +26,7 @@ export function Newsletter() {
     <div className="rounded-card bg-canvas p-md shadow-hairline-ring">
       <div className="mb-md flex items-start gap-xs">
         <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-pearl bg-coral-tint">
-          <Mail className="h-5 w-5 text-coral" aria-hidden="true" />
+          <Envelope size={20} weight="duotone" className="text-coral" aria-hidden="true" />
         </span>
         <div>
           <h3 className="text-body-strong text-ink font-display font-semibold">{t('title')}</h3>
@@ -43,7 +43,7 @@ export function Newsletter() {
             exit={{ opacity: 0 }}
             className="flex items-center gap-xs rounded-pearl bg-success-soft px-md py-xs"
           >
-            <CheckCircle2 className="h-5 w-5 shrink-0 text-success-text" aria-hidden="true" />
+            <CheckCircle size={20} weight="fill" className="shrink-0 text-success-text" aria-hidden="true" />
             <p className="text-caption text-success-text">{t('success')}</p>
           </motion.div>
         ) : (
@@ -73,7 +73,7 @@ export function Newsletter() {
               className="inline-flex items-center justify-center gap-xxs rounded-pill bg-tenant px-md py-xs text-caption-strong text-tenant-on-primary transition-transform duration-fast active:scale-95 disabled:opacity-60"
             >
               {status === 'submitting' ? (
-                <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                <CircleNotch size={16} weight="bold" className="animate-spin" aria-hidden="true" />
               ) : (
                 t('subscribe')
               )}

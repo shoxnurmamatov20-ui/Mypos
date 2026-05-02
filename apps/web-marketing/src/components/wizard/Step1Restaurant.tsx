@@ -1,6 +1,6 @@
 'use client';
 
-import { ImagePlus, X } from 'lucide-react';
+import { ImageSquare, X } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -247,7 +247,7 @@ export function Step1Restaurant() {
                 // biome-ignore lint/a11y/useAltText: decorative preview
                 <img src={restaurant.logoDataUrl} alt="" className="h-full w-full object-cover" />
               ) : (
-                <ImagePlus className="h-8 w-8 text-ink-muted-48" aria-hidden="true" />
+                <ImageSquare size={32} weight="duotone" className="text-ink-muted-48" aria-hidden="true" />
               )}
             </div>
             <div className="flex items-center gap-xs">
@@ -264,7 +264,7 @@ export function Step1Restaurant() {
                   onClick={clearLogo}
                   className="inline-flex items-center gap-xxs rounded-pill px-sm py-xs font-semibold text-caption text-ink-muted-48 transition-colors duration-fast hover:text-error"
                 >
-                  <X className="h-4 w-4" aria-hidden="true" />
+                  <X size={16} weight="bold" aria-hidden="true" />
                   {t('logo_remove')}
                 </button>
               )}
