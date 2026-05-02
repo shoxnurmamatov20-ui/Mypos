@@ -72,6 +72,9 @@ class ClockInAction
                 'metadata' => $options['metadata'] ?? null,
             ]);
 
+            // Denormalized timestamp for fast "currently working" queries.
+            $employee->update(['last_clock_in_at' => $now]);
+
             return $shift->fresh(['employee.user']);
         });
     }

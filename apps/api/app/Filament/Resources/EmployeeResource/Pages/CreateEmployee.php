@@ -22,21 +22,37 @@ class CreateEmployee extends CreateRecord
      */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        /** @var array<string, mixed> $userData */
         $userData = $data['user_data'] ?? [];
         unset($data['user_data']);
 
-        $user = User::firstOrCreate(
-            ['email' => $userData['email'] ?? null],
-            [
+        $email = $userData['email'] ?? null;
+        $tenantId = $data['tenant_id'] ?? null;
+
+        if (! empty($email)) {
+            $user = User::firstOrCreate(
+                ['email' => $email],
+                [
+                    'name' => $userData['name'] ?? 'Employee',
+                    'phone' => $userData['phone'] ?? null,
+                    'locale' => $userData['locale'] ?? 'uz',
+                    'password' => Hash::make($userData['password'] ?? Str::random(16)),
+                    'tenant_id' => $tenantId,
+                    'email_verified_at' => now(),
+                    'is_super_admin' => false,
+                ],
+            );
+        } else {
+            $user = User::create([
                 'name' => $userData['name'] ?? 'Employee',
                 'phone' => $userData['phone'] ?? null,
-                'locale' => 'uz',
+                'locale' => $userData['locale'] ?? 'uz',
                 'password' => Hash::make($userData['password'] ?? Str::random(16)),
-                'tenant_id' => $data['tenant_id'] ?? null,
+                'tenant_id' => $tenantId,
                 'email_verified_at' => now(),
                 'is_super_admin' => false,
-            ],
-        );
+            ]);
+        }
 
         if (! empty($data['position']) && ! $user->hasRole((string) $data['position'])) {
             $user->assignRole((string) $data['position']);

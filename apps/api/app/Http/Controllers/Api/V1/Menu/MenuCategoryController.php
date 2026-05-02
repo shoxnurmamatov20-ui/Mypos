@@ -18,6 +18,8 @@ class MenuCategoryController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
+        $this->authorize('viewAny', MenuCategory::class);
+
         $query = MenuCategory::query()
             ->withCount('items')
             ->orderBy('sort_order')
@@ -32,11 +34,15 @@ class MenuCategoryController extends Controller
 
     public function show(MenuCategory $category): MenuCategoryResource
     {
+        $this->authorize('view', $category);
+
         return MenuCategoryResource::make($category->loadCount('items'));
     }
 
     public function store(StoreMenuCategoryRequest $request): JsonResponse
     {
+        $this->authorize('create', MenuCategory::class);
+
         $data = $request->validated();
 
         if (empty($data['slug'])) {
@@ -53,6 +59,8 @@ class MenuCategoryController extends Controller
 
     public function update(UpdateMenuCategoryRequest $request, MenuCategory $category): MenuCategoryResource
     {
+        $this->authorize('update', $category);
+
         $category->update($request->validated());
 
         return MenuCategoryResource::make($category->fresh());
@@ -60,6 +68,8 @@ class MenuCategoryController extends Controller
 
     public function destroy(MenuCategory $category): JsonResponse
     {
+        $this->authorize('delete', $category);
+
         $category->delete();
 
         return response()->json(['data' => ['message' => "Kategoriya o'chirildi"]]);

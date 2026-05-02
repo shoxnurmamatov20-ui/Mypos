@@ -18,6 +18,8 @@ class IngredientController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
+        $this->authorize('viewAny', Ingredient::class);
+
         $query = Ingredient::query()
             ->with('category')
             ->orderBy('name->uz');
@@ -48,6 +50,8 @@ class IngredientController extends Controller
 
     public function show(Ingredient $ingredient): IngredientResource
     {
+        $this->authorize('view', $ingredient);
+
         return IngredientResource::make($ingredient->load('category'));
     }
 
@@ -55,6 +59,8 @@ class IngredientController extends Controller
         StoreIngredientRequest $request,
         CreateIngredientAction $create,
     ): JsonResponse {
+        $this->authorize('create', Ingredient::class);
+
         $data = $request->validated();
         $user = $request->user();
         $data['created_by'] = $user?->uuid;
@@ -69,6 +75,8 @@ class IngredientController extends Controller
 
     public function update(UpdateIngredientRequest $request, Ingredient $ingredient): IngredientResource
     {
+        $this->authorize('update', $ingredient);
+
         $ingredient->update($request->validated());
 
         return IngredientResource::make($ingredient->fresh()->load('category'));
@@ -76,6 +84,8 @@ class IngredientController extends Controller
 
     public function destroy(Ingredient $ingredient): JsonResponse
     {
+        $this->authorize('delete', $ingredient);
+
         $ingredient->delete();
 
         return response()->json(['data' => ['message' => "Ingredient o'chirildi"]]);

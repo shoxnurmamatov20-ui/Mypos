@@ -11,6 +11,7 @@ use App\Domain\Order\Enums\OrderType;
 use App\Domain\Order\Models\Order;
 use App\Domain\Order\Models\OrderItem;
 use App\Domain\Table\Models\Table;
+use App\Events\Order\OrderPlaced;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -123,6 +124,9 @@ class CreateOrderAction
                 'error' => $e->getMessage(),
             ]);
         }
+
+        // Notify KDS + dashboard via Reverb (and any in-app listeners).
+        OrderPlaced::dispatch($order);
 
         return $order;
     }

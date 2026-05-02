@@ -58,6 +58,10 @@ class NotificationLog extends Model
             'metadata' => 'array',
             'sent_at' => 'datetime',
             'delivered_at' => 'datetime',
+            // PII (CLAUDE.md §7) — recipient is phone/email/chat-id; body
+            // may quote names, totals, address fragments. Encrypt at rest.
+            'recipient' => 'encrypted',
+            'body' => 'encrypted',
         ];
     }
 

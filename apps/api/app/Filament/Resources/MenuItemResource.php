@@ -51,8 +51,10 @@ class MenuItemResource extends Resource
                                 return $query;
                             },
                         )
+                        // Audit M10: dropped `preload()` — pulled every menu
+                        // category cross-tenant. Keep `searchable()` so the
+                        // dropdown fetches asynchronously.
                         ->searchable()
-                        ->preload()
                         ->required(),
                     Forms\Components\Group::make([
                         Forms\Components\TextInput::make('name.uz')
@@ -279,8 +281,8 @@ class MenuItemResource extends Resource
                         titleAttribute: 'slug',
                         modifyQueryUsing: fn ($query) => $query->withoutGlobalScopes(['tenant']),
                     )
-                    ->searchable()
-                    ->preload(),
+                    // Audit M10: dropped `preload()` (cross-tenant fetch).
+                    ->searchable(),
                 Tables\Filters\TernaryFilter::make('is_active')->label('Faol'),
                 Tables\Filters\TernaryFilter::make('is_featured')->label('Tavsiya etilgan'),
                 Tables\Filters\TernaryFilter::make('is_new')->label('Yangi'),
@@ -321,7 +323,14 @@ class MenuItemResource extends Resource
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
+        // Audit H1: eager-load tenant + category to avoid N+1 on table render.
+        // The `category` relation owns global tenant scope; bypass it because
+        // we already filter by tenant via `tenant_id` on the parent row.
         return parent::getEloquentQuery()
+            ->with([
+                'tenant:id,name,slug',
+                'category' => fn ($q) => $q->withoutGlobalScopes(['tenant'])->select(['id', 'tenant_id', 'name']),
+            ])
             ->withoutGlobalScopes([
                 \Illuminate\Database\Eloquent\SoftDeletingScope::class,
                 'tenant',

@@ -7,7 +7,10 @@ namespace App\Domain\Payment\Models;
 use App\Domain\Order\Models\Order;
 use App\Domain\Payment\Enums\PaymentProvider;
 use App\Domain\Payment\Enums\PaymentStatus;
+use App\Domain\Shared\Casts\MoneyCast;
 use App\Domain\Shared\Concerns\BelongsToTenant;
+use App\Domain\Shared\Services\FxRateService;
+use App\Domain\Shared\ValueObjects\Money;
 use Database\Factories\PaymentFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $provider_transaction_id
  * @property int $amount
  * @property string $currency
+ * @property string $currency_code         Phase-4 normalised FK → currencies.code
  * @property string $status
  * @property string|null $failure_reason
  * @property array<string, mixed>|null $raw_request
@@ -46,7 +50,7 @@ class Payment extends Model
     protected $fillable = [
         'tenant_id', 'order_id',
         'provider', 'provider_transaction_id',
-        'amount', 'currency',
+        'amount', 'currency', 'currency_code',
         'status', 'failure_reason',
         'raw_request', 'raw_response',
         'idempotency_key',
@@ -63,6 +67,10 @@ class Payment extends Model
             'captured_at' => 'datetime',
             'refunded_at' => 'datetime',
             'failed_at' => 'datetime',
+
+            // Phase 4 — virtual Money attribute pairing `amount` + `currency_code`.
+            // Existing `$payment->amount` (raw int) still works.
+            'amount_money' => MoneyCast::class . ':amount,currency_code',
         ];
     }
 
@@ -79,6 +87,41 @@ class Payment extends Model
     public function statusEnum(): PaymentStatus
     {
         return PaymentStatus::from($this->status);
+    }
+
+    // -----------------------------------------------------------------
+    // Phase 4 — currency-aware Money helpers
+    // -----------------------------------------------------------------
+
+    /**
+     * Resolve the payment's effective currency code. Prefers the Phase-4
+     * normalised `currency_code` (FK to currencies), falls back to the
+     * legacy free-text `currency`, then to UZS.
+     */
+    public function effectiveCurrency(): string
+    {
+        $code = strtoupper((string) ($this->currency_code ?: $this->currency ?: 'UZS'));
+        return preg_match('/^[A-Z]{3}$/', $code) === 1 ? $code : 'UZS';
+    }
+
+    /**
+     * The payment amount as a {@see Money} value object.
+     */
+    public function money(): Money
+    {
+        return Money::fromMinor((int) $this->amount, $this->effectiveCurrency());
+    }
+
+    /**
+     * Convert this payment's amount into another currency at the rate
+     * effective on `captured_at` (or the createdAt fallback). Used by
+     * SuperAdmin reporting to show all tenants' payments in a uniform
+     * reporting currency (USD).
+     */
+    public function convertTo(string $currency, FxRateService $fx): Money
+    {
+        $effectiveDate = $this->captured_at ?? $this->authorized_at ?? $this->created_at;
+        return $fx->convert($this->money(), $currency, $effectiveDate);
     }
 
     protected static function newFactory(): PaymentFactory

@@ -45,9 +45,16 @@ return [
     | considered expired. This will override any values set in the token's
     | "expires_at" attribute, but first-party sessions are not affected.
     |
+    | SECURITY: We cap tenant tokens at 7 days (60 * 24 * 7 = 10080 minutes).
+    | High-privilege flows override this with shorter explicit `expiresAt`
+    | values:
+    |   - SuperAdminLoginAction: 1 hour
+    |   - AcceptSuperAdminInvitationAction: 1 hour
+    |   - ImpersonateTenantAction: 15 minutes
+    |
     */
 
-    'expiration' => null,
+    'expiration' => 60 * 24 * 7,
 
     /*
     |--------------------------------------------------------------------------

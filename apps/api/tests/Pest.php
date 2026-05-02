@@ -62,3 +62,44 @@ function actingAsSuperAdmin(): User
 
     return $user;
 }
+
+/**
+ * Create a staff (User + active Employee) for the given tenant and position.
+ *
+ * @return array{user: User, employee: \App\Domain\Employee\Models\Employee}
+ */
+function actingAsStaff(string $position = 'waiter', ?Tenant $tenant = null): array
+{
+    $tenant ??= Tenant::factory()->create();
+
+    $user = User::factory()->create([
+        'tenant_id' => $tenant->id,
+        'is_super_admin' => false,
+    ]);
+
+    // Build the model directly to avoid the EmployeeFactory closure that would
+    // otherwise create a second orphan User record.
+    $employee = new \App\Domain\Employee\Models\Employee([
+        'tenant_id' => $tenant->id,
+        'user_uuid' => $user->uuid,
+        'employee_code' => 'EMP-' . str_pad((string) random_int(1, 9999), 4, '0', STR_PAD_LEFT),
+        'position' => $position,
+        'hire_date' => now()->subYear()->toDateString(),
+        'hourly_rate' => 30000,
+        'status' => 'active',
+    ]);
+    $employee->save();
+
+    return ['user' => $user, 'employee' => $employee->fresh()];
+}
+
+/**
+ * Convenience wrapper for delivery tests — same shape as actingAsStaff
+ * but defaults to the courier role.
+ *
+ * @return array{user: User, employee: \App\Domain\Employee\Models\Employee}
+ */
+function actingAsCourier(?Tenant $tenant = null): array
+{
+    return actingAsStaff('courier', $tenant);
+}

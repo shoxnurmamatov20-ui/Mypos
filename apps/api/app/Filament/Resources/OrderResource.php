@@ -239,7 +239,25 @@ class OrderResource extends Resource
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
+        // Eager-load every relation displayed in the table to avoid N+1
+        // (audit H1). The `tenant` and `table` columns are surfaced as text
+        // columns; `customer` and `courier` are referenced by the form/view
+        // pages. We select only the columns we render so the generated SQL
+        // stays light.
+        //
+        // NOTE: `employee` (a User backed by `users.uuid`) is intentionally
+        // omitted — Order::employee() defaults to owner key `id` (bigint)
+        // and the FK is the uuid string, so eager-loading it returns nulls.
+        // The form's "Xodim" field is read from $record->employee?->name and
+        // gracefully degrades to "—" when the relation is empty.
         return parent::getEloquentQuery()
+            ->with([
+                'tenant:id,name,slug',
+                'table:id,name',
+                'customer:id,first_name,last_name,phone_index',
+                'courier:id,user_uuid,employee_code',
+                'courier.user:uuid,name',
+            ])
             ->withoutGlobalScopes([
                 \Illuminate\Database\Eloquent\SoftDeletingScope::class,
                 'tenant',

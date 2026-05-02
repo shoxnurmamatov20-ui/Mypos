@@ -7,6 +7,7 @@ namespace App\Domain\Order\Actions;
 use App\Domain\Order\Enums\OrderStatus;
 use App\Domain\Order\Models\Order;
 use App\Domain\Table\Models\Table;
+use App\Events\Order\OrderStatusChanged;
 use Illuminate\Validation\ValidationException;
 
 class UpdateOrderStatusAction
@@ -14,6 +15,7 @@ class UpdateOrderStatusAction
     public function __invoke(Order $order, OrderStatus $next): Order
     {
         $current = OrderStatus::from($order->status);
+        $oldStatusValue = $current->value;
 
         if (! $current->canTransitionTo($next)) {
             throw ValidationException::withMessages([
@@ -60,6 +62,11 @@ class UpdateOrderStatusAction
 
         $order->update($updates);
 
-        return $order->fresh(['items', 'table']);
+        $fresh = $order->fresh(['items', 'table']) ?? $order;
+
+        // Broadcast to dashboard widgets + customer-tracking PWA.
+        OrderStatusChanged::dispatch($fresh, $oldStatusValue, $next->value);
+
+        return $fresh;
     }
 }

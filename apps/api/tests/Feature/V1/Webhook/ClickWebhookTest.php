@@ -147,8 +147,9 @@ it('is idempotent for the same click_trans_id', function (): void {
     expect(Payment::withoutGlobalScopes()->where('provider_transaction_id', '999')->count())->toBe(1);
 });
 
-it('accepts stub mode when secret_key is empty', function (): void {
+it('accepts stub mode when secret_key is empty AND feature flag is on', function (): void {
     config()->set('services.click.secret_key', '');
+    config()->set('payment.allow_stub_webhooks', true);
 
     $owner = actingAsTenantOwner();
     $order = Order::factory()->create(['tenant_id' => $owner->tenant_id, 'total_amount' => 25000]);

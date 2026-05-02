@@ -82,7 +82,17 @@ return [
                     'scheme' => env('REVERB_SCHEME', 'https'),
                     'useTLS' => env('REVERB_SCHEME', 'https') === 'https',
                 ],
-                'allowed_origins' => ['*'],
+                // SECURITY: Reverb verifies the WebSocket connection's Origin
+                // header against this list (strings or "*"). Defaulting to "*"
+                // means any browser tab on the public internet can open a WS
+                // connection. We restrict to a comma-separated allow-list from
+                // env so dashboard, POS terminal, kitchen, courier and the QR
+                // PWA are the only valid origins. Use "*" only when you also
+                // gate channels with private/presence auth (we do).
+                'allowed_origins' => array_values(array_filter(array_map(
+                    'trim',
+                    explode(',', (string) env('REVERB_ALLOWED_ORIGINS', '*')),
+                ))),
                 'ping_interval' => env('REVERB_APP_PING_INTERVAL', 60),
                 'activity_timeout' => env('REVERB_APP_ACTIVITY_TIMEOUT', 30),
                 'max_connections' => env('REVERB_APP_MAX_CONNECTIONS'),

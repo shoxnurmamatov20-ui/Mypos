@@ -18,6 +18,8 @@ class MenuItemController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
+        $this->authorize('viewAny', MenuItem::class);
+
         $query = MenuItem::query()
             ->with('category')
             ->orderBy('sort_order')
@@ -46,11 +48,15 @@ class MenuItemController extends Controller
 
     public function show(MenuItem $item): MenuItemResource
     {
+        $this->authorize('view', $item);
+
         return MenuItemResource::make($item->load('category'));
     }
 
     public function store(StoreMenuItemRequest $request): JsonResponse
     {
+        $this->authorize('create', MenuItem::class);
+
         $data = $request->validated();
 
         if (empty($data['slug'])) {
@@ -67,6 +73,8 @@ class MenuItemController extends Controller
 
     public function update(UpdateMenuItemRequest $request, MenuItem $item): MenuItemResource
     {
+        $this->authorize('update', $item);
+
         $item->update($request->validated());
 
         return MenuItemResource::make($item->fresh()->load('category'));
@@ -74,6 +82,8 @@ class MenuItemController extends Controller
 
     public function destroy(MenuItem $item): JsonResponse
     {
+        $this->authorize('delete', $item);
+
         $item->delete();
 
         return response()->json(['data' => ['message' => "Mahsulot o'chirildi"]]);

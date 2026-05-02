@@ -24,6 +24,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $base_salary
  * @property int|null $hourly_rate
  * @property string $status
+ * @property string|null $pin_code_hash
+ * @property \Illuminate\Support\Carbon|null $pin_set_at
+ * @property \Illuminate\Support\Carbon|null $last_clock_in_at
  * @property \Illuminate\Support\Carbon|null $terminated_at
  * @property string|null $notes
  * @property string|null $emergency_contact
@@ -51,10 +54,17 @@ class Employee extends Model
         'base_salary',
         'hourly_rate',
         'status',
+        'pin_code_hash',
+        'pin_set_at',
+        'last_clock_in_at',
         'terminated_at',
         'notes',
         'emergency_contact',
         'documents',
+    ];
+
+    protected $hidden = [
+        'pin_code_hash',
     ];
 
     protected function casts(): array
@@ -63,9 +73,21 @@ class Employee extends Model
             'hire_date' => 'date',
             'base_salary' => 'integer',
             'hourly_rate' => 'integer',
+            'pin_set_at' => 'datetime',
+            'last_clock_in_at' => 'datetime',
             'terminated_at' => 'datetime',
             'documents' => 'array',
         ];
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === 'active' && $this->terminated_at === null;
+    }
+
+    public function breaks(): HasMany
+    {
+        return $this->hasMany(ShiftBreak::class, 'employee_id');
     }
 
     /**

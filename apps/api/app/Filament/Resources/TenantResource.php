@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use App\Domain\Shared\Models\Country;
+use App\Domain\Shared\Models\Currency;
 use App\Domain\Tenant\Enums\TenantPlan;
 use App\Domain\Tenant\Enums\TenantStatus;
 use App\Domain\Tenant\Models\Tenant;
@@ -11,9 +13,12 @@ use App\Filament\Resources\TenantResource\Pages;
 use App\Filament\Resources\TenantResource\RelationManagers\UsersRelationManager;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Schema;
 
 class TenantResource extends Resource
 {
@@ -116,6 +121,69 @@ class TenantResource extends Resource
                 ])
                 ->columns(3),
 
+            // Phase 4 — Region (country/currency FKs). The legacy
+            // default_locale + default_currency columns above remain for
+            // backwards compatibility; new code reads from these normalized
+            // FK columns instead. When `country_code` changes, we suggest
+            // the country's default currency + locale via Livewire reactive
+            // `afterStateUpdated`.
+            Forms\Components\Section::make(__('region.tenant.section_title'))
+                ->description(__('region.tenant.section_description'))
+                // Hidden until the region migration has applied — keeps the
+                // form usable on fresh installs without surfacing a column
+                // that doesn't exist yet.
+                ->visible(static fn (): bool => Schema::hasColumn('tenants', 'country_code'))
+                ->schema([
+                    Forms\Components\Select::make('country_code')
+                        ->label(__('region.tenant.col_country'))
+                        ->options(static function (): array {
+                            return Country::query()
+                                ->where('is_active', true)
+                                ->orderBy('code')
+                                ->get()
+                                ->mapWithKeys(static fn (Country $c): array => [
+                                    $c->code => $c->displayName(),
+                                ])
+                                ->all();
+                        })
+                        ->live()
+                        ->native(false)
+                        ->searchable()
+                        ->afterStateUpdated(static function (Set $set, Get $get, ?string $state): void {
+                            if ($state === null) {
+                                return;
+                            }
+                            $country = Country::query()->find($state);
+                            if ($country === null) {
+                                return;
+                            }
+                            // Suggest currency + locale only when those fields
+                            // are still empty / pristine — never overwrite an
+                            // explicit user choice.
+                            if (empty($get('currency_code'))) {
+                                $set('currency_code', $country->currency_code);
+                            }
+                            if (empty($get('default_locale'))) {
+                                $set('default_locale', $country->default_locale);
+                            }
+                            if (empty($get('timezone'))) {
+                                $set('timezone', $country->timezone);
+                            }
+                        }),
+                    Forms\Components\Select::make('currency_code')
+                        ->label(__('region.tenant.col_currency'))
+                        ->options(static function (): array {
+                            return Currency::query()
+                                ->where('is_active', true)
+                                ->orderBy('code')
+                                ->pluck('code', 'code')
+                                ->all();
+                        })
+                        ->native(false)
+                        ->searchable(),
+                ])
+                ->columns(2),
+
             Forms\Components\Section::make('Sozlamalar va funksiyalar')
                 ->schema([
                     Forms\Components\KeyValue::make('settings')
@@ -166,7 +234,10 @@ class TenantResource extends Resource
                     ->label('Til')
                     ->color('gray'),
                 Tables\Columns\TextColumn::make('users_count')
-                    ->counts('users')
+                    // Filament's per-column `->counts()` issues a separate
+                    // sub-query per visible column. We hoist the count(s) to
+                    // `getEloquentQuery()` via `withCount` so the engine emits
+                    // a single SELECT with correlated subqueries — see audit H1.
                     ->label('Xodimlar')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -218,7 +289,11 @@ class TenantResource extends Resource
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
+        // Audit H1: hoist `users_count` (and reserve room for `orders_count`)
+        // up to the parent query so we emit one SELECT instead of one per
+        // visible column on every row.
         return parent::getEloquentQuery()
+            ->withCount(['users'])
             ->withoutGlobalScopes([
                 \Illuminate\Database\Eloquent\SoftDeletingScope::class,
             ]);

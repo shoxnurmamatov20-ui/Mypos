@@ -22,6 +22,8 @@ class CustomerController extends Controller
 
     public function index(Request $request): AnonymousResourceCollection
     {
+        $this->authorize('viewAny', Customer::class);
+
         $query = Customer::query()
             ->with('loyaltyAccount')
             ->orderByDesc('last_visit_at')
@@ -29,11 +31,16 @@ class CustomerController extends Controller
 
         if ($request->filled('q')) {
             $search = (string) $request->string('q');
-            $query->where(function ($q) use ($search): void {
+            // phone & email are now encrypted at rest (CLAUDE.md §7) so
+            // ilike cannot match inside the ciphertext. We support exact
+            // phone lookup via the HMAC `phone_index`, plus name fuzzy search.
+            $phoneDigits = (string) preg_replace('/\D/', '', $search);
+            $query->where(function ($q) use ($search, $phoneDigits): void {
                 $q->where('first_name', 'ilike', "%{$search}%")
-                    ->orWhere('last_name', 'ilike', "%{$search}%")
-                    ->orWhere('phone', 'ilike', "%{$search}%")
-                    ->orWhere('email', 'ilike', "%{$search}%");
+                    ->orWhere('last_name', 'ilike', "%{$search}%");
+                if (strlen($phoneDigits) >= 9) {
+                    $q->orWhere('phone_index', Customer::hashPhone($search));
+                }
             });
         }
 
@@ -56,11 +63,15 @@ class CustomerController extends Controller
 
     public function show(Customer $customer): CustomerResource
     {
+        $this->authorize('view', $customer);
+
         return CustomerResource::make($customer->load('loyaltyAccount'));
     }
 
     public function store(StoreCustomerRequest $request): JsonResponse
     {
+        $this->authorize('create', Customer::class);
+
         $customer = $this->createCustomer->execute($request->validated());
 
         return response()->json(
@@ -71,6 +82,8 @@ class CustomerController extends Controller
 
     public function update(UpdateCustomerRequest $request, Customer $customer): CustomerResource
     {
+        $this->authorize('update', $customer);
+
         $customer->update($request->validated());
 
         return CustomerResource::make($customer->fresh()->load('loyaltyAccount'));
@@ -78,6 +91,8 @@ class CustomerController extends Controller
 
     public function destroy(Customer $customer): JsonResponse
     {
+        $this->authorize('delete', $customer);
+
         $customer->delete();
 
         return response()->json(['data' => ['message' => "Mijoz o'chirildi"]]);

@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Domain\Menu\Models\MenuItem;
 use App\Domain\Order\Models\Order;
 use App\Domain\Order\Models\OrderItem;
+use App\Domain\Shared\Concerns\BelongsToTenant;
 use App\Domain\Table\Models\Table;
 use App\Domain\Tenant\Models\Tenant;
 use App\Models\User;
@@ -22,6 +23,15 @@ class DemoOrdersSeeder extends Seeder
 {
     public function run(): void
     {
+        if (! app()->environment(['local', 'testing'])) {
+            $this->command?->warn(static::class . ' refused to run outside local/testing environments.');
+            return;
+        }
+
+        // Demo seeders run from artisan (no Auth user). Opt-in to lenient
+        // BelongsToTenant scope so existing-row lookups behave as before.
+        BelongsToTenant::allowEmptyTenantContext();
+
         $tenant = Tenant::where('slug', 'demo-restaurant')->first();
         if ($tenant === null) {
             $this->command?->warn('Demo tenant not found; skipping orders seed.');

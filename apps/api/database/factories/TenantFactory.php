@@ -28,6 +28,7 @@ class TenantFactory extends Factory
             'timezone' => 'Asia/Tashkent',
             'phone' => '+998' . fake()->numerify('#########'),
             'email' => fake()->unique()->safeEmail(),
+            'tier' => 'free',
         ];
     }
 }

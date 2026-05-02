@@ -10,6 +10,9 @@ use App\Domain\Payment\Enums\PaymentStatus;
 use App\Domain\Payment\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use RuntimeException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Click.uz integration.
@@ -22,7 +25,9 @@ use Illuminate\Support\Facades\DB;
  *   md5(click_trans_id + service_id + secret_key + merchant_trans_id + amount + action + sign_time)
  *   md5(click_trans_id + service_id + secret_key + merchant_trans_id + merchant_prepare_id + amount + action + sign_time) on complete
  *
- * Stub-mode: when credentials are missing we still accept fake signatures for local dev.
+ * Stub-mode: when credentials are missing we accept fake signatures ONLY in
+ * local/testing environments AND only when `payment.allow_stub_webhooks=true`.
+ * Production refuses stub mode unconditionally — see C3 fix in SECURITY.md.
  */
 class ClickProvider implements PaymentProviderInterface
 {
@@ -69,9 +74,37 @@ class ClickProvider implements PaymentProviderInterface
     public function verifyWebhook(Request $request): bool
     {
         $secretKey = (string) config('services.click.secret_key', '');
+
         if ($secretKey === '') {
-            // Stub mode: accept when "sign_string" matches our stub signature rule
-            return $this->stubSignatureValid($request);
+            // SECURITY (C3): refuse stub mode in production regardless of any
+            // feature flag — an empty CLICK_SECRET_KEY here means the operator
+            // forgot to configure credentials, NOT a license to mark orders
+            // paid for free.
+            if (app()->environment('production')) {
+                Log::critical('Click webhook secret not configured in production', [
+                    'ip' => $request->ip(),
+                    'click_trans_id' => (string) $request->input('click_trans_id', ''),
+                ]);
+
+                throw new RuntimeException('Click webhook secret not configured in production');
+            }
+
+            // Non-production: stub mode requires an explicit feature flag so the
+            // operator has to opt in. Default = false.
+            if (
+                app()->environment(['local', 'testing'])
+                && (bool) config('payment.allow_stub_webhooks', false) === true
+            ) {
+                return $this->stubSignatureValid($request);
+            }
+
+            // Any other environment (staging/dr/etc.) or flag-off: refuse.
+            Log::warning('Click webhook stub mode refused', [
+                'env' => app()->environment(),
+                'ip' => $request->ip(),
+            ]);
+
+            return false;
         }
 
         $provided = (string) $request->input('sign_string', '');
@@ -96,21 +129,21 @@ class ClickProvider implements PaymentProviderInterface
             if ($payment === null) {
                 $order = Order::withoutGlobalScopes()->find($orderId);
                 if ($order === null) {
-                    // Still persist a failed payment for debugging
-                    $payment = Payment::withoutGlobalScopes()->create([
-                        'tenant_id' => '00000000-0000-0000-0000-000000000000',
-                        'order_id' => $orderId !== '' ? $orderId : '00000000-0000-0000-0000-000000000000',
-                        'provider' => PaymentProvider::Click->value,
-                        'provider_transaction_id' => $clickTransId,
-                        'amount' => (int) $request->input('amount', 0) * 100,
-                        'currency' => 'UZS',
-                        'status' => PaymentStatus::Failed->value,
-                        'failure_reason' => 'Order not found',
-                        'raw_request' => $request->all(),
-                        'failed_at' => now(),
+                    // SECURITY (C3): refuse poison-tenant rows.  Previously this
+                    // path persisted a Payment with a placeholder zero-UUID
+                    // tenant_id which contaminated all `tenant_id IS NULL`-ish
+                    // queries.  We log the bad request and abort with HTTP 422
+                    // so Click sees a clear error and we keep the table clean.
+                    Log::warning('Click webhook: order not found, refusing to create poison-tenant Payment', [
+                        'click_trans_id' => $clickTransId,
+                        'merchant_trans_id' => $orderId,
+                        'ip' => $request->ip(),
                     ]);
 
-                    return $payment;
+                    throw new HttpException(
+                        422,
+                        'Click webhook references unknown order: ' . ($orderId !== '' ? $orderId : '<empty>'),
+                    );
                 }
 
                 $payment = Payment::withoutGlobalScopes()->create([

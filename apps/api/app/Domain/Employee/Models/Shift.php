@@ -65,6 +65,21 @@ class Shift extends Model
         return $this->hasMany(TimeClockEvent::class, 'shift_id');
     }
 
+    public function breaks(): HasMany
+    {
+        return $this->hasMany(ShiftBreak::class, 'shift_id');
+    }
+
+    public function workedMinutes(): int
+    {
+        $start = $this->actual_start;
+        $end = $this->actual_end ?? now();
+        if ($start === null) {
+            return 0;
+        }
+        return max(0, (int) $start->diffInMinutes($end));
+    }
+
     protected static function newFactory(): ShiftFactory
     {
         return ShiftFactory::new();

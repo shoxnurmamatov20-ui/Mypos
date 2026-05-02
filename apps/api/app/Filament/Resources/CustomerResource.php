@@ -146,12 +146,20 @@ class CustomerResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->label('Telefon')
                     ->copyable()
-                    ->searchable(),
+                    // phone is encrypted at rest (CLAUDE.md §7); search via
+                    // HMAC `phone_index` for exact-match lookup.
+                    ->searchable(query: function ($query, string $search) {
+                        $digits = (string) preg_replace('/\D/', '', $search);
+                        if (strlen($digits) < 9) {
+                            return $query->whereRaw('1 = 0');
+                        }
+                        return $query->where('phone_index', Customer::hashPhone($search));
+                    }),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email')
                     ->placeholder('—')
                     ->color('gray')
-                    ->searchable()
+                    // email is encrypted at rest; ilike search disabled.
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('tenant.name')
                     ->label('Restoran')
@@ -266,8 +274,15 @@ class CustomerResource extends Resource
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
+        // Audit H1: eager-load loyalty account columns referenced by the
+        // table/form. We deliberately do NOT eager-load tenant here on the
+        // table render path — the encrypted `phone` column is already joined
+        // in via the model cast, and `phone_index` (HMAC) is the only column
+        // we expose to the search query. See CustomerResource::table().
         return parent::getEloquentQuery()
-            ->with('loyaltyAccount')
+            ->with([
+                'loyaltyAccount:id,customer_id,tier,points_balance,lifetime_points',
+            ])
             ->withoutGlobalScopes([
                 \Illuminate\Database\Eloquent\SoftDeletingScope::class,
                 'tenant',

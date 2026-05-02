@@ -19,6 +19,9 @@ class StockMovementController extends Controller
     /** List movements for a given ingredient (paginated, newest first). */
     public function index(Request $request, Ingredient $ingredient): AnonymousResourceCollection
     {
+        $this->authorize('viewAny', StockMovement::class);
+        $this->authorize('view', $ingredient);
+
         $perPage = min((int) $request->integer('per_page', 30), 200);
 
         $query = StockMovement::query()
@@ -38,6 +41,8 @@ class StockMovementController extends Controller
         Ingredient $ingredient,
         AdjustStockAction $adjust,
     ): JsonResponse {
+        $this->authorize('adjustStock', $ingredient);
+
         $user = $request->user();
 
         $movement = $adjust([

@@ -56,8 +56,9 @@ class IngredientResource extends Resource
                             },
                         )
                         ->getOptionLabelFromRecordUsing(fn ($record): string => $record->name['uz'] ?? '')
-                        ->searchable()
-                        ->preload(),
+                        // Audit M10: dropped `preload()` — pulled every category
+                        // cross-tenant. `searchable()` lazy-fetches.
+                        ->searchable(),
                     Forms\Components\Group::make([
                         Forms\Components\TextInput::make('name.uz')
                             ->label('Nomi (UZ)')
@@ -217,7 +218,14 @@ class IngredientResource extends Resource
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
+        // Audit H1: eager-load category to avoid one extra query per row when
+        // rendering `category.name.uz`. The category relation has its own
+        // tenant scope which we drop because `tenant_id` is already filtered
+        // on the ingredient row.
         return parent::getEloquentQuery()
+            ->with([
+                'category' => fn ($q) => $q->withoutGlobalScopes(['tenant'])->select(['id', 'tenant_id', 'name']),
+            ])
             ->withoutGlobalScopes([
                 \Illuminate\Database\Eloquent\SoftDeletingScope::class,
                 'tenant',

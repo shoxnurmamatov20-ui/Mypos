@@ -25,6 +25,8 @@ class OrderController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
+        $this->authorize('viewAny', Order::class);
+
         $query = Order::query()
             ->with(['items', 'table'])
             ->orderBy('created_at', 'desc');
@@ -46,17 +48,20 @@ class OrderController extends Controller
 
     public function show(Order $order): OrderResource
     {
+        $this->authorize('view', $order);
+
         return OrderResource::make($order->load(['items', 'table']));
     }
 
     public function store(CreateOrderRequest $request, CreateOrderAction $create): JsonResponse
     {
+        $this->authorize('create', Order::class);
+
         $user = $request->user();
         abort_if($user === null, 401);
 
+        // CreateOrderAction already dispatches OrderPlaced — do NOT double-dispatch.
         $order = $create($user, $request->validated());
-
-        OrderPlaced::dispatch($order);
 
         return response()->json(
             ['data' => OrderResource::make($order)],
@@ -69,6 +74,8 @@ class OrderController extends Controller
         Order $order,
         UpdateOrderStatusAction $updateStatus,
     ): OrderResource {
+        $this->authorize('update', $order);
+
         $validated = $request->validate([
             'status' => ['required', Rule::in(OrderStatus::values())],
         ]);
@@ -86,6 +93,8 @@ class OrderController extends Controller
      */
     public function summary(Request $request): JsonResponse
     {
+        $this->authorize('viewAny', Order::class);
+
         $validated = $request->validate([
             'from' => ['nullable', 'date'],
             'to' => ['nullable', 'date'],

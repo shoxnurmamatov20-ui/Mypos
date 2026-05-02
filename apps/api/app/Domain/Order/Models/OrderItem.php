@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Order\Models;
 
+use App\Domain\Employee\Models\Employee;
 use App\Domain\Menu\Models\MenuItem;
 use App\Domain\Shared\Concerns\BelongsToTenant;
 use Database\Factories\OrderItemFactory;
@@ -26,6 +27,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property array<int, array<string, mixed>>|null $modifiers
  * @property string|null $notes
  * @property string $status
+ * @property string|null $cook_id
+ * @property \Illuminate\Support\Carbon|null $started_preparing_at
+ * @property \Illuminate\Support\Carbon|null $ready_at
+ * @property int|null $prep_duration_seconds
  */
 class OrderItem extends Model
 {
@@ -41,6 +46,7 @@ class OrderItem extends Model
         'tenant_id', 'order_id', 'menu_item_id',
         'name_snapshot', 'price_amount', 'quantity', 'subtotal_amount', 'currency',
         'modifiers', 'notes', 'status',
+        'cook_id', 'started_preparing_at', 'ready_at', 'prep_duration_seconds',
     ];
 
     protected function casts(): array
@@ -50,7 +56,15 @@ class OrderItem extends Model
             'price_amount' => 'integer',
             'quantity' => 'integer',
             'subtotal_amount' => 'integer',
+            'started_preparing_at' => 'datetime',
+            'ready_at' => 'datetime',
+            'prep_duration_seconds' => 'integer',
         ];
+    }
+
+    public function cook(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class, 'cook_id');
     }
 
     public function order(): BelongsTo

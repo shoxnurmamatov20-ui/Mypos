@@ -22,9 +22,15 @@ class PaymentController extends Controller
         CreatePaymentIntentRequest $request,
         CreatePaymentIntentAction $create,
     ): JsonResponse {
+        $this->authorize('create', Payment::class);
+
         $data = $request->validated();
 
         $order = Order::query()->findOrFail($data['order_id']);
+        // Re-check that the actor may pay for this specific order
+        // (within-tenant scoping + role).
+        $this->authorize('confirmPayment', $order);
+
         $provider = PaymentProvider::from($data['provider']);
 
         $result = $create($order, $provider, $data['options'] ?? []);
@@ -40,11 +46,15 @@ class PaymentController extends Controller
 
     public function show(Payment $payment): PaymentResource
     {
+        $this->authorize('view', $payment);
+
         return PaymentResource::make($payment);
     }
 
     public function captureCash(Payment $payment, CapturePaymentAction $capture): PaymentResource
     {
+        $this->authorize('capture', $payment);
+
         abort_unless($payment->provider === PaymentProvider::Cash->value, 422, 'Only cash payments can be captured manually.');
 
         $captured = $capture($payment);
@@ -58,6 +68,10 @@ class PaymentController extends Controller
         PaymentManager $manager,
     ): PaymentResource {
         $amount = (int) $request->validated()['amount'];
+
+        // Pass amount so the policy can apply the LARGE_REFUND_THRESHOLD escalation.
+        $this->authorize('refund', [$payment, $amount]);
+
         $provider = $manager->driver($payment->provider);
         $refunded = $provider->refund($payment, $amount);
 

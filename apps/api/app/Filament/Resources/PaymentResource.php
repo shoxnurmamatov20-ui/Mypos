@@ -165,7 +165,14 @@ class PaymentResource extends Resource
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
+        // Audit H1: eager-load `tenant` (rendered as a column) and `order`
+        // (used by the form/view page). Without this each row triggered an
+        // extra `tenants` query.
         return parent::getEloquentQuery()
+            ->with([
+                'tenant:id,name',
+                'order:id,order_no,total_amount,currency',
+            ])
             ->withoutGlobalScopes(['tenant']);
     }
 

@@ -16,6 +16,8 @@ class RecipeController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
+        $this->authorize('viewAny', Recipe::class);
+
         $query = Recipe::query()
             ->with('ingredient.category')
             ->orderBy('created_at', 'desc');
@@ -32,6 +34,8 @@ class RecipeController extends Controller
 
     public function store(CreateRecipeRequest $request): JsonResponse
     {
+        $this->authorize('create', Recipe::class);
+
         $recipe = Recipe::create($request->validated());
 
         return response()->json(
@@ -42,6 +46,8 @@ class RecipeController extends Controller
 
     public function destroy(Recipe $recipe): JsonResponse
     {
+        $this->authorize('delete', $recipe);
+
         $recipe->delete();
 
         return response()->json(['data' => ['message' => "Retsept o'chirildi"]]);

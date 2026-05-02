@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Domain\Tenant\Models\Tenant;
+use App\Models\Observers\UserSecurityObserver;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,10 +30,15 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null $avatar_url
  * @property string $password
  * @property bool $is_super_admin
+ * @property string|null $super_admin_role
+ * @property \Illuminate\Support\Carbon|null $last_super_admin_login_at
+ * @property bool $mfa_enabled
+ * @property string|null $mfa_secret
  * @property \Illuminate\Support\Carbon|null $last_login_at
  * @property string|null $last_login_ip
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  */
+#[ObservedBy([UserSecurityObserver::class])]
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<UserFactory> */
@@ -51,11 +58,16 @@ class User extends Authenticatable implements FilamentUser
         'avatar_url',
         'password',
         'is_super_admin',
+        'super_admin_role',
+        'last_super_admin_login_at',
+        'mfa_enabled',
+        'mfa_secret',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'mfa_secret',
     ];
 
     protected static function booted(): void
@@ -72,7 +84,9 @@ class User extends Authenticatable implements FilamentUser
         return [
             'email_verified_at' => 'datetime',
             'last_login_at' => 'datetime',
+            'last_super_admin_login_at' => 'datetime',
             'is_super_admin' => 'boolean',
+            'mfa_enabled' => 'boolean',
             'password' => 'hashed',
         ];
     }

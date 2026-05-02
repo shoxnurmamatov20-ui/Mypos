@@ -8,17 +8,28 @@ use App\Domain\Auth\Enums\Role as RoleEnum;
 use App\Domain\Employee\Enums\ShiftStatus;
 use App\Domain\Employee\Models\Employee;
 use App\Domain\Employee\Models\Shift;
+use App\Domain\Shared\Concerns\BelongsToTenant;
 use App\Domain\Tenant\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DemoEmployeesSeeder extends Seeder
 {
     public function run(): void
     {
+        if (! app()->environment(['local', 'testing'])) {
+            $this->command?->warn(static::class . ' refused to run outside local/testing environments.');
+            return;
+        }
+
+        // Demo seeders run from artisan (no Auth user). Opt-in to lenient
+        // BelongsToTenant scope so firstOrCreate lookups still see existing rows.
+        BelongsToTenant::allowEmptyTenantContext();
+
         $tenant = Tenant::where('slug', 'demo-restaurant')->first();
         if ($tenant === null) {
             $this->command?->warn('Demo tenant not found; skipping employees seed.');
@@ -76,6 +87,10 @@ class DemoEmployeesSeeder extends Seeder
 
             $created = 0;
             foreach ($roster as $person) {
+                // Generate a fresh random password each seed run (no hardcoded creds).
+                $userExisted = User::where('email', $person['email'])->exists();
+                $generatedPassword = Str::random(24);
+
                 $user = User::firstOrCreate(
                     ['email' => $person['email']],
                     [
@@ -83,11 +98,16 @@ class DemoEmployeesSeeder extends Seeder
                         'tenant_id' => $tenant->id,
                         'phone' => $person['phone'],
                         'locale' => 'uz',
-                        'password' => Hash::make('demo_pass_2026'),
+                        'password' => Hash::make($generatedPassword),
                         'email_verified_at' => now(),
                         'is_super_admin' => false,
                     ],
                 );
+
+                if (! $userExisted) {
+                    $this->command?->info("Demo employee created: {$person['email']} / {$generatedPassword}");
+                }
+
                 if (! $user->hasRole($person['position'])) {
                     $user->assignRole($person['position']);
                 }

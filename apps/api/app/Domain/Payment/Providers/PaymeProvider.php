@@ -10,6 +10,7 @@ use App\Domain\Payment\Enums\PaymentStatus;
 use App\Domain\Payment\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
 /**
@@ -90,9 +91,34 @@ class PaymeProvider implements PaymentProviderInterface
         [, $providedKey] = $parts;
 
         $expectedKey = (string) config('services.payme.secret_key', '');
+
         if ($expectedKey === '') {
-            // Stub mode — accept any "stub_ok" password for local dev
-            return $providedKey === 'stub_ok';
+            // SECURITY (C3): refuse stub mode in production.  An empty
+            // PAYME_SECRET_KEY here means the operator forgot to configure
+            // credentials, NOT a license to mark orders paid for free.
+            if (app()->environment('production')) {
+                Log::critical('Payme webhook secret not configured in production', [
+                    'ip' => $request->ip(),
+                    'method' => (string) $request->input('method', ''),
+                ]);
+
+                throw new RuntimeException('Payme webhook secret not configured in production');
+            }
+
+            // Non-production: stub mode requires an explicit feature flag.
+            if (
+                app()->environment(['local', 'testing'])
+                && (bool) config('payment.allow_stub_webhooks', false) === true
+            ) {
+                return $providedKey === 'stub_ok';
+            }
+
+            Log::warning('Payme webhook stub mode refused', [
+                'env' => app()->environment(),
+                'ip' => $request->ip(),
+            ]);
+
+            return false;
         }
 
         return hash_equals($expectedKey, $providedKey);
@@ -201,11 +227,25 @@ class PaymeProvider implements PaymentProviderInterface
             }
 
             $order = Order::withoutGlobalScopes()->find($orderId);
-            $tenantId = $order?->tenant_id ?? '00000000-0000-0000-0000-000000000000';
+
+            if ($order === null) {
+                // SECURITY (C3): refuse poison-tenant rows.  Previously we
+                // wrote a Payment with a placeholder zero-UUID tenant_id when
+                // the order was missing — bypass it so the table stays clean
+                // and Payme falls into the unified "ERR_ORDER_NOT_FOUND"
+                // branch upstream.
+                Log::warning('Payme webhook: order not found, refusing to create poison-tenant Payment', [
+                    'payme_txn_id' => $paymeTxnId,
+                    'merchant_order_id' => $orderId,
+                    'ip' => $request->ip(),
+                ]);
+
+                throw new RuntimeException('Payme transaction references unknown order');
+            }
 
             return Payment::withoutGlobalScopes()->create([
-                'tenant_id' => $tenantId,
-                'order_id' => $orderId !== '' ? $orderId : '00000000-0000-0000-0000-000000000000',
+                'tenant_id' => $order->tenant_id,
+                'order_id' => $order->id,
                 'provider' => PaymentProvider::Payme->value,
                 'provider_transaction_id' => $paymeTxnId,
                 'amount' => $amount,

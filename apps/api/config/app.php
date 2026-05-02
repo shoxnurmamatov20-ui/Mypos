@@ -86,6 +86,36 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Available Locales
+    |--------------------------------------------------------------------------
+    |
+    | Whitelist of locales the app can switch to at request time. Phase 4
+    | introduced kz (Qazaq, Cyrillic). Future phases will add ky (Qirg'iz)
+    | and tg (Tojik).
+    |
+    | When a UI locale (uz/ru/en/kz/...) is missing a key, requests fall
+    | back through this chain: <locale> -> ru -> en. ru is the lingua franca
+    | across Central Asia, so kz/ky/tg readers get a useful fallback rather
+    | than uz transliteration.
+    |
+    */
+
+    'available_locales' => [
+        'uz' => ['label' => "O'zbekcha (lotin)", 'native' => "O'zbekcha", 'flag' => '🇺🇿'],
+        'ru' => ['label' => 'Русский', 'native' => 'Русский', 'flag' => '🇷🇺'],
+        'en' => ['label' => 'English', 'native' => 'English', 'flag' => '🇬🇧'],
+        'kz' => ['label' => 'Қазақша (кирилл)', 'native' => 'Қазақша', 'flag' => '🇰🇿'],
+    ],
+
+    'locale_fallback_chain' => [
+        'uz' => ['ru', 'en'],
+        'ru' => ['en'],
+        'en' => [],
+        'kz' => ['ru', 'en'],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |
@@ -122,5 +152,23 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Caddy on-demand TLS — internal verify endpoint
+    |--------------------------------------------------------------------------
+    |
+    | Shared secret presented by Caddy in the `X-Caddy-Token` header when
+    | calling /api/internal/caddy/verify. Must be set in production: an empty
+    | secret combined with a non-loopback caller fails closed (see the
+    | InternalCaddyOnly middleware). `caddy_trust_loopback` lets operators
+    | opt loopback callers out of the secret requirement when Caddy is
+    | colocated with the API on the same node.
+    |
+    */
+
+    'caddy_secret' => env('CADDY_INTERNAL_TOKEN', ''),
+
+    'caddy_trust_loopback' => (bool) env('CADDY_TRUST_LOOPBACK', false),
 
 ];
