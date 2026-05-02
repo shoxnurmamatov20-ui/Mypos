@@ -1,26 +1,25 @@
 'use client';
 
-import {
-  BarChart3,
-  ChefHat,
-  type LucideIcon,
-  MessageCircle,
-  QrCode,
-  ShoppingBag,
-  Sparkles,
-} from 'lucide-react';
+import { BarChart2, Bot, ChefHat, MonitorSmartphone, QrCode } from 'lucide-react';
+import { TelegramLogo } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
 type FeatureKey = 'pos' | 'kds' | 'qr_menu' | 'analytics' | 'ai' | 'telegram';
 
-const ICONS: Record<FeatureKey, LucideIcon> = {
-  pos: ShoppingBag,
+type IconComponent = React.ComponentType<{ className?: string }>;
+
+const TelegramIcon: IconComponent = ({ className }) => (
+  <TelegramLogo className={className} weight="light" />
+);
+
+const ICONS: Record<FeatureKey, IconComponent> = {
+  pos: MonitorSmartphone,
   kds: ChefHat,
   qr_menu: QrCode,
-  analytics: BarChart3,
-  ai: Sparkles,
-  telegram: MessageCircle,
+  analytics: BarChart2,
+  ai: Bot,
+  telegram: TelegramIcon,
 };
 
 const ORDER: FeatureKey[] = ['pos', 'kds', 'qr_menu', 'analytics', 'ai', 'telegram'];

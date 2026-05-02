@@ -1,5 +1,5 @@
-import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import { TelegramLogo } from '@phosphor-icons/react/dist/ssr';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ContactForm } from '@/components/landing/contact-form';
@@ -17,6 +17,13 @@ export async function generateMetadata({
   };
 }
 
+type Channel = {
+  renderIcon: () => React.ReactNode;
+  label: string;
+  value: string;
+  href?: string;
+};
+
 export default async function ContactPage({
   params,
 }: {
@@ -27,11 +34,30 @@ export default async function ContactPage({
   const t = await getTranslations({ locale, namespace: 'contact_page' });
   const tFooter = await getTranslations({ locale, namespace: 'footer' });
 
-  const channels: { icon: LucideIcon; label: string; value: string; href?: string }[] = [
-    { icon: Phone, label: t('channels.phone'), value: tFooter('phone'), href: `tel:${tFooter('phone').replace(/\s/g, '')}` },
-    { icon: Mail, label: t('channels.email'), value: tFooter('email'), href: `mailto:${tFooter('email')}` },
-    { icon: MessageCircle, label: t('channels.telegram'), value: '@mypos_uz', href: 'https://t.me/mypos_uz' },
-    { icon: MapPin, label: t('channels.address'), value: tFooter('address') },
+  const channels: Channel[] = [
+    {
+      renderIcon: () => <Phone className="h-5 w-5" aria-hidden={true} />,
+      label: t('channels.phone'),
+      value: tFooter('phone'),
+      href: `tel:${tFooter('phone').replace(/\s/g, '')}`,
+    },
+    {
+      renderIcon: () => <Mail className="h-5 w-5" aria-hidden={true} />,
+      label: t('channels.email'),
+      value: tFooter('email'),
+      href: `mailto:${tFooter('email')}`,
+    },
+    {
+      renderIcon: () => <TelegramLogo className="h-5 w-5" weight="fill" aria-hidden={true} />,
+      label: t('channels.telegram'),
+      value: '@mypos_uz',
+      href: 'https://t.me/mypos_uz',
+    },
+    {
+      renderIcon: () => <MapPin className="h-5 w-5" aria-hidden={true} />,
+      label: t('channels.address'),
+      value: tFooter('address'),
+    },
   ];
 
   return (
@@ -51,36 +77,33 @@ export default async function ContactPage({
               {t('channels_title')}
             </h2>
             <ul className="mt-md space-y-sm">
-              {channels.map((channel) => {
-                const Icon = channel.icon;
-                return (
-                  <li
-                    key={channel.label}
-                    className="flex items-start gap-sm rounded-pearl border border-hairline-soft bg-canvas p-sm"
-                  >
-                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-pearl bg-coral-tint text-coral">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </span>
-                    <div>
-                      <div className="text-fine-print font-display font-semibold uppercase tracking-wider text-ink-muted-48">
-                        {channel.label}
-                      </div>
-                      {channel.href ? (
-                        <a
-                          href={channel.href}
-                          target={channel.href.startsWith('http') ? '_blank' : undefined}
-                          rel={channel.href.startsWith('http') ? 'noreferrer noopener' : undefined}
-                          className="text-caption font-semibold text-ink transition-colors duration-fast hover:text-coral"
-                        >
-                          {channel.value}
-                        </a>
-                      ) : (
-                        <div className="text-caption font-semibold text-ink">{channel.value}</div>
-                      )}
+              {channels.map((channel) => (
+                <li
+                  key={channel.label}
+                  className="flex items-start gap-sm rounded-pearl border border-hairline-soft bg-canvas p-sm"
+                >
+                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-pearl bg-coral-tint text-coral">
+                    {channel.renderIcon()}
+                  </span>
+                  <div>
+                    <div className="text-fine-print font-display font-semibold uppercase tracking-wider text-ink-muted-48">
+                      {channel.label}
                     </div>
-                  </li>
-                );
-              })}
+                    {channel.href ? (
+                      <a
+                        href={channel.href}
+                        target={channel.href.startsWith('http') ? '_blank' : undefined}
+                        rel={channel.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+                        className="text-caption font-semibold text-ink transition-colors duration-fast hover:text-coral"
+                      >
+                        {channel.value}
+                      </a>
+                    ) : (
+                      <div className="text-caption font-semibold text-ink">{channel.value}</div>
+                    )}
+                  </div>
+                </li>
+              ))}
             </ul>
           </aside>
         </div>

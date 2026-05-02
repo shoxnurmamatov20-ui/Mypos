@@ -1,13 +1,15 @@
 'use client';
 
 import { ArrowRight, Clock, type LucideIcon, TrendingUp, Users } from 'lucide-react';
+import { BowlFood, Coffee, Pizza } from '@phosphor-icons/react';
+import type { Icon as PhosphorIcon } from '@phosphor-icons/react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
 type CaseConfig = {
   id: string;
-  emoji: string;
+  CardIcon: PhosphorIcon;
   metricIcon: LucideIcon;
   metricValueKey: string;
   metricLabelKey: string;
@@ -16,21 +18,21 @@ type CaseConfig = {
 const CASES: readonly CaseConfig[] = [
   {
     id: 'osh-markazi',
-    emoji: '🍚',
+    CardIcon: BowlFood,
     metricIcon: TrendingUp,
     metricValueKey: 'case1_metric_value',
     metricLabelKey: 'case1_metric_label',
   },
   {
     id: 'pizza-house',
-    emoji: '🍕',
+    CardIcon: Pizza,
     metricIcon: Clock,
     metricValueKey: 'case2_metric_value',
     metricLabelKey: 'case2_metric_label',
   },
   {
     id: 'cafe-aroma',
-    emoji: '☕',
+    CardIcon: Coffee,
     metricIcon: Users,
     metricValueKey: 'case3_metric_value',
     metricLabelKey: 'case3_metric_label',
@@ -39,7 +41,7 @@ const CASES: readonly CaseConfig[] = [
 
 /**
  * Apple-style customer story tiles — parchment background,
- * canvas card with hairline ring, 80px emoji header on parchment,
+ * canvas card with hairline ring, Phosphor thin icon header on pearl,
  * tabular metric, single coral accent.
  */
 export function CaseStudies() {
@@ -61,7 +63,8 @@ export function CaseStudies() {
 
         <StaggerGroup className="mb-xl grid gap-md md:grid-cols-3">
           {CASES.map((caseStudy, i) => {
-            const Icon = caseStudy.metricIcon;
+            const MetricIcon = caseStudy.metricIcon;
+            const CardIcon = caseStudy.CardIcon;
             const caseKey = `case${i + 1}` as const;
 
             return (
@@ -71,15 +74,18 @@ export function CaseStudies() {
                   className="group flex h-full flex-col overflow-hidden rounded-card bg-canvas shadow-hairline-ring transition-transform duration-fast active:scale-95"
                 >
                   <div className="flex items-center justify-center bg-pearl p-xl">
-                    <span aria-hidden="true" className="text-7xl">
-                      {caseStudy.emoji}
-                    </span>
+                    <CardIcon
+                      weight="thin"
+                      size={80}
+                      className="text-ink-muted-48"
+                      aria-hidden="true"
+                    />
                   </div>
 
                   <div className="flex flex-1 flex-col p-lg">
                     <div className="mb-md flex items-center gap-xs border-b border-hairline-soft pb-md">
                       <div className="flex h-12 w-12 items-center justify-center rounded-pearl bg-coral-tint">
-                        <Icon aria-hidden="true" className="h-6 w-6 text-coral" />
+                        <MetricIcon aria-hidden="true" className="h-6 w-6 text-coral" />
                       </div>
                       <div>
                         <p className="tabular text-display-md text-ink font-display font-semibold">

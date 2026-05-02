@@ -1,4 +1,5 @@
-import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import { TelegramLogo } from '@phosphor-icons/react/dist/ssr';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './language-switcher';
@@ -84,7 +85,7 @@ export function Footer() {
                 <span>{t('address')}</span>
               </li>
               <li className="flex items-center gap-xs">
-                <MessageCircle className="h-4 w-4 text-coral" aria-hidden="true" />
+                <TelegramLogo className="h-4 w-4 text-coral" weight="fill" aria-hidden="true" />
                 <a
                   href="https://t.me/mypos_uz"
                   target="_blank"

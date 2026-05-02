@@ -1,13 +1,13 @@
 'use client';
 
-import { ArrowRight, ClipboardList, type LucideIcon, Rocket, UserPlus } from 'lucide-react';
+import { ArrowRight, type LucideIcon, Settings2, UserPlus, Zap } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
 const STEPS: { key: 'one' | 'two' | 'three'; icon: LucideIcon }[] = [
   { key: 'one', icon: UserPlus },
-  { key: 'two', icon: ClipboardList },
-  { key: 'three', icon: Rocket },
+  { key: 'two', icon: Settings2 },
+  { key: 'three', icon: Zap },
 ];
 
 /**

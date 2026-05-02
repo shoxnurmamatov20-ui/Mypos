@@ -1,4 +1,4 @@
-import { Heart, Rocket, Users } from 'lucide-react';
+import { Eye, Target, Users } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CtaSection } from '@/components/landing/cta-section';
@@ -26,8 +26,8 @@ export default async function AboutPage({
   const t = await getTranslations({ locale, namespace: 'about_page' });
 
   const cards = [
-    { icon: Rocket, title: t('mission_title'), body: t('mission') },
-    { icon: Heart, title: t('vision_title'), body: t('vision') },
+    { icon: Target, title: t('mission_title'), body: t('mission') },
+    { icon: Eye, title: t('vision_title'), body: t('vision') },
     { icon: Users, title: t('team_title'), body: t('team') },
   ];
 

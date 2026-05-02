@@ -1,13 +1,13 @@
 'use client';
 
-import { ArrowRight, Coffee, Sandwich, UtensilsCrossed, Wine } from 'lucide-react';
+import { ArrowRight, Coffee, Sandwich, Utensils, Wine } from 'lucide-react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
 const SOLUTIONS = [
   { id: 'cafe', icon: Coffee, titleKey: 'cafe_title', descKey: 'cafe_desc', featuresKey: 'cafe_features' },
-  { id: 'restaurant', icon: UtensilsCrossed, titleKey: 'restaurant_title', descKey: 'restaurant_desc', featuresKey: 'restaurant_features' },
+  { id: 'restaurant', icon: Utensils, titleKey: 'restaurant_title', descKey: 'restaurant_desc', featuresKey: 'restaurant_features' },
   { id: 'fastfood', icon: Sandwich, titleKey: 'fastfood_title', descKey: 'fastfood_desc', featuresKey: 'fastfood_features' },
   { id: 'bar', icon: Wine, titleKey: 'bar_title', descKey: 'bar_desc', featuresKey: 'bar_features' },
 ] as const;
