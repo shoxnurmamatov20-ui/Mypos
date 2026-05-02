@@ -2,7 +2,20 @@ import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 
 const SITE_URL = 'https://mypos.uz';
-const PATHS = ['', '/features', '/pricing', '/about', '/blog', '/contact'] as const;
+const PATHS = [
+  '',
+  '/features',
+  '/pricing',
+  '/about',
+  '/blog',
+  '/contact',
+  '/customers',
+  '/demo',
+  '/solutions/cafe',
+  '/solutions/restaurant',
+  '/solutions/fastfood',
+  '/solutions/bar',
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

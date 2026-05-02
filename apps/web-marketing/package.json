@@ -8,27 +8,35 @@
     "start": "next start --port 3007",
     "lint": "biome check .",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "clean": "rm -rf .next .turbo"
   },
   "dependencies": {
     "@mypos/design-tokens": "workspace:*",
     "@mypos/ui": "workspace:*",
     "@mypos/utils": "workspace:*",
+    "@mypos/validation": "workspace:*",
     "next": "^15.1.0",
     "next-intl": "^3.26.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "clsx": "^2.1.0",
     "tailwind-merge": "^2.5.0",
-    "lucide-react": "^0.468.0"
+    "lucide-react": "^0.468.0",
+    "framer-motion": "^11.15.0",
+    "zod": "^3.24.0",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@vitest/coverage-v8": "^2.1.0",
     "postcss": "^8.4.0",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vitest": "^2.1.0"
   }
 }

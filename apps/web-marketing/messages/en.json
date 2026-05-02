@@ -8,29 +8,53 @@
   },
   "nav": {
     "features": "Features",
+    "solutions": "Solutions",
     "pricing": "Pricing",
+    "customers": "Customers",
     "about": "About",
     "contact": "Contact",
     "blog": "Blog",
     "login": "Sign in",
     "try_free": "Try free",
     "open_menu": "Open menu",
-    "close_menu": "Close menu"
+    "close_menu": "Close menu",
+    "demo_cta": "Book demo"
   },
   "hero": {
     "badge": "Central Asia's #1 restaurant platform",
+    "badge_label": "New",
+    "badge_text": "Central Asia's #1 SaaS",
     "title": "The brain of your restaurant",
-    "subtitle": "Manage orders, menu, staff and analytics on a single platform. Works with Click, Payme and Uzum — even offline.",
-    "cta_primary": "Try free",
+    "title_part1": "The complete solution for",
+    "title_highlight": "your restaurant",
+    "subtitle": "POS, KDS, mobile app, QR menu, analytics — all in one system. Click and Payme payments, real-time reports, AI assistant.",
+    "cta_primary": "Start free",
     "cta_secondary": "Watch demo",
+    "trust_no_card": "No credit card required",
+    "trust_setup": "5-minute setup",
+    "trust_support": "24/7 support",
+    "floating_revenue": "Revenue",
+    "floating_orders": "Orders",
+    "floating_today": "today",
     "dashboard_alt": "MyPOS dashboard",
     "dashboard_caption": "Manager Dashboard",
     "dashboard_subtitle": "Today's revenue, top items and staff KPIs at a glance",
+    "dashboard_revenue_today": "Revenue today",
+    "status_ready": "Ready",
+    "status_cooking": "Cooking",
+    "status_new": "New",
+    "stat_restaurants": "Restaurants trust us",
+    "stat_orders": "Orders processed",
+    "stat_uptime": "Uptime guarantee",
+    "stat_support": "Support",
     "stats": {
       "restaurants": "restaurants",
       "orders": "orders",
       "uptime": "reliable uptime"
     }
+  },
+  "customer_logos": {
+    "label": "Trusted by leading restaurants"
   },
   "features": {
     "section_label": "Features",
@@ -99,12 +123,7 @@
         "price_uzs": "0",
         "price_usd": "$0",
         "tagline": "For new openings",
-        "features": [
-          "1 location, 2 staff",
-          "100 orders per month",
-          "Basic POS",
-          "MyPOS watermark"
-        ]
+        "features": ["1 location, 2 staff", "100 orders per month", "Basic POS", "MyPOS watermark"]
       },
       "starter": {
         "name": "Starter",
@@ -287,5 +306,484 @@
     "subtitle": "Restaurant business, technology and inspiration stories.",
     "coming_soon": "Coming soon",
     "coming_soon_desc": "First articles are in the works. They'll appear here when ready."
+  },
+  "solutions": {
+    "label": "SOLUTIONS",
+    "title": "Tailored to your business",
+    "subtitle": "Specialized features and workflows for every type of restaurant.",
+    "learn_more": "Learn more",
+    "cafe_title": "Cafe & Tea House",
+    "cafe_desc": "Fast service, guest management, takeaway and a loyalty program for repeat customers.",
+    "cafe_features": [
+      "Lightning-fast order taking",
+      "Guest history and loyalty",
+      "Takeaway optimization"
+    ],
+    "restaurant_title": "Restaurant",
+    "restaurant_desc": "Table management, courier delivery, kitchen display, modifiers and large menus.",
+    "restaurant_features": [
+      "Tables and rooms",
+      "KDS kitchen display",
+      "Delivery management"
+    ],
+    "fastfood_title": "Fast Food",
+    "fastfood_desc": "Self-service kiosk, drive-thru, mobile ordering and high throughput in minimal time.",
+    "fastfood_features": [
+      "Self-service kiosk",
+      "Mobile ordering",
+      "High throughput"
+    ],
+    "bar_title": "Bar & Pub",
+    "bar_desc": "Quick open tabs, age verification, shift reports and built specifically for alcohol service.",
+    "bar_features": [
+      "Open tab management",
+      "Shift reports",
+      "Age verification"
+    ]
+  },
+  "comparison": {
+    "label": "COMPARISON",
+    "title": "Why MyPOS?",
+    "subtitle": "See how we stack up against other Uzbek POS systems.",
+    "feature_header": "Feature",
+    "recommended": "RECOMMENDED",
+    "legend_yes": "Available",
+    "legend_partial": "Limited",
+    "legend_no": "Not available",
+    "features": {
+      "pos": "POS register",
+      "mobile_consumer": "Customer mobile app",
+      "qr_menu": "QR menu and online ordering",
+      "kiosk": "Self-service kiosk",
+      "kds": "Kitchen display (KDS)",
+      "telegram_bot": "Telegram integration",
+      "click_payme": "Click and Payme",
+      "ai_analytics": "AI analytics and forecasting",
+      "multi_tenant": "Multi-tenant SaaS architecture",
+      "multilingual": "UZ/RU/EN multilingual",
+      "ios_android": "iOS and Android",
+      "cloud": "Cloud hosting",
+      "realtime": "Real-time updates"
+    }
+  },
+  "case_studies": {
+    "label": "CUSTOMERS",
+    "title": "Real results, real restaurants",
+    "subtitle": "Real stories from restaurants that started using MyPOS.",
+    "read_story": "Read the story",
+    "view_all": "View all customers",
+    "case1_metric_value": "+34%",
+    "case1_metric_label": "Revenue growth",
+    "case1_name": "Osh Markazi",
+    "case1_excerpt": "A traditional Uzbek osh restaurant grew online orders 5x and cut service time in half with MyPOS.",
+    "case2_metric_value": "−40%",
+    "case2_metric_label": "Service time",
+    "case2_name": "Pizza House",
+    "case2_excerpt": "A popular pizza chain reduced prep time from 18 to 11 minutes with the kitchen display.",
+    "case3_metric_value": "+5x",
+    "case3_metric_label": "Repeat customers",
+    "case3_name": "Cafe Aroma",
+    "case3_excerpt": "73% of customers return every week thanks to the loyalty program and mobile app."
+  },
+  "solutions_page": {
+    "label": "SOLUTION",
+    "pain_title": "Sound familiar?",
+    "solutions_title": "Our solution",
+    "cafe_meta_title": "Cafe POS system — MyPOS",
+    "cafe_meta_description": "Specialized POS solution for cafes and tea houses. Fast service, guest management, loyalty.",
+    "cafe_h1": "A modern POS for cafes and tea houses",
+    "cafe_lead": "Fast service, guest management, takeaway. MyPOS takes your cafe to the next level.",
+    "cafe_pains": [
+      "Long queues and slow service",
+      "Remembering guests and building loyalty",
+      "Inventory and ingredient control"
+    ],
+    "cafe_solutions": [
+      { "title": "Quick ordering", "desc": "Touch-screen register and modifiers — orders accepted in 30 seconds." },
+      { "title": "Guest profile", "desc": "Every guest's history, favorite drinks and personal discounts." },
+      { "title": "Loyalty program", "desc": "Automated points, tiers and rewards." },
+      { "title": "Mobile app", "desc": "Guests can pre-order from their phone." }
+    ],
+    "restaurant_meta_title": "Restaurant POS system — MyPOS",
+    "restaurant_meta_description": "A complete solution for restaurants. KDS, tables, courier delivery.",
+    "restaurant_h1": "A complete operating system for your restaurant",
+    "restaurant_lead": "Tables, kitchen, couriers and payments — in a single system. Built for Central Asian restaurants.",
+    "restaurant_pains": [
+      "Tables and orders get mixed up",
+      "Slow communication between kitchen and floor",
+      "Complex delivery operations"
+    ],
+    "restaurant_solutions": [
+      { "title": "Table management", "desc": "Visual table map, real-time status, QR-menu integration." },
+      { "title": "Kitchen display", "desc": "Orders go straight to the kitchen with status updates and time tracking." },
+      { "title": "Delivery", "desc": "Courier app, route optimization and customer tracking." },
+      { "title": "Modifiers", "desc": "Complex menus: sizes, add-ons, allergens and dietary options." }
+    ],
+    "fastfood_meta_title": "Fast Food POS — MyPOS",
+    "fastfood_meta_description": "A fast POS for fast food. Self-service kiosk, mobile ordering.",
+    "fastfood_h1": "High throughput for Fast Food",
+    "fastfood_lead": "Self-service kiosk, drive-thru, mobile ordering. Orders in seconds.",
+    "fastfood_pains": [
+      "Long queues at peak hours",
+      "Few staff, lots of orders",
+      "Ensuring order accuracy"
+    ],
+    "fastfood_solutions": [
+      { "title": "Kiosk", "desc": "Customers order and pay themselves." },
+      { "title": "Mobile ordering", "desc": "Order through the app, pick up instantly when you arrive." },
+      { "title": "Combo management", "desc": "Combos and bundle promos with automatic pricing." },
+      { "title": "Fast checkout", "desc": "Click, Payme, cash — every payment method in one place." }
+    ],
+    "bar_meta_title": "Bar POS — MyPOS",
+    "bar_meta_description": "A specialized POS for bars and pubs. Open tabs, shifts, alcohol control.",
+    "bar_h1": "A professional POS for bars and pubs",
+    "bar_lead": "Open tabs, shift reports, alcohol and ingredient control. Also ideal for nightclubs.",
+    "bar_pains": [
+      "Guests linger with open tabs",
+      "Hard to track alcohol consumption",
+      "Complex end-of-shift reconciliation"
+    ],
+    "bar_solutions": [
+      { "title": "Open Tab", "desc": "Open tabs by guest name or table, settled with one payment at the end." },
+      { "title": "Alcohol control", "desc": "Automatic tracking of how much pours from each bottle." },
+      { "title": "Shift reports", "desc": "Per-bartender reports of what they sold." },
+      { "title": "Age verification", "desc": "Mandatory age entry on every relevant order." }
+    ]
+  },
+  "customers_page": {
+    "label": "CUSTOMER STORIES",
+    "title": "Restaurants grow with MyPOS",
+    "subtitle": "Real results from restaurants using MyPOS.",
+    "meta_title": "Customers — success with MyPOS",
+    "meta_description": "Real stories and results from restaurants using MyPOS.",
+    "case1": {
+      "name": "Osh Markazi",
+      "location": "Tashkent",
+      "cuisine": "Traditional Uzbek osh",
+      "quote": "MyPOS completely changed how we operate. Online orders and queue management let us breathe again.",
+      "author": "Akbar Rasulov, General Manager",
+      "stats": [
+        { "value": "+34%", "label": "Revenue growth" },
+        { "value": "5x", "label": "Online orders" },
+        { "value": "−50%", "label": "Service time" }
+      ],
+      "sections": [
+        { "heading": "The problem", "text": "The restaurant ran the old-fashioned way: paper accounting, phone orders. Attracting younger guests was getting harder." },
+        { "heading": "The solution", "text": "The full MyPOS stack: POS, mobile app, QR menu, KDS. Set up within a single week." },
+        { "heading": "The result", "text": "After 3 months: revenue grew 34% and mobile-app orders reached 8,000 a month." }
+      ]
+    },
+    "case2": {
+      "name": "Pizza House",
+      "location": "Tashkent, 4 locations",
+      "cuisine": "Italian pizza",
+      "quote": "The kitchen display was a game changer. Pizzas faster, fewer mistakes, happier guests.",
+      "author": "Diyora Karimova, Operations Director",
+      "stats": [
+        { "value": "−40%", "label": "Service time" },
+        { "value": "+22%", "label": "Orders/hour" },
+        { "value": "−65%", "label": "Order errors" }
+      ],
+      "sections": [
+        { "heading": "The problem", "text": "4 locations, each with its own system. No centralized reporting. Pizza prep time was 18 minutes." },
+        { "heading": "The solution", "text": "Multi-tenant MyPOS — all 4 locations in one dashboard, KDS in every kitchen." },
+        { "heading": "The result", "text": "Prep time down to 11 minutes. Customer rating climbed from 4.2 to 4.7." }
+      ]
+    },
+    "case3": {
+      "name": "Cafe Aroma",
+      "location": "Tashkent",
+      "cuisine": "Cafe and pastries",
+      "quote": "The loyalty program and mobile app grew our weekly returning customers 5x.",
+      "author": "Madina Ergasheva, Owner",
+      "stats": [
+        { "value": "+5x", "label": "Repeat customers" },
+        { "value": "73%", "label": "Repeat rate" },
+        { "value": "+45%", "label": "Average ticket" }
+      ],
+      "sections": [
+        { "heading": "The problem", "text": "Guests would come once and leave. Nobody could remember who liked which coffee." },
+        { "heading": "The solution", "text": "MyPOS guest CRM, loyalty points and pre-orders through the mobile app." },
+        { "heading": "The result", "text": "Customer base grew to 12,000. 73% come back every week." }
+      ]
+    }
+  },
+  "roi_calculator": {
+    "label": "ROI CALCULATOR",
+    "title": "How much will you save with MyPOS?",
+    "subtitle": "Enter your real numbers and we'll calculate the savings.",
+    "inputs_title": "Your restaurant",
+    "orders_label": "Monthly orders",
+    "avg_order_label": "Average ticket",
+    "staff_label": "Staff count",
+    "current_revenue": "Current revenue",
+    "per_month": "per month",
+    "per_year": "per year",
+    "savings_title": "Your result",
+    "annual_savings_label": "Annual savings",
+    "monthly_savings": "Monthly savings",
+    "roi_label": "ROI",
+    "payback_label": "Payback",
+    "mypos_cost": "MyPOS cost",
+    "days": "days",
+    "months": "mo",
+    "disclaimer": "Calculations are based on industry-average statistics.",
+    "cta": "Book a demo"
+  },
+  "demo_page": {
+    "meta_title": "Book a demo — MyPOS",
+    "meta_description": "Book a MyPOS demo. Our specialist will show you the system in 30 minutes.",
+    "label": "FREE DEMO",
+    "title": "See MyPOS in 30 minutes",
+    "subtitle": "Our specialist will run a personalized demo and show the features your restaurant actually needs.",
+    "perk_personalized_title": "Personalized demo",
+    "perk_personalized_desc": "Tailored to your restaurant type and specific needs",
+    "perk_30min_title": "30 minutes",
+    "perk_30min_desc": "Fast and to the point — we respect your time",
+    "perk_remote_title": "Online or on-site",
+    "perk_remote_desc": "Whatever works best — Zoom, Telegram or in person",
+    "perk_questions_title": "All your questions",
+    "perk_questions_desc": "Pricing, integrations, migration — we'll cover everything"
+  },
+  "demo_form": {
+    "name_label": "Full name",
+    "name_placeholder": "Akbar Rasulov",
+    "phone_label": "Phone",
+    "email_label": "Email",
+    "restaurant_label": "Restaurant name",
+    "restaurant_placeholder": "Osh Markazi",
+    "industry_label": "Business type",
+    "industry_cafe": "Cafe",
+    "industry_restaurant": "Restaurant",
+    "industry_fastfood": "Fast Food",
+    "industry_bar": "Bar / Pub",
+    "industry_other": "Other",
+    "date_label": "Date",
+    "time_label": "Time",
+    "notes_label": "Additional notes",
+    "notes_placeholder": "Which features are you most interested in?",
+    "submit": "Book demo",
+    "disclaimer": "By submitting you agree to our Privacy Policy and Terms of Service.",
+    "success_title": "Thank you!",
+    "success_message": "Your request has been received.",
+    "success_note": "Our manager will contact you within an hour."
+  },
+  "newsletter": {
+    "title": "News and tips",
+    "subtitle": "Useful articles for restaurant business",
+    "placeholder": "email@example.com",
+    "subscribe": "Subscribe",
+    "success": "Subscribed! Thank you."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "message": "We use cookies to improve your experience. By continuing, you agree to their use.",
+    "accept_all": "Accept all",
+    "essential_only": "Essential only",
+    "close": "Close"
+  },
+  "onboarding": {
+    "meta": {
+      "title": "Set up your restaurant",
+      "description": "Create your MyPOS account in 5 minutes and start running your restaurant."
+    },
+    "title": "Set up your restaurant",
+    "subtitle": "A few steps and you'll have POS, KDS, QR menu and analytics.",
+    "steps": {
+      "aria_label": "Steps",
+      "step": "Step",
+      "restaurant": "Restaurant",
+      "menu": "Menu",
+      "tables": "Tables",
+      "payments": "Payments",
+      "tier": "Plan"
+    },
+    "actions": {
+      "back": "Back",
+      "next": "Next",
+      "finish_free": "Start for free",
+      "pay_and_finish": "Pay and finish"
+    },
+    "step1": {
+      "title": "About your restaurant",
+      "subtitle": "Give us a few details — we'll set up the rest automatically.",
+      "name_label": "Restaurant name",
+      "name_placeholder": "e.g. Jome Burger",
+      "slug_label": "Subdomain",
+      "slug_hint": "Your address: [slug].{domain}. You can change this later.",
+      "cuisine_label": "Cuisine type",
+      "cuisines": {
+        "pizza": "Pizzeria",
+        "lavash": "Lavash / Shawarma",
+        "choyxona": "Choyxona",
+        "fastfood": "Fast food",
+        "sushi": "Sushi",
+        "cafe": "Café",
+        "bakery": "Bakery",
+        "bar": "Bar",
+        "fine_dining": "Fine dining",
+        "other": "Other"
+      },
+      "city_label": "City",
+      "city_placeholder": "Tashkent",
+      "address_label": "Address",
+      "address_placeholder": "Amir Temur St., 12",
+      "phone_label": "Phone",
+      "email_label": "Email",
+      "logo_label": "Logo",
+      "logo_hint": "PNG, JPG, SVG or WebP. Up to 1.5 MB.",
+      "logo_upload": "Upload logo",
+      "logo_replace": "Replace",
+      "logo_remove": "Remove"
+    },
+    "step2": {
+      "title": "Add your menu",
+      "subtitle": "Pick the fastest path — you can edit everything later in the dashboard.",
+      "modes": {
+        "ai": {
+          "title": "Generate with AI",
+          "description": "We'll draft 30 sample dishes for your cuisine.",
+          "badge": "New"
+        },
+        "csv": {
+          "title": "CSV import",
+          "description": "Already have a spreadsheet? Upload it in one click."
+        },
+        "manual": {
+          "title": "Skip for now",
+          "description": "Start with an empty dashboard, add dishes later."
+        }
+      },
+      "generate_cta": "Generate 30 dishes",
+      "generating": "Generating...",
+      "csv_cta": "Choose CSV file",
+      "manual_hint": "Good choice — the dashboard has a smooth menu builder.",
+      "items_preview": "{count} dishes ready",
+      "clear_all": "Clear all",
+      "col_name": "Name",
+      "col_category": "Category",
+      "col_price": "Price (UZS)"
+    },
+    "step3": {
+      "title": "Tables and zones",
+      "subtitle": "Quick setup — you'll fine-tune each table later.",
+      "zones_label": "Number of zones",
+      "zones_hint": "e.g. main hall, terrace, VIP.",
+      "tables_per_zone_label": "Tables per zone",
+      "tables_per_zone_hint": "All will be auto-named T1, T2 ...",
+      "preview_label": "Total tables",
+      "preview_total": "{count} tables",
+      "preview_hint": "You'll customize names and layout in the dashboard."
+    },
+    "step4": {
+      "title": "Payment methods",
+      "subtitle": "Which payment methods will you accept?",
+      "providers": {
+        "cash": {
+          "title": "Cash",
+          "description": "Always available — no setup needed."
+        },
+        "click": {
+          "title": "Click",
+          "description": "Most popular payment system.",
+          "setup_note": "We'll connect your Click account later."
+        },
+        "payme": {
+          "title": "Payme",
+          "description": "For mobile payments.",
+          "setup_note": "Payme connection comes later."
+        },
+        "card": {
+          "title": "Bank cards",
+          "description": "Visa, MasterCard, Humo, UzCard.",
+          "setup_note": "Acquiring is configured later."
+        }
+      },
+      "skip_hint": "You don't have to connect all of these now — start with cash and add the rest later."
+    },
+    "step5": {
+      "title": "Choose your plan",
+      "subtitle": "You can switch anytime within 30 days.",
+      "tiers": {
+        "most_popular": "Most popular",
+        "free": {
+          "name": "Free",
+          "tagline": "For small cafés",
+          "price": "Free",
+          "price_note": "Forever",
+          "features": {
+            "0": "1 location",
+            "1": "Basic POS and QR menu",
+            "2": "100 orders / month",
+            "3": "Email support"
+          }
+        },
+        "pro": {
+          "name": "Pro",
+          "tagline": "For growing restaurants",
+          "price": "$90 / month",
+          "price_note": "20% off on annual plan",
+          "features": {
+            "0": "Unlimited orders",
+            "1": "KDS + inventory",
+            "2": "AI menu and analytics",
+            "3": "Click and Payme",
+            "4": "24/7 chat support"
+          }
+        },
+        "plus": {
+          "name": "Plus",
+          "tagline": "For chains",
+          "price": "$300 / month",
+          "price_note": "Up to 5 locations",
+          "features": {
+            "0": "Everything in Pro",
+            "1": "Custom domain + branding",
+            "2": "Delivery module",
+            "3": "Telegram bot",
+            "4": "Chain-wide analytics",
+            "5": "Dedicated manager"
+          }
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "tagline": "For large chains",
+          "price": "Contact us",
+          "price_note": "Custom contract",
+          "features": {
+            "0": "Everything in Plus",
+            "1": "Unlimited locations",
+            "2": "White-label app",
+            "3": "Custom integrations",
+            "4": "On-premise option",
+            "5": "99.9% SLA guarantee"
+          }
+        }
+      }
+    },
+    "errors": {
+      "field_required": "This field is required",
+      "restaurant_name_too_short": "Name is too short",
+      "slug_too_short": "Subdomain must be at least 3 characters",
+      "slug_too_long": "Subdomain must be at most 32 characters",
+      "slug_invalid_chars": "Only Latin letters, digits and '-' allowed",
+      "phone_invalid": "Phone number is invalid",
+      "email_invalid": "Email is invalid",
+      "logo_too_large": "File must be smaller than 1.5 MB",
+      "logo_unsupported_type": "Only PNG, JPG, WebP or SVG",
+      "csv_empty": "CSV file is empty",
+      "csv_parse_failed": "Could not parse CSV",
+      "csv_missing_columns": "CSV must have 'name' and 'price' columns",
+      "menu_generate_failed": "Could not generate menu. Please try again.",
+      "too_many_tables": "Too many tables (>100). The dashboard handles this better.",
+      "select_at_least_one": "Select at least one payment method",
+      "validation_failed": "Please check your data",
+      "submit_failed": "Submission failed. Please try again.",
+      "api_400": "Bad request",
+      "api_409": "This subdomain or email is already taken",
+      "api_422": "Please check your data",
+      "api_429": "Too many attempts — try again later",
+      "api_500": "Server error — try again later"
+    }
   }
 }

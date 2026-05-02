@@ -8,29 +8,53 @@
   },
   "nav": {
     "features": "Imkoniyatlar",
+    "solutions": "Yechimlar",
     "pricing": "Narxlar",
+    "customers": "Mijozlar",
     "about": "Biz haqimizda",
     "contact": "Aloqa",
     "blog": "Blog",
     "login": "Kirish",
     "try_free": "Bepul sinab ko'rish",
     "open_menu": "Menyuni ochish",
-    "close_menu": "Menyuni yopish"
+    "close_menu": "Menyuni yopish",
+    "demo_cta": "Demo zayavka"
   },
   "hero": {
     "badge": "Markaziy Osiyo uchun #1 restoran tizimi",
+    "badge_label": "Yangi",
+    "badge_text": "Markaziy Osiyo uchun #1 SaaS",
     "title": "Restoraningizning aqli",
-    "subtitle": "Bitta platforma orqali buyurtmalar, menyu, xodimlar va analitikani boshqaring. Click, Payme va Uzum bilan birga ishlaydi — offline rejimda ham.",
-    "cta_primary": "Bepul sinab ko'rish",
-    "cta_secondary": "Ko'rish",
+    "title_part1": "Restoraningiz uchun",
+    "title_highlight": "to'liq yechim",
+    "subtitle": "POS, KDS, mobil ilova, QR menyu, tahlil — bitta tizimda. Click va Payme to'lovlar, real-time hisobotlar, AI yordamchi.",
+    "cta_primary": "Bepul boshlash",
+    "cta_secondary": "Demo ko'rish",
+    "trust_no_card": "Karta talab qilinmaydi",
+    "trust_setup": "5 daqiqada sozlash",
+    "trust_support": "24/7 qo'llab-quvvatlash",
+    "floating_revenue": "Tushum",
+    "floating_orders": "Buyurtmalar",
+    "floating_today": "bugun",
     "dashboard_alt": "MyPOS boshqaruv paneli",
     "dashboard_caption": "Manager Dashboard",
     "dashboard_subtitle": "Bugungi tushum, top taomlar va xodimlar ko'rsatkichlari",
+    "dashboard_revenue_today": "Bugungi tushum",
+    "status_ready": "Tayyor",
+    "status_cooking": "Tayyorlanmoqda",
+    "status_new": "Yangi",
+    "stat_restaurants": "Restoranlar bizga ishonadi",
+    "stat_orders": "Qayta ishlangan buyurtmalar",
+    "stat_uptime": "Uptime kafolati",
+    "stat_support": "Qo'llab-quvvatlash",
     "stats": {
       "restaurants": "restoran",
       "orders": "buyurtma",
       "uptime": "ishonchli uptime"
     }
+  },
+  "customer_logos": {
+    "label": "Yetakchi restoranlar tanlovi"
   },
   "features": {
     "section_label": "Imkoniyatlar",
@@ -99,12 +123,7 @@
         "price_uzs": "0",
         "price_usd": "$0",
         "tagline": "Yangi ochilayotgan joylar uchun",
-        "features": [
-          "1 filial, 2 xodim",
-          "Oyiga 100 buyurtma",
-          "Bazaviy POS",
-          "MyPOS vatermark"
-        ]
+        "features": ["1 filial, 2 xodim", "Oyiga 100 buyurtma", "Bazaviy POS", "MyPOS vatermark"]
       },
       "starter": {
         "name": "Starter",
@@ -287,5 +306,484 @@
     "subtitle": "Restoran biznesi, texnologiya va ilhom hikoyalari.",
     "coming_soon": "Tez orada",
     "coming_soon_desc": "Birinchi maqolalarimiz yozilmoqda. Tayyor bo'lgach, shu yerga joylashtiramiz."
+  },
+  "solutions": {
+    "label": "YECHIMLAR",
+    "title": "Sizning biznesingizga moslashtirilgan",
+    "subtitle": "Har bir restoran turi uchun maxsus xususiyatlar va workflow.",
+    "learn_more": "Batafsil",
+    "cafe_title": "Kafe va Choyxona",
+    "cafe_desc": "Tezkor xizmat, mijoz menejmenti, takeaway va doimiy mijozlar uchun loyallik dasturi.",
+    "cafe_features": [
+      "Tezkor buyurtma qabul qilish",
+      "Mijoz tarixi va loyallik",
+      "Takeaway optimizatsiya"
+    ],
+    "restaurant_title": "Restoran",
+    "restaurant_desc": "Stollar boshqaruvi, kuryer yetkazib berish, KDS oshxona ekrani, modifikatorlar va katta menyu.",
+    "restaurant_features": [
+      "Stollar va xona",
+      "KDS oshxona display",
+      "Yetkazib berish boshqaruvi"
+    ],
+    "fastfood_title": "Fast Food",
+    "fastfood_desc": "Self-service kiosk, drive-thru, mobil buyurtma va minimal vaqtda ko'p buyurtma.",
+    "fastfood_features": [
+      "Self-service kiosk",
+      "Mobil buyurtma",
+      "Yuqori tezlik"
+    ],
+    "bar_title": "Bar va Pub",
+    "bar_desc": "Tezkor open tab, yosh tekshirish, smena hisoboti, alkogolli ichimliklar uchun maxsus.",
+    "bar_features": [
+      "Open tab boshqaruvi",
+      "Smena hisoboti",
+      "Yosh tekshirish"
+    ]
+  },
+  "comparison": {
+    "label": "TAQQOSLASH",
+    "title": "Nega MyPOS?",
+    "subtitle": "Boshqa O'zbekiston POS tizimlari bilan taqqoslang.",
+    "feature_header": "Xususiyat",
+    "recommended": "TAVSIYA",
+    "legend_yes": "Mavjud",
+    "legend_partial": "Cheklangan",
+    "legend_no": "Yo'q",
+    "features": {
+      "pos": "POS kassir tizimi",
+      "mobile_consumer": "Mijoz mobil ilovasi",
+      "qr_menu": "QR menyu va onlayn buyurtma",
+      "kiosk": "Self-service kiosk",
+      "kds": "Oshxona display (KDS)",
+      "telegram_bot": "Telegram integratsiyasi",
+      "click_payme": "Click va Payme",
+      "ai_analytics": "AI tahlil va prognoz",
+      "multi_tenant": "Multi-tenant SaaS arxitektura",
+      "multilingual": "UZ/RU/EN ko'p tillik",
+      "ios_android": "iOS va Android",
+      "cloud": "Cloud hosting",
+      "realtime": "Real-time yangilanishlar"
+    }
+  },
+  "case_studies": {
+    "label": "MIJOZLAR",
+    "title": "Real natijalar, real restoranlar",
+    "subtitle": "MyPOS bilan ish boshlagan restoranlarning haqiqiy hikoyalari.",
+    "read_story": "Hikoyani o'qish",
+    "view_all": "Barcha mijozlarni ko'rish",
+    "case1_metric_value": "+34%",
+    "case1_metric_label": "Tushum o'sishi",
+    "case1_name": "Osh Markazi",
+    "case1_excerpt": "An'anaviy o'zbek oshi restorani MyPOS bilan onlayn buyurtmalarni 5 baravarga oshirdi va xizmat vaqtini 2 marta qisqartirdi.",
+    "case2_metric_value": "−40%",
+    "case2_metric_label": "Xizmat vaqti",
+    "case2_name": "Pizza House",
+    "case2_excerpt": "Mashhur pitsa tarmoqlari KDS oshxona ekrani bilan tayyorlash vaqtini 18 daqiqadan 11 daqiqaga tushirdi.",
+    "case3_metric_value": "+5x",
+    "case3_metric_label": "Doimiy mijozlar",
+    "case3_name": "Cafe Aroma",
+    "case3_excerpt": "Loyallik dasturi va mobil ilova orqali mijozlarning 73% har hafta qaytib keladi."
+  },
+  "solutions_page": {
+    "label": "YECHIM",
+    "pain_title": "Ma'lum muammolarmi?",
+    "solutions_title": "Bizning yechimimiz",
+    "cafe_meta_title": "Kafe POS tizimi — MyPOS",
+    "cafe_meta_description": "Kafe va choyxonalar uchun maxsus POS yechimi. Tezkor xizmat, mijoz menejmenti, loyallik.",
+    "cafe_h1": "Kafe va Choyxona uchun zamonaviy POS",
+    "cafe_lead": "Tezkor xizmat, mijoz menejmenti, takeaway. MyPOS sizning kafeingizni keyingi darajaga olib chiqadi.",
+    "cafe_pains": [
+      "Soatlab navbat va sekin xizmat",
+      "Mijozlarni eslab qolish va doimiy mijozlar",
+      "Inventarizatsiya va xom ashyo nazorati"
+    ],
+    "cafe_solutions": [
+      { "title": "Tezkor buyurtma", "desc": "Touch-screen kassir va modifikatorlar 30 sekundda buyurtmani qabul qiladi." },
+      { "title": "Mijoz profili", "desc": "Har bir mijoz tarixi, sevimli ichimliklari, doimiy chegirmalar." },
+      { "title": "Loyallik dasturi", "desc": "Avtomatik ball, daraja va mukofotlar tizimi." },
+      { "title": "Mobil ilova", "desc": "Mijozlar telefonidan oldindan buyurtma berishi mumkin." }
+    ],
+    "restaurant_meta_title": "Restoran POS tizimi — MyPOS",
+    "restaurant_meta_description": "Restoranlar uchun to'liq yechim. KDS, stollar, kuryer yetkazib berish.",
+    "restaurant_h1": "Restoran uchun to'liq operatsion tizim",
+    "restaurant_lead": "Stollar, oshxona, kuryer va to'lov — bitta tizimda. Markaziy Osiyo restoranlari uchun maxsus.",
+    "restaurant_pains": [
+      "Stollar va buyurtmalar chalkash bo'ladi",
+      "Oshxona va zal o'rtasidagi muloqot sekin",
+      "Yetkazib berish operatsiyasi murakkab"
+    ],
+    "restaurant_solutions": [
+      { "title": "Stollar boshqaruvi", "desc": "Vizual stollar xaritasi, real-time holat, QR-menyu integratsiyasi." },
+      { "title": "KDS oshxona ekrani", "desc": "Buyurtmalar darhol oshxonaga, status yangilanishlari, vaqt nazorati." },
+      { "title": "Yetkazib berish", "desc": "Kuryer ilovasi, marshrut optimizatsiya, mijoz kuzatuvi." },
+      { "title": "Modifikatorlar", "desc": "Murakkab menyular: o'lchamlar, qo'shimchalar, allergenlar, ratsion." }
+    ],
+    "fastfood_meta_title": "Fast Food POS — MyPOS",
+    "fastfood_meta_description": "Fast food uchun tezkor POS. Self-service kiosk, mobil buyurtma.",
+    "fastfood_h1": "Fast Food uchun yuqori tezlik",
+    "fastfood_lead": "Self-service kiosk, drive-thru, mobil buyurtma. Soniyalarda buyurtmalar.",
+    "fastfood_pains": [
+      "Pik vaqtlarda navbatlar uzun",
+      "Xodimlar kam, buyurtmalar ko'p",
+      "Buyurtma to'g'riligini ta'minlash"
+    ],
+    "fastfood_solutions": [
+      { "title": "Kiosk", "desc": "Mijozlar o'zlari buyurtma berishadi va to'laydilar." },
+      { "title": "Mobil buyurtma", "desc": "App orqali buyurtma, kelganda darrov olish." },
+      { "title": "Combo menejmenti", "desc": "Combo va paket aksiyalari, avtomatik narx." },
+      { "title": "Tezkor pul oqimi", "desc": "Click, Payme, naqd — barcha to'lovlar bir joyda." }
+    ],
+    "bar_meta_title": "Bar POS — MyPOS",
+    "bar_meta_description": "Bar va Pub uchun maxsus POS. Open tab, smena, alkogol nazorati.",
+    "bar_h1": "Bar va Pub uchun professional POS",
+    "bar_lead": "Open tab, smena hisoboti, alkogol va xom ashyo nazorati. Kechki klublar uchun ham mos.",
+    "bar_pains": [
+      "Mijozlar uzoq o'tirib turishadi (open tab)",
+      "Alkogol miqdorini nazorat qilish qiyin",
+      "Smena oxirida hisob-kitob murakkab"
+    ],
+    "bar_solutions": [
+      { "title": "Open Tab", "desc": "Mijoz nomi/stoli bilan ochiq schyot, oxirida bittada to'lov." },
+      { "title": "Alkogol nazorati", "desc": "Har bir butulkadan qancha ketganini avtomatik hisoblash." },
+      { "title": "Smena hisoboti", "desc": "Har bir bartender uchun alohida hisobot, nimaga sotgani." },
+      { "title": "Yosh tekshirish", "desc": "Buyurtmada yosh kiritishni majburiy qilish." }
+    ]
+  },
+  "customers_page": {
+    "label": "MIJOZLAR HIKOYALARI",
+    "title": "Restoranlar MyPOS bilan o'sishadi",
+    "subtitle": "MyPOS dan foydalanuvchi restoranlarning haqiqiy natijalari.",
+    "meta_title": "Mijozlar — MyPOS bilan muvaffaqiyat",
+    "meta_description": "MyPOS dan foydalanuvchi restoranlarning haqiqiy hikoyalari va natijalari.",
+    "case1": {
+      "name": "Osh Markazi",
+      "location": "Toshkent",
+      "cuisine": "An'anaviy o'zbek oshi",
+      "quote": "MyPOS bizning ish jarayonimizni butunlay o'zgartirdi. Endi onlayn buyurtmalar va navbat boshqaruvi bizni tinch tutadi.",
+      "author": "Akbar Rasulov, Bosh menejer",
+      "stats": [
+        { "value": "+34%", "label": "Tushum o'sishi" },
+        { "value": "5x", "label": "Onlayn buyurtmalar" },
+        { "value": "−50%", "label": "Xizmat vaqti" }
+      ],
+      "sections": [
+        { "heading": "Muammo", "text": "Restoran an'anaviy ravishda ishlardi: qog'oz hisob-kitob, telefon orqali buyurtma. Yosh mijozlarni jalb qilish qiyinlashdi." },
+        { "heading": "Yechim", "text": "MyPOS to'liq tizimi: POS, mobil ilova, QR-menyu, KDS. 1 hafta ichida sozlandi." },
+        { "heading": "Natija", "text": "3 oydan keyin: tushum 34% ga oshdi, mobil ilova orqali buyurtmalar oylik 8 ming ga yetdi." }
+      ]
+    },
+    "case2": {
+      "name": "Pizza House",
+      "location": "Toshkent, 4 filial",
+      "cuisine": "Italyan pitsa",
+      "quote": "KDS oshxona ekrani — game changer. Pizzalar tezroq, xatolar kamroq, mijozlar bahtli.",
+      "author": "Diyora Karimova, Operatsion direktor",
+      "stats": [
+        { "value": "−40%", "label": "Xizmat vaqti" },
+        { "value": "+22%", "label": "Buyurtmalar/soat" },
+        { "value": "−65%", "label": "Xato buyurtma" }
+      ],
+      "sections": [
+        { "heading": "Muammo", "text": "4 ta filial, har birida boshqa-boshqa tizim. Markazlashtirilgan hisobot yo'q. Pizza tayyorlash vaqti 18 daqiqa." },
+        { "heading": "Yechim", "text": "Multi-tenant MyPOS — 4 filial bitta dashboardda. Har bir oshxonada KDS." },
+        { "heading": "Natija", "text": "Tayyorlash vaqti 11 daqiqa. Mijozlar baho 4.2 dan 4.7 ga ko'tarildi." }
+      ]
+    },
+    "case3": {
+      "name": "Cafe Aroma",
+      "location": "Toshkent",
+      "cuisine": "Kafe va shirinliklar",
+      "quote": "Loyallik dasturi va mobil ilova orqali har hafta qaytib keladigan mijozlar 5 marta ko'paydi.",
+      "author": "Madina Ergasheva, Egasi",
+      "stats": [
+        { "value": "+5x", "label": "Doimiy mijozlar" },
+        { "value": "73%", "label": "Repeat rate" },
+        { "value": "+45%", "label": "O'rtacha chek" }
+      ],
+      "sections": [
+        { "heading": "Muammo", "text": "Mijozlar bir marta keladi va ketadi. Kim qaysi qahvani sevishini hech kim eslay olmaydi." },
+        { "heading": "Yechim", "text": "MyPOS mijoz CRM, loyallik ball, mobil ilova orqali oldindan buyurtma." },
+        { "heading": "Natija", "text": "Mijoz bazasi 12 ming ga yetdi. Har hafta 73% qaytib keladi." }
+      ]
+    }
+  },
+  "roi_calculator": {
+    "label": "ROI KALKULYATORI",
+    "title": "MyPOS bilan qancha tejaysiz?",
+    "subtitle": "Real ma'lumotlaringizni kiriting va biz hisoblab beramiz.",
+    "inputs_title": "Sizning restoraningiz",
+    "orders_label": "Oylik buyurtmalar soni",
+    "avg_order_label": "O'rtacha chek",
+    "staff_label": "Xodimlar soni",
+    "current_revenue": "Hozirgi tushum",
+    "per_month": "oyiga",
+    "per_year": "yiliga",
+    "savings_title": "Sizning natijangiz",
+    "annual_savings_label": "Yillik tejov",
+    "monthly_savings": "Oylik tejov",
+    "roi_label": "ROI",
+    "payback_label": "Qaytarib olish",
+    "mypos_cost": "MyPOS narxi",
+    "days": "kun",
+    "months": "oy",
+    "disclaimer": "Hisoblashlar o'rtacha statistik ma'lumotlarga asoslangan.",
+    "cta": "Demo zayavka qoldirish"
+  },
+  "demo_page": {
+    "meta_title": "Demo zayavka — MyPOS",
+    "meta_description": "MyPOS demo zayavkasini qoldiring. Bizning mutaxassis sizga 30 daqiqada tizimni ko'rsatadi.",
+    "label": "BEPUL DEMO",
+    "title": "30 daqiqada MyPOS ni ko'ring",
+    "subtitle": "Bizning mutaxassis sizga shaxsiy demo o'tkazadi. Restoraningiz uchun aynan kerakli xususiyatlarni ko'rsatamiz.",
+    "perk_personalized_title": "Shaxsiy demo",
+    "perk_personalized_desc": "Sizning restoran turi va ehtiyojlaringizga moslashtirilgan",
+    "perk_30min_title": "30 daqiqa",
+    "perk_30min_desc": "Tezkor va aniq, vaqtingizni tejaymiz",
+    "perk_remote_title": "Onlayn yoki ofisda",
+    "perk_remote_desc": "Sizga qulay formatda — Zoom, Telegram yoki shaxsan",
+    "perk_questions_title": "Barcha savollar",
+    "perk_questions_desc": "Narx, integratsiya, migratsiya — barchasini muhokama qilamiz"
+  },
+  "demo_form": {
+    "name_label": "Ism va familiya",
+    "name_placeholder": "Akbar Rasulov",
+    "phone_label": "Telefon",
+    "email_label": "Email",
+    "restaurant_label": "Restoran nomi",
+    "restaurant_placeholder": "Osh Markazi",
+    "industry_label": "Biznes turi",
+    "industry_cafe": "Kafe",
+    "industry_restaurant": "Restoran",
+    "industry_fastfood": "Fast Food",
+    "industry_bar": "Bar / Pub",
+    "industry_other": "Boshqa",
+    "date_label": "Sana",
+    "time_label": "Vaqt",
+    "notes_label": "Qo'shimcha ma'lumot",
+    "notes_placeholder": "Qaysi xususiyatlar sizni ko'proq qiziqtiradi?",
+    "submit": "Demo zayavka qoldirish",
+    "disclaimer": "Yuborish orqali siz Maxfiylik siyosati va Foydalanish shartlariga rozilik bildirasiz.",
+    "success_title": "Rahmat!",
+    "success_message": "Sizning zayavkangiz qabul qilindi.",
+    "success_note": "Bizning menejer 1 soat ichida siz bilan bog'lanadi."
+  },
+  "newsletter": {
+    "title": "Yangiliklar va maslahatlar",
+    "subtitle": "Restoran biznesi uchun foydali maqolalar",
+    "placeholder": "email@manzil.uz",
+    "subscribe": "Obuna",
+    "success": "Obuna bo'ldingiz! Rahmat."
+  },
+  "cookies": {
+    "title": "Cookie fayllari",
+    "message": "Biz tajribangizni yaxshilash uchun cookie ishlatamiz. Davom etish orqali rozilik bildirasiz.",
+    "accept_all": "Hammasini qabul qilish",
+    "essential_only": "Faqat zarur",
+    "close": "Yopish"
+  },
+  "onboarding": {
+    "meta": {
+      "title": "Restoraningizni ulang",
+      "description": "5 daqiqada MyPOS hisobingizni yarating va restoraningizni boshqarishni boshlang."
+    },
+    "title": "Restoraningizni ulang",
+    "subtitle": "Bir necha qadam — va siz POS, KDS, QR menyu va analitikadan foydalanasiz.",
+    "steps": {
+      "aria_label": "Bosqichlar",
+      "step": "Qadam",
+      "restaurant": "Restoran",
+      "menu": "Menyu",
+      "tables": "Stollar",
+      "payments": "To'lov",
+      "tier": "Tarif"
+    },
+    "actions": {
+      "back": "Orqaga",
+      "next": "Keyingi",
+      "finish_free": "Bepul boshlash",
+      "pay_and_finish": "To'lov va boshlash"
+    },
+    "step1": {
+      "title": "Restoran haqida",
+      "subtitle": "Bizga biroz ma'lumot bering — qolganini avtomatik sozlaymiz.",
+      "name_label": "Restoran nomi",
+      "name_placeholder": "Masalan, Jome Burger",
+      "slug_label": "Subdomen",
+      "slug_hint": "Sizning manzilingiz: [slug].{domain}. Keyin o'zgartirilishi mumkin.",
+      "cuisine_label": "Oshxona turi",
+      "cuisines": {
+        "pizza": "Pitseriya",
+        "lavash": "Lavash / Shaurma",
+        "choyxona": "Choyxona",
+        "fastfood": "Fastfood",
+        "sushi": "Sushi",
+        "cafe": "Kafe",
+        "bakery": "Nonvoyxona",
+        "bar": "Bar",
+        "fine_dining": "Yuqori darajadagi restoran",
+        "other": "Boshqa"
+      },
+      "city_label": "Shahar",
+      "city_placeholder": "Toshkent",
+      "address_label": "Manzil",
+      "address_placeholder": "Amir Temur ko'chasi, 12",
+      "phone_label": "Telefon",
+      "email_label": "Email",
+      "logo_label": "Logo",
+      "logo_hint": "PNG, JPG, SVG yoki WebP. 1.5 MB gacha.",
+      "logo_upload": "Logo yuklash",
+      "logo_replace": "Almashtirish",
+      "logo_remove": "O'chirish"
+    },
+    "step2": {
+      "title": "Menyuni qo'shish",
+      "subtitle": "Eng tezkor variantni tanlang — keyin kabinetda tahrirlay olasiz.",
+      "modes": {
+        "ai": {
+          "title": "AI yordamida",
+          "description": "Oshxona turingiz uchun 30 ta namuna taom yaratamiz.",
+          "badge": "Yangi"
+        },
+        "csv": {
+          "title": "CSV import",
+          "description": "Tayyor jadvalingiz bormi? Bir click bilan yuklang."
+        },
+        "manual": {
+          "title": "Keyinroq",
+          "description": "Bo'sh kabinet bilan boshlang, taomlarni keyinroq qo'shing."
+        }
+      },
+      "generate_cta": "30 ta taom yaratish",
+      "generating": "Yaratilmoqda...",
+      "csv_cta": "CSV faylni tanlash",
+      "manual_hint": "Yaxshi tanlov — kabinetda menyu konstruktoridan foydalanasiz.",
+      "items_preview": "{count} ta taom tayyor",
+      "clear_all": "Hammasini tozalash",
+      "col_name": "Nom",
+      "col_category": "Kategoriya",
+      "col_price": "Narx (UZS)"
+    },
+    "step3": {
+      "title": "Stollar va zonalar",
+      "subtitle": "Tezkor sozlash — keyin har bir stolni alohida moslashtirasiz.",
+      "zones_label": "Zonalar soni",
+      "zones_hint": "Masalan: asosiy zal, terassa, VIP.",
+      "tables_per_zone_label": "Har bir zonada stollar",
+      "tables_per_zone_hint": "Hammasi avtomatik T1, T2, ... deb nomlanadi.",
+      "preview_label": "Jami stollar",
+      "preview_total": "{count} stol",
+      "preview_hint": "Stol nomlari va joylashuvini kabinetda o'zgartirasiz."
+    },
+    "step4": {
+      "title": "To'lov turlari",
+      "subtitle": "Qaysi to'lov usullarini qabul qilasiz?",
+      "providers": {
+        "cash": {
+          "title": "Naqd",
+          "description": "Doim mavjud — qo'shimcha sozlash kerak emas."
+        },
+        "click": {
+          "title": "Click",
+          "description": "Eng mashhur to'lov tizimi.",
+          "setup_note": "Click hisobingiz bilan keyinroq ulaymiz."
+        },
+        "payme": {
+          "title": "Payme",
+          "description": "Mobil to'lovlar uchun.",
+          "setup_note": "Payme'ga keyinroq ulanasiz."
+        },
+        "card": {
+          "title": "Bank kartalari",
+          "description": "Visa, MasterCard, Humo, UzCard.",
+          "setup_note": "Acquiring keyinroq sozlanadi."
+        }
+      },
+      "skip_hint": "Hammasini hozir ulashingiz shart emas — naqd bilan boshlab, keyin qo'shing."
+    },
+    "step5": {
+      "title": "Tarifni tanlang",
+      "subtitle": "30 kun ichida xohlagan vaqtda almashtirish mumkin.",
+      "tiers": {
+        "most_popular": "Eng mashhur",
+        "free": {
+          "name": "Free",
+          "tagline": "Kichik kafelar uchun",
+          "price": "Bepul",
+          "price_note": "Doimiy",
+          "features": {
+            "0": "1 ta filial",
+            "1": "Asosiy POS va QR menyu",
+            "2": "100 ta buyurtma / oy",
+            "3": "Email qo'llab-quvvatlash"
+          }
+        },
+        "pro": {
+          "name": "Pro",
+          "tagline": "O'sayotgan restoranlar uchun",
+          "price": "$90 / oy",
+          "price_note": "Yillik to'lovda 20% chegirma",
+          "features": {
+            "0": "Cheksiz buyurtmalar",
+            "1": "KDS + ombor",
+            "2": "AI menyu va analitika",
+            "3": "Click va Payme",
+            "4": "24/7 chat qo'llab-quvvatlash"
+          }
+        },
+        "plus": {
+          "name": "Plus",
+          "tagline": "Tarmoqlar uchun",
+          "price": "$300 / oy",
+          "price_note": "5 ta filialgacha",
+          "features": {
+            "0": "Pro tarifining hammasi",
+            "1": "Maxsus domen + brending",
+            "2": "Yetkazib berish moduli",
+            "3": "Telegram bot",
+            "4": "Tarmoq analitikasi",
+            "5": "Shaxsiy menejer"
+          }
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "tagline": "Yirik tarmoqlar uchun",
+          "price": "Aloqa qiling",
+          "price_note": "Maxsus shartnoma",
+          "features": {
+            "0": "Plus tarifining hammasi",
+            "1": "Cheksiz filiallar",
+            "2": "White-label ilova",
+            "3": "Maxsus integratsiyalar",
+            "4": "On-premise variant",
+            "5": "SLA 99.9% kafolat"
+          }
+        }
+      }
+    },
+    "errors": {
+      "field_required": "Ushbu maydon to'ldirilishi shart",
+      "restaurant_name_too_short": "Nom juda qisqa",
+      "slug_too_short": "Subdomen kamida 3 belgi bo'lishi kerak",
+      "slug_too_long": "Subdomen 32 belgidan oshmasligi kerak",
+      "slug_invalid_chars": "Faqat lotin harflari, raqamlar va '-' qabul qilinadi",
+      "phone_invalid": "Telefon raqami noto'g'ri",
+      "email_invalid": "Email manzili noto'g'ri",
+      "logo_too_large": "Fayl 1.5 MB dan kichik bo'lishi kerak",
+      "logo_unsupported_type": "Faqat PNG, JPG, WebP yoki SVG",
+      "csv_empty": "CSV fayl bo'sh",
+      "csv_parse_failed": "CSV faylni o'qib bo'lmadi",
+      "csv_missing_columns": "CSV da 'name' va 'price' ustunlari bo'lishi kerak",
+      "menu_generate_failed": "Menyuni yaratib bo'lmadi. Qayta urinib ko'ring.",
+      "too_many_tables": "Stollar soni juda katta (>100). Kabinetda yaxshi boshqarasiz.",
+      "select_at_least_one": "Kamida bitta to'lov turini tanlang",
+      "validation_failed": "Ma'lumotlarni tekshiring",
+      "submit_failed": "Yuborishda xatolik. Qayta urinib ko'ring.",
+      "api_400": "So'rovda xatolik",
+      "api_409": "Bunday subdomen yoki email allaqachon mavjud",
+      "api_422": "Ma'lumotlarni tekshiring",
+      "api_429": "Juda ko'p urinish — birozdan keyin qayta urinib ko'ring",
+      "api_500": "Server xatosi — birozdan keyin qayta urinib ko'ring"
+    }
   }
 }

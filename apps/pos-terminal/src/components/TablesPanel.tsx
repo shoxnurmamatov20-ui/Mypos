@@ -1,3 +1,4 @@
+// apps/pos-terminal/src/components/TablesPanel.tsx
 import { View, Text, ScrollView, ActivityIndicator, Pressable } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
@@ -17,12 +18,21 @@ export function TablesPanel() {
   });
 
   return (
-    <View className="h-full w-[300px] border-r border-neutral-200 bg-neutral-50">
-      <View className="h-14 flex-row items-center justify-between border-b border-neutral-200 bg-white px-4">
-        <Text className="text-xl font-bold text-neutral-900">
+    <View className="h-full w-[280px] border-r border-neutral-700 bg-neutral-800">
+      <View className="h-14 flex-row items-center justify-between border-b border-neutral-700 bg-neutral-900 px-4">
+        <Text className="text-lg font-bold text-neutral-50">
           {t('pos.tables')}
         </Text>
-        {isFetching && <ActivityIndicator size="small" color="#EA7C69" />}
+        {isFetching ? (
+          <ActivityIndicator size="small" color="#EA7C69" />
+        ) : (
+          <Pressable
+            onPress={() => refetch()}
+            className="h-9 w-9 items-center justify-center rounded-lg active:bg-neutral-700"
+          >
+            <Text className="text-lg text-neutral-400">{'↻'}</Text>
+          </Pressable>
+        )}
       </View>
 
       {isLoading ? (
@@ -36,7 +46,7 @@ export function TablesPanel() {
           </Text>
           <Pressable
             onPress={() => refetch()}
-            className="mt-3 h-11 items-center justify-center rounded-lg bg-brand-500 px-5"
+            className="mt-3 h-11 items-center justify-center rounded-lg bg-brand-500 px-5 active:bg-brand-600"
           >
             <Text className="font-semibold text-white">{t('common.retry')}</Text>
           </Pressable>
@@ -48,7 +58,10 @@ export function TablesPanel() {
           </Text>
         </View>
       ) : (
-        <ScrollView contentContainerClassName="gap-3 p-3">
+        <ScrollView
+          contentContainerClassName="gap-2 p-3"
+          className="bg-neutral-800"
+        >
           {data.data.map((table) => (
             <TableCard
               key={table.id}

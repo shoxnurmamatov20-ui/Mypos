@@ -1,53 +1,62 @@
-import { Quote, Star } from 'lucide-react';
+'use client';
+
+import { Star } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
 const KEYS = ['one', 'two', 'three'] as const;
 
+/**
+ * Apple-style testimonial tiles — canvas surface, 28px lead-style quote,
+ * hairline-ring cards, monogram avatar circle, gold star row.
+ */
 export function Testimonials() {
   const t = useTranslations('testimonials');
 
   return (
-    <section className="bg-gradient-to-b from-brand-50/40 to-white py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-wider text-brand-600">
-            {t('section_label')}
-          </span>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+    <section className="bg-canvas">
+      <div className="mx-auto max-w-7xl px-md py-section sm:px-lg lg:px-xl">
+        <FadeUp className="mx-auto max-w-2xl text-center">
+          <span className="text-tagline text-coral font-display">{t('section_label')}</span>
+          <h2 className="mt-sm text-display-lg text-ink font-display font-semibold">
             {t('title')}
           </h2>
-        </div>
+        </FadeUp>
 
-        <ul className="mt-14 grid gap-6 md:grid-cols-3">
+        <StaggerGroup as="ul" className="mt-xxl grid gap-md md:grid-cols-3">
           {KEYS.map((key) => (
-            <li
+            <StaggerItem
+              as="li"
               key={key}
-              className="relative flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
+              className="flex flex-col rounded-card bg-canvas p-lg shadow-hairline-ring"
             >
-              <Quote className="h-8 w-8 text-brand-200" aria-hidden="true" />
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-700">
+              <p className="flex-1 text-lead text-ink font-display">
                 &ldquo;{t(`items.${key}.quote`)}&rdquo;
               </p>
-              <div className="mt-5 flex items-center gap-3 border-t border-neutral-100 pt-4">
+              <div className="mt-lg flex items-center gap-sm border-t border-hairline-soft pt-md">
                 <div
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 font-display font-bold text-white"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-pill bg-coral text-body-strong text-white font-display"
                   aria-hidden="true"
                 >
                   {t(`items.${key}.author`).charAt(0)}
                 </div>
                 <div className="flex-1">
-                  <div className="font-semibold text-neutral-900">{t(`items.${key}.author`)}</div>
-                  <div className="text-xs text-neutral-500">{t(`items.${key}.role`)}</div>
+                  <div className="text-caption-strong text-ink font-display">
+                    {t(`items.${key}.author`)}
+                  </div>
+                  <div className="text-fine-print text-ink-muted-48">
+                    {t(`items.${key}.role`)}
+                  </div>
                 </div>
-                <div className="flex text-gold-500" aria-hidden="true">
+                <div className="flex text-coral" aria-hidden="true">
                   {[0, 1, 2, 3, 4].map((i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-current" />
                   ))}
                 </div>
               </div>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </StaggerGroup>
       </div>
     </section>
   );

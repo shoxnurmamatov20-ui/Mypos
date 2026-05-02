@@ -9,7 +9,8 @@
     ".": "./src/index.ts",
     "./uz": "./src/uz/index.ts",
     "./ru": "./src/ru/index.ts",
-    "./en": "./src/en/index.ts"
+    "./en": "./src/en/index.ts",
+    "./kz": "./src/kz/index.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

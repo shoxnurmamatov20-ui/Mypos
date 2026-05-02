@@ -10,8 +10,13 @@ const labels: Record<string, string> = {
   uz: "O'zbekcha",
   ru: 'Русский',
   en: 'English',
+  kz: 'Қазақша',
 };
 
+/**
+ * Apple-style locale dropdown — pearl button, hairline ring,
+ * canvas dropdown with hairline rows.
+ */
 export function LanguageSwitcher({ align = 'right' }: { align?: 'left' | 'right' }) {
   const t = useTranslations('footer');
   const locale = useLocale();
@@ -39,14 +44,14 @@ export function LanguageSwitcher({ align = 'right' }: { align?: 'left' | 'right'
   }
 
   return (
-    <div className="relative inline-block text-sm">
+    <div className="relative inline-block text-caption">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={t('lang_label')}
-        className="inline-flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-3 py-2 font-medium text-neutral-700 transition hover:border-brand-300 hover:text-brand-700"
+        className="inline-flex h-9 items-center gap-xs rounded-pearl bg-pearl px-sm text-caption-strong text-ink shadow-hairline-ring transition-transform duration-fast active:scale-95"
       >
         <Globe className="h-4 w-4" aria-hidden="true" />
         <span>{labels[locale] ?? locale.toUpperCase()}</span>
@@ -54,7 +59,7 @@ export function LanguageSwitcher({ align = 'right' }: { align?: 'left' | 'right'
       {open ? (
         <ul
           role="menu"
-          className={`absolute z-50 mt-2 min-w-[9rem] overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-lg ${
+          className={`absolute z-50 mt-xxs min-w-[9rem] overflow-hidden rounded-card bg-canvas shadow-hairline-ring ${
             align === 'left' ? 'left-0' : 'right-0'
           }`}
         >
@@ -64,8 +69,8 @@ export function LanguageSwitcher({ align = 'right' }: { align?: 'left' | 'right'
                 type="button"
                 role="menuitem"
                 onClick={() => switchTo(code)}
-                className={`block w-full px-4 py-2 text-left transition hover:bg-brand-50 ${
-                  code === locale ? 'bg-brand-50 font-semibold text-brand-700' : 'text-neutral-700'
+                className={`block w-full px-md py-xs text-left text-body transition-colors duration-fast hover:bg-parchment ${
+                  code === locale ? 'bg-coral-tint text-coral' : 'text-ink'
                 }`}
               >
                 {labels[code]}

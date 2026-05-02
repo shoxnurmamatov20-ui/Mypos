@@ -1,6 +1,6 @@
 {
   "name": "@mypos/design-tokens",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "main": "./src/index.ts",
@@ -13,6 +13,8 @@
     "./radius": "./src/radius.ts",
     "./shadows": "./src/shadows.ts",
     "./breakpoints": "./src/breakpoints.ts",
+    "./motion": "./src/motion.ts",
+    "./tenant": "./src/tenant.ts",
     "./tailwind": "./src/tailwind.ts"
   },
   "scripts": {

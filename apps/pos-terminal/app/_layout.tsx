@@ -1,3 +1,4 @@
+// apps/pos-terminal/app/_layout.tsx
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -40,7 +41,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 
   if (!isBootstrapped) {
     return (
-      <View className="flex-1 items-center justify-center bg-neutral-50">
+      <View className="flex-1 items-center justify-center bg-neutral-900">
         <ActivityIndicator size="large" color="#EA7C69" />
       </View>
     );
@@ -73,7 +74,7 @@ export default function RootLayout() {
             <Stack.Screen name="pos" />
           </Stack>
         </AuthGate>
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
       </SafeAreaProvider>
     </QueryClientProvider>
   );

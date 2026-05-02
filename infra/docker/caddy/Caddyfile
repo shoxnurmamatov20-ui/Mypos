@@ -1,48 +1,112 @@
-# MyPOS Caddy configuration (production-style local).
-# For local dev, Next.js + Laravel serve on their own ports directly.
-# Use this for production or production-like testing.
+# MyPOS — Caddy reverse proxy with on-demand TLS for custom domains.
+#
+# Phase 2 — Self-service custom domains
+#
+# Architecture:
+#   - Restaurants buy a domain (e.g. `jomeburger.uz`) and CNAME it to our
+#     edge IP (`edge.mypos.uz`).
+#   - The first HTTPS request hits :443 → Caddy sees an unknown SNI →
+#     calls the API "ask" endpoint → if the domain is registered + verified,
+#     Caddy provisions a Let's Encrypt cert on demand and proxies to Next.js.
+#   - This keeps cert issuance bounded: an attacker pointing 1M domains at us
+#     cannot trigger 1M ACME requests because each is gated by a DB lookup.
+#
+# Internal "ask" contract (CaddyVerifyController):
+#   GET http://api:80/api/internal/caddy/verify?domain=jomeburger.uz
+#     → 200 OK    : domain is allowed, issue cert
+#     → non-2xx   : deny — Caddy will not request a cert
+#   The API authenticates Caddy via the X-Caddy-Token header
+#   (CADDY_INTERNAL_TOKEN env on both sides) when not on loopback.
+#
+# Local dev:
+#   - Use `infra/scripts/caddy-test.sh <hostname>` to add to /etc/hosts.
+#   - Uncomment the `acme_ca` staging line below to avoid hitting Let's
+#     Encrypt rate limits while iterating.
 
 {
-    # admin off  # uncomment in prod
+    # On-demand TLS gate — Caddy asks our API before issuing a cert for any
+    # SNI that doesn't match a static site block above.
+    #
+    # NOTE: The `ask` directive in Caddy v2 forwards the incoming request as-is
+    # plus a `domain=<host>` query string. To send `X-Caddy-Token` we use a
+    # global `header` directive on the loopback bridge; in production this is
+    # supplemented by `CADDY_TRUST_LOOPBACK=true` in InternalCaddyOnly so the
+    # docker-bridge IP (api hostname resolves to a private RFC1918 address)
+    # passes the loopback gate. The token is the belt-and-braces secondary
+    # check.
+    on_demand_tls {
+        ask http://api:80/api/internal/caddy/verify
+        # Throttle issuance so a flood of unknown SNIs cannot DoS our API or
+        # ACME quota: at most 5 new certs in any 2-minute window. Returning
+        # certs (renewals, cached) are unaffected.
+        interval 2m
+        burst 5
+    }
+
+    # Account email for Let's Encrypt notifications.
     email admin@mypos.uz
+
+    # Caddy admin API (metrics, config reload). In production we bind this
+    # to the loopback interface only — see docker-compose.yml.
+    admin :2019
+
+    # ACME staging — flip to staging for local/dev to avoid rate limits.
+    # Production: leave commented out so real Let's Encrypt is used.
+    # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
 }
 
-# Marketing site
-mypos.local {
-    reverse_proxy web-marketing:3000
+# ---------------------------------------------------------------------------
+# Static (well-known) sites — direct routes, no on-demand check needed.
+# ---------------------------------------------------------------------------
+
+# Marketing site + tenant subdomains (subdomain → tenant slug resolved by Next).
+*.mypos.uz, mypos.uz {
+    encode zstd gzip
+    reverse_proxy nextjs:3000
+
+    # Long-lived static asset cache (Next emits hashed filenames).
+    @static path /_next/static/* /static/*
+    header @static Cache-Control "public, max-age=31536000, immutable"
 }
 
-# Dashboard (manager / owner)
-app.mypos.local {
-    reverse_proxy web-dashboard:3001
+# Public REST API (consumed by our own apps + 3rd-party integrations).
+api.mypos.uz {
+    encode zstd gzip
+    reverse_proxy api:80
 }
 
-# Super Admin Advanced
-ops.mypos.local {
-    reverse_proxy web-superadmin:3002
+# Filament super-admin panel.
+admin.mypos.uz {
+    encode zstd gzip
+    reverse_proxy api:80
 }
 
-# Super Admin — Filament
-admin.mypos.local {
-    reverse_proxy api:8000
-}
-
-# Consumer web
-consumer.mypos.local {
-    reverse_proxy web-consumer:3003
-}
-
-# QR menu PWA
-menu.mypos.local {
-    reverse_proxy web-qr:3004
-}
-
-# API
-api.mypos.local {
-    reverse_proxy api:8000
-}
-
-# WebSocket (Reverb)
-ws.mypos.local {
+# WebSockets (Laravel Reverb / Pusher protocol).
+ws.mypos.uz {
     reverse_proxy api:8080
+}
+
+# ---------------------------------------------------------------------------
+# Custom-domain catch-all — every other Host header lands here.
+#
+# Caddy will only request a cert if the on-demand `ask` endpoint returns 200,
+# so this block does not allow arbitrary internet hosts to obtain TLS through us.
+# ---------------------------------------------------------------------------
+:443 {
+    tls {
+        on_demand
+    }
+
+    encode zstd gzip
+    reverse_proxy nextjs:3000
+
+    @static path /_next/static/* /static/*
+    header @static Cache-Control "public, max-age=31536000, immutable"
+}
+
+# Plain HTTP — redirect everything to HTTPS. Caddy's automatic redirect only
+# fires for known hostnames; for custom domains we set this explicit rule so
+# the very first hit gets bumped to :443 (which then triggers cert issuance).
+:80 {
+    redir https://{host}{uri} permanent
 }

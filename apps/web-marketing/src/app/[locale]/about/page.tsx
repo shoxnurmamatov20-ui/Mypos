@@ -33,31 +33,29 @@ export default async function AboutPage({
 
   return (
     <>
-      <section className="bg-gradient-to-br from-brand-50 via-white to-mint-50 py-20 sm:py-24">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="font-display text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">
-            {t('title')}
-          </h1>
-          <p className="mt-4 text-base text-neutral-600 sm:text-lg">{t('subtitle')}</p>
+      <section className="bg-parchment py-section">
+        <div className="mx-auto max-w-3xl px-md text-center">
+          <h1 className="font-display font-semibold text-display-md text-ink">{t('title')}</h1>
+          <p className="mt-md font-display text-lead text-ink-muted-80">{t('subtitle')}</p>
         </div>
       </section>
 
-      <section className="bg-white py-20 sm:py-24">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 sm:px-6 md:grid-cols-3 lg:px-8">
+      <section className="bg-canvas py-section">
+        <div className="mx-auto grid max-w-6xl gap-md px-md md:grid-cols-3">
           {cards.map((card) => {
             const Icon = card.icon;
             return (
               <article
                 key={card.title}
-                className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
+                className="rounded-card border border-hairline-soft bg-canvas p-lg shadow-hairline-ring"
               >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-pearl bg-coral-tint text-coral">
                   <Icon className="h-6 w-6" aria-hidden="true" />
                 </div>
-                <h2 className="mt-5 font-display text-xl font-semibold text-neutral-900">
+                <h2 className="mt-md font-display font-semibold text-title text-ink">
                   {card.title}
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{card.body}</p>
+                <p className="mt-xs text-caption text-ink-muted-80 leading-relaxed">{card.body}</p>
               </article>
             );
           })}

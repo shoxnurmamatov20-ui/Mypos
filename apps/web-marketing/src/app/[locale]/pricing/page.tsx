@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CtaSection } from '@/components/landing/cta-section';
 import { Faq } from '@/components/landing/faq';
 import { PricingTable } from '@/components/landing/pricing-table';
+import { RoiCalculator } from '@/components/landing/roi-calculator';
 
 export async function generateMetadata({
   params,
@@ -28,15 +29,14 @@ export default async function PricingPage({
 
   return (
     <>
-      <section className="bg-gradient-to-br from-brand-50 via-white to-mint-50 py-20 sm:py-24">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="font-display text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">
-            {t('title')}
-          </h1>
-          <p className="mt-4 text-base text-neutral-600 sm:text-lg">{t('subtitle')}</p>
+      <section className="bg-parchment py-section">
+        <div className="mx-auto max-w-3xl px-md text-center">
+          <h1 className="font-display font-semibold text-display-md text-ink">{t('title')}</h1>
+          <p className="mt-md font-display text-lead text-ink-muted-80">{t('subtitle')}</p>
         </div>
       </section>
       <PricingTable />
+      <RoiCalculator />
       <Faq />
       <CtaSection />
     </>

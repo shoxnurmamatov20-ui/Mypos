@@ -1,24 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter, Manrope } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
+import { generateRootTenantVars } from '@mypos/design-tokens/tenant';
+import { CookieConsent } from '@/components/landing/cookie-consent';
 import { Footer } from '@/components/landing/footer';
 import { Header } from '@/components/landing/header';
 import { routing } from '@/i18n/routing';
 import '../globals.css';
-
-const inter = Inter({
-  subsets: ['latin', 'cyrillic'],
-  variable: '--font-sans',
-  display: 'swap',
-});
-
-const manrope = Manrope({
-  subsets: ['latin', 'cyrillic'],
-  variable: '--font-display',
-  display: 'swap',
-});
 
 const SITE_URL = 'https://mypos.uz';
 
@@ -84,12 +73,16 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${manrope.variable}`}>
-      <body className="flex min-h-screen flex-col">
+    <html lang={locale}>
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: generateRootTenantVars() }} />
+      </head>
+      <body className="flex min-h-screen flex-col bg-canvas text-ink">
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <CookieConsent />
         </NextIntlClientProvider>
       </body>
     </html>

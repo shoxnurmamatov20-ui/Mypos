@@ -3,7 +3,12 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './language-switcher';
 import { Logo } from './logo';
+import { Newsletter } from './newsletter';
 
+/**
+ * Apple-style footer — parchment background, dense-link 2.41 leading,
+ * 64px section-tight padding, hairline column separators.
+ */
 export function Footer() {
   const t = useTranslations('footer');
   const locale = useLocale();
@@ -47,57 +52,67 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-neutral-200 bg-neutral-50/80">
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_2fr] lg:gap-16">
+    <footer className="bg-parchment border-t border-hairline-soft">
+      <div className="mx-auto max-w-7xl px-md py-section-tight sm:px-lg lg:px-xl">
+        <div className="grid gap-xl lg:grid-cols-[1.2fr_2fr] lg:gap-xxl">
           <div>
             <Logo locale={locale} />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-600">
+            <p className="mt-md max-w-xs text-caption text-ink-muted-80">
               {t('tagline')}
             </p>
-            <ul className="mt-6 space-y-2 text-sm text-neutral-600">
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-brand-500" aria-hidden="true" />
-                <a href={`tel:${t('phone').replace(/\s/g, '')}`} className="hover:text-brand-700">
+            <ul className="mt-md space-y-xs text-caption text-ink-muted-80">
+              <li className="flex items-center gap-xs">
+                <Phone className="h-4 w-4 text-coral" aria-hidden="true" />
+                <a
+                  href={`tel:${t('phone').replace(/\s/g, '')}`}
+                  className="transition-colors duration-fast hover:text-coral"
+                >
                   {t('phone')}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-brand-500" aria-hidden="true" />
-                <a href={`mailto:${t('email')}`} className="hover:text-brand-700">
+              <li className="flex items-center gap-xs">
+                <Mail className="h-4 w-4 text-coral" aria-hidden="true" />
+                <a
+                  href={`mailto:${t('email')}`}
+                  className="transition-colors duration-fast hover:text-coral"
+                >
                   {t('email')}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-brand-500" aria-hidden="true" />
+              <li className="flex items-center gap-xs">
+                <MapPin className="h-4 w-4 text-coral" aria-hidden="true" />
                 <span>{t('address')}</span>
               </li>
-              <li className="flex items-center gap-2">
-                <MessageCircle className="h-4 w-4 text-brand-500" aria-hidden="true" />
+              <li className="flex items-center gap-xs">
+                <MessageCircle className="h-4 w-4 text-coral" aria-hidden="true" />
                 <a
                   href="https://t.me/mypos_uz"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="hover:text-brand-700"
+                  className="transition-colors duration-fast hover:text-coral"
                 >
                   @mypos_uz
                 </a>
               </li>
             </ul>
+
+            <div className="mt-lg max-w-sm">
+              <Newsletter />
+            </div>
           </div>
 
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-lg sm:grid-cols-4">
             {groups.map((group) => (
               <div key={group.title}>
-                <div className="font-display text-sm font-semibold text-neutral-900">
+                <div className="text-caption-strong text-ink font-display">
                   {group.title}
                 </div>
-                <ul className="mt-3 space-y-2">
+                <ul className="mt-sm" style={{ lineHeight: '2.41' }}>
                   {group.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="text-sm text-neutral-600 transition hover:text-brand-700"
+                        className="text-body text-ink-muted-80 transition-colors duration-fast hover:text-coral"
                       >
                         {link.label}
                       </Link>
@@ -109,10 +124,8 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-neutral-200 pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center">
-          <span>
-            &copy; {t('copyright', { year: String(year) })}
-          </span>
+        <div className="mt-xl flex flex-col items-start justify-between gap-md border-t border-hairline-soft pt-md text-fine-print text-ink-muted-48 sm:flex-row sm:items-center">
+          <span>&copy; {t('copyright', { year: String(year) })}</span>
           <LanguageSwitcher align="left" />
         </div>
       </div>

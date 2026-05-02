@@ -45,7 +45,9 @@
     "total": "Jami summa",
     "confirm_order": "Buyurtmani tasdiqlang",
     "item_count": "{{count}} ta mahsulot",
-    "notes_placeholder": "Izoh (ixtiyoriy)"
+    "notes_placeholder": "Izoh (ixtiyoriy)",
+    "attach_customer": "Mijozni biriktirish (ixtiyoriy)",
+    "customer_attached": "Mijoz biriktirilgan"
   },
   "table_status": {
     "available": "Bo'sh",
@@ -67,5 +69,42 @@
     "cancel": "Bekor qilish",
     "confirm": "Tasdiqlash",
     "loading": "Yuklanmoqda..."
+  },
+  "orders": {
+    "panel_title": "Faol Buyurtmalar",
+    "filter_all": "Hammasi",
+    "filter_pending": "Kutilmoqda",
+    "filter_preparing": "Tayyorlanmoqda",
+    "filter_ready": "Tayyor",
+    "filter_served": "Berildi",
+    "empty": "Faol buyurtmalar yo'q",
+    "empty_filter_hint": "Filtrni o'zgartiring",
+    "error_load": "Buyurtmalarni yuklab bo'lmadi",
+    "table_label": "Stol",
+    "more_items": "+ {{count}} ta ko'proq",
+    "action_prepare": "Tayyorlash →",
+    "action_ready": "Tayyor ✓",
+    "action_served": "Berildi ✓",
+    "action_complete": "Yakunlash",
+    "action_cancel": "✕ Bekor"
+  },
+  "payment": {
+    "title": "To'lov",
+    "total_label": "Jami",
+    "close": "✕",
+    "method_cash": "Naqd",
+    "method_card": "Karta",
+    "method_click": "Click",
+    "method_payme": "Payme",
+    "cash_received_label": "Qabul qilingan",
+    "change_label": "Qaytim",
+    "order_total_label": "Buyurtma summasi",
+    "pay_button": "To'lash ✓",
+    "confirm_button": "Tasdiqlash",
+    "card_prompt": "Kartani terminal ga ulang",
+    "qr_generating": "QR kod generatsiya qilinmoqda...",
+    "qr_redirected": "To'lov tizimiga o'tildi",
+    "error_payment": "To'lovda xatolik yuz berdi",
+    "place_and_pay": "Buyurtma & To'lov"
   }
 }

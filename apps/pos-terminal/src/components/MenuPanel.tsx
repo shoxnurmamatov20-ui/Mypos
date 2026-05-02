@@ -1,3 +1,4 @@
+// apps/pos-terminal/src/components/MenuPanel.tsx
 import { useMemo, useState } from 'react';
 import {
   View,
@@ -13,6 +14,7 @@ import { menuApi, type MenuItem } from '@mypos/api-client';
 import { apiClient } from '@/lib/api';
 import { useCartStore } from '@/stores/cart';
 import { MenuItemCard } from './MenuItemCard';
+import { ItemDetailModal } from './ItemDetailModal';
 
 type MenuPanelProps = {
   locale: 'uz' | 'ru' | 'en';
@@ -24,7 +26,9 @@ export function MenuPanel({ locale }: MenuPanelProps) {
   const { t } = useTranslation();
   const [activeCategoryId, setActiveCategoryId] = useState<string>(ALL_KEY);
   const [query, setQuery] = useState('');
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const addItem = useCartStore((s) => s.addItem);
+  const setItemNotes = useCartStore((s) => s.setItemNotes);
 
   const categoriesQuery = useQuery({
     queryKey: ['pos', 'menu-categories'],
@@ -51,30 +55,42 @@ export function MenuPanel({ locale }: MenuPanelProps) {
 
   const items = useMemo(() => itemsQuery.data?.data ?? [], [itemsQuery.data]);
 
-  const handleAdd = (item: MenuItem) => {
-    addItem(item, locale);
+  const handleItemPress = (item: MenuItem) => {
+    setSelectedItem(item);
+  };
+
+  const handleDetailAdd = (item: MenuItem, quantity: number, notes: string) => {
+    for (let i = 0; i < quantity; i++) {
+      addItem(item, locale);
+    }
+    if (notes.trim()) {
+      setItemNotes(item.id, notes);
+    }
+    setSelectedItem(null);
   };
 
   return (
-    <View className="h-full flex-1 bg-neutral-50">
-      <View className="h-14 flex-row items-center gap-3 border-b border-neutral-200 bg-white px-4">
-        <Text className="text-xl font-bold text-neutral-900">
+    <View className="h-full flex-1 bg-neutral-900">
+      {/* Header bar */}
+      <View className="h-14 flex-row items-center gap-4 border-b border-neutral-700 bg-neutral-800 px-4">
+        <Text className="w-[60px] text-lg font-bold text-neutral-50">
           {t('pos.menu')}
         </Text>
         <TextInput
           value={query}
           onChangeText={setQuery}
           placeholder={t('pos.search_menu')}
-          placeholderTextColor="#94A3B8"
-          className="ml-4 h-10 flex-1 rounded-lg border border-neutral-300 bg-neutral-50 px-3 text-base text-neutral-900"
+          placeholderTextColor="#64748B"
+          className="h-10 flex-1 rounded-lg border border-neutral-600 bg-neutral-700 px-4 text-base text-neutral-50"
         />
       </View>
 
+      {/* Category chips */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerClassName="gap-2 px-4 py-3"
-        className="max-h-14 grow-0 bg-white"
+        className="max-h-14 grow-0 border-b border-neutral-700 bg-neutral-800"
       >
         <CategoryChip
           label={t('pos.all_categories')}
@@ -91,6 +107,7 @@ export function MenuPanel({ locale }: MenuPanelProps) {
         ))}
       </ScrollView>
 
+      {/* Items grid */}
       {itemsQuery.isLoading ? (
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color="#EA7C69" />
@@ -102,7 +119,7 @@ export function MenuPanel({ locale }: MenuPanelProps) {
           </Text>
           <Pressable
             onPress={() => itemsQuery.refetch()}
-            className="mt-3 h-11 items-center justify-center rounded-lg bg-brand-500 px-5"
+            className="mt-3 h-11 items-center justify-center rounded-lg bg-brand-500 px-5 active:bg-brand-600"
           >
             <Text className="font-semibold text-white">{t('common.retry')}</Text>
           </Pressable>
@@ -114,19 +131,26 @@ export function MenuPanel({ locale }: MenuPanelProps) {
           </Text>
         </View>
       ) : (
-        <ScrollView contentContainerClassName="p-4">
+        <ScrollView contentContainerClassName="p-3">
           <View className="flex-row flex-wrap gap-3">
             {items.map((item) => (
               <MenuItemCard
                 key={item.id}
                 item={item}
                 locale={locale}
-                onPress={() => handleAdd(item)}
+                onPress={() => handleItemPress(item)}
               />
             ))}
           </View>
         </ScrollView>
       )}
+
+      <ItemDetailModal
+        item={selectedItem}
+        locale={locale}
+        onAdd={handleDetailAdd}
+        onClose={() => setSelectedItem(null)}
+      />
     </View>
   );
 }
@@ -143,15 +167,15 @@ function CategoryChip({
   return (
     <Pressable
       onPress={onPress}
-      className={`h-10 items-center justify-center rounded-full border px-4 ${
+      className={`h-9 items-center justify-center rounded-full border px-4 ${
         isActive
           ? 'border-brand-500 bg-brand-500'
-          : 'border-neutral-300 bg-white'
+          : 'border-neutral-600 bg-neutral-700'
       }`}
     >
       <Text
         className={`text-sm font-medium ${
-          isActive ? 'text-white' : 'text-neutral-700'
+          isActive ? 'text-white' : 'text-neutral-300'
         }`}
       >
         {label}

@@ -1,4 +1,4 @@
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from './secure-storage';
 import { MyPosApiClient } from '@mypos/api-client';
 
 const API_BASE_URL =

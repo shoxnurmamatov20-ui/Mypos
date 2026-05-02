@@ -6,19 +6,21 @@ import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-const LOCALES = ['uz', 'ru', 'en'] as const;
+const LOCALES = ['uz', 'ru', 'en', 'kz'] as const;
 type Locale = (typeof LOCALES)[number];
 
 const LOCALE_LABELS: Record<Locale, string> = {
   uz: "O'zbek",
   ru: 'Русский',
   en: 'English',
+  kz: 'Қазақша',
 };
 
 const LOCALE_SHORT: Record<Locale, string> = {
   uz: 'UZ',
   ru: 'RU',
   en: 'EN',
+  kz: 'KZ',
 };
 
 function isLocale(value: string): value is Locale {

@@ -90,6 +90,27 @@ See `MYPOS_ULTRA_PLAN.md` on Desktop for the complete vision.
 - PR template: summary + test plan + screenshots.
 - Squash merge; PR title becomes commit message.
 
+### 11. Design system — APPLE-ONLY (LOCKED 2026-05-03)
+- **Source of truth**: `packages/design-tokens/DESIGN-apple.md` — the ONLY design reference.
+- **Tokens**: `packages/design-tokens/src/` — Apple-based (`@mypos/design-tokens`).
+- **Brand voltage**: MyPOS Coral `#EA7C69` — single accent, used scarcely (Apple's "single action color" rule).
+- **No hybrids** — no Notion, no Linear, no Stripe, no Vercel, no Cursor, no Figma, no Airbnb, no Claude. Apple-only.
+- **Discipline rules** (12):
+  1. Pill primary CTAs (`rounded-pill` 9999px) — never `rounded-md` on primary.
+  2. Body 17px (`text-body`) — NOT 16px.
+  3. Weight 500 absent — only 300/400/600 (`font-light/regular/semibold`).
+  4. Single drop-shadow on product imagery only (`shadow-product`) — never on cards/buttons/text.
+  5. Press transform `active:scale-95` universal.
+  6. Edge-to-edge tiles, alternating canvas/parchment/dark with 80px section.
+  7. Tabular numerals on every price/count/time (`font-feature-settings: "tnum"`).
+  8. Warm near-black ink `#1d1d1f` — never pure black.
+  9. Frosted-glass sub-nav (backdrop-blur + saturate).
+  10. Italic emphasis within headlines (`<em>`) for Apple voice operative word.
+  11. Cyrillic display tracking reduced 20% (`adjustTrackingForCyrillic()`).
+  12. SF Pro Display (≥19px) + SF Pro Text (<19px) + SF Mono (numerals/code) — never slab-serif.
+- **Per-tenant**: white-label via `var(--tenant-primary)` CSS variable — never hardcode hex.
+- **All other DESIGN-*.md files deleted** on 2026-05-03 — do not recreate.
+
 ## Domain Structure (Laravel backend)
 
 ```
@@ -149,6 +170,14 @@ See `.claude/agents/*.md` for each agent's scope.
 - ❌ Committed secrets
 - ❌ Skipping tests to merge
 - ❌ Cross-tenant queries without explicit `SuperAdminScope`
+- ❌ Mixing design systems (Notion / Linear / Stripe / Vercel / Cursor / Figma / Airbnb / Claude) — **Apple-only**
+- ❌ `font-medium` / weight 500 (Apple skips this weight)
+- ❌ `rounded-md` on primary CTAs (Apple uses `rounded-pill`)
+- ❌ `shadow-md` / `shadow-lg` on cards (Apple uses `shadow-product` on imagery only)
+- ❌ 16px body on consumer surfaces (Apple body is 17px)
+- ❌ Hardcoded hex colors in components (use Tailwind tokens / `var(--tenant-primary)`)
+- ❌ Slab-serif fonts (Apple uses SF Pro Display sans)
+- ❌ Pure black text `#000` (Apple ink is warm `#1d1d1f`)
 
 ## Working on legacy code
 

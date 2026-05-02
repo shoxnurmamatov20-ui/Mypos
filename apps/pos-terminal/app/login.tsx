@@ -1,3 +1,4 @@
+// apps/pos-terminal/app/login.tsx
 import { useState } from 'react';
 import {
   View,
@@ -22,6 +23,24 @@ const LoginSchema = z.object({
 });
 
 type LoginFormData = z.infer<typeof LoginSchema>;
+
+function BrandDecoration() {
+  const dots = [
+    '#EA7C69', '#50D1AA', '#F59E0B',
+    '#50D1AA', '#EA7C69', '#94A3B8',
+    '#F59E0B', '#94A3B8', '#EA7C69',
+  ];
+  return (
+    <View className="mt-10 flex-row flex-wrap gap-3" style={{ width: 120 }}>
+      {dots.map((color, i) => (
+        <View
+          key={i}
+          style={{ width: 24, height: 24, borderRadius: 6, backgroundColor: color, opacity: 0.7 }}
+        />
+      ))}
+    </View>
+  );
+}
 
 export default function LoginScreen() {
   const { t } = useTranslation();
@@ -55,21 +74,36 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-neutral-100">
+    <SafeAreaView className="flex-1 bg-neutral-900">
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        className="flex-1 items-center justify-center p-8"
+        className="flex-1 flex-row items-center justify-center p-8"
       >
-        <View className="w-full max-w-lg rounded-3xl bg-white p-10 shadow-lg">
-          <View className="items-center">
+        {/* Left: Brand section */}
+        <View className="hidden flex-1 items-start justify-center pr-16 lg:flex">
+          <Text className="text-6xl font-bold text-brand-500">MyPOS</Text>
+          <Text className="mt-3 text-xl text-neutral-400">
+            Restaurant Operating System
+          </Text>
+          <BrandDecoration />
+        </View>
+
+        {/* Right: Login card */}
+        <View className="w-full max-w-md rounded-3xl bg-neutral-800 p-10">
+          {/* Mobile-only brand */}
+          <View className="mb-6 items-center lg:hidden">
             <Text className="text-5xl font-bold text-brand-500">MyPOS</Text>
-            <Text className="mt-2 text-lg text-neutral-600">
-              {t('login.subtitle')}
-            </Text>
-            <Text className="mt-6 text-2xl font-semibold text-neutral-900">
-              {t('login.title')}
+            <Text className="mt-2 text-base text-neutral-400">
+              Restaurant Operating System
             </Text>
           </View>
+
+          <Text className="text-2xl font-bold text-neutral-50">
+            {t('login.title')}
+          </Text>
+          <Text className="mt-1 text-base text-neutral-400">
+            {t('login.subtitle')}
+          </Text>
 
           <View className="mt-8 gap-5">
             <Controller
@@ -77,7 +111,7 @@ export default function LoginScreen() {
               name="identifier"
               render={({ field: { value, onChange, onBlur } }) => (
                 <View>
-                  <Text className="mb-2 text-base font-medium text-neutral-700">
+                  <Text className="mb-2 text-base font-medium text-neutral-300">
                     {t('login.identifier')}
                   </Text>
                   <TextInput
@@ -85,11 +119,11 @@ export default function LoginScreen() {
                     onChangeText={onChange}
                     onBlur={onBlur}
                     placeholder={t('login.identifier_placeholder')}
-                    placeholderTextColor="#94A3B8"
+                    placeholderTextColor="#64748B"
                     autoCapitalize="none"
                     autoCorrect={false}
                     keyboardType="email-address"
-                    className="h-14 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-lg text-neutral-900"
+                    className="h-14 rounded-xl border border-neutral-600 bg-neutral-700 px-4 text-lg text-neutral-50"
                   />
                   {formState.errors.identifier && (
                     <Text className="mt-1 text-sm text-danger">
@@ -105,7 +139,7 @@ export default function LoginScreen() {
               name="password"
               render={({ field: { value, onChange, onBlur } }) => (
                 <View>
-                  <Text className="mb-2 text-base font-medium text-neutral-700">
+                  <Text className="mb-2 text-base font-medium text-neutral-300">
                     {t('login.password')}
                   </Text>
                   <TextInput
@@ -113,11 +147,11 @@ export default function LoginScreen() {
                     onChangeText={onChange}
                     onBlur={onBlur}
                     placeholder={t('login.password_placeholder')}
-                    placeholderTextColor="#94A3B8"
+                    placeholderTextColor="#64748B"
                     secureTextEntry
                     autoCapitalize="none"
                     autoCorrect={false}
-                    className="h-14 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-lg text-neutral-900"
+                    className="h-14 rounded-xl border border-neutral-600 bg-neutral-700 px-4 text-lg text-neutral-50"
                   />
                   {formState.errors.password && (
                     <Text className="mt-1 text-sm text-danger">
@@ -129,7 +163,7 @@ export default function LoginScreen() {
             />
 
             {submitError && (
-              <View className="rounded-xl bg-red-50 p-4">
+              <View className="rounded-xl border border-danger/40 bg-red-900/30 p-4">
                 <Text className="text-base text-danger">{submitError}</Text>
               </View>
             )}
@@ -142,7 +176,7 @@ export default function LoginScreen() {
               {isSubmitting ? (
                 <ActivityIndicator color="white" />
               ) : (
-                <Text className="text-xl font-semibold text-white">
+                <Text className="text-xl font-bold text-white">
                   {t('login.submit')}
                 </Text>
               )}

@@ -61,3 +61,32 @@ See `scripts/backup-db.sh`, `scripts/restore-db.sh`.
 - **Better Stack** — logs
 - **Posthog** — product analytics (self-hostable)
 - **Better Uptime** — external probing + status page
+
+## Native App Builder
+
+The Plus and Enterprise tiers ship a per-tenant white-label consumer app
+(iOS + Android). The build pipeline lives across:
+
+- `apps/mobile-consumer-template/` — Expo template, configured per tenant via
+  `EXPO_PUBLIC_*` env vars at build time.
+- `.github/workflows/eas-build.yml` — workflow that fetches tenant config from
+  the API and dispatches `eas build`.
+- `apps/api` — admin endpoint, EAS webhook receiver, and the
+  `eas:poll-builds` / `store:poll-submissions` cron jobs.
+- `infra/scripts/trigger-build.sh` — manual build trigger for ops/debug.
+
+Operational runbooks (read these before shipping a new tenant):
+
+| Runbook | Purpose |
+|---|---|
+| [`docs/runbooks/apple-develop-apps-for-clients.md`](../docs/runbooks/apple-develop-apps-for-clients.md) | Apple's "develop apps for clients" enrollment + 4.3 spam compliance |
+| [`docs/runbooks/google-play-console-setup.md`](../docs/runbooks/google-play-console-setup.md) | Play Console account, service account, release tracks |
+| [`docs/runbooks/native-app-builder-deploy.md`](../docs/runbooks/native-app-builder-deploy.md) | Coolify env vars, expo.dev webhook setup, scheduled tasks |
+| [`docs/runbooks/native-app-pricing.md`](../docs/runbooks/native-app-pricing.md) | Plus vs Enterprise tier — who pays Apple/Google, COGS per tenant |
+
+Manually trigger a build (admin/debug):
+
+```bash
+export MYPOS_ADMIN_TOKEN=...
+infra/scripts/trigger-build.sh <tenant_uuid> ios       # or android
+```

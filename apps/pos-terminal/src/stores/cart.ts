@@ -11,12 +11,14 @@ export type CartItem = {
 
 type CartState = {
   tableId: string | null;
+  customerId: string | null;
   items: CartItem[];
   notes: string;
 };
 
 type CartActions = {
   selectTable: (tableId: string | null) => void;
+  setCustomer: (customerId: string | null) => void;
   addItem: (menuItem: MenuItem, locale?: 'uz' | 'ru' | 'en') => void;
   updateQuantity: (menuItemId: string, quantity: number) => void;
   incrementItem: (menuItemId: string) => void;
@@ -29,6 +31,7 @@ type CartActions = {
 
 const initialState: CartState = {
   tableId: null,
+  customerId: null,
   items: [],
   notes: '',
 };
@@ -37,6 +40,8 @@ export const useCartStore = create<CartState & CartActions>((set) => ({
   ...initialState,
 
   selectTable: (tableId) => set({ tableId }),
+
+  setCustomer: (customerId) => set({ customerId }),
 
   addItem: (menuItem, locale = 'uz') => {
     const id = menuItem.id;

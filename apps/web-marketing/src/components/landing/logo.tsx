@@ -6,18 +6,19 @@ type Props = {
 };
 
 /**
- * MyPOS wordmark. Renders an inline SVG mark so the logo works offline and in SSG.
+ * MyPOS wordmark — Apple-style monochrome inline mark + ink wordmark.
+ * Tile + monogram + label, no gradients.
  */
 export function Logo({ locale, className }: Props) {
   return (
     <Link
       href={`/${locale}`}
-      className={`inline-flex items-center gap-2 font-display font-extrabold text-neutral-900 ${className ?? ''}`}
+      className={`inline-flex items-center gap-xs text-body-strong text-ink font-display font-semibold transition-transform duration-fast active:scale-95 ${className ?? ''}`}
       aria-label="MyPOS"
     >
       <span
         aria-hidden="true"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-sm"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-pearl bg-coral text-white"
       >
         <svg
           width="18"
@@ -40,7 +41,7 @@ export function Logo({ locale, className }: Props) {
           />
         </svg>
       </span>
-      <span className="text-lg tracking-tight">MyPOS</span>
+      <span>MyPOS</span>
     </Link>
   );
 }

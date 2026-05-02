@@ -1,0 +1,110 @@
+{
+  "home": {
+    "title": "MyPOS",
+    "subtitle": "Мейрамханаңыздың ақылы"
+  },
+  "login": {
+    "title": "Жүйеге кіру",
+    "subtitle": "MyPOS POS Терминал",
+    "identifier": "Email немесе телефон",
+    "identifier_placeholder": "owner@demo.mypos.uz",
+    "password": "Құпия сөз",
+    "password_placeholder": "••••••••",
+    "submit": "Кіру",
+    "submitting": "Кіріп жатыр...",
+    "error": "Кіру сәтсіз аяқталды",
+    "welcome": "Қош келдіңіз"
+  },
+  "pos": {
+    "tables": "Үстелдер",
+    "menu": "Мәзір",
+    "cart": "Себет",
+    "select_table": "Үстел таңдаңыз",
+    "selected_table": "Таңдалған үстел",
+    "no_table": "Үстел таңдалмаған",
+    "place_order": "Тапсырыс беру",
+    "placing_order": "Жіберілуде...",
+    "logout": "Шығу",
+    "no_items": "Тауарлар жоқ",
+    "no_tables": "Үстелдер жоқ",
+    "no_categories": "Санаттар жоқ",
+    "all_categories": "Барлығы",
+    "subtotal": "Жиыны",
+    "search_menu": "Мәзірден іздеу",
+    "order_placed": "Тапсырыс жіберілді",
+    "capacity": "Сыйымдылық",
+    "seats": "адам"
+  },
+  "cart": {
+    "title": "Себет",
+    "empty": "Себет бос",
+    "empty_hint": "Мәзірден тауар таңдаңыз",
+    "increment": "Көбейту",
+    "decrement": "Азайту",
+    "remove": "Жою",
+    "total": "Жалпы сомасы",
+    "confirm_order": "Тапсырысты растаңыз",
+    "item_count": "{{count}} тауар",
+    "notes_placeholder": "Ескертпе (міндетті емес)",
+    "attach_customer": "Клиентті қосу (міндетті емес)",
+    "customer_attached": "Клиент қосылды"
+  },
+  "table_status": {
+    "available": "Бос",
+    "occupied": "Бос емес",
+    "reserved": "Брондалды",
+    "disabled": "Белсенді емес"
+  },
+  "errors": {
+    "generic": "Қате орын алды",
+    "network": "Желі қатесі. Қайталап көріңіз",
+    "select_table_first": "Алдымен үстел таңдаңыз",
+    "cart_empty": "Себет бос",
+    "load_tables": "Үстелдерді жүктеу мүмкін болмады",
+    "load_menu": "Мәзірді жүктеу мүмкін болмады",
+    "place_order": "Тапсырысты жіберу мүмкін болмады"
+  },
+  "common": {
+    "retry": "Қайталау",
+    "cancel": "Болдырмау",
+    "confirm": "Растау",
+    "loading": "Жүктелуде..."
+  },
+  "orders": {
+    "panel_title": "Белсенді тапсырыстар",
+    "filter_all": "Барлығы",
+    "filter_pending": "Күтуде",
+    "filter_preparing": "Дайындалуда",
+    "filter_ready": "Дайын",
+    "filter_served": "Берілді",
+    "empty": "Белсенді тапсырыстар жоқ",
+    "empty_filter_hint": "Сүзгіні өзгертіңіз",
+    "error_load": "Тапсырыстарды жүктеу мүмкін болмады",
+    "table_label": "Үстел",
+    "more_items": "+ {{count}} тағы",
+    "action_prepare": "Дайындау →",
+    "action_ready": "Дайын ✓",
+    "action_served": "Берілді ✓",
+    "action_complete": "Аяқтау",
+    "action_cancel": "✕ Болдырмау"
+  },
+  "payment": {
+    "title": "Төлем",
+    "total_label": "Жиыны",
+    "close": "✕",
+    "method_cash": "Қолма-қол",
+    "method_card": "Карта",
+    "method_click": "Click",
+    "method_payme": "Payme",
+    "cash_received_label": "Қабылданды",
+    "change_label": "Қайтарым",
+    "order_total_label": "Тапсырыс сомасы",
+    "pay_button": "Төлеу ✓",
+    "confirm_button": "Растау",
+    "card_prompt": "Картаны терминалға қосыңыз",
+    "qr_generating": "QR код жасалуда...",
+    "qr_redirected": "Төлем жүйесіне өту",
+    "error_payment": "Төлем қатесі",
+    "place_and_pay": "Тапсырыс & Төлем"
+  }
+}

@@ -53,6 +53,22 @@
     "./inventory": {
       "types": "./src/inventory.ts",
       "default": "./src/inventory.ts"
+    },
+    "./staff": {
+      "types": "./src/staff.ts",
+      "default": "./src/staff.ts"
+    },
+    "./courier": {
+      "types": "./src/courier.ts",
+      "default": "./src/courier.ts"
+    },
+    "./kiosk": {
+      "types": "./src/kiosk.ts",
+      "default": "./src/kiosk.ts"
+    },
+    "./super-admin": {
+      "types": "./src/super-admin.ts",
+      "default": "./src/super-admin.ts"
     }
   },
   "scripts": {
