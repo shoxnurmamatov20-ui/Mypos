@@ -7,8 +7,7 @@
 **MyPOS** — Markaziy Osiyo uchun Restaurant Operating System (SaaS).
 - Backend: **Laravel 12 + PHP 8.5**
 - Web: **Next.js 15 + React 19 + TypeScript 5.9**
-- Mobile: **Expo SDK 54 + React Native 0.81**
-- DB: **PostgreSQL 17** | Cache/Queue: **Redis 7.4** | Search: **Meilisearch** | Storage: **MinIO**
+- DB: **MySQL 8.4** (XAMPP local) | Cache/Queue: **Redis 7.4** | Search: **Meilisearch** | Storage: **MinIO**
 - Real-time: **Laravel Reverb**
 - Admin: **Filament 3** (CRUD) + **Next.js** (workflows)
 - Hosting: **UZCLOUD** (UZ) + **Beeline DC** (DR)
@@ -19,7 +18,7 @@ See `MYPOS_ULTRA_PLAN.md` on Desktop for the complete vision.
 ## Monorepo
 
 - **Turborepo + pnpm workspaces**
-- `apps/` — runnable applications (12 + backend)
+- `apps/` — runnable applications (9 Next.js web apps + telegram-bot + Laravel backend)
 - `packages/` — shared TypeScript libraries (10)
 - `infra/` — Docker, Coolify, deploy scripts
 - `docs/` — architecture, API, ADRs, runbooks
@@ -45,21 +44,20 @@ See `MYPOS_ULTRA_PLAN.md` on Desktop for the complete vision.
 
 ### 4. Multi-tenancy
 - Every tenant-scoped table has `tenant_id`.
-- Eloquent Global Scope filters automatically.
-- PostgreSQL RLS enforced as defense-in-depth.
+- Eloquent Global Scope (`BelongsToTenant` trait) filters automatically — **sole** tenant guard since 2026-05-10 MySQL revert.
+- ~~PostgreSQL RLS~~ — REMOVED (ADR-0005). App-layer is now the only enforcement layer.
+- Never call `withoutGlobalScopes()` outside `SuperAdminScope::unguard()` audit context — single bug = cross-tenant leak.
 - Never query across tenants except in super admin context.
 
 ### 5. i18n (UZ/RU/EN)
 - Translation keys: `domain.section.key` (e.g., `menu.item.created`).
 - Laravel: `lang/{uz,ru,en}/...php`.
 - Next.js: `messages/{uz,ru,en}.json` (next-intl).
-- Expo: `i18n/{uz,ru,en}.json` (i18next).
 - **Never hardcode user-facing strings.**
 
 ### 6. Testing
 - Backend: **Pest** — min 80% coverage.
 - Web: **Vitest** (unit) + **Playwright** (E2E).
-- Mobile: **Vitest** (unit) + **Maestro** (flows).
 - Every feature PR includes tests.
 
 ### 7. Security
@@ -146,7 +144,6 @@ Use via the Agent tool with `subagent_type`:
 - `laravel-backend-dev` — Laravel modul yozish
 - `filament-resource-dev` — Filament resource yaratish
 - `nextjs-page-dev` — Next.js page
-- `expo-screen-dev` — Expo screen
 - `db-migration-author` — migration
 - `i18n-translator` — UZ/RU/EN keys
 - `test-writer` — tests

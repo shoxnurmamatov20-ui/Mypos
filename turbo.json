@@ -6,9 +6,13 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"],
-      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "EXPO_PUBLIC_*"]
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*"]
     },
     "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
       "cache": false,
       "persistent": true
     },

@@ -17,7 +17,7 @@ docs/api/openapi.yml
        ↓  (openapi-typescript)
 packages/api-client/src/generated/
        ↓  (used by)
-apps/web-*, apps/mobile-*, apps/telegram-bot
+apps/web-*, apps/telegram-bot
 ```
 
 ## Tasks
@@ -67,7 +67,7 @@ If breaking: create v2 endpoint, keep v1 until sunset period.
 
 ### Breaking (requires v2 or deprecation)
 ⚠ Removed `deprecated_total` from GET /api/v1/orders response
-   → Consumers: web-dashboard, mobile-staff
+   → Consumers: web-dashboard, web-cashier
    → Action: Create /api/v2/orders OR keep `deprecated_total` for 90d
 
 ### Action items

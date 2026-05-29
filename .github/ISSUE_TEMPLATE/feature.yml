@@ -39,7 +39,6 @@ body:
       options:
         - apps/api (Laravel)
         - apps/web-dashboard (Next.js)
-        - apps/pos-terminal (Expo)
         - apps/kds (Next.js)
         - apps/web-qr (Next.js)
         - apps/web-marketing (Next.js)

@@ -6,8 +6,6 @@
 # Domain-specific
 /apps/api/                @founder
 /apps/web-dashboard/      @founder
-/apps/mobile-*/           @founder
-/apps/pos-terminal/       @founder
 /apps/telegram-bot/       @founder
 
 /packages/design-tokens/  @founder

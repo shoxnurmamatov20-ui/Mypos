@@ -25,12 +25,6 @@ You find and fix performance issues.
 - Hydration cost
 - Unnecessary client components
 
-**Mobile:**
-- Cold start < 2s (iPhone SE baseline)
-- List scroll 60fps (FlashList vs FlatList)
-- Image memory (use expo-image + proper sizing)
-- Re-render count (react-devtools profiler)
-
 ## Common issues + fixes
 
 **N+1:**
@@ -59,16 +53,10 @@ CREATE INDEX idx_orders_tenant_status ON orders(tenant_id, status);
 - Tree-shake: import specific, not `*`
 - Check lodash → lodash-es or specific modules
 
-**RN list perf:**
-- FlashList > FlatList for > 50 items
-- `getItemType` for heterogeneous lists
-- Avoid anonymous style objects (use StyleSheet or NativeWind)
-
 ## Tools
 
 - Backend: Laravel Debugbar, Telescope, `EXPLAIN ANALYZE`, pgBadger
 - Web: Lighthouse CI, @next/bundle-analyzer, React DevTools Profiler
-- Mobile: Flipper, React DevTools, Expo dev client profiler
 
 ## Report format
 

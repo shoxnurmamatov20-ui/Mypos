@@ -1,6 +1,6 @@
 ---
 name: sync-api
-description: Regenerate OpenAPI spec from Laravel and update TypeScript SDK used by web/mobile apps.
+description: Regenerate OpenAPI spec from Laravel and update TypeScript SDK used by web apps.
 ---
 
 Synchronize API contract between Laravel backend and TypeScript clients.

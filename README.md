@@ -18,11 +18,6 @@ mypos/
 │   ├── web-marketing/          # Next.js landing (mypos.uz)
 │   ├── web-qr/                 # Next.js QR menu PWA
 │   ├── kds/                    # Next.js kitchen display
-│   ├── mobile-consumer/        # Expo mijoz app
-│   ├── mobile-staff/           # Expo waiter/chef
-│   ├── mobile-courier/         # Expo kuryer
-│   ├── pos-terminal/           # Expo POS (tablet)
-│   ├── kiosk/                  # Expo self-service
 │   └── telegram-bot/           # Node.js Telegraf
 │
 ├── packages/                   # Shared TypeScript
@@ -39,6 +34,7 @@ mypos/
 - PHP 8.5+
 - Composer 2.9+
 - Docker 26+
+- **XAMPP** (MySQL 8.4) — main DB runs on host, not in Docker
 
 ### Setup
 ```bash
@@ -49,26 +45,29 @@ cd mypos
 # 2. Install JS deps
 pnpm install
 
-# 3. Start infra (PostgreSQL + Redis + MinIO + Meilisearch)
+# 3. Start XAMPP → click Start next to MySQL
+#    Open http://localhost/phpmyadmin → CREATE DATABASE mypos
+#    Default root user (empty password) works out-of-the-box.
+
+# 4. Start side infra (Redis + MinIO + Meilisearch — NOT MySQL)
 pnpm docker:up
 
-# 4. Install Laravel backend
+# 5. Install Laravel backend
 cd apps/api
 composer install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate --seed
 
-# 5. Run dev servers (all apps)
+# 6. Run dev servers (all apps)
 cd ../..
 pnpm dev
 ```
 
 ## 🏗️ Tech Stack
 
-- **Backend:** Laravel 12 + PHP 8.5 + PostgreSQL 17 + Redis + Meilisearch
+- **Backend:** Laravel 12 + PHP 8.5 + MySQL 8.4 (XAMPP) + Redis + Meilisearch
 - **Web:** Next.js 15 + React 19 + TypeScript 5.9 + Tailwind 4
-- **Mobile:** Expo SDK 54 + React Native 0.81 + NativeWind
 - **Real-time:** Laravel Reverb (WebSocket)
 - **Admin:** Filament 3 + custom Next.js superadmin
 - **Search:** Meilisearch

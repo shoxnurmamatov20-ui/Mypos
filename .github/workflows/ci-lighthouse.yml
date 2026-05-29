@@ -1,0 +1,62 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+    paths:
+      - 'apps/web-*/**'
+      - 'apps/kds/**'
+      - 'packages/ui/**'
+      - 'packages/design-tokens/**'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    name: Audit web apps
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - web-marketing
+          - web-portal
+          - web-superadmin
+          - web-ceo
+          - web-dashboard
+          - web-consumer
+          - web-qr
+          - kds
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build ${{ matrix.app }}
+        run: pnpm --filter "@mypos/${{ matrix.app }}" build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:8000
+
+      - name: Start ${{ matrix.app }}
+        run: pnpm --filter "@mypos/${{ matrix.app }}" start &
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:8000
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000 --timeout 60000
+
+      - name: Lighthouse audit
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            http://localhost:3000/uz
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          configPath: ./.github/lighthouse/config.json
+        continue-on-error: true

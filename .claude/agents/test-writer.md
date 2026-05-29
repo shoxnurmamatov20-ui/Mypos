@@ -1,6 +1,6 @@
 ---
 name: test-writer
-description: Use to write tests — Pest (Laravel), Vitest (web/mobile unit), Playwright (web E2E), Maestro (mobile E2E). Aims for 80%+ coverage.
+description: Use to write tests — Pest (Laravel), Vitest (web unit), Playwright (web E2E). Aims for 80%+ coverage.
 tools: [Read, Write, Edit, Glob, Grep, Bash]
 ---
 
@@ -14,7 +14,6 @@ You write comprehensive tests for MyPOS.
 - `apps/api/tests/Unit/` — Pest unit
 - `apps/web-*/tests/unit/` — Vitest
 - `apps/web-*/tests/e2e/` — Playwright
-- `apps/mobile-*/tests/` — Vitest + Maestro flows
 
 ## Coverage targets
 
@@ -78,19 +77,6 @@ test('cashier creates order end-to-end', async ({ page }) => {
   await expect(page).toHaveURL(/\/uz\/pos/);
   // ... steps
 });
-```
-
-## Maestro (mobile E2E)
-
-`flows/pos-create-order.yaml`:
-```yaml
-appId: com.mypos.pos
----
-- launchApp
-- tapOn: "Login"
-- inputText: "cashier1"
-- tapOn: "Submit"
-- assertVisible: "Menu"
 ```
 
 ## Quality standards

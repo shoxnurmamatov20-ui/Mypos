@@ -19,23 +19,18 @@ Claude Code subagents registered for this project. Invoke via the `Agent` tool w
 **Capabilities:** Server Components, Client Components, Server Actions, route handlers, metadata.
 **Knows:** React 19, Tailwind 4, @mypos/ui components, next-intl.
 
-### `expo-screen-dev`
-**Scope:** Expo Router screens in `apps/mobile-*`, `apps/pos-terminal`, `apps/kiosk`.
-**Capabilities:** Route file, screen component, hooks, styles (NativeWind), navigation.
-**Knows:** Expo SDK 54, RN 0.81, Reanimated 4, i18next.
-
 ### `db-migration-author`
 **Scope:** PostgreSQL migrations in `apps/api/database/migrations/`.
 **Capabilities:** Create tables, indexes, foreign keys, RLS policies, seed data.
 **Knows:** PostgreSQL 17 features, multi-tenancy pattern.
 
 ### `i18n-translator`
-**Scope:** Translation files across backend + web + mobile.
-**Capabilities:** Add keys to `lang/uz/`, `lang/ru/`, `lang/en/` + Next.js messages + Expo i18n.
+**Scope:** Translation files across backend + web.
+**Capabilities:** Add keys to `lang/uz/`, `lang/ru/`, `lang/en/` + Next.js messages.
 **Knows:** ICU format, UZ grammar (lotin + kirill), RU grammar.
 
 ### `test-writer`
-**Scope:** Tests — Pest (backend), Vitest (unit), Playwright (web E2E), Maestro (mobile E2E).
+**Scope:** Tests — Pest (backend), Vitest (unit), Playwright (web E2E).
 **Capabilities:** Feature tests, unit tests, E2E flows, fixtures, factories.
 **Knows:** Coverage targets (80%), common gotchas.
 

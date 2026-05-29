@@ -26,7 +26,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ### Scopes
 
-Prefer domain names: `orders`, `menu`, `auth`, `payments`, `tables`, `reports`, etc. Or app names: `api`, `web-dashboard`, `pos-terminal`, `mobile-staff`.
+Prefer domain names: `orders`, `menu`, `auth`, `payments`, `tables`, `reports`, etc. Or app names: `api`, `web-dashboard`, `web-cashier`.
 
 ### Examples
 
