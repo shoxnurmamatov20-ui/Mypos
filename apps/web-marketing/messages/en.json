@@ -177,6 +177,9 @@
   "testimonials": {
     "section_label": "Testimonials",
     "title": "What restaurant owners say",
+    "stat_restaurants": "restaurants trust us",
+    "stat_satisfaction": "client satisfaction",
+    "stat_brands": "brand partners",
     "items": {
       "one": {
         "quote": "After switching to MyPOS the queue at the register disappeared. Orders are prepared twice as fast and the staff loves it.",

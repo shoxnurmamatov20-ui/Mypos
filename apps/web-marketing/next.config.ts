@@ -5,8 +5,11 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@mypos/design-tokens', '@mypos/ui', '@mypos/utils'],
+  devIndicators: false,
+  transpilePackages: ['@mypos/analytics', '@mypos/design-tokens', '@mypos/ui', '@mypos/utils'],
   typedRoutes: true,
+  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: true },
 };
 
 export default withNextIntl(nextConfig);

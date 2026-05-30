@@ -85,14 +85,14 @@ export function OrderCard({
       tabIndex={0}
       onClick={onClick}
       onKeyDown={handleCardKey}
-      className="group flex cursor-pointer flex-col gap-3 rounded-xl border border-neutral-200 bg-white p-4 text-left transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand-500"
+      className="group flex cursor-pointer flex-col gap-3 rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-4 text-left transition hover:-translate-y-0.5 hover:border-[#0f766e] focus:outline-none focus:ring-2 focus:ring-[#0f766e] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827] dark:hover:border-teal-500 dark:focus:ring-teal-500"
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <div className="font-display text-2xl font-bold text-neutral-900">
+          <div className="text-2xl font-bold text-[#16221f] dark:text-white">
             #{order.order_no}
           </div>
-          <div className="mt-0.5 text-xs text-neutral-500">
+          <div className="mt-0.5 text-xs text-[#62716d] dark:text-[#94a3b8]">
             {t(`orders.filters.type.${order.type}` as 'orders.filters.type.dine_in')}
           </div>
         </div>
@@ -100,21 +100,21 @@ export function OrderCard({
       </div>
 
       {isDineIn && order.table && (
-        <div className="rounded-lg bg-neutral-50 px-3 py-2 text-sm font-medium text-neutral-700">
+        <div className="rounded-lg bg-[#eef4f3] px-3 py-2 text-sm font-medium text-[#16221f] dark:bg-[#1a2235] dark:text-[#e2e8f0]">
           {t('orders.table')}: {order.table.name}
         </div>
       )}
 
-      <div className="flex items-center justify-between text-sm text-neutral-600">
+      <div className="flex items-center justify-between text-sm text-[#62716d] dark:text-[#94a3b8]">
         <span>
           {itemsCount} {t('orders.items_count_suffix')}
         </span>
-        <span className="font-semibold text-neutral-900">
+        <span className="font-semibold text-[#16221f] dark:text-white">
           {formatUZS(order.amounts.total)}
         </span>
       </div>
 
-      <div className="flex items-center justify-between border-t border-neutral-100 pt-3 text-xs text-neutral-500">
+      <div className="flex items-center justify-between border-t border-[rgba(22,34,31,0.09)] pt-3 text-xs text-[#62716d] dark:border-[rgba(255,255,255,0.07)] dark:text-[#94a3b8]">
         <span>{t('orders.elapsed', { minutes: elapsed })}</span>
       </div>
 
@@ -123,7 +123,7 @@ export function OrderCard({
           type="button"
           onClick={handleAdvance}
           disabled={pending}
-          className="w-full rounded-lg bg-brand-500 px-3 py-2 text-sm font-semibold text-white transition hover:bg-brand-600 disabled:opacity-60"
+          className="w-full rounded-lg bg-[#0f766e] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#0d5e58] disabled:opacity-60 dark:bg-[#14b8a6] dark:hover:bg-[#0d9488]"
         >
           {pending
             ? t('orders.updating')

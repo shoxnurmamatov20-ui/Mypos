@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property string $id
  * @property string $tenant_id
+ * @property string|null $department_id
  * @property string $user_uuid
  * @property string $employee_code
  * @property string $position
@@ -47,6 +48,7 @@ class Employee extends Model
 
     protected $fillable = [
         'tenant_id',
+        'department_id',
         'user_uuid',
         'employee_code',
         'position',
@@ -88,6 +90,11 @@ class Employee extends Model
     public function breaks(): HasMany
     {
         return $this->hasMany(ShiftBreak::class, 'employee_id');
+    }
+
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(\App\Domain\Department\Models\Department::class, 'department_id');
     }
 
     /**

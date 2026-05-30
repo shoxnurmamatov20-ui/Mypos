@@ -1,235 +1,154 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Calendar, CheckCircle, CircleNotch } from '@phosphor-icons/react';
-import { useTranslations } from 'next-intl';
+import { ArrowRight, CheckCircle, ForkKnife, UserCircle, VideoCamera } from '@phosphor-icons/react';
 import { useState } from 'react';
 
-type FormData = {
-  name: string;
-  phone: string;
-  email: string;
-  restaurant: string;
-  industry: string;
-  date: string;
-  time: string;
-  notes: string;
-};
+type Format = 'online' | 'office';
 
-const TIMES = ['10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00'] as const;
-const INDUSTRIES = ['cafe', 'restaurant', 'fastfood', 'bar', 'other'] as const;
+const FORMATS: ReadonlyArray<{ value: Format; label: string; sub: string }> = [
+  { value: 'online', label: 'Onlayn',           sub: 'Zoom / Telegram' },
+  { value: 'office', label: 'Toshkent ofisi',   sub: 'Haqiqiy kassada' },
+];
 
-const INPUT_CLASS =
-  'w-full rounded-card border border-hairline-soft bg-canvas px-md py-xs text-body text-ink transition focus:shadow-focus focus:outline-none';
-
-export function DemoForm({ locale: _locale }: { locale: string }) {
-  const t = useTranslations('demo_form');
+export function DemoForm() {
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const minDate = tomorrow.toISOString().split('T')[0]!;
-
-  const [data, setData] = useState<FormData>({
-    name: '',
-    phone: '',
-    email: '',
-    restaurant: '',
-    industry: 'restaurant',
-    date: minDate,
-    time: '14:00',
-    notes: '',
-  });
-
-  const update = <K extends keyof FormData>(key: K, value: FormData[K]) => {
-    setData((d) => ({ ...d, [key]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setSubmitting(false);
-    setSubmitted(true);
-  };
+  const [format, setFormat] = useState<Format>('online');
 
   if (submitted) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="rounded-card border border-hairline-soft bg-success-soft p-[80px] text-center shadow-hairline-ring"
-      >
-        <div className="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-pill bg-success">
-          <CheckCircle size={40} weight="fill" className="text-white" aria-hidden="true" />
+      <div className="text-center py-6">
+        <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full ring-1 ring-inset ring-emerald-400/30 bg-emerald-500/15">
+          <CheckCircle size={28} weight="fill" className="text-emerald-400" />
         </div>
-        <h2 className="mt-md font-display font-semibold text-display-sm text-ink">
-          {t('success_title')}
-        </h2>
-        <p className="mt-sm text-body text-ink-muted-80">{t('success_message')}</p>
-        <p className="mt-xs text-caption text-ink-muted-48">{t('success_note')}</p>
-      </motion.div>
+        <h3 className="mt-4 text-[20px] font-extrabold tracking-tight text-white">
+          Ariza qabul qilindi
+        </h3>
+        <p className="mx-auto mt-2 max-w-[28rem] text-[13.5px] leading-relaxed text-white/70">
+          Bizning mutaxassis 30 daqiqa ichida sizga qo&apos;ng&apos;iroq qiladi va aniq vaqtni belgilaymiz.
+        </p>
+        <button
+          type="button"
+          onClick={() => setSubmitted(false)}
+          className="press mt-5 inline-flex h-10 items-center gap-1.5 px-4 rounded-lg border border-white/15 bg-white/[0.06] text-white text-[13px] font-bold hover:bg-white/[0.12] transition-colors"
+        >
+          Yangi ariza
+        </button>
+      </div>
     );
   }
 
   return (
-    <motion.form
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      onSubmit={handleSubmit}
-      className="space-y-md rounded-card border border-hairline-soft bg-canvas p-xl shadow-hairline-ring"
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setSubmitted(true);
+      }}
+      className="space-y-5"
     >
-      <div className="grid gap-sm sm:grid-cols-2">
+      {/* Format */}
+      <div>
+        <label className="block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[#5eead4] mb-2">
+          Format
+        </label>
+        <div className="grid grid-cols-2 gap-1.5">
+          {FORMATS.map((f) => {
+            const sel = format === f.value;
+            return (
+              <button
+                key={f.value}
+                type="button"
+                onClick={() => setFormat(f.value)}
+                className={`press group flex flex-col items-start gap-0.5 h-16 px-4 rounded-lg ring-1 ring-inset transition-all ${
+                  sel
+                    ? 'bg-[rgba(20,184,166,0.12)] ring-[#5eead4]/50'
+                    : 'bg-white/[0.04] ring-white/[0.10] hover:ring-white/25'
+                }`}
+              >
+                <span className={`text-[13px] font-bold ${sel ? 'text-white' : 'text-white/85'}`}>
+                  {f.label}
+                </span>
+                <span className="text-[11px] text-white/55">{f.sub}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Name + Phone */}
+      <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label htmlFor="demo-name" className="mb-xxs block font-display font-semibold text-caption-strong text-ink">
-            {t('name_label')} *
+          <label htmlFor="df-name" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+            Ism Familiya
           </label>
-          <input
-            id="demo-name"
-            type="text"
-            required
-            value={data.name}
-            onChange={(e) => update('name', e.target.value)}
-            placeholder={t('name_placeholder')}
-            className={INPUT_CLASS}
-          />
+          <div className="relative">
+            <UserCircle size={14} weight="bold" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+            <input
+              id="df-name"
+              type="text"
+              required
+              placeholder="Sardor Xolmatov"
+              className="w-full h-11 pl-9 pr-3.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-[13.5px] placeholder:text-white/35 outline-none focus:border-[#5eead4]/60 focus:bg-white/[0.08] transition-colors"
+            />
+          </div>
         </div>
         <div>
-          <label htmlFor="demo-phone" className="mb-xxs block font-display font-semibold text-caption-strong text-ink">
-            {t('phone_label')} *
+          <label htmlFor="df-phone" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+            Telefon
           </label>
           <input
-            id="demo-phone"
+            id="df-phone"
             type="tel"
             required
-            value={data.phone}
-            onChange={(e) => update('phone', e.target.value)}
             placeholder="+998 90 123 45 67"
-            className={INPUT_CLASS}
+            className="w-full h-11 px-3.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-[13.5px] placeholder:text-white/35 outline-none focus:border-[#5eead4]/60 focus:bg-white/[0.08] transition-colors tabular"
           />
         </div>
       </div>
 
+      {/* Restaurant */}
       <div>
-        <label htmlFor="demo-email" className="mb-xxs block font-display font-semibold text-caption-strong text-ink">
-          {t('email_label')}
+        <label htmlFor="df-rest" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+          Restoran nomi
         </label>
-        <input
-          id="demo-email"
-          type="email"
-          value={data.email}
-          onChange={(e) => update('email', e.target.value)}
-          placeholder="info@restoran.uz"
-          className={INPUT_CLASS}
-        />
-      </div>
-
-      <div className="grid gap-sm sm:grid-cols-2">
-        <div>
-          <label
-            htmlFor="demo-restaurant"
-            className="mb-xxs block font-display font-semibold text-caption-strong text-ink"
-          >
-            {t('restaurant_label')} *
-          </label>
+        <div className="relative">
+          <ForkKnife size={14} weight="bold" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
           <input
-            id="demo-restaurant"
+            id="df-rest"
             type="text"
             required
-            value={data.restaurant}
-            onChange={(e) => update('restaurant', e.target.value)}
-            placeholder={t('restaurant_placeholder')}
-            className={INPUT_CLASS}
+            placeholder="Osh Markazi"
+            className="w-full h-11 pl-9 pr-3.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-[13.5px] placeholder:text-white/35 outline-none focus:border-[#5eead4]/60 focus:bg-white/[0.08] transition-colors"
           />
-        </div>
-        <div>
-          <label
-            htmlFor="demo-industry"
-            className="mb-xxs block font-display font-semibold text-caption-strong text-ink"
-          >
-            {t('industry_label')}
-          </label>
-          <select
-            id="demo-industry"
-            value={data.industry}
-            onChange={(e) => update('industry', e.target.value)}
-            className={INPUT_CLASS}
-          >
-            {INDUSTRIES.map((ind) => (
-              <option key={ind} value={ind}>
-                {t(`industry_${ind}`)}
-              </option>
-            ))}
-          </select>
         </div>
       </div>
 
-      <div className="grid gap-sm sm:grid-cols-2">
-        <div>
-          <label htmlFor="demo-date" className="mb-xxs block font-display font-semibold text-caption-strong text-ink">
-            {t('date_label')} *
-          </label>
-          <input
-            id="demo-date"
-            type="date"
-            required
-            min={minDate}
-            value={data.date}
-            onChange={(e) => update('date', e.target.value)}
-            className={INPUT_CLASS}
-          />
-        </div>
-        <div>
-          <label htmlFor="demo-time" className="mb-xxs block font-display font-semibold text-caption-strong text-ink">
-            {t('time_label')} *
-          </label>
-          <select
-            id="demo-time"
-            required
-            value={data.time}
-            onChange={(e) => update('time', e.target.value)}
-            className={INPUT_CLASS}
-          >
-            {TIMES.map((time) => (
-              <option key={time} value={time}>
-                {time}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
+      {/* Question */}
       <div>
-        <label htmlFor="demo-notes" className="mb-xxs block font-display font-semibold text-caption-strong text-ink">
-          {t('notes_label')}
+        <label htmlFor="df-q" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+          Demo&apos;da ko&apos;rmoqchi bo&apos;lgan xususiyat <span className="font-normal text-white/40">(ixtiyoriy)</span>
         </label>
         <textarea
-          id="demo-notes"
+          id="df-q"
           rows={3}
-          value={data.notes}
-          onChange={(e) => update('notes', e.target.value)}
-          placeholder={t('notes_placeholder')}
-          className={`${INPUT_CLASS} resize-none`}
+          placeholder="Masalan: Click/Payme integratsiyasi, smena hisoboti, AI menyu..."
+          className="w-full px-3.5 py-3 rounded-lg bg-white/[0.06] border border-white/15 text-white text-[13.5px] placeholder:text-white/35 outline-none focus:border-[#5eead4]/60 focus:bg-white/[0.08] transition-colors resize-none"
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={submitting}
-        className="inline-flex w-full items-center justify-center gap-xs rounded-pill bg-tenant px-lg py-sm font-display font-semibold text-body-strong text-tenant-on-primary transition-transform duration-fast active:scale-95 disabled:opacity-60"
-      >
-        {submitting ? (
-          <CircleNotch size={20} weight="bold" className="animate-spin" aria-hidden="true" />
-        ) : (
-          <>
-            <Calendar size={20} weight="duotone" aria-hidden="true" />
-            {t('submit')}
-          </>
-        )}
-      </button>
-
-      <p className="text-center text-fine-print text-ink-muted-48">{t('disclaimer')}</p>
-    </motion.form>
+      {/* Submit */}
+      <div className="flex flex-col gap-2 pt-1">
+        <button
+          type="submit"
+          className="press inline-flex h-11 items-center justify-center gap-1.5 px-6 rounded-lg bg-[#ff0037] hover:bg-[#e6002f] text-white text-[13.5px] font-bold shadow-[0_10px_28px_-8px_rgba(255,0,55,0.55)] transition-colors"
+        >
+          <VideoCamera size={14} weight="fill" />
+          Demo bron qilish
+          <ArrowRight size={13} weight="bold" />
+        </button>
+        <p className="text-center text-[11px] text-white/45">
+          30 daqiqa ichida mutaxassis bog&apos;lanadi
+        </p>
+      </div>
+    </form>
   );
 }

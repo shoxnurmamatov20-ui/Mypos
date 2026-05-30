@@ -1,3 +1,4 @@
+import { AnalyticsBoot } from '@mypos/analytics';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Inter, Manrope, JetBrains_Mono } from 'next/font/google';
@@ -24,11 +25,16 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${manrope.variable} ${mono.variable}`}>
-      <body>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${manrope.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="bg-white text-[#16221f] dark:bg-[#0b1120] dark:text-[#e2e8f0] font-sans antialiased">
+        <AnalyticsBoot app="web-dashboard" />
         <NextIntlClientProvider messages={messages}>
           <Providers>{children}</Providers>
-          <Toaster position="top-right" />
+          <Toaster position="top-right" theme="system" />
         </NextIntlClientProvider>
       </body>
     </html>

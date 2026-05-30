@@ -86,10 +86,16 @@ class StaffPerformanceWidget extends StatsOverviewWidget
         );
 
         $totalSeconds = Cache::remember($cacheKey, 60, function () use ($from, $until): float {
+            // Driver-portable elapsed-seconds aggregate. Postgres returns
+            // INTERVAL from timestamp subtraction; MySQL uses TIMESTAMPDIFF.
+            $expr = DB::connection()->getDriverName() === 'pgsql'
+                ? 'COALESCE(SUM(EXTRACT(EPOCH FROM (COALESCE(actual_end, NOW()) - actual_start))), 0)'
+                : 'COALESCE(SUM(TIMESTAMPDIFF(SECOND, actual_start, COALESCE(actual_end, NOW()))), 0)';
+
             return (float) Shift::query()
                 ->whereBetween('actual_start', [$from, $until])
                 ->whereNotNull('actual_start')
-                ->value(DB::raw('COALESCE(SUM(EXTRACT(EPOCH FROM (COALESCE(actual_end, NOW()) - actual_start))), 0)'));
+                ->value(DB::raw($expr));
         });
 
         $hours = round($totalSeconds / 3600, 1);

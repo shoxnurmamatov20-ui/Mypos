@@ -1,8 +1,14 @@
 # ADR-0003: PostgreSQL 17 over MySQL
 
-- **Status:** Accepted
+- **Status:** **REVERSED** (see ADR-0005, 2026-05-10)
 - **Date:** 2026-04-20
 - **Deciders:** Solo Founder
+
+> **REVERSAL NOTICE (2026-05-10)**: This ADR was reversed by ADR-0005. The
+> project now uses **MySQL 8.4** locally (XAMPP) and in CI. RLS and JSONB-specific
+> behaviour described below are **no longer in effect**. App-layer
+> `BelongsToTenant` global scope is now the sole tenant-isolation guard.
+> See `docs/adr/0005-mysql-after-revert.md` for the rationale.
 
 ## Context
 

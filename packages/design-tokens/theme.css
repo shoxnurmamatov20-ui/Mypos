@@ -1,0 +1,231 @@
+/**
+ * @mypos/design-tokens — Tailwind CSS v4 theme.
+ *
+ * Single source of truth for all design tokens, consumed by every web app
+ * via `@import '@mypos/design-tokens/theme.css';` after `@import 'tailwindcss';`.
+ *
+ * Generates utility classes from CSS variables — no `tailwind.config.ts`
+ * needed. Mirrors `src/tailwind.ts` preset (Apple-based foundation + MyPOS
+ * coral brand voltage + himoya/ShifoReyting dark+teal SaaS palette).
+ *
+ * @see packages/design-tokens/DESIGN-apple.md
+ */
+
+@theme {
+  /* ─── Brand voltage — MyPOS Coral ────────────────────────────────── */
+  --color-coral: #ea7c69;
+  --color-coral-active: #d05848;
+  --color-coral-focus: #f78f74;
+  --color-coral-soft: #f9c4ba;
+  --color-coral-tint: #fef0ed;
+  --color-coral-on-dark: #ffa896;
+
+  /* ─── Tenant white-label (CSS variables set by middleware) ──────── */
+  --color-tenant: var(--tenant-primary, #ea7c69);
+  --color-tenant-active: var(--tenant-primary-active, #d05848);
+  --color-tenant-focus: var(--tenant-primary-focus, #f78f74);
+  --color-tenant-soft: var(--tenant-primary-soft, #f9c4ba);
+  --color-tenant-tint: var(--tenant-primary-tint, #fef0ed);
+  --color-tenant-on-primary: var(--tenant-on-primary, #ffffff);
+
+  /* ─── Apple chrome (rare — login pages mimicking Apple) ─────────── */
+  --color-apple-blue: #0066cc;
+  --color-apple-blue-focus: #0071e3;
+  --color-apple-sky-on-dark: #2997ff;
+
+  /* ─── Apple surface palette ──────────────────────────────────────── */
+  --color-canvas: #ffffff;
+  --color-parchment: #f5f5f7;
+  --color-pearl: #fafafc;
+  --color-tile-dark-1: #272729;
+  --color-tile-dark-2: #2a2a2c;
+  --color-tile-dark-3: #252527;
+  --color-pure-black: #000000;
+
+  /* ─── Hairlines ─────────────────────────────────────────────────── */
+  --color-hairline: #e0e0e0;
+  --color-hairline-soft: #f0f0f0;
+
+  /* ─── Apple ink ladder ──────────────────────────────────────────── */
+  --color-ink: #1d1d1f;
+  --color-ink-muted-80: #333333;
+  --color-ink-muted-48: #7a7a7a;
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: #cccccc;
+
+  /* ─── Himoya/ShifoReyting SaaS palette (dashboards) ────────────── */
+  --color-himoya-ink: #16221f;
+  --color-himoya-muted: #62716d;
+  --color-himoya-muted-dark: #94a3b8;
+  --color-himoya-bg: #0b1120;
+  --color-himoya-card: #111827;
+  --color-himoya-surface-alt: #1a2235;
+  --color-himoya-soft: #eef4f3;
+  --color-himoya-teal-soft: #e6faf5;
+  --color-himoya-teal: #0f766e;
+  --color-himoya-teal-active: #0d5e58;
+  --color-himoya-teal-dark: #14b8a6;
+
+  /* ─── Semantic (status banners) ─────────────────────────────────── */
+  --color-success: #28c840;
+  --color-success-soft: #e8f6ec;
+  --color-success-text: #1aae39;
+  --color-warning: #ffbd2e;
+  --color-warning-soft: #fef7d6;
+  --color-warning-text: #9b6829;
+  --color-error: #ff5f57;
+  --color-error-soft: #fde0ec;
+  --color-error-text: #c64545;
+  --color-info: #0066cc;
+  --color-info-soft: #e6f0fb;
+  --color-info-text: #0066cc;
+
+  /* ─── Order status pipeline (functional — POS/KDS) ─────────────── */
+  --color-status-pending: #d4a017;
+  --color-status-preparing: #0066cc;
+  --color-status-ready: #28c840;
+  --color-status-served: #7a7a7a;
+  --color-status-cancelled: #c64545;
+
+  /* ─── AI Studio stage pills ─────────────────────────────────────── */
+  --color-ai-recommending: #dfa88f;
+  --color-ai-searching: #9fc9a2;
+  --color-ai-reading: #9fbbe0;
+  --color-ai-thinking: #c0a8dd;
+  --color-ai-translating: #f9c4ba;
+  --color-ai-done: #c08532;
+
+  /* ─── Font families ─────────────────────────────────────────────── */
+  --font-sans: 'Inter', 'SF Pro Text', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Manrope', 'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, Monaco, monospace;
+
+  /* ─── Font weights (Apple ladder — no 500) ──────────────────────── */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ─── Apple's exact font-size ladder ─────────────────────────────── */
+  --text-micro-legal: 10px;
+  --text-micro-legal--line-height: 1.30;
+  --text-micro-legal--letter-spacing: -0.08px;
+  --text-fine-print: 12px;
+  --text-fine-print--line-height: 1.0;
+  --text-fine-print--letter-spacing: -0.12px;
+  --text-nav-link: 12px;
+  --text-nav-link--line-height: 1.0;
+  --text-nav-link--letter-spacing: -0.12px;
+  --text-caption: 14px;
+  --text-caption--line-height: 1.43;
+  --text-caption--letter-spacing: -0.224px;
+  --text-caption-strong: 14px;
+  --text-caption-strong--line-height: 1.29;
+  --text-caption-strong--letter-spacing: -0.224px;
+  --text-caption-strong--font-weight: 600;
+  --text-body: 17px;
+  --text-body--line-height: 1.47;
+  --text-body--letter-spacing: -0.374px;
+  --text-body-strong: 17px;
+  --text-body-strong--line-height: 1.24;
+  --text-body-strong--font-weight: 600;
+  --text-button-large: 18px;
+  --text-button-large--line-height: 1.0;
+  --text-button-large--font-weight: 300;
+  --text-tagline: 21px;
+  --text-tagline--line-height: 1.19;
+  --text-tagline--letter-spacing: 0.231px;
+  --text-tagline--font-weight: 600;
+  --text-lead-airy: 24px;
+  --text-lead-airy--line-height: 1.50;
+  --text-lead-airy--font-weight: 300;
+  --text-lead: 28px;
+  --text-lead--line-height: 1.14;
+  --text-lead--letter-spacing: 0.196px;
+  --text-display-md: 34px;
+  --text-display-md--line-height: 1.47;
+  --text-display-md--letter-spacing: -0.374px;
+  --text-display-md--font-weight: 600;
+  --text-display-lg: 40px;
+  --text-display-lg--line-height: 1.10;
+  --text-display-lg--font-weight: 600;
+  --text-hero-display: 56px;
+  --text-hero-display--line-height: 1.07;
+  --text-hero-display--letter-spacing: -0.28px;
+  --text-hero-display--font-weight: 600;
+
+  /* ─── Spacing (Apple's 8px base + 17px md + 80px section) ───────── */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 17px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-section-tight: 64px;
+  --spacing-section: 80px;
+
+  /* ─── Border radius (Apple's discipline + pill signature) ───────── */
+  --radius-none: 0;
+  --radius-xs: 5px;
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-pearl: 11px;
+  --radius-lg: 18px;
+  --radius-card: 18px;
+  --radius-pill: 9999px;
+  --radius-full: 9999px;
+
+  /* ─── Shadows (Apple's single product drop-shadow) ──────────────── */
+  --shadow-product: rgba(0, 0, 0, 0.22) 3px 5px 30px 0;
+  --shadow-hairline-ring: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-pearl-ring: inset 0 0 0 3px #f0f0f0;
+  --shadow-focus: 0 0 0 2px #ea7c69;
+  --shadow-focus-apple: 0 0 0 2px #0071e3;
+
+  /* ─── Backdrop blur (frosted nav) ───────────────────────────────── */
+  --blur-nav: 20px;
+
+  /* ─── Apple breakpoints + Tailwind aliases ──────────────────────── */
+  --breakpoint-phone-s: 320px;
+  --breakpoint-phone: 375px;
+  --breakpoint-phone-l: 414px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-tablet-l: 1024px;
+  --breakpoint-desktop-s: 1280px;
+  --breakpoint-desktop: 1440px;
+  --breakpoint-desktop-wide: 1920px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-3xl: 1920px;
+
+  /* ─── Easing (Apple's exact curves) ─────────────────────────────── */
+  --ease-apple-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-apple-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --ease-apple-accelerate: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ─── Duration ──────────────────────────────────────────────────── */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-base: 320ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+
+  /* ─── Custom animations ─────────────────────────────────────────── */
+  --animate-pulse-urgent: pulse-urgent 1.5s ease-out infinite;
+  --animate-fade-in-up: fade-in-up 800ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+/* ─── Keyframes ────────────────────────────────────────────────── */
+@keyframes pulse-urgent {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

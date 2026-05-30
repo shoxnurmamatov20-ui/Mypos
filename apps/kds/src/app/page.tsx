@@ -1,5 +1,6 @@
 'use client';
 
+import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { getStoredToken } from '@/lib/api';
@@ -17,8 +18,11 @@ export default function IndexPage() {
   }, [router]);
 
   return (
-    <main className="flex h-screen items-center justify-center bg-neutral-900">
-      <p className="text-2xl text-neutral-400">Yuklanmoqda…</p>
+    <main className="flex h-screen items-center justify-center bg-white dark:bg-[#0b1120]">
+      <Loader2
+        className="h-8 w-8 animate-spin text-[#0f766e] dark:text-[#14b8a6]"
+        aria-hidden="true"
+      />
     </main>
   );
 }

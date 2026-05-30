@@ -21,6 +21,13 @@ class StockMovementResource extends JsonResource
         return [
             'id' => $this->id,
             'ingredient_id' => $this->ingredient_id,
+            'ingredient' => $this->whenLoaded('ingredient', fn () => [
+                'id' => $this->ingredient->id,
+                'name' => $this->ingredient->name,
+                'unit' => $this->ingredient->unit,
+                'cost_per_unit' => (int) $this->ingredient->cost_per_unit,
+                'sku' => $this->ingredient->sku,
+            ]),
             'delta' => (float) $this->delta,
             'balance_after' => (float) $this->balance_after,
             'reason' => $this->reason,

@@ -38,20 +38,20 @@ export function IngredientList({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t('search_placeholder')}
-          className="w-full max-w-md rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-brand-500"
+          className="w-full max-w-md rounded-lg border border-[rgba(22,34,31,0.09)] bg-white px-3 py-2 text-sm text-[#16221f] outline-none focus:border-[#0f766e] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#1a2235] dark:text-white dark:focus:border-teal-500"
         />
       </div>
 
       {isLoading ? (
-        <div className="text-sm text-neutral-500">{t('loading')}</div>
+        <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>
       ) : filtered.length === 0 ? (
-        <div className="rounded-xl border-2 border-dashed border-neutral-300 p-12 text-center text-sm text-neutral-500">
+        <div className="rounded-xl border border-dashed border-[rgba(22,34,31,0.12)] p-12 text-center text-sm text-[#62716d] dark:border-[rgba(255,255,255,0.10)] dark:text-[#94a3b8]">
           {t('empty_ingredients')}
         </div>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white">
+        <div className="overflow-hidden rounded-xl border border-[rgba(22,34,31,0.09)] bg-white dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
           <table className="w-full text-sm">
-            <thead className="bg-neutral-50 text-xs uppercase text-neutral-500">
+            <thead className="bg-[#eef4f3] text-xs uppercase text-[#62716d] dark:bg-[#1a2235] dark:text-[#94a3b8]">
               <tr>
                 <th className="px-4 py-3 text-left">{t('cols.name')}</th>
                 <th className="px-4 py-3 text-left">{t('cols.unit')}</th>
@@ -62,35 +62,46 @@ export function IngredientList({
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-100">
+            <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
               {filtered.map((ing) => (
-                <tr key={ing.id} className="hover:bg-neutral-50">
+                <tr
+                  key={ing.id}
+                  className="hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]"
+                >
                   <td className="px-4 py-3">
-                    <div className="font-medium text-neutral-900">{ing.name.uz}</div>
-                    {ing.sku && <div className="text-xs text-neutral-400">{ing.sku}</div>}
+                    <div className="font-medium text-[#16221f] dark:text-white">
+                      {ing.name.uz}
+                    </div>
+                    {ing.sku && (
+                      <div className="text-xs text-[#62716d] dark:text-[#94a3b8]">
+                        {ing.sku}
+                      </div>
+                    )}
                   </td>
                   <td className="px-4 py-3">
-                    <span className="rounded bg-neutral-100 px-2 py-0.5 text-xs">{ing.unit}</span>
+                    <span className="rounded bg-[#eef4f3] px-2 py-0.5 text-xs text-[#16221f] dark:bg-[#1a2235] dark:text-[#e2e8f0]">
+                      {ing.unit}
+                    </span>
                   </td>
                   <td className="px-4 py-3">
                     <StockLevelBar ingredient={ing} />
                   </td>
-                  <td className="px-4 py-3 text-right font-semibold">
+                  <td className="px-4 py-3 text-right font-semibold text-[#16221f] dark:text-white">
                     {ing.current_stock.toLocaleString('uz', { maximumFractionDigits: 3 })}
                   </td>
-                  <td className="px-4 py-3 text-right text-neutral-500">
+                  <td className="px-4 py-3 text-right text-[#62716d] dark:text-[#94a3b8]">
                     {ing.min_stock !== null
                       ? ing.min_stock.toLocaleString('uz', { maximumFractionDigits: 3 })
                       : '—'}
                   </td>
-                  <td className="px-4 py-3 text-right text-neutral-600">
+                  <td className="px-4 py-3 text-right text-[#62716d] dark:text-[#94a3b8]">
                     {ing.cost_per_unit.toLocaleString('uz')} UZS
                   </td>
                   <td className="px-4 py-3 text-right">
                     <button
                       type="button"
                       onClick={() => setAdjusting(ing)}
-                      className="rounded-lg bg-brand-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-600"
+                      className="rounded-lg bg-[#0f766e] px-3 py-1.5 text-xs font-medium text-white hover:bg-[#0d5e58] dark:bg-[#14b8a6] dark:hover:bg-[#0d9488]"
                     >
                       {t('adjust')}
                     </button>

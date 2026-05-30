@@ -1,3 +1,4 @@
+import { AnalyticsBoot } from '@mypos/analytics';
 import type { Metadata, Viewport } from 'next';
 import { Inter, Manrope } from 'next/font/google';
 import { Providers } from './providers';
@@ -45,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="uz" className={`${inter.variable} ${manrope.variable}`}>
       <body className="min-h-screen bg-neutral-50 text-neutral-900">
+        <AnalyticsBoot app="web-qr" />
         <Providers>{children}</Providers>
       </body>
     </html>

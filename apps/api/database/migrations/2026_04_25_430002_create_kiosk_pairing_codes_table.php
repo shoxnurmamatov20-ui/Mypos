@@ -24,7 +24,9 @@ return new class extends Migration {
             // Device that consumed this code; null until paired
             $table->uuid('device_id')->nullable();
 
-            $table->timestamp('expires_at');
+            // useCurrent() satisfies MySQL strict mode; insert paths always
+            // set this explicitly to created_at + TTL.
+            $table->timestamp('expires_at')->useCurrent();
             $table->timestamp('consumed_at')->nullable();
 
             // Admin (users.uuid) who generated the code
@@ -53,17 +55,19 @@ return new class extends Migration {
                 ->nullOnDelete();
         });
 
-        // Row-Level Security — tenant isolation (defense-in-depth)
-        DB::statement('ALTER TABLE kiosk_pairing_codes ENABLE ROW LEVEL SECURITY');
-        DB::statement("
-            CREATE POLICY tenant_isolation_kiosk_pairing_codes ON kiosk_pairing_codes
-            USING (tenant_id::text = current_setting('app.current_tenant_id', true))
-        ");
+        // Row-Level Security — Postgres only (ADR-0005, 2026-05-10).
+        if (DB::connection()->getDriverName() === 'pgsql') {
+            DB::statement('ALTER TABLE kiosk_pairing_codes ENABLE ROW LEVEL SECURITY');
+            DB::statement("
+                CREATE POLICY tenant_isolation_kiosk_pairing_codes ON kiosk_pairing_codes
+                USING (tenant_id::text = current_setting('app.current_tenant_id', true))
+            ");
+        }
     }
 
     public function down(): void
     {
-        if (Schema::hasTable('kiosk_pairing_codes')) {
+        if (Schema::hasTable('kiosk_pairing_codes') && DB::connection()->getDriverName() === 'pgsql') {
             DB::statement('DROP POLICY IF EXISTS tenant_isolation_kiosk_pairing_codes ON kiosk_pairing_codes');
             DB::statement('ALTER TABLE kiosk_pairing_codes DISABLE ROW LEVEL SECURITY');
         }

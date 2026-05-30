@@ -75,7 +75,7 @@ export function Comparison() {
           <h2 className="mt-sm text-display-lg text-ink font-display font-semibold">
             {t('title')}
           </h2>
-          <p className="mx-auto mt-md max-w-xl text-lead text-ink font-display">
+          <p className="mx-auto mt-md max-w-[36rem] text-lead text-ink font-display">
             {t('subtitle')}
           </p>
         </FadeUp>

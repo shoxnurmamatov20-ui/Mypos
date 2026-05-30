@@ -27,9 +27,9 @@ export function CustomersManager() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={t('search_placeholder')}
-          className="w-full max-w-md rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+          className="w-full max-w-md rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2 text-sm focus:border-[#0f766e] dark:focus:border-teal-500 focus:outline-none"
         />
-        <span className="ml-auto text-sm text-neutral-500">
+        <span className="ml-auto text-sm text-[#62716d] dark:text-[#94a3b8]">
           {total} {t('total_suffix')}
         </span>
       </div>

@@ -112,10 +112,14 @@ class PublicRestaurantController extends Controller
         }
 
         if ($params['search'] !== null && $params['search'] !== '') {
-            $needle = mb_strtolower($params['search']);
+            // MySQL utf8mb4_unicode_ci collation makes LIKE case-insensitive
+            // by default — drop the redundant LOWER() wrapper that defeats
+            // any future btree index on `name`/`slug`. Postgres rollback path
+            // (ADR-0005) would need ILIKE here.
+            $needle = $params['search'];
             $query->where(function (Builder $q) use ($needle): void {
-                $q->whereRaw('LOWER(name) LIKE ?', ['%' . $needle . '%'])
-                    ->orWhereRaw('LOWER(slug) LIKE ?', ['%' . $needle . '%']);
+                $q->where('name', 'like', '%' . $needle . '%')
+                    ->orWhere('slug', 'like', '%' . $needle . '%');
             });
         }
 

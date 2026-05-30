@@ -15,7 +15,9 @@ return [
     |
     */
 
-    'default' => env('CACHE_STORE', 'database'),
+    // Default 'redis' (was 'database') — every Cache::remember() against the
+    // 'database' fallback writes a row to MySQL, defeating the point. ADR-0005.
+    'default' => env('CACHE_STORE', 'redis'),
 
     /*
     |--------------------------------------------------------------------------

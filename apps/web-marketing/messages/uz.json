@@ -177,6 +177,9 @@
   "testimonials": {
     "section_label": "Mijozlar",
     "title": "Restoran egalari nima deyishadi",
+    "stat_restaurants": "restoran ishonadi",
+    "stat_satisfaction": "mijozlar mamnun",
+    "stat_brands": "brend hamkor",
     "items": {
       "one": {
         "quote": "MyPOS-ga o'tganimizdan keyin kassa navbati yo'qoldi. Buyurtma 2 barobar tez tayyorlanmoqda, xodimlar ham rozi.",

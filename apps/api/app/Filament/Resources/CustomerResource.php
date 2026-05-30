@@ -139,8 +139,8 @@ class CustomerResource extends Resource
                     ->getStateUsing(fn (Customer $record): string => $record->fullName())
                     ->searchable(query: function ($query, string $search) {
                         return $query
-                            ->where('first_name', 'ilike', "%{$search}%")
-                            ->orWhere('last_name', 'ilike', "%{$search}%");
+                            ->where('first_name', 'like', "%{$search}%")
+                            ->orWhere('last_name', 'like', "%{$search}%");
                     })
                     ->weight('semibold'),
                 Tables\Columns\TextColumn::make('phone')

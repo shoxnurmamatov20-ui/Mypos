@@ -5,12 +5,12 @@ import { useTranslations } from 'next-intl';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 const STATUS_COLORS: Record<keyof OrdersByStatus, string> = {
-  pending: '#f59e0b',
-  preparing: '#0ea5e9',
-  ready: '#10b981',
+  pending: '#b7791f',
+  preparing: '#2563eb',
+  ready: '#0f766e',
   served: '#6366f1',
-  completed: '#737373',
-  cancelled: '#ef4444',
+  completed: '#18794e',
+  cancelled: '#b42318',
 };
 
 export function OrdersStatusPie({ data }: { data: OrdersByStatus }) {
@@ -27,13 +27,13 @@ export function OrdersStatusPie({ data }: { data: OrdersByStatus }) {
     .filter((r) => r.value > 0);
 
   return (
-    <div className="rounded-xl border border-neutral-200 bg-white p-5 shadow-sm">
-      <h2 className="mb-4 text-sm font-semibold text-neutral-900">
+    <div className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-5 dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
+      <h2 className="mb-4 text-sm font-semibold text-[#16221f] dark:text-white">
         {t('charts.status_distribution_title')}
       </h2>
 
       {rows.length === 0 ? (
-        <div className="flex h-[260px] items-center justify-center rounded-lg border-2 border-dashed border-neutral-300 text-sm text-neutral-500">
+        <div className="flex h-[260px] items-center justify-center rounded-lg border border-dashed border-[rgba(22,34,31,0.12)] text-sm text-[#62716d] dark:border-[rgba(255,255,255,0.10)] dark:text-[#94a3b8]">
           {t('empty')}
         </div>
       ) : (
@@ -54,9 +54,11 @@ export function OrdersStatusPie({ data }: { data: OrdersByStatus }) {
               </Pie>
               <Tooltip
                 contentStyle={{
+                  background: '#fff',
+                  border: '1px solid rgba(22,34,31,0.09)',
+                  borderRadius: 10,
                   fontSize: 12,
-                  borderRadius: 8,
-                  border: '1px solid #e5e5e5',
+                  boxShadow: '0 4px 20px rgba(18,34,31,0.08)',
                 }}
               />
             </PieChart>
@@ -68,8 +70,8 @@ export function OrdersStatusPie({ data }: { data: OrdersByStatus }) {
                   className="inline-block h-2.5 w-2.5 rounded-full"
                   style={{ backgroundColor: r.color }}
                 />
-                <span className="text-neutral-700">{r.name}</span>
-                <span className="ml-auto font-semibold text-neutral-900">
+                <span className="text-[#16221f] dark:text-[#e2e8f0]">{r.name}</span>
+                <span className="ml-auto font-semibold text-[#16221f] dark:text-white">
                   {r.value}
                 </span>
               </li>

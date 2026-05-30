@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Requests\V1\Reports;
+
+use Illuminate\Validation\Rule;
+
+class CashflowReportRequest extends DateRangeReportRequest
+{
+    /** @return array<string, mixed> */
+    public function rules(): array
+    {
+        return array_merge(parent::rules(), [
+            'group_by' => ['nullable', Rule::in(['day', 'week', 'month'])],
+        ]);
+    }
+}

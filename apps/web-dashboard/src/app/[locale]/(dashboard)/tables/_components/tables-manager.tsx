@@ -46,8 +46,8 @@ export function TablesManager() {
         onChanged={refetchAll}
       />
 
-      <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
-        <div className="flex gap-1 rounded-lg bg-neutral-100 p-1">
+      <div className="flex items-center justify-between border-b border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] pb-3">
+        <div className="flex gap-1 rounded-lg bg-[#eef4f3] dark:bg-[#1a2235] p-1">
           <ViewButton active={view === 'list'} onClick={() => setView('list')}>
             {t('views.list')}
           </ViewButton>
@@ -55,7 +55,7 @@ export function TablesManager() {
             {t('views.floor_plan')}
           </ViewButton>
         </div>
-        <span className="text-sm text-neutral-500">
+        <span className="text-sm text-[#62716d] dark:text-[#94a3b8]">
           {tables.length} {t('tables_count_suffix')}
         </span>
       </div>
@@ -90,8 +90,8 @@ function ViewButton({
       className={cn(
         'rounded-md px-4 py-1.5 text-sm font-medium transition',
         active
-          ? 'bg-white text-neutral-900 shadow-sm'
-          : 'text-neutral-500 hover:text-neutral-900',
+          ? 'bg-white dark:bg-[#111827] text-[#16221f] dark:text-white'
+          : 'text-[#62716d] dark:text-[#94a3b8] hover:text-[#16221f] dark:hover:text-white',
       )}
     >
       {children}

@@ -1,5 +1,5 @@
 import type { MyPosApiClient } from './client';
-import type { ResourceResponse } from './menu';
+import type { PaginatedResponse, ResourceResponse } from './menu';
 
 export type PaymentProvider =
   | 'cash'
@@ -53,7 +53,30 @@ export type RefundPaymentInput = {
   amount: number;
 };
 
+export type ListPaymentsParams = {
+  status?: PaymentStatus;
+  provider?: PaymentProvider;
+  from?: string;
+  to?: string;
+  per_page?: number;
+  page?: number;
+};
+
+const toQueryString = (
+  params?: Record<string, string | number | boolean | undefined | null>,
+): string => {
+  if (!params) return '';
+  const entries = Object.entries(params).filter(
+    ([, v]) => v !== undefined && v !== null && v !== '',
+  );
+  if (entries.length === 0) return '';
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
+};
+
 export const paymentsApi = {
+  /** Paginated payment list for the manager panel (GET /api/v1/payments). */
+  list: (client: MyPosApiClient, params?: ListPaymentsParams) =>
+    client.get<PaginatedResponse<Payment>>(`/api/v1/payments${toQueryString(params)}`),
   createIntent: (client: MyPosApiClient, input: CreatePaymentIntentInput) =>
     client.post<CreatePaymentIntentResponse>('/api/v1/payments', input),
   get: (client: MyPosApiClient, id: string) =>

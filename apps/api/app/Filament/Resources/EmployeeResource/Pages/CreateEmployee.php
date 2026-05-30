@@ -61,15 +61,35 @@ class CreateEmployee extends CreateRecord
         $data['user_uuid'] = $user->uuid;
 
         if (empty($data['employee_code'])) {
-            $data['employee_code'] = 'EMP-' . str_pad(
-                (string) (Employee::withoutGlobalScopes()->count() + 1),
-                4,
-                '0',
-                STR_PAD_LEFT,
-            );
+            // Audit C-2 (ADR-0005 follow-up): the previous global count()
+            // leaked the platform-wide employee total AND collided codes
+            // across tenants. Generate per-tenant — same algorithm the
+            // CreateEmployeeAction uses for API hires.
+            $data['employee_code'] = $this->generateEmployeeCode((string) $tenantId);
         }
 
         return $data;
+    }
+
+    /**
+     * Per-tenant sequential employee code with collision retry. Mirrors
+     * \App\Domain\Employee\Actions\CreateEmployeeAction::generateEmployeeCode.
+     */
+    private function generateEmployeeCode(string $tenantId): string
+    {
+        $count = Employee::withoutGlobalScopes()
+            ->where('tenant_id', $tenantId)
+            ->count();
+
+        do {
+            $candidate = 'EMP-' . str_pad((string) (++$count), 4, '0', STR_PAD_LEFT);
+            $exists = Employee::withoutGlobalScopes()
+                ->where('tenant_id', $tenantId)
+                ->where('employee_code', $candidate)
+                ->exists();
+        } while ($exists);
+
+        return $candidate;
     }
 
     /**

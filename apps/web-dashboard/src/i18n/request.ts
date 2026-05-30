@@ -1,5 +1,8 @@
 import { getRequestConfig } from 'next-intl/server';
+import type { AbstractIntlMessages } from 'next-intl';
 import { routing } from './routing';
+
+type Messages = AbstractIntlMessages;
 
 /**
  * Phase 4 fallback strategy:
@@ -8,29 +11,29 @@ import { routing } from './routing';
  *     this gives kz/ky/tg readers a safer fallback than uz transliteration.
  *   - We deep-merge the active locale ON TOP of ru so present keys still win.
  */
-async function loadMessagesWithFallback(locale: string): Promise<Record<string, unknown>> {
-  const active = ((await import(`../../messages/${locale}.json`)) as { default: Record<string, unknown> }).default;
+async function loadMessagesWithFallback(locale: string): Promise<Messages> {
+  const active = ((await import(`../../messages/${locale}.json`)) as { default: Messages }).default;
   if (locale === 'ru' || locale === routing.defaultLocale) {
     return active;
   }
-  const ru = ((await import(`../../messages/ru.json`)) as { default: Record<string, unknown> }).default;
+  const ru = ((await import(`../../messages/ru.json`)) as { default: Messages }).default;
   return deepMerge(ru, active);
 }
 
-function deepMerge(base: Record<string, unknown>, over: Record<string, unknown>): Record<string, unknown> {
-  const out: Record<string, unknown> = { ...base };
-  for (const [k, v] of Object.entries(over)) {
+function deepMerge(base: Messages, over: Messages): Messages {
+  const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
+  for (const [k, v] of Object.entries(over as Record<string, unknown>)) {
     const baseV = out[k];
     if (
       v && typeof v === 'object' && !Array.isArray(v) &&
       baseV && typeof baseV === 'object' && !Array.isArray(baseV)
     ) {
-      out[k] = deepMerge(baseV as Record<string, unknown>, v as Record<string, unknown>);
+      out[k] = deepMerge(baseV as Messages, v as Messages);
     } else {
       out[k] = v;
     }
   }
-  return out;
+  return out as Messages;
 }
 
 export default getRequestConfig(async ({ requestLocale }) => {

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -121,6 +122,20 @@ class Tenant extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    /**
+     * Business owners (CEOs) of this tenant via the `tenant_owners` pivot.
+     * A tenant typically has 1 primary owner, plus optional co-owners or
+     * partners listed for cross-tenant visibility.
+     *
+     * @return BelongsToMany<User>
+     */
+    public function owners(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'tenant_owners')
+            ->withPivot(['is_primary', 'joined_at'])
+            ->withTimestamps();
     }
 
     /**

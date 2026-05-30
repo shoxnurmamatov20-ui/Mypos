@@ -52,17 +52,19 @@ export function AdjustStockDialog({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
+        className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-[#111827]"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="mb-1 text-lg font-semibold text-neutral-900">{t('adjust_title')}</h2>
-        <p className="mb-4 text-sm text-neutral-500">
+        <h2 className="mb-1 text-lg font-semibold text-[#16221f] dark:text-white">
+          {t('adjust_title')}
+        </h2>
+        <p className="mb-4 text-sm text-[#62716d] dark:text-[#94a3b8]">
           {ingredient.name.uz} • {t('current')}: <strong>{ingredient.current_stock}</strong>{' '}
           {ingredient.unit}
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block text-xs font-medium text-neutral-700">
+            <label className="mb-1 block text-xs font-medium text-[#16221f] dark:text-[#e2e8f0]">
               {t('delta')} ({ingredient.unit})
             </label>
             <input
@@ -72,18 +74,18 @@ export function AdjustStockDialog({
               onChange={(e) => setDelta(e.target.value)}
               placeholder={t('delta_placeholder')}
               autoFocus
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-brand-500"
+              className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] bg-white px-3 py-2 text-sm text-[#16221f] outline-none focus:border-[#0f766e] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#1a2235] dark:text-white dark:focus:border-teal-500"
             />
-            <p className="mt-1 text-xs text-neutral-400">{t('delta_hint')}</p>
+            <p className="mt-1 text-xs text-[#62716d] dark:text-[#94a3b8]">{t('delta_hint')}</p>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-neutral-700">
+            <label className="mb-1 block text-xs font-medium text-[#16221f] dark:text-[#e2e8f0]">
               {t('reason')}
             </label>
             <select
               value={reason}
               onChange={(e) => setReason(e.target.value as StockMovementReason)}
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-brand-500"
+              className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] bg-white px-3 py-2 text-sm text-[#16221f] outline-none focus:border-[#0f766e] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#1a2235] dark:text-white dark:focus:border-teal-500"
             >
               {REASONS.map((r) => (
                 <option key={r} value={r}>
@@ -93,28 +95,28 @@ export function AdjustStockDialog({
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-neutral-700">
+            <label className="mb-1 block text-xs font-medium text-[#16221f] dark:text-[#e2e8f0]">
               {t('notes')}
             </label>
             <textarea
               rows={2}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-brand-500"
+              className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] bg-white px-3 py-2 text-sm text-[#16221f] outline-none focus:border-[#0f766e] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#1a2235] dark:text-white dark:focus:border-teal-500"
             />
           </div>
           <div className="flex justify-end gap-2 pt-2">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+              className="rounded-lg border border-[rgba(22,34,31,0.09)] px-4 py-2 text-sm font-medium text-[#16221f] hover:bg-[#eef4f3] dark:border-[rgba(255,255,255,0.07)] dark:text-[#e2e8f0] dark:hover:bg-[#1a2235]"
             >
               {t('cancel')}
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600 disabled:opacity-50"
+              className="rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0d5e58] disabled:opacity-50 dark:bg-[#14b8a6] dark:hover:bg-[#0d9488]"
             >
               {submitting ? t('saving') : t('save')}
             </button>

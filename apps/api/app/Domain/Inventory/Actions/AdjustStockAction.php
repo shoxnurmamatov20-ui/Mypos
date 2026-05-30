@@ -7,6 +7,7 @@ namespace App\Domain\Inventory\Actions;
 use App\Domain\Inventory\Enums\StockMovementReason;
 use App\Domain\Inventory\Models\Ingredient;
 use App\Domain\Inventory\Models\StockMovement;
+use App\Events\Inventory\LowStockAlert;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -48,17 +49,18 @@ class AdjustStockAction
             ]);
         }
 
-        return DB::transaction(function () use ($input, $reasonEnum, $delta): StockMovement {
+        [$movement, $alertIngredient] = DB::transaction(function () use ($input, $reasonEnum, $delta): array {
             /** @var Ingredient $ingredient */
             $ingredient = Ingredient::query()
                 ->lockForUpdate()
                 ->findOrFail($input['ingredient_id']);
 
-            $newBalance = (float) $ingredient->current_stock + $delta;
+            $previousBalance = (float) $ingredient->current_stock;
+            $newBalance = $previousBalance + $delta;
 
             $ingredient->update(['current_stock' => $newBalance]);
 
-            return StockMovement::create([
+            $movement = StockMovement::create([
                 'tenant_id' => $ingredient->tenant_id,
                 'ingredient_id' => $ingredient->id,
                 'delta' => $delta,
@@ -72,6 +74,26 @@ class AdjustStockAction
                 'created_by' => $input['created_by'] ?? null,
                 'created_at' => now(),
             ]);
+
+            // Detect low-stock crossing: alert only on the edge (previousBalance was
+            // above min_stock, newBalance is at-or-below). Avoids spamming every
+            // adjust call after the alert has already fired.
+            $minStock = $ingredient->min_stock !== null ? (float) $ingredient->min_stock : null;
+            $shouldAlert = $minStock !== null
+                && $previousBalance > $minStock
+                && $newBalance <= $minStock;
+
+            return [$movement, $shouldAlert ? $ingredient->fresh() : null];
         });
+
+        if ($alertIngredient !== null && $alertIngredient->min_stock !== null) {
+            event(new LowStockAlert(
+                $alertIngredient,
+                (float) $alertIngredient->current_stock,
+                (float) $alertIngredient->min_stock,
+            ));
+        }
+
+        return $movement;
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('phone', 32);
             $table->string('ip_address', 45)->nullable();
             $table->boolean('success')->default(false);
-            $table->timestamp('attempted_at');
+            $table->timestamp('attempted_at')->useCurrent();
 
             $table->timestamps();
 

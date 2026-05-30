@@ -9,9 +9,9 @@ import { EmployeeFormDialog } from './employee-form-dialog';
 import { ShiftHistoryDialog } from './shift-history-dialog';
 
 const STATUS_CLASS: Record<string, string> = {
-  active: 'bg-mint-100 text-mint-700',
-  on_leave: 'bg-gold-100 text-gold-700',
-  terminated: 'bg-red-100 text-red-700',
+  active: 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400',
+  on_leave: 'bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400',
+  terminated: 'bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400',
 };
 
 export function EmployeeList({
@@ -48,16 +48,16 @@ export function EmployeeList({
         <button
           type="button"
           onClick={() => setEditing('new')}
-          className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600"
+          className="rounded-lg bg-[#0f766e] hover:bg-[#0d5e58] dark:bg-[#14b8a6] dark:hover:bg-[#0d9488] px-4 py-2 text-sm font-semibold text-white"
         >
           + {t('add_employee')}
         </button>
       </div>
 
       {isLoading ? (
-        <div className="text-sm text-neutral-500">{t('loading')}</div>
+        <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>
       ) : employees.length === 0 ? (
-        <div className="rounded-xl border-2 border-dashed border-neutral-300 p-12 text-center text-sm text-neutral-500">
+        <div className="rounded-xl border border-dashed border-[rgba(22,34,31,0.12)] dark:border-[rgba(255,255,255,0.10)] p-12 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
           {t('empty')}
         </div>
       ) : (
@@ -73,27 +73,27 @@ export function EmployeeList({
             return (
               <div
                 key={e.id}
-                className="rounded-xl border border-neutral-200 bg-white p-4 transition hover:shadow-md"
+                className="rounded-xl border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] p-4 transition hover:border-[rgba(22,34,31,0.18)] dark:hover:border-[rgba(255,255,255,0.14)]"
               >
                 <div className="flex items-start gap-3">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-brand-100 font-semibold text-brand-700">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-teal-50 dark:bg-teal-950/50 font-semibold text-[#0f766e] dark:text-teal-400">
                     {initials || '?'}
                   </div>
                   <div className="min-w-0 flex-1">
                     <button
                       type="button"
                       onClick={() => setViewingShifts(e)}
-                      className="truncate text-left font-semibold text-neutral-900 hover:text-brand-600 hover:underline"
+                      className="truncate text-left font-semibold text-[#16221f] dark:text-white hover:text-[#0f766e] dark:hover:text-teal-400 hover:underline"
                     >
                       {name}
                     </button>
-                    <p className="truncate text-sm text-neutral-500">{e.employee_code}</p>
-                    <p className="truncate text-xs text-neutral-400">{e.position.label}</p>
+                    <p className="truncate text-sm text-[#62716d] dark:text-[#94a3b8]">{e.employee_code}</p>
+                    <p className="truncate text-xs text-[#62716d] dark:text-[#94a3b8]">{e.position.label}</p>
                   </div>
                   <span
                     className={
                       'rounded-full px-2 py-0.5 text-xs font-medium ' +
-                      (STATUS_CLASS[e.status.value] ?? 'bg-neutral-100 text-neutral-700')
+                      (STATUS_CLASS[e.status.value] ?? 'bg-[#eef4f3] dark:bg-[#1a2235] text-[#16221f] dark:text-[#e2e8f0]')
                     }
                   >
                     {e.status.label}
@@ -101,35 +101,35 @@ export function EmployeeList({
                 </div>
 
                 {isOnShift(e) && (
-                  <div className="mt-3 flex items-center gap-2 rounded-lg bg-mint-50 px-3 py-2 text-xs font-medium text-mint-700">
-                    <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-mint-500" />
+                  <div className="mt-3 flex items-center gap-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 px-3 py-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                    <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-500 dark:bg-emerald-400" />
                     {t('on_shift')}
                   </div>
                 )}
 
                 {e.user?.phone && (
-                  <p className="mt-3 truncate text-xs text-neutral-500">{e.user.phone}</p>
+                  <p className="mt-3 truncate text-xs text-[#62716d] dark:text-[#94a3b8]">{e.user.phone}</p>
                 )}
 
                 <div className="mt-3 flex justify-end gap-3 text-xs">
                   <button
                     type="button"
                     onClick={() => setViewingShifts(e)}
-                    className="font-medium text-neutral-600 hover:underline"
+                    className="font-medium text-[#62716d] dark:text-[#94a3b8] hover:underline"
                   >
                     {t('shifts')}
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditing(e)}
-                    className="font-medium text-brand-600 hover:underline"
+                    className="font-medium text-[#0f766e] dark:text-teal-400 hover:underline"
                   >
                     {t('edit')}
                   </button>
                   <button
                     type="button"
                     onClick={() => handleDelete(e)}
-                    className="font-medium text-danger hover:underline"
+                    className="font-medium text-red-600 dark:text-red-400 hover:underline"
                   >
                     {t('delete')}
                   </button>

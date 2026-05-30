@@ -95,19 +95,19 @@ export function OrdersManager() {
       />
 
       {ordersQuery.isLoading && (
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 text-sm text-neutral-500">
+        <div className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-6 text-sm text-[#62716d] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827] dark:text-[#94a3b8]">
           {t('loading')}
         </div>
       )}
 
       {ordersQuery.isError && (
-        <div className="rounded-xl border border-danger bg-danger/10 p-4 text-sm text-danger">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-600 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
           {t('load_failed')}
         </div>
       )}
 
       {!ordersQuery.isLoading && !ordersQuery.isError && filtered.length === 0 && (
-        <div className="rounded-xl border-2 border-dashed border-neutral-300 p-12 text-center text-sm text-neutral-500">
+        <div className="rounded-xl border border-dashed border-[rgba(22,34,31,0.12)] p-12 text-center text-sm text-[#62716d] dark:border-[rgba(255,255,255,0.10)] dark:text-[#94a3b8]">
           {t('empty')}
         </div>
       )}

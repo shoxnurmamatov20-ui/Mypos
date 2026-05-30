@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# MyPOS — PostgreSQL backup script
+# MyPOS — MySQL backup script (ADR-0005, 2026-05-10 — was pg_dump)
 # Usage: ./backup-db.sh [destination_prefix]
 #
 # Runs via cron in production (daily, 3 AM UZ):
@@ -21,17 +21,26 @@ OUTPUT="${TMPDIR}/${FILENAME}"
 
 echo "[$(date)] Starting backup: ${FILENAME}"
 
-# Dump + compress
-PGPASSWORD="${DB_PASSWORD}" pg_dump \
+# Dump + gzip. --single-transaction gives a consistent snapshot on InnoDB
+# without locking other writes; --routines/--triggers/--events preserve
+# stored programs; --set-gtid-purged=OFF avoids GTID pollution on replica
+# restore; --no-tablespaces avoids the InnoDB tablespace permission warning
+# that otherwise breaks the script under set -e.
+mysqldump \
     --host="${DB_HOST}" \
     --port="${DB_PORT}" \
-    --username="${DB_USERNAME}" \
-    --dbname="${DB_DATABASE}" \
-    --format=custom \
-    --compress=9 \
-    --no-owner \
-    --no-privileges \
-    --file="${OUTPUT}"
+    --user="${DB_USERNAME}" \
+    --password="${DB_PASSWORD}" \
+    --single-transaction \
+    --quick \
+    --routines \
+    --triggers \
+    --events \
+    --set-gtid-purged=OFF \
+    --no-tablespaces \
+    --default-character-set=utf8mb4 \
+    "${DB_DATABASE}" \
+    | gzip -9 > "${OUTPUT}"
 
 echo "[$(date)] Dump size: $(du -h "${OUTPUT}" | cut -f1)"
 

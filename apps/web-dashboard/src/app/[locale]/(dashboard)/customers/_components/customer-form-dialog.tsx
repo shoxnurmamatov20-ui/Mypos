@@ -76,10 +76,10 @@ export function CustomerFormDialog({
       onClick={onClose}
     >
       <div
-        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl"
+        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white dark:bg-[#111827] p-6 shadow-[0_4px_20px_rgba(18,34,31,0.08)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="mb-4 text-xl font-semibold text-neutral-900">
+        <h2 className="mb-4 text-xl font-semibold text-[#16221f] dark:text-white">
           {isEdit ? t('edit_customer') : t('add_customer')}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -91,7 +91,7 @@ export function CustomerFormDialog({
                 onChange={(e) => setFirstName(e.target.value)}
                 required
                 maxLength={64}
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
               />
             </Field>
             <Field label={t('last_name')}>
@@ -100,7 +100,7 @@ export function CustomerFormDialog({
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 maxLength={64}
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
               />
             </Field>
           </div>
@@ -113,7 +113,7 @@ export function CustomerFormDialog({
                 required
                 maxLength={32}
                 placeholder="+998901234567"
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
               />
             </Field>
             <Field label={t('email')}>
@@ -122,7 +122,7 @@ export function CustomerFormDialog({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 maxLength={128}
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
               />
             </Field>
           </div>
@@ -132,14 +132,14 @@ export function CustomerFormDialog({
                 type="date"
                 value={birthday ?? ''}
                 onChange={(e) => setBirthday(e.target.value)}
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
               />
             </Field>
             <Field label={t('locale')}>
               <select
                 value={locale}
                 onChange={(e) => setLocale(e.target.value as 'uz' | 'ru' | 'en')}
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
               >
                 <option value="uz">O&apos;zbek</option>
                 <option value="ru">Русский</option>
@@ -150,7 +150,7 @@ export function CustomerFormDialog({
               <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value as 'male' | 'female' | 'other' | '')}
-                className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
               >
                 <option value="">—</option>
                 <option value="male">{t('gender_male')}</option>
@@ -165,7 +165,7 @@ export function CustomerFormDialog({
               value={tagsText}
               onChange={(e) => setTagsText(e.target.value)}
               placeholder="VIP, regular"
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+              className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
             />
           </Field>
           <Field label={t('notes')}>
@@ -174,21 +174,21 @@ export function CustomerFormDialog({
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
               maxLength={2000}
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2"
+              className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
             />
           </Field>
-          <div className="flex justify-end gap-2 border-t border-neutral-200 pt-4">
+          <div className="flex justify-end gap-2 border-t border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] pt-4">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+              className="rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] px-4 py-2 text-sm font-medium text-[#16221f] dark:text-[#e2e8f0] hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]"
             >
               {t('cancel')}
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600 disabled:opacity-60"
+              className="rounded-lg bg-[#0f766e] hover:bg-[#0d5e58] dark:bg-[#14b8a6] dark:hover:bg-[#0d9488] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
             >
               {submitting ? t('saving') : t('save')}
             </button>
@@ -202,7 +202,7 @@ export function CustomerFormDialog({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-neutral-700">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{label}</span>
       {children}
     </label>
   );

@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesSeeder::class,
+            RegionSeeder::class,
+            DistrictSeeder::class,
             DemoTenantSeeder::class,
             DemoMenuSeeder::class,
             DemoTablesSeeder::class,
@@ -19,6 +21,7 @@ class DatabaseSeeder extends Seeder
             DemoCustomersSeeder::class,
             DemoEmployeesSeeder::class,
             DemoInventorySeeder::class,
+            ClinicSeeder::class,
         ]);
     }
 }

@@ -1,0 +1,174 @@
+{
+  "common": {
+    "loading": "Загрузка...",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "close": "Закрыть",
+    "retry": "Повторить",
+    "search": "Поиск",
+    "all": "Все",
+    "back": "Назад",
+    "confirm": "Подтвердить",
+    "yes": "Да",
+    "no": "Нет",
+    "today": "Сегодня",
+    "none": "—"
+  },
+  "errors": {
+    "generic": "Произошла ошибка",
+    "network": "Ошибка соединения с интернетом",
+    "unauthorized": "Требуется авторизация",
+    "load_failed": "Не удалось загрузить данные"
+  },
+  "login": {
+    "redirecting": "Перенаправление в портал MyPOS…"
+  },
+  "sidebar": {
+    "brand": "MyPOS Касса",
+    "role": "Кассир",
+    "group_work": "Работа",
+    "group_session": "Смена",
+    "pos": "Касса",
+    "orders": "Заказы",
+    "payments": "Платежи",
+    "shift": "Смена",
+    "logout": "Выйти"
+  },
+  "topbar": {
+    "home": "Касса",
+    "pos": "Касса",
+    "orders": "Заказы",
+    "payments": "Платежи",
+    "shift": "Смена"
+  },
+  "user_menu": {
+    "role_cashier": "Кассир",
+    "logout": "Выйти"
+  },
+  "shift_badge": {
+    "open": "Смена открыта",
+    "closed": "Смена закрыта",
+    "on_break": "На перерыве",
+    "no_shift": "Нет смены"
+  },
+  "pos": {
+    "title": "Касса",
+    "subtitle": "Соберите заказ и примите оплату",
+    "search_placeholder": "Поиск блюда...",
+    "all_categories": "Все",
+    "cart_title": "Заказ",
+    "cart_empty": "Корзина пуста",
+    "cart_empty_hint": "Выберите блюда для заказа",
+    "qty": "Кол-во",
+    "subtotal": "Подытог",
+    "tax": "Налог",
+    "discount": "Скидка",
+    "total": "Итого",
+    "clear_cart": "Очистить",
+    "charge": "Принять оплату",
+    "charge_amount": "Оплатить {amount}",
+    "order_placed": "Заказ принят",
+    "order_type": "Тип заказа",
+    "dine_in": "В зале",
+    "takeaway": "С собой",
+    "delivery": "Доставка",
+    "out_of_stock": "Нет в наличии",
+    "no_items": "В этой категории нет блюд",
+    "added": "Добавлено",
+    "remove": "Удалить"
+  },
+  "orders": {
+    "title": "Заказы",
+    "subtitle": "Активные и завершённые заказы",
+    "filter_all": "Все",
+    "filter_active": "Активные",
+    "filter_pending": "Ожидают",
+    "filter_preparing": "Готовятся",
+    "filter_ready": "Готовы",
+    "filter_completed": "Завершённые",
+    "empty": "Заказы не найдены",
+    "order_no": "Заказ №",
+    "items_count": "{count} блюд",
+    "guests": "{count} гостей",
+    "placed_at": "Принят",
+    "total": "Итого",
+    "mark_ready": "Отметить готовым",
+    "mark_served": "Отметить поданным",
+    "mark_completed": "Завершить",
+    "status": {
+      "draft": "Черновик",
+      "pending": "Ожидает",
+      "preparing": "Готовится",
+      "ready": "Готов",
+      "served": "Подан",
+      "completed": "Завершён",
+      "cancelled": "Отменён",
+      "refunded": "Возвращён"
+    },
+    "payment": {
+      "unpaid": "Не оплачен",
+      "partial": "Частично",
+      "paid": "Оплачен",
+      "refunded": "Возвращён",
+      "void": "Аннулирован"
+    }
+  },
+  "payments": {
+    "title": "Платежи",
+    "subtitle": "Платежи за смену",
+    "empty": "Платежи не найдены",
+    "total_collected": "Всего собрано",
+    "count": "Количество платежей",
+    "cash_total": "Наличные",
+    "card_total": "Карта",
+    "amount": "Сумма",
+    "method": "Способ",
+    "time": "Время",
+    "order": "Заказ",
+    "status_label": "Статус",
+    "methods": {
+      "cash": "Наличные",
+      "card": "Карта",
+      "click": "Click",
+      "payme": "Payme",
+      "uzum": "Uzum",
+      "other": "Другое"
+    },
+    "statuses": {
+      "pending": "Ожидает",
+      "paid": "Оплачен",
+      "failed": "Ошибка",
+      "refunded": "Возвращён"
+    }
+  },
+  "shift": {
+    "title": "Смена",
+    "subtitle": "Управление сменой и статистика",
+    "current_shift": "Текущая смена",
+    "no_open_shift": "Нет открытой смены",
+    "no_open_shift_hint": "Откройте смену, чтобы начать работу",
+    "clock_in": "Открыть смену",
+    "clock_out": "Закрыть смену",
+    "start_break": "Перерыв",
+    "end_break": "Завершить перерыв",
+    "on_break": "На перерыве",
+    "started_at": "Начата",
+    "worked": "Отработано",
+    "break_total": "Перерыв",
+    "stats_title": "Показатели смены",
+    "orders_count": "Заказы",
+    "revenue": "Выручка",
+    "avg_order": "Средний чек",
+    "tips": "Чаевые",
+    "recent_shifts": "Последние смены",
+    "duration": "Длительность",
+    "date": "Дата",
+    "statuses": {
+      "scheduled": "Запланирована",
+      "open": "Открыта",
+      "closed": "Закрыта",
+      "missed": "Пропущена",
+      "in_progress": "В процессе"
+    }
+  }
+}

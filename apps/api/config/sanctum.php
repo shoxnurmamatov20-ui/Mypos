@@ -15,11 +15,17 @@ return [
     |
     */
 
+    /*
+     * PORT-2 (2026-05-10): every web-* app port + production wildcards.
+     * The stateful list lets a request from these origins ride the
+     * session cookie + Sanctum guard — required for the universal
+     * `web-portal` (port 3000) to mint a session that the other apps
+     * (3001–3007 in dev, *.mypos.uz in prod) all trust.
+     */
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
-        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
+        'localhost,localhost:3000,localhost:3001,localhost:3002,localhost:3003,localhost:3004,localhost:3005,localhost:3006,localhost:3007,localhost:3008,localhost:3010,127.0.0.1,127.0.0.1:8000,::1,*.mypos.uz,mypos.uz',
         Sanctum::currentApplicationUrlWithPort(),
-        // Sanctum::currentRequestHost(),
     ))),
 
     /*

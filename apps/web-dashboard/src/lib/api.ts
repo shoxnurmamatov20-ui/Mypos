@@ -1,6 +1,6 @@
 import { MyPosApiClient } from '@mypos/api-client';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:58000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
 
 const TOKEN_KEY = 'mypos_auth_token';
 

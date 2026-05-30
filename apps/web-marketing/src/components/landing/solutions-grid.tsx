@@ -55,7 +55,7 @@ export function SolutionsGrid() {
           <h2 className="mt-sm font-display text-display-lg font-semibold text-ink">
             {t('title')}
           </h2>
-          <p className="mx-auto mt-md max-w-xl font-display text-lead text-ink-muted-80">
+          <p className="mx-auto mt-md max-w-[36rem] font-display text-lead text-ink-muted-80">
             {t('subtitle')}
           </p>
         </FadeUp>

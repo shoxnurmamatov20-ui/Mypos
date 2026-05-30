@@ -41,7 +41,7 @@ export function InventoryManager() {
 
   return (
     <div>
-      <div className="mb-6 flex gap-2 border-b border-neutral-200">
+      <div className="mb-6 flex gap-2 border-b border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)]">
         <TabButton active={tab === 'ingredients'} onClick={() => setTab('ingredients')}>
           {t('tabs.ingredients')} ({ingredients.length})
         </TabButton>
@@ -51,7 +51,7 @@ export function InventoryManager() {
         <TabButton active={tab === 'low_stock'} onClick={() => setTab('low_stock')}>
           {t('tabs.low_stock')}
           {lowStockCount > 0 && (
-            <span className="ml-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-100 px-1.5 text-xs font-semibold text-red-700">
+            <span className="ml-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-50 px-1.5 text-xs font-semibold text-red-600 dark:bg-red-950/30 dark:text-red-400">
               {lowStockCount}
             </span>
           )}
@@ -98,11 +98,15 @@ function TabButton({
       onClick={onClick}
       className={
         'relative px-4 py-3 text-sm font-medium transition ' +
-        (active ? 'text-brand-600' : 'text-neutral-500 hover:text-neutral-900')
+        (active
+          ? 'text-[#0f766e] dark:text-teal-400'
+          : 'text-[#62716d] hover:text-[#16221f] dark:text-[#94a3b8] dark:hover:text-white')
       }
     >
       {children}
-      {active && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-500" />}
+      {active && (
+        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0f766e] dark:bg-teal-500" />
+      )}
     </button>
   );
 }

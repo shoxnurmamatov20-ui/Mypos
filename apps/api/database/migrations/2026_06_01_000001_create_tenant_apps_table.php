@@ -65,13 +65,22 @@ return new class extends Migration {
             // Google max 255 — pick the larger of the two.
             $table->string('bundle_id', 255);
 
+            // Driver-portable JSON empty-default: Postgres uses `'{}'::jsonb`
+            // cast syntax which MySQL rejects. ADR-0005 (2026-05-10) revert.
+            $emptyObjectDefault = DB::connection()->getDriverName() === 'pgsql'
+                ? DB::raw("'{}'::jsonb")
+                : DB::raw("('{}')");
+            $emptyArrayDefault = DB::connection()->getDriverName() === 'pgsql'
+                ? DB::raw("'[]'::jsonb")
+                : DB::raw("('[]')");
+
             // i18n marketing copy: { uz, ru, en } shape — same convention as
             // tenant_brands.hero_title etc.
-            $table->jsonb('description')->default(DB::raw("'{}'::jsonb"));
+            $table->jsonb('description')->default($emptyObjectDefault);
             // ASCII keywords array for ASO. JSONB so we can also store
             // per-locale variants if Apple's `keywords` field gets populated
             // per language at submission time.
-            $table->jsonb('keywords')->default(DB::raw("'{}'::jsonb"));
+            $table->jsonb('keywords')->default($emptyObjectDefault);
 
             // ----- Visual assets (MinIO public URLs) ------------------------
             // 1024x1024 PNG, no alpha — App Store icon master.
@@ -86,7 +95,7 @@ return new class extends Migration {
             $table->string('feature_graphic_url', 512)->nullable();
             // Array of screenshot URLs grouped by device class:
             //   [{ "device": "iphone_6_7", "urls": [...] }, ...]
-            $table->jsonb('screenshots')->default(DB::raw("'[]'::jsonb"));
+            $table->jsonb('screenshots')->default($emptyArrayDefault);
 
             // ----- Apple-specific ------------------------------------------
             // 10-char Apple Team ID.

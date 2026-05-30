@@ -19,7 +19,7 @@ export function TopItemsChart({ items }: { items: TopItem[] }) {
   if (items.length === 0) {
     return (
       <ChartShell title={t('charts.top_items_title')}>
-        <div className="flex h-[260px] items-center justify-center rounded-lg border-2 border-dashed border-neutral-300 text-sm text-neutral-500">
+        <div className="flex h-[260px] items-center justify-center rounded-lg border border-dashed border-[rgba(22,34,31,0.12)] text-sm text-[#62716d] dark:border-[rgba(255,255,255,0.10)] dark:text-[#94a3b8]">
           {t('empty')}
         </div>
       </ChartShell>
@@ -41,33 +41,39 @@ export function TopItemsChart({ items }: { items: TopItem[] }) {
           layout="vertical"
           margin={{ top: 8, right: 24, left: 16, bottom: 0 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" horizontal={false} />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="rgba(22,34,31,0.07)"
+            horizontal={false}
+          />
           <XAxis
             type="number"
-            tick={{ fontSize: 11, fill: '#737373' }}
-            axisLine={{ stroke: '#e5e5e5' }}
+            tick={{ fontSize: 11, fill: '#62716d' }}
+            axisLine={{ stroke: 'rgba(22,34,31,0.07)' }}
             tickLine={false}
           />
           <YAxis
             type="category"
             dataKey="name"
-            tick={{ fontSize: 12, fill: '#404040' }}
-            axisLine={{ stroke: '#e5e5e5' }}
+            tick={{ fontSize: 12, fill: '#62716d' }}
+            axisLine={{ stroke: 'rgba(22,34,31,0.07)' }}
             tickLine={false}
             width={140}
           />
           <Tooltip
             contentStyle={{
+              background: '#fff',
+              border: '1px solid rgba(22,34,31,0.09)',
+              borderRadius: 10,
               fontSize: 12,
-              borderRadius: 8,
-              border: '1px solid #e5e5e5',
+              boxShadow: '0 4px 20px rgba(18,34,31,0.08)',
             }}
             formatter={(value: number, key: string) => {
               if (key === 'revenue') return [formatUZS(value), t('metrics.total_revenue')];
               return [value, t('charts.count')];
             }}
           />
-          <Bar dataKey="count" fill="#f59e0b" radius={[0, 6, 6, 0]} />
+          <Bar dataKey="count" fill="#0f766e" radius={[0, 6, 6, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </ChartShell>
@@ -76,8 +82,8 @@ export function TopItemsChart({ items }: { items: TopItem[] }) {
 
 function ChartShell({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-neutral-200 bg-white p-5 shadow-sm">
-      <h2 className="mb-4 text-sm font-semibold text-neutral-900">{title}</h2>
+    <div className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-5 dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
+      <h2 className="mb-4 text-sm font-semibold text-[#16221f] dark:text-white">{title}</h2>
       {children}
     </div>
   );

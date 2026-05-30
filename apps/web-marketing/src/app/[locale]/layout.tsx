@@ -1,3 +1,4 @@
+import { AnalyticsBoot } from '@mypos/analytics';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
@@ -6,6 +7,7 @@ import { generateRootTenantVars } from '@mypos/design-tokens/tenant';
 import { CookieConsent } from '@/components/landing/cookie-consent';
 import { Footer } from '@/components/landing/footer';
 import { Header } from '@/components/landing/header';
+import { Providers } from '@/components/providers';
 import { routing } from '@/i18n/routing';
 import '../globals.css';
 
@@ -29,17 +31,11 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(SITE_URL),
-    title: {
-      default: t('title'),
-      template: '%s · MyPOS',
-    },
+    title: { default: t('title'), template: '%s · MyPOS' },
     description: t('description'),
     keywords: t('keywords'),
     applicationName: 'MyPOS',
-    alternates: {
-      canonical: `/${locale}`,
-      languages,
-    },
+    alternates: { canonical: `/${locale}`, languages },
     openGraph: {
       type: 'website',
       url: `${SITE_URL}/${locale}`,
@@ -53,10 +49,7 @@ export async function generateMetadata({
       title: t('og_title'),
       description: t('og_description'),
     },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -73,17 +66,20 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: generateRootTenantVars() }} />
       </head>
-      <body className="flex min-h-screen flex-col bg-canvas text-ink">
-        <NextIntlClientProvider messages={messages}>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <CookieConsent />
-        </NextIntlClientProvider>
+      <body className="flex min-h-screen flex-col bg-[#001B1B] text-[#e2e8f0] antialiased">
+        <AnalyticsBoot app="web-marketing" />
+        <Providers>
+          <NextIntlClientProvider messages={messages}>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <CookieConsent />
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );

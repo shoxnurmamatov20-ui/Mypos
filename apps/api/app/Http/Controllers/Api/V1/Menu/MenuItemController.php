@@ -34,10 +34,10 @@ class MenuItemController extends Controller
         if ($request->filled('q')) {
             $search = (string) $request->string('q');
             $query->where(function ($q) use ($search): void {
-                $q->where('name->uz', 'ilike', "%{$search}%")
-                    ->orWhere('name->ru', 'ilike', "%{$search}%")
-                    ->orWhere('name->en', 'ilike', "%{$search}%")
-                    ->orWhere('sku', 'ilike', "%{$search}%");
+                $q->where('name->uz', 'like', "%{$search}%")
+                    ->orWhere('name->ru', 'like', "%{$search}%")
+                    ->orWhere('name->en', 'like', "%{$search}%")
+                    ->orWhere('sku', 'like', "%{$search}%");
             });
         }
 

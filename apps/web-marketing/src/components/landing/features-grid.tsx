@@ -1,84 +1,61 @@
-'use client';
-
 import {
-  Brain,
-  ChartLineUp,
-  CookingPot,
-  type Icon,
+  ChartLine,
+  ChatTeardropText,
+  CreditCard,
+  Desktop,
+  Monitor,
   QrCode,
-  Storefront,
-  TelegramLogo,
-} from '@phosphor-icons/react';
+} from '@phosphor-icons/react/dist/ssr';
 import { useTranslations } from 'next-intl';
-import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
-type FeatureKey = 'pos' | 'kds' | 'qr_menu' | 'analytics' | 'ai' | 'telegram';
+const FEATURES = [
+  { key: 'pos',       Icon: Desktop,          ring: 'ring-[rgba(20,184,166,0.30)]', bg: 'bg-[rgba(20,184,166,0.15)]', color: 'text-[#14b8a6]' },
+  { key: 'kds',       Icon: Monitor,          ring: 'ring-blue-400/30',             bg: 'bg-blue-500/10',     color: 'text-blue-400' },
+  { key: 'qr_menu',   Icon: QrCode,           ring: 'ring-emerald-400/30',          bg: 'bg-emerald-500/10',  color: 'text-emerald-400' },
+  { key: 'analytics', Icon: ChartLine,        ring: 'ring-amber-400/30',            bg: 'bg-amber-500/10',    color: 'text-amber-400' },
+  { key: 'ai',        Icon: ChatTeardropText, ring: 'ring-purple-400/30',           bg: 'bg-purple-500/10',   color: 'text-purple-400' },
+  { key: 'telegram',  Icon: CreditCard,       ring: 'ring-cyan-400/30',             bg: 'bg-cyan-500/10',     color: 'text-cyan-400' },
+] as const;
 
-const ICONS: Record<FeatureKey, Icon> = {
-  pos: Storefront,
-  kds: CookingPot,
-  qr_menu: QrCode,
-  analytics: ChartLineUp,
-  ai: Brain,
-  telegram: TelegramLogo,
-};
-
-const ORDER: FeatureKey[] = ['pos', 'kds', 'qr_menu', 'analytics', 'ai', 'telegram'];
-
+/** Always-dark feature grid section on the deep teal canvas. */
 export function FeaturesGrid() {
   const t = useTranslations('features');
 
   return (
-    <section id="features" className="soft-checker bg-[#F7FAF7]">
-      <div className="mx-auto max-w-7xl px-md py-section sm:px-lg lg:px-xl">
-        <FadeUp className="grid gap-md lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-          <div>
-            <span className="font-display text-tagline text-coral">{t('section_label')}</span>
-            <h2 className="mt-sm max-w-2xl font-display text-display-lg font-semibold text-ink">
-              {t('title')}
-            </h2>
-          </div>
-          <p className="max-w-2xl font-display text-lead text-ink-muted-80 lg:justify-self-end">
+    <section id="features" className="bg-[#001B1B] py-20 sm:py-24">
+      <div className="mx-auto max-w-5xl px-5">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-[12px] font-bold uppercase tracking-[0.10em] text-[#5eead4]">
+            {t('section_label')}
+          </p>
+          <h2 className="mt-3 text-[28px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-white">
+            {t('title')}
+          </h2>
+          <p className="mt-3 text-[15px] sm:text-[16px] leading-relaxed text-white/70">
             {t('subtitle')}
           </p>
-        </FadeUp>
+        </div>
 
-        <StaggerGroup as="ul" className="mt-xxl grid gap-md lg:grid-cols-6">
-          {ORDER.map((key, index) => {
-            const Icon = ICONS[key];
-            const featured = index === 0 || index === 1;
-            return (
-              <StaggerItem
-                as="li"
-                key={key}
-                className={[
-                  'group relative overflow-hidden rounded-card border border-black/[0.06] bg-white p-lg shadow-[0_20px_60px_rgba(16,18,17,0.07)] transition-transform duration-fast active:scale-95',
-                  featured ? 'lg:col-span-3' : 'lg:col-span-2',
-                ].join(' ')}
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURES.map(({ key, Icon, ring, bg, color }) => (
+            <div
+              key={key}
+              className="glass-card glass-card-hover group rounded-2xl p-6 transition-colors"
+            >
+              <div
+                className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset ${ring} ${bg}`}
               >
-                <div
-                  className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-coral via-[#F6B15F] to-[#50D1AA]"
-                  aria-hidden="true"
-                />
-                <div className="flex items-start justify-between gap-md">
-                  <div
-                    className="inline-flex h-12 w-12 items-center justify-center rounded-card bg-[#101211] text-coral-on-dark"
-                    aria-hidden="true"
-                  >
-                    <Icon size={26} weight="light" />
-                  </div>
-                  <span className="rounded-pill bg-coral-tint px-xs py-xxs text-fine-print font-semibold text-coral">
-                    0{index + 1}
-                  </span>
-                </div>
-                <h3 className="mt-md font-display text-title font-semibold text-ink">
-                  {t(`items.${key}.title`)}
-                </h3>
-                <p className="mt-xs text-body text-ink-muted-80">{t(`items.${key}.desc`)}</p>
-              </StaggerItem>
-            );
-          })}
-        </StaggerGroup>
+                <Icon size={22} weight="bold" className={color} />
+              </div>
+              <h3 className="mt-5 text-[17px] font-bold tracking-tight text-white">
+                {t(`items.${key}.title`)}
+              </h3>
+              <p className="mt-2 text-[14px] leading-relaxed text-white/70">
+                {t(`items.${key}.desc`)}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

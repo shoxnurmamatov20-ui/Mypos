@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "MyPOS — Restoran Operatsion Tizimi",
+    "description": "Markaziy Osiyo restoranlari uchun #1 SaaS"
+  },
+  "portal": {
+    "headline": "Xush <em>kelibsiz.</em>",
+    "subline": "Email va parolni kiriting — sizni kerakli paneliga olib boramiz.",
+    "footer": "© 2026 MyPOS"
+  },
+  "login": {
+    "title": "Kirish",
+    "email_label": "Email",
+    "email_placeholder": "siz@restoran.uz",
+    "password_label": "Parol",
+    "password_placeholder": "••••••••",
+    "remember_me": "Meni 30 kun eslab qol",
+    "forgot_password": "Parolni unutdingizmi?",
+    "submit": "Kirish",
+    "submitting": "Kirilmoqda…",
+    "no_account": "Hali hisobingiz yo'qmi?",
+    "create_account": "Restoranni ro'yxatdan o'tkazing",
+    "errors": {
+      "invalid": "Email yoki parol noto'g'ri.",
+      "rate_limited": "Juda ko'p urinish. {seconds} sekunddan keyin qayta urinib ko'ring.",
+      "server": "Server bilan bog'lanishda xato. Internetni tekshirib qaytadan urinib ko'ring."
+    }
+  },
+  "forgot": {
+    "title": "Parolni tiklash",
+    "subtitle": "Emailingizni kiriting — sizga tiklash havolasini yuboramiz.",
+    "submit": "Havola yuborish",
+    "back_to_login": "Loginga qaytish",
+    "success": "Tiklash havolasi {email} manziliga yuborildi. Pochtangizni tekshiring."
+  },
+  "reset": {
+    "title": "Yangi parol o'rnatish",
+    "subtitle": "{email} uchun yangi parol o'rnating.",
+    "subtitle_no_email": "Yangi parolingizni o'rnating.",
+    "password_label": "Yangi parol",
+    "password_placeholder": "••••••••",
+    "confirm_label": "Parolni takrorlang",
+    "confirm_placeholder": "••••••••",
+    "submit": "Parolni saqlash",
+    "submitting": "Saqlanmoqda…",
+    "back_to_login": "Loginga qaytish",
+    "success_title": "Parol yangilandi",
+    "success_body": "Parolingiz muvaffaqiyatli o'zgartirildi. Endi yangi parol bilan kirishingiz mumkin.",
+    "errors": {
+      "invalid_link": "Havola noto'g'ri yoki muddati o'tgan. Yangi tiklash havolasini so'rang.",
+      "min_8": "Parol kamida 8 belgi bo'lishi kerak.",
+      "mismatch": "Parollar mos kelmadi.",
+      "server": "Server xatosi. Internetni tekshirib qayta urinib ko'ring."
+    }
+  },
+  "dispatch": {
+    "loading": "Kerakli paneliga yo'naltirilmoqda…",
+    "manual_redirect": "Avtomatik o'tmasa, {link} ni bosing",
+    "click_here": "shu yerni"
+  },
+  "logout": {
+    "title": "Chiqildi",
+    "subtitle": "Siz muvaffaqiyatli tizimdan chiqdingiz.",
+    "back_to_login": "Qayta kirish"
+  },
+  "waiter": {
+    "brand": {
+      "role": "Ofitsiant paneli"
+    },
+    "nav": {
+      "groupWork": "Ish",
+      "groupShift": "Smena",
+      "tables": "Stollar",
+      "orders": "Buyurtmalar",
+      "menu": "Menyu",
+      "shift": "Smenam"
+    },
+    "common": {
+      "logout": "Chiqish",
+      "close": "Yopish",
+      "menu": "Menyu"
+    },
+    "topbar": {
+      "home": "Ofitsiant"
+    },
+    "guard": {
+      "checking": "Tekshirilmoqda…"
+    },
+    "tables": {
+      "title": "Stollar",
+      "subtitle": "Zal holati va sizning stollaringiz",
+      "filterAll": "Barchasi",
+      "empty": "Bu holatda stol yo'q",
+      "seats": "{count} o'rin",
+      "guests": "{count} mehmon",
+      "openOrder": "Buyurtma {id}",
+      "status": {
+        "free": "Bo'sh",
+        "seated": "Band",
+        "bill": "Hisob kutilmoqda",
+        "reserved": "Zaxira"
+      }
+    },
+    "orders": {
+      "title": "Buyurtmalar",
+      "subtitle": "{count} ta faol buyurtma",
+      "filterAll": "Barchasi",
+      "empty": "Bu holatda buyurtma yo'q",
+      "total": "Jami",
+      "guests": "{count} mehmon",
+      "status": {
+        "open": "Ochiq",
+        "sent": "Oshxonada",
+        "ready": "Tayyor",
+        "served": "Berildi",
+        "paid": "To'landi"
+      }
+    },
+    "menu": {
+      "title": "Menyu",
+      "subtitle": "Taomlar ro'yxati va narxlar",
+      "search": "Taom qidirish…",
+      "filterAll": "Barchasi",
+      "empty": "Taom topilmadi",
+      "available": "Bor",
+      "unavailable": "Tugagan"
+    },
+    "shift": {
+      "title": "Smenam",
+      "subtitle": "{name} — bugungi smena natijalari",
+      "clockOut": "Smenani yopish",
+      "clockIn": "Smenani ochish",
+      "onShift": "Smena ochiq",
+      "offShift": "Smena yopiq",
+      "started": "Boshlandi: {time}",
+      "activity": "Bugungi harakatlar",
+      "stats": {
+        "tables": "Xizmat ko'rsatilgan stol",
+        "orders": "Buyurtmalar",
+        "sales": "Savdo",
+        "tips": "Choychaqa",
+        "active": "Faol stollar"
+      }
+    }
+  }
+}

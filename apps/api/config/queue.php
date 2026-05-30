@@ -13,7 +13,10 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'database'),
+    // Default 'redis' (was 'database') — MyPOS runs Horizon on Redis. The
+    // 'database' fallback would push every job through MySQL, blocking the
+    // hot path under load. ADR-0005 follow-up.
+    'default' => env('QUEUE_CONNECTION', 'redis'),
 
     /*
     |--------------------------------------------------------------------------

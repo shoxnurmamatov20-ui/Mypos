@@ -35,9 +35,13 @@ class CustomerController extends Controller
             // ilike cannot match inside the ciphertext. We support exact
             // phone lookup via the HMAC `phone_index`, plus name fuzzy search.
             $phoneDigits = (string) preg_replace('/\D/', '', $search);
-            $query->where(function ($q) use ($search, $phoneDigits): void {
-                $q->where('first_name', 'ilike', "%{$search}%")
-                    ->orWhere('last_name', 'ilike', "%{$search}%");
+            // MySQL utf8mb4_unicode_ci collation makes LIKE case-insensitive,
+            // matching the previous Postgres ILIKE behaviour. Driver-portable.
+            $likeOp = \Illuminate\Support\Facades\DB::connection()->getDriverName() === 'pgsql'
+                ? 'ilike' : 'like';
+            $query->where(function ($q) use ($search, $phoneDigits, $likeOp): void {
+                $q->where('first_name', $likeOp, "%{$search}%")
+                    ->orWhere('last_name', $likeOp, "%{$search}%");
                 if (strlen($phoneDigits) >= 9) {
                     $q->orWhere('phone_index', Customer::hashPhone($search));
                 }

@@ -1,0 +1,174 @@
+{
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "close": "Yopish",
+    "retry": "Qayta urinish",
+    "search": "Qidirish",
+    "all": "Hammasi",
+    "back": "Orqaga",
+    "confirm": "Tasdiqlash",
+    "yes": "Ha",
+    "no": "Yo'q",
+    "today": "Bugun",
+    "none": "—"
+  },
+  "errors": {
+    "generic": "Xatolik yuz berdi",
+    "network": "Internet bilan bog'lanishda xatolik",
+    "unauthorized": "Avtorizatsiya talab etiladi",
+    "load_failed": "Ma'lumotni yuklab bo'lmadi"
+  },
+  "login": {
+    "redirecting": "MyPOS portaliga yo'naltirilmoqda…"
+  },
+  "sidebar": {
+    "brand": "MyPOS Kassa",
+    "role": "Kassir",
+    "group_work": "Ish",
+    "group_session": "Smena",
+    "pos": "Kassa",
+    "orders": "Buyurtmalar",
+    "payments": "To'lovlar",
+    "shift": "Smena",
+    "logout": "Chiqish"
+  },
+  "topbar": {
+    "home": "Kassa",
+    "pos": "Kassa",
+    "orders": "Buyurtmalar",
+    "payments": "To'lovlar",
+    "shift": "Smena"
+  },
+  "user_menu": {
+    "role_cashier": "Kassir",
+    "logout": "Chiqish"
+  },
+  "shift_badge": {
+    "open": "Smena ochiq",
+    "closed": "Smena yopiq",
+    "on_break": "Tanaffusda",
+    "no_shift": "Smena yo'q"
+  },
+  "pos": {
+    "title": "Kassa",
+    "subtitle": "Buyurtma yig'ing va to'lovni qabul qiling",
+    "search_placeholder": "Taom qidirish...",
+    "all_categories": "Barchasi",
+    "cart_title": "Buyurtma",
+    "cart_empty": "Savatcha bo'sh",
+    "cart_empty_hint": "Taom tanlab buyurtma yig'ing",
+    "qty": "Soni",
+    "subtotal": "Oraliq jami",
+    "tax": "Soliq",
+    "discount": "Chegirma",
+    "total": "Jami",
+    "clear_cart": "Tozalash",
+    "charge": "To'lovni qabul qilish",
+    "charge_amount": "{amount} to'lash",
+    "order_placed": "Buyurtma qabul qilindi",
+    "order_type": "Buyurtma turi",
+    "dine_in": "Zalda",
+    "takeaway": "O'zi olib ketadi",
+    "delivery": "Yetkazib berish",
+    "out_of_stock": "Tugagan",
+    "no_items": "Bu bo'limda taom yo'q",
+    "added": "Qo'shildi",
+    "remove": "Olib tashlash"
+  },
+  "orders": {
+    "title": "Buyurtmalar",
+    "subtitle": "Faol va yakunlangan buyurtmalar",
+    "filter_all": "Hammasi",
+    "filter_active": "Faol",
+    "filter_pending": "Kutilmoqda",
+    "filter_preparing": "Tayyorlanmoqda",
+    "filter_ready": "Tayyor",
+    "filter_completed": "Yakunlangan",
+    "empty": "Buyurtmalar topilmadi",
+    "order_no": "Buyurtma №",
+    "items_count": "{count} ta taom",
+    "guests": "{count} mehmon",
+    "placed_at": "Qabul qilingan",
+    "total": "Jami",
+    "mark_ready": "Tayyor deb belgilash",
+    "mark_served": "Berildi deb belgilash",
+    "mark_completed": "Yakunlash",
+    "status": {
+      "draft": "Qoralama",
+      "pending": "Kutilmoqda",
+      "preparing": "Tayyorlanmoqda",
+      "ready": "Tayyor",
+      "served": "Berildi",
+      "completed": "Yakunlangan",
+      "cancelled": "Bekor qilingan",
+      "refunded": "Qaytarilgan"
+    },
+    "payment": {
+      "unpaid": "To'lanmagan",
+      "partial": "Qisman",
+      "paid": "To'langan",
+      "refunded": "Qaytarilgan",
+      "void": "Bekor"
+    }
+  },
+  "payments": {
+    "title": "To'lovlar",
+    "subtitle": "Smena davomidagi to'lovlar",
+    "empty": "To'lovlar topilmadi",
+    "total_collected": "Jami yig'ilgan",
+    "count": "To'lovlar soni",
+    "cash_total": "Naqd",
+    "card_total": "Karta",
+    "amount": "Summa",
+    "method": "Usul",
+    "time": "Vaqt",
+    "order": "Buyurtma",
+    "status_label": "Holat",
+    "methods": {
+      "cash": "Naqd",
+      "card": "Karta",
+      "click": "Click",
+      "payme": "Payme",
+      "uzum": "Uzum",
+      "other": "Boshqa"
+    },
+    "statuses": {
+      "pending": "Kutilmoqda",
+      "paid": "To'langan",
+      "failed": "Xato",
+      "refunded": "Qaytarilgan"
+    }
+  },
+  "shift": {
+    "title": "Smena",
+    "subtitle": "Smenani boshqarish va statistikasi",
+    "current_shift": "Joriy smena",
+    "no_open_shift": "Ochiq smena yo'q",
+    "no_open_shift_hint": "Ishni boshlash uchun smenani oching",
+    "clock_in": "Smenani ochish",
+    "clock_out": "Smenani yopish",
+    "start_break": "Tanaffus",
+    "end_break": "Tanaffusni tugatish",
+    "on_break": "Tanaffusda",
+    "started_at": "Boshlangan",
+    "worked": "Ishlangan vaqt",
+    "break_total": "Tanaffus",
+    "stats_title": "Smena ko'rsatkichlari",
+    "orders_count": "Buyurtmalar",
+    "revenue": "Tushum",
+    "avg_order": "O'rtacha chek",
+    "tips": "Choychaqa",
+    "recent_shifts": "Oxirgi smenalar",
+    "duration": "Davomiyligi",
+    "date": "Sana",
+    "statuses": {
+      "scheduled": "Rejalashtirilgan",
+      "open": "Ochiq",
+      "closed": "Yopilgan",
+      "missed": "O'tkazib yuborilgan",
+      "in_progress": "Jarayonda"
+    }
+  }
+}

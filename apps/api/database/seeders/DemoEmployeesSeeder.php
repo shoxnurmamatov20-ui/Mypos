@@ -85,11 +85,15 @@ class DemoEmployeesSeeder extends Seeder
                 ],
             ];
 
+            // Stable demo password — these accounts only exist in `local`/`testing`
+            // (see env guard above) and the portal LoginForm exposes one-click
+            // demo buttons that rely on this exact value. NEVER use in production.
+            $demoPassword = 'demo123';
+            $demoHash = Hash::make($demoPassword);
+
             $created = 0;
             foreach ($roster as $person) {
-                // Generate a fresh random password each seed run (no hardcoded creds).
                 $userExisted = User::where('email', $person['email'])->exists();
-                $generatedPassword = Str::random(24);
 
                 $user = User::firstOrCreate(
                     ['email' => $person['email']],
@@ -98,15 +102,19 @@ class DemoEmployeesSeeder extends Seeder
                         'tenant_id' => $tenant->id,
                         'phone' => $person['phone'],
                         'locale' => 'uz',
-                        'password' => Hash::make($generatedPassword),
+                        'password' => $demoHash,
                         'email_verified_at' => now(),
                         'is_super_admin' => false,
                     ],
                 );
 
-                if (! $userExisted) {
-                    $this->command?->info("Demo employee created: {$person['email']} / {$generatedPassword}");
+                // Re-affirm password on every seed so re-running fixes any drift.
+                if ($userExisted) {
+                    $user->password = $demoHash;
+                    $user->save();
                 }
+
+                $this->command?->info("Demo employee ready: {$person['email']} / {$demoPassword}");
 
                 if (! $user->hasRole($person['position'])) {
                     $user->assignRole($person['position']);

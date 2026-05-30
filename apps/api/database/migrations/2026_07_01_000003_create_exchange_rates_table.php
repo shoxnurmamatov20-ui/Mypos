@@ -68,13 +68,14 @@ return new class extends Migration {
             $table->date('rate_date');
 
             // When OUR fetcher actually pulled it. Useful for SLA alerts
-            // ("we haven't refreshed in 36 hours").
-            $table->timestampTz('fetched_at');
+            // ("we haven't refreshed in 36 hours"). useCurrent() satisfies
+            // MySQL strict mode; insert path always sets explicitly.
+            $table->timestampTz('fetched_at')->useCurrent();
 
             // No updated_at — rows are effectively append-only. We keep
             // created_at because the bigSerial id alone doesn't tell you
             // when a backfill was run vs a live fetch.
-            $table->timestampTz('created_at');
+            $table->timestampTz('created_at')->useCurrent();
         });
 
         // FKs added in a second pass after table creation (Laravel's

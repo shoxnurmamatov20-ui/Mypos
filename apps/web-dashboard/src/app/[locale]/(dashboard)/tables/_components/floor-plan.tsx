@@ -9,17 +9,17 @@ const CANVAS_HEIGHT = 2000;
 const TABLE_SIZE = 80;
 
 const STATUS_FILL_CLASS: Record<TableStatus, string> = {
-  available: 'bg-mint-500 text-white',
-  occupied: 'bg-rose-500 text-white',
-  reserved: 'bg-amber-500 text-white',
-  disabled: 'bg-neutral-400 text-white',
+  available: 'bg-emerald-500 dark:bg-emerald-600 text-white',
+  occupied: 'bg-rose-500 dark:bg-rose-600 text-white',
+  reserved: 'bg-amber-500 dark:bg-amber-600 text-white',
+  disabled: 'bg-[#62716d] dark:bg-[#475569] text-white',
 };
 
 const STATUS_BORDER_CLASS: Record<TableStatus, string> = {
-  available: 'border-mint-700',
-  occupied: 'border-rose-700',
-  reserved: 'border-amber-700',
-  disabled: 'border-neutral-600',
+  available: 'border-emerald-700 dark:border-emerald-400',
+  occupied: 'border-rose-700 dark:border-rose-400',
+  reserved: 'border-amber-700 dark:border-amber-400',
+  disabled: 'border-[#16221f]/40 dark:border-white/30',
 };
 
 export function FloorPlan({
@@ -39,12 +39,12 @@ export function FloorPlan({
   );
 
   if (isLoading) {
-    return <div className="text-sm text-neutral-500">{t('loading')}</div>;
+    return <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>;
   }
 
   if (tables.length === 0) {
     return (
-      <div className="rounded-xl border-2 border-dashed border-neutral-300 p-12 text-center text-sm text-neutral-500">
+      <div className="rounded-xl border border-dashed border-[rgba(22,34,31,0.12)] dark:border-[rgba(255,255,255,0.10)] p-12 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
         {t('empty_tables')}
       </div>
     );
@@ -52,9 +52,9 @@ export function FloorPlan({
 
   return (
     <div className="space-y-6">
-      <div className="overflow-auto rounded-xl border border-neutral-200 bg-white">
+      <div className="overflow-auto rounded-xl border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827]">
         <div
-          className="relative bg-[radial-gradient(circle,_rgba(0,0,0,0.08)_1px,_transparent_1px)] [background-size:40px_40px]"
+          className="relative bg-[radial-gradient(circle,_rgba(0,0,0,0.08)_1px,_transparent_1px)] dark:bg-[radial-gradient(circle,_rgba(255,255,255,0.08)_1px,_transparent_1px)] [background-size:40px_40px]"
           style={{
             width: `${CANVAS_WIDTH / 2}px`,
             height: `${CANVAS_HEIGHT / 2}px`,
@@ -69,10 +69,10 @@ export function FloorPlan({
 
       {unassignedTables.length > 0 && (
         <div>
-          <h3 className="mb-2 text-sm font-semibold text-neutral-700">
+          <h3 className="mb-2 text-sm font-semibold text-[#16221f] dark:text-[#e2e8f0]">
             {t('unassigned')}
           </h3>
-          <div className="flex flex-wrap gap-3 rounded-xl border border-neutral-200 bg-white p-4">
+          <div className="flex flex-wrap gap-3 rounded-xl border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] p-4">
             {unassignedTables.map((table) => (
               <UnassignedTable key={table.id} table={table} />
             ))}
@@ -80,7 +80,7 @@ export function FloorPlan({
         </div>
       )}
 
-      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-600">
+      <div className="flex flex-wrap items-center gap-4 text-xs text-[#62716d] dark:text-[#94a3b8]">
         <Legend status="available" label={t('status.available')} />
         <Legend status="occupied" label={t('status.occupied')} />
         <Legend status="reserved" label={t('status.reserved')} />
@@ -100,7 +100,7 @@ function FloorPlanTable({ table }: { table: Table }) {
   return (
     <div
       className={cn(
-        'absolute flex items-center justify-center border-2 text-xs font-semibold shadow-md',
+        'absolute flex items-center justify-center border-2 text-xs font-semibold',
         STATUS_FILL_CLASS[table.status],
         STATUS_BORDER_CLASS[table.status],
         shapeClass(table.shape),

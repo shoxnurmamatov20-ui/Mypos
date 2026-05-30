@@ -9,6 +9,7 @@ use App\Domain\Employee\Enums\ShiftStatus;
 use App\Domain\Employee\Models\Employee;
 use App\Domain\Employee\Models\Shift;
 use App\Domain\Employee\Models\TimeClockEvent;
+use App\Events\Employee\ShiftEvent;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -22,7 +23,7 @@ class ClockOutAction
      */
     public function __invoke(Employee $employee, array $options = []): Shift
     {
-        return DB::transaction(function () use ($employee, $options): Shift {
+        $shift = DB::transaction(function () use ($employee, $options): Shift {
             $now = Carbon::now();
             $source = $options['source'] ?? 'manual';
 
@@ -56,5 +57,9 @@ class ClockOutAction
 
             return $shift->fresh(['employee.user']);
         });
+
+        event(new ShiftEvent($shift, 'end'));
+
+        return $shift;
     }
 }

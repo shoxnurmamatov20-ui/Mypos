@@ -7,15 +7,22 @@ namespace App\Domain\SuperAdmin\Services;
 use App\Domain\Order\Models\Order;
 use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 /**
  * Time-series data for the SaaS dashboard charts. Always queries across all
  * tenants (super-admin scope). Date arithmetic is portable to Postgres + SQLite
  * by using DATE() casts and grouping on the result.
+ *
+ * **Cached** at the minute boundary for 90s. Chart data is read-heavy and
+ * tolerates ~1m staleness — clients that need real-time figures use the
+ * Reverb broadcast channel instead.
  */
 class DashboardChartsService
 {
+    private const CACHE_TTL_SECONDS = 90;
+
     /**
      * @param 7d|30d|90d|1y|string $range
      *
@@ -23,22 +30,27 @@ class DashboardChartsService
      */
     public function compute(string $range = '30d'): array
     {
-        $days = match ($range) {
-            '7d' => 7,
-            '90d' => 90,
-            '1y' => 365,
-            default => 30,
-        };
+        $bucket = (int) floor(now()->getTimestamp() / self::CACHE_TTL_SECONDS);
+        $key = "super_admin:dashboard_charts:{$range}:{$bucket}";
 
-        $end = now()->endOfDay();
-        $start = now()->copy()->subDays($days - 1)->startOfDay();
+        return Cache::remember($key, self::CACHE_TTL_SECONDS, function () use ($range): array {
+            $days = match ($range) {
+                '7d' => 7,
+                '90d' => 90,
+                '1y' => 365,
+                default => 30,
+            };
 
-        return [
-            'revenue_by_day' => $this->revenueByDay($start, $end),
-            'signups_by_day' => $this->signupsByDay($start, $end),
-            'orders_by_day' => $this->ordersByDay($start, $end),
-            'tenants_by_plan' => $this->tenantsByPlan(),
-        ];
+            $end = now()->endOfDay();
+            $start = now()->copy()->subDays($days - 1)->startOfDay();
+
+            return [
+                'revenue_by_day' => $this->revenueByDay($start, $end),
+                'signups_by_day' => $this->signupsByDay($start, $end),
+                'orders_by_day' => $this->ordersByDay($start, $end),
+                'tenants_by_plan' => $this->tenantsByPlan(),
+            ];
+        });
     }
 
     /** @return array<int, array<string, mixed>> */

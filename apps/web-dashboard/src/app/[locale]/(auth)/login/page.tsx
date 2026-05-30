@@ -1,31 +1,65 @@
-import { getTranslations } from 'next-intl/server';
-import { LoginForm } from './_components/login-form';
+'use client';
 
-export async function generateMetadata() {
-  const t = await getTranslations('auth.login');
-  return {
-    title: t('page_title'),
-  };
-}
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { getStoredToken, storeToken } from '@/lib/api';
 
-export default async function LoginPage() {
-  const t = await getTranslations('auth.login');
+/**
+ * CROSS-3 (2026-05-10): legacy local login is now a passthrough — every
+ * authentication flow goes through the universal portal at
+ * `localhost:3000/{locale}/login` (production: `mypos.uz/{locale}/login`).
+ *
+ * Behaviour:
+ *   - URL hash carries `#token=...` from portal → persist + go to dashboard
+ *   - Already have a token in localStorage → go to dashboard
+ *   - Neither → bounce to portal with `return=` so user lands here on success
+ */
+const PORTAL_URL = process.env.NEXT_PUBLIC_PORTAL_URL ?? 'http://localhost:3000/panel/portal';
+
+export default function LoginPage() {
+  const router = useRouter();
+  const params = useParams<{ locale: string }>();
+  const locale = params?.locale ?? 'uz';
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Token forwarded from the portal via fragment.
+    if (window.location.hash.startsWith('#token=')) {
+      const fragParams = new URLSearchParams(window.location.hash.slice(1));
+      const incoming = fragParams.get('token');
+      if (incoming) {
+        storeToken(incoming);
+        router.replace(`/${locale}/overview`);
+        return;
+      }
+    }
+
+    // Already authenticated locally.
+    if (getStoredToken()) {
+      router.replace(`/${locale}/overview`);
+      return;
+    }
+
+    // Otherwise bounce to portal.
+    window.location.href = `${PORTAL_URL}/${locale}/login`;
+  }, [locale, router]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-mint-50 p-4">
-      <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
-          <h1 className="font-display text-4xl font-bold text-brand-500">MyPOS</h1>
-          <p className="mt-2 text-sm text-neutral-600">{t('subtitle')}</p>
-        </div>
-        <div className="rounded-2xl bg-white p-8 shadow-xl border border-neutral-200">
-          <h2 className="mb-6 text-2xl font-semibold text-neutral-900">{t('title')}</h2>
-          <LoginForm />
-        </div>
-        <p className="mt-6 text-center text-xs text-neutral-500">
-          &copy; 2026 MyPOS. {t('footer')}
-        </p>
+    <main className="flex min-h-screen items-center justify-center bg-neutral-50 text-neutral-600">
+      <div className="flex flex-col items-center gap-3">
+        <Spinner />
+        <p className="text-sm">MyPOS portaliga yo'naltirilmoqda…</p>
       </div>
     </main>
+  );
+}
+
+function Spinner() {
+  return (
+    <svg className="size-6 animate-spin text-brand-500" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
+      <path d="M12 2A10 10 0 0122 12" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+    </svg>
   );
 }

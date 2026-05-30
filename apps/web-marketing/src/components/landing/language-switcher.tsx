@@ -1,83 +1,116 @@
 'use client';
 
-import { Globe } from '@phosphor-icons/react';
+import { CaretDown } from '@phosphor-icons/react';
+import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
-import { useLocale, useTranslations } from 'next-intl';
-import { useState, useTransition } from 'react';
-import { routing } from '@/i18n/routing';
+import { useEffect, useRef, useState, useTransition } from 'react';
 
-const labels: Record<string, string> = {
-  uz: "O'zbekcha",
-  ru: 'Русский',
-  en: 'English',
-  kz: 'Қазақша',
-};
+const LOCALES = [
+  { code: 'uz', short: "O'zb", label: "O'zbekcha" },
+  { code: 'ru', short: 'Рус',  label: 'Русский' },
+  { code: 'en', short: 'Eng',  label: 'English' },
+  { code: 'kz', short: 'Қаз',  label: 'Қазақша' },
+] as const;
+
+interface Props {
+  align?: 'left' | 'right';
+}
 
 /**
- * Apple-style locale dropdown — pearl button, hairline ring,
- * canvas dropdown with hairline rows.
+ * Superadmin-style `lang-drop` — 32px chip showing the current
+ * locale's short label (O'zb / Рус / Eng / Қаз) + chevron. Opens a
+ * tiny dropdown card with the full names + check on the active row.
  */
-export function LanguageSwitcher({ align = 'right' }: { align?: 'left' | 'right' }) {
-  const t = useTranslations('footer');
+export function LanguageSwitcher({ align = 'right' }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [, startTransition] = useTransition();
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    document.addEventListener('mousedown', onClick);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onClick);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
 
   function switchTo(next: string) {
     if (next === locale) {
       setOpen(false);
       return;
     }
-    const segments = pathname.split('/');
-    if (routing.locales.includes(segments[1] as (typeof routing.locales)[number])) {
-      segments[1] = next;
-    } else {
-      segments.splice(1, 0, next);
-    }
-    const target = segments.join('/') || `/${next}`;
+    const parts = pathname.split('/');
+    parts[1] = next;
+    const target = parts.join('/') || `/${next}`;
     startTransition(() => {
       router.push(target);
       setOpen(false);
     });
   }
 
+  const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
+
   return (
-    <div className="relative inline-block text-caption">
+    <div ref={ref} className="relative">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        aria-label={t('lang_label')}
-        className="inline-flex h-9 items-center gap-xs rounded-pearl bg-pearl px-sm text-caption-strong text-ink shadow-hairline-ring transition-transform duration-fast active:scale-95"
+        aria-label="Language"
+        className="flex h-8 items-center gap-1 rounded-md border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] bg-white dark:bg-[#022F2F] px-2.5 text-[12px] font-semibold text-[#0f172a] dark:text-white hover:border-[#0f766e]/40 dark:hover:border-[#14b8a6]/50 hover:text-[#0f766e] dark:hover:text-[#14b8a6] transition-colors"
       >
-        <Globe size={16} weight="duotone" aria-hidden="true" />
-        <span>{labels[locale] ?? locale.toUpperCase()}</span>
+        {current.short}
+        <CaretDown
+          size={11}
+          weight="bold"
+          className={`transition-transform ${open ? 'rotate-180' : ''}`}
+        />
       </button>
+
       {open ? (
-        <ul
+        <div
           role="menu"
-          className={`absolute z-50 mt-xxs min-w-[9rem] overflow-hidden rounded-card bg-canvas shadow-hairline-ring ${
+          className={`absolute top-full mt-1.5 min-w-[150px] p-1 rounded-[10px] border border-[rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] bg-white dark:bg-[#022F2F] shadow-[0_8px_28px_-12px_rgba(15,23,42,0.30)] z-50 ${
             align === 'left' ? 'left-0' : 'right-0'
           }`}
         >
-          {routing.locales.map((code) => (
-            <li key={code} role="none">
+          {LOCALES.map((l) => {
+            const isActive = l.code === locale;
+            return (
               <button
+                key={l.code}
                 type="button"
                 role="menuitem"
-                onClick={() => switchTo(code)}
-                className={`block w-full px-md py-xs text-left text-body transition-colors duration-fast hover:bg-parchment ${
-                  code === locale ? 'bg-coral-tint text-coral' : 'text-ink'
+                onClick={() => switchTo(l.code)}
+                className={`flex w-full items-center gap-2 px-3 py-2 rounded-[7px] text-[13px] transition-colors ${
+                  isActive
+                    ? 'text-[#0f766e] dark:text-[#14b8a6] font-semibold'
+                    : 'text-[#475569] dark:text-[#94a3b8] hover:bg-[#f1f5f9] dark:hover:bg-white/[0.06] hover:text-[#0f172a] dark:hover:text-white'
                 }`}
               >
-                {labels[code]}
+                <span>{l.short}</span>
+                <span className="text-[11px] font-normal text-[#64748b] dark:text-[#94a3b8]">
+                  {l.label}
+                </span>
+                {isActive ? (
+                  <span className="ml-auto text-[12px]" aria-hidden="true">
+                    ✓
+                  </span>
+                ) : null}
               </button>
-            </li>
-          ))}
-        </ul>
+            );
+          })}
+        </div>
       ) : null}
     </div>
   );

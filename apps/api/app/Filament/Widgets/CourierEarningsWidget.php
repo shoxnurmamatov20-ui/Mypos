@@ -148,12 +148,18 @@ class CourierEarningsWidget extends StatsOverviewWidget
         );
 
         $avg = Cache::remember($cacheKey, 60, function () use ($from, $until): ?float {
+            // Avg minutes between pickup and delivery. Driver-portable:
+            // Postgres uses EXTRACT(EPOCH); MySQL uses TIMESTAMPDIFF(SECOND).
+            $expr = DB::connection()->getDriverName() === 'pgsql'
+                ? 'AVG(EXTRACT(EPOCH FROM (delivered_at - picked_up_at)) / 60)'
+                : 'AVG(TIMESTAMPDIFF(SECOND, picked_up_at, delivered_at) / 60)';
+
             return Order::query()
                 ->where('type', OrderType::Delivery->value)
                 ->whereBetween('delivered_at', [$from, $until])
                 ->whereNotNull('picked_up_at')
                 ->whereNotNull('delivered_at')
-                ->value(DB::raw('AVG(EXTRACT(EPOCH FROM (delivered_at - picked_up_at)) / 60)'));
+                ->value(DB::raw($expr));
         });
 
         if ($avg === null) {

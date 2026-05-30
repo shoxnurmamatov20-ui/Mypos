@@ -1,79 +1,45 @@
-'use client';
-
-import {
-  CaretRight,
-  type Icon,
-  Lightning,
-  SlidersHorizontal,
-  UserPlus,
-} from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
-import { FadeUp, StaggerGroup, StaggerItem } from './animations';
 
-const STEPS: { key: 'one' | 'two' | 'three'; icon: Icon }[] = [
-  { key: 'one', icon: UserPlus },
-  { key: 'two', icon: SlidersHorizontal },
-  { key: 'three', icon: Lightning },
-];
+const STEPS = ['one', 'two', 'three'] as const;
 
+/** 3-step "how it works" on the base deep-teal canvas. */
 export function HowItWorks() {
   const t = useTranslations('how');
 
   return (
-    <section className="bg-[#101211] text-white">
-      <div className="mx-auto max-w-7xl px-md py-section sm:px-lg lg:px-xl">
-        <FadeUp className="grid gap-md lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <div>
-            <span className="font-display text-tagline text-coral-on-dark">
-              {t('section_label')}
-            </span>
-            <h2 className="mt-sm max-w-2xl font-display text-display-lg font-semibold text-white">
-              {t('title')}
-            </h2>
-          </div>
-          <p className="max-w-2xl font-display text-lead text-white/[0.64] lg:justify-self-end">
+    <section className="bg-[#001B1B] py-20 sm:py-24">
+      <div className="mx-auto max-w-5xl px-5">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-[12px] font-bold uppercase tracking-[0.10em] text-[#5eead4]">
+            {t('section_label')}
+          </p>
+          <h2 className="mt-3 text-[28px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-white">
+            {t('title')}
+          </h2>
+          <p className="mt-3 text-[15px] sm:text-[16px] leading-relaxed text-white/70">
             {t('subtitle')}
           </p>
-        </FadeUp>
+        </div>
 
-        <StaggerGroup as="ol" className="mt-xxl grid gap-md md:grid-cols-3">
-          {STEPS.map((step, idx) => {
-            const Icon = step.icon;
-            const isLast = idx === STEPS.length - 1;
-            return (
-              <StaggerItem
-                as="li"
-                key={step.key}
-                className="relative overflow-hidden rounded-card border border-white/10 bg-white/[0.055] p-lg"
-              >
-                <div className="mb-lg flex items-center justify-between">
-                  <span className="tabular font-display text-[56px] font-semibold leading-none text-white/[0.12]">
-                    0{idx + 1}
-                  </span>
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-card bg-coral text-white">
-                    <Icon size={26} weight="light" aria-hidden="true" />
-                  </span>
-                </div>
-                <div className="font-display text-caption-strong text-coral-on-dark">
-                  {t(`steps.${step.key}.label`)}
-                </div>
-                <h3 className="mt-xxs font-display text-title font-semibold text-white">
-                  {t(`steps.${step.key}.title`)}
-                </h3>
-                <p className="mt-xs text-body text-white/[0.62]">{t(`steps.${step.key}.desc`)}</p>
-
-                {!isLast ? (
-                  <div
-                    className="-right-4 absolute top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-pill border border-white/10 bg-[#101211] text-coral-on-dark md:flex"
-                    aria-hidden="true"
-                  >
-                    <CaretRight size={16} weight="bold" />
-                  </div>
-                ) : null}
-              </StaggerItem>
-            );
-          })}
-        </StaggerGroup>
+        <div className="relative mt-14 grid gap-6 sm:grid-cols-3">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-[22px] left-[8%] right-[8%] hidden sm:block h-px bg-gradient-to-r from-transparent via-[rgba(20,184,166,0.40)] to-transparent"
+          />
+          {STEPS.map((step, i) => (
+            <div key={step} className="relative flex flex-col items-center text-center">
+              <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full bg-[#014D4E] border border-[rgba(20,184,166,0.40)] text-[#5eead4] tabular text-[15px] font-extrabold">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="mt-5 text-[18px] font-bold tracking-tight text-white">
+                {t(`steps.${step}.title`)}
+              </h3>
+              <p className="mt-2 text-[14px] leading-relaxed text-white/70 max-w-[20rem]">
+                {t(`steps.${step}.desc`)}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,16 +1,72 @@
 @import 'tailwindcss';
+@import '@mypos/design-tokens/theme.css';
 
-@theme {
-  --font-display: 'Manrope', system-ui, sans-serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+/* Tailwind v4 — make `dark:` resolve when `<html class="dark">` is set
+   (next-themes flips this class). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html:not(.dark) {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #ffffff;
+    color: #16221f;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .dark body {
+    background-color: #0b1120;
+    color: #e2e8f0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background-color: #0f766e;
+    color: white;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #f8fafc;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+  }
+  .dark *::-webkit-scrollbar-track {
+    background: #1e293b;
+  }
+  .dark *::-webkit-scrollbar-thumb {
+    background-color: #475569;
+  }
+  .dark *::-webkit-scrollbar-thumb:hover {
+    background-color: #64748b;
+  }
 }
 
-body {
-  @apply bg-neutral-50 text-neutral-900 antialiased;
-  font-family: var(--font-sans);
-}
-
-.dark body {
-  @apply bg-neutral-900 text-neutral-50;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
 }

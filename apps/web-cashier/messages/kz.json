@@ -1,0 +1,174 @@
+{
+  "common": {
+    "loading": "Жүктелуде...",
+    "save": "Сақтау",
+    "cancel": "Болдырмау",
+    "close": "Жабу",
+    "retry": "Қайталау",
+    "search": "Іздеу",
+    "all": "Барлығы",
+    "back": "Артқа",
+    "confirm": "Растау",
+    "yes": "Иә",
+    "no": "Жоқ",
+    "today": "Бүгін",
+    "none": "—"
+  },
+  "errors": {
+    "generic": "Қате орын алды",
+    "network": "Интернетпен байланыс қатесі",
+    "unauthorized": "Авторизация қажет",
+    "load_failed": "Деректерді жүктеу мүмкін болмады"
+  },
+  "login": {
+    "redirecting": "MyPOS порталына бағытталуда…"
+  },
+  "sidebar": {
+    "brand": "MyPOS Касса",
+    "role": "Кассир",
+    "group_work": "Жұмыс",
+    "group_session": "Ауысым",
+    "pos": "Касса",
+    "orders": "Тапсырыстар",
+    "payments": "Төлемдер",
+    "shift": "Ауысым",
+    "logout": "Шығу"
+  },
+  "topbar": {
+    "home": "Касса",
+    "pos": "Касса",
+    "orders": "Тапсырыстар",
+    "payments": "Төлемдер",
+    "shift": "Ауысым"
+  },
+  "user_menu": {
+    "role_cashier": "Кассир",
+    "logout": "Шығу"
+  },
+  "shift_badge": {
+    "open": "Ауысым ашық",
+    "closed": "Ауысым жабық",
+    "on_break": "Үзілісте",
+    "no_shift": "Ауысым жоқ"
+  },
+  "pos": {
+    "title": "Касса",
+    "subtitle": "Тапсырыс жинаңыз және төлемді қабылдаңыз",
+    "search_placeholder": "Тағам іздеу...",
+    "all_categories": "Барлығы",
+    "cart_title": "Тапсырыс",
+    "cart_empty": "Себет бос",
+    "cart_empty_hint": "Тапсырыс жинау үшін тағам таңдаңыз",
+    "qty": "Саны",
+    "subtotal": "Аралық жиын",
+    "tax": "Салық",
+    "discount": "Жеңілдік",
+    "total": "Жиыны",
+    "clear_cart": "Тазалау",
+    "charge": "Төлемді қабылдау",
+    "charge_amount": "{amount} төлеу",
+    "order_placed": "Тапсырыс қабылданды",
+    "order_type": "Тапсырыс түрі",
+    "dine_in": "Залда",
+    "takeaway": "Өзімен алып кету",
+    "delivery": "Жеткізу",
+    "out_of_stock": "Таусылған",
+    "no_items": "Бұл бөлімде тағам жоқ",
+    "added": "Қосылды",
+    "remove": "Жою"
+  },
+  "orders": {
+    "title": "Тапсырыстар",
+    "subtitle": "Белсенді және аяқталған тапсырыстар",
+    "filter_all": "Барлығы",
+    "filter_active": "Белсенді",
+    "filter_pending": "Күтілуде",
+    "filter_preparing": "Дайындалуда",
+    "filter_ready": "Дайын",
+    "filter_completed": "Аяқталған",
+    "empty": "Тапсырыстар табылмады",
+    "order_no": "Тапсырыс №",
+    "items_count": "{count} тағам",
+    "guests": "{count} қонақ",
+    "placed_at": "Қабылданған",
+    "total": "Жиыны",
+    "mark_ready": "Дайын деп белгілеу",
+    "mark_served": "Берілді деп белгілеу",
+    "mark_completed": "Аяқтау",
+    "status": {
+      "draft": "Жоба",
+      "pending": "Күтілуде",
+      "preparing": "Дайындалуда",
+      "ready": "Дайын",
+      "served": "Берілді",
+      "completed": "Аяқталған",
+      "cancelled": "Болдырылмаған",
+      "refunded": "Қайтарылған"
+    },
+    "payment": {
+      "unpaid": "Төленбеген",
+      "partial": "Ішінара",
+      "paid": "Төленген",
+      "refunded": "Қайтарылған",
+      "void": "Жойылған"
+    }
+  },
+  "payments": {
+    "title": "Төлемдер",
+    "subtitle": "Ауысым ішіндегі төлемдер",
+    "empty": "Төлемдер табылмады",
+    "total_collected": "Барлығы жиналды",
+    "count": "Төлемдер саны",
+    "cash_total": "Қолма-қол",
+    "card_total": "Карта",
+    "amount": "Сома",
+    "method": "Әдіс",
+    "time": "Уақыт",
+    "order": "Тапсырыс",
+    "status_label": "Күйі",
+    "methods": {
+      "cash": "Қолма-қол",
+      "card": "Карта",
+      "click": "Click",
+      "payme": "Payme",
+      "uzum": "Uzum",
+      "other": "Басқа"
+    },
+    "statuses": {
+      "pending": "Күтілуде",
+      "paid": "Төленген",
+      "failed": "Қате",
+      "refunded": "Қайтарылған"
+    }
+  },
+  "shift": {
+    "title": "Ауысым",
+    "subtitle": "Ауысымды басқару және статистика",
+    "current_shift": "Ағымдағы ауысым",
+    "no_open_shift": "Ашық ауысым жоқ",
+    "no_open_shift_hint": "Жұмысты бастау үшін ауысымды ашыңыз",
+    "clock_in": "Ауысымды ашу",
+    "clock_out": "Ауысымды жабу",
+    "start_break": "Үзіліс",
+    "end_break": "Үзілісті аяқтау",
+    "on_break": "Үзілісте",
+    "started_at": "Басталды",
+    "worked": "Жұмыс істелді",
+    "break_total": "Үзіліс",
+    "stats_title": "Ауысым көрсеткіштері",
+    "orders_count": "Тапсырыстар",
+    "revenue": "Түсім",
+    "avg_order": "Орташа чек",
+    "tips": "Шайпұл",
+    "recent_shifts": "Соңғы ауысымдар",
+    "duration": "Ұзақтығы",
+    "date": "Күні",
+    "statuses": {
+      "scheduled": "Жоспарланған",
+      "open": "Ашық",
+      "closed": "Жабық",
+      "missed": "Өткізіп алынған",
+      "in_progress": "Орындалуда"
+    }
+  }
+}

@@ -29,8 +29,9 @@ return new class extends Migration {
             $table->timestamp('accepted_at')->nullable();
             $table->uuid('accepted_by_user_uuid')->nullable();
 
-            // Typically created_at + 7 days
-            $table->timestamp('expires_at');
+            // Typically created_at + 7 days. useCurrent() satisfies MySQL
+            // strict mode; insert paths always set this explicitly.
+            $table->timestamp('expires_at')->useCurrent();
             $table->timestamp('revoked_at')->nullable();
 
             // Stores intended role / permissions until acceptance

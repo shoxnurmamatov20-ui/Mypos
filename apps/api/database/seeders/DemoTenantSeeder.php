@@ -57,10 +57,11 @@ class DemoTenantSeeder extends Seeder
                 ],
             );
 
-            // Generate a fresh random password each seed run (no hardcoded creds).
-            // Echoed once so the developer can copy it from the console output.
+            // Stable demo password — only runs in local/testing (env guard above).
+            // Matches the LoginForm demo button so /panel/portal/uz/login works
+            // out-of-the-box. NEVER use in production.
+            $ownerPassword = 'demo123';
             $ownerExisted = User::where('email', 'owner@demo.mypos.uz')->exists();
-            $ownerPassword = Str::random(24);
 
             $owner = User::firstOrCreate(
                 ['email' => 'owner@demo.mypos.uz'],
@@ -75,11 +76,13 @@ class DemoTenantSeeder extends Seeder
                 ],
             );
 
-            if (! $ownerExisted) {
-                $this->command?->info("Demo owner created: owner@demo.mypos.uz / {$ownerPassword}");
-            } else {
-                $this->command?->info('Demo owner already existed; password unchanged.');
+            // Re-affirm password on every seed so re-running fixes any drift.
+            if ($ownerExisted) {
+                $owner->password = Hash::make($ownerPassword);
+                $owner->save();
             }
+
+            $this->command?->info("Demo owner ready: owner@demo.mypos.uz / {$ownerPassword}");
 
             if (! $owner->hasRole(RoleEnum::Owner->value)) {
                 $owner->assignRole(RoleEnum::Owner->value);

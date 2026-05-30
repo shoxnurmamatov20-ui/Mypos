@@ -32,19 +32,19 @@ export function EmployeesManager() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={t('search_placeholder')}
-          className="w-full max-w-md rounded-lg border border-neutral-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+          className="w-full max-w-md rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#1a2235] px-3 py-2 text-sm text-[#16221f] dark:text-white focus:border-[#0f766e] dark:focus:border-teal-500 focus:outline-none"
         />
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as EmployeeStatus | '')}
-          className="rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+          className="rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#1a2235] px-3 py-2 text-sm text-[#16221f] dark:text-white"
         >
           <option value="">{t('filter_status_all')}</option>
           <option value="active">{t('status.active')}</option>
           <option value="on_leave">{t('status.on_leave')}</option>
           <option value="terminated">{t('status.terminated')}</option>
         </select>
-        <span className="ml-auto text-sm text-neutral-500">
+        <span className="ml-auto text-sm text-[#62716d] dark:text-[#94a3b8]">
           {total} {t('total_suffix')}
         </span>
       </div>

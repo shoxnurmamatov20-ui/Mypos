@@ -17,7 +17,11 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    // Default 'mysql' (was 'sqlite') — ADR-0005 (2026-05-10) made MySQL the
+    // primary DB. The sqlite fallback was only useful before any tenant
+    // schema existed; in production it would silently route writes to a
+    // local file and lose them.
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +53,7 @@ return [
             'url' => env('DB_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel'),
+            'database' => env('DB_DATABASE', 'mypos'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
@@ -57,11 +61,26 @@ return [
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
             'prefix' => '',
             'prefix_indexes' => true,
+            // STRICT_ALL_TABLES on — silent truncation/coercion is unacceptable
+            // for a multi-tenant POS where decimal price drift = revenue drift.
             'strict' => true,
-            'engine' => null,
+            // Force InnoDB so foreign keys and transactions actually work
+            // (XAMPP defaults are sane but not guaranteed across hosts).
+            'engine' => 'InnoDB',
+            // ADR-0005 follow-up: explicit PDO options for production safety.
+            //   - emulate_prepares=false → real server-side prepared statements,
+            //     correct param binding, defence against rare injection vectors.
+            //   - errmode=exception        → fail loudly on driver errors.
+            //   - default_fetch_mode=assoc → predictable result shape.
+            //   - persistent (opt-in)      → reuse PHP-FPM connections; defaults
+            //     off because XAMPP/dev does not need it.
             'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_PERSISTENT => env('DB_PERSISTENT', false),
                 (PHP_VERSION_ID >= 80500 ? Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            ], static fn ($v) => $v !== null) : [],
         ],
 
         'mariadb' => [

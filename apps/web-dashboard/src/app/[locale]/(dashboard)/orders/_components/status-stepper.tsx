@@ -16,7 +16,7 @@ export function StatusStepper({ status }: { status: OrderStatus }) {
 
   if (status === 'cancelled' || status === 'refunded') {
     return (
-      <div className="rounded-lg bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+      <div className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:bg-red-950/30 dark:text-red-400">
         {t(`filters.${status}` as 'filters.cancelled')}
       </div>
     );
@@ -36,9 +36,11 @@ export function StatusStepper({ status }: { status: OrderStatus }) {
                 className={
                   'flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold transition ' +
                   (reached
-                    ? 'bg-brand-500 text-white'
-                    : 'bg-neutral-200 text-neutral-500') +
-                  (isCurrent ? ' ring-2 ring-brand-300 ring-offset-2' : '')
+                    ? 'bg-[#0f766e] text-white dark:bg-[#14b8a6]'
+                    : 'bg-[#eef4f3] text-[#62716d] dark:bg-[#1a2235] dark:text-[#94a3b8]') +
+                  (isCurrent
+                    ? ' ring-2 ring-[#0f766e]/40 ring-offset-2 dark:ring-teal-500/40 dark:ring-offset-[#111827]'
+                    : '')
                 }
               >
                 {idx + 1}
@@ -46,7 +48,9 @@ export function StatusStepper({ status }: { status: OrderStatus }) {
               <span
                 className={
                   'mt-1 whitespace-nowrap text-[10px] font-medium uppercase tracking-wider ' +
-                  (reached ? 'text-brand-700' : 'text-neutral-400')
+                  (reached
+                    ? 'text-[#0f766e] dark:text-teal-400'
+                    : 'text-[#62716d] dark:text-[#94a3b8]')
                 }
               >
                 {t(`filters.${step}` as 'filters.pending')}
@@ -56,7 +60,9 @@ export function StatusStepper({ status }: { status: OrderStatus }) {
               <div
                 className={
                   'h-0.5 flex-1 rounded-full ' +
-                  (currentIndex > idx ? 'bg-brand-500' : 'bg-neutral-200')
+                  (currentIndex > idx
+                    ? 'bg-[#0f766e] dark:bg-[#14b8a6]'
+                    : 'bg-[#eef4f3] dark:bg-[#1a2235]')
                 }
               />
             )}

@@ -244,6 +244,16 @@ final class DemandForecastService
     {
         $since = Carbon::now()->subDays($days);
 
+        $driver = DB::connection()->getDriverName();
+        // Postgres: EXTRACT(DOW)=0..6 (Sun..Sat). MySQL: DAYOFWEEK=1..7 (Sun..Sat).
+        // Subtract 1 in MySQL to keep the Mon-aligned business semantics consistent.
+        $dowExpr = $driver === 'pgsql'
+            ? 'EXTRACT(DOW FROM orders.created_at)::int'
+            : '(DAYOFWEEK(orders.created_at) - 1)';
+        $hourExpr = $driver === 'pgsql'
+            ? 'EXTRACT(HOUR FROM orders.created_at)::int'
+            : 'HOUR(orders.created_at)';
+
         $rows = DB::table('order_items')
             ->join('orders', 'orders.id', '=', 'order_items.order_id')
             ->where('order_items.tenant_id', $tenantId)
@@ -251,13 +261,13 @@ final class DemandForecastService
             ->where('orders.created_at', '>=', $since)
             ->whereNotIn('orders.status', self::EXCLUDED_STATUSES)
             ->whereNotNull('order_items.menu_item_id')
-            ->selectRaw('
+            ->selectRaw("
                 order_items.menu_item_id AS menu_item_id,
                 COUNT(*) AS order_count,
                 SUM(order_items.quantity) AS total_qty,
-                EXTRACT(DOW FROM orders.created_at)::int AS dow,
-                EXTRACT(HOUR FROM orders.created_at)::int AS hour
-            ')
+                {$dowExpr} AS dow,
+                {$hourExpr} AS hour
+            ")
             ->groupBy('order_items.menu_item_id', 'dow', 'hour')
             ->orderByDesc('order_count')
             ->limit(2000)
@@ -320,6 +330,15 @@ final class DemandForecastService
     {
         $since = Carbon::now()->subWeeks($weeks);
 
+        $driver = DB::connection()->getDriverName();
+        $dowExpr = $driver === 'pgsql'
+            ? 'EXTRACT(DOW FROM orders.created_at)::int'
+            : '(DAYOFWEEK(orders.created_at) - 1)';
+        // Postgres EXTRACT(WEEK) = ISO week (1..53). MySQL WEEK(date, 3) = ISO mode.
+        $weekExpr = $driver === 'pgsql'
+            ? 'EXTRACT(WEEK FROM orders.created_at)::int'
+            : 'WEEK(orders.created_at, 3)';
+
         $rows = DB::table('order_items')
             ->join('orders', 'orders.id', '=', 'order_items.order_id')
             ->where('order_items.tenant_id', $tenantId)
@@ -327,12 +346,12 @@ final class DemandForecastService
             ->where('orders.created_at', '>=', $since)
             ->whereNotIn('orders.status', self::EXCLUDED_STATUSES)
             ->whereNotNull('order_items.menu_item_id')
-            ->selectRaw('
+            ->selectRaw("
                 order_items.menu_item_id AS menu_item_id,
-                EXTRACT(DOW  FROM orders.created_at)::int AS dow,
-                EXTRACT(WEEK FROM orders.created_at)::int AS week_offset,
+                {$dowExpr} AS dow,
+                {$weekExpr} AS week_offset,
                 SUM(order_items.quantity) AS qty
-            ')
+            ")
             ->groupBy('order_items.menu_item_id', 'dow', 'week_offset')
             ->get();
 

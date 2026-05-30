@@ -12,8 +12,11 @@ return new class extends Migration {
             $table->uuid('tenant_id');
             $table->uuid('employee_id');
 
-            $table->timestamp('scheduled_start');
-            $table->timestamp('scheduled_end');
+            // useCurrent() — MySQL strict mode rejects implicit `0000-00-00`
+            // defaults on NOT NULL TIMESTAMP. Insert paths set both explicitly,
+            // so the default only fires for legacy fixtures.
+            $table->timestamp('scheduled_start')->useCurrent();
+            $table->timestamp('scheduled_end')->useCurrent();
             $table->timestamp('actual_start')->nullable();
             $table->timestamp('actual_end')->nullable();
             $table->string('status', 32)->default('scheduled');

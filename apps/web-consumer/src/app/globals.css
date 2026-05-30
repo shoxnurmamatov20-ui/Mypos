@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@import '@mypos/design-tokens/theme.css';
+
+/*
+ * Tailwind 4 theme — auto-generates utility classes from `--color-*`,
+ * `--font-*`, `--radius-*` etc. Per-tenant brand variables are wired
+ * in via `--color-brand-{primary,accent,text,background}`; the layout
+ * overrides these at the <html> level on tenant custom domains.
+ */
+@theme {
+  --font-display: 'Manrope', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Brand vars — generate `bg-brand-primary`, `text-brand-text`, etc. */
+  --color-brand-primary: #EA7C69;
+  --color-brand-accent: #8B5CF6;
+  --color-brand-text: #0F172A;
+  --color-brand-background: #FFFFFF;
+
+  /*
+   * Brand fonts — generate `font-brand-body` / `font-brand-display`
+   * utilities. These resolve through the `--brand-font*` CSS vars set
+   * by the layout, with the named fonts as the static fallback.
+   */
+  --font-brand-body: var(--brand-font, 'Inter', system-ui, sans-serif);
+  --font-brand-display: var(--brand-font-heading, 'Manrope', system-ui, sans-serif);
+}
+
+/*
+ * Per-tenant overrides. The layout sets these on <html> via inline style.
+ * Falls through to the @theme defaults above when the layout doesn't.
+ */
+:root {
+  --brand-font: 'Inter', system-ui, sans-serif;
+  --brand-font-heading: 'Manrope', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-brand-background);
+  color: var(--color-brand-text);
+  font-family: var(--brand-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--brand-font-heading);
+}
+
+::selection {
+  background-color: #FFC3B2;
+  color: #5A2419;
+}
+
+/*
+ * Theme template scoping. The layout sets
+ * `data-theme="modern" | "classic" | "minimal" | "premium"` on <html>.
+ * Themes opt in to scoped extras via these selectors.
+ */
+[data-theme='classic'] {
+  --brand-radius-card: 8px;
+  --brand-radius-button: 4px;
+}
+
+[data-theme='modern'] {
+  --brand-radius-card: 24px;
+  --brand-radius-button: 12px;
+}
+
+[data-theme='minimal'] {
+  --brand-radius-card: 0px;
+  --brand-radius-button: 0px;
+}
+
+[data-theme='premium'] {
+  --brand-radius-card: 16px;
+  --brand-radius-button: 8px;
+}

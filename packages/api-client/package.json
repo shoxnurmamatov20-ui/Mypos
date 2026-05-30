@@ -69,6 +69,14 @@
     "./super-admin": {
       "types": "./src/super-admin.ts",
       "default": "./src/super-admin.ts"
+    },
+    "./warehouse": {
+      "types": "./src/warehouse.ts",
+      "default": "./src/warehouse.ts"
+    },
+    "./reports": {
+      "types": "./src/reports.ts",
+      "default": "./src/reports.ts"
     }
   },
   "scripts": {

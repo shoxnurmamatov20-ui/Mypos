@@ -82,7 +82,7 @@ class TableCategoryResource extends Resource
                     ->label('Nomi')
                     ->getStateUsing(fn ($record): string => $record->name['uz'] ?? '')
                     ->searchable(query: function ($query, string $search) {
-                        return $query->where('name->uz', 'ilike', "%{$search}%");
+                        return $query->where('name->uz', 'like', "%{$search}%");
                     })
                     ->weight('semibold'),
                 Tables\Columns\TextColumn::make('tenant.name')

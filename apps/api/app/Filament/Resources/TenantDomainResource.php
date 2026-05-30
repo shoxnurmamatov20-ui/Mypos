@@ -272,10 +272,15 @@ class TenantDomainResource extends Resource
      */
     private static function promoteToPrimary(TenantDomain $record): void
     {
+        // Audit H-1 (ADR-0005 follow-up): bare withoutGlobalScopes() also
+        // strips SoftDeletingScope, allowing a soft-deleted/revoked custom
+        // domain to be re-promoted to primary. Narrow to ['tenant'] only,
+        // and explicitly ignore deleted rows.
         TenantDomain::query()
-            ->withoutGlobalScopes()
+            ->withoutGlobalScopes(['tenant'])
             ->where('tenant_id', $record->tenant_id)
             ->where('id', '!=', $record->id)
+            ->whereNull('deleted_at')
             ->update(['is_primary' => false]);
         $record->forceFill(['is_primary' => true])->save();
     }

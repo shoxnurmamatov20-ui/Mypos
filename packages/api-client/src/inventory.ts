@@ -139,6 +139,29 @@ const toQueryString = (params?: Record<string, string | number | boolean | undef
 };
 
 export const inventoryApi = {
+  categories: {
+    list: (client: MyPosApiClient) =>
+      client.get<CollectionResponse<IngredientCategory>>('/api/v1/inventory/categories'),
+    create: (
+      client: MyPosApiClient,
+      input: { name: TranslatedString; sort_order?: number },
+    ) =>
+      client.post<ResourceResponse<IngredientCategory>>(
+        '/api/v1/inventory/categories',
+        input,
+      ),
+    update: (
+      client: MyPosApiClient,
+      id: string,
+      input: { name?: TranslatedString; sort_order?: number },
+    ) =>
+      client.patch<ResourceResponse<IngredientCategory>>(
+        `/api/v1/inventory/categories/${id}`,
+        input,
+      ),
+    delete: (client: MyPosApiClient, id: string) =>
+      client.delete<{ data: { message: string } }>(`/api/v1/inventory/categories/${id}`),
+  },
   ingredients: {
     list: (
       client: MyPosApiClient,
@@ -181,6 +204,51 @@ export const inventoryApi = {
       client.get<PaginatedResponse<StockMovement>>(
         `/api/v1/inventory/ingredients/${ingredientId}/movements${toQueryString(params)}`,
       ),
+
+    /** Flat list of movements across ALL ingredients (manager panel). */
+    listAll: (
+      client: MyPosApiClient,
+      params?: {
+        reason?: StockMovementReason | string;
+        ingredient_id?: string;
+        reference_type?: string;
+        date_from?: string;
+        date_to?: string;
+        sort?: 'recorded_at' | '-recorded_at' | 'created_at' | '-created_at';
+        per_page?: number;
+        page?: number;
+      },
+    ) =>
+      client.get<
+        PaginatedResponse<
+          StockMovement & {
+            ingredient?: {
+              id: string;
+              name: TranslatedString;
+              unit: string;
+              cost_per_unit: number;
+              sku: string | null;
+            };
+          }
+        >
+      >(`/api/v1/inventory/movements${toQueryString(params)}`),
+
+    /** Aggregated consumption stats (today / week / month + top ingredient). */
+    stats: (
+      client: MyPosApiClient,
+      params?: { reason?: StockMovementReason | string; ingredient_id?: string },
+    ) =>
+      client.get<{
+        data: {
+          reason: string;
+          today: { quantity: number; cost: number; movements: number };
+          week: { quantity: number; cost: number; movements: number };
+          month: { quantity: number; cost: number; movements: number };
+          top_ingredient:
+            | null
+            | { id: string; name: TranslatedString | string; unit: string; quantity: number };
+        };
+      }>(`/api/v1/inventory/movements/stats${toQueryString(params)}`),
   },
   adjustStock: (client: MyPosApiClient, ingredientId: string, input: StockAdjustmentInput) =>
     client.post<ResourceResponse<StockMovement>>(

@@ -4,21 +4,29 @@ use App\Http\Controllers\Api\V1\Admin\AIController as AdminAIController;
 use App\Http\Controllers\Api\V1\Admin\AppController as AdminAppController;
 use App\Http\Controllers\Api\V1\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Api\V1\Admin\BuildSubmissionController as AdminBuildSubmissionController;
+use App\Http\Controllers\Api\V1\Admin\CourierAdminController;
 use App\Http\Controllers\Api\V1\Admin\DomainController as AdminDomainController;
 use App\Http\Controllers\Api\V1\Admin\ForecastController as AdminForecastController;
 use App\Http\Controllers\Api\V1\Admin\InsightsController as AdminInsightsController;
+use App\Http\Controllers\Api\V1\Admin\KioskAdminController;
 use App\Http\Controllers\Api\V1\Admin\TierFeatureController as AdminTierFeatureController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use App\Http\Controllers\Api\V1\Broadcasting\BroadcastAuthController;
+use App\Http\Controllers\Api\V1\CEO\ClinicController;
+use App\Http\Controllers\Api\V1\CEO\ComplaintController;
+use App\Http\Controllers\Api\V1\CEO\DashboardController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
+use App\Http\Controllers\Api\V1\Department\DepartmentController;
 use App\Http\Controllers\Api\V1\Employee\ClockController;
 use App\Http\Controllers\Api\V1\Employee\EmployeeController;
 use App\Http\Controllers\Api\V1\Employee\ShiftController;
 use App\Http\Controllers\Api\V1\Internal\CaddyVerifyController;
+use App\Http\Controllers\Api\V1\Inventory\IngredientCategoryController;
 use App\Http\Controllers\Api\V1\Inventory\IngredientController;
 use App\Http\Controllers\Api\V1\Inventory\InventoryReportController;
 use App\Http\Controllers\Api\V1\Inventory\RecipeController;
 use App\Http\Controllers\Api\V1\Inventory\StockMovementController;
+use App\Http\Controllers\Api\V1\Inventory\StockMovementListController;
 use App\Http\Controllers\Api\V1\Kiosk\KioskHeartbeatController;
 use App\Http\Controllers\Api\V1\Kiosk\KioskMenuController;
 use App\Http\Controllers\Api\V1\Kiosk\KioskOrderController;
@@ -29,13 +37,25 @@ use App\Http\Controllers\Api\V1\Menu\MenuCategoryController;
 use App\Http\Controllers\Api\V1\Menu\MenuItemController;
 use App\Http\Controllers\Api\V1\Order\OrderController;
 use App\Http\Controllers\Api\V1\Payment\PaymentController;
+use App\Http\Controllers\Api\V1\Payment\PaymentListController;
 use App\Http\Controllers\Api\V1\Public\ChatController as PublicChatController;
 use App\Http\Controllers\Api\V1\Public\OnboardingController;
 use App\Http\Controllers\Api\V1\Public\PublicCurrencyController;
 use App\Http\Controllers\Api\V1\Public\PublicExchangeRateController;
 use App\Http\Controllers\Api\V1\Public\PublicMenuController;
 use App\Http\Controllers\Api\V1\Public\PublicOrderController;
+use App\Http\Controllers\Api\V1\Public\PublicOrderReviewController;
+use App\Http\Controllers\Api\V1\Public\PublicResolveDomainController;
 use App\Http\Controllers\Api\V1\Public\PublicRestaurantController;
+use App\Http\Controllers\Api\V1\Reports\CancelledReportController;
+use App\Http\Controllers\Api\V1\Reports\CashflowReportController;
+use App\Http\Controllers\Api\V1\Reports\CourierReportController;
+use App\Http\Controllers\Api\V1\Reports\DebtorsReportController;
+use App\Http\Controllers\Api\V1\Reports\MenuItemsReportController;
+use App\Http\Controllers\Api\V1\Reports\OrdersReportController;
+use App\Http\Controllers\Api\V1\Reports\TablesReportController;
+use App\Http\Controllers\Api\V1\Reports\WaitersReportController;
+use App\Http\Controllers\Api\V1\Reports\ZReportController;
 use App\Http\Controllers\Api\V1\Staff\Courier\CourierAcceptController;
 use App\Http\Controllers\Api\V1\Staff\Courier\CourierActiveController;
 use App\Http\Controllers\Api\V1\Staff\Courier\CourierAvailableController;
@@ -63,6 +83,11 @@ use App\Http\Controllers\Api\V1\SuperAdmin\SuperAdminTeamController;
 use App\Http\Controllers\Api\V1\SuperAdmin\TenantController as SuperAdminTenantController;
 use App\Http\Controllers\Api\V1\Table\TableCategoryController;
 use App\Http\Controllers\Api\V1\Table\TableController;
+use App\Http\Controllers\Api\V1\Warehouse\AuditSessionController;
+use App\Http\Controllers\Api\V1\Warehouse\IncomingDocumentController;
+use App\Http\Controllers\Api\V1\Warehouse\TransferDocumentController;
+use App\Http\Controllers\Api\V1\Warehouse\WarehouseController;
+use App\Http\Controllers\Api\V1\Warehouse\WasteDocumentController;
 use App\Http\Controllers\Api\V1\Webhook\ClickWebhookController;
 use App\Http\Controllers\Api\V1\Webhook\EasBuildWebhookController;
 use App\Http\Controllers\Api\V1\Webhook\PaymeWebhookController;
@@ -132,7 +157,7 @@ Route::prefix('v1')->group(function () {
         // Phase 2 — host → tenant resolver (custom domain frontends call this
         // from their middleware to decide if a hostname is a registered
         // tenant and what brand to render under).
-        Route::get('/resolve-domain', \App\Http\Controllers\Api\V1\Public\PublicResolveDomainController::class)
+        Route::get('/resolve-domain', PublicResolveDomainController::class)
             ->middleware('throttle:120,1')
             ->name('v1.public.resolve_domain');
 
@@ -146,6 +171,14 @@ Route::prefix('v1')->group(function () {
         Route::get('/orders/track/{token}', [PublicOrderController::class, 'track'])
             ->middleware('throttle:30,1')
             ->name('v1.public.orders.track');
+
+        // Order review submission — anonymous via tracking_token or authed customer
+        Route::post(
+            '/orders/review',
+            [PublicOrderReviewController::class, 'store'],
+        )
+            ->middleware('throttle:10,1')
+            ->name('v1.public.orders.review');
 
         // Legacy QR-menu PWA store endpoint — kept for backwards compatibility
         Route::post('/menu/{slug}/orders', [PublicOrderController::class, 'storeForQrMenu'])
@@ -247,6 +280,16 @@ Route::prefix('v1')->group(function () {
             ->middleware('throttle:10,1')
             ->name('v1.auth.login');
 
+        // Password reset — Laravel broker emits reset link via MAIL_MAILER
+        // (=log in dev → check storage/logs/laravel.log for the URL).
+        Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])
+            ->middleware('throttle:5,15')
+            ->name('v1.auth.forgot_password');
+
+        Route::post('/reset-password', [AuthController::class, 'resetPassword'])
+            ->middleware('throttle:5,15')
+            ->name('v1.auth.reset_password');
+
         // Staff PIN login — IP-level throttle here, per-phone limiter inside the controller.
         Route::post('/staff-login', [StaffAuthController::class, 'login'])
             ->middleware('throttle:30,1')
@@ -317,6 +360,15 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('v1.employees.destroy');
         });
 
+        // Departments
+        Route::prefix('departments')->group(function () {
+            Route::get('/', [DepartmentController::class, 'index'])->name('v1.departments.index');
+            Route::post('/', [DepartmentController::class, 'store'])->name('v1.departments.store');
+            Route::get('/{department}', [DepartmentController::class, 'show'])->name('v1.departments.show');
+            Route::patch('/{department}', [DepartmentController::class, 'update'])->name('v1.departments.update');
+            Route::delete('/{department}', [DepartmentController::class, 'destroy'])->name('v1.departments.destroy');
+        });
+
         // Shifts
         Route::prefix('shifts')->group(function () {
             Route::get('/', [ShiftController::class, 'index'])->name('v1.shifts.index');
@@ -335,21 +387,67 @@ Route::prefix('v1')->group(function () {
             Route::get('/ingredients/{ingredient}', [IngredientController::class, 'show'])->name('v1.inventory.ingredients.show');
             Route::patch('/ingredients/{ingredient}', [IngredientController::class, 'update'])->name('v1.inventory.ingredients.update');
             Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('v1.inventory.ingredients.destroy');
-            Route::post('/ingredients/{ingredient}/adjust', [StockMovementController::class, 'adjust'])->name('v1.inventory.ingredients.adjust');
+            Route::post('/ingredients/{ingredient}/adjust', [StockMovementController::class, 'store'])->name('v1.inventory.ingredients.adjust');
             Route::get('/ingredients/{ingredient}/movements', [StockMovementController::class, 'index'])->name('v1.inventory.movements.index');
+
+            // Flat (cross-ingredient) movement list + aggregate stats.
+            // Used by the manager-panel Tovarlar sarfi (consumption) page.
+            Route::get('/movements', [StockMovementListController::class, 'index'])->name('v1.inventory.movements.all');
+            Route::get('/movements/stats', [StockMovementListController::class, 'stats'])->name('v1.inventory.movements.stats');
             Route::get('/recipes', [RecipeController::class, 'index'])->name('v1.inventory.recipes.index');
             Route::post('/recipes', [RecipeController::class, 'store'])->name('v1.inventory.recipes.store');
             Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('v1.inventory.recipes.destroy');
             Route::get('/low-stock', [InventoryReportController::class, 'lowStock'])->name('v1.inventory.low_stock');
             Route::get('/valuation', [InventoryReportController::class, 'valuation'])->name('v1.inventory.valuation');
+
+            // Ingredient categories (manager admin tooling)
+            Route::get('/categories', [IngredientCategoryController::class, 'index'])
+                ->name('v1.inventory.categories.index');
+            Route::post('/categories', [IngredientCategoryController::class, 'store'])
+                ->name('v1.inventory.categories.store');
+            Route::patch('/categories/{ingredientCategory}', [IngredientCategoryController::class, 'update'])
+                ->name('v1.inventory.categories.update');
+            Route::delete('/categories/{ingredientCategory}', [IngredientCategoryController::class, 'destroy'])
+                ->name('v1.inventory.categories.destroy');
         });
+
+        // Warehouse (Ombor) — multi-warehouse + incoming / waste / audit / transfer
+        Route::apiResource('warehouses', WarehouseController::class);
+        Route::apiResource('incoming-documents', IncomingDocumentController::class)
+            ->except(['update']);
+        Route::apiResource('waste-documents', WasteDocumentController::class)
+            ->except(['update']);
+        Route::apiResource('audit-sessions', AuditSessionController::class);
+        Route::post('audit-sessions/{audit_session}/complete', [AuditSessionController::class, 'complete'])
+            ->name('audit-sessions.complete');
+        Route::apiResource('transfer-documents', TransferDocumentController::class)
+            ->except(['update']);
 
         // Payments
         Route::prefix('payments')->group(function () {
+            Route::get('/', [PaymentListController::class, 'index'])->name('v1.payments.index');
             Route::post('/', [PaymentController::class, 'store'])->name('v1.payments.store');
             Route::get('/{payment}', [PaymentController::class, 'show'])->name('v1.payments.show');
             Route::post('/{payment}/capture', [PaymentController::class, 'captureCash'])->name('v1.payments.capture');
             Route::post('/{payment}/refund', [PaymentController::class, 'refund'])->name('v1.payments.refund');
+        });
+
+        // Reports (Hisobotlar) — manager-panel read-only aggregates.
+        // Authorisation is enforced inside each FormRequest via ReportPolicy::viewAny.
+        // The whole group is tenant-scoped through the BelongsToTenant global scope
+        // on Order / Payment / Employee / MenuItem.
+        // Reports — heavy aggregations, throttled to 60 req/min per user to
+        // prevent DoS via repeated wide-range scans.
+        Route::prefix('reports')->middleware('throttle:60,1')->group(function () {
+            Route::get('/z-report', [ZReportController::class, 'show'])->name('v1.reports.z_report');
+            Route::get('/orders', [OrdersReportController::class, 'index'])->name('v1.reports.orders');
+            Route::get('/tables', [TablesReportController::class, 'index'])->name('v1.reports.tables');
+            Route::get('/waiters', [WaitersReportController::class, 'index'])->name('v1.reports.waiters');
+            Route::get('/courier', [CourierReportController::class, 'index'])->name('v1.reports.courier');
+            Route::get('/menu-items', [MenuItemsReportController::class, 'index'])->name('v1.reports.menu_items');
+            Route::get('/cancelled', [CancelledReportController::class, 'index'])->name('v1.reports.cancelled');
+            Route::get('/debtors', [DebtorsReportController::class, 'index'])->name('v1.reports.debtors');
+            Route::get('/cashflow', [CashflowReportController::class, 'index'])->name('v1.reports.cashflow');
         });
     });
 
@@ -423,6 +521,46 @@ Route::prefix('v1')->group(function () {
             Route::patch('/settings', [SuperAdminSettingsController::class, 'update'])
                 ->name('v1.super_admin.settings.update');
         });
+    });
+
+    // --- CEO / Multi-restaurant owner panel (Phase 3 — 2026-05-14) ---
+    // Guards `/api/v1/ceo/*` with `ceo` middleware: user has the `ceo` role
+    // AND owns ≥1 tenant via the `tenant_owners` pivot. Cross-tenant queries
+    // are scoped by `ownedTenantIds()` in the controllers.
+    Route::middleware(['auth:sanctum', 'ceo'])->prefix('ceo')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('v1.ceo.dashboard');
+        Route::get('/restaurants', [DashboardController::class, 'restaurants'])
+            ->name('v1.ceo.restaurants');
+        Route::get('/finances/summary', [DashboardController::class, 'finances'])
+            ->name('v1.ceo.finances.summary');
+
+        // Clinics vertical (port of ShifoReyting healthcare-rating, 2026-05-20)
+        Route::get('/clinics', [ClinicController::class, 'index'])
+            ->name('v1.ceo.clinics.index');
+        Route::get('/clinics/{id}', [ClinicController::class, 'show'])
+            ->whereNumber('id')
+            ->name('v1.ceo.clinics.show');
+        Route::get('/clinics/{id}/doctors', [ClinicController::class, 'doctors'])
+            ->whereNumber('id')
+            ->name('v1.ceo.clinics.doctors');
+        Route::get('/clinics/{id}/feedback', [ClinicController::class, 'feedback'])
+            ->whereNumber('id')
+            ->name('v1.ceo.clinics.feedback');
+
+        // Complaints admin (port of ShifoReyting ComplaintAdminController, 2026-05-20)
+        Route::get('/complaints', [ComplaintController::class, 'index'])
+            ->name('v1.ceo.complaints.index');
+        Route::get('/complaints/regions', [ComplaintController::class, 'regions'])
+            ->name('v1.ceo.complaints.regions');
+        Route::post('/complaints/bulk', [ComplaintController::class, 'bulk'])
+            ->name('v1.ceo.complaints.bulk');
+        Route::get('/complaints/{id}', [ComplaintController::class, 'show'])
+            ->whereNumber('id')
+            ->name('v1.ceo.complaints.show');
+        Route::patch('/complaints/{id}', [ComplaintController::class, 'update'])
+            ->whereNumber('id')
+            ->name('v1.ceo.complaints.update');
     });
 
     // --- Restaurant-owner self-service (Phase 2 — branding + custom domains) ---
@@ -539,6 +677,25 @@ Route::prefix('v1')->group(function () {
             Route::post('/insights', [AdminInsightsController::class, 'store'])
                 ->middleware('throttle:10,1')
                 ->name('v1.admin.ai.insights');
+        });
+
+        // --- Phase 20 (Backend 2) — Kiosk + Courier admin lists ----------
+        Route::prefix('kiosks')->group(function () {
+            Route::get('/devices', [KioskAdminController::class, 'devices'])
+                ->name('v1.admin.kiosks.devices.index');
+            Route::post('/devices/{device}/disable', [KioskAdminController::class, 'disableDevice'])
+                ->name('v1.admin.kiosks.devices.disable');
+            Route::get('/pairing-codes', [KioskAdminController::class, 'pairingCodes'])
+                ->name('v1.admin.kiosks.codes.index');
+            Route::post('/pairing-codes', [KioskAdminController::class, 'createPairingCode'])
+                ->name('v1.admin.kiosks.codes.store');
+            Route::delete('/pairing-codes/{code}', [KioskAdminController::class, 'revokePairingCode'])
+                ->name('v1.admin.kiosks.codes.revoke');
+        });
+
+        Route::prefix('couriers')->group(function () {
+            Route::get('/locations', [CourierAdminController::class, 'locations'])
+                ->name('v1.admin.couriers.locations.index');
         });
     });
 

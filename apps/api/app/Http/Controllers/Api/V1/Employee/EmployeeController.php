@@ -33,11 +33,11 @@ class EmployeeController extends Controller
         if ($request->filled('q')) {
             $search = (string) $request->string('q');
             $query->where(function ($q) use ($search): void {
-                $q->where('employee_code', 'ilike', "%{$search}%")
+                $q->where('employee_code', 'like', "%{$search}%")
                     ->orWhereHas('user', function ($u) use ($search): void {
-                        $u->where('name', 'ilike', "%{$search}%")
-                            ->orWhere('email', 'ilike', "%{$search}%")
-                            ->orWhere('phone', 'ilike', "%{$search}%");
+                        $u->where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%")
+                            ->orWhere('phone', 'like', "%{$search}%");
                     });
             });
         }

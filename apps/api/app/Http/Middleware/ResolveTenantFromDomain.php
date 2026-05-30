@@ -18,7 +18,8 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * Runs **before** {@see SetTenantContext} so the resolved Tenant is bound
  * into the container as `currentTenant` — `SetTenantContext` then picks it
- * up to set the PostgreSQL GUC for RLS.
+ * up. (Pre-2026-05-10 the GUC drove PostgreSQL RLS. Project is now on MySQL,
+ * so the binding only feeds app-layer logging and `BelongsToTenant`.)
  *
  * Flow:
  *   1. If Host is one of our own platform hostnames (mypos.uz, *.mypos.uz,

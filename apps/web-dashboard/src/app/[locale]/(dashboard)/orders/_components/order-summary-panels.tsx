@@ -18,16 +18,24 @@ export function AmountsBreakdown({ order }: { order: Order }) {
   ];
 
   return (
-    <dl className="flex flex-col gap-1.5 rounded-lg border border-neutral-200 bg-white p-3 text-sm">
+    <dl className="flex flex-col gap-1.5 rounded-lg border border-[rgba(22,34,31,0.09)] bg-white p-3 text-sm dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
       {rows.map((row) => (
         <div key={row.key} className="flex items-center justify-between">
-          <dt className={row.emphasize ? 'font-semibold text-neutral-900' : 'text-neutral-600'}>
+          <dt
+            className={
+              row.emphasize
+                ? 'font-semibold text-[#16221f] dark:text-white'
+                : 'text-[#62716d] dark:text-[#94a3b8]'
+            }
+          >
             {row.label}
           </dt>
           <dd
             className={
               'tabular-nums ' +
-              (row.emphasize ? 'text-base font-bold text-neutral-900' : 'text-neutral-800')
+              (row.emphasize
+                ? 'text-base font-bold text-[#16221f] dark:text-white'
+                : 'text-[#16221f] dark:text-[#e2e8f0]')
             }
           >
             {formatUZS(row.value)}
@@ -48,11 +56,11 @@ export function Timestamps({ order }: { order: Order }) {
   ];
 
   return (
-    <dl className="flex flex-col gap-1.5 rounded-lg border border-neutral-200 bg-white p-3 text-sm">
+    <dl className="flex flex-col gap-1.5 rounded-lg border border-[rgba(22,34,31,0.09)] bg-white p-3 text-sm dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
       {rows.map((row) => (
         <div key={row.key} className="flex items-center justify-between gap-2">
-          <dt className="text-neutral-600">{row.label}</dt>
-          <dd className="text-neutral-800 tabular-nums">
+          <dt className="text-[#62716d] dark:text-[#94a3b8]">{row.label}</dt>
+          <dd className="text-[#16221f] tabular-nums dark:text-[#e2e8f0]">
             {row.value ? formatDateTime(new Date(row.value)) : t('timestamps.pending')}
           </dd>
         </div>

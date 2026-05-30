@@ -15,7 +15,8 @@
     "./breakpoints": "./src/breakpoints.ts",
     "./motion": "./src/motion.ts",
     "./tenant": "./src/tenant.ts",
-    "./tailwind": "./src/tailwind.ts"
+    "./tailwind": "./src/tailwind.ts",
+    "./theme.css": "./theme.css"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

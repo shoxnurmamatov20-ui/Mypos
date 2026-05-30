@@ -30,6 +30,8 @@
         <env name="DB_USERNAME" value="mypos"/>
         <env name="DB_PASSWORD" value="mypos_local_pwd"/>
         <env name="DB_URL" value=""/>
+        <env name="DB_CHARSET" value="utf8"/>
+        <env name="DB_COLLATION" value=""/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>

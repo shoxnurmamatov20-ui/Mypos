@@ -68,6 +68,50 @@ Broadcast::channel('tenant.{tenantId}.staff', function (?User $user, string $ten
     ]);
 });
 
+/*
+ * Per-employee staff channels (added 2026-05-14).
+ *
+ *   tenant.{tenantId}.waiter.{employeeId}  — kitchen.item.ready, customer.call
+ *   courier.{employeeId}                   — delivery.offered, delivery.cancelled
+ *
+ * The waiter channel scope encodes BOTH tenant + employee, so only the
+ * targeted waiter receives "your item is ready" pings. The courier channel
+ * is employee-scoped only (no tenant prefix) because couriers can deliver
+ * across tenants in the future marketplace mode.
+ */
+Broadcast::channel(
+    'tenant.{tenantId}.waiter.{employeeId}',
+    function (?User $user, string $tenantId, string $employeeId): bool {
+        if ($user === null || $user->tenant_id !== $tenantId) {
+            return false;
+        }
+
+        $employee = $user->employee;
+        if ($employee === null || $employee->id !== $employeeId) {
+            return false;
+        }
+
+        return in_array(
+            $employee->position,
+            ['waiter', 'cashier', 'manager', 'owner'],
+            true,
+        );
+    },
+);
+
+Broadcast::channel('courier.{employeeId}', function (?User $user, string $employeeId): bool {
+    if ($user === null) {
+        return false;
+    }
+
+    $employee = $user->employee;
+    if ($employee === null || $employee->id !== $employeeId) {
+        return false;
+    }
+
+    return $employee->position === 'courier';
+});
+
 Broadcast::channel('order.{orderId}', function (?User $user, string $orderId): bool {
     // Two valid paths to listen on an order channel:
     //   1) An authenticated tenant user whose tenant owns the order, OR

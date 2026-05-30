@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureActiveStaff;
+use App\Http\Middleware\EnsureCEO;
 use App\Http\Middleware\EnsureKioskDevice;
 use App\Http\Middleware\EnsureSuperAdmin;
 use App\Http\Middleware\EnsureTenantAdmin;
@@ -8,9 +9,11 @@ use App\Http\Middleware\InternalCaddyOnly;
 use App\Http\Middleware\PaymentWebhookIpAllowlist;
 use App\Http\Middleware\ResolveTenantFromDomain;
 use App\Http\Middleware\SetTenantContext;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -38,6 +41,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'kiosk.device' => EnsureKioskDevice::class,
             'super-admin' => EnsureSuperAdmin::class,
             'tenant.admin' => EnsureTenantAdmin::class,
+            'ceo' => EnsureCEO::class,
             'payment.webhook.ips' => PaymentWebhookIpAllowlist::class,
             'tenant.context' => SetTenantContext::class,
             'tenant.domain' => ResolveTenantFromDomain::class,
@@ -45,5 +49,12 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // API hardening (2026-05-14): force JSON response shape for every
+        // /api/* request. This makes the default AuthenticationException
+        // return a clean 401 JSON instead of trying to redirect to a
+        // nonexistent `login` route (which surfaced as a 500 to curl/SDK
+        // callers that forgot to set `Accept: application/json`).
+        $exceptions->shouldRenderJsonWhen(function (Request $request, \Throwable $e) {
+            return $request->is('api/*') || $request->expectsJson();
+        });
     })->create();

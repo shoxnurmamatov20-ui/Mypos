@@ -17,16 +17,16 @@ export function StockLevelBar({ ingredient }: { ingredient: Ingredient }) {
   const ceiling = Math.max(reorderPt * 2, threshold * 4, current);
   const pct = ceiling > 0 ? Math.min(100, Math.round((current / ceiling) * 100)) : 0;
 
-  let color = 'bg-neutral-300';
+  let color = 'bg-[#cbd5cf] dark:bg-[#334155]';
   if (min !== null) {
     if (current <= min) color = 'bg-red-500';
-    else if (current <= reorderPt) color = 'bg-yellow-500';
-    else color = 'bg-green-500';
+    else if (current <= reorderPt) color = 'bg-amber-500';
+    else color = 'bg-emerald-500';
   }
 
   return (
     <div className="flex items-center gap-2">
-      <div className="h-2 w-28 overflow-hidden rounded-full bg-neutral-200">
+      <div className="h-2 w-28 overflow-hidden rounded-full bg-[#eef4f3] dark:bg-[#1a2235]">
         <div
           className={`h-full ${color} transition-all`}
           style={{ width: `${pct}%` }}

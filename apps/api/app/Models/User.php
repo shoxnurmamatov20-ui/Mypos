@@ -12,6 +12,7 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -94,6 +95,32 @@ class User extends Authenticatable implements FilamentUser
     public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    /**
+     * Tenants this user OWNS as a CEO/business-owner (via `tenant_owners`
+     * pivot). Distinct from `tenant()` which is the single tenant this
+     * user is *employed at* (cashier, waiter, manager scope). A CEO may
+     * own 5 restaurants and not be employed at any of them.
+     *
+     * @return BelongsToMany<Tenant>
+     */
+    public function ownedTenants(): BelongsToMany
+    {
+        return $this->belongsToMany(Tenant::class, 'tenant_owners')
+            ->withPivot(['is_primary', 'joined_at'])
+            ->withTimestamps();
+    }
+
+    /**
+     * UUIDs of every tenant this user owns — convenient for cross-tenant
+     * scoped queries inside `/api/v1/ceo/*` controllers.
+     *
+     * @return array<string>
+     */
+    public function ownedTenantIds(): array
+    {
+        return $this->ownedTenants()->pluck('tenants.id')->all();
     }
 
     /**

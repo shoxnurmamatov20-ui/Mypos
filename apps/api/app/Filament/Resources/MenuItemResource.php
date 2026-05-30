@@ -213,7 +213,7 @@ class MenuItemResource extends Resource
                     ->label('Nomi')
                     ->getStateUsing(fn ($record): string => $record->name['uz'] ?? '')
                     ->searchable(query: function ($query, string $search) {
-                        return $query->where('name->uz', 'ilike', "%{$search}%");
+                        return $query->where('name->uz', 'like', "%{$search}%");
                     })
                     ->weight('semibold'),
                 Tables\Columns\TextColumn::make('tenant.name')
@@ -227,7 +227,7 @@ class MenuItemResource extends Resource
                     ->searchable(query: function ($query, string $search) {
                         return $query->whereHas('category', function ($q) use ($search) {
                             $q->withoutGlobalScopes(['tenant'])
-                                ->where('name->uz', 'ilike', "%{$search}%");
+                                ->where('name->uz', 'like', "%{$search}%");
                         });
                     })
                     ->color('gray'),

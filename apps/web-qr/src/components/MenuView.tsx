@@ -11,10 +11,11 @@ import {
   type Locale,
 } from '@/lib/i18n';
 import { useCartStore } from '@/stores/cart';
-import { MenuCategoryTabs } from './MenuCategoryTabs';
-import { MenuItemCard } from './MenuItemCard';
 import { Cart } from './Cart';
 import { CartModal } from './CartModal';
+import { MenuCategoryTabs } from './MenuCategoryTabs';
+import { type DietaryTag, MenuFilters } from './MenuFilters';
+import { MenuItemCard } from './MenuItemCard';
 import { PlaceOrderConfirm } from './PlaceOrderConfirm';
 
 type Props = {
@@ -26,6 +27,9 @@ export function MenuView({ slug, tableId }: Props) {
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
   const [placedOrderNo, setPlacedOrderNo] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
+  const [tags, setTags] = useState<Set<DietaryTag>>(new Set());
+  const [overrideLocale, setOverrideLocale] = useState<Locale | null>(null);
 
   const setTenantSlug = useCartStore((s) => s.setTenantSlug);
 
@@ -38,14 +42,35 @@ export function MenuView({ slug, tableId }: Props) {
     queryFn: () => publicApi.menu.get(apiClient, slug),
   });
 
-  const locale: Locale = normalizeLocale(menuQuery.data?.data.tenant.default_locale);
+  const tenantLocale: Locale = normalizeLocale(menuQuery.data?.data.tenant.default_locale);
+  const locale: Locale = overrideLocale ?? tenantLocale;
   const currency = menuQuery.data?.data.tenant.default_currency ?? 'UZS';
 
   const filteredItems = useMemo(() => {
     const all = menuQuery.data?.data.items ?? [];
-    if (activeCategoryId === null) return all;
-    return all.filter((it) => it.category_id === activeCategoryId);
-  }, [menuQuery.data, activeCategoryId]);
+    let result = activeCategoryId === null ? all : all.filter((it) => it.category_id === activeCategoryId);
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter((it) => {
+        const name = pickTranslation(it.name, locale).toLowerCase();
+        const desc = it.description ? pickTranslation(it.description, locale).toLowerCase() : '';
+        return name.includes(q) || desc.includes(q);
+      });
+    }
+
+    if (tags.size > 0) {
+      result = result.filter((it) => {
+        const itemTags = new Set<string>([...(it.tags ?? []), ...(it.allergens ?? [])]);
+        for (const tag of tags) {
+          if (itemTags.has(tag)) return true;
+        }
+        return false;
+      });
+    }
+
+    return result;
+  }, [menuQuery.data, activeCategoryId, search, tags, locale]);
 
   if (menuQuery.isLoading) {
     return (
@@ -94,6 +119,15 @@ export function MenuView({ slug, tableId }: Props) {
       </header>
 
       <section className="px-4">
+        <MenuFilters
+          locale={locale}
+          onLocaleChange={setOverrideLocale}
+          search={search}
+          onSearchChange={setSearch}
+          activeTags={tags}
+          onTagsChange={setTags}
+        />
+
         <MenuCategoryTabs
           categories={categories}
           activeId={activeCategoryId}

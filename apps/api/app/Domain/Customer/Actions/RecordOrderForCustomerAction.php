@@ -25,9 +25,13 @@ class RecordOrderForCustomerAction
         }
 
         DB::transaction(function () use ($order): void {
+            // Audit C-1 (ADR-0005 follow-up): RLS used to catch a missing
+            // tenant_id filter here. Now app-layer is the only guard, so we
+            // pin every cross-scope lookup to $order->tenant_id explicitly.
             /** @var Customer|null $customer */
             $customer = Customer::query()
                 ->withoutGlobalScopes(['tenant'])
+                ->where('tenant_id', $order->tenant_id)
                 ->where('id', $order->customer_id)
                 ->lockForUpdate()
                 ->first();
@@ -52,6 +56,7 @@ class RecordOrderForCustomerAction
             /** @var LoyaltyAccount|null $account */
             $account = LoyaltyAccount::query()
                 ->withoutGlobalScopes(['tenant'])
+                ->where('tenant_id', $order->tenant_id)
                 ->where('customer_id', $customer->id)
                 ->where('program_id', $program->id)
                 ->lockForUpdate()

@@ -1,0 +1,174 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "retry": "Retry",
+    "search": "Search",
+    "all": "All",
+    "back": "Back",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "today": "Today",
+    "none": "—"
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "network": "Network connection error",
+    "unauthorized": "Authorization required",
+    "load_failed": "Failed to load data"
+  },
+  "login": {
+    "redirecting": "Redirecting to the MyPOS portal…"
+  },
+  "sidebar": {
+    "brand": "MyPOS Cashier",
+    "role": "Cashier",
+    "group_work": "Work",
+    "group_session": "Shift",
+    "pos": "POS",
+    "orders": "Orders",
+    "payments": "Payments",
+    "shift": "Shift",
+    "logout": "Sign out"
+  },
+  "topbar": {
+    "home": "POS",
+    "pos": "POS",
+    "orders": "Orders",
+    "payments": "Payments",
+    "shift": "Shift"
+  },
+  "user_menu": {
+    "role_cashier": "Cashier",
+    "logout": "Sign out"
+  },
+  "shift_badge": {
+    "open": "Shift open",
+    "closed": "Shift closed",
+    "on_break": "On break",
+    "no_shift": "No shift"
+  },
+  "pos": {
+    "title": "POS",
+    "subtitle": "Build the order and take payment",
+    "search_placeholder": "Search items...",
+    "all_categories": "All",
+    "cart_title": "Order",
+    "cart_empty": "Cart is empty",
+    "cart_empty_hint": "Pick items to build an order",
+    "qty": "Qty",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "discount": "Discount",
+    "total": "Total",
+    "clear_cart": "Clear",
+    "charge": "Take payment",
+    "charge_amount": "Charge {amount}",
+    "order_placed": "Order placed",
+    "order_type": "Order type",
+    "dine_in": "Dine in",
+    "takeaway": "Takeaway",
+    "delivery": "Delivery",
+    "out_of_stock": "Out of stock",
+    "no_items": "No items in this category",
+    "added": "Added",
+    "remove": "Remove"
+  },
+  "orders": {
+    "title": "Orders",
+    "subtitle": "Active and completed orders",
+    "filter_all": "All",
+    "filter_active": "Active",
+    "filter_pending": "Pending",
+    "filter_preparing": "Preparing",
+    "filter_ready": "Ready",
+    "filter_completed": "Completed",
+    "empty": "No orders found",
+    "order_no": "Order №",
+    "items_count": "{count} items",
+    "guests": "{count} guests",
+    "placed_at": "Placed",
+    "total": "Total",
+    "mark_ready": "Mark ready",
+    "mark_served": "Mark served",
+    "mark_completed": "Complete",
+    "status": {
+      "draft": "Draft",
+      "pending": "Pending",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "served": "Served",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded"
+    },
+    "payment": {
+      "unpaid": "Unpaid",
+      "partial": "Partial",
+      "paid": "Paid",
+      "refunded": "Refunded",
+      "void": "Void"
+    }
+  },
+  "payments": {
+    "title": "Payments",
+    "subtitle": "Payments collected this shift",
+    "empty": "No payments found",
+    "total_collected": "Total collected",
+    "count": "Payment count",
+    "cash_total": "Cash",
+    "card_total": "Card",
+    "amount": "Amount",
+    "method": "Method",
+    "time": "Time",
+    "order": "Order",
+    "status_label": "Status",
+    "methods": {
+      "cash": "Cash",
+      "card": "Card",
+      "click": "Click",
+      "payme": "Payme",
+      "uzum": "Uzum",
+      "other": "Other"
+    },
+    "statuses": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "failed": "Failed",
+      "refunded": "Refunded"
+    }
+  },
+  "shift": {
+    "title": "Shift",
+    "subtitle": "Manage your shift and see stats",
+    "current_shift": "Current shift",
+    "no_open_shift": "No open shift",
+    "no_open_shift_hint": "Open a shift to start working",
+    "clock_in": "Clock in",
+    "clock_out": "Clock out",
+    "start_break": "Break",
+    "end_break": "End break",
+    "on_break": "On break",
+    "started_at": "Started",
+    "worked": "Worked",
+    "break_total": "Break",
+    "stats_title": "Shift stats",
+    "orders_count": "Orders",
+    "revenue": "Revenue",
+    "avg_order": "Avg ticket",
+    "tips": "Tips",
+    "recent_shifts": "Recent shifts",
+    "duration": "Duration",
+    "date": "Date",
+    "statuses": {
+      "scheduled": "Scheduled",
+      "open": "Open",
+      "closed": "Closed",
+      "missed": "Missed",
+      "in_progress": "In progress"
+    }
+  }
+}

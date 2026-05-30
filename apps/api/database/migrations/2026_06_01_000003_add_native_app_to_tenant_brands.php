@@ -47,8 +47,12 @@ return new class extends Migration {
                 // Mock-up screenshots arranged for store-listing preview.
                 // Same shape as tenant_apps.screenshots:
                 //   [{ "device": "iphone_6_7", "urls": [...] }, ...]
+                // Driver-portable JSON empty-default — see ADR-0005.
+                $emptyArrayDefault = DB::connection()->getDriverName() === 'pgsql'
+                    ? DB::raw("'[]'::jsonb")
+                    : DB::raw("('[]')");
                 $table->jsonb('native_app_screenshots')
-                    ->default(DB::raw("'[]'::jsonb"));
+                    ->default($emptyArrayDefault);
             }
         });
     }

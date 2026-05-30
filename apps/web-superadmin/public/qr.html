@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyPOS Mobile Apps — QR Codes</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: #fff;
+  min-height: 100vh;
+  padding: 32px 24px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.header h1 {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #EA7C69, #9333EA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 12px;
+}
+.header p {
+  font-size: 18px;
+  color: #94A3B8;
+  margin-bottom: 8px;
+}
+.instructions {
+  background: rgba(234, 124, 105, 0.1);
+  border: 1px solid rgba(234, 124, 105, 0.3);
+  border-radius: 16px;
+  padding: 20px 24px;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #FCA5A5;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 24px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(234, 124, 105, 0.5);
+  box-shadow: 0 20px 60px rgba(234, 124, 105, 0.2);
+}
+.emoji {
+  font-size: 80px;
+  margin-bottom: 12px;
+}
+.card h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.card .subtitle {
+  font-size: 14px;
+  color: #94A3B8;
+  margin-bottom: 16px;
+}
+.qr {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  display: inline-block;
+  margin: 12px 0;
+}
+.qr img {
+  display: block;
+  width: 240px;
+  height: 240px;
+}
+.url {
+  font-family: 'Consolas', monospace;
+  font-size: 13px;
+  color: #50D1AA;
+  background: rgba(80, 209, 170, 0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+  word-break: break-all;
+}
+.role {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.role.kassir { background: rgba(234, 124, 105, 0.2); color: #FCA5A5; }
+.role.mijoz { background: rgba(80, 209, 170, 0.2); color: #6EE7B7; }
+.role.xodim { background: rgba(147, 51, 234, 0.2); color: #C4B5FD; }
+.role.kuryer { background: rgba(251, 191, 36, 0.2); color: #FCD34D; }
+.role.kiosk { background: rgba(59, 130, 246, 0.2); color: #93C5FD; }
+.footer {
+  text-align: center;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #64748B;
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📱 MyPOS Mobile Apps</h1>
+  <p>5 ta mobil ilova — Expo Go bilan oching</p>
+</div>
+
+<div class="instructions">
+  <strong>📲 Qanday ishlatish:</strong><br>
+  1. Telefoningizda <strong>Expo Go</strong> ilovasini oching<br>
+  2. <strong>"Scan QR Code"</strong> tugmasini bosing<br>
+  3. Quyidagi QR kodlardan birini telefoningiz kamerasiga tutings<br>
+  4. Ilova avtomatik yuklanadi (15-30 soniya kuting)<br>
+  ⚠️ Telefon va kompyuter <strong>bir Wi-Fi tarmog'ida</strong> bo'lishi shart!
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="emoji">💼</div>
+    <span class="role kassir">Kassir</span>
+    <h2>POS Terminal</h2>
+    <p class="subtitle">Landscape, dark theme</p>
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=exp%3A%2F%2F192.168.100.50%3A8081&margin=10" alt="POS Terminal QR">
+    </div>
+    <div class="url">exp://192.168.100.50:8081</div>
+  </div>
+
+  <div class="card">
+    <div class="emoji">🍔</div>
+    <span class="role mijoz">Mijoz</span>
+    <h2>Consumer App</h2>
+    <p class="subtitle">Uber Eats uslubida</p>
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=exp%3A%2F%2F192.168.100.50%3A8082&margin=10" alt="Consumer QR">
+    </div>
+    <div class="url">exp://192.168.100.50:8082</div>
+  </div>
+
+  <div class="card">
+    <div class="emoji">👨‍🍳</div>
+    <span class="role xodim">Xodim</span>
+    <h2>Staff App</h2>
+    <p class="subtitle">Waiter + Cook</p>
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=exp%3A%2F%2F192.168.100.50%3A8083&margin=10" alt="Staff QR">
+    </div>
+    <div class="url">exp://192.168.100.50:8083</div>
+  </div>
+
+  <div class="card">
+    <div class="emoji">🛵</div>
+    <span class="role kuryer">Kuryer</span>
+    <h2>Courier App</h2>
+    <p class="subtitle">GPS bilan yetkazib berish</p>
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=exp%3A%2F%2F192.168.100.50%3A8084&margin=10" alt="Courier QR">
+    </div>
+    <div class="url">exp://192.168.100.50:8084</div>
+  </div>
+
+  <div class="card">
+    <div class="emoji">🖥️</div>
+    <span class="role kiosk">Kiosk</span>
+    <h2>Self-Service Kiosk</h2>
+    <p class="subtitle">Landscape, planshet uchun</p>
+    <div class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=exp%3A%2F%2F192.168.100.50%3A8085&margin=10" alt="Kiosk QR">
+    </div>
+    <div class="url">exp://192.168.100.50:8085</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>🚀 MyPOS — Restaurant SaaS Platform</p>
+  <p style="margin-top:8px">LAN IP: <code>192.168.100.50</code> • Backend: <code>http://192.168.100.50:58000</code></p>
+</div>
+
+</body>
+</html>

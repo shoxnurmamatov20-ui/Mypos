@@ -1,11 +1,7 @@
 @import 'tailwindcss';
-@config '../../tailwind.config.ts';
+@import '@mypos/design-tokens/theme.css';
 
-@theme {
-  --font-display: 'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-sans: 'SF Pro Text', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, Menlo, Monaco, monospace;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   html {
@@ -13,61 +9,124 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  html:not(.dark) { color-scheme: light; }
+  html.dark { color-scheme: dark; }
 
   body {
-    background:
-      linear-gradient(180deg, rgba(247, 250, 247, 0.92) 0%, rgba(255, 255, 255, 1) 36%),
-      #ffffff;
-    color: #1d1d1f;
-    font-family: var(--font-sans);
-    font-size: 17px;
-    line-height: 1.47;
-    letter-spacing: 0;
+    /* Always-dark teal canvas — the marketing site reads as one
+       continuous Operatora-style emerald stage regardless of theme
+       toggle. Individual sections layer their own bg on top. */
+    background-color: #001B1B;
+    color: #e2e8f0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .dark body {
+    /* 3-tone Dark Teal / Deep Emerald palette
+       — Base #001B1B → tinted with subtle teal radials so the body
+       doesn't feel flat. Sections use #022F2F, elevated surfaces #014D4E. */
+    background-color: #001B1B;
+    background-image:
+      radial-gradient(ellipse 1200px 600px at 50% -200px, rgba(20, 184, 166, 0.18), transparent 60%),
+      radial-gradient(ellipse 800px 400px at 80% 60%, rgba(1, 77, 78, 0.30), transparent 60%);
+    color: #e2e8f0;
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-family: var(--font-display);
-    color: #1d1d1f;
-  }
+  ::selection { background-color: #0f766e; color: white; }
 
-  ::selection {
-    background-color: #fef0ed;
-    color: #1d1d1f;
-  }
+  *::-webkit-scrollbar { width: 8px; height: 8px; }
+  *::-webkit-scrollbar-track { background: #f8fafc; }
+  *::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+  *::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+  .dark *::-webkit-scrollbar-track { background: #0f172a; }
+  .dark *::-webkit-scrollbar-thumb { background-color: #334155; }
+  .dark *::-webkit-scrollbar-thumb:hover { background-color: #475569; }
 }
 
-/* Tabular numerals for prices/counts/timers */
-.tabular {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: 'tnum';
-}
+.tabular { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+.press { transition: transform 0.15s ease; }
+.press:active { transform: scale(0.97); }
 
-/* Frosted global navigation */
-.frosted-nav {
-  background-color: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(22px) saturate(170%);
-  -webkit-backdrop-filter: blur(22px) saturate(170%);
-}
-
-.ops-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 36px 36px;
-}
-
-.modern-gradient {
+/* Subtle teal-tinted radial backdrop for the hero. Falls off quickly so
+   it stays elegant rather than loud. */
+.hero-glow {
   background:
-    linear-gradient(135deg, rgba(234, 124, 105, 0.18), rgba(80, 209, 170, 0.12) 42%, transparent 72%),
-    linear-gradient(180deg, #151918 0%, #101211 100%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(15, 118, 110, 0.12), transparent 60%);
+}
+.dark .hero-glow {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(45, 212, 191, 0.20), transparent 60%);
 }
 
-.soft-checker {
-  background-image:
-    linear-gradient(rgba(16, 18, 17, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16, 18, 17, 0.04) 1px, transparent 1px);
-  background-size: 28px 28px;
+/* True glassmorphism — high transparency, heavy backdrop-blur,
+   saturated under-content, top-edge inner shimmer, double-layer shadow.
+   The pill reads as frosted glass over the teal canvas. */
+.nav-glass-light {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 184, 166, 0.10) 0%,
+    rgba(2, 47, 47, 0.28) 100%
+  );
+  backdrop-filter: saturate(200%) blur(40px);
+  -webkit-backdrop-filter: saturate(200%) blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    /* Inner top shimmer — gives the glass its lifted feel */
+    0 1px 0 inset rgba(255, 255, 255, 0.18),
+    0 0 0 1px inset rgba(255, 255, 255, 0.02),
+    /* Floating drop shadow */
+    0 10px 40px -8px rgba(0, 0, 0, 0.45),
+    0 4px 16px -4px rgba(0, 0, 0, 0.30);
+}
+.dark .nav-glass-light {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 184, 166, 0.08) 0%,
+    rgba(2, 47, 47, 0.32) 100%
+  );
+  box-shadow:
+    0 1px 0 inset rgba(255, 255, 255, 0.16),
+    0 0 0 1px inset rgba(255, 255, 255, 0.02),
+    0 10px 40px -8px rgba(0, 0, 0, 0.60),
+    0 4px 16px -4px rgba(0, 0, 0, 0.40);
+}
+
+/* Reusable glass-card — same recipe as the floating navbar but tuned
+   for static surfaces: lower blur so child content stays crisp, lighter
+   shadow so cards don't compete with the pill. */
+.glass-card {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 184, 166, 0.08) 0%,
+    rgba(2, 47, 47, 0.32) 100%
+  );
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 1px 0 inset rgba(255, 255, 255, 0.14),
+    0 0 0 1px inset rgba(255, 255, 255, 0.02),
+    0 8px 32px -10px rgba(0, 0, 0, 0.40),
+    0 2px 8px -2px rgba(0, 0, 0, 0.20);
+}
+.glass-card-hover:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 184, 166, 0.12) 0%,
+    rgba(2, 47, 47, 0.40) 100%
+  );
+  border-color: rgba(20, 184, 166, 0.35);
+}
+
+/* Animated teal gradient used by the headline highlight word. */
+.gradient-teal {
+  background: linear-gradient(135deg, #0f766e 0%, #14b8a6 60%, #2dd4bf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dark .gradient-teal {
+  background: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 60%, #5eead4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

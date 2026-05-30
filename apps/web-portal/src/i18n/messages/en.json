@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "MyPOS — Restaurant Operating System",
+    "description": "Central Asia's #1 restaurant SaaS"
+  },
+  "portal": {
+    "headline": "Welcome <em>back.</em>",
+    "subline": "Enter your email and password — we'll route you to the right workspace.",
+    "footer": "© 2026 MyPOS"
+  },
+  "login": {
+    "title": "Sign in",
+    "email_label": "Email",
+    "email_placeholder": "you@restaurant.uz",
+    "password_label": "Password",
+    "password_placeholder": "••••••••",
+    "remember_me": "Remember me for 30 days",
+    "forgot_password": "Forgot your password?",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "no_account": "Don't have an account yet?",
+    "create_account": "Register your restaurant",
+    "errors": {
+      "invalid": "Email or password is incorrect.",
+      "rate_limited": "Too many attempts. Try again in {seconds} seconds.",
+      "server": "Connection error. Check your internet and try again."
+    }
+  },
+  "forgot": {
+    "title": "Reset password",
+    "subtitle": "Enter your email — we'll send you a reset link.",
+    "submit": "Send link",
+    "back_to_login": "Back to sign in",
+    "success": "Reset link sent to {email}. Check your inbox."
+  },
+  "reset": {
+    "title": "Set a new password",
+    "subtitle": "Set a new password for {email}.",
+    "subtitle_no_email": "Set your new password.",
+    "password_label": "New password",
+    "password_placeholder": "••••••••",
+    "confirm_label": "Repeat password",
+    "confirm_placeholder": "••••••••",
+    "submit": "Save password",
+    "submitting": "Saving…",
+    "back_to_login": "Back to sign in",
+    "success_title": "Password updated",
+    "success_body": "Your password has been changed. You can now sign in with the new password.",
+    "errors": {
+      "invalid_link": "This link is invalid or expired. Request a new reset link.",
+      "min_8": "Password must be at least 8 characters.",
+      "mismatch": "Passwords don't match.",
+      "server": "Server error. Check your internet and try again."
+    }
+  },
+  "dispatch": {
+    "loading": "Routing you to the right panel…",
+    "manual_redirect": "If you're not redirected automatically — {link}",
+    "click_here": "click here"
+  },
+  "logout": {
+    "title": "Signed out",
+    "subtitle": "You've been successfully signed out.",
+    "back_to_login": "Sign in again"
+  },
+  "waiter": {
+    "brand": {
+      "role": "Waiter panel"
+    },
+    "nav": {
+      "groupWork": "Work",
+      "groupShift": "Shift",
+      "tables": "Tables",
+      "orders": "Orders",
+      "menu": "Menu",
+      "shift": "My shift"
+    },
+    "common": {
+      "logout": "Sign out",
+      "close": "Close",
+      "menu": "Menu"
+    },
+    "topbar": {
+      "home": "Waiter"
+    },
+    "guard": {
+      "checking": "Checking…"
+    },
+    "tables": {
+      "title": "Tables",
+      "subtitle": "Floor status and your tables",
+      "filterAll": "All",
+      "empty": "No tables in this status",
+      "seats": "{count} seats",
+      "guests": "{count} guests",
+      "openOrder": "Order {id}",
+      "status": {
+        "free": "Free",
+        "seated": "Seated",
+        "bill": "Awaiting bill",
+        "reserved": "Reserved"
+      }
+    },
+    "orders": {
+      "title": "Orders",
+      "subtitle": "{count} active orders",
+      "filterAll": "All",
+      "empty": "No orders in this status",
+      "total": "Total",
+      "guests": "{count} guests",
+      "status": {
+        "open": "Open",
+        "sent": "In kitchen",
+        "ready": "Ready",
+        "served": "Served",
+        "paid": "Paid"
+      }
+    },
+    "menu": {
+      "title": "Menu",
+      "subtitle": "Dishes and prices",
+      "search": "Search a dish…",
+      "filterAll": "All",
+      "empty": "No dish found",
+      "available": "Available",
+      "unavailable": "Sold out"
+    },
+    "shift": {
+      "title": "My shift",
+      "subtitle": "{name} — today's shift summary",
+      "clockOut": "Clock out",
+      "clockIn": "Clock in",
+      "onShift": "Shift open",
+      "offShift": "Shift closed",
+      "started": "Started: {time}",
+      "activity": "Today's activity",
+      "stats": {
+        "tables": "Tables served",
+        "orders": "Orders",
+        "sales": "Sales",
+        "tips": "Tips",
+        "active": "Active tables"
+      }
+    }
+  }
+}

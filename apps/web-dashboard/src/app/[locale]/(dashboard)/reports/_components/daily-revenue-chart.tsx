@@ -35,26 +35,28 @@ export function DailyRevenueChart({ points }: { points: DailyRevenuePoint[] }) {
     <ChartShell title={t('charts.daily_revenue_title')}>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={points} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(22,34,31,0.07)" />
           <XAxis
             dataKey="date"
             tickFormatter={formatDate}
-            tick={{ fontSize: 11, fill: '#737373' }}
-            axisLine={{ stroke: '#e5e5e5' }}
+            tick={{ fontSize: 11, fill: '#62716d' }}
+            axisLine={{ stroke: 'rgba(22,34,31,0.07)' }}
             tickLine={false}
           />
           <YAxis
             tickFormatter={formatRevenue}
-            tick={{ fontSize: 11, fill: '#737373' }}
-            axisLine={{ stroke: '#e5e5e5' }}
+            tick={{ fontSize: 11, fill: '#62716d' }}
+            axisLine={{ stroke: 'rgba(22,34,31,0.07)' }}
             tickLine={false}
             width={60}
           />
           <Tooltip
             contentStyle={{
+              background: '#fff',
+              border: '1px solid rgba(22,34,31,0.09)',
+              borderRadius: 10,
               fontSize: 12,
-              borderRadius: 8,
-              border: '1px solid #e5e5e5',
+              boxShadow: '0 4px 20px rgba(18,34,31,0.08)',
             }}
             labelFormatter={(label) => String(label)}
             formatter={(value: number, key: string) => {
@@ -65,7 +67,7 @@ export function DailyRevenueChart({ points }: { points: DailyRevenuePoint[] }) {
           <Line
             type="monotone"
             dataKey="revenue"
-            stroke="#0ea5e9"
+            stroke="#0f766e"
             strokeWidth={2.5}
             dot={{ r: 2 }}
             activeDot={{ r: 5 }}
@@ -78,8 +80,8 @@ export function DailyRevenueChart({ points }: { points: DailyRevenuePoint[] }) {
 
 function ChartShell({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-neutral-200 bg-white p-5 shadow-sm">
-      <h2 className="mb-4 text-sm font-semibold text-neutral-900">{title}</h2>
+    <div className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-5 dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
+      <h2 className="mb-4 text-sm font-semibold text-[#16221f] dark:text-white">{title}</h2>
       {children}
     </div>
   );
@@ -87,7 +89,7 @@ function ChartShell({ title, children }: { title: string; children: React.ReactN
 
 function EmptyState({ label }: { label: string }) {
   return (
-    <div className="flex h-[260px] items-center justify-center rounded-lg border-2 border-dashed border-neutral-300 text-sm text-neutral-500">
+    <div className="flex h-[260px] items-center justify-center rounded-lg border border-dashed border-[rgba(22,34,31,0.12)] text-sm text-[#62716d] dark:border-[rgba(255,255,255,0.10)] dark:text-[#94a3b8]">
       {label}
     </div>
   );

@@ -36,14 +36,14 @@ export function CategoryList({
         <button
           type="button"
           onClick={() => setEditing('new')}
-          className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600"
+          className="rounded-lg bg-[#0f766e] hover:bg-[#0d5e58] dark:bg-[#14b8a6] dark:hover:bg-[#0d9488] px-4 py-2 text-sm font-semibold text-white"
         >
           + {t('add_category')}
         </button>
       </div>
 
       {isLoading ? (
-        <div className="text-sm text-neutral-500">{t('loading')}</div>
+        <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>
       ) : categories.length === 0 ? (
         <EmptyState label={t('empty_categories')} />
       ) : (
@@ -51,7 +51,7 @@ export function CategoryList({
           {categories.map((cat) => (
             <div
               key={cat.id}
-              className="rounded-xl border border-neutral-200 bg-white p-5 transition hover:shadow-md"
+              className="rounded-xl border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] p-5 transition"
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
@@ -67,19 +67,19 @@ export function CategoryList({
                     </div>
                   )}
                   <div>
-                    <h3 className="font-semibold text-neutral-900">{cat.name.uz}</h3>
-                    <p className="text-xs text-neutral-500">
+                    <h3 className="font-semibold text-[#16221f] dark:text-white">{cat.name.uz}</h3>
+                    <p className="text-xs text-[#62716d] dark:text-[#94a3b8]">
                       {cat.name.ru} · {cat.name.en}
                     </p>
                   </div>
                 </div>
                 {!cat.is_active && (
-                  <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600">
+                  <span className="rounded-full bg-[#eef4f3] dark:bg-[#1a2235] px-2 py-0.5 text-xs text-[#62716d] dark:text-[#94a3b8]">
                     {t('inactive')}
                   </span>
                 )}
               </div>
-              <div className="mt-4 flex items-center justify-between text-xs text-neutral-500">
+              <div className="mt-4 flex items-center justify-between text-xs text-[#62716d] dark:text-[#94a3b8]">
                 <span>
                   {cat.items_count ?? 0} {t('items_count_suffix')}
                 </span>
@@ -87,14 +87,14 @@ export function CategoryList({
                   <button
                     type="button"
                     onClick={() => setEditing(cat)}
-                    className="font-medium text-brand-600 hover:underline"
+                    className="font-medium text-[#0f766e] dark:text-teal-400 hover:underline"
                   >
                     {t('edit')}
                   </button>
                   <button
                     type="button"
                     onClick={() => handleDelete(cat)}
-                    className="font-medium text-danger hover:underline"
+                    className="font-medium text-red-600 dark:text-red-400 hover:underline"
                   >
                     {t('delete')}
                   </button>
@@ -121,7 +121,7 @@ export function CategoryList({
 
 function EmptyState({ label }: { label: string }) {
   return (
-    <div className="rounded-xl border-2 border-dashed border-neutral-300 p-12 text-center text-sm text-neutral-500">
+    <div className="rounded-xl border border-dashed border-[rgba(22,34,31,0.12)] dark:border-[rgba(255,255,255,0.10)] p-12 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
       {label}
     </div>
   );

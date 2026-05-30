@@ -81,7 +81,7 @@ export function OrderDetailDialog({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl"
+        className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6 shadow-[0_4px_20px_rgba(18,34,31,0.08)] dark:bg-[#111827] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
         onClick={(e) => e.stopPropagation()}
       >
         <DialogHeader order={order} onClose={onClose} />
@@ -109,7 +109,7 @@ export function OrderDetailDialog({
         {order.notes && (
           <section className="mb-6">
             <SectionTitle>{t('detail.notes')}</SectionTitle>
-            <p className="rounded-lg bg-neutral-50 px-3 py-2 text-sm text-neutral-700">
+            <p className="rounded-lg bg-[#eef4f3] px-3 py-2 text-sm text-[#16221f] dark:bg-[#1a2235] dark:text-[#e2e8f0]">
               {order.notes}
             </p>
           </section>
@@ -130,7 +130,7 @@ export function OrderDetailDialog({
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-neutral-500">
+    <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#62716d] dark:text-[#94a3b8]">
       {children}
     </h3>
   );
@@ -139,15 +139,15 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 function DialogHeader({ order, onClose }: { order: Order; onClose: () => void }) {
   const t = useTranslations('orders');
   return (
-    <div className="mb-6 flex items-start justify-between gap-4 border-b border-neutral-200 pb-4">
+    <div className="mb-6 flex items-start justify-between gap-4 border-b border-[rgba(22,34,31,0.09)] pb-4 dark:border-[rgba(255,255,255,0.07)]">
       <div>
         <div className="flex items-center gap-3">
-          <h2 className="font-display text-2xl font-bold text-neutral-900">
+          <h2 className="text-2xl font-bold text-[#16221f] dark:text-white">
             #{order.order_no}
           </h2>
           <StatusBadge status={order.status} />
         </div>
-        <p className="mt-1 text-sm text-neutral-500">
+        <p className="mt-1 text-sm text-[#62716d] dark:text-[#94a3b8]">
           {t(`filters.type.${order.type}` as 'filters.type.dine_in')}
           {order.table ? ` \u00b7 ${t('table')}: ${order.table.name}` : ''}
         </p>
@@ -156,7 +156,7 @@ function DialogHeader({ order, onClose }: { order: Order; onClose: () => void })
         type="button"
         onClick={onClose}
         aria-label={t('close')}
-        className="rounded-lg p-2 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
+        className="rounded-lg p-2 text-[#62716d] hover:bg-[#eef4f3] hover:text-[#16221f] dark:text-[#94a3b8] dark:hover:bg-[#1a2235] dark:hover:text-white"
       >
         {'\u2715'}
       </button>
@@ -188,11 +188,11 @@ function ActionsBar({
   const nextStep = nextStatus(order.status);
 
   return (
-    <div className="flex flex-wrap items-center justify-end gap-2 border-t border-neutral-200 pt-4">
+    <div className="flex flex-wrap items-center justify-end gap-2 border-t border-[rgba(22,34,31,0.09)] pt-4 dark:border-[rgba(255,255,255,0.07)]">
       <button
         type="button"
         onClick={onPrint}
-        className="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+        className="rounded-lg border border-[rgba(22,34,31,0.09)] px-4 py-2 text-sm font-medium text-[#16221f] hover:bg-[#eef4f3] dark:border-[rgba(255,255,255,0.07)] dark:text-[#e2e8f0] dark:hover:bg-[#1a2235]"
       >
         {t('actions.print_receipt')}
       </button>
@@ -201,7 +201,7 @@ function ActionsBar({
           type="button"
           onClick={() => void onCancel()}
           disabled={pending}
-          className="rounded-lg border border-rose-300 px-4 py-2 text-sm font-medium text-rose-700 hover:bg-rose-50 disabled:opacity-60"
+          className="rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-60 dark:border-red-900/50 dark:text-red-400 dark:hover:bg-red-950/30"
         >
           {t('actions.cancel')}
         </button>
@@ -211,7 +211,7 @@ function ActionsBar({
           type="button"
           onClick={() => void onChangeStatus(nextStep.next)}
           disabled={pending}
-          className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600 disabled:opacity-60"
+          className="rounded-lg bg-[#0f766e] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0d5e58] disabled:opacity-60 dark:bg-[#14b8a6] dark:hover:bg-[#0d9488]"
         >
           {pending
             ? t('updating')
@@ -221,7 +221,7 @@ function ActionsBar({
       <button
         type="button"
         onClick={onClose}
-        className="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+        className="rounded-lg border border-[rgba(22,34,31,0.09)] px-4 py-2 text-sm font-medium text-[#16221f] hover:bg-[#eef4f3] dark:border-[rgba(255,255,255,0.07)] dark:text-[#e2e8f0] dark:hover:bg-[#1a2235]"
       >
         {t('close')}
       </button>

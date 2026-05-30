@@ -1,151 +1,95 @@
-'use client';
-
-import { ArrowRight, Check } from '@phosphor-icons/react';
-import Link from 'next/link';
+import { CheckCircle } from '@phosphor-icons/react/dist/ssr';
 import { useLocale, useTranslations } from 'next-intl';
-import { FadeUp, StaggerGroup, StaggerItem } from './animations';
+import Link from 'next/link';
 
-type PlanKey = 'free' | 'starter' | 'pro' | 'business';
+const PLANS = ['free', 'starter', 'pro', 'business'] as const;
 
-const PLANS: { key: PlanKey; highlight: boolean; featureCount: number }[] = [
-  { key: 'free', highlight: false, featureCount: 4 },
-  { key: 'starter', highlight: false, featureCount: 5 },
-  { key: 'pro', highlight: true, featureCount: 5 },
-  { key: 'business', highlight: false, featureCount: 5 },
-];
-
+/** 4-plan pricing on the base-tier deep-teal canvas. */
 export function PricingTable() {
   const t = useTranslations('pricing');
   const locale = useLocale();
 
   return (
-    <section id="pricing" className="bg-[#F7FAF7]">
-      <div className="mx-auto max-w-7xl px-md py-section sm:px-lg lg:px-xl">
-        <FadeUp className="mx-auto max-w-3xl text-center">
-          <span className="font-display text-tagline text-coral">{t('section_label')}</span>
-          <h2 className="mt-sm font-display text-display-lg font-semibold text-ink">
+    <section className="bg-[#001B1B] py-20 sm:py-24">
+      <div className="mx-auto max-w-5xl px-5">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-[12px] font-bold uppercase tracking-[0.10em] text-[#5eead4]">
+            {t('section_label')}
+          </p>
+          <h2 className="mt-3 text-[28px] sm:text-[40px] font-extrabold leading-tight tracking-tight text-white">
             {t('title')}
           </h2>
-          <p className="mx-auto mt-md max-w-xl font-display text-lead text-ink-muted-80">
+          <p className="mt-3 text-[15px] sm:text-[16px] leading-relaxed text-white/70">
             {t('subtitle')}
           </p>
-        </FadeUp>
+        </div>
 
-        <StaggerGroup className="mt-xxl grid gap-md lg:grid-cols-4">
-          {PLANS.map((plan) => (
-            <StaggerItem key={plan.key}>
-              <PricingCard
-                planKey={plan.key}
-                highlight={plan.highlight}
-                featureCount={plan.featureCount}
-                locale={locale}
-              />
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {PLANS.map((plan) => {
+            const featured = plan === 'pro';
+            const features = t.raw(`plans.${plan}.features`) as string[];
+
+            return (
+              <div
+                key={plan}
+                className={
+                  featured
+                    ? 'glass-card relative flex h-full flex-col rounded-2xl p-6 ring-2 ring-[#ff0037] shadow-[0_20px_50px_-20px_rgba(255,0,55,0.55)] lg:-my-3 lg:scale-[1.02]'
+                    : 'glass-card relative flex h-full flex-col rounded-2xl p-6'
+                }
+              >
+                {featured ? (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center px-2.5 py-1 rounded-full bg-[#ff0037] text-white text-[10px] font-extrabold uppercase tracking-[0.08em] shadow-[0_4px_12px_-2px_rgba(255,0,55,0.50)]">
+                    {t('most_popular')}
+                  </span>
+                ) : null}
+
+                <h3 className="text-[18px] font-extrabold text-white">
+                  {t(`plans.${plan}.name`)}
+                </h3>
+                <p className="mt-1 text-[12.5px] text-white/60">
+                  {t(`plans.${plan}.tagline`)}
+                </p>
+
+                <div className="mt-4 flex items-baseline">
+                  <span className="tabular text-[36px] font-extrabold leading-none text-white">
+                    {t(`plans.${plan}.price_usd`)}
+                  </span>
+                  <span className="ml-1.5 text-[12px] text-white/60">
+                    {t('per_month')}
+                  </span>
+                </div>
+
+                <ul className="mt-5 flex-1 space-y-2">
+                  {features.map((f) => (
+                    <li key={f} className="flex items-start gap-2">
+                      <CheckCircle
+                        size={16}
+                        weight="fill"
+                        className={featured ? 'mt-0.5 shrink-0 text-[#5eead4]' : 'mt-0.5 shrink-0 text-emerald-400'}
+                      />
+                      <span className="text-[13.5px] leading-relaxed text-white/90">
+                        {f}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href={`/${locale}/get-started`}
+                  className={
+                    featured
+                      ? 'press mt-6 inline-flex h-10 items-center justify-center rounded-lg bg-[#ff0037] hover:bg-[#e6002f] text-white text-[13px] font-bold shadow-[0_10px_28px_-8px_rgba(255,0,55,0.55)] transition-colors'
+                      : 'press mt-6 inline-flex h-10 items-center justify-center rounded-lg border border-white/15 bg-white/[0.06] text-white text-[13px] font-bold hover:bg-white/[0.12] transition-colors'
+                  }
+                >
+                  {t('cta')}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
-  );
-}
-
-function PricingCard({
-  planKey,
-  highlight,
-  featureCount,
-  locale,
-}: {
-  planKey: PlanKey;
-  highlight: boolean;
-  featureCount: number;
-  locale: string;
-}) {
-  const t = useTranslations('pricing');
-  const name = t(`plans.${planKey}.name`);
-  const tagline = t(`plans.${planKey}.tagline`);
-  const priceUzs = t(`plans.${planKey}.price_uzs`);
-  const priceUsd = t(`plans.${planKey}.price_usd`);
-
-  const cardClass = highlight
-    ? 'relative h-full rounded-card bg-[#101211] p-lg text-white shadow-[0_28px_80px_rgba(16,18,17,0.22)]'
-    : 'relative h-full rounded-card border border-black/[0.06] bg-white p-lg shadow-[0_18px_50px_rgba(16,18,17,0.06)]';
-
-  const ctaClass = highlight
-    ? 'mt-lg inline-flex h-12 w-full items-center justify-center gap-xs rounded-pill bg-tenant px-lg text-body-strong text-tenant-on-primary transition-transform duration-fast active:scale-95'
-    : 'mt-lg inline-flex h-12 w-full items-center justify-center gap-xs rounded-pill bg-[#101211] px-lg text-body-strong text-white transition-transform duration-fast active:scale-95';
-
-  return (
-    <div className={cardClass}>
-      {highlight ? (
-        <span className="mb-md inline-flex rounded-pill bg-coral px-sm py-xxs text-caption-strong text-white">
-          {t('most_popular')}
-        </span>
-      ) : null}
-
-      <div
-        className={
-          highlight
-            ? 'font-display text-title font-semibold text-white'
-            : 'font-display text-title font-semibold text-ink'
-        }
-      >
-        {name}
-      </div>
-      <div
-        className={
-          highlight ? 'mt-xxs text-caption text-white/60' : 'mt-xxs text-caption text-ink-muted-80'
-        }
-      >
-        {tagline}
-      </div>
-
-      <div className="mt-md">
-        <div
-          className={
-            highlight
-              ? 'tabular font-display text-display-md font-semibold text-white'
-              : 'tabular font-display text-display-md font-semibold text-ink'
-          }
-        >
-          {priceUzs}
-        </div>
-        <div
-          className={
-            highlight
-              ? 'mt-xxs text-caption text-white/[0.48]'
-              : 'mt-xxs text-caption text-ink-muted-48'
-          }
-        >
-          {priceUsd}
-          {planKey !== 'free' ? <span> {t('per_month')}</span> : null}
-        </div>
-      </div>
-
-      <ul
-        className={
-          highlight
-            ? 'mt-lg space-y-xs text-body text-white/[0.74]'
-            : 'mt-lg space-y-xs text-body text-ink'
-        }
-      >
-        {Array.from({ length: featureCount }).map((_, i) => (
-          <li
-            // biome-ignore lint/suspicious/noArrayIndexKey: list order is stable by i18n
-            key={i}
-            className="flex items-start gap-xs"
-          >
-            <Check size={16} weight="bold" className="mt-1 flex-shrink-0 text-coral" aria-hidden="true" />
-            <span>{t(`plans.${planKey}.features.${i}`)}</span>
-          </li>
-        ))}
-      </ul>
-
-      <Link
-        href={`/${locale}/${planKey === 'business' ? 'contact' : 'get-started'}`}
-        className={ctaClass}
-      >
-        {planKey === 'business' ? t('cta_contact') : t('cta')}
-        <ArrowRight size={16} weight="bold" aria-hidden="true" />
-      </Link>
-    </div>
   );
 }

@@ -34,13 +34,16 @@ export function formatTimeAgo(minutes: number): string {
 }
 
 /**
- * Urgency buckets for color coding:
- *   < 5 min       -> normal
- *   5..15 min     -> warning
- *   > 15 min      -> urgent
+ * Urgency buckets for colour coding. Thresholds are cook-configurable
+ * (Settings → display preferences), so the board can run tighter on a
+ * fast-casual line and looser at a fine-dining pass.
+ *
+ *   minutes < warning            -> normal
+ *   warning <= minutes < urgent  -> warning
+ *   minutes >= urgent            -> urgent
  */
-export function urgencyLevel(minutes: number): UrgencyLevel {
-  if (minutes < 5) return 'normal';
-  if (minutes <= 15) return 'warning';
-  return 'urgent';
+export function urgencyLevel(minutes: number, warningMin = 5, urgentMin = 15): UrgencyLevel {
+  if (minutes >= urgentMin) return 'urgent';
+  if (minutes >= warningMin) return 'warning';
+  return 'normal';
 }

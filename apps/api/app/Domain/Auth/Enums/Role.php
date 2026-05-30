@@ -11,7 +11,8 @@ namespace App\Domain\Auth\Enums;
 enum Role: string
 {
     case SuperAdmin = 'super_admin';
-    case Owner = 'owner';          // Tenant owner (multi-location)
+    case Ceo = 'ceo';              // Multi-restaurant business owner (NEW 2026-05-14)
+    case Owner = 'owner';          // Single-tenant owner
     case Manager = 'manager';      // Single-location manager
     case Cashier = 'cashier';
     case Waiter = 'waiter';
@@ -23,6 +24,7 @@ enum Role: string
     {
         return match ($this) {
             self::SuperAdmin => 'Super Admin',
+            self::Ceo => 'CEO / Direktor',
             self::Owner => 'Egasi',
             self::Manager => 'Menejer',
             self::Cashier => 'Kassir',

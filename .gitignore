@@ -3,6 +3,10 @@ _legacy-*/
 
 # Claude Code — local session settings (keep .claude/agents/ and commands/ tracked)
 .claude/settings.local.json
+.claude/worktrees/
+.claude/workspace/
+.claude/skills/
+.claude/scheduled_tasks.lock
 
 # Dependencies
 node_modules/
@@ -51,6 +55,7 @@ desktop.ini
 
 # Logs
 logs/
+.run-logs/
 *.log
 npm-debug.log*
 yarn-debug.log*

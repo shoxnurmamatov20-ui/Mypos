@@ -1,7 +1,11 @@
 # MyPOS — Local Development Infrastructure
 #
-# Services:
-#   - postgres    : PostgreSQL 17 (main DB)
+# DB NOTE (2026-05-10, ADR-0005): MyPOS now uses MySQL 8.4. The MAIN database
+# runs via XAMPP on the host (localhost:3306), NOT in Docker. This compose
+# file no longer brings up a database service. CI uses its own mysql:8.4
+# service container — see .github/workflows/ci.yml.
+#
+# Services in this file:
 #   - redis       : Redis 7.4 (cache, queue, Reverb pub/sub)
 #   - meilisearch : Search (Laravel Scout driver)
 #   - minio       : S3-compatible object storage (files, images)
@@ -9,13 +13,19 @@
 #                   (opt-in profile "edge" — does not start by default in dev)
 #
 # Usage:
-#   pnpm docker:up       # Start all
-#   pnpm docker:down     # Stop all
+#   pnpm docker:up       # Start redis + meilisearch + minio
+#   pnpm docker:down     # Stop them
 #   pnpm docker:logs     # Tail logs
 #
+# Local DB setup (do this once, separately from docker):
+#   1. Open XAMPP Control Panel and click Start next to MySQL.
+#   2. Visit http://localhost/phpmyadmin
+#   3. Create database `mypos` with collation `utf8mb4_unicode_ci`.
+#   4. Default user `root` with empty password works out-of-the-box.
+#
 # Access:
-#   postgres    : localhost:5432  (user: mypos / pwd: mypos_local_pwd)
-#   redis       : localhost:6379
+#   mysql       : localhost:3306 (XAMPP)        — phpMyAdmin: http://localhost/phpmyadmin
+#   redis       : localhost:56379
 #   meilisearch : http://localhost:7700
 #   minio       : http://localhost:9000 (API), http://localhost:9001 (console)
 #
@@ -25,44 +35,6 @@
 name: mypos
 
 services:
-  postgres:
-    image: postgres:17-alpine
-    container_name: mypos-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: mypos
-      POSTGRES_USER: mypos
-      POSTGRES_PASSWORD: mypos_local_pwd
-      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
-      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
-      TZ: Asia/Tashkent
-    ports:
-      - "55432:5432"   # Host 55432 to avoid clash with other local Postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
-    command:
-      - "postgres"
-      - "-c"
-      - "max_connections=200"
-      - "-c"
-      - "shared_buffers=256MB"
-      - "-c"
-      - "effective_cache_size=1GB"
-      - "-c"
-      - "work_mem=16MB"
-      - "-c"
-      - "maintenance_work_mem=128MB"
-      - "-c"
-      - "log_min_duration_statement=500"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U mypos -d mypos"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - mypos
-
   redis:
     image: redis:7.4-alpine
     container_name: mypos-redis
@@ -169,8 +141,6 @@ services:
     networks:
       - mypos
     depends_on:
-      postgres:
-        condition: service_healthy
       redis:
         condition: service_healthy
     healthcheck:
@@ -180,8 +150,6 @@ services:
       retries: 3
 
 volumes:
-  postgres_data:
-    driver: local
   redis_data:
     driver: local
   meilisearch_data:

@@ -1,3 +1,10 @@
+-- ────────────────────────────────────────────────────────────────────────
+-- ARCHIVED 2026-05-10 (ADR-0005): Project switched to MySQL 8.4.
+-- This file is no longer mounted into any container. Kept for the rollback
+-- path documented in ADR-0005 — if Postgres is restored, re-mount via
+-- docker-compose.yml `./docker/postgres/init:/docker-entrypoint-initdb.d:ro`.
+-- ────────────────────────────────────────────────────────────────────────
+
 -- PostgreSQL extensions enabled for MyPOS.
 -- Runs automatically when volume is empty (first-time setup).
 

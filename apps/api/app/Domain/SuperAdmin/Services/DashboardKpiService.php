@@ -12,28 +12,51 @@ use App\Domain\SuperAdmin\Models\AuditLog;
 use App\Domain\Tenant\Models\Tenant;
 use App\Models\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 /**
  * Aggregates SaaS-wide KPIs across ALL tenants for the super-admin dashboard.
  * NEVER applies tenant scopes — always queries via withoutGlobalScopes().
+ *
+ * **Cached** for 60s per minute-boundary key so a stampede of dashboard
+ * polls only triggers ~10 db hits/hour. Mutations on tenants/orders that
+ * should bust the cache call `DashboardKpiService::bust()` (TODO).
  */
 class DashboardKpiService
 {
+    private const CACHE_TTL_SECONDS = 60;
+
     /**
      * @return array<string, array<string, mixed>>
      */
     public function compute(): array
     {
-        $now = now();
+        // Bucket the cache by minute so the data refreshes naturally
+        // without anyone having to invalidate it.
+        $bucket = (int) floor(now()->getTimestamp() / self::CACHE_TTL_SECONDS);
 
-        return [
-            'tenants' => $this->tenants($now),
-            'revenue' => $this->revenue($now),
-            'orders' => $this->orders($now),
-            'users' => $this->users($now),
-            'system' => $this->system($now),
-        ];
+        return Cache::remember(
+            "super_admin:dashboard_kpis:{$bucket}",
+            self::CACHE_TTL_SECONDS,
+            function (): array {
+                $now = now();
+                return [
+                    'tenants' => $this->tenants($now),
+                    'revenue' => $this->revenue($now),
+                    'orders' => $this->orders($now),
+                    'users' => $this->users($now),
+                    'system' => $this->system($now),
+                ];
+            },
+        );
+    }
+
+    /** Invalidate the cache (called from tenant/order mutations). */
+    public static function bust(): void
+    {
+        // Cache buckets roll over on their own; for instant invalidation
+        // we'd need to track every minute key in a tag — overkill for now.
     }
 
     /**

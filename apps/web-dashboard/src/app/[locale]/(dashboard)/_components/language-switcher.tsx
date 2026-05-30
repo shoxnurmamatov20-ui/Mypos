@@ -77,17 +77,17 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={t('language')}
-        className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+        className="inline-flex items-center gap-1.5 rounded-md border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#0f172a] px-2.5 py-1.5 text-[12px] font-medium text-[#16221f] dark:text-white hover:bg-[#eef4f3] dark:hover:bg-[#1a2235] transition-colors"
       >
-        <Globe className="h-4 w-4 text-neutral-500" aria-hidden />
+        <Globe className="h-3.5 w-3.5 text-[#62716d] dark:text-[#94a3b8]" aria-hidden />
         <span>{LOCALE_SHORT[activeLocale]}</span>
-        <ChevronDown className="h-3.5 w-3.5 text-neutral-500" aria-hidden />
+        <ChevronDown className="h-3 w-3 text-[#62716d] dark:text-[#94a3b8]" aria-hidden />
       </button>
 
       {open && (
         <div
           role="menu"
-          className="absolute right-0 mt-2 w-40 overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-lg"
+          className="absolute right-0 mt-2 w-40 overflow-hidden rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#0f172a] shadow-lg z-50"
         >
           {LOCALES.map((locale) => (
             <button
@@ -96,12 +96,12 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
               role="menuitem"
               onClick={() => handleSelect(locale)}
               className={cn(
-                'flex w-full items-center justify-between px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50',
-                locale === activeLocale && 'bg-brand-50 font-medium text-brand-700',
+                'flex w-full items-center justify-between px-3 py-2 text-[13px] text-[#16221f] dark:text-[#e2e8f0] hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]',
+                locale === activeLocale && 'bg-teal-50 dark:bg-teal-950/50 font-semibold text-teal-700 dark:text-teal-300',
               )}
             >
               <span>{LOCALE_LABELS[locale]}</span>
-              <span className="text-xs text-neutral-500">{LOCALE_SHORT[locale]}</span>
+              <span className="text-xs text-[#62716d] dark:text-[#94a3b8]">{LOCALE_SHORT[locale]}</span>
             </button>
           ))}
         </div>

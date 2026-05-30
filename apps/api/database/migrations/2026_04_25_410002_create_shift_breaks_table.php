@@ -20,7 +20,9 @@ return new class extends Migration {
             $table->uuid('shift_id');
             $table->uuid('employee_id');
 
-            $table->timestamp('started_at');
+            // useCurrent() — MySQL strict mode rejects implicit `0000-00-00`
+            // defaults on NOT NULL TIMESTAMP. Insert paths set this explicitly.
+            $table->timestamp('started_at')->useCurrent();
             $table->timestamp('ended_at')->nullable();
             $table->integer('duration_minutes')->nullable(); // populated when ended
             $table->string('reason', 64)->nullable();        // 'lunch', 'rest', 'personal'
@@ -47,17 +49,19 @@ return new class extends Migration {
                 ->cascadeOnDelete();
         });
 
-        // Row-Level Security — tenant isolation
-        DB::statement('ALTER TABLE shift_breaks ENABLE ROW LEVEL SECURITY');
-        DB::statement("
-            CREATE POLICY tenant_isolation_shift_breaks ON shift_breaks
-            USING (tenant_id::text = current_setting('app.current_tenant_id', true))
-        ");
+        // Row-Level Security — Postgres only (ADR-0005, 2026-05-10).
+        if (DB::connection()->getDriverName() === 'pgsql') {
+            DB::statement('ALTER TABLE shift_breaks ENABLE ROW LEVEL SECURITY');
+            DB::statement("
+                CREATE POLICY tenant_isolation_shift_breaks ON shift_breaks
+                USING (tenant_id::text = current_setting('app.current_tenant_id', true))
+            ");
+        }
     }
 
     public function down(): void
     {
-        if (Schema::hasTable('shift_breaks')) {
+        if (Schema::hasTable('shift_breaks') && DB::connection()->getDriverName() === 'pgsql') {
             DB::statement('DROP POLICY IF EXISTS tenant_isolation_shift_breaks ON shift_breaks');
             DB::statement('ALTER TABLE shift_breaks DISABLE ROW LEVEL SECURITY');
         }

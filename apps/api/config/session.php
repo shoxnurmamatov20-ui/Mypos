@@ -18,7 +18,9 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'database'),
+    // Default 'redis' (was 'database') — sessions on MySQL serialize concurrent
+    // requests at the row level. Redis-backed sessions are atomic and parallel.
+    'driver' => env('SESSION_DRIVER', 'redis'),
 
     /*
     |--------------------------------------------------------------------------

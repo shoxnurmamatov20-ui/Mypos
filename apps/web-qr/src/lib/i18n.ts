@@ -35,6 +35,17 @@ const uz: StringsMap = {
   'order.error': 'Buyurtma yuborilmadi',
   'item.add': "Qo'shish",
   'item.added': "Qo'shildi",
+  'search.placeholder': 'Taom qidirish...',
+  'filter.title': 'Filtr',
+  'filter.vegan': 'Vegan',
+  'filter.vegetarian': 'Vegeteryan',
+  'filter.glutenFree': 'Glutensiz',
+  'filter.lactoseFree': 'Laktozasiz',
+  'filter.spicy': 'Achchiq',
+  'filter.halal': 'Halol',
+  'filter.clear': 'Tozalash',
+  'filter.active': 'Faol filtrlar',
+  'lang.label': 'Til',
 };
 
 const ru: StringsMap = {
@@ -63,6 +74,17 @@ const ru: StringsMap = {
   'order.error': 'Не удалось отправить заказ',
   'item.add': 'Добавить',
   'item.added': 'Добавлено',
+  'search.placeholder': 'Поиск блюда...',
+  'filter.title': 'Фильтры',
+  'filter.vegan': 'Веган',
+  'filter.vegetarian': 'Вегетарианское',
+  'filter.glutenFree': 'Без глютена',
+  'filter.lactoseFree': 'Без лактозы',
+  'filter.spicy': 'Острое',
+  'filter.halal': 'Халяль',
+  'filter.clear': 'Сбросить',
+  'filter.active': 'Активные фильтры',
+  'lang.label': 'Язык',
 };
 
 const en: StringsMap = {
@@ -91,6 +113,17 @@ const en: StringsMap = {
   'order.error': 'Failed to place order',
   'item.add': 'Add',
   'item.added': 'Added',
+  'search.placeholder': 'Search dishes...',
+  'filter.title': 'Filters',
+  'filter.vegan': 'Vegan',
+  'filter.vegetarian': 'Vegetarian',
+  'filter.glutenFree': 'Gluten-free',
+  'filter.lactoseFree': 'Lactose-free',
+  'filter.spicy': 'Spicy',
+  'filter.halal': 'Halal',
+  'filter.clear': 'Clear',
+  'filter.active': 'Active filters',
+  'lang.label': 'Language',
 };
 
 const strings: Record<Locale, StringsMap> = { uz, ru, en };

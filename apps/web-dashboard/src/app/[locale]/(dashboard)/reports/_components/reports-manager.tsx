@@ -86,13 +86,13 @@ export function ReportsManager() {
       />
 
       {summaryQuery.isLoading && (
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 text-sm text-neutral-500">
+        <div className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-6 text-sm text-[#62716d] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827] dark:text-[#94a3b8]">
           {t('loading')}
         </div>
       )}
 
       {summaryQuery.isError && (
-        <div className="rounded-xl border border-danger bg-danger/10 p-4 text-sm text-danger">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-600 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
           {t('load_failed')}
         </div>
       )}
@@ -142,24 +142,24 @@ function DateRangeToolbar({
   ];
 
   return (
-    <div className="flex flex-col gap-3 rounded-xl border border-neutral-200 bg-white p-4 md:flex-row md:items-end md:justify-between">
+    <div className="flex flex-col gap-3 rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-4 md:flex-row md:items-end md:justify-between dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
       <div className="flex flex-wrap items-end gap-3">
-        <label className="flex flex-col text-xs font-medium text-neutral-600">
+        <label className="flex flex-col text-xs font-medium text-[#62716d] dark:text-[#94a3b8]">
           {t('date_range.from')}
           <input
             type="date"
             value={from}
             onChange={(e) => onFromChange(e.target.value)}
-            className="mt-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900"
+            className="mt-1 rounded-lg border border-[rgba(22,34,31,0.09)] bg-white px-3 py-2 text-sm text-[#16221f] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#1a2235] dark:text-white"
           />
         </label>
-        <label className="flex flex-col text-xs font-medium text-neutral-600">
+        <label className="flex flex-col text-xs font-medium text-[#62716d] dark:text-[#94a3b8]">
           {t('date_range.to')}
           <input
             type="date"
             value={to}
             onChange={(e) => onToChange(e.target.value)}
-            className="mt-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900"
+            className="mt-1 rounded-lg border border-[rgba(22,34,31,0.09)] bg-white px-3 py-2 text-sm text-[#16221f] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#1a2235] dark:text-white"
           />
         </label>
       </div>
@@ -173,8 +173,8 @@ function DateRangeToolbar({
             className={
               'rounded-lg px-3 py-2 text-xs font-medium transition ' +
               (preset === p
-                ? 'bg-brand-500 text-white'
-                : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200')
+                ? 'bg-[#0f766e] text-white hover:bg-[#0d5e58] dark:bg-[#14b8a6] dark:hover:bg-[#0d9488]'
+                : 'bg-[#eef4f3] text-[#16221f] hover:bg-[rgba(22,34,31,0.06)] dark:bg-[#1a2235] dark:text-[#e2e8f0] dark:hover:bg-[#243049]')
             }
           >
             {t(`date_range.presets.${p}`)}
