@@ -64,28 +64,3 @@ export async function initSentryWeb(cfg: SentryConfig): Promise<SentryLike | nul
   });
   return Sentry;
 }
-
-/**
- * Init Sentry for Expo / React Native.
- */
-export async function initSentryMobile(cfg: SentryConfig): Promise<SentryLike | null> {
-  if (!cfg.dsn) return null;
-  const Sentry = await dynamicImport('@sentry/react-native');
-  if (!Sentry) return null;
-  Sentry.init({
-    dsn: cfg.dsn,
-    release: cfg.release,
-    environment: cfg.environment ?? 'production',
-    tracesSampleRate: cfg.tracesSampleRate ?? 0.05,
-    attachStacktrace: true,
-    beforeSend(event: { user?: Record<string, unknown> }) {
-      if (event.user) {
-        delete event.user.ip_address;
-        delete event.user.email;
-      }
-      return event;
-    },
-    initialScope: { tags: { app: cfg.app } },
-  });
-  return Sentry;
-}

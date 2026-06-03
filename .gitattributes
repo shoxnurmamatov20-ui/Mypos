@@ -1,0 +1,63 @@
+# ============================================================
+#  Git attributes — line-ending normalization & diff hygiene
+#  Repo stores LF; Windows authors check out native (core.autocrlf).
+#  Keeps a Windows-authored tree consistent with Linux CI / GitHub.
+# ============================================================
+
+# Default: treat as text, auto-detect, store LF in the repository.
+* text=auto
+
+# --- Source & config (normalize to LF in repo) ---
+*.php       text
+*.blade.php text
+*.ts        text
+*.tsx       text
+*.js        text
+*.jsx       text
+*.mjs       text
+*.cjs       text
+*.json      text
+*.jsonc     text
+*.css       text
+*.scss      text
+*.md        text
+*.mdx       text
+*.yml       text
+*.yaml      text
+*.html      text
+*.svg       text
+*.xml       text
+*.sql       text
+*.env.example text
+
+# --- Shell vs Windows scripts (enforce correct EOL) ---
+*.sh    text eol=lf
+*.bash  text eol=lf
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+
+# --- Lockfiles: LF, and collapse from diffs (generated) ---
+pnpm-lock.yaml    text eol=lf -diff
+composer.lock     text eol=lf -diff
+package-lock.json text eol=lf -diff
+
+# --- Binary assets (never normalize or diff) ---
+*.exe   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.avif  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.pdf   binary
+*.zip   binary
+*.gz    binary
+*.mp4   binary
+*.webm  binary

@@ -1,4 +1,4 @@
-export { initSentryWeb, initSentryMobile, type SentryConfig } from './sentry';
+export { initSentryWeb, type SentryConfig } from './sentry';
 export {
   initPosthogWeb,
   track,

@@ -5,8 +5,6 @@
     "ms-vscode.vscode-typescript-next",
     "dbaeumer.vscode-eslint",
 
-    "expo.vscode-expo-tools",
-
     "bmewburn.vscode-intelephense-client",
     "xdebug.php-debug",
     "open-southeners.laravel-pint",

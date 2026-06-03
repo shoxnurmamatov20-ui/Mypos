@@ -43,7 +43,6 @@
     "dist",
     "build",
     ".next",
-    ".expo",
     "_legacy-*",
     "apps/api"
   ]

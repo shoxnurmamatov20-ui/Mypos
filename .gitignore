@@ -19,8 +19,6 @@ dist/
 build/
 out/
 .next/
-.expo/
-.expo-shared/
 *.tsbuildinfo
 
 # Turbo
@@ -86,15 +84,14 @@ apps/api/public/hot
 apps/api/public/build/
 apps/api/auth.json
 
-# Mobile / Expo
+# RoadRunner server binary (platform-specific; regenerate with: ./vendor/bin/rr get)
+apps/api/rr
+apps/api/rr.exe
+
+# Merge artifacts
 *.orig.*
-web-build/
-ios/
-android/
-.eas/
 
 # Docker
-infra/docker/postgres/data/
 infra/docker/redis/data/
 infra/docker/minio/data/
 infra/docker/meilisearch/data/
