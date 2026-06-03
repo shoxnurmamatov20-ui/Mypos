@@ -1,7 +1,9 @@
 'use client';
 
 import {
+  ArrowDownLeft,
   ArrowLeftRight,
+  ArrowUpRight,
   Bell,
   Bike,
   Box,
@@ -19,16 +21,23 @@ import {
   Handshake,
   House,
   Landmark,
+  ListVideo,
   Lock,
   LogOut,
   type LucideIcon,
+  Megaphone,
   Menu as MenuIcon,
   Monitor,
   Package,
   PackageMinus,
   PackagePlus,
+  Printer,
+  ReceiptText,
+  Scale,
   ScrollText,
   Settings,
+  ShoppingBag,
+  Soup,
   Store,
   Tag,
   Tags,
@@ -52,7 +61,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { cn } from '@mypos/ui';
 import { useAuthStore } from '@/stores/auth';
 
-type NavLeaf = { id: string; href: string };
+type NavLeaf = { id: string; href: string; locked?: boolean };
 
 type NavSection = {
   id: string;
@@ -108,22 +117,49 @@ const SECTIONS: readonly NavSection[] = [
   {
     id: 'sozlamalar',
     icon: Settings,
-    items: [{ id: 'notifications_log', href: 'notifications/log' }],
+    items: [
+      { id: 'settings_customers', href: 'customers' },
+      { id: 'settings_place', href: 'settings/place' },
+      { id: 'settings_payment_methods', href: 'settings/payment-methods' },
+      { id: 'settings_units', href: 'units' },
+      { id: 'settings_profile', href: 'settings/profile' },
+      { id: 'settings_printer', href: 'settings/printer' },
+      { id: 'settings_receipt', href: 'settings/receipt' },
+    ],
   },
   {
     id: 'moliya',
     icon: Wallet,
-    items: [{ id: 'payments', href: 'payments' }],
+    items: [
+      { id: 'finance_overview', href: 'finance' },
+      { id: 'finance_operations', href: 'finance/operations' },
+      { id: 'finance_income_categories', href: 'finance/income-categories' },
+      { id: 'finance_expense_categories', href: 'finance/expense-categories' },
+      { id: 'payments', href: 'payments' },
+    ],
   },
   {
     id: 'nomenklatura',
     icon: Tags,
     items: [
-      { id: 'menu_categories', href: 'menu/categories' },
-      { id: 'menu_items', href: 'menu/items' },
+      { id: 'nom_dishes', href: 'menu/items' },
+      { id: 'nom_raw', href: 'inventory/ingredients' },
+      { id: 'nom_semi', href: 'nomenklatura/semi-finished' },
+      { id: 'nom_dish_categories', href: 'menu/categories' },
+      { id: 'nom_raw_categories', href: 'inventory/categories' },
+      { id: 'nom_semi_categories', href: 'nomenklatura/semi-finished-categories' },
+      { id: 'nom_sales_categories', href: 'nomenklatura/sales-categories' },
     ],
   },
-  { id: 'menyu_translyatsiya', icon: Tv, items: [] },
+  {
+    id: 'menyu_translyatsiya',
+    icon: Tv,
+    items: [
+      { id: 'broadcast_devices', href: 'signage/devices', locked: true },
+      { id: 'broadcast_playlists', href: 'signage/playlists', locked: true },
+      { id: 'broadcast_banners', href: 'signage/banners' },
+    ],
+  },
   {
     id: 'magazin',
     icon: Store,
@@ -172,16 +208,39 @@ const LEAF_ICONS: Record<string, LucideIcon> = {
   shifts: Timer,
   departments: Building2,
   notifications_log: Bell,
+  settings_customers: UsersRound,
+  settings_place: Building2,
+  settings_payment_methods: CreditCard,
+  settings_units: Scale,
+  settings_profile: UserCog,
+  settings_printer: Printer,
+  settings_receipt: ReceiptText,
+  finance_overview: ChartPie,
+  finance_operations: ArrowLeftRight,
+  finance_income_categories: ArrowDownLeft,
+  finance_expense_categories: ArrowUpRight,
   payments: CreditCard,
+  // Nomenklatura — 7 items (4 linked existing + 3 new) per founder spec 2026-05-31
+  nom_dishes: UtensilsCrossed,
+  nom_raw: Box,
+  nom_semi: Soup,
+  nom_dish_categories: Tag,
+  nom_raw_categories: Tag,
+  nom_semi_categories: Tag,
+  nom_sales_categories: ShoppingBag,
   menu_categories: Tag,
   menu_items: UtensilsCrossed,
+  // Menyu-translyatsiya (digital signage) — founder spec 2026-05-31
+  broadcast_devices: Monitor,
+  broadcast_playlists: ListVideo,
+  broadcast_banners: Megaphone,
   orders: ClipboardList,
   tables: Store,
   table_categories: Tag,
 };
 // Force-include unused icons to avoid Tailwind tree-shake (these may be used
 // by a future "locked" overlay or new report types).
-const _unusedIcons = { FileSpreadsheet, Lock };
+const _unusedIcons = { FileSpreadsheet };
 void _unusedIcons;
 
 const SECTION_ICON_COLOR: Record<string, string> = {
@@ -393,6 +452,12 @@ export function Sidebar() {
                                     strokeWidth={isActive ? 2.4 : 2}
                                   />
                                   <span>{t(it.id)}</span>
+                                  {it.locked ? (
+                                    <Lock
+                                      className="ml-auto h-3 w-3 flex-shrink-0 text-[#62716d] dark:text-[#94a3b8]"
+                                      strokeWidth={2.4}
+                                    />
+                                  ) : null}
                                 </Link>
                               </li>
                             );

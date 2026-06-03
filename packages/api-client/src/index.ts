@@ -3,7 +3,13 @@ export type { ApiClientConfig } from './client';
 export { healthApi } from './health';
 export type { HealthStatus } from './health';
 export { authApi } from './auth';
-export type { AuthUser, AuthTenant, LoginInput, LoginResponse, MeResponse } from './auth';
+export type {
+  AuthUser,
+  AuthTenant,
+  LoginInput,
+  LoginResponse,
+  MeResponse,
+} from './auth';
 export { departmentsApi } from './departments';
 export type {
   Department,
@@ -79,6 +85,14 @@ export type {
   UpdateCustomerInput,
   ListCustomersParams,
 } from './customers';
+export { unitsApi } from './units';
+export type {
+  UnitOfMeasure,
+  UnitType,
+  CreateUnitInput,
+  UpdateUnitInput,
+  ListUnitsParams,
+} from './units';
 export { employeesApi, shiftsApi, clockApi } from './employees';
 export type {
   Employee,

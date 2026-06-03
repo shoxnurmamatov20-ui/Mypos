@@ -42,6 +42,10 @@
       "types": "./src/customers.ts",
       "default": "./src/customers.ts"
     },
+    "./units": {
+      "types": "./src/units.ts",
+      "default": "./src/units.ts"
+    },
     "./employees": {
       "types": "./src/employees.ts",
       "default": "./src/employees.ts"

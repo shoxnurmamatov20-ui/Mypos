@@ -9,6 +9,7 @@ use App\Domain\Shared\Concerns\BelongsToTenant;
 use App\Domain\Tenant\Enums\TenantPlan;
 use App\Domain\Tenant\Enums\TenantStatus;
 use App\Domain\Tenant\Models\Tenant;
+use App\Domain\Unit\Models\UnitOfMeasure;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -87,6 +88,31 @@ class DemoTenantSeeder extends Seeder
             if (! $owner->hasRole(RoleEnum::Owner->value)) {
                 $owner->assignRole(RoleEnum::Owner->value);
             }
+
+            // Units of measure ("O'lchov birligi") — standard kg/litr/dona set,
+            // tenant-scoped. Idempotent via firstOrCreate on (tenant_id, abbreviation).
+            $units = [
+                ['name' => 'Kilogramm', 'abbreviation' => 'kg', 'type' => 'weight', 'sort_order' => 1],
+                ['name' => 'Gramm', 'abbreviation' => 'g', 'type' => 'weight', 'sort_order' => 2],
+                ['name' => 'Litr', 'abbreviation' => 'l', 'type' => 'volume', 'sort_order' => 3],
+                ['name' => 'Millilitr', 'abbreviation' => 'ml', 'type' => 'volume', 'sort_order' => 4],
+                ['name' => 'Dona', 'abbreviation' => 'dona', 'type' => 'count', 'sort_order' => 5],
+                ['name' => 'Portsiya', 'abbreviation' => 'port', 'type' => 'count', 'sort_order' => 6],
+            ];
+
+            foreach ($units as $unit) {
+                UnitOfMeasure::firstOrCreate(
+                    ['tenant_id' => $tenant->id, 'abbreviation' => $unit['abbreviation']],
+                    [
+                        'name' => $unit['name'],
+                        'type' => $unit['type'],
+                        'is_active' => true,
+                        'sort_order' => $unit['sort_order'],
+                    ],
+                );
+            }
+
+            $this->command?->info('Demo units of measure ready (kg, g, l, ml, dona, port).');
         });
     }
 }

@@ -53,6 +53,8 @@ use App\Domain\Tenant\Policies\TenantDomainPolicy;
 use App\Domain\Tenant\Policies\TenantPolicy;
 use App\Domain\Tenant\Services\AppStoreConnectClient;
 use App\Domain\Tenant\Services\GooglePlayClient;
+use App\Domain\Unit\Models\UnitOfMeasure;
+use App\Domain\Unit\Policies\UnitOfMeasurePolicy;
 use App\Domain\Warehouse\Models\AuditSession;
 use App\Domain\Warehouse\Models\IncomingDocument;
 use App\Domain\Warehouse\Models\TransferDocument;
@@ -158,6 +160,9 @@ class AppServiceProvider extends ServiceProvider
 
         // Customers.
         Gate::policy(Customer::class, CustomerPolicy::class);
+
+        // Units of measure ("O'lchov birligi").
+        Gate::policy(UnitOfMeasure::class, UnitOfMeasurePolicy::class);
 
         // Menu catalogue.
         Gate::policy(MenuItem::class, MenuItemPolicy::class);

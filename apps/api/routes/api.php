@@ -83,6 +83,7 @@ use App\Http\Controllers\Api\V1\SuperAdmin\SuperAdminTeamController;
 use App\Http\Controllers\Api\V1\SuperAdmin\TenantController as SuperAdminTenantController;
 use App\Http\Controllers\Api\V1\Table\TableCategoryController;
 use App\Http\Controllers\Api\V1\Table\TableController;
+use App\Http\Controllers\Api\V1\Unit\UnitOfMeasureController;
 use App\Http\Controllers\Api\V1\Warehouse\AuditSessionController;
 use App\Http\Controllers\Api\V1\Warehouse\IncomingDocumentController;
 use App\Http\Controllers\Api\V1\Warehouse\TransferDocumentController;
@@ -349,6 +350,15 @@ Route::prefix('v1')->group(function () {
             Route::get('/{customer}', [CustomerController::class, 'show'])->name('v1.customers.show');
             Route::patch('/{customer}', [CustomerController::class, 'update'])->name('v1.customers.update');
             Route::delete('/{customer}', [CustomerController::class, 'destroy'])->name('v1.customers.destroy');
+        });
+
+        // Units of measure ("O'lchov birligi") — kg/litr/dona reference data.
+        Route::prefix('units')->group(function () {
+            Route::get('/', [UnitOfMeasureController::class, 'index'])->name('v1.units.index');
+            Route::post('/', [UnitOfMeasureController::class, 'store'])->name('v1.units.store');
+            Route::get('/{unit}', [UnitOfMeasureController::class, 'show'])->name('v1.units.show');
+            Route::patch('/{unit}', [UnitOfMeasureController::class, 'update'])->name('v1.units.update');
+            Route::delete('/{unit}', [UnitOfMeasureController::class, 'destroy'])->name('v1.units.destroy');
         });
 
         // Employees
