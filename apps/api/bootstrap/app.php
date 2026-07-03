@@ -25,16 +25,33 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: 'api',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Append ResolveTenantFromDomain BEFORE SetTenantContext: it inspects
-        // the Host header for a custom restaurant domain (e.g. jomeburger.uz)
-        // and binds the matching Tenant into the container as `currentTenant`.
-        // SetTenantContext then picks that up to set the `app.current_tenant_id`
-        // GUC for PostgreSQL RLS — auth-derived tenants still take priority,
-        // and for our own platform hostnames the resolver passes through.
         $middleware->api(append: [
             ResolveTenantFromDomain::class,
             SetTenantContext::class,
         ]);
+
+        // Laravel re-sorts every route's middleware stack against the kernel
+        // priority list, so ARRAY POSITION above is not execution order. Two
+        // constraints matter under the non-owner RLS runtime (ADR-0006):
+        //
+        //   1. AFTER Authenticate — `$request->user()` resolves via the
+        //      DEFAULT guard; only `auth:sanctum` (via shouldUse) makes the
+        //      bearer token visible there. Run earlier and every request
+        //      looks anonymous: no GUC, zero rows on strict tables.
+        //   2. BEFORE SubstituteBindings — implicit route-model binding runs
+        //      its SELECT inside that middleware; without the GUC already
+        //      set, every /{model} route 404s even for the owning tenant.
+        //
+        // ResolveTenantFromDomain first (binds `currentTenant` from a custom
+        // restaurant Host header), then SetTenantContext writes the GUC.
+        $middleware->prependToPriorityList(
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            ResolveTenantFromDomain::class,
+        );
+        $middleware->prependToPriorityList(
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SetTenantContext::class,
+        );
 
         $middleware->alias([
             'staff.scope' => EnsureActiveStaff::class,
@@ -56,5 +73,21 @@ return Application::configure(basePath: dirname(__DIR__))
         // callers that forgot to set `Accept: application/json`).
         $exceptions->shouldRenderJsonWhen(function (Request $request, \Throwable $e) {
             return $request->is('api/*') || $request->expectsJson();
+        });
+
+        // Don't leak internal model FQCNs ("No query results for model
+        // [App\Domain\...\Order] <uuid>") to API consumers — a localized,
+        // generic 404 body carries exactly as much information as a guest
+        // (or another tenant probing ids) is entitled to. Hooked at the
+        // Symfony level because the framework wraps ModelNotFoundException
+        // into NotFoundHttpException before render callbacks run.
+        $exceptions->render(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e, Request $request) {
+            if ($request->is('api/*') || $request->expectsJson()) {
+                return response()->json([
+                    'message' => __('Resurs topilmadi'),
+                ], 404);
+            }
+
+            return null;
         });
     })->create();

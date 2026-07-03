@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Domain\Auth\Enums\Role;
+use App\Support\TenantGuc;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -22,43 +23,44 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * Resolution order (first match wins):
  *   1. Authenticated user is super-admin           -> '*' (DB-level only)
- *   2. Authenticated user has tenant_id            -> that UUID
- *   3. Container has `currentTenant` (kiosk, QR)   -> that tenant's UUID
- *   4. None of the above                           -> nothing set (policies
+ *   2. CEO-role user on the /api/v1/ceo/* surface  -> '*' (DB-level only;
+ *      controllers scope every query to ownedTenantIds() — same posture as
+ *      super admin, required because a CEO legitimately reads N tenants)
+ *   3. Authenticated user has tenant_id            -> that UUID
+ *   4. Container has `currentTenant` (kiosk, QR)   -> that tenant's UUID
+ *   5. None of the above                           -> nothing set (policies
  *      then deny by default for non-owner roles)
  *
  * The '*' wildcard is written ONLY into the database GUC, never into
  * `resolveTenantId()`'s return value — app-side consumers comparing
  * "current tenant === expected tenant" must never see '*' (Audit H-4).
+ *
+ * Pre-auth flows that resolve a tenant later in the request (public slug
+ * endpoints, kiosk device auth, staff PIN login, webhooks) imprint through
+ * {@see TenantGuc} themselves.
  */
 class SetTenantContext
 {
-    private const GUC = 'app.current_tenant_id';
-
     public function handle(Request $request, Closure $next): Response
     {
-        $tenantId = $this->resolveTenantId($request);
+        // Wildcard surfaces first: a CEO may also carry a tenant_id, but on
+        // /api/v1/ceo/* they must read their whole owned set, not one tenant.
+        $gucValue = $this->isSuperAdmin($request) || $this->isCeoSurface($request)
+            ? TenantGuc::WILDCARD
+            : $this->resolveTenantId($request);
 
-        // ADR-0006: super admins imprint the RLS wildcard '*' at the DATABASE
-        // level only — resolveTenantId() still returns null for them so no
-        // app-side consumer ever mistakes '*' for a real tenant id (Audit
-        // H-4). Without the wildcard, a production runtime connected as the
-        // non-owner `mypos_app` role would show super admins zero rows.
-        $gucValue = $tenantId ?? ($this->isSuperAdmin($request) ? '*' : null);
-
-        if ($gucValue !== null) {
-            $current = $this->lastSet();
-            if ($current !== $gucValue) {
-                // Postgres only — emit the GUC for RLS. On MySQL/sqlite this
-                // becomes a no-op so the rest of the middleware stays portable.
-                if (DB::connection()->getDriverName() === 'pgsql') {
-                    DB::statement('SELECT set_config(?, ?, false)', [self::GUC, $gucValue]);
-                }
-                app()->instance('tenant.guc.last', $gucValue);
-            }
-        }
+        TenantGuc::imprint($gucValue);
 
         return $next($request);
+    }
+
+    /**
+     * Reset the GUC after the response is sent so the next request on this
+     * pooled connection starts clean. Skip if no SET happened.
+     */
+    public function terminate(Request $request, Response $response): void
+    {
+        TenantGuc::reset();
     }
 
     private function isSuperAdmin(Request $request): bool
@@ -69,27 +71,20 @@ class SetTenantContext
     }
 
     /**
-     * Reset the GUC after the response is sent so the next request on this
-     * pooled connection starts clean. Skip if no SET happened.
+     * CEO consolidated surface: cross-tenant by design. The DB-level '*'
+     * mirrors what the table-owner connection allowed implicitly before the
+     * runtime moved to the non-owner `mypos_app` role; row scoping remains
+     * the controllers' explicit `ownedTenantIds()` filters (layer 1).
      */
-    public function terminate(Request $request, Response $response): void
+    private function isCeoSurface(Request $request): bool
     {
-        if (! app()->bound('tenant.guc.last')) {
-            return;
+        if (! $request->is('api/v1/ceo/*')) {
+            return false;
         }
-        try {
-            if (DB::connection()->getDriverName() === 'pgsql') {
-                DB::statement('SELECT set_config(?, ?, false)', [self::GUC, '']);
-            }
-            app()->forgetInstance('tenant.guc.last');
-        } catch (\Throwable $e) {
-            // Connection may already be closed/returned to the pool — ignore.
-        }
-    }
 
-    private function lastSet(): ?string
-    {
-        return app()->bound('tenant.guc.last') ? (string) app('tenant.guc.last') : null;
+        $user = $request->user();
+
+        return $user !== null && $user->hasRole(Role::Ceo->value);
     }
 
     private function resolveTenantId(Request $request): ?string
