@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api\V1\CEO;
 use App\Domain\Clinic\Actions\GetClinicAction;
 use App\Domain\Clinic\Actions\ListClinicsAction;
 use App\Domain\Clinic\Models\Clinic;
+use App\Domain\Clinic\Models\ClinicDepartment;
 use App\Domain\Clinic\Models\ClinicFeedback;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\Clinic\ClinicDetailResource;
@@ -24,6 +25,7 @@ use Illuminate\Http\Request;
  * `auth:sanctum + ceo` middleware (see routes/api.php).
  *
  * @group CEO — Clinics
+ *
  * @authenticated
  */
 class ClinicController extends Controller
@@ -87,6 +89,36 @@ class ClinicController extends Controller
         return response()->json([
             'data' => ClinicDoctorResource::collection($doctors),
             'meta' => ['count' => $doctors->count()],
+        ]);
+    }
+
+    /**
+     * List departments for a clinic — powers the doctor-form dropdown.
+     */
+    public function departments(int $id): JsonResponse
+    {
+        $clinic = Clinic::query()->find($id);
+
+        if ($clinic === null) {
+            return response()->json([
+                'message' => __('Klinika topilmadi'),
+            ], 404);
+        }
+
+        $departments = ClinicDepartment::query()
+            ->where('clinic_id', $clinic->id)
+            ->withCount('doctors')
+            ->orderBy('name')
+            ->get(['id', 'clinic_id', 'name', 'is_active']);
+
+        return response()->json([
+            'data' => $departments->map(fn (ClinicDepartment $dep): array => [
+                'id' => $dep->id,
+                'name' => $dep->name,
+                'doctors_count' => (int) ($dep->doctors_count ?? 0),
+                'is_active' => (bool) $dep->is_active,
+            ]),
+            'meta' => ['count' => $departments->count()],
         ]);
     }
 

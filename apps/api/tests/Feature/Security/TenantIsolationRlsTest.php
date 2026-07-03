@@ -40,12 +40,14 @@ use App\Domain\Payment\Enums\PaymentProvider;
 use App\Domain\Payment\Enums\PaymentStatus;
 use App\Domain\Payment\Models\Payment;
 use App\Domain\Tenant\Models\Tenant;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Laravel\Sanctum\Sanctum;
 
 /** Skip the whole file on non-pgsql drivers so the suite still passes locally on sqlite. */
 beforeEach(function (): void {
     if (DB::connection()->getDriverName() !== 'pgsql') {
-        $this->markTestSkipped('RLS is a PostgreSQL feature — skipping on ' . DB::connection()->getDriverName());
+        $this->markTestSkipped('RLS is a PostgreSQL feature — skipping on '.DB::connection()->getDriverName());
     }
 });
 
@@ -56,7 +58,7 @@ afterEach(function (): void {
     // Always reset role first so we have permissions to clear the GUC.
     try {
         DB::statement('RESET ROLE');
-    } catch (\Throwable) {
+    } catch (Throwable) {
         // Connection may be in a broken state from a failed assertion — ignore.
     }
     // Reset the GUC so it doesn't leak between tests.
@@ -185,11 +187,21 @@ it('verifies RLS is enabled on every tenant-scoped table', function (): void {
         'ingredient_categories', 'ingredients', 'recipes', 'stock_movements', 'suppliers',
         'payments',
         'notifications_log',
+        // Covered by their own create migrations (pgsql-gated blocks).
+        'courier_locations', 'kiosk_devices', 'kiosk_pairing_codes', 'shift_breaks',
+        'tenant_domains', 'tenant_brands', 'tenant_apps', 'tenant_app_builds',
+        'ai_generations_log',
+        // ADR-0006 extension (2026_07_21_000001) — tables added during the
+        // MySQL period that shipped without RLS.
+        'order_reviews', 'visit_tokens',
+        'warehouses', 'incoming_documents', 'waste_documents',
+        'audit_sessions', 'transfer_documents',
+        'departments', 'units_of_measure',
     ];
 
     $rows = DB::select(
         'SELECT tablename, rowsecurity FROM pg_tables WHERE schemaname = current_schema() AND tablename = ANY(?)',
-        ['{' . implode(',', $protected) . '}'],
+        ['{'.implode(',', $protected).'}'],
     );
 
     $byName = [];
@@ -212,6 +224,10 @@ it('verifies a policy named tenant_isolation_<table> exists for every protected 
         'ingredients', 'recipes', 'stock_movements',
         'payments',
         'notifications_log',
+        'order_reviews', 'visit_tokens',
+        'warehouses', 'incoming_documents', 'waste_documents',
+        'audit_sessions', 'transfer_documents',
+        'departments', 'units_of_measure',
     ];
 
     $rows = DB::select('SELECT tablename, policyname FROM pg_policies WHERE schemaname = current_schema()');
@@ -221,7 +237,7 @@ it('verifies a policy named tenant_isolation_<table> exists for every protected 
     }
 
     foreach ($protected as $table) {
-        $expected = 'tenant_isolation_' . $table;
+        $expected = 'tenant_isolation_'.$table;
         expect(array_key_exists($table, $policiesByTable))
             ->toBeTrue("No policy on `{$table}`.");
         expect(in_array($expected, $policiesByTable[$table] ?? [], true))
@@ -250,7 +266,7 @@ it('blocks INSERT into wrong tenant via RLS WITH CHECK', function (): void {
              VALUES (gen_random_uuid(), ?, ?, ?, ?, 0, 0, now(), now())',
             [$tenantB->id, '+998901234567', 'Mole', 'uz'],
         );
-    } catch (\Illuminate\Database\QueryException $e) {
+    } catch (QueryException $e) {
         $threw = true;
     }
 
@@ -304,7 +320,7 @@ it('SetTenantContext middleware sets the GUC for an authenticated tenant request
     // SetTenantContext middleware populated it.
     $owner = actingAsTenantOwner();
 
-    \Laravel\Sanctum\Sanctum::actingAs($owner);
+    Sanctum::actingAs($owner);
 
     // Hitting any authenticated endpoint runs the middleware stack.
     $this->getJson('/api/v1/auth/me')->assertOk();
@@ -324,7 +340,7 @@ it('SetTenantContext middleware sets the GUC for an authenticated tenant request
 
 it('SetTenantContext middleware sets `*` GUC for super_admin requests', function (): void {
     $admin = actingAsSuperAdmin();
-    \Laravel\Sanctum\Sanctum::actingAs($admin, ['super-admin']);
+    Sanctum::actingAs($admin, ['super-admin']);
 
     $this->getJson('/api/v1/super-admin/me')->assertOk();
 

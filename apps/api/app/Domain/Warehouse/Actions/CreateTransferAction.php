@@ -12,6 +12,7 @@ use App\Domain\Warehouse\Models\TransferDocument;
 use App\Domain\Warehouse\Models\TransferDocumentItem;
 use App\Domain\Warehouse\Models\Warehouse;
 use App\Domain\Warehouse\Support\DocumentNumberGenerator;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -101,6 +102,12 @@ class CreateTransferAction
                 'created_by' => $input['created_by'] ?? null,
             ]);
 
+            // stock_movements.created_by stores the user *uuid*, not the
+            // bigint users.id that documents keep — resolve it once.
+            $creatorUuid = $status === TransferStatus::Received
+                ? $this->creatorUuid($input['created_by'] ?? null)
+                : null;
+
             foreach ($input['items'] as $row) {
                 $qty = (float) $row['quantity'];
                 if ($qty <= 0) {
@@ -121,7 +128,7 @@ class CreateTransferAction
                         $row['ingredient_id'],
                         $qty,
                         $document,
-                        $input['created_by'] ?? null,
+                        $creatorUuid,
                     );
                 }
             }
@@ -137,7 +144,7 @@ class CreateTransferAction
         string $ingredientId,
         float $quantity,
         TransferDocument $document,
-        ?int $userId,
+        ?string $creatorUuid,
     ): void {
         /** @var Ingredient $ingredient */
         $ingredient = Ingredient::query()
@@ -168,7 +175,7 @@ class CreateTransferAction
             'cost_per_unit' => null,
             'notes' => "Ko'chirish chiqim: {$document->doc_no} ({$document->from_warehouse_id} -> {$document->to_warehouse_id})",
             'recorded_at' => now(),
-            'created_by' => $userId !== null ? (string) $userId : null,
+            'created_by' => $creatorUuid,
             'created_at' => now(),
         ]);
 
@@ -185,8 +192,21 @@ class CreateTransferAction
             'cost_per_unit' => null,
             'notes' => "Ko'chirish kirim: {$document->doc_no} ({$document->from_warehouse_id} -> {$document->to_warehouse_id})",
             'recorded_at' => now(),
-            'created_by' => $userId !== null ? (string) $userId : null,
+            'created_by' => $creatorUuid,
             'created_at' => now(),
         ]);
+    }
+
+    /**
+     * stock_movements.created_by is a uuid column pointing at users.uuid,
+     * while warehouse documents keep the bigint users.id. MySQL's CHAR(36)
+     * silently accepted a stringified bigint here; PostgreSQL's uuid type
+     * rejects it — look the uuid up explicitly.
+     */
+    private function creatorUuid(?int $userId): ?string
+    {
+        return $userId === null
+            ? null
+            : User::query()->whereKey($userId)->value('uuid');
     }
 }

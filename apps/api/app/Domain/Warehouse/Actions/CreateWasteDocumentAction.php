@@ -13,6 +13,7 @@ use App\Domain\Warehouse\Models\Warehouse;
 use App\Domain\Warehouse\Models\WasteDocument;
 use App\Domain\Warehouse\Models\WasteDocumentItem;
 use App\Domain\Warehouse\Support\DocumentNumberGenerator;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -120,6 +121,12 @@ class CreateWasteDocumentAction
                 'created_by' => $input['created_by'] ?? null,
             ]);
 
+            // stock_movements.created_by stores the user *uuid*, not the
+            // bigint users.id that documents keep — resolve it once.
+            $creatorUuid = $status === WasteStatus::Posted
+                ? $this->creatorUuid($input['created_by'] ?? null)
+                : null;
+
             foreach ($itemRows as $row) {
                 WasteDocumentItem::create([
                     'waste_document_id' => $document->id,
@@ -136,7 +143,7 @@ class CreateWasteDocumentAction
                         (float) $row['quantity'],
                         (int) $row['unit_cost'],
                         $document,
-                        $input['created_by'] ?? null,
+                        $creatorUuid,
                     );
                 }
             }
@@ -153,7 +160,7 @@ class CreateWasteDocumentAction
         float $quantity,
         int $unitCost,
         WasteDocument $document,
-        ?int $userId,
+        ?string $creatorUuid,
     ): void {
         /** @var Ingredient $ingredient */
         $ingredient = Ingredient::query()
@@ -188,8 +195,21 @@ class CreateWasteDocumentAction
             'cost_per_unit' => $unitCost > 0 ? $unitCost : null,
             'notes' => "Yo'qotish: {$document->doc_no}",
             'recorded_at' => now(),
-            'created_by' => $userId !== null ? (string) $userId : null,
+            'created_by' => $creatorUuid,
             'created_at' => now(),
         ]);
+    }
+
+    /**
+     * stock_movements.created_by is a uuid column pointing at users.uuid,
+     * while warehouse documents keep the bigint users.id. MySQL's CHAR(36)
+     * silently accepted a stringified bigint here; PostgreSQL's uuid type
+     * rejects it — look the uuid up explicitly.
+     */
+    private function creatorUuid(?int $userId): ?string
+    {
+        return $userId === null
+            ? null
+            : User::query()->whereKey($userId)->value('uuid');
     }
 }

@@ -72,8 +72,10 @@ class ListDoctorsAction
         if ($q !== '') {
             $like = '%'.mb_strtolower($q).'%';
             $query->where(function (Builder $x) use ($like): void {
+                // Single quotes — "" is an (empty, invalid) IDENTIFIER on
+                // PostgreSQL, not an empty string literal like on MySQL.
                 $x->whereRaw('LOWER(name) LIKE ?', [$like])
-                    ->orWhereRaw('LOWER(COALESCE(specialty, "")) LIKE ?', [$like])
+                    ->orWhereRaw("LOWER(COALESCE(specialty, '')) LIKE ?", [$like])
                     ->orWhereHas('clinic', function (Builder $cq) use ($like): void {
                         $cq->whereRaw('LOWER(name) LIKE ?', [$like]);
                     });

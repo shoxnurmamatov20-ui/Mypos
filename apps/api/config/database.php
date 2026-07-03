@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Str;
 use Pdo\Mysql;
+use Pdo\Pgsql;
 
 return [
 
@@ -17,11 +18,13 @@ return [
     |
     */
 
-    // Default 'mysql' (was 'sqlite') — ADR-0005 (2026-05-10) made MySQL the
-    // primary DB. The sqlite fallback was only useful before any tenant
-    // schema existed; in production it would silently route writes to a
-    // local file and lose them.
-    'default' => env('DB_CONNECTION', 'mysql'),
+    // Default 'pgsql' — ADR-0006 (2026-07-02) moved the primary DB back to
+    // PostgreSQL (18.x), reversing ADR-0005. Postgres gives us RLS
+    // defense-in-depth for tenant isolation, declarative partitioning for
+    // hot telemetry tables, partial/covering indexes, and JSONB. The
+    // sqlite fallback stays out: in production it would silently route
+    // writes to a local file and lose them.
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,14 +51,20 @@ return [
             'transaction_mode' => 'DEFERRED',
         ],
 
+        // Legacy connection (primary until ADR-0006). Retained as the source
+        // side of the one-off MySQL→PostgreSQL data migration bridge
+        // (`php artisan db:migrate-from-mysql`) and for reading old backups.
+        // Deliberately pinned to its own LEGACY_DB_* env vars so the primary
+        // DB_* vars (now Postgres) can never accidentally point Eloquent at
+        // the old database.
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'mypos'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'url' => env('LEGACY_DB_URL'),
+            'host' => env('LEGACY_DB_HOST', '127.0.0.1'),
+            'port' => env('LEGACY_DB_PORT', '3306'),
+            'database' => env('LEGACY_DB_DATABASE', 'mypos'),
+            'username' => env('LEGACY_DB_USERNAME', 'root'),
+            'password' => env('LEGACY_DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
@@ -103,19 +112,33 @@ return [
             ]) : [],
         ],
 
+        // Primary connection since ADR-0006 (2026-07-02).
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DB_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
+            'database' => env('DB_DATABASE', 'mypos'),
+            'username' => env('DB_USERNAME', 'postgres'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => env('DB_CHARSET', 'utf8'),
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
+            // verify-full in production — set via DB_SSLMODE (Doppler/Coolify).
             'sslmode' => env('DB_SSLMODE', 'prefer'),
+            // Shows up in pg_stat_activity / pg_stat_statements — makes
+            // per-service connection debugging possible on shared clusters.
+            'application_name' => env('DB_APPLICATION_NAME', 'mypos-api'),
+            'options' => extension_loaded('pdo_pgsql') ? array_filter([
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                // Opt-in for PHP-FPM/Octane connection reuse (off in dev).
+                PDO::ATTR_PERSISTENT => env('DB_PERSISTENT', false),
+                // Set DB_DISABLE_PREPARES=true when connecting through
+                // PgBouncer in transaction-pooling mode — named prepared
+                // statements are per-session and break behind such poolers.
+                (PHP_VERSION_ID >= 80500 ? Pgsql::ATTR_DISABLE_PREPARES : PDO::PGSQL_ATTR_DISABLE_PREPARES) => env('DB_DISABLE_PREPARES', false) ? true : null,
+            ], static fn ($v) => $v !== null && $v !== false) : [],
         ],
 
         'sqlsrv' => [

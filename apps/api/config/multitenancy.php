@@ -1,16 +1,16 @@
 <?php
 
-use Spatie\Multitenancy\Jobs\TenantAware;
 use Illuminate\Broadcasting\BroadcastEvent;
 use Illuminate\Events\CallQueuedListener;
 use Illuminate\Mail\SendQueuedMailable;
-use Spatie\Multitenancy\Jobs\NotTenantAware;
 use Illuminate\Notifications\SendQueuedNotifications;
 use Illuminate\Queue\CallQueuedClosure;
 use Spatie\Multitenancy\Actions\ForgetCurrentTenantAction;
 use Spatie\Multitenancy\Actions\MakeQueueTenantAwareAction;
 use Spatie\Multitenancy\Actions\MakeTenantCurrentAction;
 use Spatie\Multitenancy\Actions\MigrateTenantAction;
+use Spatie\Multitenancy\Jobs\NotTenantAware;
+use Spatie\Multitenancy\Jobs\TenantAware;
 use Spatie\Multitenancy\Models\Tenant;
 
 return [
@@ -53,8 +53,18 @@ return [
      * If there is a current tenant when dispatching a job, the id of the current tenant
      * will be automatically set on the job. When the job is executed, the set
      * tenant on the job will be made current.
+     *
+     * DISABLED (2026-07-02): MyPOS uses its own single-database tenancy —
+     * `BelongsToTenant` global scope + `tenant_id` carried explicitly in job
+     * payloads. The container key `currentTenant` holds an
+     * `App\Domain\Tenant\Models\Tenant` (a plain Eloquent model), while this
+     * Spatie hook expects `Spatie\Multitenancy\Models\Tenant::current()` to
+     * return Spatie's own model — with the hook enabled every queued job
+     * (including sync-queued broadcast events) crashed with a TypeError in
+     * kiosk/QR flows. `tenant_finder` and `switch_tenant_tasks` are unused,
+     * so the hook adds nothing here.
      */
-    'queues_are_tenant_aware_by_default' => true,
+    'queues_are_tenant_aware_by_default' => false,
 
     /*
      * The connection name to reach the tenant database.
@@ -75,8 +85,14 @@ return [
 
     /*
      * This key will be used to bind the current tenant in the container.
+     *
+     * RENAMED (2026-07-02): MyPOS binds its own App\Domain\Tenant\Models\Tenant
+     * into `currentTenant` (kiosk/QR middleware, BelongsToTenant). Spatie's
+     * queue hooks read THIS key expecting Spatie's model class and crash with
+     * a TypeError on ours. Giving Spatie a namespaced key it alone owns keeps
+     * both worlds apart — our `currentTenant` binding is untouched.
      */
-    'current_tenant_container_key' => 'currentTenant',
+    'current_tenant_container_key' => 'spatie.currentTenant',
 
     /*
      * Set it to `true` if you like to cache the tenant(s) routes

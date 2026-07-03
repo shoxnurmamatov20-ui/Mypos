@@ -1,0 +1,16 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "MyPOS Dev (PostgreSQL 18 @ 5433)",
+      "Group": "Servers",
+      "Host": "127.0.0.1",
+      "Port": 5433,
+      "MaintenanceDB": "postgres",
+      "Username": "postgres",
+      "SSLMode": "prefer",
+      "ConnectionParameters": {
+        "connect_timeout": 10
+      }
+    }
+  }
+}

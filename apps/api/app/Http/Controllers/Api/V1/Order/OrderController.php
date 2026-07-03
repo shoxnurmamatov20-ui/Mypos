@@ -9,17 +9,18 @@ use App\Domain\Order\Actions\UpdateOrderStatusAction;
 use App\Domain\Order\Enums\OrderStatus;
 use App\Domain\Order\Models\Order;
 use App\Domain\Order\Models\OrderItem;
-use App\Domain\Table\Models\Table;
 use App\Events\Order\OrderPlaced;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Order\CreateOrderRequest;
 use App\Http\Resources\V1\Order\OrderResource;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
@@ -178,7 +179,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $baseQuery
+     * @param  Builder  $baseQuery
      * @return list<array{date: string, orders: int, revenue: int}>
      */
     private function dailyRevenue($baseQuery, Carbon $from, Carbon $to): array
@@ -190,9 +191,9 @@ class OrderController extends Controller
         // (tenant_id, created_date)`. Using the column directly lets the
         // planner do an index-condition pushdown — measured 2.35s → 0.95s
         // on 1M rows. Postgres keeps TO_CHAR for portability.
-        $driver = \Illuminate\Support\Facades\DB::connection()->getDriverName();
+        $driver = DB::connection()->getDriverName();
         $useGenerated = $driver !== 'pgsql'
-            && \Illuminate\Support\Facades\Schema::hasColumn('orders', 'created_date');
+            && Schema::hasColumn('orders', 'created_date');
 
         if ($useGenerated) {
             $rows = (clone $baseQuery)
@@ -259,10 +260,13 @@ class OrderController extends Controller
      */
     private function topTables(Carbon $from, Carbon $to): array
     {
+        // Columns MUST be orders-qualified: after the `tables` join both
+        // sides carry created_at/status, and an unqualified reference is an
+        // "ambiguous column" SQL error on every driver.
         $rows = Order::query()
-            ->whereBetween('created_at', [$from, $to])
-            ->whereNotIn('status', ['draft', 'cancelled', 'refunded'])
-            ->whereNotNull('table_id')
+            ->whereBetween('orders.created_at', [$from, $to])
+            ->whereNotIn('orders.status', ['draft', 'cancelled', 'refunded'])
+            ->whereNotNull('orders.table_id')
             ->leftJoin('tables', 'orders.table_id', '=', 'tables.id')
             ->selectRaw('orders.table_id, tables.name AS table_name, COUNT(*) AS orders_count, COALESCE(SUM(orders.total_amount), 0) AS revenue')
             ->groupBy('orders.table_id', 'tables.name')

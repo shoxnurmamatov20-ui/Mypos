@@ -1,9 +1,14 @@
 # ADR-0005: Switch to MySQL 8.4 (reverses ADR-0003)
 
-- **Status:** Accepted
+- **Status:** **REVERSED** (see ADR-0006, 2026-07-02)
 - **Date:** 2026-05-10
 - **Deciders:** Solo Founder
 - **Reverses:** ADR-0003 (PostgreSQL 17 over MySQL)
+
+> **REVERSAL NOTICE (2026-07-02)**: ADR-0006 moved the project back to
+> **PostgreSQL 18** using exactly the rollback path this ADR preserved.
+> RLS + partitioning + partial indexes are in effect again; MySQL remains
+> only as the `LEGACY_DB_*` read-side of the one-off data bridge.
 
 ## Context
 

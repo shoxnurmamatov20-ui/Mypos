@@ -14,14 +14,14 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class DemoTenantSeeder extends Seeder
 {
     public function run(): void
     {
         if (! app()->environment(['local', 'testing'])) {
-            $this->command?->warn(static::class . ' refused to run outside local/testing environments.');
+            $this->command?->warn(static::class.' refused to run outside local/testing environments.');
+
             return;
         }
 
@@ -30,17 +30,31 @@ class DemoTenantSeeder extends Seeder
         BelongsToTenant::allowEmptyTenantContext();
 
         DB::transaction(function (): void {
-            // Promote the initial Filament admin (created in tinker) to super admin.
-            $superAdmin = User::where('email', 'admin@mypos.uz')->first();
-            if ($superAdmin) {
-                $superAdmin->update([
-                    'is_super_admin' => true,
+            // Local super admin — the entry point of the whole chain
+            // (super admin → CEO/tenants → manager → staff). Previously this
+            // only PROMOTED a tinker-created user, so a fresh database had
+            // no super admin at all. Stable demo password, env-guarded above.
+            $superAdmin = User::firstOrCreate(
+                ['email' => 'admin@mypos.uz'],
+                [
+                    'name' => 'MyPOS Super Admin',
+                    'tenant_id' => null,
                     'locale' => 'uz',
-                ]);
-                if (! $superAdmin->hasRole(RoleEnum::SuperAdmin->value)) {
-                    $superAdmin->assignRole(RoleEnum::SuperAdmin->value);
-                }
+                    'phone' => '+998900000000',
+                    'password' => Hash::make('admin123'),
+                    'email_verified_at' => now(),
+                ],
+            );
+            $superAdmin->update([
+                'is_super_admin' => true,
+                'locale' => 'uz',
+            ]);
+            if (! $superAdmin->hasRole(RoleEnum::SuperAdmin->value)) {
+                $superAdmin->assignRole(RoleEnum::SuperAdmin->value);
             }
+            // ?-> is CORRECT here despite PHPStan's non-nullable type:
+            // tests invoke seeders programmatically, where $command IS null.
+            $this->command?->info('Super admin ready: admin@mypos.uz / admin123');
 
             // Create one demo tenant with an owner so we can exercise the app end-to-end.
             $tenant = Tenant::firstOrCreate(

@@ -6,6 +6,7 @@ namespace App\Domain\Customer\Models;
 
 use App\Domain\Order\Models\Order;
 use App\Domain\Shared\Concerns\BelongsToTenant;
+use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,12 +21,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int|null $food_rating
  * @property int|null $delivery_rating
  * @property string|null $comment
+ * @property-read Tenant|null $tenant
+ * @property-read Order|null $order
+ * @property-read Customer|null $customer
  */
 class OrderReview extends Model
 {
+    use BelongsToTenant;
     use HasFactory;
     use HasUuids;
-    use BelongsToTenant;
 
     protected $fillable = [
         'tenant_id',

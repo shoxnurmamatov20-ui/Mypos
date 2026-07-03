@@ -20,7 +20,15 @@ class UpdateTableRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['sometimes', 'string', 'min:1', 'max:64'],
+            // Same tenant-scoped uniqueness as StoreTableRequest, ignoring
+            // the row being renamed.
+            'name' => [
+                'sometimes', 'string', 'min:1', 'max:64',
+                Rule::unique('tables', 'name')
+                    ->where('tenant_id', $this->user()?->tenant_id)
+                    ->whereNull('deleted_at')
+                    ->ignore($this->route('table')),
+            ],
             'capacity' => ['sometimes', 'integer', 'min:1', 'max:50'],
             'category_id' => ['sometimes', 'nullable', 'uuid', 'exists:table_categories,id'],
             'status' => ['sometimes', Rule::in(TableStatus::values())],

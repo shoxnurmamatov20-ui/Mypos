@@ -11,6 +11,7 @@ use App\Domain\Payment\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use RuntimeException;
 
 /**
@@ -29,16 +30,25 @@ use RuntimeException;
 class PaymeProvider implements PaymentProviderInterface
 {
     public const ERR_INVALID_AMOUNT = -31001;
+
     public const ERR_ORDER_NOT_FOUND = -31050;
+
     public const ERR_CANNOT_PERFORM = -31008;
+
     public const ERR_TRANSACTION_NOT_FOUND = -31003;
+
     public const ERR_UNABLE_TO_CANCEL = -31007;
+
     public const ERR_INVALID_AUTH = -32504;
+
     public const ERR_INVALID_REQUEST = -32600;
 
     public const STATE_CREATED = 1;
+
     public const STATE_COMPLETED = 2;
+
     public const STATE_CANCELLED_AFTER_CREATE = -1;
+
     public const STATE_CANCELLED_AFTER_COMPLETE = -2;
 
     public function key(): string
@@ -67,7 +77,7 @@ class PaymeProvider implements PaymentProviderInterface
         $host = $testMode ? 'https://test.paycom.uz' : 'https://checkout.paycom.uz';
 
         return [
-            'payment_url' => $host . '/' . $encoded,
+            'payment_url' => $host.'/'.$encoded,
             'transaction_id' => null,
         ];
     }
@@ -135,7 +145,7 @@ class PaymeProvider implements PaymentProviderInterface
             'PerformTransaction' => $this->performTransaction($request, $params),
             'CancelTransaction' => $this->cancelTransaction($request, $params),
             'CheckTransaction' => $this->checkTransaction($request, $params),
-            default => throw new RuntimeException('Unsupported Payme method: ' . $method),
+            default => throw new RuntimeException('Unsupported Payme method: '.$method),
         };
     }
 
@@ -186,7 +196,13 @@ class PaymeProvider implements PaymentProviderInterface
         $orderId = (string) ($params['account']['order_id'] ?? '');
         $amount = (int) ($params['amount'] ?? 0);
 
-        $order = Order::withoutGlobalScopes()->find($orderId);
+        // Guard the lookup: `account.order_id` is attacker-controlled and
+        // orders.id is a real uuid column on Postgres — feeding it garbage
+        // raises SQLSTATE 22P02 instead of returning null (MySQL CHAR(36)
+        // just missed silently). Non-uuid input == order not found.
+        $order = Str::isUuid($orderId)
+            ? Order::withoutGlobalScopes()->find($orderId)
+            : null;
 
         if ($order === null) {
             return $this->ghostPayment($request, $orderId, $amount, 'Order not found');
@@ -226,7 +242,10 @@ class PaymeProvider implements PaymentProviderInterface
                 return $existing;
             }
 
-            $order = Order::withoutGlobalScopes()->find($orderId);
+            // Same 22P02 guard as checkPerform — non-uuid == unknown order.
+            $order = Str::isUuid($orderId)
+                ? Order::withoutGlobalScopes()->find($orderId)
+                : null;
 
             if ($order === null) {
                 // SECURITY (C3): refuse poison-tenant rows.  Previously we
@@ -273,14 +292,14 @@ class PaymeProvider implements PaymentProviderInterface
             throw new RuntimeException('Payme transaction not found');
         }
 
-        // Idempotent: already captured is fine
-        if ($payment->status !== PaymentStatus::Captured->value) {
-            $payment->update([
-                'status' => PaymentStatus::Captured->value,
-                'captured_at' => now(),
-                'raw_request' => $request->all(),
-            ]);
-        }
+        // Record the webhook payload, but leave the Captured transition to
+        // CapturePaymentAction (invoked by the controller): the action is
+        // what syncs the Order's paid_amount/payment_status and broadcasts.
+        // Flipping the status here made the action see "already captured"
+        // and skip the order sync — orders stayed `unpaid` after payment.
+        $payment->update([
+            'raw_request' => $request->all(),
+        ]);
 
         return $payment->fresh() ?? $payment;
     }

@@ -93,7 +93,8 @@ it('accepts an invitation and creates a super admin user', function (): void {
 it('rejects accept-invitation with invalid token', function (): void {
     $this->postJson('/api/v1/super-admin/admins/accept-invitation', [
         'token' => str_repeat('x', 48),
-        'name' => 'X',
+        // Otherwise-valid payload so only the token can fail validation.
+        'name' => 'Xavier',
         'password' => 'super-strong-pass',
     ])->assertStatus(422)->assertJsonValidationErrors(['token']);
 });
@@ -108,7 +109,7 @@ it('revokes super admin role from another user', function (): void {
     $admin = actingAsSuperAdmin();
     Sanctum::actingAs($admin, ['super-admin']);
 
-    $this->deleteJson('/api/v1/super-admin/admins/' . $target->uuid)->assertOk();
+    $this->deleteJson('/api/v1/super-admin/admins/'.$target->uuid)->assertOk();
 
     expect($target->fresh()->is_super_admin)->toBeFalse();
     expect($target->fresh()->super_admin_role)->toBeNull();
@@ -120,6 +121,6 @@ it('forbids self-revoke', function (): void {
     $admin = actingAsSuperAdmin();
     Sanctum::actingAs($admin, ['super-admin']);
 
-    $this->deleteJson('/api/v1/super-admin/admins/' . $admin->uuid)
+    $this->deleteJson('/api/v1/super-admin/admins/'.$admin->uuid)
         ->assertStatus(422);
 });

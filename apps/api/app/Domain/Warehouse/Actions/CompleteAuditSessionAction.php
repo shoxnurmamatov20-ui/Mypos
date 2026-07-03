@@ -10,6 +10,7 @@ use App\Domain\Inventory\Models\StockMovement;
 use App\Domain\Warehouse\Enums\AuditStatus;
 use App\Domain\Warehouse\Models\AuditSession;
 use App\Domain\Warehouse\Models\AuditSessionItem;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -48,6 +49,12 @@ class CompleteAuditSessionAction
 
             $session = $locked;
             $session->load('items');
+
+            // stock_movements.created_by stores the user *uuid*, not the
+            // bigint users.id — resolve it once for all adjustments below.
+            $creatorUuid = $userId === null
+                ? null
+                : User::query()->whereKey($userId)->value('uuid');
 
             $discrepancyCount = 0;
 
@@ -93,7 +100,7 @@ class CompleteAuditSessionAction
                     'cost_per_unit' => null,
                     'notes' => "Inventarizatsiya: {$session->doc_no}",
                     'recorded_at' => now(),
-                    'created_by' => $userId !== null ? (string) $userId : null,
+                    'created_by' => $creatorUuid,
                     'created_at' => now(),
                 ]);
             }

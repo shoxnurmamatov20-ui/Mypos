@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             DemoCustomersSeeder::class,
             DemoEmployeesSeeder::class,
             DemoInventorySeeder::class,
+            // CEO chain demo: ceo@mypos.uz owning 5 sample tenants — exercises
+            // the super-admin → CEO → manager hierarchy end-to-end locally.
+            DemoCeoSeeder::class,
             ClinicSeeder::class,
         ]);
     }

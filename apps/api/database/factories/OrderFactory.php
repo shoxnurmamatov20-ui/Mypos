@@ -17,7 +17,7 @@ class OrderFactory extends Factory
     {
         return [
             'tenant_id' => Tenant::factory(),
-            'order_no' => 'O' . now()->format('ymd') . '-' . str_pad((string) fake()->unique()->numberBetween(1, 9999), 4, '0', STR_PAD_LEFT),
+            'order_no' => 'O'.now()->format('ymd').'-'.str_pad((string) fake()->unique()->numberBetween(1, 9999), 4, '0', STR_PAD_LEFT),
             'type' => 'dine_in',
             'status' => 'pending',
             'payment_status' => 'unpaid',
@@ -34,5 +34,29 @@ class OrderFactory extends Factory
             'currency' => 'UZS',
             'placed_at' => now(),
         ];
+    }
+
+    public function forTenant(Tenant $tenant): static
+    {
+        return $this->state(['tenant_id' => $tenant->id]);
+    }
+
+    /** A completed, fully-paid order. */
+    public function paid(): static
+    {
+        return $this->state(function (array $attributes): array {
+            $total = $attributes['total_amount'] > 0
+                ? $attributes['total_amount']
+                : fake()->numberBetween(50_000, 500_000);
+
+            return [
+                'status' => 'completed',
+                'payment_status' => 'paid',
+                'total_amount' => $total,
+                'subtotal_amount' => $total,
+                'paid_amount' => $total,
+                'paid_at' => now(),
+            ];
+        });
     }
 }

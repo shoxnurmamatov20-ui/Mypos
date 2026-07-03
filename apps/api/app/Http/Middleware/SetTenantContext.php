@@ -10,28 +10,26 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Originally set the PostgreSQL session variable `app.current_tenant_id` so
- * RLS policies could filter rows at the database level (see migration
- * `2026_05_01_000001_enable_rls_on_tenant_scoped_tables`).
+ * Sets the PostgreSQL session variable `app.current_tenant_id` so RLS
+ * policies can filter rows at the database level (see migrations
+ * `2026_05_01_000001_enable_rls_on_tenant_scoped_tables` and
+ * `2026_07_21_000001_extend_rls_and_create_app_role`).
  *
- * **2026-05-10 (ADR-0005)** — project switched to MySQL 8.4. RLS no longer
- * exists, so the GUC `set_config()` call is a no-op on MySQL. The middleware
- * is retained because:
- *   1. It still resolves the active tenant and exposes it via `app('currentTenant')`
- *      / `tenant.guc.last` for downstream consumers (logging, audit, debug).
- *   2. If the project ever reverts to Postgres (rollback path in ADR-0005),
- *      flipping a single conditional re-enables RLS without rewiring
- *      every controller.
+ * History: ADR-0005 (2026-05-10) moved the project to MySQL and turned this
+ * middleware into an app-side no-op; ADR-0006 (2026-07-02) moved it back to
+ * PostgreSQL 18 and re-activated the GUC as tenant-isolation layer 2 behind
+ * the `BelongsToTenant` Eloquent scope.
  *
  * Resolution order (first match wins):
- *   1. Authenticated user is super-admin           -> '*' (cross-tenant access)
+ *   1. Authenticated user is super-admin           -> '*' (DB-level only)
  *   2. Authenticated user has tenant_id            -> that UUID
  *   3. Container has `currentTenant` (kiosk, QR)   -> that tenant's UUID
- *   4. None of the above                           -> nothing recorded
+ *   4. None of the above                           -> nothing set (policies
+ *      then deny by default for non-owner roles)
  *
- * Tenant isolation now relies SOLELY on the application-layer
- * `BelongsToTenant` global scope. Reviewers must catch any
- * `withoutGlobalScopes()` call outside `SuperAdminScope::unguard()`.
+ * The '*' wildcard is written ONLY into the database GUC, never into
+ * `resolveTenantId()`'s return value — app-side consumers comparing
+ * "current tenant === expected tenant" must never see '*' (Audit H-4).
  */
 class SetTenantContext
 {
@@ -41,19 +39,33 @@ class SetTenantContext
     {
         $tenantId = $this->resolveTenantId($request);
 
-        if ($tenantId !== null) {
+        // ADR-0006: super admins imprint the RLS wildcard '*' at the DATABASE
+        // level only — resolveTenantId() still returns null for them so no
+        // app-side consumer ever mistakes '*' for a real tenant id (Audit
+        // H-4). Without the wildcard, a production runtime connected as the
+        // non-owner `mypos_app` role would show super admins zero rows.
+        $gucValue = $tenantId ?? ($this->isSuperAdmin($request) ? '*' : null);
+
+        if ($gucValue !== null) {
             $current = $this->lastSet();
-            if ($current !== $tenantId) {
+            if ($current !== $gucValue) {
                 // Postgres only — emit the GUC for RLS. On MySQL/sqlite this
                 // becomes a no-op so the rest of the middleware stays portable.
                 if (DB::connection()->getDriverName() === 'pgsql') {
-                    DB::statement('SELECT set_config(?, ?, false)', [self::GUC, $tenantId]);
+                    DB::statement('SELECT set_config(?, ?, false)', [self::GUC, $gucValue]);
                 }
-                app()->instance('tenant.guc.last', $tenantId);
+                app()->instance('tenant.guc.last', $gucValue);
             }
         }
 
         return $next($request);
+    }
+
+    private function isSuperAdmin(Request $request): bool
+    {
+        $user = $request->user();
+
+        return $user !== null && ($user->is_super_admin ?? false) === true;
     }
 
     /**

@@ -66,7 +66,10 @@ use App\Domain\Warehouse\Policies\TransferDocumentPolicy;
 use App\Domain\Warehouse\Policies\WarehousePolicy;
 use App\Domain\Warehouse\Policies\WasteDocumentPolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -138,6 +141,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->configureRateLimiters();
+
         // Employee + scheduling.
         Gate::policy(Employee::class, EmployeePolicy::class);
         Gate::policy(Shift::class, ShiftPolicy::class);
@@ -156,7 +161,7 @@ class AppServiceProvider extends ServiceProvider
         // aggregates surface. Wired here so a controller can later use
         // `Gate::authorize('viewAny', ReportSubject::class)` if we add a
         // sentinel subject; for now FormRequests call ReportPolicy directly.
-        Gate::define('reports.view', fn ($user): bool => (new ReportPolicy())->viewAny($user));
+        Gate::define('reports.view', fn ($user): bool => (new ReportPolicy)->viewAny($user));
 
         // Customers.
         Gate::policy(Customer::class, CustomerPolicy::class);
@@ -218,6 +223,30 @@ class AppServiceProvider extends ServiceProvider
             $email = property_exists($notifiable, 'email') ? (string) $notifiable->email : '';
 
             return $portal.'?token='.urlencode($token).'&email='.urlencode($email);
+        });
+    }
+
+    /**
+     * Named rate limiters with ROUTE-SCOPED keys.
+     *
+     * The inline `throttle:5,1` style keys guests by sha1(domain|ip) plus the
+     * max-attempt count only — so every guest route sharing the same number
+     * (checkout 5/1m, onboarding 5/15m, password reset 5/15m) also shared ONE
+     * bucket per IP. Five password-reset attempts then 429'd marketplace
+     * checkout for the same office/NAT IP. Route-scoped keys isolate them.
+     */
+    private function configureRateLimiters(): void
+    {
+        RateLimiter::for('checkout', function (Request $request): Limit {
+            return Limit::perMinute(5)->by('checkout:'.$request->ip());
+        });
+
+        RateLimiter::for('onboarding-write', function (Request $request): Limit {
+            return Limit::perMinutes(15, 5)->by('onboarding:'.$request->path().':'.$request->ip());
+        });
+
+        RateLimiter::for('password-reset', function (Request $request): Limit {
+            return Limit::perMinutes(15, 5)->by('pwreset:'.$request->path().':'.$request->ip());
         });
     }
 }

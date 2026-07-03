@@ -12,6 +12,7 @@ use App\Domain\Warehouse\Models\IncomingDocument;
 use App\Domain\Warehouse\Models\IncomingDocumentItem;
 use App\Domain\Warehouse\Models\Warehouse;
 use App\Domain\Warehouse\Support\DocumentNumberGenerator;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -119,6 +120,12 @@ class CreateIncomingDocumentAction
                 'created_by' => $input['created_by'] ?? null,
             ]);
 
+            // stock_movements.created_by stores the user *uuid*, not the
+            // bigint users.id that documents keep — resolve it once.
+            $creatorUuid = $status === IncomingStatus::Posted
+                ? $this->creatorUuid($input['created_by'] ?? null)
+                : null;
+
             foreach ($itemRows as $row) {
                 IncomingDocumentItem::create([
                     'incoming_document_id' => $document->id,
@@ -139,7 +146,7 @@ class CreateIncomingDocumentAction
                         (float) $row['quantity'],
                         (int) $row['unit_price'],
                         $document,
-                        $input['created_by'] ?? null,
+                        $creatorUuid,
                     );
                 }
             }
@@ -156,7 +163,7 @@ class CreateIncomingDocumentAction
         float $quantity,
         int $unitPrice,
         IncomingDocument $document,
-        ?int $userId,
+        ?string $creatorUuid,
     ): void {
         /** @var Ingredient $ingredient */
         $ingredient = Ingredient::query()
@@ -179,8 +186,21 @@ class CreateIncomingDocumentAction
             'cost_per_unit' => $unitPrice > 0 ? $unitPrice : null,
             'notes' => "Kelib tushish: {$document->doc_no}",
             'recorded_at' => now(),
-            'created_by' => $userId !== null ? (string) $userId : null,
+            'created_by' => $creatorUuid,
             'created_at' => now(),
         ]);
+    }
+
+    /**
+     * stock_movements.created_by is a uuid column pointing at users.uuid,
+     * while warehouse documents keep the bigint users.id. MySQL's CHAR(36)
+     * silently accepted a stringified bigint here; PostgreSQL's uuid type
+     * rejects it — look the uuid up explicitly.
+     */
+    private function creatorUuid(?int $userId): ?string
+    {
+        return $userId === null
+            ? null
+            : User::query()->whereKey($userId)->value('uuid');
     }
 }

@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
@@ -21,13 +22,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int|null $created_by
  * @property string $token_hash
  * @property string|null $visit_reference
- * @property \Illuminate\Support\Carbon $expires_at
- * @property \Illuminate\Support\Carbon|null $used_at
+ * @property Carbon $expires_at
+ * @property Carbon|null $used_at
+ * @property-read Tenant|null $tenant
+ * @property-read TableCategory|null $category
+ * @property-read Table|null $tableRef
+ * @property-read User|null $creator
  */
 class VisitToken extends Model
 {
-    use HasUuids;
     use BelongsToTenant;
+    use HasUuids;
 
     protected $table = 'visit_tokens';
 

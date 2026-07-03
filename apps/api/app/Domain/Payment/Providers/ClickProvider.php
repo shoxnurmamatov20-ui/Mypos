@@ -11,6 +11,7 @@ use App\Domain\Payment\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -32,15 +33,23 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class ClickProvider implements PaymentProviderInterface
 {
     public const ACTION_PREPARE = 0;
+
     public const ACTION_COMPLETE = 1;
 
     public const ERROR_SUCCESS = 0;
+
     public const ERROR_SIGN_CHECK = -1;
+
     public const ERROR_AMOUNT = -2;
+
     public const ERROR_ACTION = -3;
+
     public const ERROR_ALREADY_PAID = -4;
+
     public const ERROR_USER_NOT_FOUND = -5;
+
     public const ERROR_TRANSACTION_NOT_FOUND = -6;
+
     public const ERROR_CANCELLED = -9;
 
     public function key(): string
@@ -127,7 +136,13 @@ class ClickProvider implements PaymentProviderInterface
                 ->first();
 
             if ($payment === null) {
-                $order = Order::withoutGlobalScopes()->find($orderId);
+                // merchant_trans_id is attacker-controlled; orders.id is a
+                // real uuid column on Postgres — non-uuid input would raise
+                // SQLSTATE 22P02 instead of missing quietly. Treat it as
+                // order-not-found.
+                $order = Str::isUuid($orderId)
+                    ? Order::withoutGlobalScopes()->find($orderId)
+                    : null;
                 if ($order === null) {
                     // SECURITY (C3): refuse poison-tenant rows.  Previously this
                     // path persisted a Payment with a placeholder zero-UUID
@@ -142,7 +157,7 @@ class ClickProvider implements PaymentProviderInterface
 
                     throw new HttpException(
                         422,
-                        'Click webhook references unknown order: ' . ($orderId !== '' ? $orderId : '<empty>'),
+                        'Click webhook references unknown order: '.($orderId !== '' ? $orderId : '<empty>'),
                     );
                 }
 
@@ -173,9 +188,12 @@ class ClickProvider implements PaymentProviderInterface
                         'raw_request' => $request->all(),
                     ]);
                 } else {
+                    // Record the payload only — the Captured transition
+                    // belongs to CapturePaymentAction (controller-invoked),
+                    // which also syncs the Order and broadcasts. Flipping the
+                    // status here made the action see "already captured" and
+                    // skip the order sync, leaving paid orders `unpaid`.
                     $payment->update([
-                        'status' => PaymentStatus::Captured->value,
-                        'captured_at' => $payment->captured_at ?? now(),
                         'raw_request' => $request->all(),
                     ]);
                 }

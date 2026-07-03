@@ -51,8 +51,8 @@ it('filters tenants by plan', function (): void {
 });
 
 it('searches tenants by query string', function (): void {
-    Tenant::factory()->create(['name' => 'Osh Markazi', 'slug' => 'osh-markazi-' . uniqid()]);
-    Tenant::factory()->create(['name' => 'Plov Club', 'slug' => 'plov-club-' . uniqid()]);
+    Tenant::factory()->create(['name' => 'Osh Markazi', 'slug' => 'osh-markazi-'.uniqid()]);
+    Tenant::factory()->create(['name' => 'Plov Club', 'slug' => 'plov-club-'.uniqid()]);
 
     $admin = actingAsSuperAdmin();
     Sanctum::actingAs($admin, ['super-admin']);
@@ -73,7 +73,7 @@ it('shows full tenant detail', function (): void {
     $admin = actingAsSuperAdmin();
     Sanctum::actingAs($admin, ['super-admin']);
 
-    $response = $this->getJson('/api/v1/super-admin/tenants/' . $tenant->id)->assertOk();
+    $response = $this->getJson('/api/v1/super-admin/tenants/'.$tenant->id)->assertOk();
 
     expect($response->json('data.tenant.id'))->toBe($tenant->id);
     expect($response->json('data.owner.email'))->toBe($owner->email);
@@ -86,9 +86,9 @@ it('creates a new tenant + owner', function (): void {
 
     $payload = [
         'name' => 'New Restaurant',
-        'slug' => 'new-restaurant-' . uniqid(),
+        'slug' => 'new-restaurant-'.uniqid(),
         'owner_name' => 'Owner Name',
-        'owner_email' => 'owner+' . uniqid() . '@test.uz',
+        'owner_email' => 'owner+'.uniqid().'@test.uz',
         'owner_phone' => '+998901234567',
         'owner_password' => 'secure-pass-9',
         'plan' => 'starter',
@@ -114,7 +114,8 @@ it('rejects duplicate slug on create', function (): void {
     $this->postJson('/api/v1/super-admin/tenants', [
         'name' => 'Another',
         'slug' => 'taken-slug',
-        'owner_name' => 'X',
+        // Otherwise-valid payload so only the slug can fail validation.
+        'owner_name' => 'Xavier',
         'owner_email' => 'x@test.uz',
         'owner_password' => 'secure-pass-9',
     ])->assertStatus(422)->assertJsonValidationErrors(['slug']);
@@ -126,7 +127,7 @@ it('updates tenant fields', function (): void {
     $admin = actingAsSuperAdmin();
     Sanctum::actingAs($admin, ['super-admin']);
 
-    $this->patchJson('/api/v1/super-admin/tenants/' . $tenant->id, [
+    $this->patchJson('/api/v1/super-admin/tenants/'.$tenant->id, [
         'subscription_plan' => 'pro',
         'mrr_minor' => 1_290_000,
         'notes' => 'Upgraded',
@@ -143,7 +144,7 @@ it('suspends a tenant', function (): void {
     $admin = actingAsSuperAdmin();
     Sanctum::actingAs($admin, ['super-admin']);
 
-    $this->postJson('/api/v1/super-admin/tenants/' . $tenant->id . '/suspend', [
+    $this->postJson('/api/v1/super-admin/tenants/'.$tenant->id.'/suspend', [
         'reason' => 'non_payment',
         'notes' => '30 days overdue',
     ])->assertOk()
@@ -163,7 +164,7 @@ it('resumes a suspended tenant', function (): void {
     $admin = actingAsSuperAdmin();
     Sanctum::actingAs($admin, ['super-admin']);
 
-    $this->postJson('/api/v1/super-admin/tenants/' . $tenant->id . '/resume')
+    $this->postJson('/api/v1/super-admin/tenants/'.$tenant->id.'/resume')
         ->assertOk()
         ->assertJsonPath('data.subscription_status', 'active')
         ->assertJsonPath('data.suspended_at', null)

@@ -1,11 +1,14 @@
 # MyPOS — Local Development Infrastructure
 #
-# DB NOTE (2026-05-10, ADR-0005): MyPOS now uses MySQL 8.4. The MAIN database
-# runs via XAMPP on the host (localhost:3306), NOT in Docker. This compose
-# file no longer brings up a database service. CI uses its own mysql:8.4
-# service container — see .github/workflows/ci.yml.
+# DB NOTE (2026-07-02, ADR-0006): MyPOS runs on PostgreSQL 18 again
+# (reverses ADR-0005/MySQL). The `postgres` service below is the default
+# local database; a native PostgreSQL install (port 5432) or the
+# trust-auth helper cluster (infra/scripts/dev-postgres.ps1, port 5433)
+# work too — point DB_HOST/DB_PORT at whichever you use. CI uses its own
+# postgres:18 service container — see .github/workflows/ci.yml.
 #
 # Services in this file:
+#   - postgres    : PostgreSQL 18 (primary database)
 #   - redis       : Redis 7.4 (cache, queue, Reverb pub/sub)
 #   - meilisearch : Search (Laravel Scout driver)
 #   - minio       : S3-compatible object storage (files, images)
@@ -13,18 +16,13 @@
 #                   (opt-in profile "edge" — does not start by default in dev)
 #
 # Usage:
-#   pnpm docker:up       # Start redis + meilisearch + minio
+#   pnpm docker:up       # Start postgres + redis + meilisearch + minio
 #   pnpm docker:down     # Stop them
 #   pnpm docker:logs     # Tail logs
 #
-# Local DB setup (do this once, separately from docker):
-#   1. Open XAMPP Control Panel and click Start next to MySQL.
-#   2. Visit http://localhost/phpmyadmin
-#   3. Create database `mypos` with collation `utf8mb4_unicode_ci`.
-#   4. Default user `root` with empty password works out-of-the-box.
-#
 # Access:
-#   mysql       : localhost:3306 (XAMPP)        — phpMyAdmin: http://localhost/phpmyadmin
+#   postgres    : localhost:55432 (user/pass/db: mypos / mypos_local / mypos)
+#                 psql "postgres://mypos:mypos_local@localhost:55432/mypos"
 #   redis       : localhost:56379
 #   meilisearch : http://localhost:7700
 #   minio       : http://localhost:9000 (API), http://localhost:9001 (console)
@@ -35,6 +33,34 @@
 name: mypos
 
 services:
+  postgres:
+    image: postgres:18
+    container_name: mypos-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mypos
+      POSTGRES_PASSWORD: mypos_local
+      POSTGRES_DB: mypos
+      # Sane dev defaults; production tuning lives in Coolify/infra configs.
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
+    ports:
+      - "55432:5432"   # Host 55432 to avoid clash with a native PostgreSQL
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command:
+      - "postgres"
+      - "-c"
+      - "shared_buffers=256MB"
+      - "-c"
+      - "max_connections=200"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mypos -d mypos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mypos
+
   redis:
     image: redis:7.4-alpine
     container_name: mypos-redis
@@ -150,6 +176,8 @@ services:
       retries: 3
 
 volumes:
+  postgres_data:
+    driver: local
   redis_data:
     driver: local
   meilisearch_data:

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\Customer\Models;
 
 use App\Domain\Shared\Concerns\BelongsToTenant;
+use Database\Factories\LoyaltyProgramFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -20,8 +22,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class LoyaltyProgram extends Model
 {
-    use HasUuids;
     use BelongsToTenant;
+
+    /** @use HasFactory<LoyaltyProgramFactory> */
+    use HasFactory;
+
+    use HasUuids;
 
     protected $table = 'loyalty_programs';
 
@@ -58,6 +64,12 @@ class LoyaltyProgram extends Model
     public function pointsForSpend(int $amount): int
     {
         $rate = (float) $this->points_per_currency_unit;
+
         return (int) floor($amount * $rate);
+    }
+
+    protected static function newFactory(): LoyaltyProgramFactory
+    {
+        return LoyaltyProgramFactory::new();
     }
 }

@@ -8,7 +8,6 @@ use App\Domain\Clinic\Models\Clinic;
 use App\Domain\Clinic\Models\ClinicComplaint;
 use App\Domain\Clinic\Models\ClinicFeedback;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Returns every clinic with one-shot aggregated stats:
@@ -40,7 +39,9 @@ class ListClinicsAction
             ->select('clinic_id')
             ->selectRaw('COUNT(*) as total')
             ->selectRaw('AVG(rating) as avg_rating')
-            ->selectRaw('SUM(CASE WHEN is_verified = 1 THEN 1 ELSE 0 END) as verified_count')
+            // Bare boolean predicate — portable: PG boolean and MySQL tinyint(1)
+            // both evaluate truthy here, while `= 1` breaks on PG (boolean = int).
+            ->selectRaw('SUM(CASE WHEN is_verified THEN 1 ELSE 0 END) as verified_count')
             ->whereIn('clinic_id', $ids)
             ->groupBy('clinic_id')
             ->get()
@@ -49,7 +50,7 @@ class ListClinicsAction
         $complaintStats = ClinicComplaint::query()
             ->select('clinic_id')
             ->selectRaw("SUM(CASE WHEN status = 'open' THEN 1 ELSE 0 END) as open_count")
-            ->selectRaw('SUM(CASE WHEN is_urgent = 1 THEN 1 ELSE 0 END) as urgent_count')
+            ->selectRaw('SUM(CASE WHEN is_urgent THEN 1 ELSE 0 END) as urgent_count')
             ->whereIn('clinic_id', $ids)
             ->groupBy('clinic_id')
             ->get()

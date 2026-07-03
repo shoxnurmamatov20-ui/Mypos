@@ -36,15 +36,18 @@ final class MenuItemsReportService
             ->whereNotIn('orders.status', ['draft', 'cancelled', 'refunded'])
             ->where('order_items.status', '!=', 'cancelled')
             ->when($categoryId !== null && $categoryId !== '', fn ($q) => $q->where('menu_items.category_id', $categoryId))
+            // ANY_VALUE (MySQL 5.7+/PostgreSQL 16+) — these columns are
+            // functionally dependent on the GROUP BY key; the old MAX() trick
+            // broke on Postgres where max(uuid)/max(jsonb) do not exist.
             ->selectRaw(
-                "order_items.menu_item_id,
-                 MAX(menu_items.category_id) AS category_id,
-                 MAX(menu_items.name) AS item_name_json,
-                 MAX(menu_categories.name) AS category_name_json,
-                 MAX(menu_items.cost_amount) AS unit_cost,
+                'order_items.menu_item_id,
+                 ANY_VALUE(menu_items.category_id) AS category_id,
+                 ANY_VALUE(menu_items.name) AS item_name_json,
+                 ANY_VALUE(menu_categories.name) AS category_name_json,
+                 ANY_VALUE(menu_items.cost_amount) AS unit_cost,
                  COALESCE(SUM(order_items.quantity), 0) AS qty,
                  COALESCE(SUM(order_items.subtotal_amount), 0) AS revenue,
-                 COUNT(DISTINCT order_items.order_id) AS orders_cnt"
+                 COUNT(DISTINCT order_items.order_id) AS orders_cnt'
             )
             ->groupBy('order_items.menu_item_id')
             ->get();
@@ -68,6 +71,7 @@ final class MenuItemsReportService
             $revenue = (int) $row->revenue;
             $unitCost = (int) ($row->unit_cost ?? 0);
             $cost = (int) round($qty * $unitCost);
+
             return [
                 'menu_item_id' => $row->menu_item_id !== null ? (string) $row->menu_item_id : null,
                 'name' => $this->extractTranslation($row->item_name_json),
@@ -106,11 +110,12 @@ final class MenuItemsReportService
         if (is_array($decoded)) {
             return (string) ($decoded['uz'] ?? $decoded['ru'] ?? $decoded['en'] ?? reset($decoded));
         }
+
         return (string) $raw;
     }
 
     /**
-     * @param list<array<string, mixed>> $rows
+     * @param  list<array<string, mixed>>  $rows
      * @return list<array<string, mixed>>
      */
     private function sortRows(array $rows, string $sort): array
@@ -125,6 +130,7 @@ final class MenuItemsReportService
         ];
         $key = $map[$column] ?? 'revenue_minor';
         usort($rows, fn (array $a, array $b): int => ($a[$key] <=> $b[$key]) * $direction);
+
         return $rows;
     }
 }

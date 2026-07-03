@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Domain\Customer\Models\Customer;
+use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /** @extends Factory<Customer> */
@@ -31,7 +32,7 @@ class CustomerFactory extends Factory
         $lastName = fake()->randomElement($lastNames);
         // UZ mobile: +998 + 9 digits, common operator prefixes
         $prefix = fake()->randomElement(['90', '91', '93', '94', '95', '97', '98', '99']);
-        $phone = '+998' . $prefix . fake()->numerify('#######');
+        $phone = '+998'.$prefix.fake()->numerify('#######');
         $tags = fake()->randomElements(
             ['VIP', 'regular', 'new', 'birthday', 'corporate'],
             fake()->numberBetween(0, 2),
@@ -40,7 +41,7 @@ class CustomerFactory extends Factory
         return [
             'phone' => $phone,
             'email' => fake()->boolean(40)
-                ? strtolower($firstName) . fake()->numerify('##') . '@mail.uz'
+                ? strtolower($firstName).fake()->numerify('##').'@mail.uz'
                 : null,
             'first_name' => $firstName,
             'last_name' => $lastName,
@@ -56,5 +57,10 @@ class CustomerFactory extends Factory
             'total_spent' => 0,
             'last_visit_at' => null,
         ];
+    }
+
+    public function forTenant(Tenant $tenant): static
+    {
+        return $this->state(['tenant_id' => $tenant->id]);
     }
 }

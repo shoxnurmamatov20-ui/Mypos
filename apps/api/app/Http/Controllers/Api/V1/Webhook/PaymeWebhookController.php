@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api\V1\Webhook;
 
 use App\Domain\Payment\Actions\CapturePaymentAction;
 use App\Domain\Payment\Enums\PaymentStatus;
+use App\Domain\Payment\Models\Payment;
 use App\Domain\Payment\PaymentManager;
 use App\Domain\Payment\Providers\PaymeProvider;
 use App\Http\Controllers\Controller;
@@ -36,8 +37,11 @@ class PaymeWebhookController extends Controller
         try {
             $payment = $provider->handleWebhook($request);
         } catch (Throwable $e) {
+            // Payme's JSON-RPC spec keys the error code off the METHOD:
+            // CreateTransaction with an unknown order must answer -31008
+            // (cannot perform), not the blanket -31003 (txn not found).
             return response()->json($provider->respondToWebhook($request, null, [
-                'code' => PaymeProvider::ERR_TRANSACTION_NOT_FOUND,
+                'code' => $this->errorCodeFor($method),
                 'message' => $e->getMessage(),
             ]), 200);
         }
@@ -86,7 +90,7 @@ class PaymeWebhookController extends Controller
     /**
      * @return array<string, mixed>
      */
-    private function checkPerformResult(\App\Domain\Payment\Models\Payment $payment): array
+    private function checkPerformResult(Payment $payment): array
     {
         return [
             'allow' => $payment->status !== PaymentStatus::Failed->value,
@@ -97,12 +101,15 @@ class PaymeWebhookController extends Controller
      * @return array<string, mixed>
      */
     private function afterPerform(
-        \App\Domain\Payment\Models\Payment $payment,
+        Payment $payment,
         CapturePaymentAction $capture,
         PaymeProvider $provider,
     ): array {
-        if ($payment->status === PaymentStatus::Captured->value) {
-            $capture($payment);
+        // Unconditional: the action owns the Captured transition AND the
+        // order sync. It is idempotent — a Payme retry on an already-captured
+        // payment neither double-credits the order nor re-broadcasts.
+        if ($payment->status !== PaymentStatus::Failed->value) {
+            $payment = $capture($payment);
         }
 
         return [

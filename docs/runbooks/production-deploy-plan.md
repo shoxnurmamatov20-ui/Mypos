@@ -1,9 +1,20 @@
 # MyPOS Production Deploy Plan
 
-> **Status**: planning document, 2026-05-10
+> **Status**: planning document, 2026-05-10 — **DB sections superseded 2026-07-02**
 > **Scope**: ground-up production deployment for MyPOS SaaS
-> **Stack**: Laravel 12 + MySQL 8.4 + Redis + Meilisearch + MinIO + Coolify + Caddy
+> **Stack**: Laravel 12 + **PostgreSQL 18** (ADR-0006) + Redis + Meilisearch + MinIO + Coolify + Caddy
 > **Infrastructure**: UZCLOUD (UZ primary) + Beeline DC (DR)
+
+> ⚠️ **ADR-0006 (2026-07-02)**: the database moved back to **PostgreSQL 18**.
+> Read every "MySQL 8.4" reference below as PostgreSQL 18: §5 becomes a
+> standard `postgresql-18` apt install; binlog replication becomes **streaming
+> physical replication** (primary → DR standby via `pg_basebackup` +
+> `primary_conninfo`); backups move from `mysqldump`/XtraBackup to
+> `pg_dump`/`pgBackRest`. Two runtime roles are REQUIRED: the schema owner
+> for migrations/workers and `mypos_app` (LOGIN, NOBYPASSRLS — see
+> `infra/scripts/pg-app-role.sql`) for the web runtime so Row-Level Security
+> binds. Data lands via `php artisan db:migrate-from-mysql`
+> (docs/runbooks/mysql-to-postgres-migration.md).
 
 ---
 

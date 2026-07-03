@@ -90,7 +90,9 @@ it('returns a clinic with departments, doctors, and feedback', function (): void
         ->and($response->json('data.stats.doctors_count'))->toBe(1)
         ->and($response->json('data.stats.feedback_total'))->toBe(1)
         ->and($response->json('data.stats.verified_count'))->toBe(1)
-        ->and($response->json('data.stats.avg_rating'))->toBe(5.0)
+        // toEqual (==): json_encode drops the zero fraction (5.0 → "5")
+        // without JSON_PRESERVE_ZERO_FRACTION, so the decoded value is int 5.
+        ->and($response->json('data.stats.avg_rating'))->toEqual(5.0)
         ->and($response->json('data.departments'))->toBeArray()->toHaveCount(1)
         ->and($response->json('data.departments.0.name'))->toBe('Pediatriya')
         ->and($response->json('data.departments.0.doctors_count'))->toBe(1)

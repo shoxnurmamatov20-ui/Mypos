@@ -20,7 +20,15 @@ class StoreTableRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:1', 'max:64'],
+            // Tenant-scoped uniqueness mirrors the DB constraint
+            // tables_tenant_id_name_unique — without the rule a duplicate
+            // name surfaced as an unhandled 500 instead of a 422.
+            'name' => [
+                'required', 'string', 'min:1', 'max:64',
+                Rule::unique('tables', 'name')
+                    ->where('tenant_id', $this->user()?->tenant_id)
+                    ->whereNull('deleted_at'),
+            ],
             'capacity' => ['nullable', 'integer', 'min:1', 'max:50'],
             'category_id' => ['nullable', 'uuid', 'exists:table_categories,id'],
             'status' => ['nullable', Rule::in(TableStatus::values())],

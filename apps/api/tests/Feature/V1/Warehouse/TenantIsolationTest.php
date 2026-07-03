@@ -73,14 +73,22 @@ it('blocks creating documents that point at another tenant warehouse', function 
 
     Sanctum::actingAs($ownerA);
 
-    // The `exists:warehouses,id` rule runs without tenant scope (validation
-    // bypasses our model query) so it WILL find $whB. However the controller
-    // resolves the warehouse via the Action which uses the scoped query and
-    // returns 404 — that surfaces as a ModelNotFoundException -> 404.
+    // StoreIncomingDocumentRequest scopes its exists-rule by tenant_id
+    // (`Rule::exists('warehouses','id')->where('tenant_id', ...)`), so the
+    // foreign warehouse is rejected at the validation layer with 422 and the
+    // same "invalid" message a non-existent id gets — no existence leak. The
+    // Action's scoped lookup remains as the second net behind it.
     $this->postJson('/api/v1/incoming-documents', [
         'warehouse_id' => $whB->id,
         'items' => [
             ['ingredient_id' => $ingA->id, 'quantity' => 1, 'unit_price' => 100],
         ],
-    ])->assertStatus(404);
+    ])->assertStatus(422)->assertJsonValidationErrors(['warehouse_id']);
+
+    // And nothing may have been persisted for either tenant.
+    expect(
+        IncomingDocument::query()
+            ->withoutGlobalScopes()
+            ->count()
+    )->toBe(0);
 });

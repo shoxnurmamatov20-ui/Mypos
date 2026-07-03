@@ -1,5 +1,6 @@
 includes:
     - vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
 
 parameters:
     paths:
@@ -7,14 +8,23 @@ parameters:
         - config/
         - database/
         - routes/
-        - tests/
 
     level: 8
 
     excludePaths:
-        - app/Console/Kernel.php
-        - bootstrap/app.php
+        # Optional (?) — Laravel 12 dropped Console\Kernel; keep the entry
+        # harmless for older branches.
+        - app/Console/Kernel.php (?)
+        - bootstrap/app.php (?)
         - vendor
+
+    # Historical debt lives in phpstan-baseline.neon (generated 2026-07-02,
+    # first run this config ever completed — the old excludePaths entry made
+    # phpstan abort on startup). New/changed code must analyse clean; shrink
+    # the baseline opportunistically, never grow it.
+    #
+    # tests/ are exercised by Pest itself and use Pest's function-based style
+    # that level-8 PHPStan misreports without the (unavailable) pest plugin.
 
     ignoreErrors:
         # Facade calls
@@ -23,3 +33,5 @@ parameters:
         - '#Call to an undefined method .*::find\(\)#'
         - '#Call to an undefined method .*::where\(\)#'
         - '#Call to an undefined method .*::create\(\)#'
+
+    reportUnmatchedIgnoredErrors: false

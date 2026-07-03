@@ -26,7 +26,17 @@ class CapturePaymentAction
                 ]);
             }
 
-            $order = $payment->order;
+            // Explicit scope opt-out: this action runs inside webhook handlers
+            // where no tenant context exists, so the BelongsToTenant scope
+            // fail-closes and `$payment->order` would silently resolve to
+            // null (order stuck `unpaid` after a captured payment). The
+            // payment row itself was already located through a provider-
+            // verified lookup; re-applying its own tenant_id keeps the
+            // cross-tenant guarantee without relying on request context.
+            $order = $payment->order()
+                ->withoutGlobalScope('tenant')
+                ->where('tenant_id', $payment->tenant_id)
+                ->first();
             if ($order !== null && ! $wasAlreadyCaptured) {
                 $newPaid = (int) $order->paid_amount + (int) $payment->amount;
                 $updates = [

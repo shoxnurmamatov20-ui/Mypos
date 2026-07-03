@@ -45,10 +45,12 @@ final class TablesReportService
             ->whereBetween('orders.created_at', [$fromCarbon, $toCarbon])
             ->whereNotIn('orders.status', ['draft', 'cancelled', 'refunded'])
             ->whereNotNull('orders.table_id')
+            // ANY_VALUE for group-dependent columns (Postgres has no
+            // max(jsonb)); MAX(created_at) stays — that one is a real max.
             ->selectRaw(
                 "orders.table_id,
-                 MAX(tables.name) AS name,
-                 MAX(table_categories.name) AS category_json,
+                 ANY_VALUE(tables.name) AS name,
+                 ANY_VALUE(table_categories.name) AS category_json,
                  COUNT(*) AS cnt,
                  COALESCE(SUM(orders.total_amount), 0) AS revenue,
                  COALESCE(SUM(orders.guest_count), 0) AS guests,
@@ -129,11 +131,12 @@ final class TablesReportService
         if (is_array($decoded)) {
             return (string) ($decoded['uz'] ?? $decoded['ru'] ?? $decoded['en'] ?? reset($decoded));
         }
+
         return (string) $raw;
     }
 
     /**
-     * @param list<array<string, mixed>> $rows
+     * @param  list<array<string, mixed>>  $rows
      * @return list<array<string, mixed>>
      */
     private function sortRows(array $rows, string $sort): array

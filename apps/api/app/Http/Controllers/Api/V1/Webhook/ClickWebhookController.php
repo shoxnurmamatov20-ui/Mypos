@@ -33,9 +33,16 @@ class ClickWebhookController extends Controller
 
         $payment = $provider->handleWebhook($request);
 
-        // On COMPLETE action with captured status → sync order
-        if ($payment->status === PaymentStatus::Captured->value) {
-            $capture($payment);
+        // COMPLETE with a non-negative error code → finalize through the
+        // action: it owns the Captured transition, the Order sync
+        // (paid_amount / payment_status) and the one-time broadcast.
+        // Idempotent for Click's retries of already-captured payments.
+        $action = (int) $request->input('action', -1);
+        if ($action === ClickProvider::ACTION_COMPLETE
+            && $payment->status !== PaymentStatus::Cancelled->value
+            && $payment->status !== PaymentStatus::Failed->value
+        ) {
+            $payment = $capture($payment);
         }
 
         return response()->json($provider->respondToWebhook($request, $payment), 200);

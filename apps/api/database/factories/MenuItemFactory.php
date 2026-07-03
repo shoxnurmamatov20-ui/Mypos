@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Domain\Menu\Models\MenuCategory;
 use App\Domain\Menu\Models\MenuItem;
+use App\Domain\Tenant\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -27,7 +28,7 @@ class MenuItemFactory extends Factory
                 'ru' => "Вкусный $pick",
                 'en' => "Tasty $pick",
             ],
-            'slug' => Str::slug($pick) . '-' . Str::random(4),
+            'slug' => Str::slug($pick).'-'.Str::random(4),
             'sku' => strtoupper(Str::random(8)),
             'price_amount' => fake()->numberBetween(15_000, 150_000),
             'price_currency' => 'UZS',
@@ -41,5 +42,18 @@ class MenuItemFactory extends Factory
             'is_new' => fake()->boolean(15),
             'sort_order' => fake()->numberBetween(0, 100),
         ];
+    }
+
+    /**
+     * Pin the item AND its nested category to a tenant — without this the
+     * implicit `MenuCategory::factory()` in definition() would try to create
+     * a category with a NULL tenant_id and hit the NOT NULL constraint.
+     */
+    public function forTenant(Tenant $tenant): static
+    {
+        return $this->state(fn (): array => [
+            'tenant_id' => $tenant->id,
+            'category_id' => MenuCategory::factory()->forTenant($tenant),
+        ]);
     }
 }

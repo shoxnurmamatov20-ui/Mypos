@@ -15,6 +15,9 @@ use App\Http\Controllers\Api\V1\Broadcasting\BroadcastAuthController;
 use App\Http\Controllers\Api\V1\CEO\ClinicController;
 use App\Http\Controllers\Api\V1\CEO\ComplaintController;
 use App\Http\Controllers\Api\V1\CEO\DashboardController;
+use App\Http\Controllers\Api\V1\CEO\DoctorController as CeoDoctorController;
+use App\Http\Controllers\Api\V1\CEO\FeedbackController as CeoFeedbackController;
+use App\Http\Controllers\Api\V1\CEO\VisitTokenController as CeoVisitTokenController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Department\DepartmentController;
 use App\Http\Controllers\Api\V1\Employee\ClockController;
@@ -162,10 +165,11 @@ Route::prefix('v1')->group(function () {
             ->middleware('throttle:120,1')
             ->name('v1.public.resolve_domain');
 
-        // Marketplace guest checkout — strict per-IP throttle, validation
-        // includes phone so abuse on a single IP+phone pair is bounded.
+        // Marketplace guest checkout — strict per-IP throttle via the NAMED
+        // `checkout` limiter (route-scoped key; inline `throttle:5,1` shared
+        // its guest bucket with every other 5-attempt route on the same IP).
         Route::post('/orders', [PublicOrderController::class, 'store'])
-            ->middleware('throttle:5,1')
+            ->middleware('throttle:checkout')
             ->name('v1.public.orders.store');
 
         // Guest order tracking — token is the credential
@@ -220,7 +224,7 @@ Route::prefix('v1')->group(function () {
         // independently of the underlying provisioning code.
         Route::prefix('onboarding')->group(function () {
             Route::post('/start', [OnboardingController::class, 'start'])
-                ->middleware('throttle:5,15')
+                ->middleware('throttle:onboarding-write')
                 ->name('v1.public.onboarding.start');
 
             Route::post('/menu-generate', [OnboardingController::class, 'menuGenerate'])
@@ -228,7 +232,7 @@ Route::prefix('v1')->group(function () {
                 ->name('v1.public.onboarding.menu_generate');
 
             Route::post('/submit', [OnboardingController::class, 'submit'])
-                ->middleware('throttle:5,15')
+                ->middleware('throttle:onboarding-write')
                 ->name('v1.public.onboarding.submit');
         });
     });
@@ -284,11 +288,11 @@ Route::prefix('v1')->group(function () {
         // Password reset — Laravel broker emits reset link via MAIL_MAILER
         // (=log in dev → check storage/logs/laravel.log for the URL).
         Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])
-            ->middleware('throttle:5,15')
+            ->middleware('throttle:password-reset')
             ->name('v1.auth.forgot_password');
 
         Route::post('/reset-password', [AuthController::class, 'resetPassword'])
-            ->middleware('throttle:5,15')
+            ->middleware('throttle:password-reset')
             ->name('v1.auth.reset_password');
 
         // Staff PIN login — IP-level throttle here, per-phone limiter inside the controller.
@@ -554,9 +558,38 @@ Route::prefix('v1')->group(function () {
         Route::get('/clinics/{id}/doctors', [ClinicController::class, 'doctors'])
             ->whereNumber('id')
             ->name('v1.ceo.clinics.doctors');
+        Route::get('/clinics/{id}/departments', [ClinicController::class, 'departments'])
+            ->whereNumber('id')
+            ->name('v1.ceo.clinics.departments');
         Route::get('/clinics/{id}/feedback', [ClinicController::class, 'feedback'])
             ->whereNumber('id')
             ->name('v1.ceo.clinics.feedback');
+
+        // Doctor administration (flat cross-clinic list + CRUD)
+        Route::get('/doctors', [CeoDoctorController::class, 'index'])
+            ->name('v1.ceo.doctors.index');
+        Route::post('/doctors', [CeoDoctorController::class, 'store'])
+            ->name('v1.ceo.doctors.store');
+        Route::patch('/doctors/{id}', [CeoDoctorController::class, 'update'])
+            ->whereNumber('id')
+            ->name('v1.ceo.doctors.update');
+        Route::delete('/doctors/{id}', [CeoDoctorController::class, 'destroy'])
+            ->whereNumber('id')
+            ->name('v1.ceo.doctors.destroy');
+
+        // Guest feedback (order reviews across owned restaurants)
+        Route::get('/feedback', [CeoFeedbackController::class, 'index'])
+            ->name('v1.ceo.feedback.index');
+        Route::get('/feedback/stats', [CeoFeedbackController::class, 'stats'])
+            ->name('v1.ceo.feedback.stats');
+        Route::get('/feedback/restaurants', [CeoFeedbackController::class, 'restaurants'])
+            ->name('v1.ceo.feedback.restaurants');
+        Route::get('/feedback/{id}', [CeoFeedbackController::class, 'show'])
+            ->whereUuid('id')
+            ->name('v1.ceo.feedback.show');
+        Route::delete('/feedback/{id}', [CeoFeedbackController::class, 'destroy'])
+            ->whereUuid('id')
+            ->name('v1.ceo.feedback.destroy');
 
         // Complaints admin (port of ShifoReyting ComplaintAdminController, 2026-05-20)
         Route::get('/complaints', [ComplaintController::class, 'index'])
@@ -571,6 +604,22 @@ Route::prefix('v1')->group(function () {
         Route::patch('/complaints/{id}', [ComplaintController::class, 'update'])
             ->whereNumber('id')
             ->name('v1.ceo.complaints.update');
+
+        // Visit tokens — guest feedback QR codes minted per owned tenant.
+        Route::get('/tokens', [CeoVisitTokenController::class, 'index'])
+            ->name('v1.ceo.tokens.index');
+        Route::get('/tokens/options', [CeoVisitTokenController::class, 'options'])
+            ->name('v1.ceo.tokens.options');
+        Route::post('/tokens', [CeoVisitTokenController::class, 'store'])
+            ->name('v1.ceo.tokens.store');
+        Route::post('/tokens/bulk', [CeoVisitTokenController::class, 'bulk'])
+            ->name('v1.ceo.tokens.bulk');
+        Route::post('/tokens/{id}/revoke', [CeoVisitTokenController::class, 'revoke'])
+            ->whereUuid('id')
+            ->name('v1.ceo.tokens.revoke');
+        Route::delete('/tokens/{id}', [CeoVisitTokenController::class, 'destroy'])
+            ->whereUuid('id')
+            ->name('v1.ceo.tokens.destroy');
     });
 
     // --- Restaurant-owner self-service (Phase 2 — branding + custom domains) ---

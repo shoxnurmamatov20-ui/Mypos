@@ -1,0 +1,3799 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: app/Domain/AI/Actions/AutoTranslateAction.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: app/Domain/AI/Actions/GenerateDescriptionAction.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/AI/Actions/GenerateMenuAction.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/AI/DataTransferObjects/GeneratedMenuItem.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/AI/DataTransferObjects/TranslationBundle.php
+
+		-
+			message: '#^Method App\\Domain\\AI\\Models\\AiGenerationLog\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/AI/Models/AiGenerationLog.php
+
+		-
+			message: '#^Method App\\Domain\\AI\\Models\\AiGenerationLog\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/AI/Models/AiGenerationLog.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between mixed and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domain/AI/Services/AiQuotaGuard.php
+
+		-
+			message: '#^Method App\\Domain\\AI\\Services\\AnthropicClient\:\:extractText\(\) has parameter \$response with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Domain/AI/Services/AnthropicClient.php
+
+		-
+			message: '#^Method App\\Domain\\AI\\Services\\AnthropicClient\:\:writeFailureLog\(\) has parameter \$payload with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Domain/AI/Services/AnthropicClient.php
+
+		-
+			message: '#^Method App\\Domain\\AI\\Services\\AnthropicClient\:\:writeSuccessLog\(\) has parameter \$payload with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Domain/AI/Services/AnthropicClient.php
+
+		-
+			message: '#^Method App\\Domain\\AI\\Services\\AnthropicClient\:\:writeSuccessLog\(\) has parameter \$response with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Domain/AI/Services/AnthropicClient.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Http\\Request\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domain/AI/Services/AnthropicClient.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/AI/Services/ChatbotService.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tagline" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Domain/AI/Services/ChatbotService.php
+
+		-
+			message: '#^Offset ''content'' on array\{role\: ''assistant''\|''user'', content\: string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domain/AI/Services/ConversationMemory.php
+
+		-
+			message: '#^Offset ''role'' on array\{role\: string, content\: string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domain/AI/Services/ConversationMemory.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/AI/Services/DemandForecastService.php
+
+		-
+			message: '#^Method App\\Domain\\AI\\Services\\DemandForecastService\:\:aggregateBuckets\(\) should return list\<array\<string, mixed\>\> but returns array\<int, array\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/AI/Services/DemandForecastService.php
+
+		-
+			message: '#^Method App\\Domain\\AI\\Services\\DemandForecastService\:\:weeklySamples\(\) should return list\<array\<string, mixed\>\> but returns array\<int, array\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/AI/Services/DemandForecastService.php
+
+		-
+			message: '#^Parameter \#2 \$itemIds of method App\\Domain\\AI\\Services\\DemandForecastService\:\:loadItemNames\(\) expects list\<string\>, array\<int, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domain/AI/Services/DemandForecastService.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: app/Domain/AI/Services/DemandForecastService.php
+
+		-
+			message: '#^Method App\\Domain\\Auth\\Actions\\LoginAction\:\:__invoke\(\) should return array\{user\: App\\Models\\User, token\: string\} but returns array\{user\: App\\Models\\User\|null, token\: string\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Auth/Actions/LoginAction.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Clinic\\Models\\ClinicFeedback\:\:\$avg_rating\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Clinic/Actions/ListClinicsAction.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Actions\\ListClinicsAction\:\:execute\(\) should return Illuminate\\Support\\Collection\<int, array\<string, mixed\>\> but returns Illuminate\\Support\\Collection\<int, array\{id\: int, name\: string, slug\: string, address\: string\|null, phone\: string\|null, region\: string\|null, logo_url\: string\|null, is_active\: bool, \.\.\.\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Clinic/Actions/ListClinicsAction.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Actions\\ListComplaintsAction\:\:execute\(\) return type with generic interface Illuminate\\Contracts\\Pagination\\LengthAwarePaginator does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Actions/ListComplaintsAction.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between bool and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Domain/Clinic/Actions/ListComplaintsAction.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Actions\\UpdateDoctorAction\:\:execute\(\) should return App\\Domain\\Clinic\\Models\\ClinicDoctor but returns App\\Domain\\Clinic\\Models\\ClinicDoctor\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Clinic/Actions/UpdateDoctorAction.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\Clinic\:\:complaints\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/Clinic.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\Clinic\:\:departments\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/Clinic.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\Clinic\:\:doctors\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/Clinic.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\Clinic\:\:feedback\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/Clinic.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicComplaint\:\:clinic\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicComplaint.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicComplaint\:\:department\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicComplaint.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicComplaint\:\:doctor\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicComplaint.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicDepartment\:\:clinic\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicDepartment.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicDepartment\:\:doctors\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicDepartment.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicDoctor\:\:clinic\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicDoctor.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicDoctor\:\:department\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicDoctor.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicDoctor\:\:feedback\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicDoctor.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicFeedback\:\:clinic\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicFeedback.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicFeedback\:\:department\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicFeedback.php
+
+		-
+			message: '#^Method App\\Domain\\Clinic\\Models\\ClinicFeedback\:\:doctor\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Clinic/Models/ClinicFeedback.php
+
+		-
+			message: '#^Anonymous function should return App\\Domain\\Customer\\Models\\Customer but returns App\\Domain\\Customer\\Models\\Customer\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Customer/Actions/CreateCustomerAction.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/Customer/Models/Customer.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\Customer\:\:loyaltyAccount\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasOne does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/Customer.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\Customer\:\:scopeWherePhone\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/Customer.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\Customer\:\:scopeWherePhone\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/Customer.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\Customer\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/Customer.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyAccount\:\:customer\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyAccount.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyAccount\:\:program\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyAccount.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyAccount\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyAccount.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyAccount\:\:transactions\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyAccount.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyProgram\:\:accounts\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyProgram.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyProgram\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyProgram.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyTransaction\:\:account\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyTransaction.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyTransaction\:\:order\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyTransaction.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\LoyaltyTransaction\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/LoyaltyTransaction.php
+
+		-
+			message: '#^Class App\\Domain\\Customer\\Models\\OrderReview uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/OrderReview.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\OrderReview\:\:customer\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/OrderReview.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\OrderReview\:\:order\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/OrderReview.php
+
+		-
+			message: '#^Method App\\Domain\\Customer\\Models\\OrderReview\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Customer/Models/OrderReview.php
+
+		-
+			message: '#^Method App\\Domain\\Department\\Models\\Department\:\:employees\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Department/Models/Department.php
+
+		-
+			message: '#^Method App\\Domain\\Department\\Models\\Department\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Department/Models/Department.php
+
+		-
+			message: '#^Anonymous function should return App\\Domain\\Order\\Models\\Order but returns App\\Domain\\Order\\Models\\Order\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Employee/Actions/AcceptDeliveryAction.php
+
+		-
+			message: '#^Anonymous function should return App\\Domain\\Employee\\Models\\Shift but returns App\\Domain\\Employee\\Models\\Shift\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Employee/Actions/ClockInAction.php
+
+		-
+			message: '#^Anonymous function should return App\\Domain\\Employee\\Models\\Shift but returns App\\Domain\\Employee\\Models\\Shift\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Employee/Actions/ClockOutAction.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Actions\\ComputeCourierEarningsAction\:\:__invoke\(\) should return array\{period\: string, from\: string, to\: string, deliveries_count\: int, total_earnings_minor\: int, tips_minor\: int, avg_per_delivery_minor\: int, total_distance_meters\: int, \.\.\.\} but returns array\{period\: string, from\: string, to\: string, deliveries_count\: int\<0, max\>, total_earnings_minor\: int, tips_minor\: int, avg_per_delivery_minor\: int, total_distance_meters\: int, \.\.\.\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Employee/Actions/ComputeCourierEarningsAction.php
+
+		-
+			message: '#^Anonymous function should return App\\Domain\\Employee\\Models\\ShiftBreak but returns App\\Domain\\Employee\\Models\\ShiftBreak\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Employee/Actions/EndBreakAction.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Actions\\PickupDeliveryAction\:\:__invoke\(\) should return App\\Domain\\Order\\Models\\Order but returns App\\Domain\\Order\\Models\\Order\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Employee/Actions/PickupDeliveryAction.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Actions\\StaffPinLoginAction\:\:__invoke\(\) should return array\{user\: App\\Models\\User, employee\: App\\Domain\\Employee\\Models\\Employee, token\: string\} but returns array\{user\: App\\Models\\User\|null, employee\: App\\Domain\\Employee\\Models\\Employee\|null, token\: string\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Employee/Actions/StaffPinLoginAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between App\\Domain\\Employee\\Models\\Employee and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domain/Employee/Actions/StaffPinLoginAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between App\\Models\\User and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domain/Employee/Actions/StaffPinLoginAction.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\CourierLocation\:\:employee\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/CourierLocation.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\CourierLocation\:\:order\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/CourierLocation.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\CourierLocation\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/CourierLocation.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Employee\:\:breaks\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Employee.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Employee\:\:clockEvents\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Employee.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Employee\:\:department\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Employee.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Employee\:\:latestShift\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Employee.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Employee\:\:shifts\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Employee.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Employee\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Employee.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Employee\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Employee.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Shift\:\:breaks\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Shift.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Shift\:\:clockEvents\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Shift.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Shift\:\:employee\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Shift.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\Shift\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/Shift.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\ShiftBreak\:\:employee\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/ShiftBreak.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\ShiftBreak\:\:shift\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/ShiftBreak.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\ShiftBreak\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/ShiftBreak.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\TimeClockEvent\:\:employee\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/TimeClockEvent.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\TimeClockEvent\:\:shift\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/TimeClockEvent.php
+
+		-
+			message: '#^Method App\\Domain\\Employee\\Models\\TimeClockEvent\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Employee/Models/TimeClockEvent.php
+
+		-
+			message: '#^PHPDoc tag @var for constant App\\Domain\\Employee\\Models\\TimeClockEvent\:\:UPDATED_AT with type string is incompatible with value null\.$#'
+			identifier: classConstant.phpDocType
+			count: 1
+			path: app/Domain/Employee/Models/TimeClockEvent.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$menu_item_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Inventory/Actions/ConsumeIngredientsForOrderAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Inventory/Actions/ConsumeIngredientsForOrderAction.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Ingredient\:\:category\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Ingredient.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Ingredient\:\:movements\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Ingredient.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Ingredient\:\:recipes\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Ingredient.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Ingredient\:\:scopeLowStock\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Ingredient.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Ingredient\:\:scopeLowStock\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Ingredient.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Ingredient\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Ingredient.php
+
+		-
+			message: '#^Class App\\Domain\\Inventory\\Models\\IngredientCategory uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/IngredientCategory.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\IngredientCategory\:\:ingredients\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/IngredientCategory.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\IngredientCategory\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/IngredientCategory.php
+
+		-
+			message: '#^Class App\\Domain\\Inventory\\Models\\Recipe uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Recipe.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Recipe\:\:ingredient\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Recipe.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Recipe\:\:menuItem\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Recipe.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Recipe\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Recipe.php
+
+		-
+			message: '#^Class App\\Domain\\Inventory\\Models\\StockMovement uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/StockMovement.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\StockMovement\:\:ingredient\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/StockMovement.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\StockMovement\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/StockMovement.php
+
+		-
+			message: '#^Class App\\Domain\\Inventory\\Models\\Supplier uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Supplier.php
+
+		-
+			message: '#^Method App\\Domain\\Inventory\\Models\\Supplier\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Inventory/Models/Supplier.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 1
+			path: app/Domain/Kiosk/Actions/HeartbeatKioskAction.php
+
+		-
+			message: '#^Method App\\Domain\\Kiosk\\Actions\\PairKioskDeviceAction\:\:__invoke\(\) should return array\{device\: App\\Domain\\Kiosk\\Models\\KioskDevice, plain_token\: string\} but returns array\{device\: App\\Domain\\Kiosk\\Models\\KioskDevice\|null, plain_token\: string\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Kiosk/Actions/PairKioskDeviceAction.php
+
+		-
+			message: '#^Method App\\Domain\\Kiosk\\Models\\KioskDevice\:\:orders\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Kiosk/Models/KioskDevice.php
+
+		-
+			message: '#^Method App\\Domain\\Kiosk\\Models\\KioskDevice\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Kiosk/Models/KioskDevice.php
+
+		-
+			message: '#^Method App\\Domain\\Kiosk\\Models\\KioskPairingCode\:\:createdBy\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Kiosk/Models/KioskPairingCode.php
+
+		-
+			message: '#^Method App\\Domain\\Kiosk\\Models\\KioskPairingCode\:\:device\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Kiosk/Models/KioskPairingCode.php
+
+		-
+			message: '#^Method App\\Domain\\Kiosk\\Models\\KioskPairingCode\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Kiosk/Models/KioskPairingCode.php
+
+		-
+			message: '#^Method App\\Domain\\Menu\\Models\\MenuCategory\:\:children\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Menu/Models/MenuCategory.php
+
+		-
+			message: '#^Method App\\Domain\\Menu\\Models\\MenuCategory\:\:items\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Menu/Models/MenuCategory.php
+
+		-
+			message: '#^Method App\\Domain\\Menu\\Models\\MenuCategory\:\:parent\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Menu/Models/MenuCategory.php
+
+		-
+			message: '#^Method App\\Domain\\Menu\\Models\\MenuCategory\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Menu/Models/MenuCategory.php
+
+		-
+			message: '#^Method App\\Domain\\Menu\\Models\\MenuItem\:\:category\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Menu/Models/MenuItem.php
+
+		-
+			message: '#^Method App\\Domain\\Menu\\Models\\MenuItem\:\:recipes\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Menu/Models/MenuItem.php
+
+		-
+			message: '#^Method App\\Domain\\Menu\\Models\\MenuItem\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Menu/Models/MenuItem.php
+
+		-
+			message: '#^Method App\\Domain\\Notification\\Models\\NotificationLog\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Notification/Models/NotificationLog.php
+
+		-
+			message: '#^Method App\\Domain\\Notification\\Models\\NotificationPreference\:\:user\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Notification/Models/NotificationPreference.php
+
+		-
+			message: '#^Cannot access property \$price_currency on App\\Domain\\Menu\\Models\\MenuItem\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domain/Order/Actions/CreateOrderAction.php
+
+		-
+			message: '#^Offset ''type'' on array\{type\: string, table_id\?\: string\|null, employee_uuid\?\: string\|null, guest_count\?\: int\|null, notes\?\: string\|null, items\: non\-empty\-array\<int, array\{menu_item_id\: string, quantity\: int, notes\?\: string\|null, modifiers\?\: array\<int, array\{id\: string, name\: string, price_delta\: int\}\>\}\>\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Domain/Order/Actions/CreateOrderAction.php
+
+		-
+			message: '#^Parameter \#1 \$tenantId of method App\\Domain\\Order\\Actions\\CreateOrderAction\:\:generateOrderNo\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domain/Order/Actions/CreateOrderAction.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\Order\:\:courier\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/Order.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\Order\:\:customer\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/Order.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\Order\:\:employee\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/Order.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\Order\:\:items\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/Order.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\Order\:\:kioskDevice\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/Order.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\Order\:\:servedBy\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/Order.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\Order\:\:table\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/Order.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\Order\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/Order.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\OrderItem\:\:cook\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/OrderItem.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\OrderItem\:\:menuItem\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/OrderItem.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\OrderItem\:\:order\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/OrderItem.php
+
+		-
+			message: '#^Method App\\Domain\\Order\\Models\\OrderItem\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Order/Models/OrderItem.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string\|null and int will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domain/Order/Policies/OrderPolicy.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$paid_amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Payment/Actions/CapturePaymentAction.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$total_amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Payment/Actions/CapturePaymentAction.php
+
+		-
+			message: '#^Method App\\Domain\\Payment\\Models\\Payment\:\:order\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Payment/Models/Payment.php
+
+		-
+			message: '#^Method App\\Domain\\Payment\\Models\\Payment\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Payment/Models/Payment.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$cancelled_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order_no\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$servedBy\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$total_amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Access to protected property Illuminate\\Database\\Eloquent\\Model\:\:\$table\.$#'
+			identifier: property.protected
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Cannot access property \$name on string\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\CancelledReportService\:\:cancelledItems\(\) return type with generic class Illuminate\\Support\\Collection does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\CancelledReportService\:\:cancelledOrders\(\) return type with generic class Illuminate\\Database\\Eloquent\\Collection does not specify its types\: TKey, TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<\(int\|string\),Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Database\\Eloquent\\Collection\<\(int\|string\),Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Domain/Reports/Services/CancelledReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Payment\\Models\\Payment\:\:\$cnt\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domain/Reports/Services/CashflowReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Payment\\Models\\Payment\:\:\$inflow\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CashflowReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Payment\\Models\\Payment\:\:\$period\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CashflowReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\CashflowReportService\:\:byProvider\(\) should return list\<array\{provider\: string, amount_minor\: int, count\: int, percent\: float\}\> but returns array\<int, array\{provider\: string, amount_minor\: int, count\: int, percent\: float\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Reports/Services/CashflowReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$avg_minutes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CourierReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$deliveries\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CourierReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$distance_meters\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CourierReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CourierReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$tips\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/CourierReportService.php
+
+		-
+			message: '#^Parameter \#1 \$rows of method App\\Domain\\Reports\\Services\\CourierReportService\:\:sortRows\(\) expects list\<array\<string, mixed\>\>, array\<int, array\{courier_id\: string, name\: string, deliveries_count\: int, revenue_delivered_minor\: int, avg_delivery_minutes\: float, total_distance_km\: float, tips_minor\: int\}\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domain/Reports/Services/CourierReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$oldest_unpaid\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/DebtorsReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$orders_cnt\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/DebtorsReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$owed\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/DebtorsReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$category_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/MenuItemsReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$category_name_json\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/MenuItemsReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$item_name_json\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/MenuItemsReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$orders_cnt\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/MenuItemsReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$qty\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/MenuItemsReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/MenuItemsReportService.php
+
+		-
+			message: '#^Parameter \#1 \$rows of method App\\Domain\\Reports\\Services\\MenuItemsReportService\:\:sortRows\(\) expects list\<array\<string, mixed\>\>, array\<int, array\{menu_item_id\: string\|null, name\: string, category_id\: string\|null, category_name\: string, quantity_sold\: float, revenue_minor\: int, cost_minor\: int, gross_profit_minor\: int, \.\.\.\}\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domain/Reports/Services/MenuItemsReportService.php
+
+		-
+			message: '#^Possibly invalid array key type string\|null\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: app/Domain/Reports/Services/MenuItemsReportService.php
+
+		-
+			message: '#^Generic type Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\<App\\Domain\\Order\\Models\\Order\> in PHPDoc tag @return does not specify all template types of interface Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\: TKey, TValue$#'
+			identifier: generics.lessTypes
+			count: 1
+			path: app/Domain/Reports/Services/OrdersReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\OrdersReportService\:\:appendQuery\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Domain/Reports/Services/OrdersReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\OrdersReportService\:\:applySort\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Reports/Services/OrdersReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\OrdersReportService\:\:list\(\) should return array\{paginator\: Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\<App\\Domain\\Order\\Models\\Order\>, summary\: array\<string, int\>\} but returns array\{paginator\: Illuminate\\Pagination\\LengthAwarePaginator\<int, App\\Domain\\Order\\Models\\Order\>, summary\: array\<string, int\>\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Reports/Services/OrdersReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\OrdersReportService\:\:summary\(\) has parameter \$query with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Reports/Services/OrdersReportService.php
+
+		-
+			message: '#^Type App\\Domain\\Order\\Models\\Order in generic type Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\<App\\Domain\\Order\\Models\\Order\> in PHPDoc tag @return is not subtype of template type TKey of \(int\|string\) of interface Illuminate\\Contracts\\Pagination\\LengthAwarePaginator\.$#'
+			identifier: generics.notSubtype
+			count: 1
+			path: app/Domain/Reports/Services/OrdersReportService.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$cnt\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/TablesReportService.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$guests\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/TablesReportService.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$last_used_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/TablesReportService.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$occupancy_minutes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/TablesReportService.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/TablesReportService.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$table_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/TablesReportService.php
+
+		-
+			message: '#^Parameter \#1 \$rows of method App\\Domain\\Reports\\Services\\TablesReportService\:\:sortRows\(\) expects list\<array\<string, mixed\>\>, array\<int, array\<string, mixed\>\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domain/Reports/Services/TablesReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$cnt\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/WaitersReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$guests\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/WaitersReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$last_used_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/WaitersReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/WaitersReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$tips\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/WaitersReportService.php
+
+		-
+			message: '#^Parameter \#1 \$rows of method App\\Domain\\Reports\\Services\\WaitersReportService\:\:sortRows\(\) expects list\<array\<string, mixed\>\>, array\<int, array\{employee_id\: string, name\: string, position\: string, orders_count\: int, revenue_minor\: int, guests_total\: int, avg_ticket_minor\: int, tips_minor\: int, \.\.\.\}\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domain/Reports/Services/WaitersReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$cnt\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$reason\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$qty\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Payment\\Models\\Payment\:\:\$cnt\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\ZReportService\:\:payments\(\) should return list\<array\{provider\: string, count\: int, amount_minor\: int, percent\: float\}\> but returns array\<int, array\{provider\: string, count\: int, amount_minor\: int, percent\: float\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\ZReportService\:\:topItems\(\) should return list\<array\{menu_item_id\: string\|null, name\: string, quantity_sold\: float, revenue_minor\: int\}\> but returns array\<int, array\{menu_item_id\: string\|null, name\: string, quantity_sold\: float, revenue_minor\: int\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Method App\\Domain\\Reports\\Services\\ZReportService\:\:topWaiters\(\) should return list\<array\{employee_id\: string\|null, name\: string, orders_count\: int, revenue_minor\: int\}\> but returns array\<int, array\{employee_id\: string\|null, name\: string, orders_count\: int, revenue_minor\: int\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Reports/Services/ZReportService.php
+
+		-
+			message: '#^Class App\\Domain\\Shared\\Casts\\MoneyCast implements generic interface Illuminate\\Contracts\\Database\\Eloquent\\CastsAttributes but does not specify its types\: TGet, TSet$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Shared/Casts/MoneyCast.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/Shared/Models/Country.php
+
+		-
+			message: '#^Method App\\Domain\\Shared\\Models\\Country\:\:currency\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Shared/Models/Country.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/Shared/Models/Currency.php
+
+		-
+			message: '#^Method App\\Domain\\Shared\\Models\\District\:\:region\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Shared/Models/District.php
+
+		-
+			message: '#^Method App\\Domain\\Shared\\Models\\ExchangeRate\:\:fromCurrency\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Shared/Models/ExchangeRate.php
+
+		-
+			message: '#^Method App\\Domain\\Shared\\Models\\ExchangeRate\:\:toCurrency\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Shared/Models/ExchangeRate.php
+
+		-
+			message: '#^Method App\\Domain\\Shared\\Models\\Region\:\:districts\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Shared/Models/Region.php
+
+		-
+			message: '#^Parameter \#1 \$num1 of function bcmul expects numeric\-string, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domain/Shared/ValueObjects/Money.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Actions\\AcceptSuperAdminInvitationAction\:\:__invoke\(\) should return array\{user\: App\\Models\\User, token\: string, role\: string\|null\} but returns array\{user\: App\\Models\\User\|null, token\: string, role\: string\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/SuperAdmin/Actions/AcceptSuperAdminInvitationAction.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Actions\\CreateTenantAction\:\:__invoke\(\) should return array\{tenant\: App\\Domain\\Tenant\\Models\\Tenant, owner\: App\\Models\\User\} but returns array\{tenant\: App\\Domain\\Tenant\\Models\\Tenant\|null, owner\: App\\Models\\User\|null\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/SuperAdmin/Actions/CreateTenantAction.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Actions\\ImpersonateTenantAction\:\:__invoke\(\) should return array\{token\: string, user\: App\\Models\\User, tenant\: App\\Domain\\Tenant\\Models\\Tenant, expires_at\: Illuminate\\Support\\Carbon\} but returns array\{token\: string, user\: App\\Models\\User\|null, tenant\: App\\Domain\\Tenant\\Models\\Tenant\|null, expires_at\: Illuminate\\Support\\Carbon\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/SuperAdmin/Actions/ImpersonateTenantAction.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Actions\\InviteSuperAdminAction\:\:__invoke\(\) should return array\{invitation\: App\\Domain\\SuperAdmin\\Models\\SuperAdminInvitation, plain_token\: string\} but returns array\{invitation\: App\\Domain\\SuperAdmin\\Models\\SuperAdminInvitation\|null, plain_token\: string\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/SuperAdmin/Actions/InviteSuperAdminAction.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Actions\\ResumeTenantAction\:\:__invoke\(\) should return App\\Domain\\Tenant\\Models\\Tenant but returns App\\Domain\\Tenant\\Models\\Tenant\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/SuperAdmin/Actions/ResumeTenantAction.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Actions\\RevokeSuperAdminAction\:\:__invoke\(\) should return App\\Models\\User but returns App\\Models\\User\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/SuperAdmin/Actions/RevokeSuperAdminAction.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Actions\\SuperAdminLoginAction\:\:__invoke\(\) should return array\{user\: App\\Models\\User, token\: string, role\: string\|null\} but returns array\{user\: App\\Models\\User\|null, token\: string, role\: string\|null\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/SuperAdmin/Actions/SuperAdminLoginAction.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Actions\\SuspendTenantAction\:\:__invoke\(\) should return App\\Domain\\Tenant\\Models\\Tenant but returns App\\Domain\\Tenant\\Models\\Tenant\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/SuperAdmin/Actions/SuspendTenantAction.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Models\\AuditLog\:\:actor\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/SuperAdmin/Models/AuditLog.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Models\\AuditLog\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/SuperAdmin/Models/AuditLog.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Models\\SuperAdminInvitation\:\:acceptedBy\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/SuperAdmin/Models/SuperAdminInvitation.php
+
+		-
+			message: '#^Method App\\Domain\\SuperAdmin\\Models\\SuperAdminInvitation\:\:invitedBy\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/SuperAdmin/Models/SuperAdminInvitation.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Http\\Request\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Domain/SuperAdmin/Services/AuditLogger.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Tenant\\Models\\Tenant\:\:\$count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/SuperAdmin/Services/DashboardChartsService.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(7d\|30d\|90d\|1y\|string \$range\)\: Unexpected token "d", expected variable at offset 19 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: app/Domain/SuperAdmin/Services/DashboardChartsService.php
+
+		-
+			message: '#^Parameter \#3 \$rows of method App\\Domain\\SuperAdmin\\Services\\DashboardChartsService\:\:fillDailySeries\(\) expects iterable\<object\{day\: Illuminate\\Support\\Carbon\|string\}\>, Illuminate\\Database\\Eloquent\\Collection\<int, App\\Domain\\Order\\Models\\Order\> given\.$#'
+			identifier: argument.type
+			count: 2
+			path: app/Domain/SuperAdmin/Services/DashboardChartsService.php
+
+		-
+			message: '#^Parameter \#3 \$rows of method App\\Domain\\SuperAdmin\\Services\\DashboardChartsService\:\:fillDailySeries\(\) expects iterable\<object\{day\: Illuminate\\Support\\Carbon\|string\}\>, Illuminate\\Database\\Eloquent\\Collection\<int, App\\Domain\\Tenant\\Models\\Tenant\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Domain/SuperAdmin/Services/DashboardChartsService.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Tenant\\Models\\Tenant\:\:\$tenants\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Domain/SuperAdmin/Services/MrrBreakdownService.php
+
+		-
+			message: '#^Method App\\Domain\\Table\\Models\\Table\:\:category\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Table/Models/Table.php
+
+		-
+			message: '#^Method App\\Domain\\Table\\Models\\Table\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Table/Models/Table.php
+
+		-
+			message: '#^Method App\\Domain\\Table\\Models\\TableCategory\:\:tables\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Table/Models/TableCategory.php
+
+		-
+			message: '#^Method App\\Domain\\Table\\Models\\TableCategory\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Table/Models/TableCategory.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> in isset\(\) always exists and is not nullable\.$#'
+			identifier: isset.offset
+			count: 1
+			path: app/Domain/Tenant/Actions/GenerateNativeAppAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between App\\Domain\\Tenant\\Models\\Tenant and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Domain/Tenant/Actions/GenerateNativeAppAction.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 2
+			path: app/Domain/Tenant/Actions/GenerateNativeAppAction.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\Tenant\:\:apps\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/Tenant.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\Tenant\:\:brand\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasOne does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/Tenant.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\Tenant\:\:country\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/Tenant.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\Tenant\:\:currency\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/Tenant.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\Tenant\:\:domains\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/Tenant.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\Tenant\:\:owners\(\) should return Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\<App\\Models\\User, Illuminate\\Database\\Eloquent\\Relations\\Pivot, ''pivot''\> but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\<App\\Models\\User, \$this\(App\\Domain\\Tenant\\Models\\Tenant\), Illuminate\\Database\\Eloquent\\Relations\\Pivot, ''pivot''\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Domain/Tenant/Models/Tenant.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\Tenant\:\:users\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/Tenant.php
+
+		-
+			message: '#^Type string in generic type Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\<App\\Models\\User, Illuminate\\Database\\Eloquent\\Relations\\Pivot, string\> in PHPDoc tag @return is not subtype of template type TPivotModel of Illuminate\\Database\\Eloquent\\Relations\\Pivot \= Illuminate\\Database\\Eloquent\\Relations\\Pivot of class Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\.$#'
+			identifier: generics.notSubtype
+			count: 1
+			path: app/Domain/Tenant/Models/Tenant.php
+
+		-
+			message: '#^Class App\\Domain\\Tenant\\Models\\TenantApp uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantApp.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\TenantApp\:\:builds\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantApp.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\TenantApp\:\:latestBuild\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantApp.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\TenantApp\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantApp.php
+
+		-
+			message: '#^Class App\\Domain\\Tenant\\Models\\TenantAppBuild uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantAppBuild.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\TenantAppBuild\:\:app\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantAppBuild.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\TenantAppBuild\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantAppBuild.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\TenantBrand\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantBrand.php
+
+		-
+			message: '#^Class App\\Domain\\Tenant\\Models\\TenantDomain uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantDomain.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Models\\TenantDomain\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Tenant/Models/TenantDomain.php
+
+		-
+			message: '#^Property App\\Domain\\Tenant\\Observers\\TenantRegionObserver\:\:\$countryCache type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Domain/Tenant/Observers/TenantRegionObserver.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Services\\AppStoreConnectClient\:\:client\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: app/Domain/Tenant/Services/AppStoreConnectClient.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Services\\AppStoreConnectClient\:\:createApp\(\) has parameter \$appPayload with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Domain/Tenant/Services/AppStoreConnectClient.php
+
+		-
+			message: '#^Method App\\Domain\\Tenant\\Services\\AppStoreConnectClient\:\:createApp\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Domain/Tenant/Services/AppStoreConnectClient.php
+
+		-
+			message: '#^Property App\\Domain\\Tenant\\Services\\SslStatusService\:\:\$verifier is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: app/Domain/Tenant/Services/SslStatusService.php
+
+		-
+			message: '#^Method App\\Domain\\Unit\\Models\\UnitOfMeasure\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Unit/Models/UnitOfMeasure.php
+
+		-
+			message: '#^Method App\\Domain\\Visit\\Models\\VisitToken\:\:category\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Visit/Models/VisitToken.php
+
+		-
+			message: '#^Method App\\Domain\\Visit\\Models\\VisitToken\:\:creator\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Visit/Models/VisitToken.php
+
+		-
+			message: '#^Method App\\Domain\\Visit\\Models\\VisitToken\:\:tableRef\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Visit/Models/VisitToken.php
+
+		-
+			message: '#^Method App\\Domain\\Visit\\Models\\VisitToken\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Visit/Models/VisitToken.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/Warehouse/Actions/CreateTransferAction.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Domain/Warehouse/Actions/CreateWasteDocumentAction.php
+
+		-
+			message: '#^Class App\\Domain\\Warehouse\\Models\\AuditSession uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/AuditSession.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\AuditSession\:\:conductor\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/AuditSession.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\AuditSession\:\:items\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/AuditSession.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\AuditSession\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/AuditSession.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\AuditSession\:\:warehouse\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/AuditSession.php
+
+		-
+			message: '#^Class App\\Domain\\Warehouse\\Models\\AuditSessionItem uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/AuditSessionItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\AuditSessionItem\:\:ingredient\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/AuditSessionItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\AuditSessionItem\:\:session\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/AuditSessionItem.php
+
+		-
+			message: '#^Class App\\Domain\\Warehouse\\Models\\IncomingDocument uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/IncomingDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\IncomingDocument\:\:creator\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/IncomingDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\IncomingDocument\:\:items\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/IncomingDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\IncomingDocument\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/IncomingDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\IncomingDocument\:\:warehouse\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/IncomingDocument.php
+
+		-
+			message: '#^Class App\\Domain\\Warehouse\\Models\\IncomingDocumentItem uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/IncomingDocumentItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\IncomingDocumentItem\:\:document\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/IncomingDocumentItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\IncomingDocumentItem\:\:ingredient\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/IncomingDocumentItem.php
+
+		-
+			message: '#^Class App\\Domain\\Warehouse\\Models\\TransferDocument uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\TransferDocument\:\:creator\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\TransferDocument\:\:fromWarehouse\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\TransferDocument\:\:items\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\TransferDocument\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\TransferDocument\:\:toWarehouse\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocument.php
+
+		-
+			message: '#^Class App\\Domain\\Warehouse\\Models\\TransferDocumentItem uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocumentItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\TransferDocumentItem\:\:document\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocumentItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\TransferDocumentItem\:\:ingredient\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/TransferDocumentItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\Warehouse\:\:auditSessions\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/Warehouse.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\Warehouse\:\:incomingDocuments\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/Warehouse.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\Warehouse\:\:ingredients\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/Warehouse.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\Warehouse\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/Warehouse.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\Warehouse\:\:transfersFrom\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/Warehouse.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\Warehouse\:\:transfersTo\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/Warehouse.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\Warehouse\:\:wasteDocuments\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/Warehouse.php
+
+		-
+			message: '#^Class App\\Domain\\Warehouse\\Models\\WasteDocument uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/WasteDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\WasteDocument\:\:creator\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/WasteDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\WasteDocument\:\:items\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\HasMany does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/WasteDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\WasteDocument\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/WasteDocument.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\WasteDocument\:\:warehouse\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/WasteDocument.php
+
+		-
+			message: '#^Class App\\Domain\\Warehouse\\Models\\WasteDocumentItem uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types\: TFactory$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/WasteDocumentItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\WasteDocumentItem\:\:document\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/WasteDocumentItem.php
+
+		-
+			message: '#^Method App\\Domain\\Warehouse\\Models\\WasteDocumentItem\:\:ingredient\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Domain/Warehouse/Models/WasteDocumentItem.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Events/Order/KitchenItemAssigned.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Events/Order/OrderPlaced.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: app/Events/Order/OrderPlaced.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Events/Order/OrderPlaced.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Events/Payment/PaymentCaptured.php
+
+		-
+			message: '#^Call to function is_array\(\) with App\\Domain\\AI\\DataTransferObjects\\TranslationBundle will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\{insights\: list\<string\>, recommendations\: list\<string\>, risks\: list\<string\>, generated_at\: string, usage\: array\<string, mixed\>\} will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Call to function is_callable\(\) with App\\Domain\\AI\\Actions\\AnalyzeRestaurantInsightsAction will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Call to function is_callable\(\) with App\\Domain\\AI\\Actions\\AutoTranslateAction will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Call to function is_callable\(\) with App\\Domain\\AI\\Actions\\GenerateMenuAction will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Call to function is_object\(\) with App\\Domain\\AI\\DataTransferObjects\\TranslationBundle will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Call to function property_exists\(\) with App\\Domain\\AI\\DataTransferObjects\\TranslationBundle and ''translations'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Offset ''reply'' on array\{reply\: string, usage\: array\<string, mixed\>, refused\: bool, reason\: string\|null\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Parameter \#1 \$tenant of static method App\\Filament\\Pages\\AIStudio\\AIStudioTabsSchema\:\:canUseAi\(\) expects App\\Domain\\Tenant\\Models\\Tenant\|null, Illuminate\\Database\\Eloquent\\Model\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Filament/Pages/AIStudio.php
+
+		-
+			message: '#^Instanceof between string and App\\Domain\\Tenant\\Enums\\AppPlatform will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Filament/Pages/AppBuilder.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Pages/AppBuilder.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Pages/AppBuilder/AppBuilderWizardSchema.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>slug" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Pages/AppBuilder/AppBuilderWizardSchema.php
+
+		-
+			message: '#^Method App\\Filament\\Pages\\BrandStudio\:\:getPreviewState\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Filament/Pages/BrandStudio.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\AiGenerationLogResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/AiGenerationLogResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>value" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/AiGenerationLogResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\CountryResource\:\:canDelete\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/CountryResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\CountryResource\:\:canEdit\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/CountryResource.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: app/Filament/Resources/CourierLocationResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\CourierLocationResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/CourierLocationResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/CourierLocationResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\CurrencyResource\:\:canDelete\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/CurrencyResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\CurrencyResource\:\:canEdit\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/CurrencyResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$lifetime_points\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/CustomerResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$points_balance\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/CustomerResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/Resources/CustomerResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\CustomerResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/CustomerResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>lifetime_points" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/CustomerResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>points_balance" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/CustomerResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>total_orders" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/CustomerResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>total_spent" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/CustomerResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\EmployeeResource\:\:firstLoadedShift\(\) should return App\\Domain\\Employee\\Models\\Shift\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/EmployeeResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\EmployeeResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/EmployeeResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>locale" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/EmployeeResource/Pages/EditEmployee.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\EmployeeResource\\Schemas\\EmployeeActions\:\:bulkActions\(\) should return array\<int, Filament\\Tables\\Actions\\BulkAction\> but returns array\<int, Filament\\Tables\\Actions\\BulkActionGroup\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/EmployeeResource/Schemas/EmployeeActions.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\EmployeeResource\\Schemas\\EmployeeActions\:\:rowActions\(\) should return array\<int, Filament\\Tables\\Actions\\Action\> but returns array\{Filament\\Tables\\Actions\\ActionGroup\}\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Resources/EmployeeResource/Schemas/EmployeeActions.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\ExchangeRateResource\:\:canDelete\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/ExchangeRateResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\ExchangeRateResource\:\:canEdit\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/ExchangeRateResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\IngredientCategoryResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/IngredientCategoryResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\IngredientResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/IngredientResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\KioskDeviceResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/KioskDeviceResource.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between App\\Domain\\Tenant\\Models\\Tenant and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Filament/Resources/KioskDeviceResource/Pages/EditKioskDevice.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between App\\Domain\\Tenant\\Models\\Tenant and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Filament/Resources/KioskDeviceResource/Schemas/KioskDeviceActions.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>last_ip_address" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/KioskDeviceResource/Schemas/KioskDeviceFormSchema.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\KioskPairingCodeResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/KioskPairingCodeResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\MenuCategoryResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/MenuCategoryResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\MenuItemResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/MenuItemResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Inventory\\Models\\Ingredient\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Domain\\Inventory\\Models\\Ingredient\>\:\:\$unit\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Resources/MenuItemResource/RelationManagers/RecipesRelationManager.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tenant_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Filament/Resources/MenuItemResource/RelationManagers/RecipesRelationManager.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\NotificationLogResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/NotificationLogResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Filament/Resources/OrderResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\OrderResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/OrderResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>guest_count" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/OrderResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: app/Filament/Resources/OrderResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>notes" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/OrderResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>order_no" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/OrderResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>payment_method" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/OrderResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>payment_status" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/OrderResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\PaymentResource\:\:canEdit\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/PaymentResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\PaymentResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/PaymentResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>failure_reason" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/PaymentResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/PaymentResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>order_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/PaymentResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>provider_transaction_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/PaymentResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\ShiftBreakResource\:\:canDelete\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/ShiftBreakResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\ShiftBreakResource\:\:canEdit\(\) has parameter \$record with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Filament/Resources/ShiftBreakResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\ShiftBreakResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/ShiftBreakResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/ShiftBreakResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>notes" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/ShiftBreakResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\ShiftResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/ShiftResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/ShiftResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\TableCategoryResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/TableCategoryResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\TableResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/TableResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\TenantAppBuildResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/TenantAppBuildResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tenant_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/TenantAppBuildResource/Pages/ListTenantAppBuilds.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tenant_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/TenantAppBuildResource/Pages/ViewTenantAppBuild.php
+
+		-
+			message: '#^Call to an undefined method object\{execute\: callable\}\:\:execute\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Filament/Resources/TenantAppBuildResource/Support/BuildActions.php
+
+		-
+			message: '#^Instanceof between App\\Domain\\Tenant\\Models\\TenantApp and App\\Domain\\Tenant\\Models\\TenantApp will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: app/Filament/Resources/TenantAppBuildResource/Support/BuildActions.php
+
+		-
+			message: '#^Call to function is_callable\(\) with App\\Domain\\Tenant\\Actions\\GenerateNativeAppAction will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Filament/Resources/TenantAppResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\TenantAppResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/TenantAppResource.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and App\\Domain\\Tenant\\Enums\\AppStatus\:\:Live will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 2
+			path: app/Filament/Resources/TenantAppResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tenant_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Filament/Resources/TenantAppResource/Pages/ViewTenantApp.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments string, array\{App\\Domain\\Tenant\\Enums\\AppStatus\:\:Live, App\\Domain\\Tenant\\Enums\\AppStatus\:\:Review\} and true will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Filament/Resources/TenantAppResource/Schemas/TenantAppFormSchema.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\TenantDomainResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/TenantDomainResource.php
+
+		-
+			message: '#^Offset ''verified'' on array\{domain\: App\\Domain\\Tenant\\Models\\TenantDomain, verified\: bool, reason\: string\|null\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 2
+			path: app/Filament/Resources/TenantDomainResource.php
+
+		-
+			message: '#^Offset ''domain'' on array\{domain\: App\\Domain\\Tenant\\Models\\TenantDomain, verified\: bool, reason\: string\|null\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/Resources/TenantDomainResource/Pages/CreateTenantDomain.php
+
+		-
+			message: '#^Offset ''reason'' on \*NEVER\* on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/Resources/TenantDomainResource/Pages/CreateTenantDomain.php
+
+		-
+			message: '#^Offset ''verified'' on array\{domain\: App\\Domain\\Tenant\\Models\\TenantDomain, verified\: bool, reason\: string\|null\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/Resources/TenantDomainResource/Pages/CreateTenantDomain.php
+
+		-
+			message: '#^Offset ''verified'' on array\{domain\: App\\Domain\\Tenant\\Models\\TenantDomain, verified\: bool, reason\: string\|null\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Filament/Resources/TenantDomainResource/Pages/ViewTenantDomain.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\TenantResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/TenantResource.php
+
+		-
+			message: '#^Method App\\Filament\\Resources\\UserResource\:\:getEloquentQuery\(\) return type with generic class Illuminate\\Database\\Eloquent\\Builder does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Filament/Resources/UserResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Widgets/ActiveDeliveriesWidget.php
+
+		-
+			message: '#^Method App\\Filament\\Widgets\\ActiveShiftsWidget\:\:openBreak\(\) should return App\\Domain\\Employee\\Models\\ShiftBreak\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Filament/Widgets/ActiveShiftsWidget.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\AI\\Models\\AiGenerationLog\:\:\$cnt\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Filament/Widgets/AiCostWidget.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: app/Filament/Widgets/AiCostWidget.php
+
+		-
+			message: '#^Instanceof between Illuminate\\Support\\Carbon and Carbon\\CarbonImmutable will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Filament/Widgets/CurrentFxRatesWidget.php
+
+		-
+			message: '#^Instanceof between string and BackedEnum will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: app/Http/Controllers/Api/V1/Admin/AppController.php
+
+		-
+			message: '#^Parameter \#2 \$data of method App\\Domain\\Tenant\\Actions\\CreateCustomDomainAction\:\:execute\(\) expects array\{domain\: string, verification_method\?\: string, redirects_to\?\: string\|null\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Admin/DomainController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\Broadcasting\\BroadcastAuthController\:\:__invoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Api/V1/Broadcasting/BroadcastAuthController.php
+
+		-
+			message: '#^Parameter \#1 \$filters of method App\\Domain\\Clinic\\Actions\\ListComplaintsAction\:\:execute\(\) expects array\{q\?\: string\|null, clinic_id\?\: int\|null, region\?\: string\|null, severity\?\: string\|null, status\?\: string\|null, urgent\?\: bool\|null, stale\?\: bool\|null, from\?\: Carbon\\CarbonInterface\|null, \.\.\.\}, array\{q\: string\|null, clinic_id\: int\|null, region\: string\|null, severity\: string\|null, status\: string\|null, urgent\: bool\|null, stale\: bool\|null, from\: string\|null, \.\.\.\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/ComplaintController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$orders_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$revenue_minor\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Tenant\\Models\\Tenant\:\:\$pivot\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/DashboardController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>is_primary" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/DashboardController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>orders_count" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/DashboardController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>revenue_minor" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Api/V1/CEO/VisitTokenController.php
+
+		-
+			message: '#^Cannot call method ownedTenantIds\(\) on App\\Models\\User\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/VisitTokenController.php
+
+		-
+			message: '#^Cannot call method ownedTenants\(\) on App\\Models\\User\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/VisitTokenController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\CEO\\VisitTokenController\:\:summary\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/VisitTokenController.php
+
+		-
+			message: '#^Parameter \#1 \$input of method App\\Domain\\Visit\\Actions\\CreateVisitTokenBatchAction\:\:execute\(\) expects array\{tenant_id\: string, table_category_id\?\: string\|null, table_id\?\: string\|null, visit_reference\?\: string\|null, ttl_hours\?\: int\|null, count\?\: int\|null, created_by\?\: int\|null\}, non\-empty\-array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/CEO/VisitTokenController.php
+
+		-
+			message: '#^Cannot call method load\(\) on App\\Domain\\Customer\\Models\\Customer\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/V1/Customer/CustomerController.php
+
+		-
+			message: '#^Parameter \#2 \$data of method App\\Domain\\Department\\Actions\\CreateDepartmentAction\:\:execute\(\) expects array\{name\: string, description\?\: string\|null, is_active\?\: bool, sort_order\?\: int\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Department/DepartmentController.php
+
+		-
+			message: '#^Parameter \#1 \$employee of callable App\\Domain\\Employee\\Actions\\ClockInAction expects App\\Domain\\Employee\\Models\\Employee, App\\Domain\\Employee\\Models\\Employee\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Domain\\Employee\\Models\\Employee\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Employee/ClockController.php
+
+		-
+			message: '#^Parameter \#1 \$employee of callable App\\Domain\\Employee\\Actions\\ClockOutAction expects App\\Domain\\Employee\\Models\\Employee, App\\Domain\\Employee\\Models\\Employee\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Domain\\Employee\\Models\\Employee\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Employee/ClockController.php
+
+		-
+			message: '#^Parameter \#3 \$employeeData of callable App\\Domain\\Employee\\Actions\\CreateEmployeeAction expects array\{employee_code\?\: string\|null, position\: string, hire_date\: string, base_salary\?\: int\|null, hourly_rate\?\: int\|null, status\?\: string, notes\?\: string\|null, emergency_contact\?\: string\|null, \.\.\.\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Employee/EmployeeController.php
+
+		-
+			message: '#^Cannot call method load\(\) on App\\Domain\\Inventory\\Models\\Ingredient\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/V1/Inventory/IngredientController.php
+
+		-
+			message: '#^Parameter \#1 \$input of callable App\\Domain\\Inventory\\Actions\\CreateIngredientAction expects array\{category_id\?\: string\|null, name\: array\<string, string\>, sku\?\: string\|null, unit\: string, cost_per_unit\: int, current_stock\?\: float\|int\|string\|null, min_stock\?\: float\|int\|string\|null, reorder_point\?\: float\|int\|string\|null, \.\.\.\}, non\-empty\-array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Inventory/IngredientController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Inventory\\Models\\StockMovement\:\:\$qty_total\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/Inventory/StockMovementListController.php
+
+		-
+			message: '#^Parameter \#2 \$input of callable App\\Domain\\Kiosk\\Actions\\PlaceKioskOrderAction expects array\{session_id\?\: string\|null, items\: array\<int, array\{menu_item_id\: string, quantity\: int, notes\?\: string\|null, modifiers\?\: array\<int, array\{id\: string, name\: string, price_delta\: int\}\>\}\>, customer_phone_for_receipt\?\: string\|null, notes\?\: string\|null\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Kiosk/KioskOrderController.php
+
+		-
+			message: '#^Cannot call method load\(\) on App\\Domain\\Menu\\Models\\MenuItem\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/V1/Menu/MenuItemController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$cnt\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$orders_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\Order\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$cnt\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Access to an undefined property App\\Domain\\Order\\Models\\OrderItem\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$orders\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$revenue\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\Order\\OrderController\:\:dailyRevenue\(\) has parameter \$baseQuery with generic class Illuminate\\Database\\Eloquent\\Builder but does not specify its types\: TModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\Order\\OrderController\:\:paymentMethods\(\) should return list\<array\{method\: string, count\: int, revenue\: int\}\> but returns array\<int, array\{method\: string, count\: int, revenue\: int\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\Order\\OrderController\:\:topItems\(\) should return list\<array\{menu_item_id\: string\|null, name\: string, count\: int, revenue\: int\}\> but returns array\<int, array\{menu_item_id\: mixed, name\: string, count\: int, revenue\: int\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\Order\\OrderController\:\:topTables\(\) should return list\<array\{table_id\: string\|null, name\: string, orders\: int, revenue\: int\}\> but returns array\<int, array\{table_id\: mixed, name\: string, orders\: int, revenue\: int\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Parameter \#2 \$input of callable App\\Domain\\Order\\Actions\\CreateOrderAction expects array\{type\: string, table_id\?\: string\|null, employee_uuid\?\: string\|null, guest_count\?\: int\|null, notes\?\: string\|null, items\: array\<int, array\{menu_item_id\: string, quantity\: int, notes\?\: string\|null, modifiers\?\: array\<int, array\{id\: string, name\: string, price_delta\: int\}\>\}\>\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tenant_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/Order/OrderController.php
+
+		-
+			message: '#^Parameter \#1 \$order of callable App\\Domain\\Payment\\Actions\\CreatePaymentIntentAction expects App\\Domain\\Order\\Models\\Order, App\\Domain\\Order\\Models\\Order\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Domain\\Order\\Models\\Order\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Payment/PaymentController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\Public\\OnboardingController\:\:stubMenuFor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/Api/V1/Public/OnboardingController.php
+
+		-
+			message: '#^Cannot call method toDateString\(\) on Illuminate\\Support\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Controllers/Api/V1/Public/PublicExchangeRateController.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between Illuminate\\Support\\Carbon\|null and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Http/Controllers/Api/V1/Public/PublicExchangeRateController.php
+
+		-
+			message: '#^Parameter \#1 \$string of function trim expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Public/PublicMenuController.php
+
+		-
+			message: '#^Cannot access property \$price_currency on App\\Domain\\Menu\\Models\\MenuItem\|null\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/V1/Public/PublicOrderController.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 3
+			path: app/Http/Controllers/Api/V1/Public/PublicOrderController.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 3
+			path: app/Http/Controllers/Api/V1/Public/PublicOrderController.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tenant_id" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/Reports/CourierReportController.php
+
+		-
+			message: '#^Parameter \#2 \$payload of callable App\\Domain\\Employee\\Actions\\RecordCourierLocationAction expects array\{lat\: float, lng\: float, accuracy_meters\?\: float\|null, heading\?\: float\|null, speed_mps\?\: float\|null, battery_percent\?\: int\|null, order_id\?\: string\|null, recorded_at\?\: DateTimeInterface\|string\|null\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Staff/Courier/CourierLocationController.php
+
+		-
+			message: '#^Parameter \#2 \$input of callable App\\Domain\\Order\\Actions\\CreateOrderAction expects array\{type\: string, table_id\?\: string\|null, employee_uuid\?\: string\|null, guest_count\?\: int\|null, notes\?\: string\|null, items\: array\<int, array\{menu_item_id\: string, quantity\: int, notes\?\: string\|null, modifiers\?\: array\<int, array\{id\: string, name\: string, price_delta\: int\}\>\}\>\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Staff/StaffOrderController.php
+
+		-
+			message: '#^Parameter \#1 \$input of callable App\\Domain\\SuperAdmin\\Actions\\AcceptSuperAdminInvitationAction expects array\{token\: string, name\: string, password\: string\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/SuperAdminTeamController.php
+
+		-
+			message: '#^Parameter \#1 \$superAdmin of callable App\\Domain\\SuperAdmin\\Actions\\InviteSuperAdminAction expects App\\Models\\User, App\\Models\\User\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/SuperAdminTeamController.php
+
+		-
+			message: '#^Parameter \#1 \$superAdmin of callable App\\Domain\\SuperAdmin\\Actions\\RevokeSuperAdminAction expects App\\Models\\User, App\\Models\\User\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/SuperAdminTeamController.php
+
+		-
+			message: '#^Parameter \#2 \$input of callable App\\Domain\\SuperAdmin\\Actions\\InviteSuperAdminAction expects array\{email\: string, role\?\: string\|null, name\?\: string\|null\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/SuperAdminTeamController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Api\\V1\\SuperAdmin\\TenantController\:\:resolveOwnersForTenants\(\) should return array\<string, App\\Models\\User\> but returns array\<string, App\\Models\\User\|null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/TenantController.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/TenantController.php
+
+		-
+			message: '#^Parameter \#1 \$superAdmin of callable App\\Domain\\SuperAdmin\\Actions\\CreateTenantAction expects App\\Models\\User, App\\Models\\User\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/TenantController.php
+
+		-
+			message: '#^Parameter \#1 \$superAdmin of callable App\\Domain\\SuperAdmin\\Actions\\ImpersonateTenantAction expects App\\Models\\User, App\\Models\\User\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/TenantController.php
+
+		-
+			message: '#^Parameter \#1 \$superAdmin of callable App\\Domain\\SuperAdmin\\Actions\\ResumeTenantAction expects App\\Models\\User, App\\Models\\User\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/TenantController.php
+
+		-
+			message: '#^Parameter \#1 \$superAdmin of callable App\\Domain\\SuperAdmin\\Actions\\SuspendTenantAction expects App\\Models\\User, App\\Models\\User\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/TenantController.php
+
+		-
+			message: '#^Parameter \#2 \$input of callable App\\Domain\\SuperAdmin\\Actions\\CreateTenantAction expects array\{name\: string, slug\: string, owner_name\: string, owner_email\: string, owner_phone\?\: string\|null, owner_password\: string, plan\?\: string\|null, trial_days\?\: int\|null, \.\.\.\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/SuperAdmin/TenantController.php
+
+		-
+			message: '#^Cannot call method load\(\) on App\\Domain\\Table\\Models\\Table\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Controllers/Api/V1/Table/TableController.php
+
+		-
+			message: '#^Parameter \#1 \$input of callable App\\Domain\\Warehouse\\Actions\\StartAuditSessionAction expects array\{tenant_id\?\: string\|null, warehouse_id\: string, conducted_by\?\: int\|null, notes\?\: string\|null\}, non\-empty\-array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/AuditSessionController.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/AuditSessionController.php
+
+		-
+			message: '#^Parameter \#1 \$input of callable App\\Domain\\Warehouse\\Actions\\CreateIncomingDocumentAction expects array\{tenant_id\?\: string\|null, warehouse_id\: string, doc_date\?\: DateTimeInterface\|string\|null, supplier_name\?\: string\|null, supplier_inn\?\: string\|null, currency\?\: string, status\?\: string, notes\?\: string\|null, \.\.\.\}, non\-empty\-array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/IncomingDocumentController.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/IncomingDocumentController.php
+
+		-
+			message: '#^Parameter \#1 \$input of callable App\\Domain\\Warehouse\\Actions\\CreateTransferAction expects array\{tenant_id\?\: string\|null, from_warehouse_id\: string, to_warehouse_id\: string, doc_date\?\: DateTimeInterface\|string\|null, status\?\: string, notes\?\: string\|null, created_by\?\: int\|null, items\: array\<int, array\{ingredient_id\: string, quantity\: float\|int\|string, notes\?\: string\|null\}\>\}, non\-empty\-array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/TransferDocumentController.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/TransferDocumentController.php
+
+		-
+			message: '#^Parameter \#1 \$input of callable App\\Domain\\Warehouse\\Actions\\CreateWarehouseAction expects array\{tenant_id\?\: string\|null, name\: string, address\?\: string\|null, is_active\?\: bool, is_default\?\: bool, sort_order\?\: int, notes\?\: string\|null\}, array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/WarehouseController.php
+
+		-
+			message: '#^Parameter \#1 \$input of callable App\\Domain\\Warehouse\\Actions\\CreateWasteDocumentAction expects array\{tenant_id\?\: string\|null, warehouse_id\: string, doc_date\?\: DateTimeInterface\|string\|null, reason\: string, status\?\: string, notes\?\: string\|null, created_by\?\: int\|null, items\: array\<int, array\{ingredient_id\: string, quantity\: float\|int\|string, unit_cost\?\: int\|null, notes\?\: string\|null\}\>\}, non\-empty\-array\<string, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/WasteDocumentController.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/Warehouse/WasteDocumentController.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: app/Http/Controllers/Api/V1/Webhook/PaymeWebhookController.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Controllers/Api/V1/Webhook/PaymeWebhookController.php
+
+		-
+			message: '#^Cannot call method currentAccessToken\(\) on App\\Models\\User\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Middleware/EnsureSuperAdmin.php
+
+		-
+			message: '#^Cannot call method tokenCan\(\) on App\\Models\\User\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Middleware/EnsureSuperAdmin.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between Laravel\\Sanctum\\PersonalAccessToken and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Http/Middleware/EnsureSuperAdmin.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/CreateAppRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/CreateAppRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tier" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Admin/CreateAppRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/CreateDomainRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/CreateDomainRequest.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Http/Requests/V1/Admin/CreateDomainRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tier" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Admin/CreateDomainRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/ForecastQueryRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tier" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Admin/ForecastQueryRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/GenerateDescriptionAiRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tier" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Admin/GenerateDescriptionAiRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/GenerateMenuAiRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tier" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Admin/GenerateMenuAiRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/InsightsRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tier" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Admin/InsightsRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/TranslateAiRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tier" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Admin/TranslateAiRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tier\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Requests/V1/Admin/UpdateBrandRequest.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>tier" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Admin/UpdateBrandRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between App\\Models\\User and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Http/Requests/V1/CEO/StoreVisitTokenBatchRequest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/CEO/StoreVisitTokenBatchRequest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Reports/MenuItemsReportRequest.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between App\\Models\\User and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Http/Requests/V1/Reports/OrdersReportRequest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Reports/OrdersReportRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between App\\Models\\User and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Http/Requests/V1/Warehouse/StoreAuditSessionRequest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Warehouse/StoreAuditSessionRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between App\\Models\\User and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Http/Requests/V1/Warehouse/StoreIncomingDocumentRequest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Warehouse/StoreIncomingDocumentRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between App\\Models\\User and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Http/Requests/V1/Warehouse/StoreTransferDocumentRequest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Warehouse/StoreTransferDocumentRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between App\\Models\\User and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Http/Requests/V1/Warehouse/StoreWasteDocumentRequest.php
+
+		-
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\User\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Requests/V1/Warehouse/StoreWasteDocumentRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/Staff/Courier/ActiveDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$phone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/Staff/Courier/ActiveDeliveryResource.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:fullName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/Staff/Courier/ActiveDeliveryResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$phone\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/Staff/Courier/AvailableOrderResource.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:fullName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/Staff/Courier/AvailableOrderResource.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:fullName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/Api/V1/Staff/Courier/DeliveryHistoryResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Admin/AppBuildResource.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<int, array\{device\: string, urls\: array\<int, string\>\}\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Resources/V1/Admin/AppResource.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<int\|string, mixed\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Resources/V1/Admin/AppResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Admin/AppResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Admin/BrandResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Admin/DomainResource.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Resources/V1/Admin/TierFeaturesResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Auth/UserResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Resources/V1/Clinic/ClinicComplaintResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Resources/V1/Clinic/ClinicComplaintResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$region\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Clinic/ClinicComplaintResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$specialty\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Clinic/ClinicComplaintResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Clinic/ClinicDoctorResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Clinic/ClinicDoctorResource.php
+
+		-
+			message: '#^Access to an undefined property App\\Http\\Resources\\V1\\Clinic\\DoctorListItemResource\:\:\$avg_rating\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Clinic/DoctorListItemResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/V1/Clinic/DoctorListItemResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Resources/V1/Clinic/DoctorListItemResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$region\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Clinic/DoctorListItemResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$slug\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Clinic/DoctorListItemResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Resources/V1/Customer/CustomerResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/Employee/EmployeeResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Employee/ShiftResource.php
+
+		-
+			message: '#^Cannot access property \$cost_per_unit on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Inventory/StockMovementResource.php
+
+		-
+			message: '#^Cannot access property \$id on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Inventory/StockMovementResource.php
+
+		-
+			message: '#^Cannot access property \$name on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Inventory/StockMovementResource.php
+
+		-
+			message: '#^Cannot access property \$sku on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Inventory/StockMovementResource.php
+
+		-
+			message: '#^Cannot access property \$unit on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Inventory/StockMovementResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on string\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Inventory/StockMovementResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/Inventory/StockMovementResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type string\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/Inventory/StockMovementResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Kiosk/KioskDeviceResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Resources/V1/Menu/MenuCategoryResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Resources/V1/Menu/MenuItemResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Notification/NotificationPreferenceResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Order/OrderItemResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Resources/V1/Order/OrderResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Payment/PaymentResource.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<string, string\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Resources/V1/Public/CurrencyResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Public/ExchangeRateResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$menu_item_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name_snapshot\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$notes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$price_amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$settings\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$status\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$subtotal_amount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Cannot access property \$settings on Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: argument.unresolvableType
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Return type of call to method Illuminate\\Database\\Eloquent\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:map\(\) contains unresolvable type\.$#'
+			identifier: method.unresolvableReturnType
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>settings" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/Public/PublicOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Resources/V1/Reports/ReportOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Reports/ReportOrderResource.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:fullName\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Resources/V1/Reports/ReportOrderResource.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/Reports/ReportOrderResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/Staff/EmployeeResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$employee_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Staff/KitchenOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Staff/KitchenOrderResource.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$user\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Resources/V1/Staff/KitchenOrderResource.php
+
+		-
+			message: '#^Cannot call method diffInSeconds\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Staff/KitchenOrderResource.php
+
+		-
+			message: '#^Parameter \#1 \$callback of method Illuminate\\Support\\Collection\<int,Illuminate\\Database\\Eloquent\\Model\>\:\:reject\(\) expects bool\|\(callable\(Illuminate\\Database\\Eloquent\\Model, int\)\: bool\)\|Illuminate\\Database\\Eloquent\\Model, Closure\(App\\Domain\\Order\\Models\\OrderItem\)\: bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Resources/V1/Staff/KitchenOrderResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/Staff/ShiftBreakResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/Staff/ShiftResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/SuperAdmin/AuditLogResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/SuperAdmin/SuperAdminInvitationResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 2
+			path: app/Http/Resources/V1/SuperAdmin/TenantDetailResource.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Support\\Carbon\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Http/Resources/V1/SuperAdmin/TenantSummaryResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: app/Http/Resources/V1/Table/TableCategoryResource.php
+
+		-
+			message: '#^Cannot call method toIso8601String\(\) on Carbon\\Carbon\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: app/Http/Resources/V1/Table/TableResource.php
+
+		-
+			message: '#^Offset ''state'' on array\{state\: string, raw\: array\<string, mixed\>\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 2
+			path: app/Jobs/PollSubmissionStatusJob.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type App\\Domain\\Shared\\Services\\RateProviders\\RateProviderInterface\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Jobs/SyncFxRatesJob.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:ownedTenants\(\) should return Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\<App\\Domain\\Tenant\\Models\\Tenant, Illuminate\\Database\\Eloquent\\Relations\\Pivot, ''pivot''\> but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\<App\\Domain\\Tenant\\Models\\Tenant, \$this\(App\\Models\\User\), Illuminate\\Database\\Eloquent\\Relations\\Pivot, ''pivot''\>\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Method App\\Models\\User\:\:tenant\(\) return type with generic class Illuminate\\Database\\Eloquent\\Relations\\BelongsTo does not specify its types\: TRelatedModel, TDeclaringModel$#'
+			identifier: missingType.generics
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Type string in generic type Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\<App\\Domain\\Tenant\\Models\\Tenant, Illuminate\\Database\\Eloquent\\Relations\\Pivot, string\> in PHPDoc tag @return is not subtype of template type TPivotModel of Illuminate\\Database\\Eloquent\\Relations\\Pivot \= Illuminate\\Database\\Eloquent\\Relations\\Pivot of class Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany\.$#'
+			identifier: generics.notSubtype
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Offset ''error'' on \*NEVER\* on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Notifications/Actions/SendNotificationAction.php
+
+		-
+			message: '#^Offset ''success'' on array\{success\: bool, provider_message_id\?\: string\|null, simulated\?\: bool, error\?\: string\|null, raw\?\: array\<string, mixed\>\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Notifications/Actions/SendNotificationAction.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Providers/AppServiceProvider.php
+
+		-
+			message: '#^Parameter \#2 \$string of function explode expects string, bool\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/auth_redirects.php
+
+		-
+			message: '#^Parameter \#2 \$string of function explode expects string, bool\|string given\.$#'
+			identifier: argument.type
+			count: 2
+			path: config/cors.php
+
+		-
+			message: '#^Parameter \#1 \$string of function rtrim expects string, bool\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/filesystems.php
+
+		-
+			message: '#^Parameter \#1 \$title of static method Illuminate\\Support\\Str\:\:slug\(\) expects string, bool\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/horizon.php
+
+		-
+			message: '#^Parameter \#2 \$string of function explode expects string, bool\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/sanctum.php
+
+		-
+			message: '#^Method Database\\Factories\\KioskDeviceFactory\:\:createWithToken\(\) has parameter \$overrides with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/factories/KioskDeviceFactory.php
+
+		-
+			message: '#^Method Database\\Factories\\KioskDeviceFactory\:\:createWithToken\(\) should return array\{device\: App\\Domain\\Kiosk\\Models\\KioskDevice, token\: string\} but returns array\{device\: App\\Domain\\Kiosk\\Models\\KioskDevice\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Domain\\Kiosk\\Models\\KioskDevice\>, token\: string\}\.$#'
+			identifier: return.type
+			count: 1
+			path: database/factories/KioskDeviceFactory.php
+
+		-
+			message: '#^Parameter \#1 \$value of static method Illuminate\\Support\\Facades\\Crypt\:\:encryptString\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: database/migrations/2026_05_01_000004_encrypt_existing_pii_data.php
+
+		-
+			message: '#^Property Illuminate\\Database\\Migrations\\Migration@anonymous/database/migrations/2026_07_21_000001_extend_rls_and_create_app_role\.php\:41\:\:\$strict type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: database/migrations/2026_07_21_000001_extend_rls_and_create_app_role.php
+
+		-
+			message: '#^Method Illuminate\\Database\\Migrations\\Migration@anonymous/database/migrations/landlord/2026_04_19_232050_create_landlord_tenants_table\.php\:7\:\:up\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: database/migrations/landlord/2026_04_19_232050_create_landlord_tenants_table.php
+
+		-
+			message: '#^Match arm comparison between ''neutral'' and ''neutral'' is always true\.$#'
+			identifier: match.alwaysTrue
+			count: 1
+			path: database/seeders/ClinicSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: database/seeders/ClinicSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: database/seeders/DemoCeoSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: database/seeders/DemoCustomersSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: database/seeders/DemoEmployeesSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: database/seeders/DemoInventorySeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: database/seeders/DemoMenuSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 6
+			path: database/seeders/DemoOrdersSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 3
+			path: database/seeders/DemoTablesSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: database/seeders/DemoTenantSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: database/seeders/DistrictSeeder.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: database/seeders/RegionSeeder.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\User\:\:\$employee\.$#'
+			identifier: property.notFound
+			count: 2
+			path: routes/channels.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Http\\Request\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: routes/channels.php
