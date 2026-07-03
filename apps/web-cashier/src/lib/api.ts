@@ -414,4 +414,48 @@ export const api = {
   endBreak: async (): Promise<void> => {
     await request('POST', '/api/v1/staff/breaks/end', {});
   },
+
+  // ── POS register flow ─────────────────────────────────────────────────
+  // 1. create the order  2. open a cash payment intent  3. capture it.
+  // Prices/discount are re-computed server-side; the response carries the
+  // authoritative total.
+
+  createOrder: async (payload: {
+    type: OrderType;
+    items: { menu_item_id: string; quantity: number }[];
+    discount_amount?: number;
+    notes?: string;
+  }): Promise<PlacedOrder> => {
+    const res = await request<Envelope<RawPlacedOrder>>('POST', '/api/v1/orders', payload);
+    return {
+      id: res.data.id,
+      order_no: res.data.order_no,
+      total: res.data.amounts?.total ?? 0,
+    };
+  },
+
+  createCashPayment: async (orderId: string): Promise<string> => {
+    const res = await request<Envelope<{ payment: { id: string } }>>('POST', '/api/v1/payments', {
+      order_id: orderId,
+      provider: 'cash',
+    });
+    return res.data.payment.id;
+  },
+
+  captureCashPayment: async (paymentId: string): Promise<void> => {
+    await request('POST', `/api/v1/payments/${paymentId}/capture`, {});
+  },
+};
+
+type RawPlacedOrder = {
+  id: string;
+  order_no: string;
+  amounts?: { total?: number };
+};
+
+export type PlacedOrder = {
+  id: string;
+  order_no: string;
+  /** Authoritative server-computed total, minor units. */
+  total: number;
 };

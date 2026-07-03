@@ -146,3 +146,40 @@ it('rejects a quantity of zero', function (): void {
         ->assertStatus(422)
         ->assertJsonValidationErrors(['items.0.quantity']);
 });
+
+it('applies a flat discount to the total, never below zero', function (): void {
+    $owner = actingAsTenantOwner();
+    $category = MenuCategory::factory()->create(['tenant_id' => $owner->tenant_id]);
+    $item = MenuItem::factory()->create([
+        'tenant_id' => $owner->tenant_id,
+        'category_id' => $category->id,
+        'price_amount' => 30000,
+        'has_discount' => false,
+    ]);
+    Sanctum::actingAs($owner);
+
+    // Normal discount: total = subtotal - discount.
+    $this->postJson('/api/v1/orders', [
+        'items' => [['menu_item_id' => $item->id, 'quantity' => 2]],
+        'discount_amount' => 10000,
+    ])
+        ->assertCreated()
+        ->assertJsonPath('data.amounts.subtotal', 60000)
+        ->assertJsonPath('data.amounts.discount', 10000)
+        ->assertJsonPath('data.amounts.total', 50000);
+
+    // Discount larger than the ticket is clamped server-side, not negative.
+    $this->postJson('/api/v1/orders', [
+        'items' => [['menu_item_id' => $item->id, 'quantity' => 1]],
+        'discount_amount' => 999999,
+    ])
+        ->assertCreated()
+        ->assertJsonPath('data.amounts.discount', 30000)
+        ->assertJsonPath('data.amounts.total', 0);
+
+    // Negative discount is rejected by validation.
+    $this->postJson('/api/v1/orders', [
+        'items' => [['menu_item_id' => $item->id, 'quantity' => 1]],
+        'discount_amount' => -5,
+    ])->assertStatus(422);
+});

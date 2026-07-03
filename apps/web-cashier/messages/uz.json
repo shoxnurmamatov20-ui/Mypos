@@ -75,7 +75,9 @@
     "out_of_stock": "Tugagan",
     "no_items": "Bu bo'limda taom yo'q",
     "added": "Qo'shildi",
-    "remove": "Olib tashlash"
+    "remove": "Olib tashlash",
+    "charging": "To'lov qilinmoqda…",
+    "charge_failed": "To'lovni o'tkazib bo'lmadi. Qayta urinib ko'ring."
   },
   "orders": {
     "title": "Buyurtmalar",

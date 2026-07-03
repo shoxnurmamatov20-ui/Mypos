@@ -31,6 +31,7 @@ class CreateOrderAction
      *   employee_uuid?: string|null,
      *   guest_count?: int|null,
      *   notes?: string|null,
+     *   discount_amount?: int|null,
      *   items: array<int, array{menu_item_id: string, quantity: int, notes?: string|null, modifiers?: array<int, array{id: string, name: string, price_delta: int}>}>,
      * } $input
      */
@@ -99,9 +100,15 @@ class CreateOrderAction
                 ]);
             }
 
+            // Flat ticket discount, clamped server-side so the total can
+            // never go negative regardless of what the client sends. Menu
+            // prices are VAT-inclusive (UZ QQS) — no tax is added on top.
+            $discount = min(max(0, (int) ($input['discount_amount'] ?? 0)), $subtotal);
+
             $order->update([
                 'subtotal_amount' => $subtotal,
-                'total_amount' => $subtotal, // TODO: apply tax + discount + service charge
+                'discount_amount' => $discount,
+                'total_amount' => $subtotal - $discount,
             ]);
 
             // Occupy table if dine-in

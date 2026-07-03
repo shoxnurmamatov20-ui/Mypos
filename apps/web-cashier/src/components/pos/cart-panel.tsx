@@ -1,13 +1,14 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { Check, Minus, Plus, ShoppingCart, Trash2, X } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import type { OrderType } from '@/lib/api';
+import { api, type OrderType } from '@/lib/api';
 import { cn } from '@/lib/cn';
 import { formatMoney, pickName } from '@/lib/format';
-import { cartSubtotal, cartTax, cartTotal, lineSubtotal, useCartStore } from '@/stores/cart';
+import { cartSubtotal, cartTotal, lineSubtotal, useCartStore } from '@/stores/cart';
 
 const ORDER_TYPES: { id: OrderType; key: 'dine_in' | 'takeaway' | 'delivery' }[] = [
   { id: 'dine_in', key: 'dine_in' },
@@ -19,24 +20,47 @@ const ORDER_TYPES: { id: OrderType; key: 'dine_in' | 'takeaway' | 'delivery' }[]
 export function CartPanel() {
   const t = useTranslations('pos');
   const locale = useLocale();
+  const queryClient = useQueryClient();
   const { lines, discount, orderType } = useCartStore();
   const { increment, decrement, remove, setDiscount, setOrderType, clear } = useCartStore();
   const [placed, setPlaced] = useState(false);
+  const [charging, setCharging] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const subtotal = cartSubtotal(lines);
-  const tax = cartTax(lines, discount);
   const total = cartTotal(lines, discount);
   const empty = lines.length === 0;
 
-  const charge = () => {
-    if (empty) return;
-    // Backend wiring lands with the staff orders endpoint; for now the
-    // register confirms locally and resets — the flow is identical.
-    setPlaced(true);
-    window.setTimeout(() => {
-      clear();
-      setPlaced(false);
-    }, 1600);
+  const charge = async () => {
+    if (empty || charging) return;
+    setCharging(true);
+    setError(null);
+    try {
+      // Real register flow: order → cash intent → capture. The backend
+      // recomputes prices and clamps the discount, so what lands in the
+      // till is the server's total, not the client's.
+      const order = await api.createOrder({
+        type: orderType,
+        items: lines.map((l) => ({ menu_item_id: l.id, quantity: l.qty })),
+        discount_amount: discount > 0 ? discount : undefined,
+      });
+      const paymentId = await api.createCashPayment(order.id);
+      await api.captureCashPayment(paymentId);
+
+      // Orders/payments lists show the new sale on next focus/refetch.
+      void queryClient.invalidateQueries({ queryKey: ['orders'] });
+      void queryClient.invalidateQueries({ queryKey: ['payments'] });
+
+      setPlaced(true);
+      window.setTimeout(() => {
+        clear();
+        setPlaced(false);
+      }, 1600);
+    } catch {
+      setError(t('charge_failed'));
+    } finally {
+      setCharging(false);
+    }
   };
 
   return (
@@ -144,7 +168,6 @@ export function CartPanel() {
               className="tnum w-24 rounded-md border border-[rgba(22,34,31,0.12)] bg-white px-2 py-1 text-right text-[13px] text-[#16221f] outline-none focus:border-[#0f766e] dark:border-[rgba(255,255,255,0.1)] dark:bg-[#0b1120] dark:text-white"
             />
           </div>
-          <Row label={t('tax')} value={formatMoney(tax)} muted />
           <div className="mt-1 flex items-center justify-between border-t border-[rgba(22,34,31,0.07)] pt-2 dark:border-[rgba(255,255,255,0.06)]">
             <span className="text-sm font-bold text-[#16221f] dark:text-white">{t('total')}</span>
             <span className="tnum text-xl font-bold text-[#0f766e] dark:text-[#5ed6c9]">
@@ -153,10 +176,16 @@ export function CartPanel() {
           </div>
         </div>
 
+        {error ? (
+          <p role="alert" className="text-[12px] font-semibold text-red-600 dark:text-red-400">
+            {error}
+          </p>
+        ) : null}
+
         <Button
           size="lg"
           variant={placed ? 'secondary' : 'primary'}
-          disabled={empty}
+          disabled={empty || charging}
           onClick={charge}
           className="h-14 w-full text-[15px]"
         >
@@ -164,6 +193,8 @@ export function CartPanel() {
             <>
               <Check className="h-5 w-5" /> {t('order_placed')}
             </>
+          ) : charging ? (
+            t('charging')
           ) : (
             t('charge_amount', { amount: formatMoney(total) })
           )}

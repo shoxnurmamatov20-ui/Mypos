@@ -75,7 +75,9 @@
     "out_of_stock": "Out of stock",
     "no_items": "No items in this category",
     "added": "Added",
-    "remove": "Remove"
+    "remove": "Remove",
+    "charging": "Charging…",
+    "charge_failed": "Could not complete the sale. Try again."
   },
   "orders": {
     "title": "Orders",

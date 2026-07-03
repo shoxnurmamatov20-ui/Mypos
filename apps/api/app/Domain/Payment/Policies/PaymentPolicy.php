@@ -15,10 +15,10 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 /**
  * Authorisation rules for payments.
  *
- * Cashiers may create payment intents (cash, card-present). Manual capture
- * (cash) and refunds belong to managers. Refunds above LARGE_REFUND_THRESHOLD
- * (1,000,000 minor units = 10,000 UZS major) require an owner-or-above to
- * prevent waiter/cashier escalation paths.
+ * Cashiers may create payment intents (cash, card-present) and capture CASH
+ * payments — the register flow. Refunds belong to managers; refunds above
+ * LARGE_REFUND_THRESHOLD (1,000,000 minor units = 10,000 UZS major) require
+ * an owner-or-above to prevent waiter/cashier escalation paths.
  */
 class PaymentPolicy
 {
@@ -65,10 +65,18 @@ class PaymentPolicy
         return $user->is_super_admin === true;
     }
 
-    /** Manual capture (cash flow) — managers only. */
+    /**
+     * Manual capture (cash flow). Taking cash at the register is the
+     * cashier's core job — the endpoint already refuses non-cash providers,
+     * so this cannot leak into card/PSP flows. Refunds stay manager+.
+     */
     public function capture(User $user, Payment $payment): bool
     {
-        return $this->isAdminOrManager($user) && $this->shareTenant($user, $payment);
+        if (! $this->shareTenant($user, $payment)) {
+            return false;
+        }
+
+        return $this->isAdminOrManager($user) || $this->isCashier($user);
     }
 
     /**

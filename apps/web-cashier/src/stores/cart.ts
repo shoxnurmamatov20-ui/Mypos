@@ -28,29 +28,23 @@ type CartActions = {
   clear: () => void;
 };
 
-/** Tax rate applied on the discounted subtotal (12% — standard UZ VAT). */
-export const TAX_RATE = 0.12;
-
 /** Per-line subtotal. */
 export function lineSubtotal(line: CartLine): number {
   return line.price * line.qty;
 }
 
-/** Sum of every line before discount / tax. */
+/** Sum of every line before discount. */
 export function cartSubtotal(lines: CartLine[]): number {
   return lines.reduce((sum, line) => sum + lineSubtotal(line), 0);
 }
 
-/** Tax charged on `(subtotal - discount)`, never below zero. */
-export function cartTax(lines: CartLine[], discount: number): number {
-  const base = Math.max(0, cartSubtotal(lines) - discount);
-  return Math.round(base * TAX_RATE);
-}
-
-/** Final amount the cashier charges. */
+/**
+ * Final amount the cashier charges. Menu prices are VAT-inclusive (UZ QQS),
+ * so no tax is added on top — this mirrors the backend's
+ * `total = subtotal - discount` exactly (CreateOrderAction).
+ */
 export function cartTotal(lines: CartLine[], discount: number): number {
-  const base = Math.max(0, cartSubtotal(lines) - discount);
-  return base + cartTax(lines, discount);
+  return Math.max(0, cartSubtotal(lines) - discount);
 }
 
 export const useCartStore = create<CartState & CartActions>((set) => ({
