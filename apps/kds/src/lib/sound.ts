@@ -3,9 +3,15 @@
 /**
  * New-ticket chime — a short two-tone beep synthesised with the Web
  * Audio API so the Kitchen panel needs no audio asset and no network
- * fetch. The first call lazily creates a shared `AudioContext`; on a
- * fresh kitchen tablet that context starts `suspended` until the cook
- * first taps the screen, after which every chime plays.
+ * fetch.
+ *
+ * Browser autoplay policy: audio/vibration are only allowed after the
+ * first user gesture. We arm a one-time `pointerdown`/`keydown`
+ * listener and hold every chime/buzz until then — this keeps the
+ * console free of "AudioContext was not allowed to start" /
+ * "Blocked call to navigator.vibrate" noise on a freshly booted
+ * kitchen tablet, without changing behaviour after the cook's first
+ * tap.
  */
 
 type WebkitWindow = Window & {
@@ -13,9 +19,33 @@ type WebkitWindow = Window & {
 };
 
 let ctx: AudioContext | null = null;
+let unlocked = false;
+let armed = false;
+
+function armUnlockListener(): void {
+  if (armed || typeof window === 'undefined') return;
+  armed = true;
+  const unlock = (): void => {
+    unlocked = true;
+    // Resume (or lazily create) the context inside the gesture handler —
+    // the only moment the autoplay policy guarantees it will succeed.
+    const audio = getContext();
+    if (audio?.state === 'suspended') {
+      void audio.resume().catch(() => undefined);
+    }
+  };
+  window.addEventListener('pointerdown', unlock, { once: true, passive: true });
+  window.addEventListener('keydown', unlock, { once: true });
+}
+
+// Arm as soon as the module loads on the client so the cook's very first
+// tap unlocks audio even when it happens before any ticket arrives.
+if (typeof window !== 'undefined') {
+  armUnlockListener();
+}
 
 function getContext(): AudioContext | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === 'undefined' || !unlocked) return null;
   if (ctx) return ctx;
   const Ctor = window.AudioContext ?? (window as WebkitWindow).webkitAudioContext;
   if (!Ctor) return null;
@@ -23,12 +53,15 @@ function getContext(): AudioContext | null {
   return ctx;
 }
 
-/** Play the chime at `volume` (0–1). Silently no-ops if audio is blocked. */
+/**
+ * Play the chime at `volume` (0–1). Silently no-ops until the first user
+ * gesture unlocks audio (browser autoplay policy).
+ */
 export function playChime(volume = 0.7): void {
+  armUnlockListener();
   const audio = getContext();
   if (!audio) return;
 
-  // Autoplay policy: the context may be suspended until a user gesture.
   if (audio.state === 'suspended') {
     void audio.resume().catch(() => undefined);
   }
@@ -55,8 +88,14 @@ export function playChime(volume = 0.7): void {
   }
 }
 
-/** Buzz the device, when supported, for a new ticket. */
+/**
+ * Buzz the device, when supported, for a new ticket. No-ops until the
+ * first user gesture (browsers block vibration before interaction and
+ * log a console error we'd rather not spam the KDS with).
+ */
 export function vibrateOnce(): void {
+  armUnlockListener();
+  if (!unlocked) return;
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
     navigator.vibrate?.(180);
   }

@@ -25,7 +25,9 @@ export const apiClient = new MyPosApiClient({
   onUnauthorized: () => {
     clearToken();
     if (typeof window !== 'undefined') {
-      window.location.href = '/login';
+      // window.location bypasses Next's basePath — include it explicitly or
+      // the redirect lands on the marketing site instead of the KDS login.
+      window.location.href = '/panel/kitchen/login';
     }
   },
 });
