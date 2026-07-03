@@ -130,16 +130,10 @@ Route::prefix('internal')->middleware(['internal.caddy'])->group(function (): vo
 });
 
 Route::prefix('v1')->group(function () {
-    Route::get('/health', function () {
-        return response()->json([
-            'status' => 'ok',
-            'version' => '0.1.0',
-            'service' => 'mypos-api',
-            'timestamp' => now()->toIso8601String(),
-            'locale' => app()->getLocale(),
-            'timezone' => config('app.timezone'),
-        ]);
-    })->name('v1.health');
+    // Deep readiness probe (db/redis/cache/queue + RLS posture) — 200/503.
+    Route::get('/health', \App\Http\Controllers\Api\V1\HealthController::class)
+        ->middleware('throttle:60,1')
+        ->name('v1.health');
 
     // --- Public (unauthenticated) endpoints — marketplace + QR-menu PWA ---
     // Default 60 req/min per IP for read endpoints. Writes use stricter caps
