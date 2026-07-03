@@ -70,7 +70,10 @@ class DemoOrdersSeeder extends Seeder
             $totalCreated = 0;
 
             for ($daysAgo = 29; $daysAgo >= 0; $daysAgo--) {
-                $day = now()->subDays($daysAgo);
+                // Business hours below are Tashkent wall-clock times; build the
+                // moment in the restaurant's timezone, then store as UTC like
+                // every real order (app timezone is UTC).
+                $day = now('Asia/Tashkent')->subDays($daysAgo);
 
                 // More orders on weekends + recent days (simulated traffic curve)
                 $ordersForDay = fake()->numberBetween(8, 22);
@@ -80,7 +83,13 @@ class DemoOrdersSeeder extends Seeder
                 for ($o = 0; $o < $ordersForDay; $o++) {
                     $hour = fake()->randomElement([11, 12, 13, 13, 14, 18, 19, 19, 20, 20, 21]);
                     $minute = fake()->numberBetween(0, 59);
-                    $placedAt = $day->copy()->setTime($hour, $minute);
+                    $placedAt = $day->copy()->setTime($hour, $minute)->setTimezone('UTC');
+
+                    // Today's not-yet-reached dinner slots would land in the
+                    // future — a "-42 minutes ago" order card. Skip them.
+                    if ($placedAt->isFuture()) {
+                        continue;
+                    }
 
                     $type = fake()->randomElement($orderTypes);
                     $table = $type === 'dine_in' ? $tables->random() : null;
@@ -111,6 +120,13 @@ class DemoOrdersSeeder extends Seeder
                     $preparedAt = $placedAt->copy()->addMinutes(fake()->numberBetween(8, 25));
                     $servedAt = $preparedAt->copy()->addMinutes(fake()->numberBetween(2, 8));
                     $completedAt = $servedAt->copy()->addMinutes(fake()->numberBetween(20, 80));
+
+                    // An order placed minutes ago cannot already be "completed
+                    // 80 minutes later" — keep the lifecycle inside the past.
+                    if ($isCompleted && $completedAt->isFuture()) {
+                        $isCompleted = false;
+                        $status = 'preparing';
+                    }
 
                     $order = Order::create([
                         'tenant_id' => $tenant->id,
