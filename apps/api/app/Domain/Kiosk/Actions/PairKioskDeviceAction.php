@@ -6,6 +6,7 @@ namespace App\Domain\Kiosk\Actions;
 
 use App\Domain\Kiosk\Enums\KioskDeviceStatus;
 use App\Domain\Kiosk\Models\KioskDevice;
+use App\Support\TenantGuc;
 use App\Domain\Kiosk\Models\KioskPairingCode;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -35,19 +36,22 @@ class PairKioskDeviceAction
 
         // Pairing code lookup ignores the tenant scope because no user is
         // authenticated at this point — the code itself selects the tenant.
-        $pairing = KioskPairingCode::query()
+        $pairing = TenantGuc::scoped(TenantGuc::WILDCARD, fn () => KioskPairingCode::query()
             ->withoutGlobalScopes(['tenant'])
             ->where('code', $code)
             ->whereNull('consumed_at')
             ->where('expires_at', '>', now())
             ->orderByDesc('created_at')
-            ->first();
+            ->first());
 
         if ($pairing === null) {
             throw ValidationException::withMessages([
                 'code' => [__('Bog\'lash kodi noto\'g\'ri yoki muddati o\'tgan')],
             ]);
         }
+
+        // Pin the request to the pairing code's tenant for the writes below.
+        TenantGuc::imprint((string) $pairing->tenant_id);
 
         return DB::transaction(function () use ($pairing, $input): array {
             $plainToken = Str::random(64);

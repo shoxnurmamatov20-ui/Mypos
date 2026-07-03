@@ -6,6 +6,7 @@ namespace App\Http\Middleware;
 
 use App\Domain\Tenant\Models\Tenant;
 use App\Domain\Tenant\Models\TenantDomain;
+use App\Support\TenantGuc;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -100,12 +101,15 @@ class ResolveTenantFromDomain
             return $cached;
         }
 
-        $row = TenantDomain::query()
+        // Pre-auth, pre-GUC by definition: the row that maps a hostname to
+        // its tenant lives in an RLS-protected table, so read it under a
+        // one-shot wildcard scope (restored immediately).
+        $row = TenantGuc::scoped(TenantGuc::WILDCARD, fn () => TenantDomain::query()
             ->withoutGlobalScopes()
             ->where('domain', $host)
             ->where('is_verified', true)
             ->whereNull('deleted_at')
-            ->first(['tenant_id']);
+            ->first(['tenant_id']));
 
         if ($row === null) {
             // Negative cache — keep short so a freshly-verified domain

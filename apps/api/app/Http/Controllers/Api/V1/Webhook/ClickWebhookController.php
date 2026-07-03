@@ -31,6 +31,12 @@ class ClickWebhookController extends Controller
             ], 200);
         }
 
+
+        // RLS: provider webhooks are signature-verified machine calls that
+        // locate payments/orders across tenants — imprint the DB wildcard
+        // for this request (reset by SetTenantContext::terminate()).
+        \App\Support\TenantGuc::imprint(\App\Support\TenantGuc::WILDCARD);
+
         $payment = $provider->handleWebhook($request);
 
         // COMPLETE with a non-negative error code → finalize through the

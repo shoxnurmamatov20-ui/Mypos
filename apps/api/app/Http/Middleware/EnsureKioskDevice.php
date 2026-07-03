@@ -6,6 +6,7 @@ namespace App\Http\Middleware;
 
 use App\Domain\Kiosk\Enums\KioskDeviceStatus;
 use App\Domain\Kiosk\Models\KioskDevice;
+use App\Support\TenantGuc;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +52,10 @@ class EnsureKioskDevice
         // current tenant from the container (e.g. spatie/laravel-multitenancy
         // helpers) can find it without an authenticated User.
         app()->instance('currentTenant', $device->tenant);
+
+        // Route middleware runs AFTER the group-level SetTenantContext, so
+        // the RLS GUC must be imprinted here for device-authed requests.
+        TenantGuc::imprint((string) $device->tenant_id);
 
         return $next($request);
     }

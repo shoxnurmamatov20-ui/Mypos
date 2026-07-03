@@ -81,7 +81,9 @@ class EasBuildWebhookController extends Controller
         }
 
         // Bypass the BelongsToTenant scope: webhooks have no tenant context
-        // and we already trust the signature.
+        // and we already trust the signature. The row's tenant is unknown
+        // until found, so RLS needs the wildcard for this machine call.
+        \App\Support\TenantGuc::imprint(\App\Support\TenantGuc::WILDCARD);
         $build = TenantAppBuild::query()
             ->withoutGlobalScopes()
             ->where('eas_build_id', $easBuildId)

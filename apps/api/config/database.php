@@ -160,6 +160,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Web-runtime role split (ADR-0006 "Runtime roles")
+    |--------------------------------------------------------------------------
+    |
+    | PostgreSQL table owners bypass Row-Level Security, so the HTTP runtime
+    | must NOT connect as the migrator/owner role (`mypos`). When these are
+    | set, `AppServiceProvider` swaps the pgsql connection credentials to
+    | this login-enabled, NOBYPASSRLS role for PHP-FPM requests only —
+    | artisan (migrations), Horizon workers, the scheduler and Reverb stay
+    | on the owner role, exactly as infra/scripts/pg-app-role.sql documents.
+    |
+    */
+
+    'app_runtime' => [
+        'username' => env('DB_APP_USERNAME'),
+        'password' => env('DB_APP_PASSWORD', ''),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Migration Repository Table
     |--------------------------------------------------------------------------
     |

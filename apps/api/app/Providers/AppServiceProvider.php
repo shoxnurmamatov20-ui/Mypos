@@ -79,6 +79,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->bindWebRuntimeDatabaseRole();
+
         $this->app->singleton(PaymentManager::class, fn (): PaymentManager => new PaymentManager);
 
         // ---- Phase 3 — store submission API clients --------------------
@@ -219,11 +221,32 @@ class AppServiceProvider extends ServiceProvider
         // page since this Laravel API doesn't render any web pages. The
         // user clicks the link in their email and lands on the SPA.
         ResetPassword::createUrlUsing(function (object $notifiable, string $token): string {
-            $portal = (string) (env('AUTH_PORTAL_FORGOT_URL') ?? 'http://localhost:3000/panel/portal/uz/reset-password');
+            $portal = (string) config('services.portal.forgot_url');
             $email = property_exists($notifiable, 'email') ? (string) $notifiable->email : '';
 
             return $portal.'?token='.urlencode($token).'&email='.urlencode($email);
         });
+    }
+
+    /**
+     * ADR-0006 "Runtime roles": PostgreSQL table owners bypass RLS, so the
+     * HTTP runtime must connect as the non-owner `mypos_app` role while
+     * artisan/Horizon/scheduler/Reverb (CLI SAPI) stay on the owner for
+     * migrations and cross-tenant jobs. Config-cache safe: the values are
+     * baked from .env into `database.app_runtime` at cache time, and the
+     * swap below re-applies on every request before the first connection.
+     */
+    private function bindWebRuntimeDatabaseRole(): void
+    {
+        $username = (string) (config('database.app_runtime.username') ?? '');
+        if ($username === '' || PHP_SAPI !== 'fpm-fcgi') {
+            return;
+        }
+
+        config([
+            'database.connections.pgsql.username' => $username,
+            'database.connections.pgsql.password' => (string) config('database.app_runtime.password', ''),
+        ]);
     }
 
     /**

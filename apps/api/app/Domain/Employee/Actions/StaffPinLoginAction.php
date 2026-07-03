@@ -7,6 +7,7 @@ namespace App\Domain\Employee\Actions;
 use App\Domain\Employee\Enums\EmployeeStatus;
 use App\Domain\Employee\Models\Employee;
 use App\Models\User;
+use App\Support\TenantGuc;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -25,6 +26,13 @@ class StaffPinLoginAction
     public function __invoke(string $phone, string $pin, ?string $ip = null): array
     {
         $user = User::query()->where('phone', $phone)->first();
+
+        // Pre-auth: `employees` is under strict RLS. The candidate's own
+        // tenant_id (from the global users table) is authoritative — imprint
+        // it so the lookup below can see exactly that tenant's rows.
+        if ($user !== null && ! empty($user->tenant_id)) {
+            TenantGuc::imprint((string) $user->tenant_id);
+        }
 
         $employee = $user === null
             ? null

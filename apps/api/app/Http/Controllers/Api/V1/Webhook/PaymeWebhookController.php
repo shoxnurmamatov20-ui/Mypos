@@ -31,6 +31,12 @@ class PaymeWebhookController extends Controller
             ]), 200);
         }
 
+
+        // RLS: provider webhooks are signature-verified machine calls that
+        // locate payments/orders across tenants — imprint the DB wildcard
+        // for this request (reset by SetTenantContext::terminate()).
+        \App\Support\TenantGuc::imprint(\App\Support\TenantGuc::WILDCARD);
+
         $method = (string) $request->input('method', '');
         $params = (array) $request->input('params', []);
 

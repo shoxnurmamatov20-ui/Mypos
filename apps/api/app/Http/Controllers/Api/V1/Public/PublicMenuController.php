@@ -8,6 +8,7 @@ use App\Domain\Menu\Models\MenuCategory;
 use App\Domain\Menu\Models\MenuItem;
 use App\Domain\Tenant\Models\Tenant;
 use App\Http\Controllers\Controller;
+use App\Support\TenantGuc;
 use App\Http\Resources\V1\Menu\MenuCategoryResource;
 use App\Http\Resources\V1\Menu\MenuItemResource;
 use Illuminate\Http\JsonResponse;
@@ -87,6 +88,10 @@ class PublicMenuController extends Controller
     /** @return array<string, mixed> */
     private function buildPayload(Tenant $tenant, Request $request): array
     {
+        // RLS: menu tables are strictly tenant-scoped. Imprint only on the
+        // cache-miss path so warm hits stay at a single tenant-slug query.
+        TenantGuc::imprint($tenant->id);
+
         // Bypass the BelongsToTenant global scope — public context has no
         // authenticated user. We re-add the explicit tenant_id filter below.
         $categories = MenuCategory::query()

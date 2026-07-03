@@ -15,6 +15,7 @@ use App\Domain\Table\Models\Table;
 use App\Domain\Tenant\Models\Tenant;
 use App\Events\Order\OrderPlaced;
 use App\Http\Controllers\Controller;
+use App\Support\TenantGuc;
 use App\Http\Requests\V1\Public\CreatePublicOrderRequest;
 use App\Http\Resources\V1\Order\OrderResource;
 use App\Http\Resources\V1\Public\PublicOrderResource;
@@ -178,15 +179,20 @@ class PublicOrderController extends Controller
             throw new NotFoundHttpException('Buyurtma topilmadi');
         }
 
-        $order = Order::query()
+        // The unguessable token IS the credential; the row's tenant is
+        // unknown until found, so the lookup runs under a one-shot wildcard.
+        $order = TenantGuc::scoped(TenantGuc::WILDCARD, fn () => Order::query()
             ->withoutGlobalScopes()
             ->with(['items', 'tenant'])
             ->where('tracking_token', $token)
-            ->first();
+            ->first());
 
         if ($order === null) {
             throw new NotFoundHttpException('Buyurtma topilmadi');
         }
+
+        // Keep the rest of the request scoped to the order's own tenant.
+        TenantGuc::imprint((string) $order->tenant_id);
 
         return response()->json([
             'data' => PublicOrderResource::make($order)->toArray($request),
@@ -297,6 +303,10 @@ class PublicOrderController extends Controller
         if ($tenant === null) {
             throw new NotFoundHttpException('Restoran topilmadi');
         }
+
+        // RLS: guest checkout writes orders/order_items for this tenant —
+        // imprint so the WITH CHECK policies accept the insert.
+        TenantGuc::imprint($tenant->id);
 
         return $tenant;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Domain\Auth\Enums\Role as RoleEnum;
 use App\Domain\Order\Models\Order;
+use App\Support\TenantGuc;
 use App\Models\User;
 use Illuminate\Support\Facades\Broadcast;
 
@@ -126,11 +127,13 @@ Broadcast::channel('order.{orderId}', function (?User $user, string $orderId): b
     $token = $request?->query('tracking_token');
 
     // Find the order without a global tenant scope so guests can authorize.
+    // Guests carry no tenant GUC either — one-shot RLS wildcard, restored
+    // right after the lookup.
     /** @var Order|null $order */
-    $order = Order::query()
+    $order = TenantGuc::scoped(TenantGuc::WILDCARD, fn () => Order::query()
         ->withoutGlobalScopes()
         ->whereKey($orderId)
-        ->first();
+        ->first());
 
     if ($order === null) {
         return false;

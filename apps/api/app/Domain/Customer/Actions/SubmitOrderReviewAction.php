@@ -7,6 +7,7 @@ namespace App\Domain\Customer\Actions;
 use App\Domain\Customer\Models\OrderReview;
 use App\Domain\Order\Models\Order;
 use App\Events\Customer\ReviewPosted;
+use App\Support\TenantGuc;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -26,11 +27,14 @@ class SubmitOrderReviewAction
     public function __invoke(array $input): OrderReview
     {
         $review = DB::transaction(function () use ($input): OrderReview {
+            // Guest submissions arrive with no tenant context; the order id +
+            // tracking token pair is the credential, so locate the row under
+            // a one-shot RLS wildcard, then pin the request to its tenant.
             /** @var Order|null $order */
-            $order = Order::query()
+            $order = TenantGuc::scoped(TenantGuc::WILDCARD, fn () => Order::query()
                 ->withoutGlobalScopes(['tenant'])
                 ->whereKey($input['order_id'])
-                ->first();
+                ->first());
 
             if ($order === null) {
                 throw ValidationException::withMessages([
@@ -52,6 +56,8 @@ class SubmitOrderReviewAction
                     'auth' => ['Unauthorized to review this order'],
                 ]);
             }
+
+            TenantGuc::imprint((string) $order->tenant_id);
 
             // One review per order — repeat submission updates instead of duplicates.
             return OrderReview::updateOrCreate(

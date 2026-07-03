@@ -137,4 +137,20 @@ return [
         'access_key' => env('FIXER_ACCESS_KEY'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Web-portal URLs
+    |--------------------------------------------------------------------------
+    |
+    | The Laravel API renders no web pages; password-reset emails deep-link
+    | into the universal portal SPA instead.
+    |
+    */
+    'portal' => [
+        'forgot_url' => env(
+            'AUTH_PORTAL_FORGOT_URL',
+            'http://localhost:3000/panel/portal/uz/reset-password',
+        ),
+    ],
+
 ];
