@@ -1,8 +1,8 @@
 'use client';
 
 import { Bell, BellOff, ExternalLink } from 'lucide-react';
-import Link from 'next/link';
 import type { Route } from 'next';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/cn';
 
@@ -73,9 +73,7 @@ export function NotificationBell() {
           className="absolute right-0 top-full mt-1.5 w-80 sm:w-96 max-w-[calc(100vw-2rem)] rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg shadow-gray-900/10 dark:shadow-gray-900/40 z-50 overflow-hidden"
         >
           <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
-            <p className="text-sm font-bold text-gray-900 dark:text-white">
-              Bildirishnomalar
-            </p>
+            <p className="text-sm font-bold text-gray-900 dark:text-white">Bildirishnomalar</p>
             {items.length > 0 ? (
               <span className="text-[10px] font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400 tabular-nums">
                 {items.length}

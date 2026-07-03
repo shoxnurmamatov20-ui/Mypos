@@ -15,7 +15,11 @@ export function initials(fullName: string): string {
 /** Truncate with ellipsis (unicode-safe) */
 export function truncate(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
-  return Array.from(text).slice(0, maxLength - 1).join('') + '…';
+  return (
+    Array.from(text)
+      .slice(0, maxLength - 1)
+      .join('') + '…'
+  );
 }
 
 /** Basic slug for URL — keeps Latin + Cyrillic alphanumerics, lowercases */

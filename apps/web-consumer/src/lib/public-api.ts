@@ -21,8 +21,7 @@ import type { TranslatedString } from '@mypos/api-client';
 
 // ------------ Configuration ------------
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:58000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:58000';
 
 /** Cache-revalidation window for browse endpoints (60s ISR). */
 const DEFAULT_REVALIDATE = 60;
@@ -214,10 +213,7 @@ type FetcherOptions = {
   noStore?: boolean;
 };
 
-async function publicFetch<T>(
-  path: string,
-  init: RequestInit & FetcherOptions = {},
-): Promise<T> {
+async function publicFetch<T>(path: string, init: RequestInit & FetcherOptions = {}): Promise<T> {
   const { revalidate, locale, noStore, ...fetchInit } = init;
   const headers = new Headers(fetchInit.headers);
   headers.set('Accept', 'application/json');
@@ -245,11 +241,7 @@ async function publicFetch<T>(
     } catch {
       body = await response.text();
     }
-    throw new PublicApiError(
-      `HTTP ${response.status} on ${path}`,
-      response.status,
-      body,
-    );
+    throw new PublicApiError(`HTTP ${response.status} on ${path}`, response.status, body);
   }
 
   if (response.status === 204) return undefined as T;
@@ -262,12 +254,7 @@ function buildQuery(params: Record<string, unknown> | undefined): string {
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries
-      .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-      .join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 }
 
 // ------------ Public API surface ------------
@@ -275,10 +262,7 @@ function buildQuery(params: Record<string, unknown> | undefined): string {
 export const publicConsumerApi = {
   restaurants: {
     /** GET /api/v1/public/restaurants — paginated marketplace list. */
-    list: (
-      params?: PublicRestaurantsListParams,
-      options: FetcherOptions = {},
-    ) =>
+    list: (params?: PublicRestaurantsListParams, options: FetcherOptions = {}) =>
       publicFetch<PublicRestaurantsListResponse>(
         `/api/v1/public/restaurants${buildQuery(params)}`,
         { revalidate: options.revalidate ?? DEFAULT_REVALIDATE, ...options },
@@ -295,10 +279,10 @@ export const publicConsumerApi = {
   menu: {
     /** GET /api/v1/public/menu/{slug} — public menu (cached server-side). */
     bySlug: (slug: string, options: FetcherOptions = {}) =>
-      publicFetch<PublicMenuResponse>(
-        `/api/v1/public/menu/${encodeURIComponent(slug)}`,
-        { revalidate: options.revalidate ?? MENU_REVALIDATE, ...options },
-      ),
+      publicFetch<PublicMenuResponse>(`/api/v1/public/menu/${encodeURIComponent(slug)}`, {
+        revalidate: options.revalidate ?? MENU_REVALIDATE,
+        ...options,
+      }),
   },
 
   orders: {

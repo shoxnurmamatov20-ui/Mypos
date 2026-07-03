@@ -1,4 +1,4 @@
-import type { UUID, ISO8601, Locale, Currency } from './common';
+import type { Currency, ISO8601, Locale, UUID } from './common';
 
 export type TenantPlan = 'free' | 'starter' | 'pro' | 'business' | 'enterprise';
 export type TenantStatus = 'active' | 'suspended' | 'trialing' | 'cancelled';
@@ -17,9 +17,9 @@ export type Tenant = {
 };
 
 export type TenantRole =
-  | 'super_admin'      // MyPOS platform ops
-  | 'owner'            // Tenant owner (multi-location)
-  | 'manager'          // Single-location manager
+  | 'super_admin' // MyPOS platform ops
+  | 'owner' // Tenant owner (multi-location)
+  | 'manager' // Single-location manager
   | 'cashier'
   | 'waiter'
   | 'chef'

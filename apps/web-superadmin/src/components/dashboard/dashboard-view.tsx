@@ -30,7 +30,7 @@ import { PlanDonutCard } from './plan-donut-card';
 import { RecentTenantsTable } from './recent-tenants-table';
 import { SentimentDonutCard } from './sentiment-donut-card';
 import { StatCard } from './stat-card';
-import { STATUS_KEYS, StatusBreakdownCard } from './status-breakdown-card';
+import { type STATUS_KEYS, StatusBreakdownCard } from './status-breakdown-card';
 import { SystemHealthBar } from './system-health-bar';
 
 type DashboardViewProps = { locale: string };
@@ -67,10 +67,13 @@ export function DashboardView({ locale }: DashboardViewProps) {
 
   const statusCounts = useMemo(() => {
     const init = { active: 0, trialing: 0, past_due: 0, suspended: 0 };
-    return tenants.reduce((acc, t) => {
-      if (t.status in acc) acc[t.status as (typeof STATUS_KEYS)[number]]++;
-      return acc;
-    }, init as Record<(typeof STATUS_KEYS)[number], number>);
+    return tenants.reduce(
+      (acc, t) => {
+        if (t.status in acc) acc[t.status as (typeof STATUS_KEYS)[number]]++;
+        return acc;
+      },
+      init as Record<(typeof STATUS_KEYS)[number], number>,
+    );
   }, [tenants]);
   const statusTotal = Object.values(statusCounts).reduce((a, b) => a + b, 0);
 
@@ -126,24 +129,25 @@ export function DashboardView({ locale }: DashboardViewProps) {
   }
 
   // Derived KPIs to fill the 4×2 grid.
-  const activeTenants  = kpis?.active_tenants.value ?? 0;
-  const trialing       = kpis?.trialing_tenants ?? 0;
-  const totalRevenue   = kpis?.mrr_minor.value ?? 0;
-  const totalOrders    = kpis?.total_orders.value ?? 0;
-  const atRisk         = kpis?.at_risk_tenants ?? 0;
-  const nrr            = kpis?.nrr_pct.value ?? 0;
-  const arrMinor       = totalRevenue * 12;
-  const conversionPct  = activeTenants + trialing > 0
-    ? Math.round((activeTenants / (activeTenants + trialing)) * 100)
-    : 0;
+  const activeTenants = kpis?.active_tenants.value ?? 0;
+  const trialing = kpis?.trialing_tenants ?? 0;
+  const totalRevenue = kpis?.mrr_minor.value ?? 0;
+  const totalOrders = kpis?.total_orders.value ?? 0;
+  const atRisk = kpis?.at_risk_tenants ?? 0;
+  const nrr = kpis?.nrr_pct.value ?? 0;
+  const arrMinor = totalRevenue * 12;
+  const conversionPct =
+    activeTenants + trialing > 0
+      ? Math.round((activeTenants / (activeTenants + trialing)) * 100)
+      : 0;
 
   const tenantTrend = kpis?.active_tenants.trend_pct ?? 0;
-  const mrrTrend    = kpis?.mrr_minor.trend_pct ?? 0;
+  const mrrTrend = kpis?.mrr_minor.trend_pct ?? 0;
   const ordersTrend = kpis?.total_orders.trend_pct ?? 0;
-  const nrrTrend    = kpis?.nrr_pct.trend_pct ?? 0;
+  const nrrTrend = kpis?.nrr_pct.trend_pct ?? 0;
 
   const yangi = (text = 'Yangi') => ({ tone: 'good' as const, text });
-  const xato  = (text = 'Yangi') => ({ tone: 'bad'  as const, text });
+  const xato = (text = 'Yangi') => ({ tone: 'bad' as const, text });
 
   return (
     <div className="space-y-3.5 md:space-y-4">
@@ -229,12 +233,18 @@ export function DashboardView({ locale }: DashboardViewProps) {
         <div className="lg:col-span-2 bg-white dark:bg-[#111827] border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] rounded-[12px] overflow-hidden transition-colors">
           <div className="px-4 sm:px-[18px] pt-4 pb-1 flex flex-wrap items-start justify-between gap-2">
             <div className="min-w-0">
-              <h3 className="text-[14px] font-bold text-[#16221f] dark:text-white">So&apos;nggi 7 kun</h3>
-              <p className="text-[12px] text-[#62716d] dark:text-[#94a3b8] mt-0.5">Daromad dinamikasi</p>
+              <h3 className="text-[14px] font-bold text-[#16221f] dark:text-white">
+                So&apos;nggi 7 kun
+              </h3>
+              <p className="text-[12px] text-[#62716d] dark:text-[#94a3b8] mt-0.5">
+                Daromad dinamikasi
+              </p>
             </div>
             <span className="text-[12px] text-[#62716d] dark:text-[#94a3b8] tabular-nums">
               jami{' '}
-              <span className="font-bold text-[#16221f] dark:text-white">{formatNumber(last7Total)}K so&apos;m</span>
+              <span className="font-bold text-[#16221f] dark:text-white">
+                {formatNumber(last7Total)}K so&apos;m
+              </span>
             </span>
           </div>
           <div className="px-2 sm:px-[18px] pb-[18px]">
@@ -245,13 +255,28 @@ export function DashboardView({ locale }: DashboardViewProps) {
                 <AreaChart data={last7} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
                   <defs>
                     <linearGradient id="grad7" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%"   stopColor="#0f766e" stopOpacity={0.4} />
+                      <stop offset="0%" stopColor="#0f766e" stopOpacity={0.4} />
                       <stop offset="100%" stopColor="#0f766e" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(22,34,31,0.06)" vertical={false} />
-                  <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#62716d' }} tickLine={false} axisLine={false} />
-                  <YAxis tick={{ fontSize: 11, fill: '#62716d' }} tickLine={false} axisLine={false} width={40} tickFormatter={(v) => `${v}K`} />
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    stroke="rgba(22,34,31,0.06)"
+                    vertical={false}
+                  />
+                  <XAxis
+                    dataKey="label"
+                    tick={{ fontSize: 11, fill: '#62716d' }}
+                    tickLine={false}
+                    axisLine={false}
+                  />
+                  <YAxis
+                    tick={{ fontSize: 11, fill: '#62716d' }}
+                    tickLine={false}
+                    axisLine={false}
+                    width={40}
+                    tickFormatter={(v) => `${v}K`}
+                  />
                   <Tooltip
                     contentStyle={{
                       background: '#fff',

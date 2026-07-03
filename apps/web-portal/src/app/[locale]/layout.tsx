@@ -1,8 +1,8 @@
 import { AnalyticsBoot } from '@mypos/analytics';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 import '../globals.css';
 
 const locales = ['uz', 'ru', 'en', 'kz'] as const;

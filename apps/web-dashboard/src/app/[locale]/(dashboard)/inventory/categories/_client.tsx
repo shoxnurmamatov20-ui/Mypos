@@ -1,6 +1,6 @@
 'use client';
 
-import { inventoryApi, type IngredientCategory } from '@mypos/api-client';
+import { type IngredientCategory, inventoryApi } from '@mypos/api-client';
 import {
   Button,
   DataTable,

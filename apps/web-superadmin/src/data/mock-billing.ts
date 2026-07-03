@@ -50,10 +50,8 @@ export type Invoice = {
 };
 
 const BASE_NOW = new Date('2026-04-25T17:30:00Z').getTime();
-const isoDate = (timestamp: number): string =>
-  new Date(timestamp).toISOString().slice(0, 10);
-const isoTimestamp = (timestamp: number): string =>
-  new Date(timestamp).toISOString();
+const isoDate = (timestamp: number): string => new Date(timestamp).toISOString().slice(0, 10);
+const isoTimestamp = (timestamp: number): string => new Date(timestamp).toISOString();
 
 /** Sums every active tenant's MRR — single source of truth for the page. */
 const computeTotalMrrMinor = (): number =>
@@ -67,9 +65,8 @@ const TOTAL_MRR_MINOR = computeTotalMrrMinor();
 export const MOCK_MRR_SUMMARY: MrrSummary = {
   total_mrr_minor: TOTAL_MRR_MINOR,
   arr_minor: TOTAL_MRR_MINOR * 12,
-  active_subscriptions: MOCK_TENANTS.filter(
-    (t) => t.status === 'active' || t.status === 'past_due',
-  ).length,
+  active_subscriptions: MOCK_TENANTS.filter((t) => t.status === 'active' || t.status === 'past_due')
+    .length,
   trial_conversion_pct: 62.5,
   trial_conversion_trend_pct: 4.2,
   movement_30d: {
@@ -81,39 +78,24 @@ export const MOCK_MRR_SUMMARY: MrrSummary = {
 };
 
 /** 30-day daily MRR movement series — small magnitudes, deterministic. */
-export const MOCK_MRR_MOVEMENT: MrrMovementPoint[] = Array.from(
-  { length: 30 },
-  (_, idx) => {
-    const day = BASE_NOW - (29 - idx) * 24 * 60 * 60 * 1000;
-    // Slight wave around mean. New > expansion > churn most days.
-    const newWave = Math.sin(idx / 2.4) * 600_000 + 1_400_000;
-    const expansionWave = Math.cos(idx / 3.1) * 300_000 + 700_000;
-    const churnWave = Math.sin(idx / 1.9 + 1) * 250_000 + 450_000;
+export const MOCK_MRR_MOVEMENT: MrrMovementPoint[] = Array.from({ length: 30 }, (_, idx) => {
+  const day = BASE_NOW - (29 - idx) * 24 * 60 * 60 * 1000;
+  // Slight wave around mean. New > expansion > churn most days.
+  const newWave = Math.sin(idx / 2.4) * 600_000 + 1_400_000;
+  const expansionWave = Math.cos(idx / 3.1) * 300_000 + 700_000;
+  const churnWave = Math.sin(idx / 1.9 + 1) * 250_000 + 450_000;
 
-    return {
-      date: isoDate(day),
-      new_minor: Math.max(200_000, Math.round(newWave + ((idx * 7919) % 7) * 50_000)),
-      expansion_minor: Math.max(
-        100_000,
-        Math.round(expansionWave + ((idx * 3343) % 5) * 30_000),
-      ),
-      churn_minor: Math.max(
-        50_000,
-        Math.round(churnWave + ((idx * 2137) % 4) * 25_000),
-      ),
-    };
-  },
-);
+  return {
+    date: isoDate(day),
+    new_minor: Math.max(200_000, Math.round(newWave + ((idx * 7919) % 7) * 50_000)),
+    expansion_minor: Math.max(100_000, Math.round(expansionWave + ((idx * 3343) % 5) * 30_000)),
+    churn_minor: Math.max(50_000, Math.round(churnWave + ((idx * 2137) % 4) * 25_000)),
+  };
+});
 
 /** Donut + table breakdown of MRR per plan (only active payers). */
 export const MOCK_MRR_BY_PLAN: MrrByPlan[] = (() => {
-  const PLAN_ORDER: readonly TenantPlan[] = [
-    'enterprise',
-    'business',
-    'pro',
-    'starter',
-    'free',
-  ];
+  const PLAN_ORDER: readonly TenantPlan[] = ['enterprise', 'business', 'pro', 'starter', 'free'];
   const grouped = new Map<TenantPlan, { count: number; mrr_minor: number }>();
   for (const tenant of MOCK_TENANTS) {
     if (tenant.status === 'cancelled' || tenant.status === 'suspended') continue;
@@ -164,17 +146,15 @@ export type SubscriptionRow = {
   last_invoice_at: string;
 };
 
-export const MOCK_SUBSCRIPTIONS: SubscriptionRow[] = MOCK_TENANTS.map(
-  (tenant, idx) => ({
-    tenant_id: tenant.id,
-    tenant_name: tenant.name,
-    plan: tenant.plan,
-    status: tenant.status,
-    mrr_minor: tenant.mrr_minor,
-    renews_at: nextRenewalIso(tenant),
-    last_invoice_at: lastInvoiceIso(tenant, idx),
-  }),
-);
+export const MOCK_SUBSCRIPTIONS: SubscriptionRow[] = MOCK_TENANTS.map((tenant, idx) => ({
+  tenant_id: tenant.id,
+  tenant_name: tenant.name,
+  plan: tenant.plan,
+  status: tenant.status,
+  mrr_minor: tenant.mrr_minor,
+  renews_at: nextRenewalIso(tenant),
+  last_invoice_at: lastInvoiceIso(tenant, idx),
+}));
 
 /** 20 mock invoices spread across last ~45 days. Statuses mixed. */
 export const MOCK_INVOICES: Invoice[] = (() => {

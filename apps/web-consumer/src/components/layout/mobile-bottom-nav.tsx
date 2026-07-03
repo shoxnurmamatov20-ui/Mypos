@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { Home, Search, ShoppingBag, User } from 'lucide-react';
-import Link from 'next/link';
 import type { Route } from 'next';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAuthStore } from '@/stores/auth';
@@ -23,9 +23,7 @@ export function MobileBottomNav() {
   const cartCount = useCartStore(selectCartCount);
   const user = useAuthStore((s) => s.user);
 
-  const profileHref = (
-    user ? `/${locale}/profile` : `/${locale}/login`
-  ) as Route;
+  const profileHref = (user ? `/${locale}/profile` : `/${locale}/login`) as Route;
 
   const tabs: Tab[] = [
     {
@@ -38,16 +36,13 @@ export function MobileBottomNav() {
       key: 'search',
       href: `/${locale}/search` as Route,
       icon: Search,
-      match: (p, l) =>
-        p.startsWith(`/${l}/search`) ||
-        p.startsWith(`/${l}/restaurants`),
+      match: (p, l) => p.startsWith(`/${l}/search`) || p.startsWith(`/${l}/restaurants`),
     },
     {
       key: 'cart',
       href: `/${locale}/cart` as Route,
       icon: ShoppingBag,
-      match: (p, l) =>
-        p.startsWith(`/${l}/cart`) || p.startsWith(`/${l}/checkout`),
+      match: (p, l) => p.startsWith(`/${l}/cart`) || p.startsWith(`/${l}/checkout`),
     },
     {
       key: 'profile',

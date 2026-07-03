@@ -1,4 +1,4 @@
-import type { UUID, ISO8601, Locale } from './common';
+import type { ISO8601, Locale, UUID } from './common';
 
 export type Customer = {
   id: UUID;

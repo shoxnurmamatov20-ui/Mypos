@@ -1,19 +1,67 @@
 'use client';
 
-import { type LucideIcon, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, type LucideIcon, Sparkles } from 'lucide-react';
 
 type Accent = 'teal' | 'amber' | 'green' | 'violet' | 'blue' | 'indigo' | 'rose' | 'pink' | 'sky';
 
-const ACCENT: Record<Accent, { iconBg: string; iconColor: string; chipBg: string; chipText: string }> = {
-  teal:   { iconBg: 'bg-[rgba(15,118,110,0.10)]',  iconColor: 'text-[#0f766e]', chipBg: 'bg-teal-50 dark:bg-teal-500/15',   chipText: 'text-teal-700 dark:text-teal-300' },
-  amber:  { iconBg: 'bg-[rgba(183,121,31,0.10)]',  iconColor: 'text-[#b7791f]', chipBg: 'bg-amber-50 dark:bg-amber-500/15', chipText: 'text-amber-700 dark:text-amber-300' },
-  green:  { iconBg: 'bg-[rgba(24,121,78,0.10)]',   iconColor: 'text-[#18794e]', chipBg: 'bg-emerald-50 dark:bg-emerald-500/15', chipText: 'text-emerald-700 dark:text-emerald-300' },
-  violet: { iconBg: 'bg-[rgba(124,58,237,0.10)]',  iconColor: 'text-[#7c3aed]', chipBg: 'bg-violet-50 dark:bg-violet-500/15', chipText: 'text-violet-700 dark:text-violet-300' },
-  blue:   { iconBg: 'bg-[rgba(37,99,235,0.10)]',   iconColor: 'text-[#2563eb]', chipBg: 'bg-blue-50 dark:bg-blue-500/15',   chipText: 'text-blue-700 dark:text-blue-300' },
-  indigo: { iconBg: 'bg-[rgba(99,102,241,0.10)]',  iconColor: 'text-[#6366f1]', chipBg: 'bg-indigo-50 dark:bg-indigo-500/15', chipText: 'text-indigo-700 dark:text-indigo-300' },
-  rose:   { iconBg: 'bg-[rgba(244,63,94,0.10)]',   iconColor: 'text-[#e11d48]', chipBg: 'bg-rose-50 dark:bg-rose-500/15',   chipText: 'text-rose-700 dark:text-rose-300' },
-  pink:   { iconBg: 'bg-[rgba(219,39,119,0.10)]',  iconColor: 'text-[#db2777]', chipBg: 'bg-pink-50 dark:bg-pink-500/15',   chipText: 'text-pink-700 dark:text-pink-300' },
-  sky:    { iconBg: 'bg-[rgba(14,165,233,0.10)]',  iconColor: 'text-[#0284c7]', chipBg: 'bg-sky-50 dark:bg-sky-500/15',     chipText: 'text-sky-700 dark:text-sky-300' },
+const ACCENT: Record<
+  Accent,
+  { iconBg: string; iconColor: string; chipBg: string; chipText: string }
+> = {
+  teal: {
+    iconBg: 'bg-[rgba(15,118,110,0.10)]',
+    iconColor: 'text-[#0f766e]',
+    chipBg: 'bg-teal-50 dark:bg-teal-500/15',
+    chipText: 'text-teal-700 dark:text-teal-300',
+  },
+  amber: {
+    iconBg: 'bg-[rgba(183,121,31,0.10)]',
+    iconColor: 'text-[#b7791f]',
+    chipBg: 'bg-amber-50 dark:bg-amber-500/15',
+    chipText: 'text-amber-700 dark:text-amber-300',
+  },
+  green: {
+    iconBg: 'bg-[rgba(24,121,78,0.10)]',
+    iconColor: 'text-[#18794e]',
+    chipBg: 'bg-emerald-50 dark:bg-emerald-500/15',
+    chipText: 'text-emerald-700 dark:text-emerald-300',
+  },
+  violet: {
+    iconBg: 'bg-[rgba(124,58,237,0.10)]',
+    iconColor: 'text-[#7c3aed]',
+    chipBg: 'bg-violet-50 dark:bg-violet-500/15',
+    chipText: 'text-violet-700 dark:text-violet-300',
+  },
+  blue: {
+    iconBg: 'bg-[rgba(37,99,235,0.10)]',
+    iconColor: 'text-[#2563eb]',
+    chipBg: 'bg-blue-50 dark:bg-blue-500/15',
+    chipText: 'text-blue-700 dark:text-blue-300',
+  },
+  indigo: {
+    iconBg: 'bg-[rgba(99,102,241,0.10)]',
+    iconColor: 'text-[#6366f1]',
+    chipBg: 'bg-indigo-50 dark:bg-indigo-500/15',
+    chipText: 'text-indigo-700 dark:text-indigo-300',
+  },
+  rose: {
+    iconBg: 'bg-[rgba(244,63,94,0.10)]',
+    iconColor: 'text-[#e11d48]',
+    chipBg: 'bg-rose-50 dark:bg-rose-500/15',
+    chipText: 'text-rose-700 dark:text-rose-300',
+  },
+  pink: {
+    iconBg: 'bg-[rgba(219,39,119,0.10)]',
+    iconColor: 'text-[#db2777]',
+    chipBg: 'bg-pink-50 dark:bg-pink-500/15',
+    chipText: 'text-pink-700 dark:text-pink-300',
+  },
+  sky: {
+    iconBg: 'bg-[rgba(14,165,233,0.10)]',
+    iconColor: 'text-[#0284c7]',
+    chipBg: 'bg-sky-50 dark:bg-sky-500/15',
+    chipText: 'text-sky-700 dark:text-sky-300',
+  },
 };
 
 type Stat = { label: string; value: string; tone?: 'good' | 'bad' | 'flat' };
@@ -45,7 +93,7 @@ export function PlaceholderSection({
   accent,
   stats = [],
   comingSoonLabel = 'Tez kunda',
-  actionLabel = "Talab yuborish",
+  actionLabel = 'Talab yuborish',
 }: Props) {
   const a = ACCENT[accent];
 
@@ -54,7 +102,9 @@ export function PlaceholderSection({
       {/* Page header */}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3 min-w-0">
-          <div className={`grid h-12 w-12 place-items-center rounded-[12px] flex-shrink-0 ${a.iconBg}`}>
+          <div
+            className={`grid h-12 w-12 place-items-center rounded-[12px] flex-shrink-0 ${a.iconBg}`}
+          >
             <Icon className={`h-6 w-6 ${a.iconColor}`} strokeWidth={2} />
           </div>
           <div className="min-w-0">
@@ -62,7 +112,9 @@ export function PlaceholderSection({
               <h1 className="text-[20px] sm:text-[22px] font-bold tracking-tight text-[#16221f] dark:text-white leading-tight">
                 {title}
               </h1>
-              <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-bold uppercase tracking-[0.06em] ${a.chipBg} ${a.chipText}`}>
+              <span
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10.5px] font-bold uppercase tracking-[0.06em] ${a.chipBg} ${a.chipText}`}
+              >
                 <Sparkles className="h-3 w-3" strokeWidth={2.4} />
                 {comingSoonLabel}
               </span>
@@ -102,7 +154,8 @@ export function PlaceholderSection({
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50 dark:opacity-30"
           style={{
-            background: 'radial-gradient(ellipse 50% 40% at 50% 0%, rgba(20,184,166,0.10), transparent 70%)',
+            background:
+              'radial-gradient(ellipse 50% 40% at 50% 0%, rgba(20,184,166,0.10), transparent 70%)',
           }}
         />
 

@@ -1,8 +1,9 @@
+import type { Icon } from '@phosphor-icons/react';
 import {
   ArrowRight,
   CalendarBlank,
-  CheckCircle,
   ChatCircleDots,
+  CheckCircle,
   CurrencyCircleDollar,
   FileText,
   Gavel,
@@ -18,7 +19,6 @@ import {
   WarningCircle,
   XCircle,
 } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
@@ -28,7 +28,8 @@ type Props = { params: Promise<{ locale: string }> };
 
 export const metadata: Metadata = {
   title: 'Foydalanish shartlari — MyPOS',
-  description: "MyPOS xizmatidan foydalanish shartlari. Sizning huquqlaringiz va majburiyatlaringiz.",
+  description:
+    'MyPOS xizmatidan foydalanish shartlari. Sizning huquqlaringiz va majburiyatlaringiz.',
 };
 
 const LAST_UPDATED = '2026-05-01';
@@ -39,22 +40,30 @@ type Highlight = { Icon: Icon; tint: string; bg: string; title: string; body: st
 
 const HIGHLIGHTS: ReadonlyArray<Highlight> = [
   {
-    Icon: Handshake, tint: 'text-[#5eead4]', bg: 'bg-[rgba(20,184,166,0.15)]',
+    Icon: Handshake,
+    tint: 'text-[#5eead4]',
+    bg: 'bg-[rgba(20,184,166,0.15)]',
     title: '14 kun bepul',
-    body: "Karta kerak emas · Istalgan vaqtda bekor qilish · Hech qanday majburiyat",
+    body: 'Karta kerak emas · Istalgan vaqtda bekor qilish · Hech qanday majburiyat',
   },
   {
-    Icon: CurrencyCircleDollar, tint: 'text-emerald-400', bg: 'bg-emerald-500/15',
-    title: "30 kun pul qaytarish",
+    Icon: CurrencyCircleDollar,
+    tint: 'text-emerald-400',
+    bg: 'bg-emerald-500/15',
+    title: '30 kun pul qaytarish',
     body: "Birinchi 30 kun ichida xohlasangiz — to'liq pul qaytariladi, savol berilmaydi",
   },
   {
-    Icon: Lock, tint: 'text-amber-400', bg: 'bg-amber-500/15',
+    Icon: Lock,
+    tint: 'text-amber-400',
+    bg: 'bg-amber-500/15',
     title: "Yashirin to'lov yo'q",
     body: "Tarifda ko'rsatilgan narx — yakuniy narx. Hech qanday qo'shimcha komissiya yoki yashirin haq",
   },
   {
-    Icon: ShieldCheck, tint: 'text-[#ff0037]', bg: 'bg-[rgba(255,0,55,0.15)]',
+    Icon: ShieldCheck,
+    tint: 'text-[#ff0037]',
+    bg: 'bg-[rgba(255,0,55,0.15)]',
     title: '99.9% uptime kafolat',
     body: "Tizim ishlamasa — har soat uchun 1% pul qaytariladi. SLA aniq va o'lchanadigan",
   },
@@ -76,31 +85,33 @@ const SECTIONS: ReadonlyArray<Section> = [
     id: 'acceptance',
     Icon: CheckCircle,
     title: '1. Shartlarni qabul qilish',
-    intro: "MyPOS xizmatidan ro'yxatdan o'tib foydalanishni boshlaganingizda — ushbu shartlarga rozisiz deb hisoblanadi. Shartlarga rozi bo'lmasangiz, xizmatdan foydalanmang.",
+    intro:
+      "MyPOS xizmatidan ro'yxatdan o'tib foydalanishni boshlaganingizda — ushbu shartlarga rozisiz deb hisoblanadi. Shartlarga rozi bo'lmasangiz, xizmatdan foydalanmang.",
     bullets: [
-      "Siz 18 yoshdan katta va shartnoma tuzishga huquqlisiz",
+      'Siz 18 yoshdan katta va shartnoma tuzishga huquqlisiz',
       "O'zbekiston Respublikasi yoki Markaziy Osiyo davlatlaridan birida ro'yxatdan o'tgan tadbirkorsiz",
       "Yuboradigan barcha ma'lumotlar haqiqiy va to'liq",
-      "Akkauntdan faqat siz va sizning xodimlaringiz foydalanadi",
+      'Akkauntdan faqat siz va sizning xodimlaringiz foydalanadi',
     ],
   },
   {
     id: 'service',
     Icon: Sparkle,
     title: "2. Xizmatning ta'rifi",
-    intro: "MyPOS — restoran, kafe, oshxona va boshqa ovqatlanish nuqtalari uchun cloud asosidagi POS (kassa) tizimidir.",
+    intro:
+      'MyPOS — restoran, kafe, oshxona va boshqa ovqatlanish nuqtalari uchun cloud asosidagi POS (kassa) tizimidir.',
     items: [
       {
-        label: "Asosiy funksiyalar",
-        body: "Buyurtma qabul qilish, chek chiqarish, smena hisoboti, menyu va inventar boshqaruvi, xodimlar va smena rejasi, biznes tahlili.",
+        label: 'Asosiy funksiyalar',
+        body: 'Buyurtma qabul qilish, chek chiqarish, smena hisoboti, menyu va inventar boshqaruvi, xodimlar va smena rejasi, biznes tahlili.',
       },
       {
         label: "To'lov integratsiyasi",
         body: "Click, Payme, Uzcard, Visa/Mastercard va naqd to'lov. Har bir tranzaksiya — to'lov tizimining o'z qoidalariga bo'ysunadi.",
       },
       {
-        label: "Yetkazib berish",
-        body: "Cloud xizmat — internet orqali ishlaydi. Offline rejim 24 soatgacha mavjud. Avtomatik sinxronizatsiya.",
+        label: 'Yetkazib berish',
+        body: 'Cloud xizmat — internet orqali ishlaydi. Offline rejim 24 soatgacha mavjud. Avtomatik sinxronizatsiya.',
       },
     ],
   },
@@ -108,12 +119,13 @@ const SECTIONS: ReadonlyArray<Section> = [
     id: 'account',
     Icon: UserCircle,
     title: '3. Akkaunt va xavfsizlik',
-    intro: "Akkauntingiz — sizning mas'uliyatingizdadir. Parol va kirish ma'lumotlarini xavfsiz saqlang.",
+    intro:
+      "Akkauntingiz — sizning mas'uliyatingizdadir. Parol va kirish ma'lumotlarini xavfsiz saqlang.",
     bullets: [
-      "Parolingizni hech kim bilan ulashmang",
-      "Xodimlaringizga alohida hisoblar yarating (har biri uchun rol va ruxsat)",
-      "Shubhali faollik sezsangiz darhol xabar bering: security@mypos.uz",
-      "Sizning akkauntingiz orqali amalga oshirilgan barcha amallar uchun siz javobgar",
+      'Parolingizni hech kim bilan ulashmang',
+      'Xodimlaringizga alohida hisoblar yarating (har biri uchun rol va ruxsat)',
+      'Shubhali faollik sezsangiz darhol xabar bering: security@mypos.uz',
+      'Sizning akkauntingiz orqali amalga oshirilgan barcha amallar uchun siz javobgar',
       "Akkauntni boshqalarga sotish yoki ijaraga berish — ta'qiqlanadi",
     ],
   },
@@ -121,7 +133,8 @@ const SECTIONS: ReadonlyArray<Section> = [
     id: 'pricing',
     Icon: CurrencyCircleDollar,
     title: "4. Narxlar va to'lov",
-    intro: "MyPOS oyma-oy yoki yillik obuna asosida ishlaydi. Joriy tariflar — mypos.uz/pricing sahifasida.",
+    intro:
+      'MyPOS oyma-oy yoki yillik obuna asosida ishlaydi. Joriy tariflar — mypos.uz/pricing sahifasida.',
     items: [
       {
         label: "To'lov muddati",
@@ -129,14 +142,14 @@ const SECTIONS: ReadonlyArray<Section> = [
       },
       {
         label: "Narx o'zgarishi",
-        body: "Yangi narxlar haqida 60 kun oldin email orqali xabar beramiz. Yangi narx faqat keyingi billing davridan boshlanadi.",
+        body: 'Yangi narxlar haqida 60 kun oldin email orqali xabar beramiz. Yangi narx faqat keyingi billing davridan boshlanadi.',
       },
       {
-        label: "Tarif yangilash/pasaytirish",
-        body: "Yangilash — darhol faollashadi, narx pro-rata hisoblanadi. Pasaytirish — keyingi davrdan.",
+        label: 'Tarif yangilash/pasaytirish',
+        body: 'Yangilash — darhol faollashadi, narx pro-rata hisoblanadi. Pasaytirish — keyingi davrdan.',
       },
       {
-        label: "Pul qaytarish",
+        label: 'Pul qaytarish',
         body: "Birinchi 30 kun ichida — to'liq qaytariladi. Keyin — qo'llanilmagan davr uchun pro-rata.",
       },
     ],
@@ -146,24 +159,26 @@ const SECTIONS: ReadonlyArray<Section> = [
     id: 'usage',
     Icon: Globe,
     title: '5. Foydalanish qoidalari',
-    intro: "MyPOS'ni qonuniy va halol biznes uchun foydalaning. Quyidagi amallar qat'iyan ta'qiqlanadi:",
+    intro:
+      "MyPOS'ni qonuniy va halol biznes uchun foydalaning. Quyidagi amallar qat'iyan ta'qiqlanadi:",
     prohibited: [
-      "Qonunga zid biznes faoliyati uchun foydalanish",
-      "Spam yuborish, foydalanuvchilarni aldash, firibgarlik",
-      "Tizimga noruxsat kirishga urinish, hack qilish",
-      "Boshqa foydalanuvchilarga ziyon yetkazish",
-      "MyPOS kodini reverse-engineer qilish yoki nusxalash",
+      'Qonunga zid biznes faoliyati uchun foydalanish',
+      'Spam yuborish, foydalanuvchilarni aldash, firibgarlik',
+      'Tizimga noruxsat kirishga urinish, hack qilish',
+      'Boshqa foydalanuvchilarga ziyon yetkazish',
+      'MyPOS kodini reverse-engineer qilish yoki nusxalash',
       "Ma'lumotlarni mass-eksport qilish va sotish",
-      "Bir akkauntdan bir nechta restoran boshqarish (har biri uchun alohida akkaunt)",
-      "Avtomatik bot yoki skript bilan tizimni majburlash",
+      'Bir akkauntdan bir nechta restoran boshqarish (har biri uchun alohida akkaunt)',
+      'Avtomatik bot yoki skript bilan tizimni majburlash',
     ],
-    note: "Qoidalarni buzganda — akkaunt darhol bloklanadi, pul qaytarilmaydi. Jiddiy holatlarda — huquq-tartibot organlariga murojaat qilamiz.",
+    note: 'Qoidalarni buzganda — akkaunt darhol bloklanadi, pul qaytarilmaydi. Jiddiy holatlarda — huquq-tartibot organlariga murojaat qilamiz.',
   },
   {
     id: 'data',
     Icon: ShieldCheck,
     title: "6. Sizning ma'lumotlaringiz",
-    intro: "Restoraningiz tarkibida yaratilgan barcha ma'lumotlar — menyu, buyurtmalar, hisobotlar, mijoz ma'lumotlari — SIZNING mulkingiz. MyPOS faqat xizmat ko'rsatish uchun foydalanadi.",
+    intro:
+      "Restoraningiz tarkibida yaratilgan barcha ma'lumotlar — menyu, buyurtmalar, hisobotlar, mijoz ma'lumotlari — SIZNING mulkingiz. MyPOS faqat xizmat ko'rsatish uchun foydalanadi.",
     bullets: [
       "Ma'lumotlaringizni istalgan vaqtda eksport qilishingiz mumkin (JSON yoki Excel)",
       "Akkaunt o'chirilganda — 90 kun ichida butunlay yo'q qilinadi",
@@ -175,20 +190,21 @@ const SECTIONS: ReadonlyArray<Section> = [
   {
     id: 'uptime',
     Icon: Sparkle,
-    title: "7. SLA va xizmat kafolati",
-    intro: "MyPOS 99.9% uptime'ga kafolat beradi. Bu yiliga maksimal 8 soat 45 daqiqa downtime degani.",
+    title: '7. SLA va xizmat kafolati',
+    intro:
+      "MyPOS 99.9% uptime'ga kafolat beradi. Bu yiliga maksimal 8 soat 45 daqiqa downtime degani.",
     items: [
       {
-        label: "Ishlamay qolish",
+        label: 'Ishlamay qolish',
         body: "Tizim ishlamagan har bir to'liq soat uchun — joriy oy narxidan 1% kompensatsiya. Maksimal 50%.",
       },
       {
-        label: "Planli xizmat",
-        body: "Yangilanish va texnik ishlar — Yakshanba 03:00–05:00 (Toshkent vaqti). Sizga 7 kun avval xabar beriladi. Bu downtime hisobiga kirmaydi.",
+        label: 'Planli xizmat',
+        body: 'Yangilanish va texnik ishlar — Yakshanba 03:00–05:00 (Toshkent vaqti). Sizga 7 kun avval xabar beriladi. Bu downtime hisobiga kirmaydi.',
       },
       {
-        label: "Force majeure",
-        body: "Tabiiy ofat, urush, hukumat qarori, internet provayder uzilishi va boshqa MyPOS nazoratidan tashqaridagi holatlar SLA hisobiga kirmaydi.",
+        label: 'Force majeure',
+        body: 'Tabiiy ofat, urush, hukumat qarori, internet provayder uzilishi va boshqa MyPOS nazoratidan tashqaridagi holatlar SLA hisobiga kirmaydi.',
       },
     ],
   },
@@ -196,27 +212,28 @@ const SECTIONS: ReadonlyArray<Section> = [
     id: 'liability',
     Icon: ScalesIcon,
     title: "8. Mas'uliyat chegarasi",
-    intro: "MyPOS o'z xizmatini iloji boricha mukammal ko'rsatishga harakat qiladi, ammo ba'zi cheklovlar mavjud:",
+    intro:
+      "MyPOS o'z xizmatini iloji boricha mukammal ko'rsatishga harakat qiladi, ammo ba'zi cheklovlar mavjud:",
     bullets: [
       "Mas'uliyatimizning maksimal hajmi — oxirgi 12 oy ichida to'langan pulingiz miqdoridir",
       "Bilvosita zararlar (mijoz yo'qotish, foyda yo'qolishi) qoplanmaydi",
       "Sizning xato kiritgan ma'lumotlaringiz uchun javobgar emasmiz",
-      "3-tomon xizmatlari (Click, Payme, soliq idoralari) muammosi uchun javobgar emasmiz",
+      '3-tomon xizmatlari (Click, Payme, soliq idoralari) muammosi uchun javobgar emasmiz',
       "Internet aloqasi muammolari MyPOS'ning mas'uliyatida emas",
     ],
   },
   {
     id: 'termination',
     Icon: XCircle,
-    title: "9. Shartnomani bekor qilish",
-    intro: "Siz yoki MyPOS shartnomani istalgan vaqtda bekor qila olasiz.",
+    title: '9. Shartnomani bekor qilish',
+    intro: 'Siz yoki MyPOS shartnomani istalgan vaqtda bekor qila olasiz.',
     items: [
       {
-        label: "Sizning huquqingiz",
+        label: 'Sizning huquqingiz',
         body: "Istalgan vaqtda 'Akkauntni o'chirish' tugmasini bosib bekor qilish mumkin. Hech qanday sabab kerak emas. Joriy davr oxirigacha xizmat ishlaydi.",
       },
       {
-        label: "Bizning huquqimiz",
+        label: 'Bizning huquqimiz',
         body: "Quyidagi hollarda akkauntni bekor qilamiz: shartlarni buzish, to'lov 30+ kun kechikishi, qonunbuzarlik, boshqa foydalanuvchilarga zarar yetkazish.",
       },
       {
@@ -228,13 +245,14 @@ const SECTIONS: ReadonlyArray<Section> = [
   {
     id: 'changes',
     Icon: CalendarBlank,
-    title: '10. Shartlardagi o\'zgarishlar',
-    intro: "Ushbu shartlar vaqti-vaqti bilan yangilanishi mumkin. Har bir muhim o'zgarish haqida sizga email orqali 30 kun oldin xabar beramiz. Yangi versiya kuchga kirgandan keyin xizmatdan foydalanishni davom ettirsangiz — yangi shartlarga rozisiz deb hisoblanadi.",
+    title: "10. Shartlardagi o'zgarishlar",
+    intro:
+      "Ushbu shartlar vaqti-vaqti bilan yangilanishi mumkin. Har bir muhim o'zgarish haqida sizga email orqali 30 kun oldin xabar beramiz. Yangi versiya kuchga kirgandan keyin xizmatdan foydalanishni davom ettirsangiz — yangi shartlarga rozisiz deb hisoblanadi.",
   },
   {
     id: 'law',
     Icon: Gavel,
-    title: '11. Qo\'llaniladigan qonun',
+    title: "11. Qo'llaniladigan qonun",
     intro: "Ushbu shartnoma O'zbekiston Respublikasi qonunlari asosida tartibga solinadi.",
     bullets: [
       "Barcha kelishmovchiliklar avval do'stona muzokaralar orqali hal qilinadi",
@@ -252,18 +270,21 @@ export default async function TermsPage({ params }: Props) {
     <main>
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#001B1B]">
-        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]" />
+        <div
+          aria-hidden="true"
+          className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]"
+        />
         <div className="relative mx-auto max-w-3xl px-5 pt-20 sm:pt-24 pb-10 text-center">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(15,118,110,0.25)] bg-[rgba(15,118,110,0.10)] text-[#5eead4] text-[11px] font-bold uppercase tracking-[0.08em]">
             <Gavel size={11} weight="fill" />
             HUQUQIY
           </span>
           <h1 className="mt-5 text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold leading-[1.05] tracking-tight text-white">
-            Foydalanish{' '}
-            <span className="gradient-teal">shartlari</span>
+            Foydalanish <span className="gradient-teal">shartlari</span>
           </h1>
           <p className="mx-auto mt-4 max-w-[36rem] text-[15px] sm:text-[16px] leading-relaxed text-white/70">
-            MyPOS xizmatidan foydalanish bo&apos;yicha siz va biz o&apos;rtasidagi rasmiy kelishuv. Aniq, oddiy va halol.
+            MyPOS xizmatidan foydalanish bo&apos;yicha siz va biz o&apos;rtasidagi rasmiy kelishuv.
+            Aniq, oddiy va halol.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-2 text-[11.5px]">
@@ -303,11 +324,18 @@ export default async function TermsPage({ params }: Props) {
 
             <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {HIGHLIGHTS.map((h) => (
-                <article key={h.title} className="rounded-xl ring-1 ring-inset ring-white/[0.08] bg-white/[0.02] p-4">
-                  <span className={`inline-flex h-9 w-9 items-center justify-center rounded-lg ring-1 ring-inset ring-white/10 ${h.bg}`}>
+                <article
+                  key={h.title}
+                  className="rounded-xl ring-1 ring-inset ring-white/[0.08] bg-white/[0.02] p-4"
+                >
+                  <span
+                    className={`inline-flex h-9 w-9 items-center justify-center rounded-lg ring-1 ring-inset ring-white/10 ${h.bg}`}
+                  >
                     <h.Icon size={17} weight="bold" className={h.tint} />
                   </span>
-                  <h3 className="mt-3 text-[13.5px] font-bold tracking-tight text-white">{h.title}</h3>
+                  <h3 className="mt-3 text-[13.5px] font-bold tracking-tight text-white">
+                    {h.title}
+                  </h3>
                   <p className="mt-1 text-[11.5px] leading-relaxed text-white/60">{h.body}</p>
                 </article>
               ))}
@@ -332,7 +360,11 @@ export default async function TermsPage({ params }: Props) {
                       href={`#${s.id}`}
                       className="press group flex items-center gap-2 px-2.5 py-2 rounded-lg text-[12.5px] font-semibold text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                     >
-                      <s.Icon size={13} weight="bold" className="text-[#5eead4]/70 shrink-0 group-hover:text-[#5eead4] transition-colors" />
+                      <s.Icon
+                        size={13}
+                        weight="bold"
+                        className="text-[#5eead4]/70 shrink-0 group-hover:text-[#5eead4] transition-colors"
+                      />
                       <span className="truncate">{s.title.replace(/^\d+\.\s/, '')}</span>
                     </a>
                   </li>
@@ -359,18 +391,17 @@ export default async function TermsPage({ params }: Props) {
                 </div>
 
                 {s.intro ? (
-                  <p className="mt-4 text-[13.5px] leading-relaxed text-white/75">
-                    {s.intro}
-                  </p>
+                  <p className="mt-4 text-[13.5px] leading-relaxed text-white/75">{s.intro}</p>
                 ) : null}
 
                 {s.items ? (
                   <ul className="mt-4 space-y-3">
                     {s.items.map((it) => (
-                      <li key={it.label} className="rounded-xl ring-1 ring-inset ring-white/[0.08] bg-white/[0.02] px-4 py-3">
-                        <div className="text-[12.5px] font-bold text-white">
-                          {it.label}
-                        </div>
+                      <li
+                        key={it.label}
+                        className="rounded-xl ring-1 ring-inset ring-white/[0.08] bg-white/[0.02] px-4 py-3"
+                      >
+                        <div className="text-[12.5px] font-bold text-white">{it.label}</div>
                         <p className="mt-1 text-[12.5px] leading-relaxed text-white/65">
                           {it.body}
                         </p>
@@ -383,7 +414,11 @@ export default async function TermsPage({ params }: Props) {
                   <ul className="mt-4 space-y-2">
                     {s.bullets.map((b) => (
                       <li key={b} className="flex items-start gap-2.5 text-[13px] text-white/75">
-                        <CheckCircle size={14} weight="fill" className="mt-[3px] text-[#5eead4] shrink-0" />
+                        <CheckCircle
+                          size={14}
+                          weight="fill"
+                          className="mt-[3px] text-[#5eead4] shrink-0"
+                        />
                         <span className="leading-relaxed">{b}</span>
                       </li>
                     ))}
@@ -394,7 +429,11 @@ export default async function TermsPage({ params }: Props) {
                   <ul className="mt-4 space-y-2">
                     {s.prohibited.map((b) => (
                       <li key={b} className="flex items-start gap-2.5 text-[13px] text-white/75">
-                        <Prohibit size={14} weight="bold" className="mt-[3px] text-[#ff0037] shrink-0" />
+                        <Prohibit
+                          size={14}
+                          weight="bold"
+                          className="mt-[3px] text-[#ff0037] shrink-0"
+                        />
                         <span className="leading-relaxed">{b}</span>
                       </li>
                     ))}
@@ -403,10 +442,12 @@ export default async function TermsPage({ params }: Props) {
 
                 {s.note ? (
                   <div className="mt-4 flex items-start gap-2.5 px-4 py-3 rounded-xl ring-1 ring-inset ring-amber-500/25 bg-amber-500/8">
-                    <WarningCircle size={14} weight="fill" className="mt-[3px] text-amber-400 shrink-0" />
-                    <p className="text-[12px] leading-relaxed text-white/80">
-                      {s.note}
-                    </p>
+                    <WarningCircle
+                      size={14}
+                      weight="fill"
+                      className="mt-[3px] text-amber-400 shrink-0"
+                    />
+                    <p className="text-[12px] leading-relaxed text-white/80">{s.note}</p>
                   </div>
                 ) : null}
               </article>
@@ -432,11 +473,10 @@ export default async function TermsPage({ params }: Props) {
                 <Handshake size={24} weight="bold" className="text-[#5eead4]" />
               </span>
               <div>
-                <h3 className="text-[17px] font-bold text-white">
-                  Huquqiy savol bormi?
-                </h3>
+                <h3 className="text-[17px] font-bold text-white">Huquqiy savol bormi?</h3>
                 <p className="mt-1 text-[12.5px] text-white/65">
-                  Shartlar yoki shartnoma bo&apos;yicha tushunmovchilik bo&apos;lsa — huquqiy bo&apos;limimizga yozing.
+                  Shartlar yoki shartnoma bo&apos;yicha tushunmovchilik bo&apos;lsa — huquqiy
+                  bo&apos;limimizga yozing.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2">

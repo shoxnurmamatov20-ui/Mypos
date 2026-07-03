@@ -41,7 +41,7 @@ export const spacingScale = {
   3: 12,
   3.5: 14,
   4: 16,
-  4.25: 17,  // Apple's md
+  4.25: 17, // Apple's md
   5: 20,
   6: 24,
   7: 28,
@@ -51,7 +51,7 @@ export const spacingScale = {
   12: 48,
   14: 56,
   16: 64,
-  20: 80,    // Apple section
+  20: 80, // Apple section
   24: 96,
   32: 128,
 } as const;

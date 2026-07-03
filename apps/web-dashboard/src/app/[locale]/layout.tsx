@@ -1,8 +1,8 @@
 import { AnalyticsBoot } from '@mypos/analytics';
+import { Inter, JetBrains_Mono, Manrope } from 'next/font/google';
+import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import { Inter, Manrope, JetBrains_Mono } from 'next/font/google';
-import { notFound } from 'next/navigation';
 import { Toaster } from 'sonner';
 import { routing } from '@/i18n/routing';
 import { Providers } from './providers';

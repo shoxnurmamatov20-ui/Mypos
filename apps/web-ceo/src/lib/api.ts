@@ -299,3 +299,172 @@ export type FinancesResponse = {
     currency: string;
   };
 };
+
+/**
+ * Semantic alias for mutations used by the newer dashboard pages
+ * (tokens / feedback). Same contract as `ceoMutate`.
+ */
+export const ceoSend = ceoMutate;
+
+// --- Doctors admin (flat cross-clinic list + CRUD) ---
+
+export type ClinicDepartmentLite = {
+  id: number;
+  name: string;
+  doctors_count: number;
+  is_active: boolean;
+};
+
+export type ClinicDepartmentsResponse = {
+  data: ClinicDepartmentLite[];
+  meta: { count: number };
+};
+
+export type DoctorListItem = {
+  id: number;
+  name: string;
+  specialty: string | null;
+  photo_url?: string | null;
+  is_active: boolean;
+  clinic: { id: number; name: string; slug?: string; region: string | null } | null;
+  department: { id: number; name: string } | null;
+  feedback_count: number;
+  avg_rating: number | null;
+  open_complaints: number;
+  status: string;
+  reason: string | null;
+  created_at: string | null;
+};
+
+export type DoctorsListResponse = {
+  data: DoctorListItem[];
+  summary: { total: number; active: number; inactive: number; clinics_count: number };
+  meta: { total: number; page: number; pages: number; per_page: number };
+};
+
+export type DoctorPayload = {
+  clinic_id: number;
+  department_id: number | null;
+  name: string;
+  specialty: string | null;
+  is_active: boolean;
+};
+
+export type DoctorMutationResponse = { data: DoctorListItem };
+
+// --- Guest feedback (order reviews across owned restaurants) ---
+
+export type FeedbackQuery = {
+  page?: number;
+  per?: number;
+  q?: string;
+  tenant_id?: string;
+  rating?: number;
+  has_comment?: '1' | '0';
+  sort?: 'created_at' | 'rating';
+  dir?: 'asc' | 'desc';
+};
+
+export function buildFeedbackQuery(f: FeedbackQuery): string {
+  const params = new URLSearchParams();
+  if (f.q) params.set('q', f.q);
+  if (f.tenant_id) params.set('tenant_id', f.tenant_id);
+  if (f.rating) params.set('rating', String(f.rating));
+  if (f.has_comment !== undefined) params.set('has_comment', f.has_comment);
+  if (f.sort) params.set('sort', f.sort);
+  if (f.dir) params.set('dir', f.dir);
+  if (f.per) params.set('per', String(f.per));
+  if (f.page && f.page > 1) params.set('page', String(f.page));
+  const qs = params.toString();
+  return qs ? `?${qs}` : '';
+}
+
+export type FeedbackRow = {
+  id: string;
+  rating: number;
+  restaurant: string | null;
+  customer_name: string | null;
+  customer_phone: string | null;
+  order_no: string | null;
+  comment: string | null;
+  created_at_label: string | null;
+};
+
+export type FeedbackListResponse = {
+  data: FeedbackRow[];
+  meta: { total: number; page: number; pages: number; per: number };
+};
+
+export type FeedbackStats = {
+  total: number;
+  avg_rating: number | null;
+  positive_count: number;
+  negative_count: number;
+  distribution: Array<{ rating: number; count: number }>;
+};
+
+export type FeedbackStatsResponse = { data: FeedbackStats };
+
+export type FeedbackRestaurantsResponse = {
+  data: Array<{ id: string; name: string; slug: string }>;
+};
+
+export type FeedbackDetail = {
+  id: string;
+  rating: number;
+  restaurant: string | null;
+  customer: { name: string | null; phone: string | null } | null;
+  order: { order_no: string } | null;
+  food_rating: number | null;
+  delivery_rating: number | null;
+  comment: string | null;
+  created_at: string | null;
+};
+
+export type FeedbackDetailResponse = { data: FeedbackDetail };
+
+// --- Visit tokens (guest feedback QR codes) ---
+
+export type VisitTokenStatus = 'valid' | 'used' | 'expired';
+
+export type VisitTokenRow = {
+  id: string;
+  tenant_id: string;
+  tenant: string | null;
+  table_category: string | null;
+  table: string | null;
+  visit_reference: string | null;
+  status: VisitTokenStatus;
+  creator: string | null;
+  expires_at: string;
+  expires_at_human: string | null;
+  used_at: string | null;
+  created_at: string | null;
+  created_at_human: string | null;
+};
+
+export type VisitTokensListResponse = {
+  rows: VisitTokenRow[];
+  summary: { total: number; valid: number; used: number; expired: number };
+  page: number;
+  pages: number;
+  total: number;
+};
+
+export type VisitTokenOptionsResponse = {
+  data: {
+    tenants: Array<{
+      id: string;
+      name: string;
+      categories: Array<{ id: string; name: string | null }>;
+      tables: Array<{ id: string; name: string; category_id: string | null }>;
+    }>;
+  };
+};
+
+export type VisitTokenCreated = {
+  id: string;
+  token: string;
+  url: string;
+  expires_at: string;
+};

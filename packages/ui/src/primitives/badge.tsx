@@ -26,7 +26,8 @@ export function Badge({ children, className, variant = 'default' }: BadgeProps) 
     destructive: 'bg-red-100 text-red-800 dark:bg-red-950/50 dark:text-red-400',
     info: 'bg-blue-100 text-blue-800 dark:bg-blue-950/50 dark:text-blue-400',
     teal: 'bg-teal-50 text-teal-700 dark:bg-teal-950/50 dark:text-teal-300',
-    outline: 'border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-transparent',
+    outline:
+      'border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 bg-transparent',
   };
 
   return (

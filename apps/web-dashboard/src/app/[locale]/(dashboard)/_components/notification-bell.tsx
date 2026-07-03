@@ -29,11 +29,7 @@ export function NotificationBell() {
 
       {open ? (
         <>
-          <div
-            className="fixed inset-0 z-30"
-            onClick={() => setOpen(false)}
-            aria-hidden
-          />
+          <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} aria-hidden />
           <div
             role="dialog"
             aria-label="Bildirishnomalar"
@@ -51,7 +47,11 @@ export function NotificationBell() {
               {[
                 { tone: 'rose', title: "Ombor: 'Pomidor' kam qoldi", time: '5 min oldin' },
                 { tone: 'amber', title: 'Yangi buyurtma — №O260528-0042', time: '14 min oldin' },
-                { tone: 'emerald', title: "To'lov qabul qilindi — 187K so'm", time: '23 min oldin' },
+                {
+                  tone: 'emerald',
+                  title: "To'lov qabul qilindi — 187K so'm",
+                  time: '23 min oldin',
+                },
               ].map((it) => (
                 <div
                   key={it.title}

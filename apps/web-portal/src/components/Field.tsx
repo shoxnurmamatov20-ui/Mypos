@@ -1,7 +1,7 @@
 'use client';
 
-import { forwardRef, useState } from 'react';
 import { cn } from '@mypos/ui';
+import { forwardRef, useState } from 'react';
 
 interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;

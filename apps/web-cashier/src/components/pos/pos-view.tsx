@@ -39,9 +39,7 @@ export function PosView() {
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-xl font-bold text-[#16221f] dark:text-white">{t('title')}</h1>
-            <p className="mt-0.5 text-[13px] text-[#62716d] dark:text-[#94a3b8]">
-              {t('subtitle')}
-            </p>
+            <p className="mt-0.5 text-[13px] text-[#62716d] dark:text-[#94a3b8]">{t('subtitle')}</p>
           </div>
           <div className="relative sm:w-64">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#62716d] dark:text-[#94a3b8]" />

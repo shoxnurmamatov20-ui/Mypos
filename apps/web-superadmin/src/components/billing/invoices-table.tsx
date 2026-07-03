@@ -4,13 +4,13 @@ import { format } from 'date-fns';
 import { Download, Inbox, Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
+import type { Invoice } from '@/data/mock-billing';
 import { cn } from '@/lib/cn';
 import { formatUZS } from '@/lib/format';
-import type { Invoice } from '@/data/mock-billing';
 import {
   computeInvoiceCounts,
-  InvoicesStatusChips,
   type InvoiceStatusFilter,
+  InvoicesStatusChips,
 } from './invoices-status-chips';
 
 type Props = {
@@ -19,8 +19,10 @@ type Props = {
 
 const STATUS_STYLES: Record<Invoice['status'], string> = {
   paid: 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-500/30',
-  pending: 'bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:ring-amber-500/30',
-  failed: 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-200 dark:bg-red-500/15 dark:text-red-300 dark:ring-red-500/30',
+  pending:
+    'bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:ring-amber-500/30',
+  failed:
+    'bg-red-50 text-red-700 ring-1 ring-inset ring-red-200 dark:bg-red-500/15 dark:text-red-300 dark:ring-red-500/30',
 };
 
 const RANGE_OPTIONS = [
@@ -76,8 +78,7 @@ export function InvoicesTable({ invoices }: Props) {
     [filtered],
   );
 
-  const hasActiveFilters =
-    statusFilter !== 'all' || range !== 'all' || query.length > 0;
+  const hasActiveFilters = statusFilter !== 'all' || range !== 'all' || query.length > 0;
 
   const onClear = () => {
     setStatusFilter('all');
@@ -97,11 +98,7 @@ export function InvoicesTable({ invoices }: Props) {
     <div className="space-y-3">
       {/* Header bar — chips + total amount + export */}
       <div className="flex items-center gap-3 flex-wrap px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-        <InvoicesStatusChips
-          current={statusFilter}
-          onChange={setStatusFilter}
-          counts={counts}
-        />
+        <InvoicesStatusChips current={statusFilter} onChange={setStatusFilter} counts={counts} />
         <span
           className="hidden sm:inline text-gray-400 dark:text-gray-600 text-xs font-bold px-1 select-none"
           aria-hidden="true"

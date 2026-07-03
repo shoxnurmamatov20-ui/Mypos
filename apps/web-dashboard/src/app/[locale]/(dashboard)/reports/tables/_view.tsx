@@ -8,17 +8,17 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
+  daysAgo,
   EmptyCard,
   ErrorBanner,
   Field,
+  formatDateTime,
+  formatNumber,
+  inputClass,
   LoadingHint,
   PageTitle,
   SimpleStat,
   TableShell,
-  daysAgo,
-  formatDateTime,
-  formatNumber,
-  inputClass,
   today,
 } from '../_components/report-helpers';
 
@@ -46,17 +46,36 @@ export function TablesReportView() {
       <PageTitle>{t('tables_report.title')}</PageTitle>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <SimpleStat label={t('tables_report.stats_total')} value={formatNumber(meta?.total_tables ?? 0)} />
-        <SimpleStat label={t('tables_report.stats_active')} value={formatNumber(meta?.active_tables ?? 0)} />
-        <SimpleStat label={t('tables_report.stats_revenue')} value={formatUZS(meta?.total_revenue_minor ?? 0)} />
+        <SimpleStat
+          label={t('tables_report.stats_total')}
+          value={formatNumber(meta?.total_tables ?? 0)}
+        />
+        <SimpleStat
+          label={t('tables_report.stats_active')}
+          value={formatNumber(meta?.active_tables ?? 0)}
+        />
+        <SimpleStat
+          label={t('tables_report.stats_revenue')}
+          value={formatUZS(meta?.total_revenue_minor ?? 0)}
+        />
       </div>
 
       <div className="flex flex-wrap items-end gap-3">
         <Field label={t('common.from_date')}>
-          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('common.to_date')}>
-          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('common.sort')}>
           <select
@@ -74,7 +93,11 @@ export function TablesReportView() {
       {q.isLoading ? (
         <LoadingHint label={t('common.loading')} />
       ) : q.isError ? (
-        <ErrorBanner message={t('common.load_failed')} onRetry={() => q.refetch()} retryLabel={t('common.retry')} />
+        <ErrorBanner
+          message={t('common.load_failed')}
+          onRetry={() => q.refetch()}
+          retryLabel={t('common.retry')}
+        />
       ) : rows.length === 0 ? (
         <EmptyCard
           icon={<Store className="h-6 w-6" strokeWidth={1.5} />}
@@ -87,11 +110,19 @@ export function TablesReportView() {
             <thead className="bg-[#f5f8f7] text-left text-xs text-[#62716d] dark:bg-[#0d1424] dark:text-[#94a3b8]">
               <tr>
                 <th className="px-4 py-2.5 font-medium">{t('tables_report.col_name')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('tables_report.col_orders')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('tables_report.col_guests')}</th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('tables_report.col_orders')}
+                </th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('tables_report.col_guests')}
+                </th>
                 <th className="px-4 py-2.5 font-medium text-right">{t('tables_report.col_avg')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('tables_report.col_revenue')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('tables_report.col_occupancy')}</th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('tables_report.col_revenue')}
+                </th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('tables_report.col_occupancy')}
+                </th>
                 <th className="px-4 py-2.5 font-medium">{t('tables_report.col_last_used')}</th>
               </tr>
             </thead>

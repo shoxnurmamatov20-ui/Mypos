@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  ApiError,
-  menuApi,
-  type MenuCategory,
-  type MenuItem,
-} from '@mypos/api-client';
+import { ApiError, type MenuCategory, type MenuItem, menuApi } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -107,70 +102,123 @@ export function ItemFormDialog({
           </Field>
           <div className="grid grid-cols-3 gap-3">
             <Field label="UZ">
-              <input type="text" value={nameUz} onChange={(e) => setNameUz(e.target.value)}
-                required maxLength={128}
-                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2" />
+              <input
+                type="text"
+                value={nameUz}
+                onChange={(e) => setNameUz(e.target.value)}
+                required
+                maxLength={128}
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
+              />
             </Field>
             <Field label="RU">
-              <input type="text" value={nameRu} onChange={(e) => setNameRu(e.target.value)}
-                required maxLength={128}
-                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2" />
+              <input
+                type="text"
+                value={nameRu}
+                onChange={(e) => setNameRu(e.target.value)}
+                required
+                maxLength={128}
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
+              />
             </Field>
             <Field label="EN">
-              <input type="text" value={nameEn} onChange={(e) => setNameEn(e.target.value)}
-                required maxLength={128}
-                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2" />
+              <input
+                type="text"
+                value={nameEn}
+                onChange={(e) => setNameEn(e.target.value)}
+                required
+                maxLength={128}
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
+              />
             </Field>
           </div>
           <Field label={t('description_uz')}>
-            <textarea value={descUz} onChange={(e) => setDescUz(e.target.value)}
-              rows={2} maxLength={2000}
-              className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2" />
+            <textarea
+              value={descUz}
+              onChange={(e) => setDescUz(e.target.value)}
+              rows={2}
+              maxLength={2000}
+              className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
+            />
           </Field>
           <div className="grid grid-cols-2 gap-3">
             <Field label={t('price_uzs')}>
-              <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))}
-                required min={0} step={100}
-                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2" />
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
+                required
+                min={0}
+                step={100}
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
+              />
             </Field>
             <Field label={t('image_url')}>
-              <input type="url" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)}
-                maxLength={512} placeholder="https://..."
-                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2" />
+              <input
+                type="url"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                maxLength={512}
+                placeholder="https://..."
+                className="w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
+              />
             </Field>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={isNew} onChange={(e) => setIsNew(e.target.checked)}
-                className="h-4 w-4 rounded text-[#0f766e] dark:text-teal-400" />
+              <input
+                type="checkbox"
+                checked={isNew}
+                onChange={(e) => setIsNew(e.target.checked)}
+                className="h-4 w-4 rounded text-[#0f766e] dark:text-teal-400"
+              />
               <span className="text-sm">{t('is_new')}</span>
             </label>
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)}
-                className="h-4 w-4 rounded text-[#0f766e] dark:text-teal-400" />
+              <input
+                type="checkbox"
+                checked={isFeatured}
+                onChange={(e) => setIsFeatured(e.target.checked)}
+                className="h-4 w-4 rounded text-[#0f766e] dark:text-teal-400"
+              />
               <span className="text-sm">{t('is_featured')}</span>
             </label>
           </div>
           <div>
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={hasDiscount} onChange={(e) => setHasDiscount(e.target.checked)}
-                className="h-4 w-4 rounded text-[#0f766e] dark:text-teal-400" />
+              <input
+                type="checkbox"
+                checked={hasDiscount}
+                onChange={(e) => setHasDiscount(e.target.checked)}
+                className="h-4 w-4 rounded text-[#0f766e] dark:text-teal-400"
+              />
               <span className="text-sm">{t('has_discount')}</span>
             </label>
             {hasDiscount && (
-              <input type="number" value={discountPercent}
+              <input
+                type="number"
+                value={discountPercent}
                 onChange={(e) => setDiscountPercent(Number(e.target.value))}
-                min={0} max={100} placeholder="%"
-                className="mt-2 w-32 rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2" />
+                min={0}
+                max={100}
+                placeholder="%"
+                className="mt-2 w-32 rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] text-[#16221f] dark:text-white px-3 py-2"
+              />
             )}
           </div>
           <div className="flex justify-end gap-2 border-t border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] pt-4">
-            <button type="button" onClick={onClose}
-              className="rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] px-4 py-2 text-sm font-medium text-[#16221f] dark:text-[#e2e8f0] hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] px-4 py-2 text-sm font-medium text-[#16221f] dark:text-[#e2e8f0] hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]"
+            >
               {t('cancel')}
             </button>
-            <button type="submit" disabled={submitting}
-              className="rounded-lg bg-[#0f766e] hover:bg-[#0d5e58] dark:bg-[#14b8a6] dark:hover:bg-[#0d9488] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">
+            <button
+              type="submit"
+              disabled={submitting}
+              className="rounded-lg bg-[#0f766e] hover:bg-[#0d5e58] dark:bg-[#14b8a6] dark:hover:bg-[#0d9488] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
+            >
               {submitting ? t('saving') : t('save')}
             </button>
           </div>
@@ -183,7 +231,9 @@ export function ItemFormDialog({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+        {label}
+      </span>
       {children}
     </label>
   );

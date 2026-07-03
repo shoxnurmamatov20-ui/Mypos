@@ -18,7 +18,7 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: 'MyPOS Menu',
-  description: 'Restoran menyusi — QR kodni skanerlab ko\'ring',
+  description: "Restoran menyusi — QR kodni skanerlab ko'ring",
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -38,11 +38,7 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="uz" className={`${inter.variable} ${manrope.variable}`}>
       <body className="min-h-screen bg-neutral-50 text-neutral-900">

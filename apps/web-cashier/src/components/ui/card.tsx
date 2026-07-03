@@ -50,9 +50,7 @@ export function CardTitle({ children, className, hint }: CardTitleProps) {
       >
         {children}
       </h3>
-      {hint ? (
-        <p className="mt-1.5 text-xs text-[#62716d] dark:text-[#94a3b8]">{hint}</p>
-      ) : null}
+      {hint ? <p className="mt-1.5 text-xs text-[#62716d] dark:text-[#94a3b8]">{hint}</p> : null}
     </div>
   );
 }

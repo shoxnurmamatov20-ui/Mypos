@@ -1,17 +1,22 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import { ListMusic, Plus, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { cn } from '@mypos/ui';
-import { type Playlist, playlistDuration, useSignageHydrated, useSignageStore } from '@/stores/signage';
 import {
-  Toggle,
+  type Playlist,
+  playlistDuration,
+  useSignageHydrated,
+  useSignageStore,
+} from '@/stores/signage';
+import {
   primaryBtnClass,
-  secondaryBtnClass,
   SettingsCard,
   SettingsSkeleton,
+  secondaryBtnClass,
+  Toggle,
 } from '../../settings/_components/settings-ui';
 import { PlaylistEditorDialog } from './playlist-editor-dialog';
 import { PlaylistFormDialog } from './playlist-form-dialog';
@@ -58,7 +63,9 @@ function PlaylistsInner() {
 
       {playlists.length === 0 ? (
         <SettingsCard>
-          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">{t('playlists.empty')}</p>
+          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
+            {t('playlists.empty')}
+          </p>
         </SettingsCard>
       ) : (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -75,15 +82,26 @@ function PlaylistsInner() {
                   <ListMusic className="h-5 w-5" strokeWidth={2} />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-[#16221f] dark:text-white">{p.name}</p>
+                  <p className="truncate text-sm font-semibold text-[#16221f] dark:text-white">
+                    {p.name}
+                  </p>
                   <p className="text-[12px] text-[#62716d] [font-feature-settings:'tnum'] dark:text-[#94a3b8]">
-                    {p.slides.length} {t('playlists.slides_count')} · {fmtDuration(playlistDuration(p))}
+                    {p.slides.length} {t('playlists.slides_count')} ·{' '}
+                    {fmtDuration(playlistDuration(p))}
                   </p>
                 </div>
-                <Toggle checked={p.isActive} onChange={(v) => updatePlaylist(p.id, { isActive: v })} ariaLabel={t('active')} />
+                <Toggle
+                  checked={p.isActive}
+                  onChange={(v) => updatePlaylist(p.id, { isActive: v })}
+                  ariaLabel={t('active')}
+                />
               </div>
               <div className="flex gap-2">
-                <button type="button" onClick={() => setEditingId(p.id)} className={cn(secondaryBtnClass, 'flex-1 text-center text-xs')}>
+                <button
+                  type="button"
+                  onClick={() => setEditingId(p.id)}
+                  className={cn(secondaryBtnClass, 'flex-1 text-center text-xs')}
+                >
                   {t('edit')}
                 </button>
                 <button
@@ -101,7 +119,9 @@ function PlaylistsInner() {
       )}
 
       {creating && <PlaylistFormDialog onClose={() => setCreating(false)} />}
-      {editingPlaylist && <PlaylistEditorDialog playlist={editingPlaylist} onClose={() => setEditingId(null)} />}
+      {editingPlaylist && (
+        <PlaylistEditorDialog playlist={editingPlaylist} onClose={() => setEditingId(null)} />
+      )}
     </div>
   );
 }

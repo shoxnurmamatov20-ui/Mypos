@@ -11,10 +11,10 @@ import { PromoBanner } from '@/components/home/promo-banner';
 import { TenantThemeShell } from '@/components/themes/TenantThemeShell';
 import { fetchBrandForHost } from '@/lib/brand';
 import {
-  publicConsumerApi,
   isPublicLocale,
   type PublicLocale,
   type PublicRestaurant,
+  publicConsumerApi,
 } from '@/lib/public-api';
 
 export async function generateMetadata({
@@ -31,10 +31,7 @@ export async function generateMetadata({
     const tenantName =
       typeof tenant.name === 'string' ? tenant.name : (tenant.name.uz ?? 'Restaurant');
     const tagline =
-      tenant.brand.tagline?.uz ??
-      tenant.brand.tagline?.ru ??
-      tenant.brand.tagline?.en ??
-      '';
+      tenant.brand.tagline?.uz ?? tenant.brand.tagline?.ru ?? tenant.brand.tagline?.en ?? '';
     return {
       title: tenantName,
       description: tagline,
@@ -53,11 +50,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 

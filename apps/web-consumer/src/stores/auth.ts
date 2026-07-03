@@ -91,7 +91,10 @@ export const useAuthStore = create<AuthState & AuthActions>((set, get) => ({
       // Customer created — log them in to obtain a session token.
       await get().login(input.phone, input.password);
     } catch (err) {
-      if (err instanceof ApiError && (err.status === 401 || err.status === 403 || err.status === 404)) {
+      if (
+        err instanceof ApiError &&
+        (err.status === 401 || err.status === 403 || err.status === 404)
+      ) {
         set({ isLoading: false, error: 'auth.register_failed_use_mobile' });
         throw new RegistrationUnavailableError();
       }

@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 
 type Health = { id: string; label: string; tone: 'ok' | 'warn' | 'err' };
 
@@ -54,7 +54,10 @@ export function SystemHealthBar() {
       <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5">
         {items.map((it) => (
           <div key={it.id} className="flex items-center gap-2">
-            <span className={`block h-[7px] w-[7px] rounded-full ${TONE_DOT[it.tone]}`} aria-hidden />
+            <span
+              className={`block h-[7px] w-[7px] rounded-full ${TONE_DOT[it.tone]}`}
+              aria-hidden
+            />
             <span className={`text-[12px] font-semibold tabular-nums ${TONE_TEXT[it.tone]}`}>
               {it.label}
             </span>

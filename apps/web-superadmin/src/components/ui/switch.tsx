@@ -34,15 +34,10 @@ export function Switch({
       {label || description ? (
         <div className="min-w-0 flex-1">
           {label ? (
-            <p className="text-[13px] font-bold text-[#16221f] dark:text-white">
-              {label}
-            </p>
+            <p className="text-[13px] font-bold text-[#16221f] dark:text-white">{label}</p>
           ) : null}
           {description ? (
-            <p
-              id={descriptionId}
-              className="mt-0.5 text-[11px] text-[#62716d] dark:text-[#94a3b8]"
-            >
+            <p id={descriptionId} className="mt-0.5 text-[11px] text-[#62716d] dark:text-[#94a3b8]">
               {description}
             </p>
           ) : null}
@@ -58,9 +53,7 @@ export function Switch({
         className={cn(
           'relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors',
           'focus:outline-none focus:ring-2 focus:ring-[rgba(15,118,110,0.30)] dark:focus:ring-[rgba(20,184,166,0.40)] focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-[#111827]',
-          checked
-            ? 'bg-[#0f766e] dark:bg-[#14b8a6]'
-            : 'bg-gray-300 dark:bg-[#1a2235]',
+          checked ? 'bg-[#0f766e] dark:bg-[#14b8a6]' : 'bg-gray-300 dark:bg-[#1a2235]',
           disabled && 'cursor-not-allowed opacity-60',
         )}
       >

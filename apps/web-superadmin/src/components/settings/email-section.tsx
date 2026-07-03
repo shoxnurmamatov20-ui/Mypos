@@ -4,8 +4,8 @@ import { Lock, Mail, Send } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/cn';
 import type { PlatformSettings } from '@/lib/api-helpers';
+import { cn } from '@/lib/cn';
 import { Field, SettingsBanner, SettingsSection } from './settings-section';
 
 type Props = {
@@ -102,10 +102,7 @@ export function EmailSection({ settings, isLoading = false, onSent }: Props) {
       {isLoading ? (
         <div className="space-y-3" aria-busy="true">
           {Array.from({ length: 4 }, (_, idx) => (
-            <div
-              key={idx}
-              className="h-9 rounded animate-pulse bg-gray-200 dark:bg-gray-800"
-            />
+            <div key={idx} className="h-9 rounded animate-pulse bg-gray-200 dark:bg-gray-800" />
           ))}
         </div>
       ) : (

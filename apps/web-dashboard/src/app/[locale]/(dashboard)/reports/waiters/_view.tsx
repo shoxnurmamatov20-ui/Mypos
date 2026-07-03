@@ -8,16 +8,16 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
+  daysAgo,
   EmptyCard,
   ErrorBanner,
   Field,
+  formatNumber,
+  inputClass,
   LoadingHint,
   PageTitle,
   SimpleStat,
   TableShell,
-  daysAgo,
-  formatNumber,
-  inputClass,
   today,
 } from '../_components/report-helpers';
 
@@ -46,17 +46,36 @@ export function WaitersReportView() {
       <PageTitle>{t('waiters_report.title')}</PageTitle>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <SimpleStat label={t('waiters_report.stats_total')} value={formatNumber(meta?.employees_count ?? 0)} />
-        <SimpleStat label={t('waiters_report.stats_orders')} value={formatNumber(meta?.total_orders_count ?? 0)} />
-        <SimpleStat label={t('waiters_report.stats_revenue')} value={formatUZS(meta?.total_revenue_minor ?? 0)} />
+        <SimpleStat
+          label={t('waiters_report.stats_total')}
+          value={formatNumber(meta?.employees_count ?? 0)}
+        />
+        <SimpleStat
+          label={t('waiters_report.stats_orders')}
+          value={formatNumber(meta?.total_orders_count ?? 0)}
+        />
+        <SimpleStat
+          label={t('waiters_report.stats_revenue')}
+          value={formatUZS(meta?.total_revenue_minor ?? 0)}
+        />
       </div>
 
       <div className="flex flex-wrap items-end gap-3">
         <Field label={t('common.from_date')}>
-          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('common.to_date')}>
-          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('common.sort')}>
           <select
@@ -74,7 +93,11 @@ export function WaitersReportView() {
       {q.isLoading ? (
         <LoadingHint label={t('common.loading')} />
       ) : q.isError ? (
-        <ErrorBanner message={t('common.load_failed')} onRetry={() => q.refetch()} retryLabel={t('common.retry')} />
+        <ErrorBanner
+          message={t('common.load_failed')}
+          onRetry={() => q.refetch()}
+          retryLabel={t('common.retry')}
+        />
       ) : rows.length === 0 ? (
         <EmptyCard
           icon={<UsersRound className="h-6 w-6" strokeWidth={1.5} />}
@@ -88,10 +111,18 @@ export function WaitersReportView() {
               <tr>
                 <th className="px-4 py-2.5 font-medium">{t('waiters_report.col_name')}</th>
                 <th className="px-4 py-2.5 font-medium">{t('waiters_report.col_position')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('waiters_report.col_orders')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('waiters_report.col_avg')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('waiters_report.col_tips')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('waiters_report.col_revenue')}</th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('waiters_report.col_orders')}
+                </th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('waiters_report.col_avg')}
+                </th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('waiters_report.col_tips')}
+                </th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('waiters_report.col_revenue')}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
@@ -109,7 +140,9 @@ export function WaitersReportView() {
                         ) : null}
                       </div>
                     </td>
-                    <td className="px-4 py-2.5 text-[#62716d] dark:text-[#94a3b8]">{r.position || '—'}</td>
+                    <td className="px-4 py-2.5 text-[#62716d] dark:text-[#94a3b8]">
+                      {r.position || '—'}
+                    </td>
                     <td className="px-4 py-2.5 text-right tabular-nums text-[#16221f] dark:text-white">
                       {formatNumber(r.orders_count)}
                     </td>

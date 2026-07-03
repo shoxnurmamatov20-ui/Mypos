@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  ordersApi,
-  type Order,
-  type OrderStatus,
-  type OrderType,
-} from '@mypos/api-client';
+import { type Order, type OrderStatus, type OrderType, ordersApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
@@ -69,7 +64,7 @@ export function OrdersManager() {
     [orders, statusFilter, typeFilter, dateFrom, dateTo],
   );
 
-  const selectedOrder = selectedId ? orders.find((o) => o.id === selectedId) ?? null : null;
+  const selectedOrder = selectedId ? (orders.find((o) => o.id === selectedId) ?? null) : null;
 
   const clearFilters = (): void => {
     setStatusFilter(new Set());

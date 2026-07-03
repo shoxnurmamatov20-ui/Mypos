@@ -4,11 +4,11 @@ import { ArrowLeft, MoreHorizontal, Pencil, Shield } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { TenantPlanBadge } from './tenant-plan-badge';
-import { TenantStatusBadge } from './tenant-status-badge';
 import { cn } from '@/lib/cn';
 import { pickAvatarColor } from '@/lib/tenant-utils';
 import type { TenantSummary } from '@/types/super-admin';
+import { TenantPlanBadge } from './tenant-plan-badge';
+import { TenantStatusBadge } from './tenant-status-badge';
 
 type Props = {
   tenant: TenantSummary;
@@ -22,13 +22,7 @@ type Props = {
  * Tenant detail header — responsive: avatar + name on top, actions
  * stacked below on mobile, beside-the-title from `md:` and up.
  */
-export function TenantDetailHeader({
-  tenant,
-  locale,
-  onEdit,
-  onImpersonate,
-  onMore,
-}: Props) {
+export function TenantDetailHeader({ tenant, locale, onEdit, onImpersonate, onMore }: Props) {
   const t = useTranslations('tenant_detail');
   const initial = tenant.name.trim().charAt(0).toUpperCase() || '?';
 

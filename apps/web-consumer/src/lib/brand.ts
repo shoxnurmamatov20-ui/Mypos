@@ -44,9 +44,7 @@ import type { TranslatedString } from '@mypos/api-client';
  * Falls back to the public URL, then to localhost, in that order.
  */
 const INTERNAL_API_URL =
-  process.env.INTERNAL_API_URL ??
-  process.env.NEXT_PUBLIC_API_URL ??
-  'http://localhost:58000';
+  process.env.INTERNAL_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:58000';
 
 /**
  * Cache window for the `resolve-domain` lookup. Keep it short — we want

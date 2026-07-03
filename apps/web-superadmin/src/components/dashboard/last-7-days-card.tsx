@@ -1,5 +1,6 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import {
   Bar,
   BarChart,
@@ -10,7 +11,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { useTheme } from 'next-themes';
 import { MOCK_LAST_7_DAYS } from '@/data/mock-feedback';
 
 /**

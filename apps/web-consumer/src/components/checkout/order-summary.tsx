@@ -1,8 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { formatSom } from '@/lib/format';
 import type { CartAmounts } from '@/lib/cart-fees';
+import { formatSom } from '@/lib/format';
 import type { CartItem } from '@/stores/cart';
 
 type Props = {
@@ -22,9 +22,7 @@ export function CheckoutOrderSummary({ items, amounts }: Props) {
 
   return (
     <section className="rounded-3xl bg-neutral-50 p-5 sm:p-6">
-      <h3 className="font-display text-lg font-extrabold text-neutral-900">
-        {t('summary_title')}
-      </h3>
+      <h3 className="font-display text-lg font-extrabold text-neutral-900">{t('summary_title')}</h3>
 
       <p className="mt-1 text-xs text-neutral-500">
         {t('summary_items', { count: totalQuantity })}
@@ -38,8 +36,7 @@ export function CheckoutOrderSummary({ items, amounts }: Props) {
                 {item.emoji}
               </span>
               <span className="truncate text-neutral-700">
-                {item.name}{' '}
-                <span className="text-neutral-400">× {item.quantity}</span>
+                {item.name} <span className="text-neutral-400">× {item.quantity}</span>
               </span>
             </div>
             <span className="shrink-0 font-semibold tabular-nums text-neutral-900">
@@ -71,15 +68,7 @@ export function CheckoutOrderSummary({ items, amounts }: Props) {
   );
 }
 
-function Row({
-  label,
-  value,
-  accent,
-}: {
-  label: string;
-  value: string;
-  accent?: 'mint';
-}) {
+function Row({ label, value, accent }: { label: string; value: string; accent?: 'mint' }) {
   return (
     <div className="flex items-baseline justify-between">
       <dt className="text-neutral-500">{label}</dt>

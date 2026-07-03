@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiError, customersApi, type Customer } from '@mypos/api-client';
+import { ApiError, type Customer, customersApi } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -23,7 +23,9 @@ export function CustomerFormDialog({
   const [phone, setPhone] = useState(customer?.phone ?? '+998');
   const [email, setEmail] = useState(customer?.email ?? '');
   const [birthday, setBirthday] = useState(customer?.birthday ?? '');
-  const [locale, setLocale] = useState<'uz' | 'ru' | 'en'>((customer?.locale as 'uz' | 'ru' | 'en') ?? 'uz');
+  const [locale, setLocale] = useState<'uz' | 'ru' | 'en'>(
+    (customer?.locale as 'uz' | 'ru' | 'en') ?? 'uz',
+  );
   const [gender, setGender] = useState<'' | 'male' | 'female' | 'other'>(
     (customer?.gender as 'male' | 'female' | 'other' | null) ?? '',
   );
@@ -202,7 +204,9 @@ export function CustomerFormDialog({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+        {label}
+      </span>
       {children}
     </label>
   );

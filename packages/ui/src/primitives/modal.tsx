@@ -1,7 +1,7 @@
 'use client';
 
 import { X } from 'lucide-react';
-import { useEffect, type ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { cn } from '../cn';
 
 type ModalProps = {
@@ -81,9 +81,7 @@ export function Modal({
               {title}
             </h2>
             {description ? (
-              <p className="mt-0.5 text-[11px] text-[#62716d] dark:text-[#94a3b8]">
-                {description}
-              </p>
+              <p className="mt-0.5 text-[11px] text-[#62716d] dark:text-[#94a3b8]">{description}</p>
             ) : null}
           </div>
           <button

@@ -1,5 +1,5 @@
-import { getTranslations } from 'next-intl/server';
 import { PageHeader } from '@mypos/ui';
+import { getTranslations } from 'next-intl/server';
 import { ReportsManager } from './_components/reports-manager';
 
 export async function generateMetadata() {

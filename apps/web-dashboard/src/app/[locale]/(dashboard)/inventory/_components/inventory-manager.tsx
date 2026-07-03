@@ -1,6 +1,6 @@
 'use client';
 
-import { inventoryApi, menuApi, type Ingredient, type MenuItem } from '@mypos/api-client';
+import { type Ingredient, inventoryApi, type MenuItem, menuApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';

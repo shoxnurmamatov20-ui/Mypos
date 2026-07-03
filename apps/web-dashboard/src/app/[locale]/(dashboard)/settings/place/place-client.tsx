@@ -8,8 +8,8 @@ import {
   type DayHours,
   useSettingsHydrated,
   useSettingsStore,
-  type Weekday,
   WEEKDAYS,
+  type Weekday,
 } from '@/stores/settings';
 import {
   Field,
@@ -71,19 +71,39 @@ function PlaceForm() {
       <SettingsCard title={t('place.info')}>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Field label={t('place.name')}>
-            <input className={inputClass} value={form.name} onChange={(e) => patchForm('name', e.target.value)} />
+            <input
+              className={inputClass}
+              value={form.name}
+              onChange={(e) => patchForm('name', e.target.value)}
+            />
           </Field>
           <Field label={t('place.phone')}>
-            <input className={inputClass} value={form.phone} onChange={(e) => patchForm('phone', e.target.value)} />
+            <input
+              className={inputClass}
+              value={form.phone}
+              onChange={(e) => patchForm('phone', e.target.value)}
+            />
           </Field>
           <Field label={t('place.address')} className="sm:col-span-2">
-            <input className={inputClass} value={form.address} onChange={(e) => patchForm('address', e.target.value)} />
+            <input
+              className={inputClass}
+              value={form.address}
+              onChange={(e) => patchForm('address', e.target.value)}
+            />
           </Field>
           <Field label={t('place.city')}>
-            <input className={inputClass} value={form.city} onChange={(e) => patchForm('city', e.target.value)} />
+            <input
+              className={inputClass}
+              value={form.city}
+              onChange={(e) => patchForm('city', e.target.value)}
+            />
           </Field>
           <Field label={t('place.timezone')}>
-            <input className={inputClass} value={form.timezone} onChange={(e) => patchForm('timezone', e.target.value)} />
+            <input
+              className={inputClass}
+              value={form.timezone}
+              onChange={(e) => patchForm('timezone', e.target.value)}
+            />
           </Field>
         </div>
       </SettingsCard>

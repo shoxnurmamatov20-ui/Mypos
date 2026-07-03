@@ -7,7 +7,13 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   basePath: '/panel/manager',
-  transpilePackages: ['@mypos/analytics', '@mypos/api-client', '@mypos/design-tokens', '@mypos/ui', '@mypos/utils'],
+  transpilePackages: [
+    '@mypos/analytics',
+    '@mypos/api-client',
+    '@mypos/design-tokens',
+    '@mypos/ui',
+    '@mypos/utils',
+  ],
   experimental: {
     typedRoutes: true,
   },

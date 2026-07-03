@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  inventoryApi,
-  type Ingredient,
-  type MenuItem,
-  type Recipe,
-} from '@mypos/api-client';
+import { type Ingredient, inventoryApi, type MenuItem, type Recipe } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -74,9 +69,7 @@ export function RecipeEditor({
   };
 
   if (isLoading)
-    return (
-      <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>
-    );
+    return <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>;
 
   const recipes: Recipe[] = recipesQuery.data?.data ?? [];
 

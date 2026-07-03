@@ -1,11 +1,7 @@
 import type { Route } from 'next';
 import { redirect } from 'next/navigation';
 
-export default async function RootPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function RootPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   redirect(`/${locale}/dashboard` as Route);
 }

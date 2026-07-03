@@ -1,8 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -50,13 +50,8 @@ export function ForgotForm({ locale }: { locale: string }) {
     return (
       <div className="flex flex-col gap-md py-md">
         <h2 className="font-display text-display-md text-ink">{t('title')}</h2>
-        <p className="text-body text-ink">
-          {t('success', { email: submitted })}
-        </p>
-        <Link
-          href={`/${locale}/login`}
-          className="text-tenant hover:underline text-body"
-        >
+        <p className="text-body text-ink">{t('success', { email: submitted })}</p>
+        <Link href={`/${locale}/login`} className="text-tenant hover:underline text-body">
           {t('back_to_login')}
         </Link>
       </div>

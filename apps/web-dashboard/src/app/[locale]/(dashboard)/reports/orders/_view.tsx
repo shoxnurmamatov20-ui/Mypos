@@ -1,6 +1,6 @@
 'use client';
 
-import { reportsApi, type OrdersReportItem } from '@mypos/api-client';
+import { type OrdersReportItem, reportsApi } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight, ClipboardList } from 'lucide-react';
@@ -8,17 +8,17 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
+  daysAgo,
   EmptyCard,
   ErrorBanner,
   Field,
+  formatDateTime,
+  formatNumber,
+  inputClass,
   LoadingHint,
   PageTitle,
   SimpleStat,
   TableShell,
-  daysAgo,
-  formatDateTime,
-  formatNumber,
-  inputClass,
   today,
 } from '../_components/report-helpers';
 
@@ -79,13 +79,36 @@ export function OrdersReportView() {
 
       <div className="flex flex-wrap items-end gap-3">
         <Field label={t('common.from_date')}>
-          <input type="date" value={from} onChange={(e) => { setFrom(e.target.value); resetPage(); }} className={inputClass} />
+          <input
+            type="date"
+            value={from}
+            onChange={(e) => {
+              setFrom(e.target.value);
+              resetPage();
+            }}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('common.to_date')}>
-          <input type="date" value={to} onChange={(e) => { setTo(e.target.value); resetPage(); }} className={inputClass} />
+          <input
+            type="date"
+            value={to}
+            onChange={(e) => {
+              setTo(e.target.value);
+              resetPage();
+            }}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('orders_report.f_status')}>
-          <select value={status} onChange={(e) => { setStatus(e.target.value); resetPage(); }} className={inputClass}>
+          <select
+            value={status}
+            onChange={(e) => {
+              setStatus(e.target.value);
+              resetPage();
+            }}
+            className={inputClass}
+          >
             <option value="">{t('common.all')}</option>
             <option value="pending">pending</option>
             <option value="preparing">preparing</option>
@@ -97,7 +120,14 @@ export function OrdersReportView() {
           </select>
         </Field>
         <Field label={t('orders_report.f_type')}>
-          <select value={type} onChange={(e) => { setType(e.target.value); resetPage(); }} className={inputClass}>
+          <select
+            value={type}
+            onChange={(e) => {
+              setType(e.target.value);
+              resetPage();
+            }}
+            className={inputClass}
+          >
             <option value="">{t('common.all')}</option>
             <option value="dine_in">dine_in</option>
             <option value="takeaway">takeaway</option>
@@ -106,7 +136,14 @@ export function OrdersReportView() {
           </select>
         </Field>
         <Field label={t('orders_report.f_payment')}>
-          <select value={paymentMethod} onChange={(e) => { setPaymentMethod(e.target.value); resetPage(); }} className={inputClass}>
+          <select
+            value={paymentMethod}
+            onChange={(e) => {
+              setPaymentMethod(e.target.value);
+              resetPage();
+            }}
+            className={inputClass}
+          >
             <option value="">{t('common.all')}</option>
             <option value="cash">cash</option>
             <option value="card">card</option>
@@ -119,7 +156,10 @@ export function OrdersReportView() {
           <input
             type="text"
             value={q}
-            onChange={(e) => { setQ(e.target.value); resetPage(); }}
+            onChange={(e) => {
+              setQ(e.target.value);
+              resetPage();
+            }}
             placeholder={t('orders_report.search_placeholder')}
             className={inputClass}
           />
@@ -129,7 +169,11 @@ export function OrdersReportView() {
       {query.isLoading ? (
         <LoadingHint label={t('common.loading')} />
       ) : query.isError ? (
-        <ErrorBanner message={t('common.load_failed')} onRetry={() => query.refetch()} retryLabel={t('common.retry')} />
+        <ErrorBanner
+          message={t('common.load_failed')}
+          onRetry={() => query.refetch()}
+          retryLabel={t('common.retry')}
+        />
       ) : rows.length === 0 ? (
         <EmptyCard
           icon={<ClipboardList className="h-6 w-6" strokeWidth={1.5} />}
@@ -148,13 +192,17 @@ export function OrdersReportView() {
                 <th className="px-4 py-2.5 font-medium">{t('orders_report.col_waiter')}</th>
                 <th className="px-4 py-2.5 font-medium">{t('orders_report.col_status')}</th>
                 <th className="px-4 py-2.5 font-medium">{t('orders_report.col_payment')}</th>
-                <th className="px-4 py-2.5 font-medium text-right">{t('orders_report.col_total')}</th>
+                <th className="px-4 py-2.5 font-medium text-right">
+                  {t('orders_report.col_total')}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
               {rows.map((o) => (
                 <tr key={o.id} className="hover:bg-[#fafcfb] dark:hover:bg-[#0b1120]/40">
-                  <td className="px-4 py-2.5 font-medium text-[#16221f] dark:text-white">{o.order_no}</td>
+                  <td className="px-4 py-2.5 font-medium text-[#16221f] dark:text-white">
+                    {o.order_no}
+                  </td>
                   <td className="whitespace-nowrap px-4 py-2.5 text-[#62716d] dark:text-[#94a3b8]">
                     {formatDateTime(o.placed_at ?? o.created_at)}
                   </td>
@@ -181,7 +229,9 @@ export function OrdersReportView() {
 
           {lastPage > 1 ? (
             <div className="flex items-center justify-between border-t border-[rgba(22,34,31,0.06)] px-4 py-2.5 text-xs text-[#62716d] dark:border-[rgba(255,255,255,0.05)] dark:text-[#94a3b8]">
-              <span>{(page - 1) * perPage + 1}–{Math.min(page * perPage, total)} / {total}</span>
+              <span>
+                {(page - 1) * perPage + 1}–{Math.min(page * perPage, total)} / {total}
+              </span>
               <div className="flex items-center gap-1">
                 <button
                   type="button"

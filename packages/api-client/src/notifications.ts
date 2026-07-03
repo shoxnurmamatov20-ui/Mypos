@@ -1,19 +1,9 @@
 import type { MyPosApiClient } from './client';
 import type { CollectionResponse, ResourceResponse } from './menu';
 
-export type NotificationChannel =
-  | 'email'
-  | 'sms'
-  | 'push'
-  | 'telegram'
-  | 'in_app';
+export type NotificationChannel = 'email' | 'sms' | 'push' | 'telegram' | 'in_app';
 
-export type NotificationStatus =
-  | 'queued'
-  | 'sent'
-  | 'failed'
-  | 'delivered'
-  | 'read';
+export type NotificationStatus = 'queued' | 'sent' | 'failed' | 'delivered' | 'read';
 
 export type NotificationTemplate =
   | 'order_placed'
@@ -68,34 +58,19 @@ const buildQueryString = (params: Record<string, unknown> | undefined): string =
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries
-      .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-      .join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 export const notificationsApi = {
   list: (client: MyPosApiClient, params?: ListNotificationsParams) => {
     const qs = buildQueryString(params);
-    return client.get<CollectionResponse<NotificationLog>>(
-      `/api/v1/notifications${qs}`,
-    );
+    return client.get<CollectionResponse<NotificationLog>>(`/api/v1/notifications${qs}`);
   },
   markAsRead: (client: MyPosApiClient, id: string) =>
-    client.patch<ResourceResponse<NotificationLog>>(
-      `/api/v1/notifications/${id}/read`,
-    ),
+    client.patch<ResourceResponse<NotificationLog>>(`/api/v1/notifications/${id}/read`),
   getPreferences: (client: MyPosApiClient) =>
-    client.get<CollectionResponse<NotificationPreference>>(
-      '/api/v1/notifications/preferences',
-    ),
-  updatePreference: (
-    client: MyPosApiClient,
-    id: string,
-    input: UpdatePreferenceInput,
-  ) =>
+    client.get<CollectionResponse<NotificationPreference>>('/api/v1/notifications/preferences'),
+  updatePreference: (client: MyPosApiClient, id: string, input: UpdatePreferenceInput) =>
     client.patch<ResourceResponse<NotificationPreference>>(
       `/api/v1/notifications/preferences/${id}`,
       input,

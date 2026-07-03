@@ -1,6 +1,6 @@
 'use client';
 
-import { authApi, ApiError, type AuthUser } from '@mypos/api-client';
+import { ApiError, type AuthUser, authApi } from '@mypos/api-client';
 import { create } from 'zustand';
 import { apiClient, clearToken, getStoredToken } from '@/lib/api';
 

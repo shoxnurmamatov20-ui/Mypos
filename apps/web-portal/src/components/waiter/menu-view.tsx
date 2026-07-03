@@ -1,9 +1,9 @@
 'use client';
 
+import { cn, Input, PageHeader } from '@mypos/ui';
 import { ForkKnife, MagnifyingGlass, Star } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
-import { cn, Input, PageHeader } from '@mypos/ui';
 import { formatSom, getWaiterData } from '@/lib/waiter-data';
 
 /** Menyu — read-only menu reference the waiter scans while taking orders. */
@@ -19,9 +19,7 @@ export function MenuView() {
     const q = query.trim().toLowerCase();
     return menu
       .filter((category) => activeCat === 'all' || category.name === activeCat)
-      .flatMap((category) =>
-        category.items.map((item) => ({ ...item, category: category.name })),
-      )
+      .flatMap((category) => category.items.map((item) => ({ ...item, category: category.name })))
       .filter((item) => q === '' || item.name.toLowerCase().includes(q));
   }, [menu, activeCat, query]);
 
@@ -80,14 +78,9 @@ export function MenuView() {
                 </span>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <p className="truncate text-[13px] font-semibold text-[#16221f]">
-                      {item.name}
-                    </p>
+                    <p className="truncate text-[13px] font-semibold text-[#16221f]">{item.name}</p>
                     {item.popular ? (
-                      <Star
-                        className="h-3.5 w-3.5 flex-shrink-0 text-[#b7791f]"
-                        weight="fill"
-                      />
+                      <Star className="h-3.5 w-3.5 flex-shrink-0 text-[#b7791f]" weight="fill" />
                     ) : null}
                   </div>
                   <p className="text-[11px] text-[#9aa6a3]">{item.category}</p>

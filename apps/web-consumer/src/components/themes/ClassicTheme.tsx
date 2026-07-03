@@ -19,13 +19,10 @@ import type { ThemeProps } from './types';
  */
 export function ClassicTheme({ tenant, brand, restaurant, locale }: ThemeProps) {
   const tenantName =
-    typeof tenant.name === 'string'
-      ? tenant.name
-      : pickTranslation(tenant.name, locale);
+    typeof tenant.name === 'string' ? tenant.name : pickTranslation(tenant.name, locale);
   const heroTitle = pickTranslation(brand.hero_title, locale) || tenantName;
   const heroSubtitle =
-    pickTranslation(brand.hero_subtitle, locale) ||
-    pickTranslation(brand.tagline, locale);
+    pickTranslation(brand.hero_subtitle, locale) || pickTranslation(brand.tagline, locale);
 
   return (
     <section className="bg-brand-background py-16 lg:py-24">
@@ -69,7 +66,9 @@ export function ClassicTheme({ tenant, brand, restaurant, locale }: ThemeProps) 
 
         <div className="mt-12">
           <a
-            href={restaurant ? `/${locale}/restaurants/${restaurant.slug}` : `/${locale}/restaurants`}
+            href={
+              restaurant ? `/${locale}/restaurants/${restaurant.slug}` : `/${locale}/restaurants`
+            }
             className="inline-flex items-center border-2 px-12 py-4 text-sm font-bold uppercase tracking-[0.2em] text-brand-text transition hover:bg-brand-text hover:text-brand-background"
             style={{
               borderColor: 'var(--color-brand-text)',

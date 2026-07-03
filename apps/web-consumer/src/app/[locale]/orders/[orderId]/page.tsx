@@ -14,7 +14,12 @@ import {
   computeEtaMinutes,
   type TimelineStepLabels,
 } from '@/lib/order-timeline';
-import { deriveOrderStatus, loadMockOrder, type MockOrder, type MockOrderStatus } from '@/lib/save-order';
+import {
+  deriveOrderStatus,
+  loadMockOrder,
+  type MockOrder,
+  type MockOrderStatus,
+} from '@/lib/save-order';
 
 type Locale = 'uz' | 'ru' | 'en';
 const SUPPORTED_LOCALES: readonly Locale[] = ['uz', 'ru', 'en'];
@@ -42,10 +47,7 @@ function statusEmoji(status: MockOrderStatus): string {
 
 type HeroCopy = { title: string; subtitle: string };
 
-function buildHeroCopy(
-  t: ReturnType<typeof useTranslations>,
-  status: MockOrderStatus,
-): HeroCopy {
+function buildHeroCopy(t: ReturnType<typeof useTranslations>, status: MockOrderStatus): HeroCopy {
   switch (status) {
     case 'pending':
       return {
@@ -112,9 +114,7 @@ export default function OrderTrackingPage() {
   const etaMinutes = placedAt ? computeEtaMinutes(placedAt, status, now) : 0;
   const heroCopy = buildHeroCopy(t, status);
   const etaLabel =
-    status === 'delivered'
-      ? t('eta_delivered')
-      : t('eta_remaining', { minutes: etaMinutes });
+    status === 'delivered' ? t('eta_delivered') : t('eta_remaining', { minutes: etaMinutes });
 
   const stepLabels: TimelineStepLabels = useMemo(
     () => ({
@@ -210,10 +210,7 @@ export default function OrderTrackingPage() {
         <StatusTimeline steps={steps} />
       </section>
 
-      <RestaurantCard
-        order={order}
-        orderRefLabel={`${t('title_prefix')} #${order.orderNo}`}
-      />
+      <RestaurantCard order={order} orderRefLabel={`${t('title_prefix')} #${order.orderNo}`} />
 
       <ItemsCard order={order} itemsLabel={t('items_label')} locale={localeKey} />
 
@@ -297,9 +294,7 @@ type ItemsCardProps = {
 function ItemsCard({ order, itemsLabel, locale }: ItemsCardProps) {
   return (
     <section className="mt-6 rounded-2xl border border-neutral-200 bg-white p-5">
-      <h3 className="text-sm font-bold uppercase tracking-wider text-neutral-500">
-        {itemsLabel}
-      </h3>
+      <h3 className="text-sm font-bold uppercase tracking-wider text-neutral-500">{itemsLabel}</h3>
       <ul className="mt-3 flex flex-col divide-y divide-neutral-100">
         {order.items.map((item) => (
           <li key={item.id} className="flex items-center gap-3 py-3">
@@ -332,17 +327,10 @@ function SummaryCard({ order, t, locale }: SummaryCardProps) {
   const isFreeDelivery = order.amounts.deliveryFee === 0;
   return (
     <section className="mt-6 flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white p-5">
-      <SummaryRow
-        label={t('summary_subtotal')}
-        value={formatUZS(order.amounts.subtotal, locale)}
-      />
+      <SummaryRow label={t('summary_subtotal')} value={formatUZS(order.amounts.subtotal, locale)} />
       <SummaryRow
         label={t('summary_delivery')}
-        value={
-          isFreeDelivery
-            ? t('summary_free')
-            : formatUZS(order.amounts.deliveryFee, locale)
-        }
+        value={isFreeDelivery ? t('summary_free') : formatUZS(order.amounts.deliveryFee, locale)}
         freeColor={isFreeDelivery}
       />
       <SummaryRow
@@ -372,9 +360,7 @@ function SummaryRow({ label, value, emphasis, freeColor }: SummaryRowProps) {
     : freeColor
       ? 'text-sm font-bold text-mint-600'
       : 'text-sm font-medium text-neutral-900';
-  const labelClass = emphasis
-    ? 'text-lg font-bold text-neutral-900'
-    : 'text-sm text-neutral-500';
+  const labelClass = emphasis ? 'text-lg font-bold text-neutral-900' : 'text-sm text-neutral-500';
   return (
     <div className="flex items-center justify-between">
       <span className={labelClass}>{label}</span>

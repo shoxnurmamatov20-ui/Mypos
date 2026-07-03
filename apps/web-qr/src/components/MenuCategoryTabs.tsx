@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@mypos/ui';
 import type { PublicMenuCategory } from '@mypos/api-client';
+import { cn } from '@mypos/ui';
 import { type Locale, pickTranslation, translate } from '@/lib/i18n';
 
 type Props = {

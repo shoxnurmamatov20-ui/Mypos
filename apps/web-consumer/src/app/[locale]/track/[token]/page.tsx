@@ -1,12 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
+import { isPublicLocale, PublicApiError, publicConsumerApi } from '@/lib/public-api';
 import { OrderTrackingView } from './_components/order-tracking-view';
-import {
-  isPublicLocale,
-  publicConsumerApi,
-  PublicApiError,
-} from '@/lib/public-api';
 
 /**
  * Public order tracking page — `/[locale]/track/[token]`.
@@ -43,7 +39,7 @@ export default async function TrackOrderPage({
   if (!isPublicLocale(locale)) notFound();
   setRequestLocale(locale);
 
-  let initial;
+  let initial: Awaited<ReturnType<typeof publicConsumerApi.orders.track>> | undefined;
   try {
     initial = await publicConsumerApi.orders.track(token, { locale });
   } catch (error) {
@@ -54,11 +50,5 @@ export default async function TrackOrderPage({
     // can retry once mounted.
   }
 
-  return (
-    <OrderTrackingView
-      token={token}
-      locale={locale}
-      initialData={initial ?? null}
-    />
-  );
+  return <OrderTrackingView token={token} locale={locale} initialData={initial ?? null} />;
 }

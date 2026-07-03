@@ -2,11 +2,7 @@
 
 import { Search, X } from 'lucide-react';
 import type { useTranslations } from 'next-intl';
-import type {
-  ComplaintFilters,
-  ComplaintSeverity,
-  ComplaintStatus,
-} from '@/lib/api';
+import type { ComplaintFilters, ComplaintSeverity, ComplaintStatus } from '@/lib/api';
 
 type T = ReturnType<typeof useTranslations>;
 
@@ -53,12 +49,12 @@ export function FilterBar({
         {/* Status */}
         <select
           value={filters.status ?? ''}
-          onChange={(e) =>
-            onChange({ status: (e.target.value || '') as ComplaintStatus | '' })
-          }
+          onChange={(e) => onChange({ status: (e.target.value || '') as ComplaintStatus | '' })}
           className="h-9 rounded-md border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-[#0b1120] px-2 text-[13px] text-[#16221f] dark:text-white"
         >
-          <option value="">{t('filter_status')}: {t('filter_all')}</option>
+          <option value="">
+            {t('filter_status')}: {t('filter_all')}
+          </option>
           {statuses.map((s) => (
             <option key={s} value={s}>
               {t(`status.${s}`)}
@@ -69,12 +65,12 @@ export function FilterBar({
         {/* Severity */}
         <select
           value={filters.severity ?? ''}
-          onChange={(e) =>
-            onChange({ severity: (e.target.value || '') as ComplaintSeverity | '' })
-          }
+          onChange={(e) => onChange({ severity: (e.target.value || '') as ComplaintSeverity | '' })}
           className="h-9 rounded-md border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-[#0b1120] px-2 text-[13px] text-[#16221f] dark:text-white"
         >
-          <option value="">{t('filter_severity')}: {t('filter_all')}</option>
+          <option value="">
+            {t('filter_severity')}: {t('filter_all')}
+          </option>
           {severities.map((s) => (
             <option key={s} value={s}>
               {t(`severity.${s}`)}
@@ -89,7 +85,9 @@ export function FilterBar({
             onChange={(e) => onChange({ region: e.target.value || '' })}
             className="h-9 rounded-md border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-[#0b1120] px-2 text-[13px] text-[#16221f] dark:text-white"
           >
-            <option value="">{t('filter_region')}: {t('filter_all')}</option>
+            <option value="">
+              {t('filter_region')}: {t('filter_all')}
+            </option>
             {regions.map((r) => (
               <option key={r} value={r}>
                 {r}

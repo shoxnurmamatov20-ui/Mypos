@@ -1,4 +1,4 @@
-import type { UUID, ISO8601 } from './common';
+import type { ISO8601, UUID } from './common';
 import type { TenantRole } from './tenant';
 
 export type Employee = {

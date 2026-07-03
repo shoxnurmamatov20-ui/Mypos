@@ -1,17 +1,17 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import { Monitor, Pencil, Plus, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { cn } from '@mypos/ui';
 import { type SignageDevice, useSignageHydrated, useSignageStore } from '@/stores/signage';
 import {
-  Toggle,
   inputClass,
   primaryBtnClass,
   SettingsCard,
   SettingsSkeleton,
+  Toggle,
 } from '../../settings/_components/settings-ui';
 import { DeviceFormDialog } from './device-form-dialog';
 
@@ -38,7 +38,9 @@ function DevicesInner() {
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return devices;
-    return devices.filter((d) => d.name.toLowerCase().includes(q) || d.location.toLowerCase().includes(q));
+    return devices.filter(
+      (d) => d.name.toLowerCase().includes(q) || d.location.toLowerCase().includes(q),
+    );
   }, [devices, search]);
 
   const editing: SignageDevice | null = dialog !== null && dialog !== 'new' ? dialog : null;
@@ -71,7 +73,9 @@ function DevicesInner() {
 
       {filtered.length === 0 ? (
         <SettingsCard>
-          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">{t('devices.empty')}</p>
+          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
+            {t('devices.empty')}
+          </p>
         </SettingsCard>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -87,8 +91,12 @@ function DevicesInner() {
                     <Monitor className="h-5 w-5" strokeWidth={2} />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-[#16221f] dark:text-white">{d.name}</p>
-                    <p className="truncate text-[12px] text-[#62716d] dark:text-[#94a3b8]">{d.location || '—'}</p>
+                    <p className="truncate text-sm font-semibold text-[#16221f] dark:text-white">
+                      {d.name}
+                    </p>
+                    <p className="truncate text-[12px] text-[#62716d] dark:text-[#94a3b8]">
+                      {d.location || '—'}
+                    </p>
                   </div>
                   <span
                     className={cn(
@@ -98,21 +106,38 @@ function DevicesInner() {
                         : 'bg-[rgba(22,34,31,0.07)] text-[#62716d] dark:bg-white/10 dark:text-[#94a3b8]',
                     )}
                   >
-                    <span className={cn('h-1.5 w-1.5 rounded-full', d.isOnline ? 'bg-emerald-500' : 'bg-[#94a3b8]')} aria-hidden />
+                    <span
+                      className={cn(
+                        'h-1.5 w-1.5 rounded-full',
+                        d.isOnline ? 'bg-emerald-500' : 'bg-[#94a3b8]',
+                      )}
+                      aria-hidden
+                    />
                     {d.isOnline ? t('online') : t('offline')}
                   </span>
                 </div>
 
                 <dl className="space-y-1 text-[12px]">
                   <div className="flex justify-between gap-2">
-                    <dt className="text-[#62716d] dark:text-[#94a3b8]">{t('devices.orientation')}</dt>
+                    <dt className="text-[#62716d] dark:text-[#94a3b8]">
+                      {t('devices.orientation')}
+                    </dt>
                     <dd className="font-medium text-[#16221f] dark:text-[#e2e8f0]">
-                      {d.orientation === 'landscape' ? t('devices.landscape') : t('devices.portrait')}
+                      {d.orientation === 'landscape'
+                        ? t('devices.landscape')
+                        : t('devices.portrait')}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-2">
                     <dt className="text-[#62716d] dark:text-[#94a3b8]">{t('devices.playlist')}</dt>
-                    <dd className={cn('truncate font-medium', assigned ? 'text-[#16221f] dark:text-[#e2e8f0]' : 'text-[#62716d] dark:text-[#94a3b8]')}>
+                    <dd
+                      className={cn(
+                        'truncate font-medium',
+                        assigned
+                          ? 'text-[#16221f] dark:text-[#e2e8f0]'
+                          : 'text-[#62716d] dark:text-[#94a3b8]',
+                      )}
+                    >
                       {assigned || t('devices.no_playlist')}
                     </dd>
                   </div>
@@ -120,7 +145,11 @@ function DevicesInner() {
 
                 <div className="mt-auto flex items-center justify-between gap-2 border-t border-[rgba(22,34,31,0.06)] pt-2 dark:border-[rgba(255,255,255,0.05)]">
                   <div className="flex items-center gap-2 text-[12px] text-[#62716d] dark:text-[#94a3b8]">
-                    <Toggle checked={d.isOnline} onChange={(v) => updateDevice(d.id, { isOnline: v })} ariaLabel={t('status')} />
+                    <Toggle
+                      checked={d.isOnline}
+                      onChange={(v) => updateDevice(d.id, { isOnline: v })}
+                      ariaLabel={t('status')}
+                    />
                     {t('status')}
                   </div>
                   <div className="flex items-center gap-1">
@@ -148,7 +177,13 @@ function DevicesInner() {
         </div>
       )}
 
-      {dialog !== null && <DeviceFormDialog device={editing} onClose={() => setDialog(null)} onSaved={() => setDialog(null)} />}
+      {dialog !== null && (
+        <DeviceFormDialog
+          device={editing}
+          onClose={() => setDialog(null)}
+          onSaved={() => setDialog(null)}
+        />
+      )}
     </div>
   );
 }

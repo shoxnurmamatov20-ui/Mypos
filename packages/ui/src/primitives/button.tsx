@@ -1,4 +1,4 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { type ButtonHTMLAttributes, forwardRef, type ReactNode } from 'react';
 import { cn } from '../cn';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline';
@@ -72,9 +72,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         <span className="inline-flex shrink-0">{leftIcon}</span>
       ) : null}
       {children}
-      {!loading && rightIcon ? (
-        <span className="inline-flex shrink-0">{rightIcon}</span>
-      ) : null}
+      {!loading && rightIcon ? <span className="inline-flex shrink-0">{rightIcon}</span> : null}
     </button>
   );
 });

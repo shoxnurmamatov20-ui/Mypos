@@ -1,15 +1,10 @@
 'use client';
 
 import { formatDistanceToNow } from 'date-fns';
-import {
-  Shield,
-  ShieldOff,
-  Trash2,
-  type LucideIcon,
-} from 'lucide-react';
+import { type LucideIcon, Shield, ShieldOff, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/cn';
 import type { AdminUserRecord } from '@/lib/api-helpers';
+import { cn } from '@/lib/cn';
 import type { SuperAdminRole } from '@/stores/auth';
 import { RoleBadge } from './role-badge';
 
@@ -23,10 +18,10 @@ type Props = {
 
 /** Avatar gradient tied to the admin's role so the table reads at a glance. */
 const ROLE_AVATAR: Record<SuperAdminRole, string> = {
-  owner:     'from-purple-500 to-purple-700',
-  admin:     'from-blue-500 to-blue-700',
-  support:   'from-teal-500 to-teal-700',
-  finance:   'from-amber-500 to-amber-700',
+  owner: 'from-purple-500 to-purple-700',
+  admin: 'from-blue-500 to-blue-700',
+  support: 'from-teal-500 to-teal-700',
+  finance: 'from-amber-500 to-amber-700',
   developer: 'from-gray-500 to-gray-700',
 };
 
@@ -66,12 +61,7 @@ function resolvedRole(admin: AdminUserRecord): SuperAdminRole {
  * only mutation the API currently exposes. On mobile (<md) the table
  * collapses into stacked cards.
  */
-export function ActiveAdminsTable({
-  rows,
-  currentUserId,
-  onRevoke,
-  isRevoking = false,
-}: Props) {
+export function ActiveAdminsTable({ rows, currentUserId, onRevoke, isRevoking = false }: Props) {
   const t = useTranslations('admins_page');
 
   if (rows.length === 0) {
@@ -260,13 +250,7 @@ function SelfTag({ label }: { label: string }) {
   );
 }
 
-function MfaBadge({
-  enabled,
-  t,
-}: {
-  enabled: boolean;
-  t: ReturnType<typeof useTranslations>;
-}) {
+function MfaBadge({ enabled, t }: { enabled: boolean; t: ReturnType<typeof useTranslations> }) {
   return enabled ? (
     <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
       <Shield className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden="true" />

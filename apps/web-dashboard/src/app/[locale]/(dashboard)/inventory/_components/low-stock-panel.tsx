@@ -1,6 +1,6 @@
 'use client';
 
-import { type Ingredient } from '@mypos/api-client';
+import type { Ingredient } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { AdjustStockDialog } from './adjust-stock-dialog';
@@ -18,9 +18,7 @@ export function LowStockPanel({
   const [adjusting, setAdjusting] = useState<Ingredient | null>(null);
 
   if (isLoading) {
-    return (
-      <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>
-    );
+    return <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>;
   }
 
   if (ingredients.length === 0) {
@@ -49,13 +47,9 @@ export function LowStockPanel({
           >
             <div className="mb-2 flex items-start justify-between">
               <div>
-                <div className="font-semibold text-[#16221f] dark:text-white">
-                  {ing.name.uz}
-                </div>
+                <div className="font-semibold text-[#16221f] dark:text-white">{ing.name.uz}</div>
                 {ing.sku && (
-                  <div className="text-xs text-[#62716d] dark:text-[#94a3b8]">
-                    {ing.sku}
-                  </div>
+                  <div className="text-xs text-[#62716d] dark:text-[#94a3b8]">{ing.sku}</div>
                 )}
               </div>
               <span className="rounded-full bg-red-50 px-2 py-0.5 text-xs font-semibold text-red-600 dark:bg-red-950/30 dark:text-red-400">

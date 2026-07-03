@@ -2,14 +2,8 @@
 
 import { formatDistanceToNow } from 'date-fns';
 import { enUS, ru, uz } from 'date-fns/locale';
-import {
-  AlertTriangle,
-  ArrowRight,
-  CircleAlert,
-  Info,
-  ShieldAlert,
-} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CircleAlert, Info, ShieldAlert } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -33,9 +27,9 @@ const SEVERITY_ICON: Record<AuditSeverity, LucideIcon> = {
 };
 
 const SEVERITY_DOT: Record<AuditSeverity, string> = {
-  info:     'bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400',
-  warning:  'bg-amber-50 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400',
-  error:    'bg-red-50 text-red-600 dark:bg-red-500/15 dark:text-red-400',
+  info: 'bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400',
+  warning: 'bg-amber-50 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400',
+  error: 'bg-red-50 text-red-600 dark:bg-red-500/15 dark:text-red-400',
   critical: 'bg-red-100 text-red-700 dark:bg-red-500/25 dark:text-red-300',
 };
 
@@ -62,7 +56,11 @@ export function ActivityFeed({ entries, locale }: ActivityFeedProps) {
 
       {entries.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-10 text-center">
-          <Info className="h-7 w-7 text-gray-300 dark:text-gray-700 mb-2" strokeWidth={1.5} aria-hidden="true" />
+          <Info
+            className="h-7 w-7 text-gray-300 dark:text-gray-700 mb-2"
+            strokeWidth={1.5}
+            aria-hidden="true"
+          />
           <p className="text-sm font-medium text-[#62716d] dark:text-[#94a3b8]">{t('subtitle')}</p>
         </div>
       ) : (
@@ -79,7 +77,8 @@ export function ActivityFeed({ entries, locale }: ActivityFeedProps) {
                 key={entry.id}
                 className={cn(
                   'flex items-start gap-3 py-3',
-                  !isLast && 'border-b border-[rgba(22,34,31,0.06)] dark:border-[rgba(255,255,255,0.06)]',
+                  !isLast &&
+                    'border-b border-[rgba(22,34,31,0.06)] dark:border-[rgba(255,255,255,0.06)]',
                 )}
               >
                 <span
@@ -96,10 +95,7 @@ export function ActivityFeed({ entries, locale }: ActivityFeedProps) {
                     <p className="font-semibold text-[#16221f] dark:text-white">
                       {tActions(entry.action_key as Parameters<typeof tActions>[0])}
                     </p>
-                    <SeverityBadge
-                      severity={entry.severity}
-                      label={tSeverity(entry.severity)}
-                    />
+                    <SeverityBadge severity={entry.severity} label={tSeverity(entry.severity)} />
                   </div>
                   <p className="truncate text-sm text-[#62716d] dark:text-[#94a3b8]">
                     <span className="text-[#16221f] dark:text-gray-300">{entry.actor}</span>

@@ -3,9 +3,9 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
-import { subscribeToDashboard, type DashboardHandlers } from '@/lib/echo';
-import { useAuthStore } from '@/stores/auth';
 import { getStoredToken } from '@/lib/api';
+import { type DashboardHandlers, subscribeToDashboard } from '@/lib/echo';
+import { useAuthStore } from '@/stores/auth';
 
 interface Options extends DashboardHandlers {
   /** Override automatic toast notifications. Defaults to true. */

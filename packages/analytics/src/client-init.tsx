@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { initSentryWeb, type SentryConfig } from './sentry';
 import { initPosthogWeb, type PosthogConfig } from './posthog';
+import { initSentryWeb, type SentryConfig } from './sentry';
 
 interface AnalyticsBootProps {
   sentry?: Partial<SentryConfig>;
@@ -25,8 +25,7 @@ export function AnalyticsBoot({ sentry, posthog, app }: AnalyticsBootProps) {
         dsn: sentryDsn,
         app,
         release: sentryRelease,
-        environment:
-          sentry?.environment ?? process.env.NEXT_PUBLIC_DEPLOY_ENV ?? 'production',
+        environment: sentry?.environment ?? process.env.NEXT_PUBLIC_DEPLOY_ENV ?? 'production',
         tracesSampleRate: sentry?.tracesSampleRate,
         replaysOnErrorSampleRate: sentry?.replaysOnErrorSampleRate,
       });

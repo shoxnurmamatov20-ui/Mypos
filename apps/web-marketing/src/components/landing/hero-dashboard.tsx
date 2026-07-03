@@ -13,8 +13,7 @@ export function HeroDashboard() {
       <div className="mb-3 rounded-2xl border border-black/6 bg-white p-4">
         <p className="text-[12px] text-[#6e6e73]">Bugungi tushum</p>
         <p className="tabular mt-1 text-[30px] font-semibold text-[#1d1d1f]">
-          4,280,000{' '}
-          <span className="text-[15px] font-normal text-[#6e6e73]">so&apos;m</span>
+          4,280,000 <span className="text-[15px] font-normal text-[#6e6e73]">so&apos;m</span>
         </p>
         <p className="mt-1 text-[12px] font-medium text-green-600">↑ 18% kechadan</p>
       </div>

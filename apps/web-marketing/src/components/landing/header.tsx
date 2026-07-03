@@ -1,8 +1,8 @@
 'use client';
 
 import { ArrowRight, List, X } from '@phosphor-icons/react';
-import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { LanguageSwitcher } from './language-switcher';
 import { Logo } from './logo';
@@ -17,11 +17,11 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: `/${locale}/features`,  label: t('features') },
-    { href: `/${locale}/pricing`,   label: t('pricing') },
+    { href: `/${locale}/features`, label: t('features') },
+    { href: `/${locale}/pricing`, label: t('pricing') },
     { href: `/${locale}/solutions`, label: t('solutions') },
     { href: `/${locale}/customers`, label: t('customers') },
-    { href: `/${locale}/about`,     label: t('about') },
+    { href: `/${locale}/about`, label: t('about') },
   ];
 
   useEffect(() => {

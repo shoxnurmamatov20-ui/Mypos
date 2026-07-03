@@ -1,6 +1,6 @@
 'use client';
 
-import { employeesApi, type Employee } from '@mypos/api-client';
+import { type Employee, employeesApi } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -39,8 +39,7 @@ export function EmployeeList({
     }
   };
 
-  const isOnShift = (e: Employee): boolean =>
-    e.latest_shift?.status.value === 'open';
+  const isOnShift = (e: Employee): boolean => e.latest_shift?.status.value === 'open';
 
   return (
     <div>
@@ -87,13 +86,18 @@ export function EmployeeList({
                     >
                       {name}
                     </button>
-                    <p className="truncate text-sm text-[#62716d] dark:text-[#94a3b8]">{e.employee_code}</p>
-                    <p className="truncate text-xs text-[#62716d] dark:text-[#94a3b8]">{e.position.label}</p>
+                    <p className="truncate text-sm text-[#62716d] dark:text-[#94a3b8]">
+                      {e.employee_code}
+                    </p>
+                    <p className="truncate text-xs text-[#62716d] dark:text-[#94a3b8]">
+                      {e.position.label}
+                    </p>
                   </div>
                   <span
                     className={
                       'rounded-full px-2 py-0.5 text-xs font-medium ' +
-                      (STATUS_CLASS[e.status.value] ?? 'bg-[#eef4f3] dark:bg-[#1a2235] text-[#16221f] dark:text-[#e2e8f0]')
+                      (STATUS_CLASS[e.status.value] ??
+                        'bg-[#eef4f3] dark:bg-[#1a2235] text-[#16221f] dark:text-[#e2e8f0]')
                     }
                   >
                     {e.status.label}
@@ -108,7 +112,9 @@ export function EmployeeList({
                 )}
 
                 {e.user?.phone && (
-                  <p className="mt-3 truncate text-xs text-[#62716d] dark:text-[#94a3b8]">{e.user.phone}</p>
+                  <p className="mt-3 truncate text-xs text-[#62716d] dark:text-[#94a3b8]">
+                    {e.user.phone}
+                  </p>
                 )}
 
                 <div className="mt-3 flex justify-end gap-3 text-xs">

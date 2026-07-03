@@ -43,9 +43,7 @@ export function ReportPlaceholder({
         <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-[#eef4f3] text-[#0f766e] dark:bg-[#1a2235] dark:text-teal-400">
           <Icon className="h-5 w-5" strokeWidth={1.8} />
         </div>
-        <p className="text-sm leading-relaxed text-[#62716d] dark:text-[#94a3b8]">
-          {description}
-        </p>
+        <p className="text-sm leading-relaxed text-[#62716d] dark:text-[#94a3b8]">{description}</p>
       </div>
     </div>
   );

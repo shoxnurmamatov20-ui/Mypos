@@ -58,7 +58,7 @@ export function PasswordStrengthMeter({ value }: Props) {
             className={cn(
               'h-1.5 flex-1 rounded-full transition-colors duration-200',
               i < score
-                ? STRENGTH_COLOR[score] ?? 'bg-gray-200 dark:bg-gray-800'
+                ? (STRENGTH_COLOR[score] ?? 'bg-gray-200 dark:bg-gray-800')
                 : 'bg-gray-200 dark:bg-gray-800',
             )}
           />

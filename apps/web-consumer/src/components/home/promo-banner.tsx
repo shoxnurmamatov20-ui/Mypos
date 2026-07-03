@@ -1,8 +1,8 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import type { Route } from 'next';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 
 /**

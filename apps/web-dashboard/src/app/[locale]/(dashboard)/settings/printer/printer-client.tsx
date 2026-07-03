@@ -16,13 +16,13 @@ import {
   FieldGroup,
   inputClass,
   primaryBtnClass,
-  type SegmentOption,
   SegmentedControl,
+  type SegmentOption,
   SettingsCard,
   SettingsSkeleton,
   Stepper,
-  ToggleRow,
   secondaryBtnClass,
+  ToggleRow,
 } from '../_components/settings-ui';
 
 export function PrinterClient() {
@@ -131,7 +131,11 @@ function PrinterForm() {
         </div>
 
         <div className="pt-1">
-          <button type="button" className={secondaryBtnClass} onClick={() => toast.success(t('printer.test_sent'))}>
+          <button
+            type="button"
+            className={secondaryBtnClass}
+            onClick={() => toast.success(t('printer.test_sent'))}
+          >
             {t('printer.test')}
           </button>
         </div>

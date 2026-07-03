@@ -27,10 +27,7 @@ export function StockLevelBar({ ingredient }: { ingredient: Ingredient }) {
   return (
     <div className="flex items-center gap-2">
       <div className="h-2 w-28 overflow-hidden rounded-full bg-[#eef4f3] dark:bg-[#1a2235]">
-        <div
-          className={`h-full ${color} transition-all`}
-          style={{ width: `${pct}%` }}
-        />
+        <div className={`h-full ${color} transition-all`} style={{ width: `${pct}%` }} />
       </div>
     </div>
   );

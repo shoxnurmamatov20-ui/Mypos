@@ -23,10 +23,7 @@ export const NewTenantSchema = z.object({
   locale: z.enum(LOCALES),
   currency: z.literal('UZS'),
   owner_name: z.string().min(1, 'validation_owner_name_required'),
-  owner_email: z
-    .string()
-    .min(1, 'validation_email_required')
-    .email('validation_email_format'),
+  owner_email: z.string().min(1, 'validation_email_required').email('validation_email_format'),
   owner_phone: z
     .string()
     .min(1, 'validation_phone_required')

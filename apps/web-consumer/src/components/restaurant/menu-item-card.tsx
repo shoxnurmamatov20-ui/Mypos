@@ -1,8 +1,8 @@
 'use client';
 
-import { type MockMenuItem, getItemBgClass } from '@/data/menus';
-import { selectItemQuantity, useCartStore } from '@/stores/cart';
+import { getItemBgClass, type MockMenuItem } from '@/data/menus';
 import { formatSom } from '@/lib/format';
+import { selectItemQuantity, useCartStore } from '@/stores/cart';
 
 type MenuItemCardProps = {
   item: MockMenuItem;
@@ -49,9 +49,7 @@ export function MenuItemCard({ item, locale, popularLabel, newLabel, onOpen }: M
           <p className="line-clamp-2 text-sm text-neutral-500">{description}</p>
         ) : null}
         <div className="mt-2 flex items-center justify-between gap-2">
-          <span className="text-base font-bold text-neutral-900">
-            {formatSom(item.priceMinor)}
-          </span>
+          <span className="text-base font-bold text-neutral-900">{formatSom(item.priceMinor)}</span>
         </div>
       </div>
 

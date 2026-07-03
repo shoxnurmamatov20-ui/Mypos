@@ -71,7 +71,11 @@ function ProfileForm() {
           <div className="flex items-center gap-4">
             {avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={avatarUrl} alt={displayName} className="h-16 w-16 rounded-full object-cover" />
+              <img
+                src={avatarUrl}
+                alt={displayName}
+                className="h-16 w-16 rounded-full object-cover"
+              />
             ) : (
               <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 via-teal-500 to-teal-600 text-2xl font-semibold text-white select-none">
                 {avatarInitial}
@@ -86,7 +90,13 @@ function ProfileForm() {
           </div>
 
           <Field label={t('profile.email')}>
-            <input className={inputClass} type="email" value={user?.email ?? '—'} disabled readOnly />
+            <input
+              className={inputClass}
+              type="email"
+              value={user?.email ?? '—'}
+              disabled
+              readOnly
+            />
           </Field>
           <Field label={t('profile.role')}>
             <input className={inputClass} type="text" value={role} disabled readOnly />

@@ -1,7 +1,7 @@
 'use client';
 
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { useTheme } from 'next-themes';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { MOCK_EVENT_TYPES } from '@/data/mock-feedback';
 
 /**
@@ -73,7 +73,9 @@ export function EventTypeDonutCard() {
                   style={{ background: e.color }}
                   aria-hidden="true"
                 />
-                <span className="text-[#62716d] dark:text-[#94a3b8] flex-1 truncate">{e.label}</span>
+                <span className="text-[#62716d] dark:text-[#94a3b8] flex-1 truncate">
+                  {e.label}
+                </span>
                 <span className="text-[#62716d] dark:text-[#94a3b8] tabular-nums">{pct}%</span>
                 <span className="text-[#16221f] dark:text-white font-bold tabular-nums w-9 text-right">
                   {e.count}

@@ -20,8 +20,8 @@ import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { apiClient } from '@/lib/api';
 import { useAuthStore } from '@/stores/auth';
+import { type DashPeriod, PeriodChip } from '../../_components/period-chip';
 import { DashStatCard } from '../../_components/stat-card';
-import { PeriodChip, type DashPeriod } from '../../_components/period-chip';
 import { SystemHealthBar } from '../../_components/system-health-bar';
 import { OverviewRankings } from './overview-rankings';
 import { OverviewRevenueTrend } from './overview-revenue-trend';
@@ -100,9 +100,7 @@ export function OverviewDashboard({ locale }: { locale: string }) {
           <h1 className="text-[20px] sm:text-[22px] font-bold tracking-tight text-[#16221f] dark:text-white">
             {user ? t('welcome', { name: user.name }) : t('welcome_generic')}
           </h1>
-          <p className="mt-0.5 text-[13px] text-[#62716d] dark:text-[#94a3b8]">
-            {t('subtitle')}
-          </p>
+          <p className="mt-0.5 text-[13px] text-[#62716d] dark:text-[#94a3b8]">{t('subtitle')}</p>
         </div>
         <PeriodChip value={period} onChange={setPeriod} />
       </div>

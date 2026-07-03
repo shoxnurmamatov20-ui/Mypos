@@ -1,6 +1,6 @@
 'use client';
 
-import { type Table, type TableStatus } from '@mypos/api-client';
+import type { Table, TableStatus } from '@mypos/api-client';
 import { cn } from '@mypos/ui';
 import { useTranslations } from 'next-intl';
 
@@ -22,13 +22,7 @@ const STATUS_BORDER_CLASS: Record<TableStatus, string> = {
   disabled: 'border-[#16221f]/40 dark:border-white/30',
 };
 
-export function FloorPlan({
-  tables,
-  isLoading,
-}: {
-  tables: Table[];
-  isLoading: boolean;
-}) {
+export function FloorPlan({ tables, isLoading }: { tables: Table[]; isLoading: boolean }) {
   const t = useTranslations('tables');
 
   const placedTables = tables.filter(

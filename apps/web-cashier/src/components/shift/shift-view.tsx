@@ -170,10 +170,27 @@ export function ShiftView() {
           {t('stats_title')}
         </h2>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <Metric icon={<Receipt className="h-4 w-4" />} label={t('orders_count')} value={String(stats?.orders_count ?? 0)} />
-          <Metric icon={<Wallet className="h-4 w-4" />} label={t('revenue')} value={fmt(stats?.revenue)} highlight />
-          <Metric icon={<TrendingUp className="h-4 w-4" />} label={t('avg_order')} value={fmt(stats?.avg_order)} />
-          <Metric icon={<Coffee className="h-4 w-4" />} label={t('tips')} value={fmt(stats?.tips)} />
+          <Metric
+            icon={<Receipt className="h-4 w-4" />}
+            label={t('orders_count')}
+            value={String(stats?.orders_count ?? 0)}
+          />
+          <Metric
+            icon={<Wallet className="h-4 w-4" />}
+            label={t('revenue')}
+            value={fmt(stats?.revenue)}
+            highlight
+          />
+          <Metric
+            icon={<TrendingUp className="h-4 w-4" />}
+            label={t('avg_order')}
+            value={fmt(stats?.avg_order)}
+          />
+          <Metric
+            icon={<Coffee className="h-4 w-4" />}
+            label={t('tips')}
+            value={fmt(stats?.tips)}
+          />
         </div>
       </section>
 

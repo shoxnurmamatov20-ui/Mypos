@@ -52,16 +52,13 @@ export default async function NotConfiguredPage({
         <h1 className="font-display text-2xl font-bold tracking-tight text-neutral-900">
           {t('not_configured_title')}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-neutral-600">{t('not_configured_body')}</p>
-        {host && (
-          <p className="mt-6 break-all text-sm font-mono text-neutral-400">{host}</p>
-        )}
+        <p className="mt-4 text-base leading-relaxed text-neutral-600">
+          {t('not_configured_body')}
+        </p>
+        {host && <p className="mt-6 break-all text-sm font-mono text-neutral-400">{host}</p>}
         <p className="mt-8 border-t border-neutral-200 pt-6 text-sm text-neutral-400">
           {t('powered_by')}{' '}
-          <a
-            href="https://mypos.uz"
-            className="font-semibold text-brand-primary hover:underline"
-          >
+          <a href="https://mypos.uz" className="font-semibold text-brand-primary hover:underline">
             MyPOS
           </a>
         </p>

@@ -41,7 +41,12 @@ export function CommandPalette() {
   // Static command catalog — order drives the rendered group order.
   const allItems: CmdItem[] = useMemo(
     () => [
-      { label: 'Umumiy ko’rinish', group: 'Navigatsiya', action: 'nav:overview', hint: 'Boshqaruv paneli' },
+      {
+        label: 'Umumiy ko’rinish',
+        group: 'Navigatsiya',
+        action: 'nav:overview',
+        hint: 'Boshqaruv paneli',
+      },
       { label: 'Restoranlarim', group: 'Navigatsiya', action: 'nav:restaurants' },
       { label: 'Moliya', group: 'Navigatsiya', action: 'nav:finances' },
       { label: 'Davr: 7 kun', group: 'Davr', action: 'period:7d' },

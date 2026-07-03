@@ -79,12 +79,7 @@ export function EditSubscriptionModal({
   const notesError = fieldErrors.notes;
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      title={t('edit_subscription_modal_title')}
-      size="md"
-    >
+    <Modal open={open} onClose={onClose} title={t('edit_subscription_modal_title')} size="md">
       <div className="space-y-4">
         <div>
           <Select<TenantPlan>

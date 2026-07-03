@@ -3,8 +3,8 @@
 import { ArrowRight, Inbox } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { formatUZS } from '@/lib/format';
 import type { MockOrder } from '@/data/mock-tenant-detail';
+import { formatUZS } from '@/lib/format';
 
 type Props = {
   orders: readonly MockOrder[];
@@ -12,10 +12,10 @@ type Props = {
 };
 
 const STATUS_STYLE: Record<MockOrder['status'], string> = {
-  pending:   'bg-amber-50 text-[#b7791f] dark:bg-amber-500/15 dark:text-amber-400',
+  pending: 'bg-amber-50 text-[#b7791f] dark:bg-amber-500/15 dark:text-amber-400',
   preparing: 'bg-blue-50 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400',
-  served:    'bg-purple-50 text-purple-600 dark:bg-purple-500/15 dark:text-purple-400',
-  paid:      'bg-emerald-50 text-[#18794e] dark:bg-emerald-500/15 dark:text-emerald-400',
+  served: 'bg-purple-50 text-purple-600 dark:bg-purple-500/15 dark:text-purple-400',
+  paid: 'bg-emerald-50 text-[#18794e] dark:bg-emerald-500/15 dark:text-emerald-400',
   cancelled: 'bg-red-50 text-[#b42318] dark:bg-red-500/15 dark:text-red-400',
 };
 
@@ -50,8 +50,12 @@ export function TenantRecentOrders({ orders, onViewAll }: Props) {
           <table className="w-full text-sm min-w-[400px]">
             <thead>
               <tr className="text-left text-xs uppercase tracking-wide text-[#62716d] dark:text-[#94a3b8]">
-                <th scope="col" className="pb-2 px-2 font-semibold">{t('th_order_no')}</th>
-                <th scope="col" className="pb-2 px-2 font-semibold">{t('th_order_status')}</th>
+                <th scope="col" className="pb-2 px-2 font-semibold">
+                  {t('th_order_no')}
+                </th>
+                <th scope="col" className="pb-2 px-2 font-semibold">
+                  {t('th_order_status')}
+                </th>
                 <th scope="col" className="pb-2 px-2 text-right font-semibold">
                   {t('th_order_total')}
                 </th>

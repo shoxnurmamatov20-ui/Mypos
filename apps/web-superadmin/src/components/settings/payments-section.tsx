@@ -89,16 +89,10 @@ export function PaymentsSection({ isLoading = false }: Props) {
             >
               <div className="flex items-center gap-2.5 mb-3">
                 <div
-                  className={cn(
-                    'flex h-8 w-8 items-center justify-center rounded-md',
-                    provider.bg,
-                  )}
+                  className={cn('flex h-8 w-8 items-center justify-center rounded-md', provider.bg)}
                   aria-hidden="true"
                 >
-                  <CreditCard
-                    className={cn('h-4 w-4', provider.color)}
-                    strokeWidth={2.2}
-                  />
+                  <CreditCard className={cn('h-4 w-4', provider.color)} strokeWidth={2.2} />
                 </div>
                 <p className="text-sm font-bold text-gray-900 dark:text-white">
                   {t(`payment_provider_${provider.key}` as const)}

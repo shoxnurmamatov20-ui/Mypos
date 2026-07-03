@@ -61,9 +61,7 @@ export function OverviewRevenueTrend({ points, locale }: Props) {
         </h3>
         <span className="tabular-nums text-xs text-[#62716d] dark:text-[#94a3b8]">
           {t('labels.revenue')}:{' '}
-          <span className="font-bold text-[#16221f] dark:text-white">
-            {formatUZS(total)}
-          </span>
+          <span className="font-bold text-[#16221f] dark:text-white">{formatUZS(total)}</span>
         </span>
       </header>
 
@@ -82,11 +80,7 @@ export function OverviewRevenueTrend({ points, locale }: Props) {
                   <stop offset="100%" stopColor="#0f766e" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid
-                strokeDasharray="3 3"
-                stroke="rgba(22,34,31,0.07)"
-                vertical={false}
-              />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(22,34,31,0.07)" vertical={false} />
               <XAxis
                 dataKey="label"
                 tick={{ fontSize: 11, fill: '#62716d' }}

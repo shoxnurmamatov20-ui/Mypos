@@ -16,11 +16,11 @@ import { logout } from '@/lib/api';
  * revoked), and clears its own storage.
  */
 const PER_APP_KEYS = [
-  'mypos_token',                  // portal
-  'mypos_role',                   // portal
-  'mypos_super_admin_token',      // web-superadmin
-  'mypos_auth_token',             // web-dashboard / web-ceo / web-cashier
-  'kds_auth_token',               // kds
+  'mypos_token', // portal
+  'mypos_role', // portal
+  'mypos_super_admin_token', // web-superadmin
+  'mypos_auth_token', // web-dashboard / web-ceo / web-cashier
+  'kds_auth_token', // kds
 ];
 
 export function LogoutScreen({ locale }: { locale: string }) {

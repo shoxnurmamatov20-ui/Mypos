@@ -4,7 +4,7 @@ import { AlertTriangle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 
-export default function Error({
+export default function LocaleErrorPage({
   error,
   reset,
 }: {

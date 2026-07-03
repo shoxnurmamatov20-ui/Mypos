@@ -57,7 +57,9 @@ export default function ReferralsPage() {
       <div className="rounded-3xl bg-gradient-to-br from-brand-primary to-brand-accent p-6 text-white shadow-lg">
         <div className="flex items-center gap-2 mb-2">
           <Gift className="h-6 w-6" />
-          <p className="text-sm font-semibold uppercase tracking-wide opacity-90">{t('your_code')}</p>
+          <p className="text-sm font-semibold uppercase tracking-wide opacity-90">
+            {t('your_code')}
+          </p>
         </div>
         <p className="font-mono text-4xl font-black tracking-tight">{code}</p>
         <p className="mt-3 text-sm opacity-90">{t('benefit')}</p>
@@ -83,7 +85,9 @@ export default function ReferralsPage() {
       </div>
 
       <div className="mt-8">
-        <h2 className="font-display text-lg font-bold text-neutral-900 mb-3">{t('how_it_works')}</h2>
+        <h2 className="font-display text-lg font-bold text-neutral-900 mb-3">
+          {t('how_it_works')}
+        </h2>
         <ol className="grid gap-3">
           {(['step_1', 'step_2', 'step_3'] as const).map((key, i) => (
             <li key={key} className="flex gap-3 rounded-2xl border border-neutral-200 bg-white p-4">

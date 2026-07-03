@@ -1,10 +1,10 @@
 'use client';
 
+import type { AuthUser } from '@mypos/api-client';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import Link from 'next/link';
 import type { Route } from 'next';
-import type { AuthUser } from '@mypos/api-client';
+import Link from 'next/link';
 
 type Props = {
   open: boolean;

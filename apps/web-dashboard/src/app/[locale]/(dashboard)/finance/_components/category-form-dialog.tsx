@@ -1,20 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
 import { cn } from '@mypos/ui';
-import {
-  type FinanceCategory,
-  type FinanceKind,
-  useFinanceStore,
-} from '@/stores/finance';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { type FinanceCategory, type FinanceKind, useFinanceStore } from '@/stores/finance';
 import {
   Field,
-  Toggle,
   inputClass,
   primaryBtnClass,
   secondaryBtnClass,
+  Toggle,
 } from '../../settings/_components/settings-ui';
 
 interface Props {
@@ -105,11 +101,7 @@ export function CategoryFormDialog({ kind, category, onClose, onSaved }: Props) 
             <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
               {t('active')}
             </span>
-            <Toggle
-              checked={isActive}
-              onChange={setIsActive}
-              ariaLabel={t('active')}
-            />
+            <Toggle checked={isActive} onChange={setIsActive} ariaLabel={t('active')} />
           </div>
 
           {/* Actions */}

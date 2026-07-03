@@ -1,18 +1,18 @@
 'use client';
 
+import { ArrowRight, Plus, Trash2 } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowRight, Plus, Trash2 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { CartEmptyState } from '@/components/cart/cart-empty-state';
 import { CartItemRow } from '@/components/cart/cart-item-row';
 import { CartSummaryCard } from '@/components/cart/cart-summary-card';
 import { computeCartFees } from '@/lib/cart-fees';
+import { usePublicRestaurant } from '@/lib/hooks/use-public-restaurants';
 import { isPublicLocale } from '@/lib/public-api';
 import { publicRestaurantToUi } from '@/lib/public-api-mappers';
-import { usePublicRestaurant } from '@/lib/hooks/use-public-restaurants';
 import { selectCartTotal, useCartStore } from '@/stores/cart';
 
 /**
@@ -45,10 +45,7 @@ export default function CartPage() {
   const apiLocale = isPublicLocale(locale) ? locale : 'uz';
   const { data: restaurantResponse } = usePublicRestaurant(restaurantSlug);
   const restaurant = useMemo(
-    () =>
-      restaurantResponse
-        ? publicRestaurantToUi(restaurantResponse.data, apiLocale)
-        : null,
+    () => (restaurantResponse ? publicRestaurantToUi(restaurantResponse.data, apiLocale) : null),
     [restaurantResponse, apiLocale],
   );
 
@@ -206,10 +203,7 @@ function CartNotesCard({ items, setItemNotes, labels }: CartNotesCardProps) {
   if (!firstItem) return null;
   return (
     <div className="rounded-3xl border border-neutral-200 bg-white p-4 sm:p-5">
-      <label
-        htmlFor="cart-notes"
-        className="font-display text-sm font-bold text-neutral-900"
-      >
+      <label htmlFor="cart-notes" className="font-display text-sm font-bold text-neutral-900">
         {labels.title}
       </label>
       <textarea

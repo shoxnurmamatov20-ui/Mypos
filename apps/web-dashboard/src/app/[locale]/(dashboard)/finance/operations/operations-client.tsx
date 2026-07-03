@@ -1,16 +1,16 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import { ArrowDownLeft, ArrowUpRight, Plus, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { cn } from '@mypos/ui';
 import { type FinanceKind, useFinanceHydrated, useFinanceStore } from '@/stores/finance';
 import {
   inputClass,
   primaryBtnClass,
-  type SegmentOption,
   SegmentedControl,
+  type SegmentOption,
   SettingsCard,
   SettingsSkeleton,
 } from '../../settings/_components/settings-ui';
@@ -72,7 +72,11 @@ function OperationsInner() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Kpi label={t('overview.total_income')} value={fmt(totalIncome)} tone="income" />
         <Kpi label={t('overview.total_expense')} value={fmt(totalExpense)} tone="expense" />
-        <Kpi label={t('overview.net_profit')} value={fmt(net)} tone={net >= 0 ? 'income' : 'expense'} />
+        <Kpi
+          label={t('overview.net_profit')}
+          value={fmt(net)}
+          tone={net >= 0 ? 'income' : 'expense'}
+        />
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
@@ -91,14 +95,29 @@ function OperationsInner() {
           aria-label={t('category')}
         >
           <option value="all">{t('operations.filter_all')}</option>
-          {(kindFilter === 'all' ? categories : categories.filter((c) => c.kind === kindFilter)).map((c) => (
+          {(kindFilter === 'all'
+            ? categories
+            : categories.filter((c) => c.kind === kindFilter)
+          ).map((c) => (
             <option key={c.id} value={c.id}>
               {c.name}
             </option>
           ))}
         </select>
-        <input type="date" className={cn(inputClass, 'w-auto')} value={from} onChange={(e) => setFrom(e.target.value)} aria-label={t('date')} />
-        <input type="date" className={cn(inputClass, 'w-auto')} value={to} onChange={(e) => setTo(e.target.value)} aria-label={t('date')} />
+        <input
+          type="date"
+          className={cn(inputClass, 'w-auto')}
+          value={from}
+          onChange={(e) => setFrom(e.target.value)}
+          aria-label={t('date')}
+        />
+        <input
+          type="date"
+          className={cn(inputClass, 'w-auto')}
+          value={to}
+          onChange={(e) => setTo(e.target.value)}
+          aria-label={t('date')}
+        />
         <button
           type="button"
           className={cn(primaryBtnClass, 'ml-auto inline-flex items-center gap-1.5')}
@@ -110,7 +129,9 @@ function OperationsInner() {
 
       <SettingsCard>
         {filtered.length === 0 ? (
-          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">{t('operations.empty')}</p>
+          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
+            {t('operations.empty')}
+          </p>
         ) : (
           <div className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
             {filtered.map((o) => {
@@ -129,7 +150,9 @@ function OperationsInner() {
                     <Icon className="h-4 w-4" strokeWidth={2.2} />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{catName(o.categoryId)}</p>
+                    <p className="truncate text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+                      {catName(o.categoryId)}
+                    </p>
                     <p className="text-[12px] text-[#62716d] dark:text-[#94a3b8]">
                       {o.date}
                       {o.note ? ` · ${o.note}` : ''}
@@ -138,7 +161,9 @@ function OperationsInner() {
                   <span
                     className={cn(
                       "flex-shrink-0 text-sm font-semibold tabular-nums [font-feature-settings:'tnum']",
-                      inc ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400',
+                      inc
+                        ? 'text-emerald-600 dark:text-emerald-400'
+                        : 'text-rose-600 dark:text-rose-400',
                     )}
                   >
                     {inc ? '+' : '−'}
@@ -162,7 +187,12 @@ function OperationsInner() {
         )}
       </SettingsCard>
 
-      {dialogOpen && <OperationFormDialog onClose={() => setDialogOpen(false)} onSaved={() => setDialogOpen(false)} />}
+      {dialogOpen && (
+        <OperationFormDialog
+          onClose={() => setDialogOpen(false)}
+          onSaved={() => setDialogOpen(false)}
+        />
+      )}
     </div>
   );
 }
@@ -174,7 +204,9 @@ function Kpi({ label, value, tone }: { label: string; value: string; tone: 'inco
       <p
         className={cn(
           "mt-1 text-xl font-semibold tabular-nums [font-feature-settings:'tnum']",
-          tone === 'income' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400',
+          tone === 'income'
+            ? 'text-emerald-600 dark:text-emerald-400'
+            : 'text-rose-600 dark:text-rose-400',
         )}
       >
         {value} so'm

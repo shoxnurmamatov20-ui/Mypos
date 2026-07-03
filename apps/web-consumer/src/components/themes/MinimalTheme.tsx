@@ -20,13 +20,10 @@ import type { ThemeProps } from './types';
  */
 export function MinimalTheme({ tenant, brand, restaurant, locale }: ThemeProps) {
   const tenantName =
-    typeof tenant.name === 'string'
-      ? tenant.name
-      : pickTranslation(tenant.name, locale);
+    typeof tenant.name === 'string' ? tenant.name : pickTranslation(tenant.name, locale);
   const heroTitle = pickTranslation(brand.hero_title, locale) || tenantName;
   const heroSubtitle =
-    pickTranslation(brand.hero_subtitle, locale) ||
-    pickTranslation(brand.tagline, locale);
+    pickTranslation(brand.hero_subtitle, locale) || pickTranslation(brand.tagline, locale);
 
   return (
     <section className="bg-brand-background py-32 lg:py-48">
@@ -48,7 +45,9 @@ export function MinimalTheme({ tenant, brand, restaurant, locale }: ThemeProps) 
 
         <div className="mt-16 flex items-center gap-8 border-t border-brand-text/10 pt-8">
           <a
-            href={restaurant ? `/${locale}/restaurants/${restaurant.slug}` : `/${locale}/restaurants`}
+            href={
+              restaurant ? `/${locale}/restaurants/${restaurant.slug}` : `/${locale}/restaurants`
+            }
             className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-text underline-offset-8 hover:underline"
           >
             View menu →

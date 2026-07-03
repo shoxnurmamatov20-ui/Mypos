@@ -58,12 +58,24 @@ export function TopTenantsTable({ tenants, locale }: TopTenantsTableProps) {
         <table className="w-full min-w-[640px] border-collapse text-sm">
           <thead>
             <tr className="border-b border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] text-left text-xs font-semibold uppercase tracking-wide text-[#62716d] dark:text-[#94a3b8]">
-              <th scope="col" className="px-5 py-3">{t('th_tenant')}</th>
-              <th scope="col" className="px-3 py-3">{t('th_plan')}</th>
-              <th scope="col" className="px-3 py-3">{t('th_status')}</th>
-              <th scope="col" className="px-3 py-3 text-right">{t('th_mrr')}</th>
-              <th scope="col" className="px-3 py-3 text-right">{t('th_orders')}</th>
-              <th scope="col" className="px-5 py-3 text-right">{t('th_last_active')}</th>
+              <th scope="col" className="px-5 py-3">
+                {t('th_tenant')}
+              </th>
+              <th scope="col" className="px-3 py-3">
+                {t('th_plan')}
+              </th>
+              <th scope="col" className="px-3 py-3">
+                {t('th_status')}
+              </th>
+              <th scope="col" className="px-3 py-3 text-right">
+                {t('th_mrr')}
+              </th>
+              <th scope="col" className="px-3 py-3 text-right">
+                {t('th_orders')}
+              </th>
+              <th scope="col" className="px-5 py-3 text-right">
+                {t('th_last_active')}
+              </th>
             </tr>
           </thead>
           <tbody>

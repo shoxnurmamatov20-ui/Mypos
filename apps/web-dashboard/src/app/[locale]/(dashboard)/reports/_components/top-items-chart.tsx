@@ -3,15 +3,7 @@
 import type { TopItem } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useTranslations } from 'next-intl';
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 export function TopItemsChart({ items }: { items: TopItem[] }) {
   const t = useTranslations('reports');
@@ -36,16 +28,8 @@ export function TopItemsChart({ items }: { items: TopItem[] }) {
   return (
     <ChartShell title={t('charts.top_items_title')}>
       <ResponsiveContainer width="100%" height={Math.max(220, data.length * 56)}>
-        <BarChart
-          data={data}
-          layout="vertical"
-          margin={{ top: 8, right: 24, left: 16, bottom: 0 }}
-        >
-          <CartesianGrid
-            strokeDasharray="3 3"
-            stroke="rgba(22,34,31,0.07)"
-            horizontal={false}
-          />
+        <BarChart data={data} layout="vertical" margin={{ top: 8, right: 24, left: 16, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(22,34,31,0.07)" horizontal={false} />
           <XAxis
             type="number"
             tick={{ fontSize: 11, fill: '#62716d' }}

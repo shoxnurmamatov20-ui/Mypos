@@ -34,11 +34,7 @@ export async function renderCart(ctx: BotContext): Promise<void> {
   await safeRender(ctx, body, kb);
 }
 
-async function safeRender(
-  ctx: BotContext,
-  text: string,
-  kb: InlineKb,
-): Promise<void> {
+async function safeRender(ctx: BotContext, text: string, kb: InlineKb): Promise<void> {
   try {
     await ctx.editMessageText(text, { parse_mode: 'Markdown', ...kb });
   } catch {

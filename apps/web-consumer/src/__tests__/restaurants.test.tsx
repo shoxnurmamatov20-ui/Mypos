@@ -64,14 +64,13 @@ describe('publicConsumerApi.restaurants.list', () => {
       meta: { next_cursor: null, has_more: false, total: 2 },
     };
 
-    global.fetch = vi.fn(
-      () =>
-        Promise.resolve(
-          new Response(JSON.stringify(payload), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' },
-          }),
-        ),
+    global.fetch = vi.fn(() =>
+      Promise.resolve(
+        new Response(JSON.stringify(payload), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      ),
     );
 
     const res = await publicConsumerApi.restaurants.list();
@@ -159,11 +158,13 @@ describe('publicRestaurantsToUi mapper', () => {
   });
 
   it('preserves all UI shape fields', () => {
-    const restaurants = [makeRestaurant({
-      rating: 4.2,
-      delivery_minutes: 30,
-      delivery_fee: 12000,
-    })];
+    const restaurants = [
+      makeRestaurant({
+        rating: 4.2,
+        delivery_minutes: 30,
+        delivery_fee: 12000,
+      }),
+    ];
 
     const ui = publicRestaurantsToUi(restaurants, 'uz')[0]!;
     expect(ui.rating).toBe(4.2);
@@ -207,9 +208,7 @@ describe('Restaurant list state machine (loading / error)', () => {
 
   it('shows error state on API failure', async () => {
     global.fetch = vi.fn(() =>
-      Promise.resolve(
-        new Response('{"message":"down"}', { status: 503 }),
-      ),
+      Promise.resolve(new Response('{"message":"down"}', { status: 503 })),
     );
 
     const promise = publicConsumerApi.restaurants.list();
@@ -264,9 +263,7 @@ describe('publicConsumerApi.menu.bySlug', () => {
 
   it('throws on unknown slug (404)', async () => {
     global.fetch = vi.fn(() =>
-      Promise.resolve(
-        new Response('{"message":"not found"}', { status: 404 }),
-      ),
+      Promise.resolve(new Response('{"message":"not found"}', { status: 404 })),
     );
 
     await expect(publicConsumerApi.menu.bySlug('not-real')).rejects.toMatchObject({

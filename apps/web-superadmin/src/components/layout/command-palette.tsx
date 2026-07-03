@@ -48,7 +48,12 @@ export function CommandPalette() {
   // Static command catalogue — order drives the rendered group order.
   const allItems: CmdItem[] = useMemo(
     () => [
-      { label: 'Dashboard', group: 'Navigatsiya', action: 'nav:dashboard', hint: 'Boshqaruv paneli' },
+      {
+        label: 'Dashboard',
+        group: 'Navigatsiya',
+        action: 'nav:dashboard',
+        hint: 'Boshqaruv paneli',
+      },
       { label: "Tenant'lar", group: 'Navigatsiya', action: 'nav:tenants' },
       { label: 'Hisob-kitob', group: 'Navigatsiya', action: 'nav:billing' },
       { label: 'Audit log', group: 'Navigatsiya', action: 'nav:audit' },
@@ -61,7 +66,12 @@ export function CommandPalette() {
       { label: "Yorug' rejim", group: 'Tezkor', action: 'theme:light' },
       { label: 'Tungi rejim', group: 'Tezkor', action: 'theme:dark' },
       { label: 'Tizim rejimi', group: 'Tezkor', action: 'theme:system' },
-      { label: 'Bosh sahifa', group: 'Tezkor', action: 'url:http://localhost:3000/uz', hint: 'Public portal' },
+      {
+        label: 'Bosh sahifa',
+        group: 'Tezkor',
+        action: 'url:http://localhost:3000/uz',
+        hint: 'Public portal',
+      },
       { label: 'Tizimdan chiqish', group: 'Tezkor', action: 'logout' },
     ],
     [],

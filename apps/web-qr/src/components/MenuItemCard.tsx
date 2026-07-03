@@ -1,8 +1,8 @@
 'use client';
 
-import { Plus } from 'lucide-react';
 import type { PublicMenuItem } from '@mypos/api-client';
-import { formatMoney, type Currency, type Locale as UtilsLocale } from '@mypos/utils';
+import { type Currency, formatMoney, type Locale as UtilsLocale } from '@mypos/utils';
+import { Plus } from 'lucide-react';
 import { type Locale, pickTranslation, translate } from '@/lib/i18n';
 
 type Props = {

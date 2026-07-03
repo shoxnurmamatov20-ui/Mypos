@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  Activity,
-  Building2,
-  ShieldCheck,
-  ShoppingBag,
-  TrendingUp,
-  Users,
-} from 'lucide-react';
+import { Activity, Building2, ShieldCheck, ShoppingBag, TrendingUp, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { formatNumber, formatUZS } from '@/lib/format';
 import type { DashboardKpis, SystemHealth, TenantSummary } from '@/types/super-admin';
@@ -112,9 +105,7 @@ export function KpiGrid({ kpis, derived, systemHealth }: KpiGridProps) {
  */
 export function deriveKpiCounts(tenants: TenantSummary[]): DerivedCounts {
   const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
-  const newTenants30d = tenants.filter(
-    (t) => new Date(t.created_at).getTime() >= cutoff,
-  ).length;
+  const newTenants30d = tenants.filter((t) => new Date(t.created_at).getTime() >= cutoff).length;
 
   // Aggregate today's orders from the bottom of the 30-day chart series.
   // This keeps the numbers consistent with the Recharts data even though

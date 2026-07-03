@@ -1,5 +1,5 @@
-import { getTranslations } from 'next-intl/server';
 import { PageHeader } from '@mypos/ui';
+import { getTranslations } from 'next-intl/server';
 import { InventoryManager } from './_components/inventory-manager';
 
 export async function generateMetadata() {

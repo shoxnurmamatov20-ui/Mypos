@@ -28,10 +28,7 @@ export function Step3Tables() {
       aria-labelledby="step3-title"
       className="rounded-card border border-hairline-soft bg-canvas p-lg shadow-hairline-ring sm:p-xl"
     >
-      <h2
-        id="step3-title"
-        className="font-display font-semibold text-display-sm text-ink"
-      >
+      <h2 id="step3-title" className="font-display font-semibold text-display-sm text-ink">
         {t('title')}
       </h2>
       <p className="mt-xs text-caption text-ink-muted-80">{t('subtitle')}</p>
@@ -64,7 +61,10 @@ export function Step3Tables() {
       </div>
 
       {total > 100 && (
-        <p role="alert" className="mt-md rounded-pearl bg-error-soft px-md py-xs text-caption text-error">
+        <p
+          role="alert"
+          className="mt-md rounded-pearl bg-error-soft px-md py-xs text-caption text-error"
+        >
           {tErr('too_many_tables')}
         </p>
       )}

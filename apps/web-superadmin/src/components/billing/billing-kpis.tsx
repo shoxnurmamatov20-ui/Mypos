@@ -3,8 +3,8 @@
 import { CreditCard, Repeat, TrendingUp, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { KpiCard } from '@/components/dashboard/kpi-card';
-import { formatNumber, formatPercent, formatUZS } from '@/lib/format';
 import type { MrrSummary } from '@/data/mock-billing';
+import { formatNumber, formatPercent, formatUZS } from '@/lib/format';
 
 type Props = {
   summary: MrrSummary;

@@ -1,7 +1,7 @@
 'use client';
 
-import { type LucideIcon, Minus, Plus } from 'lucide-react';
 import { cn } from '@mypos/ui';
+import { type LucideIcon, Minus, Plus } from 'lucide-react';
 
 /** Shared himoya-styled input/select class (matches the rest of the dashboard). */
 export const inputClass =
@@ -67,7 +67,9 @@ export function Field({
         {label}
       </span>
       {children}
-      {hint && <span className="mt-1 block text-[12px] text-[#62716d] dark:text-[#94a3b8]">{hint}</span>}
+      {hint && (
+        <span className="mt-1 block text-[12px] text-[#62716d] dark:text-[#94a3b8]">{hint}</span>
+      )}
     </label>
   );
 }
@@ -159,7 +161,9 @@ export function FieldGroup({
         {label}
       </span>
       {children}
-      {hint && <span className="mt-1.5 block text-[12px] text-[#62716d] dark:text-[#94a3b8]">{hint}</span>}
+      {hint && (
+        <span className="mt-1.5 block text-[12px] text-[#62716d] dark:text-[#94a3b8]">{hint}</span>
+      )}
     </div>
   );
 }
@@ -226,13 +230,25 @@ export function Stepper({
     'flex h-9 w-9 items-center justify-center text-[#16221f] dark:text-[#e2e8f0] hover:bg-[#eef4f3] dark:hover:bg-[#1a2235] disabled:opacity-40 disabled:hover:bg-transparent transition-colors active:scale-90 outline-none';
   return (
     <div className="inline-flex items-center overflow-hidden rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)]">
-      <button type="button" className={btn} onClick={() => onChange(Math.max(min, value - 1))} disabled={value <= min} aria-label="−">
+      <button
+        type="button"
+        className={btn}
+        onClick={() => onChange(Math.max(min, value - 1))}
+        disabled={value <= min}
+        aria-label="−"
+      >
         <Minus className="h-4 w-4" strokeWidth={2.4} />
       </button>
       <span className="w-12 text-center text-sm font-semibold tabular-nums [font-feature-settings:'tnum'] text-[#16221f] dark:text-white">
         {value}
       </span>
-      <button type="button" className={btn} onClick={() => onChange(Math.min(max, value + 1))} disabled={value >= max} aria-label="+">
+      <button
+        type="button"
+        className={btn}
+        onClick={() => onChange(Math.min(max, value + 1))}
+        disabled={value >= max}
+        aria-label="+"
+      >
         <Plus className="h-4 w-4" strokeWidth={2.4} />
       </button>
     </div>

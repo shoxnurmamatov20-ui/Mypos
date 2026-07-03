@@ -109,9 +109,7 @@ export const menuApi = {
   categories: {
     list: (client: MyPosApiClient, params?: { active_only?: boolean }) => {
       const qs = params?.active_only ? '?active_only=1' : '';
-      return client.get<CollectionResponse<MenuCategory>>(
-        `/api/v1/menu/categories${qs}`,
-      );
+      return client.get<CollectionResponse<MenuCategory>>(`/api/v1/menu/categories${qs}`);
     },
     create: (client: MyPosApiClient, input: CreateMenuCategoryInput) =>
       client.post<ResourceResponse<MenuCategory>>('/api/v1/menu/categories', input),

@@ -1,10 +1,10 @@
-export { initSentryWeb, type SentryConfig } from './sentry';
-export {
-  initPosthogWeb,
-  track,
-  identify,
-  reset,
-  type PosthogConfig,
-  type EventName,
-} from './posthog';
 export { AnalyticsBoot } from './client-init';
+export {
+  type EventName,
+  identify,
+  initPosthogWeb,
+  type PosthogConfig,
+  reset,
+  track,
+} from './posthog';
+export { initSentryWeb, type SentryConfig } from './sentry';

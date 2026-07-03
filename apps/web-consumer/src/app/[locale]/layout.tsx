@@ -11,9 +11,9 @@ import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { MobileBottomNav } from '@/components/layout/mobile-bottom-nav';
 import { Providers } from '@/components/providers';
-import { BrandProvider } from '@/lib/brand-context';
-import { brandToCssVars, fetchBrandForHost, MYPOS_DEFAULT_BRAND } from '@/lib/brand';
 import { routing } from '@/i18n/routing';
+import { brandToCssVars, fetchBrandForHost, MYPOS_DEFAULT_BRAND } from '@/lib/brand';
+import { BrandProvider } from '@/lib/brand-context';
 import '../globals.css';
 
 const inter = Inter({

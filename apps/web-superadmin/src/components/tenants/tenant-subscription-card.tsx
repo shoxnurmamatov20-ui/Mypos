@@ -3,10 +3,10 @@
 import { Pencil } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { TenantPlanBadge } from './tenant-plan-badge';
-import { TenantStatusBadge } from './tenant-status-badge';
 import { formatUZS } from '@/lib/format';
 import type { TenantSummary } from '@/types/super-admin';
+import { TenantPlanBadge } from './tenant-plan-badge';
+import { TenantStatusBadge } from './tenant-status-badge';
 
 type Props = {
   tenant: TenantSummary;
@@ -91,10 +91,7 @@ export function TenantSubscriptionCard({
 
       <dl className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.06)]">
         {rows.map((row) => (
-          <div
-            key={row.label}
-            className="flex items-center justify-between gap-3 py-3 text-sm"
-          >
+          <div key={row.label} className="flex items-center justify-between gap-3 py-3 text-sm">
             <dt className="text-[#62716d] dark:text-[#94a3b8]">{row.label}</dt>
             <dd className="text-right font-medium">{row.value}</dd>
           </div>

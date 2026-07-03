@@ -1,4 +1,4 @@
-import type { UUID, ISO8601 } from './common';
+import type { ISO8601, UUID } from './common';
 
 export type TableStatus = 'available' | 'occupied' | 'reserved' | 'disabled';
 

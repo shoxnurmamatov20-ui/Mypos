@@ -9,14 +9,9 @@
  * Kept as a pure function so the routing decision is unit-testable
  * without a browser.
  */
-export type PostLoginTarget =
-  | { kind: 'internal'; path: string }
-  | { kind: 'dispatch' };
+export type PostLoginTarget = { kind: 'internal'; path: string } | { kind: 'dispatch' };
 
-export function resolvePostLoginTarget(
-  role: string,
-  locale: string,
-): PostLoginTarget {
+export function resolvePostLoginTarget(role: string, locale: string): PostLoginTarget {
   if (role === 'waiter') {
     // Portal app has Next.js basePath '/panel/portal'. `window.location.href`
     // is a raw browser nav so basePath is NOT auto-prepended — we must

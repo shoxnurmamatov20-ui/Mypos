@@ -33,13 +33,13 @@ export function OrderItemsTable({ items }: { items: OrderItem[] }) {
                   </div>
                 )}
                 {item.notes && (
-                  <div className="text-xs italic text-[#62716d] dark:text-[#94a3b8]">{item.notes}</div>
+                  <div className="text-xs italic text-[#62716d] dark:text-[#94a3b8]">
+                    {item.notes}
+                  </div>
                 )}
               </td>
               <td className="px-3 py-2 text-right tabular-nums">{item.quantity}</td>
-              <td className="px-3 py-2 text-right tabular-nums">
-                {formatUZS(item.price_amount)}
-              </td>
+              <td className="px-3 py-2 text-right tabular-nums">{formatUZS(item.price_amount)}</td>
               <td className="px-3 py-2 text-right font-semibold tabular-nums">
                 {formatUZS(item.subtotal_amount)}
               </td>

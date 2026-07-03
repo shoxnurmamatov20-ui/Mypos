@@ -16,13 +16,10 @@ import type { ThemeProps } from './types';
  */
 export function ModernTheme({ tenant, brand, restaurant, locale }: ThemeProps) {
   const tenantName =
-    typeof tenant.name === 'string'
-      ? tenant.name
-      : pickTranslation(tenant.name, locale);
+    typeof tenant.name === 'string' ? tenant.name : pickTranslation(tenant.name, locale);
   const heroTitle = pickTranslation(brand.hero_title, locale) || tenantName;
   const heroSubtitle =
-    pickTranslation(brand.hero_subtitle, locale) ||
-    pickTranslation(brand.tagline, locale);
+    pickTranslation(brand.hero_subtitle, locale) || pickTranslation(brand.tagline, locale);
 
   return (
     <section className="relative overflow-hidden bg-brand-background pb-24 pt-16">
@@ -58,7 +55,9 @@ export function ModernTheme({ tenant, brand, restaurant, locale }: ThemeProps) {
           )}
           <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href={restaurant ? `/${locale}/restaurants/${restaurant.slug}` : `/${locale}/restaurants`}
+              href={
+                restaurant ? `/${locale}/restaurants/${restaurant.slug}` : `/${locale}/restaurants`
+              }
               className="inline-flex items-center rounded-2xl bg-brand-primary px-8 py-4 font-bold text-white shadow-xl transition hover:opacity-90"
             >
               {pickTranslation(brand.tagline, locale) || 'Buyurtma berish'}

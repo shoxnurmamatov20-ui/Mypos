@@ -30,7 +30,10 @@ function saveMethods(items: PaymentMethod[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
 }
 
-const PROVIDER_META: Record<PaymentMethod['provider'], { label: string; emoji: string; color: string }> = {
+const PROVIDER_META: Record<
+  PaymentMethod['provider'],
+  { label: string; emoji: string; color: string }
+> = {
   click: { label: 'Click', emoji: '⚡', color: 'bg-sky-100' },
   payme: { label: 'Payme', emoji: '💜', color: 'bg-purple-100' },
   uzum: { label: 'Uzum', emoji: '🟡', color: 'bg-amber-100' },
@@ -99,13 +102,17 @@ export default function PaymentMethodsPage() {
                 key={m.id}
                 className={`flex items-center gap-3 rounded-2xl border-2 bg-white p-4 ${m.is_default ? 'border-brand-primary' : 'border-neutral-200'}`}
               >
-                <div className={`h-12 w-12 rounded-xl flex items-center justify-center text-2xl ${meta.color}`}>
+                <div
+                  className={`h-12 w-12 rounded-xl flex items-center justify-center text-2xl ${meta.color}`}
+                >
                   {meta.emoji}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-neutral-900">
                     {meta.label}
-                    {m.brand && <span className="ml-2 text-sm font-normal text-neutral-600">{m.brand}</span>}
+                    {m.brand && (
+                      <span className="ml-2 text-sm font-normal text-neutral-600">{m.brand}</span>
+                    )}
                   </p>
                   <p className="text-xs text-neutral-500 mt-0.5 font-mono">
                     •••• {m.last4} {m.expires && `· ${m.expires}`}

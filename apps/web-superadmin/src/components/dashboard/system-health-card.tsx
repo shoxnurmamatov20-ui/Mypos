@@ -47,15 +47,13 @@ export function SystemHealthCard({ health }: SystemHealthCardProps) {
               key={metric.label_key}
               className={cn(
                 'flex items-center justify-between py-2.5',
-                !isLast && 'border-b border-[rgba(22,34,31,0.06)] dark:border-[rgba(255,255,255,0.06)]',
+                !isLast &&
+                  'border-b border-[rgba(22,34,31,0.06)] dark:border-[rgba(255,255,255,0.06)]',
               )}
             >
               <span className="flex items-center gap-2 text-sm text-[#62716d] dark:text-[#94a3b8]">
                 <span
-                  className={cn(
-                    'inline-block h-2 w-2 rounded-full',
-                    STATUS_DOT[metric.status],
-                  )}
+                  className={cn('inline-block h-2 w-2 rounded-full', STATUS_DOT[metric.status])}
                   aria-hidden="true"
                 />
                 {t(metric.label_key as Parameters<typeof t>[0])}
@@ -76,7 +74,7 @@ export function SystemHealthCard({ health }: SystemHealthCardProps) {
 type BannerStatus = 'ok' | 'warn' | 'down';
 
 const BANNER_STYLES: Record<BannerStatus, string> = {
-  ok:   'bg-emerald-50 ring-emerald-500/30 text-[#18794e] dark:bg-emerald-500/10 dark:text-emerald-400',
+  ok: 'bg-emerald-50 ring-emerald-500/30 text-[#18794e] dark:bg-emerald-500/10 dark:text-emerald-400',
   warn: 'bg-amber-50 ring-amber-500/30 text-[#b7791f] dark:bg-amber-500/10 dark:text-amber-400',
   down: 'bg-red-50 ring-red-500/30 text-[#b42318] dark:bg-red-500/10 dark:text-red-400',
 };

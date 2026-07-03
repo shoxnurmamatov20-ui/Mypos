@@ -1,4 +1,4 @@
-import type { UUID, ISO8601, Translated, MoneyAmount } from './common';
+import type { ISO8601, MoneyAmount, Translated, UUID } from './common';
 
 export type MenuCategory = {
   id: UUID;

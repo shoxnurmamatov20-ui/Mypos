@@ -1,10 +1,10 @@
 'use client';
 
+import type { Locale } from 'date-fns';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { enUS, ru, uz } from 'date-fns/locale';
-import type { Locale } from 'date-fns';
-import { KeyRound, Mail, Phone, User } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { KeyRound, Mail, Phone, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import type { TenantSummary } from '@/types/super-admin';
@@ -29,12 +29,7 @@ type Row = {
   monospace?: boolean;
 };
 
-export function TenantOwnerCard({
-  tenant,
-  ownerPhone,
-  onSendPasswordReset,
-  locale,
-}: Props) {
+export function TenantOwnerCard({ tenant, ownerPhone, onSendPasswordReset, locale }: Props) {
   const t = useTranslations('tenant_detail');
   const dateLocale = DATE_FNS_LOCALE[locale] ?? enUS;
 
@@ -98,9 +93,7 @@ export function TenantOwnerCard({
           <dt className="w-24 shrink-0 text-[#62716d] dark:text-[#94a3b8]">
             {t('owner_last_login')}
           </dt>
-          <dd className="min-w-0 flex-1 truncate text-[#16221f] dark:text-gray-200">
-            {lastLogin}
-          </dd>
+          <dd className="min-w-0 flex-1 truncate text-[#16221f] dark:text-gray-200">{lastLogin}</dd>
         </div>
       </dl>
     </Card>

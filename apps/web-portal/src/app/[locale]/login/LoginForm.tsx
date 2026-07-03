@@ -1,15 +1,15 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { Field } from '@/components/Field';
 import { ApiError, login } from '@/lib/api';
 import { resolvePostLoginTarget } from '@/lib/post-login';
 import { persistWaiterSession } from '@/lib/waiter-session';
-import { Field } from '@/components/Field';
 
 const schema = z.object({
   identifier: z.string().min(1, 'required').email('invalid_email'),
@@ -21,11 +21,11 @@ type FormValues = z.infer<typeof schema>;
 
 const DEMO_ACCOUNTS: Array<{ label: string; email: string; password: string }> = [
   { label: 'Super Admin', email: 'admin@mypos.uz', password: 'admin123' },
-  { label: 'CEO',         email: 'ceo@mypos.uz', password: 'ceo123' },
-  { label: 'Manager',     email: 'manager@demo.mypos.uz', password: 'demo123' },
-  { label: 'Cashier',     email: 'cashier1@demo.mypos.uz', password: 'demo123' },
-  { label: 'Chef',        email: 'chef@demo.mypos.uz', password: 'demo123' },
-  { label: 'Waiter',      email: 'waiter@demo.mypos.uz', password: 'demo123' },
+  { label: 'CEO', email: 'ceo@mypos.uz', password: 'ceo123' },
+  { label: 'Manager', email: 'manager@demo.mypos.uz', password: 'demo123' },
+  { label: 'Cashier', email: 'cashier1@demo.mypos.uz', password: 'demo123' },
+  { label: 'Chef', email: 'chef@demo.mypos.uz', password: 'demo123' },
+  { label: 'Waiter', email: 'waiter@demo.mypos.uz', password: 'demo123' },
 ];
 
 /**
@@ -37,13 +37,13 @@ const DEMO_ACCOUNTS: Array<{ label: string; email: string; password: string }> =
  */
 const PANEL_PREFETCH_PATHS: Record<string, string> = {
   super_admin: '/panel/admin/uz/dashboard',
-  ceo:         '/panel/ceo/uz/overview',
-  owner:       '/panel/manager/uz/overview',
-  manager:     '/panel/manager/uz/overview',
-  cashier:     '/panel/cashier/uz/pos',
-  chef:        '/panel/kitchen/board',
-  waiter:      '/panel/portal/uz/tables',
-  customer:    '/panel/consumer/uz',
+  ceo: '/panel/ceo/uz/overview',
+  owner: '/panel/manager/uz/overview',
+  manager: '/panel/manager/uz/overview',
+  cashier: '/panel/cashier/uz/pos',
+  chef: '/panel/kitchen/board',
+  waiter: '/panel/portal/uz/tables',
+  customer: '/panel/consumer/uz',
 };
 
 export function LoginForm() {
@@ -148,9 +148,7 @@ export function LoginForm() {
           <ShoppingBagIcon />
         </div>
         <div>
-          <h1 className="text-[18px] font-bold text-black leading-tight">
-            MyPOS Portal
-          </h1>
+          <h1 className="text-[18px] font-bold text-black leading-tight">MyPOS Portal</h1>
           <p className="text-[13px] text-black/60 leading-tight mt-[2px]">
             {t('email_label')} va {t('password_label').toLowerCase()}ni kiriting
           </p>
@@ -186,10 +184,7 @@ export function LoginForm() {
             />
             <span>{t('remember_me')}</span>
           </label>
-          <Link
-            href={`/${locale}/forgot-password`}
-            className="text-black hover:underline"
-          >
+          <Link href={`/${locale}/forgot-password`} className="text-black hover:underline">
             {t('forgot_password')}
           </Link>
         </div>
@@ -214,9 +209,7 @@ export function LoginForm() {
       </form>
 
       <div className="mt-6 border-t border-black/10 pt-5">
-        <p className="text-[12px] text-black/60 mb-2">
-          Tezkor sinash uchun rolni tanlang:
-        </p>
+        <p className="text-[12px] text-black/60 mb-2">Tezkor sinash uchun rolni tanlang:</p>
         <div className="flex flex-wrap gap-1.5">
           {DEMO_ACCOUNTS.map((acct) => (
             <button

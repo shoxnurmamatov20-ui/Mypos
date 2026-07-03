@@ -143,7 +143,10 @@ export function Select<T extends string>({
                     ) : null}
                   </span>
                   {isSelected ? (
-                    <Check className="h-3.5 w-3.5 text-[#0f766e] dark:text-[#14b8a6]" aria-hidden="true" />
+                    <Check
+                      className="h-3.5 w-3.5 text-[#0f766e] dark:text-[#14b8a6]"
+                      aria-hidden="true"
+                    />
                   ) : null}
                 </button>
               );

@@ -29,8 +29,8 @@
 
 import { type NextRequest, NextResponse } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
-import { isOwnDomain } from './lib/brand';
 import { routing } from './i18n/routing';
+import { isOwnDomain } from './lib/brand';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -47,9 +47,7 @@ type SlimResolve = {
 };
 
 const INTERNAL_API_URL =
-  process.env.INTERNAL_API_URL ??
-  process.env.NEXT_PUBLIC_API_URL ??
-  'http://localhost:58000';
+  process.env.INTERNAL_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:58000';
 
 async function resolveTenantSlug(host: string): Promise<{ slug: string; theme: string } | null> {
   try {

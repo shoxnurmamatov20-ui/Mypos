@@ -21,11 +21,7 @@ export async function generateMetadata({
   return { title: t('title') };
 }
 
-export default async function DashboardPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function DashboardPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   return <DashboardView locale={locale} />;

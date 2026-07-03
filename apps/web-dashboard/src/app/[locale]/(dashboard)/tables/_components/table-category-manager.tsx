@@ -1,19 +1,12 @@
 'use client';
 
-import {
-  ApiError,
-  tablesApi,
-  type TableCategory,
-} from '@mypos/api-client';
+import { ApiError, type TableCategory, tablesApi } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { apiClient } from '@/lib/api';
 
-type EditingState =
-  | { mode: 'new' }
-  | { mode: 'edit'; category: TableCategory }
-  | null;
+type EditingState = { mode: 'new' } | { mode: 'edit'; category: TableCategory } | null;
 
 export function TableCategoryManager({
   categories,
@@ -240,7 +233,9 @@ function CategoryDialog({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+        {label}
+      </span>
       {children}
     </label>
   );

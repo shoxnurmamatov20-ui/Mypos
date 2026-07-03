@@ -8,18 +8,18 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
+  daysAgo,
   EmptyCard,
   ErrorBanner,
   Field,
+  formatDateTime,
+  formatNumber,
+  inputClass,
   LoadingHint,
   PageTitle,
   SectionTitle,
   SimpleStat,
   TableShell,
-  daysAgo,
-  formatDateTime,
-  formatNumber,
-  inputClass,
   today,
 } from '../_components/report-helpers';
 
@@ -47,8 +47,14 @@ export function CancelledReportView() {
       <PageTitle>{t('cancelled_report.title')}</PageTitle>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <SimpleStat label={t('cancelled_report.stats_orders')} value={formatNumber(summary?.orders_count ?? 0)} />
-        <SimpleStat label={t('cancelled_report.stats_items')} value={formatNumber(summary?.items_count ?? 0)} />
+        <SimpleStat
+          label={t('cancelled_report.stats_orders')}
+          value={formatNumber(summary?.orders_count ?? 0)}
+        />
+        <SimpleStat
+          label={t('cancelled_report.stats_items')}
+          value={formatNumber(summary?.items_count ?? 0)}
+        />
         <SimpleStat
           label={t('cancelled_report.stats_loss')}
           value={formatUZS(summary?.total_loss_minor ?? 0)}
@@ -58,17 +64,31 @@ export function CancelledReportView() {
 
       <div className="flex flex-wrap items-end gap-3">
         <Field label={t('common.from_date')}>
-          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('common.to_date')}>
-          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            className={inputClass}
+          />
         </Field>
       </div>
 
       {q.isLoading ? (
         <LoadingHint label={t('common.loading')} />
       ) : q.isError ? (
-        <ErrorBanner message={t('common.load_failed')} onRetry={() => q.refetch()} retryLabel={t('common.retry')} />
+        <ErrorBanner
+          message={t('common.load_failed')}
+          onRetry={() => q.refetch()}
+          retryLabel={t('common.retry')}
+        />
       ) : (
         <div className="space-y-6">
           {/* Section A: Cancelled orders */}
@@ -84,17 +104,30 @@ export function CancelledReportView() {
                 <table className="w-full text-sm">
                   <thead className="bg-[#f5f8f7] text-left text-xs text-[#62716d] dark:bg-[#0d1424] dark:text-[#94a3b8]">
                     <tr>
-                      <th className="px-4 py-2.5 font-medium">{t('cancelled_report.col_order_no')}</th>
+                      <th className="px-4 py-2.5 font-medium">
+                        {t('cancelled_report.col_order_no')}
+                      </th>
                       <th className="px-4 py-2.5 font-medium">{t('cancelled_report.col_table')}</th>
-                      <th className="px-4 py-2.5 font-medium">{t('cancelled_report.col_waiter')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cancelled_report.col_total')}</th>
-                      <th className="px-4 py-2.5 font-medium">{t('cancelled_report.col_cancelled_at')}</th>
-                      <th className="px-4 py-2.5 font-medium">{t('cancelled_report.col_reason')}</th>
+                      <th className="px-4 py-2.5 font-medium">
+                        {t('cancelled_report.col_waiter')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cancelled_report.col_total')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium">
+                        {t('cancelled_report.col_cancelled_at')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium">
+                        {t('cancelled_report.col_reason')}
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
                     {orders.map((o) => (
-                      <tr key={o.order_id} className="hover:bg-[#fafcfb] dark:hover:bg-[#0b1120]/40">
+                      <tr
+                        key={o.order_id}
+                        className="hover:bg-[#fafcfb] dark:hover:bg-[#0b1120]/40"
+                      >
                         <td className="px-4 py-2.5 font-medium text-[#16221f] dark:text-white">
                           {o.order_no}
                         </td>
@@ -136,9 +169,15 @@ export function CancelledReportView() {
                 <table className="w-full text-sm">
                   <thead className="bg-[#f5f8f7] text-left text-xs text-[#62716d] dark:bg-[#0d1424] dark:text-[#94a3b8]">
                     <tr>
-                      <th className="px-4 py-2.5 font-medium">{t('cancelled_report.col_reason')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cancelled_report.col_count')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cancelled_report.col_loss')}</th>
+                      <th className="px-4 py-2.5 font-medium">
+                        {t('cancelled_report.col_reason')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cancelled_report.col_count')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cancelled_report.col_loss')}
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 export type CartItem = {
   id: string;
@@ -87,8 +87,7 @@ export const useCartStore = create<CartState>()(
 
       clear: () => set({ items: [] }),
 
-      subtotal: () =>
-        get().items.reduce((sum, it) => sum + it.price * it.qty, 0),
+      subtotal: () => get().items.reduce((sum, it) => sum + it.price * it.qty, 0),
 
       totalCount: () => get().items.reduce((sum, it) => sum + it.qty, 0),
     }),

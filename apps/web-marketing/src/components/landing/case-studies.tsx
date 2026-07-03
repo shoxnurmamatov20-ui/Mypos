@@ -87,7 +87,12 @@ export function CaseStudies() {
                   <div className="flex flex-1 flex-col p-lg">
                     <div className="mb-md flex items-center gap-xs border-b border-hairline-soft pb-md">
                       <div className="flex h-12 w-12 items-center justify-center rounded-pearl bg-coral-tint">
-                        <MetricIcon size={24} weight="light" aria-hidden="true" className="text-coral" />
+                        <MetricIcon
+                          size={24}
+                          weight="light"
+                          aria-hidden="true"
+                          className="text-coral"
+                        />
                       </div>
                       <div>
                         <p className="tabular text-display-md text-ink font-display font-semibold">

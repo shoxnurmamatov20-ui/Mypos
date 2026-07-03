@@ -7,7 +7,13 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   basePath: '/panel/ceo',
-  transpilePackages: ['@mypos/analytics', '@mypos/api-client', '@mypos/design-tokens', '@mypos/ui', '@mypos/utils'],
+  transpilePackages: [
+    '@mypos/analytics',
+    '@mypos/api-client',
+    '@mypos/design-tokens',
+    '@mypos/ui',
+    '@mypos/utils',
+  ],
   typedRoutes: true,
   images: {
     remotePatterns: [{ protocol: 'https', hostname: '**' }],

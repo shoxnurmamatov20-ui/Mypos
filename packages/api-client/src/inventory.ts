@@ -6,12 +6,7 @@ import type {
   TranslatedString,
 } from './menu';
 
-export type StockMovementReason =
-  | 'order_consume'
-  | 'purchase'
-  | 'adjust'
-  | 'waste'
-  | 'transfer';
+export type StockMovementReason = 'order_consume' | 'purchase' | 'adjust' | 'waste' | 'transfer';
 
 export type IngredientCategory = {
   id: string;
@@ -129,7 +124,9 @@ export type ValuationResponse = {
   };
 };
 
-const toQueryString = (params?: Record<string, string | number | boolean | undefined | null>): string => {
+const toQueryString = (
+  params?: Record<string, string | number | boolean | undefined | null>,
+): string => {
   if (!params) return '';
   const entries = Object.entries(params).filter(
     ([, v]) => v !== undefined && v !== null && v !== '',
@@ -142,14 +139,8 @@ export const inventoryApi = {
   categories: {
     list: (client: MyPosApiClient) =>
       client.get<CollectionResponse<IngredientCategory>>('/api/v1/inventory/categories'),
-    create: (
-      client: MyPosApiClient,
-      input: { name: TranslatedString; sort_order?: number },
-    ) =>
-      client.post<ResourceResponse<IngredientCategory>>(
-        '/api/v1/inventory/categories',
-        input,
-      ),
+    create: (client: MyPosApiClient, input: { name: TranslatedString; sort_order?: number }) =>
+      client.post<ResourceResponse<IngredientCategory>>('/api/v1/inventory/categories', input),
     update: (
       client: MyPosApiClient,
       id: string,
@@ -187,9 +178,7 @@ export const inventoryApi = {
   },
   recipes: {
     list: (client: MyPosApiClient, params?: { menu_item_id?: string; ingredient_id?: string }) =>
-      client.get<CollectionResponse<Recipe>>(
-        `/api/v1/inventory/recipes${toQueryString(params)}`,
-      ),
+      client.get<CollectionResponse<Recipe>>(`/api/v1/inventory/recipes${toQueryString(params)}`),
     create: (client: MyPosApiClient, input: CreateRecipeInput) =>
       client.post<ResourceResponse<Recipe>>('/api/v1/inventory/recipes', input),
     delete: (client: MyPosApiClient, id: string) =>
@@ -244,9 +233,12 @@ export const inventoryApi = {
           today: { quantity: number; cost: number; movements: number };
           week: { quantity: number; cost: number; movements: number };
           month: { quantity: number; cost: number; movements: number };
-          top_ingredient:
-            | null
-            | { id: string; name: TranslatedString | string; unit: string; quantity: number };
+          top_ingredient: null | {
+            id: string;
+            name: TranslatedString | string;
+            unit: string;
+            quantity: number;
+          };
         };
       }>(`/api/v1/inventory/movements/stats${toQueryString(params)}`),
   },
@@ -256,9 +248,7 @@ export const inventoryApi = {
       input,
     ),
   lowStock: (client: MyPosApiClient) =>
-    client.get<{ data: Ingredient[]; meta: { count: number } }>(
-      '/api/v1/inventory/low-stock',
-    ),
+    client.get<{ data: Ingredient[]; meta: { count: number } }>('/api/v1/inventory/low-stock'),
   valuation: (client: MyPosApiClient) =>
     client.get<ValuationResponse>('/api/v1/inventory/valuation'),
 };

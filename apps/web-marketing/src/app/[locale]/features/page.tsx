@@ -1,3 +1,4 @@
+import type { Icon } from '@phosphor-icons/react';
 import {
   ChartLineUp,
   ChatTeardropText,
@@ -17,7 +18,6 @@ import {
   Users,
   WifiSlash,
 } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { CtaSection } from '@/components/landing/cta-section';
@@ -52,12 +52,12 @@ const FEATURES: ReadonlyArray<FeatureBlock> = [
     title: 'POS Terminal',
     tagline: 'Buyurtmaga 2 soniya. Click/Payme integratsiyasi. Offline rejim.',
     metric: '2s',
-    metricLabel: "buyurtma vaqti",
+    metricLabel: 'buyurtma vaqti',
     bullets: [
       { Icon: Lightning, text: 'Buyurtmani 2 soniyada qabul qilish' },
-      { Icon: WifiSlash, text: "Offline rejim — internet uzilsa ham ishlaydi" },
-      { Icon: Printer,   text: 'Chek printeri va shtrix-kod skanner qo\'llab-quvvatlash' },
-      { Icon: CreditCard, text: 'Click va Payme onlayn to\'lovlari' },
+      { Icon: WifiSlash, text: 'Offline rejim — internet uzilsa ham ishlaydi' },
+      { Icon: Printer, text: "Chek printeri va shtrix-kod skanner qo'llab-quvvatlash" },
+      { Icon: CreditCard, text: "Click va Payme onlayn to'lovlari" },
     ],
   },
   {
@@ -71,9 +71,9 @@ const FEATURES: ReadonlyArray<FeatureBlock> = [
     metricLabel: 'tayyorlash vaqti',
     bullets: [
       { Icon: Lightning, text: 'Tayyorlash vaqti taymeri har taom uchun' },
-      { Icon: Receipt,   text: 'Avtomatik navbat va prioritet' },
+      { Icon: Receipt, text: 'Avtomatik navbat va prioritet' },
       { Icon: ChatTeardropText, text: "Oshpaz va ofitsiant o'rtasida xabarlar" },
-      { Icon: Check,     text: '"Tayyor" tugma — bir bosishda mijozga signal' },
+      { Icon: Check, text: '"Tayyor" tugma — bir bosishda mijozga signal' },
     ],
   },
   {
@@ -86,10 +86,10 @@ const FEATURES: ReadonlyArray<FeatureBlock> = [
     metric: '−30%',
     metricLabel: 'ofisiant xarajati',
     bullets: [
-      { Icon: Globe,    text: 'UZ/RU/EN avtomatik tarjima' },
-      { Icon: Receipt,  text: "O'z-o'ziga buyurtma — mijoz to'g'ridan-to'g'ri oshxonaga" },
-      { Icon: CreditCard, text: 'Onlayn to\'lov mijoz telefonida' },
-      { Icon: Sparkle,  text: 'Kuponlar va loyalty integratsiyasi' },
+      { Icon: Globe, text: 'UZ/RU/EN avtomatik tarjima' },
+      { Icon: Receipt, text: "O'z-o'ziga buyurtma — mijoz to'g'ridan-to'g'ri oshxonaga" },
+      { Icon: CreditCard, text: "Onlayn to'lov mijoz telefonida" },
+      { Icon: Sparkle, text: 'Kuponlar va loyalty integratsiyasi' },
     ],
   },
   {
@@ -100,12 +100,12 @@ const FEATURES: ReadonlyArray<FeatureBlock> = [
     title: 'Analitika',
     tagline: 'Kunlik tushum, top taomlar, xodimlar KPI. PDF va Excel eksport.',
     metric: '+18%',
-    metricLabel: 'marja o\'sishi',
+    metricLabel: "marja o'sishi",
     bullets: [
-      { Icon: ChartLineUp, text: 'Real-time tushum va buyurtma ko\'rsatkichlari' },
-      { Icon: Users,       text: 'Xodimlar samaradorligi va KPI tracker' },
-      { Icon: Package,     text: 'Top sotiluvchi va foydasiz taomlar tahlili' },
-      { Icon: Receipt,     text: 'PDF/Excel eksport — buxgalteriya uchun' },
+      { Icon: ChartLineUp, text: "Real-time tushum va buyurtma ko'rsatkichlari" },
+      { Icon: Users, text: 'Xodimlar samaradorligi va KPI tracker' },
+      { Icon: Package, text: 'Top sotiluvchi va foydasiz taomlar tahlili' },
+      { Icon: Receipt, text: 'PDF/Excel eksport — buxgalteriya uchun' },
     ],
   },
   {
@@ -118,10 +118,10 @@ const FEATURES: ReadonlyArray<FeatureBlock> = [
     metric: '24/7',
     metricLabel: 'avtomatlashtirish',
     bullets: [
-      { Icon: Globe,    text: 'Menyu UZ → RU / EN avtomatik tarjima' },
+      { Icon: Globe, text: 'Menyu UZ → RU / EN avtomatik tarjima' },
       { Icon: ChartLineUp, text: "Talabni bashorat — qaysi taom ko'p sotiladi" },
-      { Icon: Cube,     text: 'Inventar minimum — avtomatik xarid ogohlantirish' },
-      { Icon: Sparkle,  text: 'Mijoz fikrlari avtomatik tahlil' },
+      { Icon: Cube, text: 'Inventar minimum — avtomatik xarid ogohlantirish' },
+      { Icon: Sparkle, text: 'Mijoz fikrlari avtomatik tahlil' },
     ],
   },
   {
@@ -135,16 +135,26 @@ const FEATURES: ReadonlyArray<FeatureBlock> = [
     metricLabel: "ko'proq mijoz",
     bullets: [
       { Icon: TelegramLogo, text: "Mijoz Telegram'da menyu va buyurtma" },
-      { Icon: Receipt,      text: 'Buyurtma holati avtomatik xabarnomalar' },
-      { Icon: CreditCard,   text: "To'lov bot ichida Click/Payme bilan" },
-      { Icon: Sparkle,      text: 'Marketing kampaniyalari va aksiyalar' },
+      { Icon: Receipt, text: 'Buyurtma holati avtomatik xabarnomalar' },
+      { Icon: CreditCard, text: "To'lov bot ichida Click/Payme bilan" },
+      { Icon: Sparkle, text: 'Marketing kampaniyalari va aksiyalar' },
     ],
   },
 ];
 
 const INTEGRATIONS = [
-  'Click', 'Payme', 'Uzcard', 'Humo', 'Visa', 'Mastercard', 'Telegram', '1C',
-  'Yandex Food', 'Express24', 'Stripe', 'Mailgun',
+  'Click',
+  'Payme',
+  'Uzcard',
+  'Humo',
+  'Visa',
+  'Mastercard',
+  'Telegram',
+  '1C',
+  'Yandex Food',
+  'Express24',
+  'Stripe',
+  'Mailgun',
 ] as const;
 
 export default async function FeaturesPage({ params }: Props) {
@@ -210,7 +220,9 @@ export default async function FeaturesPage({ params }: Props) {
                 <div className={`grid gap-0 md:grid-cols-2 ${isOdd ? 'md:[direction:rtl]' : ''}`}>
                   {/* Left column — copy */}
                   <div className="p-6 sm:p-8 md:[direction:ltr] order-2 md:order-none">
-                    <div className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${f.bg}`}>
+                    <div
+                      className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${f.bg}`}
+                    >
                       <Icon size={22} weight="bold" className={f.tint} />
                     </div>
                     <h2 className="mt-4 text-[22px] sm:text-[28px] font-extrabold tracking-tight text-white">
@@ -223,7 +235,9 @@ export default async function FeaturesPage({ params }: Props) {
                     <ul className="mt-5 space-y-2.5">
                       {f.bullets.map((b) => (
                         <li key={b.text} className="flex items-start gap-2.5">
-                          <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${f.bg}`}>
+                          <span
+                            className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${f.bg}`}
+                          >
                             <b.Icon size={12} weight="bold" className={f.tint} />
                           </span>
                           <span className="text-[13.5px] text-white/85 leading-relaxed">
@@ -241,17 +255,24 @@ export default async function FeaturesPage({ params }: Props) {
                       className="pointer-events-none absolute inset-0 opacity-50"
                       style={{
                         background: `radial-gradient(circle at 50% 50%, ${
-                          f.key === 'pos'      ? 'rgba(20,184,166,0.20)'
-                        : f.key === 'kds'      ? 'rgba(59,130,246,0.20)'
-                        : f.key === 'qr'       ? 'rgba(16,185,129,0.20)'
-                        : f.key === 'analytics'? 'rgba(245,158,11,0.20)'
-                        : f.key === 'ai'       ? 'rgba(168,85,247,0.20)'
-                        :                        'rgba(34,211,238,0.20)'
+                          f.key === 'pos'
+                            ? 'rgba(20,184,166,0.20)'
+                            : f.key === 'kds'
+                              ? 'rgba(59,130,246,0.20)'
+                              : f.key === 'qr'
+                                ? 'rgba(16,185,129,0.20)'
+                                : f.key === 'analytics'
+                                  ? 'rgba(245,158,11,0.20)'
+                                  : f.key === 'ai'
+                                    ? 'rgba(168,85,247,0.20)'
+                                    : 'rgba(34,211,238,0.20)'
                         }, transparent 60%)`,
                       }}
                     />
                     <div className="relative text-center">
-                      <div className={`tabular text-[56px] sm:text-[72px] font-extrabold leading-none ${f.tint}`}>
+                      <div
+                        className={`tabular text-[56px] sm:text-[72px] font-extrabold leading-none ${f.tint}`}
+                      >
                         {f.metric}
                       </div>
                       <div className="mt-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white/60">

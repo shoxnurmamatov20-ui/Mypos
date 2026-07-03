@@ -70,13 +70,7 @@ type AddressRowProps = {
   onSelect: () => void;
 };
 
-function AddressRow({
-  address,
-  isActive,
-  selectedLabel,
-  selectLabel,
-  onSelect,
-}: AddressRowProps) {
+function AddressRow({ address, isActive, selectedLabel, selectLabel, onSelect }: AddressRowProps) {
   const wrapperClass = isActive
     ? 'flex items-center gap-4 rounded-2xl border-2 border-brand-500 bg-white p-5'
     : 'flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white p-5';

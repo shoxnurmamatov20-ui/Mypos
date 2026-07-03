@@ -1,3 +1,4 @@
+import type { Icon } from '@phosphor-icons/react';
 import {
   ArrowRight,
   CalendarBlank,
@@ -11,7 +12,6 @@ import {
   UserCircle,
   VideoCamera,
 } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { CtaSection } from '@/components/landing/cta-section';
@@ -20,31 +20,69 @@ import { DemoForm } from '@/components/landing/demo-form';
 type Props = { params: Promise<{ locale: string }> };
 
 export const metadata: Metadata = {
-  title: 'Demo so\'rash — MyPOS',
-  description: "30 daqiqalik shaxsiylashtirilgan demo. Restoraningiz uchun maxsus sozlangan namoyish.",
+  title: "Demo so'rash — MyPOS",
+  description:
+    '30 daqiqalik shaxsiylashtirilgan demo. Restoraningiz uchun maxsus sozlangan namoyish.',
 };
 
-const PERKS: ReadonlyArray<{ Icon: Icon; tint: string; bg: string; title: string; body: string }> = [
-  { Icon: UserCircle, tint: 'text-[#5eead4]', bg: 'bg-[rgba(20,184,166,0.15)]',
-    title: 'Shaxsiylashtirilgan', body: 'Faqat sizning restoran turingizga mos xususiyatlar' },
-  { Icon: Clock, tint: 'text-amber-400', bg: 'bg-amber-500/15',
-    title: '30 daqiqa', body: 'Aniq vaqt. Cho\'zilmaydi, savollarga to\'liq javob' },
-  { Icon: VideoCamera, tint: 'text-blue-400', bg: 'bg-blue-500/15',
-    title: 'Onlayn yoki ofisda', body: 'Zoom/Telegram orqali yoki Toshkent ofisimizda' },
-  { Icon: Headset, tint: 'text-[#ff0037]', bg: 'bg-[rgba(255,0,55,0.15)]',
-    title: 'Hech qanday majburiyat', body: 'Bepul. Karta kerak emas. Yoqtirsangiz — boshlaymiz' },
-];
+const PERKS: ReadonlyArray<{ Icon: Icon; tint: string; bg: string; title: string; body: string }> =
+  [
+    {
+      Icon: UserCircle,
+      tint: 'text-[#5eead4]',
+      bg: 'bg-[rgba(20,184,166,0.15)]',
+      title: 'Shaxsiylashtirilgan',
+      body: 'Faqat sizning restoran turingizga mos xususiyatlar',
+    },
+    {
+      Icon: Clock,
+      tint: 'text-amber-400',
+      bg: 'bg-amber-500/15',
+      title: '30 daqiqa',
+      body: "Aniq vaqt. Cho'zilmaydi, savollarga to'liq javob",
+    },
+    {
+      Icon: VideoCamera,
+      tint: 'text-blue-400',
+      bg: 'bg-blue-500/15',
+      title: 'Onlayn yoki ofisda',
+      body: 'Zoom/Telegram orqali yoki Toshkent ofisimizda',
+    },
+    {
+      Icon: Headset,
+      tint: 'text-[#ff0037]',
+      bg: 'bg-[rgba(255,0,55,0.15)]',
+      title: 'Hech qanday majburiyat',
+      body: 'Bepul. Karta kerak emas. Yoqtirsangiz — boshlaymiz',
+    },
+  ];
 
 const AGENDA = [
-  { time: '00–05', title: 'Tanishuv', body: 'Sizning restoraningiz, hozirgi tizim, asosiy muammolar' },
-  { time: '05–20', title: 'Live demo', body: 'Buyurtma qabul qilish, chek, smena, hisobot — sizning menyu bilan' },
-  { time: '20–25', title: 'Savollar', body: 'Click/Payme, narxlar, onboarding muddati — istalgan savol' },
-  { time: '25–30', title: 'Keyingi qadam', body: 'Yoqtirsangiz — 14 kun bepul akkaunt darhol yaratiladi' },
+  {
+    time: '00–05',
+    title: 'Tanishuv',
+    body: 'Sizning restoraningiz, hozirgi tizim, asosiy muammolar',
+  },
+  {
+    time: '05–20',
+    title: 'Live demo',
+    body: 'Buyurtma qabul qilish, chek, smena, hisobot — sizning menyu bilan',
+  },
+  {
+    time: '20–25',
+    title: 'Savollar',
+    body: 'Click/Payme, narxlar, onboarding muddati — istalgan savol',
+  },
+  {
+    time: '25–30',
+    title: 'Keyingi qadam',
+    body: 'Yoqtirsangiz — 14 kun bepul akkaunt darhol yaratiladi',
+  },
 ] as const;
 
 const SLOTS = [
-  { day: 'Ertaga',    date: '12 may', slots: ['10:00', '11:30', '14:00', '16:00'] },
-  { day: 'Indinga',   date: '13 may', slots: ['09:00', '10:30', '13:00', '15:30', '17:00'] },
+  { day: 'Ertaga', date: '12 may', slots: ['10:00', '11:30', '14:00', '16:00'] },
+  { day: 'Indinga', date: '13 may', slots: ['09:00', '10:30', '13:00', '15:30', '17:00'] },
   { day: 'Payshanba', date: '14 may', slots: ['11:00', '14:30', '16:30'] },
 ] as const;
 
@@ -56,7 +94,10 @@ export default async function DemoPage({ params }: Props) {
     <main className="bg-[#001B1B]">
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]" />
+        <div
+          aria-hidden="true"
+          className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]"
+        />
         <div className="relative mx-auto max-w-3xl px-5 pt-20 sm:pt-24 pb-8 text-center">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(15,118,110,0.25)] bg-[rgba(15,118,110,0.10)] text-[#5eead4] text-[11px] font-bold uppercase tracking-[0.08em]">
             <PlayCircle size={11} weight="fill" />
@@ -67,7 +108,8 @@ export default async function DemoPage({ params }: Props) {
             <span className="gradient-teal">o&apos;z ko&apos;zingiz bilan ko&apos;ring</span>
           </h1>
           <p className="mx-auto mt-4 max-w-[36rem] text-[14.5px] sm:text-[16px] leading-relaxed text-white/70">
-            Restoraningiz uchun maxsus sozlangan namoyish. Sizning menyu va biznes shartlaringiz bilan ishlaydi.
+            Restoraningiz uchun maxsus sozlangan namoyish. Sizning menyu va biznes shartlaringiz
+            bilan ishlaydi.
           </p>
         </div>
       </section>
@@ -78,7 +120,9 @@ export default async function DemoPage({ params }: Props) {
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {PERKS.map((p) => (
               <article key={p.title} className="glass-card glass-card-hover rounded-2xl p-5">
-                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${p.bg}`}>
+                <span
+                  className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${p.bg}`}
+                >
                   <p.Icon size={20} weight="bold" className={p.tint} />
                 </span>
                 <h3 className="mt-3.5 text-[14px] font-bold text-white">{p.title}</h3>
@@ -177,7 +221,8 @@ export default async function DemoPage({ params }: Props) {
                 ))}
               </div>
               <p className="mt-2.5 text-[12px] leading-relaxed text-white/80 italic">
-                &ldquo;Demo'dan keyin shu kuni qaror qildim. Mutaxassis butun jarayonni — bizning menyu bilan — ko&apos;rsatdi.&rdquo;
+                &ldquo;Demo'dan keyin shu kuni qaror qildim. Mutaxassis butun jarayonni — bizning
+                menyu bilan — ko&apos;rsatdi.&rdquo;
               </p>
               <div className="mt-2.5 flex items-center gap-2">
                 <span className="inline-flex h-7 w-7 items-center justify-center rounded-full ring-1 ring-inset ring-white/15 bg-[rgba(20,184,166,0.18)] text-[#5eead4] text-[10px] font-bold">
@@ -192,7 +237,9 @@ export default async function DemoPage({ params }: Props) {
 
             {/* Direct */}
             <div className="glass-card rounded-2xl p-5">
-              <h3 className="text-[13px] font-bold text-white">Forma to&apos;ldirgingiz kelmayaptimi?</h3>
+              <h3 className="text-[13px] font-bold text-white">
+                Forma to&apos;ldirgingiz kelmayaptimi?
+              </h3>
               <p className="mt-1 text-[11.5px] text-white/55">
                 Telegramda yozing — 5 daqiqada slot tanlaymiz.
               </p>
@@ -216,10 +263,10 @@ export default async function DemoPage({ params }: Props) {
           <div className="glass-card rounded-2xl p-6 sm:p-7">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
               {[
-                { v: '500+', l: 'demo o\'tkazilgan' },
-                { v: '94%',  l: 'demo → mijoz' },
-                { v: '30',   l: 'daqiqa o\'rtacha' },
-                { v: '4.9',  l: 'demo reytingi' },
+                { v: '500+', l: "demo o'tkazilgan" },
+                { v: '94%', l: 'demo → mijoz' },
+                { v: '30', l: "daqiqa o'rtacha" },
+                { v: '4.9', l: 'demo reytingi' },
               ].map((s) => (
                 <div key={s.l}>
                   <div className="tabular text-[24px] font-extrabold text-white">{s.v}</div>
@@ -244,17 +291,36 @@ export default async function DemoPage({ params }: Props) {
           </div>
           <div className="mt-8 space-y-2.5">
             {[
-              { q: 'Demo haqiqatan bepulmi?', a: "Ha, 100% bepul. Hech qanday karta yoki to'lov ma'lumotini so'ramaymiz." },
-              { q: "Demo'dan keyin majburiyat bormi?", a: "Yo'q. Yoqtirsangiz 14 kun bepul akkaunt yaratamiz. Yoqtirmasangiz — hech narsa bo'lmaydi." },
-              { q: "Demo'ni qaysi tilda o'tkaziladi?", a: "O'zbek (lotin/kirill), rus yoki ingliz tillarida — siz tanlaysiz." },
-              { q: 'Texnik bilim talab qilinadimi?', a: "Mutlaqo yo'q. Mutaxassis hammasini oddiy tilda tushuntiradi." },
-              { q: 'Kompaniyamiz katta — maxsus demo mumkinmi?', a: "Ha. 5+ filial uchun maxsus 60 daqiqalik enterprise demo o'tkazamiz — tarmoq xususiyatlari va integratsiyalar bilan." },
+              {
+                q: 'Demo haqiqatan bepulmi?',
+                a: "Ha, 100% bepul. Hech qanday karta yoki to'lov ma'lumotini so'ramaymiz.",
+              },
+              {
+                q: "Demo'dan keyin majburiyat bormi?",
+                a: "Yo'q. Yoqtirsangiz 14 kun bepul akkaunt yaratamiz. Yoqtirmasangiz — hech narsa bo'lmaydi.",
+              },
+              {
+                q: "Demo'ni qaysi tilda o'tkaziladi?",
+                a: "O'zbek (lotin/kirill), rus yoki ingliz tillarida — siz tanlaysiz.",
+              },
+              {
+                q: 'Texnik bilim talab qilinadimi?',
+                a: "Mutlaqo yo'q. Mutaxassis hammasini oddiy tilda tushuntiradi.",
+              },
+              {
+                q: 'Kompaniyamiz katta — maxsus demo mumkinmi?',
+                a: "Ha. 5+ filial uchun maxsus 60 daqiqalik enterprise demo o'tkazamiz — tarmoq xususiyatlari va integratsiyalar bilan.",
+              },
             ].map((f, idx) => (
               <details key={f.q} className="glass-card rounded-2xl group" open={idx === 0}>
                 <summary className="press flex cursor-pointer items-center gap-3 px-5 py-4 list-none">
                   <span className="min-w-0 flex-1 text-[14px] font-bold text-white">{f.q}</span>
                   <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full ring-1 ring-inset ring-white/15 bg-white/[0.05] text-white/70 group-open:bg-[#5eead4]/15 group-open:text-[#5eead4] group-open:ring-[#5eead4]/30 transition-colors">
-                    <ArrowRight size={11} weight="bold" className="group-open:rotate-90 transition-transform" />
+                    <ArrowRight
+                      size={11}
+                      weight="bold"
+                      className="group-open:rotate-90 transition-transform"
+                    />
                   </span>
                 </summary>
                 <div className="px-5 pb-5 -mt-1 text-[13px] leading-relaxed text-white/70">

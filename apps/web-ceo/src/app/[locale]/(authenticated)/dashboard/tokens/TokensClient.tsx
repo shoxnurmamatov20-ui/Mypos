@@ -127,7 +127,10 @@ export function TokensClient({ locale }: { locale: string }) {
   const bulkApply = async (action: 'revoke' | 'delete') => {
     const ids = Array.from(selected);
     if (ids.length === 0) return;
-    const msg = action === 'revoke' ? t('confirm_bulk_revoke', { count: ids.length }) : t('confirm_bulk_delete', { count: ids.length });
+    const msg =
+      action === 'revoke'
+        ? t('confirm_bulk_revoke', { count: ids.length })
+        : t('confirm_bulk_delete', { count: ids.length });
     if (!window.confirm(msg)) return;
     await ceoSend('/api/v1/ceo/tokens/bulk', 'POST', { action, ids });
     setSelected(new Set());
@@ -362,7 +365,10 @@ function Filters_({
   return (
     <div className="flex flex-wrap items-center gap-2">
       <div className="relative flex-1 min-w-[180px] max-w-md">
-        <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400" strokeWidth={2.2} />
+        <Search
+          className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400"
+          strokeWidth={2.2}
+        />
         <input
           type="search"
           value={filters.q}
@@ -477,7 +483,9 @@ function TokensTable({
             <th className="px-3 py-2 text-left font-semibold">{t('th_status')}</th>
             <th className="px-3 py-2 text-left font-semibold">{t('th_created')}</th>
             <th className="px-3 py-2 text-left font-semibold">{t('th_expires')}</th>
-            <th className="px-3 py-2 text-left font-semibold hidden md:table-cell">{t('th_creator')}</th>
+            <th className="px-3 py-2 text-left font-semibold hidden md:table-cell">
+              {t('th_creator')}
+            </th>
             <th className="px-3 py-2 text-right font-semibold">{t('th_actions')}</th>
           </tr>
         </thead>
@@ -541,7 +549,13 @@ function TokensTable({
   );
 }
 
-function StatusBadge({ status, t }: { status: VisitTokenStatus; t: ReturnType<typeof useTranslations> }) {
+function StatusBadge({
+  status,
+  t,
+}: {
+  status: VisitTokenStatus;
+  t: ReturnType<typeof useTranslations>;
+}) {
   if (status === 'valid') return <Badge variant="success">{t('status_valid')}</Badge>;
   if (status === 'used') return <Badge variant="default">{t('status_used')}</Badge>;
   return <Badge variant="warning">{t('status_expired')}</Badge>;
@@ -571,9 +585,7 @@ function Pagination({
 
   return (
     <div className="flex flex-wrap items-center gap-2 text-[12px] text-gray-600 dark:text-gray-400">
-      <span className="tabular-nums">
-        {t('info_range', { start, end, total })}
-      </span>
+      <span className="tabular-nums">{t('info_range', { start, end, total })}</span>
       <span className="flex-1" />
       <label className="font-semibold">{t('per_page')}</label>
       <select
@@ -587,7 +599,11 @@ function Pagination({
           </option>
         ))}
       </select>
-      <PageButton onClick={() => onPage(1)} disabled={page <= 1} icon={<ChevronsLeft className="h-3.5 w-3.5" />} />
+      <PageButton
+        onClick={() => onPage(1)}
+        disabled={page <= 1}
+        icon={<ChevronsLeft className="h-3.5 w-3.5" />}
+      />
       <PageButton
         onClick={() => onPage(Math.max(1, page - 1))}
         disabled={page <= 1}
@@ -601,12 +617,24 @@ function Pagination({
         disabled={page >= pages}
         icon={<ChevronRight className="h-3.5 w-3.5" />}
       />
-      <PageButton onClick={() => onPage(pages)} disabled={page >= pages} icon={<ChevronsRight className="h-3.5 w-3.5" />} />
+      <PageButton
+        onClick={() => onPage(pages)}
+        disabled={page >= pages}
+        icon={<ChevronsRight className="h-3.5 w-3.5" />}
+      />
     </div>
   );
 }
 
-function PageButton({ onClick, disabled, icon }: { onClick: () => void; disabled: boolean; icon: React.ReactNode }) {
+function PageButton({
+  onClick,
+  disabled,
+  icon,
+}: {
+  onClick: () => void;
+  disabled: boolean;
+  icon: React.ReactNode;
+}) {
   return (
     <button
       type="button"
@@ -698,8 +726,12 @@ function CreateModal({
       <div className="w-full max-w-lg rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden">
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
           <div>
-            <h2 className="text-[14px] font-bold text-gray-900 dark:text-white">{t('modal_title')}</h2>
-            <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">{t('modal_subtitle')}</p>
+            <h2 className="text-[14px] font-bold text-gray-900 dark:text-white">
+              {t('modal_title')}
+            </h2>
+            <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">
+              {t('modal_subtitle')}
+            </p>
           </div>
           <button
             type="button"
@@ -780,7 +812,9 @@ function CreateModal({
                   min={1}
                   max={168}
                   value={ttl}
-                  onChange={(e) => setTtl(Math.max(1, Math.min(168, parseInt(e.target.value, 10) || 24)))}
+                  onChange={(e) =>
+                    setTtl(Math.max(1, Math.min(168, parseInt(e.target.value, 10) || 24)))
+                  }
                   className="w-full h-9 px-2.5 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 tabular-nums"
                 />
               </Field>
@@ -790,7 +824,9 @@ function CreateModal({
                   min={1}
                   max={50}
                   value={count}
-                  onChange={(e) => setCount(Math.max(1, Math.min(50, parseInt(e.target.value, 10) || 1)))}
+                  onChange={(e) =>
+                    setCount(Math.max(1, Math.min(50, parseInt(e.target.value, 10) || 1)))
+                  }
                   className="w-full h-9 px-2.5 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 tabular-nums"
                 />
               </Field>
@@ -823,7 +859,9 @@ function CreateModal({
               <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
               {t('modal_success', { count: created.length })}
             </div>
-            <h3 className="text-[12px] font-bold text-gray-900 dark:text-white">{t('modal_show_tokens')}</h3>
+            <h3 className="text-[12px] font-bold text-gray-900 dark:text-white">
+              {t('modal_show_tokens')}
+            </h3>
             <ul className="space-y-1.5 max-h-72 overflow-y-auto">
               {created.map((tk, i) => (
                 <li
@@ -831,7 +869,9 @@ function CreateModal({
                   className="flex items-center gap-2 rounded-md border border-gray-200 dark:border-gray-800 px-2.5 py-2 text-[11px]"
                 >
                   <span className="text-gray-400 tabular-nums w-5">{i + 1}.</span>
-                  <code className="flex-1 font-mono text-gray-800 dark:text-gray-200 truncate">{tk.token}</code>
+                  <code className="flex-1 font-mono text-gray-800 dark:text-gray-200 truncate">
+                    {tk.token}
+                  </code>
                   <button
                     type="button"
                     onClick={() => copy(tk.token)}

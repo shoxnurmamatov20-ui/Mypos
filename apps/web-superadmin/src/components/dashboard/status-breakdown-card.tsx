@@ -4,10 +4,10 @@ import { Activity, AlertCircle, CheckCircle, Clock, Inbox, XCircle } from 'lucid
 import { cn } from '@/lib/cn';
 
 const STATUS_STYLE = {
-  active:    { color: '#10b981', bg: 'bg-emerald-500', label: 'Faol',          icon: CheckCircle },
-  trialing:  { color: '#3b82f6', bg: 'bg-blue-500',    label: 'Sinov',         icon: Clock },
-  past_due:  { color: '#f59e0b', bg: 'bg-amber-500',   label: 'Kechikdi',      icon: AlertCircle },
-  suspended: { color: '#ef4444', bg: 'bg-red-500',     label: 'To\'xtatilgan', icon: XCircle },
+  active: { color: '#10b981', bg: 'bg-emerald-500', label: 'Faol', icon: CheckCircle },
+  trialing: { color: '#3b82f6', bg: 'bg-blue-500', label: 'Sinov', icon: Clock },
+  past_due: { color: '#f59e0b', bg: 'bg-amber-500', label: 'Kechikdi', icon: AlertCircle },
+  suspended: { color: '#ef4444', bg: 'bg-red-500', label: "To'xtatilgan", icon: XCircle },
 } as const;
 
 type Props = {

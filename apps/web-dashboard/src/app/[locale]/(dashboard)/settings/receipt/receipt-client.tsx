@@ -15,8 +15,8 @@ import {
   FieldGroup,
   inputClass,
   primaryBtnClass,
-  type SegmentOption,
   SegmentedControl,
+  type SegmentOption,
   SettingsCard,
   SettingsSkeleton,
   ToggleRow,
@@ -66,7 +66,9 @@ function ReceiptPreview({ form }: { form: ReceiptSettings }) {
         </div>
       )}
 
-      <p className="mb-1 text-center font-semibold leading-tight">{form.header || 'MyPOS Restaurant'}</p>
+      <p className="mb-1 text-center font-semibold leading-tight">
+        {form.header || 'MyPOS Restaurant'}
+      </p>
       <p className="text-center text-[9px] text-[#888]">
         {dateLabel}: {new Date().toLocaleDateString()}
       </p>
@@ -110,7 +112,9 @@ function ReceiptPreview({ form }: { form: ReceiptSettings }) {
         </>
       )}
 
-      <p className="mt-1.5 text-center text-[#555]">{form.footer || 'Tashrifingiz uchun rahmat!'}</p>
+      <p className="mt-1.5 text-center text-[#555]">
+        {form.footer || 'Tashrifingiz uchun rahmat!'}
+      </p>
     </div>
   );
 }
@@ -166,7 +170,11 @@ function ReceiptForm() {
         }
       >
         <div className="space-y-5">
-          <ToggleRow label={t('receipt.show_logo')} checked={form.showLogo} onChange={(v) => patch({ showLogo: v })} />
+          <ToggleRow
+            label={t('receipt.show_logo')}
+            checked={form.showLogo}
+            onChange={(v) => patch({ showLogo: v })}
+          />
 
           {form.showLogo && (
             <Field label={t('receipt.logo_url')}>
@@ -201,21 +209,44 @@ function ReceiptForm() {
           </Field>
 
           <FieldGroup label={t('receipt.font_size')}>
-            <SegmentedControl options={fontOptions} value={form.fontSize} onChange={(v) => patch({ fontSize: v })} ariaLabel={t('receipt.font_size')} />
+            <SegmentedControl
+              options={fontOptions}
+              value={form.fontSize}
+              onChange={(v) => patch({ fontSize: v })}
+              ariaLabel={t('receipt.font_size')}
+            />
           </FieldGroup>
 
           <FieldGroup label={t('receipt.paper_width')}>
-            <SegmentedControl options={paperOptions} value={form.paperWidth} onChange={(v) => patch({ paperWidth: v })} ariaLabel={t('receipt.paper_width')} />
+            <SegmentedControl
+              options={paperOptions}
+              value={form.paperWidth}
+              onChange={(v) => patch({ paperWidth: v })}
+              ariaLabel={t('receipt.paper_width')}
+            />
           </FieldGroup>
 
           <FieldGroup label={t('receipt.language')}>
-            <SegmentedControl options={langOptions} value={form.language} onChange={(v) => patch({ language: v })} ariaLabel={t('receipt.language')} />
+            <SegmentedControl
+              options={langOptions}
+              value={form.language}
+              onChange={(v) => patch({ language: v })}
+              ariaLabel={t('receipt.language')}
+            />
           </FieldGroup>
 
           <div className="rounded-xl border border-[rgba(22,34,31,0.06)] dark:border-[rgba(255,255,255,0.05)] px-4">
-            <ToggleRow label={t('receipt.show_tax')} checked={form.showTax} onChange={(v) => patch({ showTax: v })} />
+            <ToggleRow
+              label={t('receipt.show_tax')}
+              checked={form.showTax}
+              onChange={(v) => patch({ showTax: v })}
+            />
             <div className="border-t border-[rgba(22,34,31,0.06)] dark:border-[rgba(255,255,255,0.05)]">
-              <ToggleRow label={t('receipt.show_qr')} checked={form.showQr} onChange={(v) => patch({ showQr: v })} />
+              <ToggleRow
+                label={t('receipt.show_qr')}
+                checked={form.showQr}
+                onChange={(v) => patch({ showQr: v })}
+              />
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import type { Icon } from '@phosphor-icons/react';
 import {
   ArrowRight,
   Calculator,
@@ -17,7 +18,6 @@ import {
   Truck,
   UsersThree,
 } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
@@ -27,19 +27,20 @@ type Props = { params: Promise<{ locale: string }> };
 
 export const metadata: Metadata = {
   title: 'Integratsiyalar — MyPOS',
-  description: "40+ tayyor integratsiya: Click, Payme, Yandex, Wolt, Telegram, soliq idoralari va boshqalar.",
+  description:
+    '40+ tayyor integratsiya: Click, Payme, Yandex, Wolt, Telegram, soliq idoralari va boshqalar.',
 };
 
 type Category = { slug: string; label: string; Icon: Icon; count: number };
 
 const CATEGORIES: ReadonlyArray<Category> = [
-  { slug: 'all',         label: 'Hammasi',          Icon: Sparkle,              count: 32 },
-  { slug: 'payment',     label: "To'lovlar",        Icon: CreditCard,           count: 6 },
-  { slug: 'delivery',    label: 'Yetkazib berish',   Icon: Truck,                count: 5 },
-  { slug: 'marketing',   label: 'Marketing',         Icon: ChartBar,             count: 5 },
-  { slug: 'accounting',  label: 'Hisob va soliq',    Icon: Calculator,           count: 4 },
-  { slug: 'hardware',    label: 'Apparat',           Icon: Printer,              count: 6 },
-  { slug: 'communication',label: 'Aloqa',            Icon: ChatCircleDots,       count: 6 },
+  { slug: 'all', label: 'Hammasi', Icon: Sparkle, count: 32 },
+  { slug: 'payment', label: "To'lovlar", Icon: CreditCard, count: 6 },
+  { slug: 'delivery', label: 'Yetkazib berish', Icon: Truck, count: 5 },
+  { slug: 'marketing', label: 'Marketing', Icon: ChartBar, count: 5 },
+  { slug: 'accounting', label: 'Hisob va soliq', Icon: Calculator, count: 4 },
+  { slug: 'hardware', label: 'Apparat', Icon: Printer, count: 6 },
+  { slug: 'communication', label: 'Aloqa', Icon: ChatCircleDots, count: 6 },
 ];
 
 type Integration = {
@@ -56,61 +57,361 @@ type Integration = {
 
 const INTEGRATIONS: ReadonlyArray<Integration> = [
   // Payments
-  { slug: 'click',    name: 'Click',    category: 'payment',  body: "Mahalliy onlayn to'lov · Eng mashhur Click karta orqali",     initials: 'CK', tint: 'text-white', bg: 'from-blue-500/30 via-blue-500/10', status: 'native', popular: true },
-  { slug: 'payme',    name: 'Payme',    category: 'payment',  body: "Onlayn to'lov · QR kod orqali to'lash · Avtomatik fiskal chek", initials: 'PM', tint: 'text-white', bg: 'from-cyan-500/30 via-cyan-500/10', status: 'native', popular: true },
-  { slug: 'uzcard',   name: 'Uzcard',   category: 'payment',  body: "Milliy karta tizimi · POS-terminal va onlayn",                 initials: 'UZ', tint: 'text-white', bg: 'from-emerald-500/30 via-emerald-500/10', status: 'native' },
-  { slug: 'humo',     name: 'Humo',     category: 'payment',  body: "Yangi milliy karta · Ko'pchilik banklar qo'llab-quvvatlaydi",  initials: 'HM', tint: 'text-white', bg: 'from-amber-500/30 via-amber-500/10', status: 'native' },
-  { slug: 'visa',     name: 'Visa',     category: 'payment',  body: "Xalqaro to'lov · Turistik restoranlar uchun zarur",            initials: 'VS', tint: 'text-white', bg: 'from-blue-600/30 via-blue-600/10', status: 'native' },
-  { slug: 'paynet',   name: 'Paynet',   category: 'payment',  body: 'Terminal va onlayn · Kambriyali to\'lov tizimi',                initials: 'PN', tint: 'text-white', bg: 'from-purple-500/30 via-purple-500/10', status: 'native' },
+  {
+    slug: 'click',
+    name: 'Click',
+    category: 'payment',
+    body: "Mahalliy onlayn to'lov · Eng mashhur Click karta orqali",
+    initials: 'CK',
+    tint: 'text-white',
+    bg: 'from-blue-500/30 via-blue-500/10',
+    status: 'native',
+    popular: true,
+  },
+  {
+    slug: 'payme',
+    name: 'Payme',
+    category: 'payment',
+    body: "Onlayn to'lov · QR kod orqali to'lash · Avtomatik fiskal chek",
+    initials: 'PM',
+    tint: 'text-white',
+    bg: 'from-cyan-500/30 via-cyan-500/10',
+    status: 'native',
+    popular: true,
+  },
+  {
+    slug: 'uzcard',
+    name: 'Uzcard',
+    category: 'payment',
+    body: 'Milliy karta tizimi · POS-terminal va onlayn',
+    initials: 'UZ',
+    tint: 'text-white',
+    bg: 'from-emerald-500/30 via-emerald-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'humo',
+    name: 'Humo',
+    category: 'payment',
+    body: "Yangi milliy karta · Ko'pchilik banklar qo'llab-quvvatlaydi",
+    initials: 'HM',
+    tint: 'text-white',
+    bg: 'from-amber-500/30 via-amber-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'visa',
+    name: 'Visa',
+    category: 'payment',
+    body: "Xalqaro to'lov · Turistik restoranlar uchun zarur",
+    initials: 'VS',
+    tint: 'text-white',
+    bg: 'from-blue-600/30 via-blue-600/10',
+    status: 'native',
+  },
+  {
+    slug: 'paynet',
+    name: 'Paynet',
+    category: 'payment',
+    body: "Terminal va onlayn · Kambriyali to'lov tizimi",
+    initials: 'PN',
+    tint: 'text-white',
+    bg: 'from-purple-500/30 via-purple-500/10',
+    status: 'native',
+  },
 
   // Delivery
-  { slug: 'yandex',   name: 'Yandex Eats', category: 'delivery', body: "Yetkazib berish · Buyurtma POS'ga avtomatik tushadi",        initials: 'YE', tint: 'text-white', bg: 'from-red-500/30 via-red-500/10', status: 'native', popular: true },
-  { slug: 'wolt',     name: 'Wolt',     category: 'delivery', body: "Yetkazib berish · Real-time buyurtma sinxronizatsiya",          initials: 'WT', tint: 'text-white', bg: 'from-cyan-500/30 via-cyan-500/10', status: 'native' },
-  { slug: 'uzum',     name: 'Uzum Tezkor',category: 'delivery',body: "Mahalliy yetkazib berish · 30 daqiqada",                       initials: 'UT', tint: 'text-white', bg: 'from-purple-500/30 via-purple-500/10', status: 'native' },
-  { slug: 'express24',name: 'Express24',category: 'delivery', body: 'Tezkor yetkazish · Toshkent + 6 viloyat',                        initials: 'E2', tint: 'text-white', bg: 'from-amber-500/30 via-amber-500/10', status: 'partner' },
-  { slug: 'mybazar',  name: 'MyBazar Food',category: 'delivery',body: "Yangi platform · 0% komissiya birinchi 3 oy",                 initials: 'MB', tint: 'text-white', bg: 'from-emerald-500/30 via-emerald-500/10', status: 'soon' },
+  {
+    slug: 'yandex',
+    name: 'Yandex Eats',
+    category: 'delivery',
+    body: "Yetkazib berish · Buyurtma POS'ga avtomatik tushadi",
+    initials: 'YE',
+    tint: 'text-white',
+    bg: 'from-red-500/30 via-red-500/10',
+    status: 'native',
+    popular: true,
+  },
+  {
+    slug: 'wolt',
+    name: 'Wolt',
+    category: 'delivery',
+    body: 'Yetkazib berish · Real-time buyurtma sinxronizatsiya',
+    initials: 'WT',
+    tint: 'text-white',
+    bg: 'from-cyan-500/30 via-cyan-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'uzum',
+    name: 'Uzum Tezkor',
+    category: 'delivery',
+    body: 'Mahalliy yetkazib berish · 30 daqiqada',
+    initials: 'UT',
+    tint: 'text-white',
+    bg: 'from-purple-500/30 via-purple-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'express24',
+    name: 'Express24',
+    category: 'delivery',
+    body: 'Tezkor yetkazish · Toshkent + 6 viloyat',
+    initials: 'E2',
+    tint: 'text-white',
+    bg: 'from-amber-500/30 via-amber-500/10',
+    status: 'partner',
+  },
+  {
+    slug: 'mybazar',
+    name: 'MyBazar Food',
+    category: 'delivery',
+    body: 'Yangi platform · 0% komissiya birinchi 3 oy',
+    initials: 'MB',
+    tint: 'text-white',
+    bg: 'from-emerald-500/30 via-emerald-500/10',
+    status: 'soon',
+  },
 
   // Marketing
-  { slug: 'instagram',name: 'Instagram',category: 'marketing', body: "Menyu, story va reels integratsiyasi · 'Buyurtma berish' tugma", initials: 'IG', tint: 'text-white', bg: 'from-pink-500/30 via-pink-500/10', status: 'native' },
-  { slug: 'meta-ads', name: 'Meta Ads', category: 'marketing', body: 'Reklama hisoboti · Buyurtma manbasini kuzating',                initials: 'MA', tint: 'text-white', bg: 'from-blue-500/30 via-blue-500/10', status: 'partner' },
-  { slug: 'google-business',name: 'Google Business',category: 'marketing',body: "Xarita, menyu va reyting · Avtomatik yangilanish", initials: 'GB', tint: 'text-white', bg: 'from-red-500/30 via-red-500/10', status: 'native' },
-  { slug: 'yandex-business',name: 'Yandex Business',category:'marketing', body: "Xarita va menyu · O'zbekistondagi #1 qidiruv",      initials: 'YB', tint: 'text-white', bg: 'from-yellow-500/30 via-yellow-500/10', status: 'native' },
-  { slug: 'loyalty',  name: 'Loyalty Box',category:'marketing',body: 'Sodiqlik dasturi · Ball, chegirma, mukofotlar',                  initials: 'LB', tint: 'text-white', bg: 'from-[#ff0037]/30 via-[#ff0037]/10', status: 'native' },
+  {
+    slug: 'instagram',
+    name: 'Instagram',
+    category: 'marketing',
+    body: "Menyu, story va reels integratsiyasi · 'Buyurtma berish' tugma",
+    initials: 'IG',
+    tint: 'text-white',
+    bg: 'from-pink-500/30 via-pink-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'meta-ads',
+    name: 'Meta Ads',
+    category: 'marketing',
+    body: 'Reklama hisoboti · Buyurtma manbasini kuzating',
+    initials: 'MA',
+    tint: 'text-white',
+    bg: 'from-blue-500/30 via-blue-500/10',
+    status: 'partner',
+  },
+  {
+    slug: 'google-business',
+    name: 'Google Business',
+    category: 'marketing',
+    body: 'Xarita, menyu va reyting · Avtomatik yangilanish',
+    initials: 'GB',
+    tint: 'text-white',
+    bg: 'from-red-500/30 via-red-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'yandex-business',
+    name: 'Yandex Business',
+    category: 'marketing',
+    body: "Xarita va menyu · O'zbekistondagi #1 qidiruv",
+    initials: 'YB',
+    tint: 'text-white',
+    bg: 'from-yellow-500/30 via-yellow-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'loyalty',
+    name: 'Loyalty Box',
+    category: 'marketing',
+    body: 'Sodiqlik dasturi · Ball, chegirma, mukofotlar',
+    initials: 'LB',
+    tint: 'text-white',
+    bg: 'from-[#ff0037]/30 via-[#ff0037]/10',
+    status: 'native',
+  },
 
   // Accounting
-  { slug: 'tax',      name: "Soliq qo'mitasi", category: 'accounting', body: "OFD ulanish · Fiskal cheklar avtomatik · MyTaxes",      initials: 'SQ', tint: 'text-white', bg: 'from-emerald-500/30 via-emerald-500/10', status: 'native', popular: true },
-  { slug: '1c',       name: '1C: Buxgalteriya',category:'accounting',body: 'Hisobchilik · 2 tomonlama sinxronizatsiya',                initials: '1C', tint: 'text-white', bg: 'from-amber-500/30 via-amber-500/10', status: 'native' },
-  { slug: 'kassa-uz', name: 'Kassa.uz',  category: 'accounting',body: 'Online kassa · Soliq hisobotlari va eksport',                  initials: 'KU', tint: 'text-white', bg: 'from-blue-500/30 via-blue-500/10', status: 'partner' },
-  { slug: 'finance-uz',name: 'Finance.uz',category:'accounting',body: 'Bank statement import · Avtomatik moliyaviy hisobot',          initials: 'FU', tint: 'text-white', bg: 'from-purple-500/30 via-purple-500/10', status: 'native' },
+  {
+    slug: 'tax',
+    name: "Soliq qo'mitasi",
+    category: 'accounting',
+    body: 'OFD ulanish · Fiskal cheklar avtomatik · MyTaxes',
+    initials: 'SQ',
+    tint: 'text-white',
+    bg: 'from-emerald-500/30 via-emerald-500/10',
+    status: 'native',
+    popular: true,
+  },
+  {
+    slug: '1c',
+    name: '1C: Buxgalteriya',
+    category: 'accounting',
+    body: 'Hisobchilik · 2 tomonlama sinxronizatsiya',
+    initials: '1C',
+    tint: 'text-white',
+    bg: 'from-amber-500/30 via-amber-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'kassa-uz',
+    name: 'Kassa.uz',
+    category: 'accounting',
+    body: 'Online kassa · Soliq hisobotlari va eksport',
+    initials: 'KU',
+    tint: 'text-white',
+    bg: 'from-blue-500/30 via-blue-500/10',
+    status: 'partner',
+  },
+  {
+    slug: 'finance-uz',
+    name: 'Finance.uz',
+    category: 'accounting',
+    body: 'Bank statement import · Avtomatik moliyaviy hisobot',
+    initials: 'FU',
+    tint: 'text-white',
+    bg: 'from-purple-500/30 via-purple-500/10',
+    status: 'native',
+  },
 
   // Hardware
-  { slug: 'epson',    name: 'Epson chek',category: 'hardware', body: 'Termal printer · Plug-and-play USB/LAN',                       initials: 'EP', tint: 'text-white', bg: 'from-blue-500/30 via-blue-500/10', status: 'native' },
-  { slug: 'star',     name: 'Star Micronics',category:'hardware',body: 'Yuqori sifatli chek printerlari',                              initials: 'SM', tint: 'text-white', bg: 'from-emerald-500/30 via-emerald-500/10', status: 'native' },
-  { slug: 'kds',      name: 'Oshxona ekrani (KDS)',category:'hardware',body: "Oshpaz uchun buyurtma ekrani · Smart TV ham mumkin",   initials: 'KD', tint: 'text-white', bg: 'from-amber-500/30 via-amber-500/10', status: 'native' },
-  { slug: 'scale',    name: 'Tarozi',   category: 'hardware', body: "Elektron tarozi integratsiyasi · Vazn bo'yicha narxlash",       initials: 'TZ', tint: 'text-white', bg: 'from-cyan-500/30 via-cyan-500/10', status: 'native' },
-  { slug: 'scanner',  name: 'Barcode skanner',category:'hardware',body: "QR/EAN/UPC kod · Inventar va menyu uchun",                  initials: 'BS', tint: 'text-white', bg: 'from-purple-500/30 via-purple-500/10', status: 'native' },
-  { slug: 'cash',     name: 'Kassa apparati',category:'hardware',body: 'Naqd pul jihozi · Avtomatik ochiluvchi javon',                initials: 'KA', tint: 'text-white', bg: 'from-emerald-500/30 via-emerald-500/10', status: 'native' },
+  {
+    slug: 'epson',
+    name: 'Epson chek',
+    category: 'hardware',
+    body: 'Termal printer · Plug-and-play USB/LAN',
+    initials: 'EP',
+    tint: 'text-white',
+    bg: 'from-blue-500/30 via-blue-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'star',
+    name: 'Star Micronics',
+    category: 'hardware',
+    body: 'Yuqori sifatli chek printerlari',
+    initials: 'SM',
+    tint: 'text-white',
+    bg: 'from-emerald-500/30 via-emerald-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'kds',
+    name: 'Oshxona ekrani (KDS)',
+    category: 'hardware',
+    body: 'Oshpaz uchun buyurtma ekrani · Smart TV ham mumkin',
+    initials: 'KD',
+    tint: 'text-white',
+    bg: 'from-amber-500/30 via-amber-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'scale',
+    name: 'Tarozi',
+    category: 'hardware',
+    body: "Elektron tarozi integratsiyasi · Vazn bo'yicha narxlash",
+    initials: 'TZ',
+    tint: 'text-white',
+    bg: 'from-cyan-500/30 via-cyan-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'scanner',
+    name: 'Barcode skanner',
+    category: 'hardware',
+    body: 'QR/EAN/UPC kod · Inventar va menyu uchun',
+    initials: 'BS',
+    tint: 'text-white',
+    bg: 'from-purple-500/30 via-purple-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'cash',
+    name: 'Kassa apparati',
+    category: 'hardware',
+    body: 'Naqd pul jihozi · Avtomatik ochiluvchi javon',
+    initials: 'KA',
+    tint: 'text-white',
+    bg: 'from-emerald-500/30 via-emerald-500/10',
+    status: 'native',
+  },
 
   // Communication
-  { slug: 'telegram', name: 'Telegram bot',category:'communication',body: "Buyurtma qabul qilish · Restoran kanali · Mijoz bildirgisi", initials: 'TG', tint: 'text-white', bg: 'from-[#26A5E4]/30 via-[#26A5E4]/10', status: 'native', popular: true },
-  { slug: 'whatsapp', name: 'WhatsApp Business',category:'communication',body: 'Buyurtma va xabarlar · Broadcast hisoboti',           initials: 'WA', tint: 'text-white', bg: 'from-green-500/30 via-green-500/10', status: 'native' },
-  { slug: 'sms-eskiz',name: 'Eskiz SMS', category: 'communication',body: 'SMS yuborish · Tasdiqlash va marketing',                    initials: 'EK', tint: 'text-white', bg: 'from-amber-500/30 via-amber-500/10', status: 'native' },
-  { slug: 'playmobile',name: 'PlayMobile',category:'communication',body: 'SMS provayder · Mass yuborish',                              initials: 'PB', tint: 'text-white', bg: 'from-purple-500/30 via-purple-500/10', status: 'partner' },
-  { slug: 'gmail',    name: 'Gmail SMTP',category: 'communication',body: 'Email yuborish · Hisobotlar va xabarlar',                   initials: 'GM', tint: 'text-white', bg: 'from-red-500/30 via-red-500/10', status: 'native' },
-  { slug: 'zoom',     name: 'Zoom',     category: 'communication',body: 'Demo va onboarding uchrashuvlar',                              initials: 'ZM', tint: 'text-white', bg: 'from-blue-500/30 via-blue-500/10', status: 'partner' },
+  {
+    slug: 'telegram',
+    name: 'Telegram bot',
+    category: 'communication',
+    body: 'Buyurtma qabul qilish · Restoran kanali · Mijoz bildirgisi',
+    initials: 'TG',
+    tint: 'text-white',
+    bg: 'from-[#26A5E4]/30 via-[#26A5E4]/10',
+    status: 'native',
+    popular: true,
+  },
+  {
+    slug: 'whatsapp',
+    name: 'WhatsApp Business',
+    category: 'communication',
+    body: 'Buyurtma va xabarlar · Broadcast hisoboti',
+    initials: 'WA',
+    tint: 'text-white',
+    bg: 'from-green-500/30 via-green-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'sms-eskiz',
+    name: 'Eskiz SMS',
+    category: 'communication',
+    body: 'SMS yuborish · Tasdiqlash va marketing',
+    initials: 'EK',
+    tint: 'text-white',
+    bg: 'from-amber-500/30 via-amber-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'playmobile',
+    name: 'PlayMobile',
+    category: 'communication',
+    body: 'SMS provayder · Mass yuborish',
+    initials: 'PB',
+    tint: 'text-white',
+    bg: 'from-purple-500/30 via-purple-500/10',
+    status: 'partner',
+  },
+  {
+    slug: 'gmail',
+    name: 'Gmail SMTP',
+    category: 'communication',
+    body: 'Email yuborish · Hisobotlar va xabarlar',
+    initials: 'GM',
+    tint: 'text-white',
+    bg: 'from-red-500/30 via-red-500/10',
+    status: 'native',
+  },
+  {
+    slug: 'zoom',
+    name: 'Zoom',
+    category: 'communication',
+    body: 'Demo va onboarding uchrashuvlar',
+    initials: 'ZM',
+    tint: 'text-white',
+    bg: 'from-blue-500/30 via-blue-500/10',
+    status: 'partner',
+  },
 ];
 
-const STATUS_BADGE: Record<NonNullable<Integration['status']>, { label: string; cls: string; Icon: Icon }> = {
-  native:  { label: 'Native',    cls: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/25', Icon: CheckCircle },
-  partner: { label: 'Hamkor',    cls: 'bg-amber-500/15 text-amber-300 ring-amber-500/25', Icon: Plug },
-  soon:    { label: "Tez orada", cls: 'bg-white/[0.06] text-white/55 ring-white/15', Icon: Lightning },
+const STATUS_BADGE: Record<
+  NonNullable<Integration['status']>,
+  { label: string; cls: string; Icon: Icon }
+> = {
+  native: {
+    label: 'Native',
+    cls: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/25',
+    Icon: CheckCircle,
+  },
+  partner: { label: 'Hamkor', cls: 'bg-amber-500/15 text-amber-300 ring-amber-500/25', Icon: Plug },
+  soon: { label: 'Tez orada', cls: 'bg-white/[0.06] text-white/55 ring-white/15', Icon: Lightning },
 };
 
 const STATS = [
   { value: '32+', label: 'integratsiya' },
-  { value: '6',   label: 'kategoriya' },
-  { value: '5min',label: "ulanish vaqti" },
-  { value: '0',   label: "qo'shimcha haq" },
+  { value: '6', label: 'kategoriya' },
+  { value: '5min', label: 'ulanish vaqti' },
+  { value: '0', label: "qo'shimcha haq" },
 ] as const;
 
 export default async function IntegrationsPage({ params }: Props) {
@@ -121,18 +422,21 @@ export default async function IntegrationsPage({ params }: Props) {
     <main className="bg-[#001B1B]">
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]" />
+        <div
+          aria-hidden="true"
+          className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]"
+        />
         <div className="relative mx-auto max-w-3xl px-5 pt-20 sm:pt-24 pb-10 text-center">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(15,118,110,0.25)] bg-[rgba(15,118,110,0.10)] text-[#5eead4] text-[11px] font-bold uppercase tracking-[0.08em]">
             <Plug size={11} weight="bold" />
             INTEGRATSIYALAR
           </span>
           <h1 className="mt-5 text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold leading-[1.05] tracking-tight text-white">
-            Hamma narsa{' '}
-            <span className="gradient-teal">bog&apos;langan</span>
+            Hamma narsa <span className="gradient-teal">bog&apos;langan</span>
           </h1>
           <p className="mx-auto mt-4 max-w-[36rem] text-[15px] sm:text-[16px] leading-relaxed text-white/70">
-            Click, Payme, Yandex, Wolt, Telegram, soliq idoralari va 32+ boshqa xizmat — 5 daqiqada ulang. Qo&apos;shimcha haq yo&apos;q.
+            Click, Payme, Yandex, Wolt, Telegram, soliq idoralari va 32+ boshqa xizmat — 5 daqiqada
+            ulang. Qo&apos;shimcha haq yo&apos;q.
           </p>
 
           {/* Search */}
@@ -156,8 +460,12 @@ export default async function IntegrationsPage({ params }: Props) {
           <div className="glass-card mx-auto mt-10 grid max-w-3xl grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden">
             {STATS.map((s) => (
               <div key={s.label} className="px-3 py-5 text-center bg-white/[0.02]">
-                <div className="tabular text-[22px] sm:text-[24px] font-extrabold leading-none text-white">{s.value}</div>
-                <div className="mt-1 text-[10.5px] sm:text-[11px] font-semibold text-white/60">{s.label}</div>
+                <div className="tabular text-[22px] sm:text-[24px] font-extrabold leading-none text-white">
+                  {s.value}
+                </div>
+                <div className="mt-1 text-[10.5px] sm:text-[11px] font-semibold text-white/60">
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>
@@ -180,7 +488,9 @@ export default async function IntegrationsPage({ params }: Props) {
               >
                 <c.Icon size={12} weight="bold" />
                 {c.label}
-                <span className={`tabular text-[10px] font-bold ${c.slug === 'all' ? 'text-[#001B1B]/60' : 'text-white/40'}`}>
+                <span
+                  className={`tabular text-[10px] font-bold ${c.slug === 'all' ? 'text-[#001B1B]/60' : 'text-white/40'}`}
+                >
                   {c.count}
                 </span>
               </button>
@@ -208,7 +518,9 @@ export default async function IntegrationsPage({ params }: Props) {
                   ) : null}
 
                   <div className="flex items-center gap-3">
-                    <div className={`relative h-12 w-12 shrink-0 rounded-xl ring-1 ring-inset ring-white/10 overflow-hidden bg-gradient-to-br ${it.bg} to-transparent`}>
+                    <div
+                      className={`relative h-12 w-12 shrink-0 rounded-xl ring-1 ring-inset ring-white/10 overflow-hidden bg-gradient-to-br ${it.bg} to-transparent`}
+                    >
                       <div className="absolute inset-0 flex items-center justify-center">
                         <span className="tabular font-extrabold text-[13px] text-white drop-shadow-sm">
                           {it.initials}
@@ -220,7 +532,9 @@ export default async function IntegrationsPage({ params }: Props) {
                         {it.name}
                       </h3>
                       {badge ? (
-                        <span className={`mt-1 inline-flex items-center gap-1 px-1.5 py-0.5 rounded ring-1 ring-inset text-[9.5px] font-bold uppercase tracking-wide ${badge.cls}`}>
+                        <span
+                          className={`mt-1 inline-flex items-center gap-1 px-1.5 py-0.5 rounded ring-1 ring-inset text-[9.5px] font-bold uppercase tracking-wide ${badge.cls}`}
+                        >
                           <badge.Icon size={9} weight="fill" />
                           {badge.label}
                         </span>
@@ -256,7 +570,8 @@ export default async function IntegrationsPage({ params }: Props) {
                 Sizga kerakli xizmat ro&apos;yxatda yo&apos;qmi?
               </div>
               <div className="text-[11.5px] text-white/55">
-                Bizga yozing — 4 ish haftasida tayyor qilamiz. Ovoz berish bilan tartibni belgilaymiz.
+                Bizga yozing — 4 ish haftasida tayyor qilamiz. Ovoz berish bilan tartibni
+                belgilaymiz.
               </div>
             </div>
             <Link
@@ -284,10 +599,10 @@ export default async function IntegrationsPage({ params }: Props) {
 
           <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { Icon: MagnifyingGlass, t: '1. Tanlang',  b: 'Kerakli xizmatni qidirib toping' },
-              { Icon: Plug,            t: '2. Ulang',    b: "API kalit yoki OAuth orqali ruxsat bering" },
-              { Icon: Lightning,       t: '3. Sozlang',  b: 'Avtomatik sinxronizatsiya yoqiladi' },
-              { Icon: CheckCircle,     t: '4. Ishlatib turing', b: 'Ma\'lumotlar real-time keladi' },
+              { Icon: MagnifyingGlass, t: '1. Tanlang', b: 'Kerakli xizmatni qidirib toping' },
+              { Icon: Plug, t: '2. Ulang', b: 'API kalit yoki OAuth orqali ruxsat bering' },
+              { Icon: Lightning, t: '3. Sozlang', b: 'Avtomatik sinxronizatsiya yoqiladi' },
+              { Icon: CheckCircle, t: '4. Ishlatib turing', b: "Ma'lumotlar real-time keladi" },
             ].map((s) => (
               <article key={s.t} className="glass-card rounded-2xl p-5">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 bg-[rgba(20,184,166,0.15)]">
@@ -309,7 +624,8 @@ export default async function IntegrationsPage({ params }: Props) {
               aria-hidden="true"
               className="pointer-events-none absolute inset-0"
               style={{
-                background: 'radial-gradient(circle at 100% 0%, rgba(255,0,55,0.15), transparent 50%), radial-gradient(circle at 0% 100%, rgba(20,184,166,0.18), transparent 50%)',
+                background:
+                  'radial-gradient(circle at 100% 0%, rgba(255,0,55,0.15), transparent 50%), radial-gradient(circle at 0% 100%, rgba(20,184,166,0.18), transparent 50%)',
               }}
             />
             <div className="relative">
@@ -321,7 +637,8 @@ export default async function IntegrationsPage({ params }: Props) {
                 Xizmat yetkazib beruvchimisiz?
               </h2>
               <p className="mt-3 text-[13.5px] leading-relaxed text-white/75">
-                MyPOS bilan integratsiyangizni qiling — 500+ restoran sizning xizmatingizdan foydalanishi mumkin. Royalty 0%, doimiy texnik yordam.
+                MyPOS bilan integratsiyangizni qiling — 500+ restoran sizning xizmatingizdan
+                foydalanishi mumkin. Royalty 0%, doimiy texnik yordam.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-2">
                 <Link
@@ -342,10 +659,10 @@ export default async function IntegrationsPage({ params }: Props) {
 
             <div className="relative grid grid-cols-2 gap-2">
               {[
-                { Icon: Globe,       tint: 'text-[#5eead4]' },
-                { Icon: Receipt,     tint: 'text-amber-400' },
-                { Icon: Storefront,  tint: 'text-emerald-400' },
-                { Icon: Truck,       tint: 'text-blue-400' },
+                { Icon: Globe, tint: 'text-[#5eead4]' },
+                { Icon: Receipt, tint: 'text-amber-400' },
+                { Icon: Storefront, tint: 'text-emerald-400' },
+                { Icon: Truck, tint: 'text-blue-400' },
               ].map((b, i) => (
                 <div
                   key={i}
@@ -367,7 +684,9 @@ export default async function IntegrationsPage({ params }: Props) {
               <TelegramLogo size={16} weight="fill" className="text-[#26A5E4]" />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="text-[13px] font-bold text-white">Integratsiya bo&apos;yicha savol?</div>
+              <div className="text-[13px] font-bold text-white">
+                Integratsiya bo&apos;yicha savol?
+              </div>
               <div className="text-[11.5px] text-white/55">
                 Telegramda yozing — 5 daqiqada javob beramiz.
               </div>

@@ -1,10 +1,10 @@
 'use client';
 
+import type { LucideIcon } from 'lucide-react';
 import { AlertCircle, AlertTriangle, Info, ListChecks, ShieldAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import type { LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/cn';
 import type { AuditLogRecord } from '@/lib/api-helpers';
+import { cn } from '@/lib/cn';
 
 /** UI-visible severities (we hide `debug` from filters but still count it as info). */
 export type DisplaySeverity = 'info' | 'warning' | 'error' | 'critical';
@@ -134,12 +134,7 @@ export function AuditSeverityChips({ current, onChange, counts }: Props) {
           >
             <Icon className="h-3 w-3 shrink-0" strokeWidth={2.4} aria-hidden="true" />
             <span>{t(`severity_chip_${c.labelKey}`)}</span>
-            <span
-              className={cn(
-                'tabular-nums font-bold',
-                isActive ? '' : c.countTint,
-              )}
-            >
+            <span className={cn('tabular-nums font-bold', isActive ? '' : c.countTint)}>
               {value}
             </span>
           </button>

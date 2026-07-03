@@ -59,10 +59,8 @@ export function NotificationsSection({ settings, isLoading = false, onSave }: Pr
     setForm(hydrate(settings));
   }, [settings]);
 
-  const set = <K extends keyof NotificationsFormState>(
-    key: K,
-    value: NotificationsFormState[K],
-  ) => setForm((prev) => ({ ...prev, [key]: value }));
+  const set = <K extends keyof NotificationsFormState>(key: K, value: NotificationsFormState[K]) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
 
   const handleSave = async () => {
     setSaving(true);
@@ -98,10 +96,7 @@ export function NotificationsSection({ settings, isLoading = false, onSave }: Pr
         </div>
         <div className="space-y-3 pt-2">
           {Array.from({ length: 4 }, (_, idx) => (
-            <div
-              key={idx}
-              className="h-9 rounded animate-pulse bg-gray-200 dark:bg-gray-800"
-            />
+            <div key={idx} className="h-9 rounded animate-pulse bg-gray-200 dark:bg-gray-800" />
           ))}
         </div>
       </div>

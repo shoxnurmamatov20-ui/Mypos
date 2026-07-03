@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import type { Route } from 'next';
+import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 
 export default function NotFound() {
@@ -11,9 +11,7 @@ export default function NotFound() {
       <p className="text-9xl opacity-30" aria-hidden="true">
         🍽️
       </p>
-      <h1 className="mt-6 font-display text-3xl font-bold text-neutral-900">
-        404 — {t('title')}
-      </h1>
+      <h1 className="mt-6 font-display text-3xl font-bold text-neutral-900">404 — {t('title')}</h1>
       <p className="mt-3 text-neutral-500">{t('subtitle')}</p>
       <Link
         href={`/${locale}` as Route}

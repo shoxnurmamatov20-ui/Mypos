@@ -16,9 +16,7 @@ type Props = {
 export function OrderStatusBadge({ status, label }: Props) {
   const cls = pillClass(status);
   return (
-    <span
-      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold ${cls}`}
-    >
+    <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold ${cls}`}>
       {label}
     </span>
   );

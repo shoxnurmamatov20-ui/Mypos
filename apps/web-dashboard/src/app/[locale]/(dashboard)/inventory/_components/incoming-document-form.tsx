@@ -1,9 +1,9 @@
 'use client';
 
 import {
-  incomingDocumentsApi,
   type CreateIncomingDocumentInput,
   type Ingredient,
+  incomingDocumentsApi,
 } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -14,12 +14,7 @@ import { toast } from 'sonner';
 import { apiClient } from '@/lib/api';
 import { DocDetailModal } from './doc-detail-modal';
 import { IngredientSearch } from './ingredient-search';
-import {
-  inputClass,
-  labelClass,
-  primaryBtnClass,
-  secondaryBtnClass,
-} from './ui-helpers';
+import { inputClass, labelClass, primaryBtnClass, secondaryBtnClass } from './ui-helpers';
 import { WarehouseSelect } from './warehouse-select';
 
 type Row = {
@@ -217,27 +212,21 @@ export function IncomingDocumentForm({ onClose }: { onClose: () => void }) {
                 className="grid grid-cols-12 items-end gap-2 rounded-lg border border-[rgba(22,34,31,0.06)] bg-[#fafbfa] p-3 dark:border-[rgba(255,255,255,0.05)] dark:bg-[#0d1424]"
               >
                 <div className="col-span-12 md:col-span-4">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.ingredient') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.ingredient') : ''}</label>
                   <IngredientSearch
                     value={row.ingredient?.id ?? ''}
                     onChange={(ing) =>
                       updateRow(row.id, {
                         ingredient: ing,
                         unitPrice:
-                          ing && row.unitPrice === ''
-                            ? String(ing.cost_per_unit)
-                            : row.unitPrice,
+                          ing && row.unitPrice === '' ? String(ing.cost_per_unit) : row.unitPrice,
                       })
                     }
                     excludeIds={pickedIds.filter((id) => id !== row.ingredient?.id)}
                   />
                 </div>
                 <div className="col-span-4 md:col-span-2">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.quantity') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.quantity') : ''}</label>
                   <input
                     type="number"
                     step="0.001"
@@ -248,9 +237,7 @@ export function IncomingDocumentForm({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div className="col-span-4 md:col-span-2">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.unit_price') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.unit_price') : ''}</label>
                   <input
                     type="number"
                     step="1"
@@ -261,9 +248,7 @@ export function IncomingDocumentForm({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div className="col-span-3 md:col-span-2">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.expiry_date') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.expiry_date') : ''}</label>
                   <input
                     type="date"
                     value={row.expiryDate}
@@ -272,9 +257,7 @@ export function IncomingDocumentForm({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div className="col-span-3 md:col-span-1">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.batch_number') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.batch_number') : ''}</label>
                   <input
                     type="text"
                     value={row.batchNumber}
@@ -298,9 +281,7 @@ export function IncomingDocumentForm({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="mt-3 flex items-center justify-end gap-3 text-sm">
-            <span className="text-[#62716d] dark:text-[#94a3b8]">
-              {t('form.total_label')}
-            </span>
+            <span className="text-[#62716d] dark:text-[#94a3b8]">{t('form.total_label')}</span>
             <span className="text-base font-bold tabular-nums text-[#16221f] dark:text-white">
               {formatUZS(total)}
             </span>

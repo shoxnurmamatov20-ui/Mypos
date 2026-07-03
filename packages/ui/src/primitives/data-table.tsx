@@ -69,13 +69,19 @@ export function DataTable<T>({
           <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
             {loading ? (
               <tr>
-                <td colSpan={columns.length} className="px-4 py-12 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
+                <td
+                  colSpan={columns.length}
+                  className="px-4 py-12 text-center text-sm text-[#62716d] dark:text-[#94a3b8]"
+                >
                   <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-[#0f766e] border-t-transparent" />
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={columns.length} className="px-4 py-16 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
+                <td
+                  colSpan={columns.length}
+                  className="px-4 py-16 text-center text-sm text-[#62716d] dark:text-[#94a3b8]"
+                >
                   {empty ?? '—'}
                 </td>
               </tr>

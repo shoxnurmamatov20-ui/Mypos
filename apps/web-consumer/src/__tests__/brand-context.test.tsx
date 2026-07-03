@@ -226,14 +226,13 @@ describe('fetchBrandForHost', () => {
   });
 
   it('returns null when the API responds non-2xx', async () => {
-    global.fetch = vi.fn(
-      () =>
-        Promise.resolve(
-          new Response('{"message":"not found"}', {
-            status: 404,
-            headers: { 'Content-Type': 'application/json' },
-          }),
-        ),
+    global.fetch = vi.fn(() =>
+      Promise.resolve(
+        new Response('{"message":"not found"}', {
+          status: 404,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      ),
     ) as unknown as typeof global.fetch;
 
     const { fetchBrandForHost } = await import('../lib/brand');
@@ -241,7 +240,9 @@ describe('fetchBrandForHost', () => {
   });
 
   it('returns null when the network throws (graceful degradation)', async () => {
-    global.fetch = vi.fn(() => Promise.reject(new TypeError('Failed to fetch'))) as unknown as typeof global.fetch;
+    global.fetch = vi.fn(() =>
+      Promise.reject(new TypeError('Failed to fetch')),
+    ) as unknown as typeof global.fetch;
     const { fetchBrandForHost } = await import('../lib/brand');
     expect(await fetchBrandForHost('jomeburger.uz')).toBeNull();
   });
@@ -277,14 +278,13 @@ describe('fetchBrandForHost', () => {
       },
     };
 
-    global.fetch = vi.fn(
-      () =>
-        Promise.resolve(
-          new Response(JSON.stringify(payload), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' },
-          }),
-        ),
+    global.fetch = vi.fn(() =>
+      Promise.resolve(
+        new Response(JSON.stringify(payload), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      ),
     ) as unknown as typeof global.fetch;
 
     const { fetchBrandForHost } = await import('../lib/brand');

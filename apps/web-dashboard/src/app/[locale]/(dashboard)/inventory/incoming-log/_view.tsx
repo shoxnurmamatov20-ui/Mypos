@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  incomingDocumentsApi,
   type IncomingDocument,
+  incomingDocumentsApi,
   type ListIncomingDocumentsParams,
 } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
@@ -20,17 +20,17 @@ import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { apiClient } from '@/lib/api';
 import { DashStatCard } from '../../_components/stat-card';
+import { daysAgo, formatDate, today } from '../_components/format';
 import { StatusBadge } from '../_components/status-badge';
 import {
   EmptyState,
   ErrorBanner,
-  StatStripSkeleton,
-  TableSkeleton,
   inputClass,
+  StatStripSkeleton,
   secondaryBtnClass,
+  TableSkeleton,
 } from '../_components/ui-helpers';
 import { WarehouseSelect } from '../_components/warehouse-select';
-import { daysAgo, formatDate, today } from '../_components/format';
 
 export function IncomingLogView() {
   const t = useTranslations('inventory');
@@ -158,9 +158,7 @@ export function IncomingLogView() {
             <section key={month} className="space-y-2">
               <h2 className="text-[11px] font-bold uppercase tracking-[0.06em] text-[#62716d] dark:text-[#94a3b8]">
                 {month}
-                <span className="ml-2 text-[#16221f] dark:text-white">
-                  ({list.length})
-                </span>
+                <span className="ml-2 text-[#16221f] dark:text-white">({list.length})</span>
               </h2>
               <div className="overflow-x-auto rounded-xl border border-[rgba(22,34,31,0.09)] bg-white dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
                 <table className="w-full text-sm">
@@ -222,10 +220,7 @@ function ExpandableRow({
 
   return (
     <>
-      <tr
-        className="cursor-pointer hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]"
-        onClick={onToggle}
-      >
+      <tr className="cursor-pointer hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]" onClick={onToggle}>
         <td className="px-2 py-3 text-center text-[#62716d] dark:text-[#94a3b8]">
           {isOpen ? (
             <ChevronDown className="mx-auto h-4 w-4" />
@@ -236,15 +231,9 @@ function ExpandableRow({
         <td className="px-4 py-3 font-mono text-xs font-semibold text-[#16221f] dark:text-white">
           {doc.doc_no}
         </td>
-        <td className="px-4 py-3 text-[#16221f] dark:text-white">
-          {formatDate(doc.doc_date)}
-        </td>
-        <td className="px-4 py-3 text-[#16221f] dark:text-white">
-          {doc.supplier_name ?? '—'}
-        </td>
-        <td className="px-4 py-3 text-[#16221f] dark:text-white">
-          {doc.warehouse?.name ?? '—'}
-        </td>
+        <td className="px-4 py-3 text-[#16221f] dark:text-white">{formatDate(doc.doc_date)}</td>
+        <td className="px-4 py-3 text-[#16221f] dark:text-white">{doc.supplier_name ?? '—'}</td>
+        <td className="px-4 py-3 text-[#16221f] dark:text-white">{doc.warehouse?.name ?? '—'}</td>
         <td className="px-4 py-3 text-right tabular-nums text-[#62716d] dark:text-[#94a3b8]">
           {doc.items_count ?? items.length ?? '—'}
         </td>
@@ -259,13 +248,9 @@ function ExpandableRow({
         <tr className="bg-[#fafbfa] dark:bg-[#0d1424]">
           <td colSpan={8} className="px-4 py-3">
             {itemsQuery.isLoading ? (
-              <div className="py-3 text-center text-xs text-[#62716d] dark:text-[#94a3b8]">
-                ...
-              </div>
+              <div className="py-3 text-center text-xs text-[#62716d] dark:text-[#94a3b8]">...</div>
             ) : items.length === 0 ? (
-              <div className="py-3 text-center text-xs text-[#62716d] dark:text-[#94a3b8]">
-                —
-              </div>
+              <div className="py-3 text-center text-xs text-[#62716d] dark:text-[#94a3b8]">—</div>
             ) : (
               <table className="w-full text-xs">
                 <thead className="text-[10px] uppercase text-[#62716d] dark:text-[#94a3b8]">

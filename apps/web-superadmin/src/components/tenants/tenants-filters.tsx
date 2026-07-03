@@ -23,19 +23,19 @@ type Props = {
 };
 
 const REGIONS = [
-  { code: '',     name: 'Hamma viloyatlar' },
-  { code: 'tas',  name: 'Toshkent' },
-  { code: 'sam',  name: 'Samarqand' },
-  { code: 'buk',  name: 'Buxoro' },
-  { code: 'and',  name: 'Andijon' },
-  { code: 'fer',  name: "Farg'ona" },
-  { code: 'nam',  name: 'Namangan' },
-  { code: 'kar',  name: 'Qashqadaryo' },
-  { code: 'sur',  name: 'Surxondaryo' },
-  { code: 'jiz',  name: 'Jizzax' },
-  { code: 'sir',  name: 'Sirdaryo' },
-  { code: 'nav',  name: 'Navoiy' },
-  { code: 'kho',  name: 'Xorazm' },
+  { code: '', name: 'Hamma viloyatlar' },
+  { code: 'tas', name: 'Toshkent' },
+  { code: 'sam', name: 'Samarqand' },
+  { code: 'buk', name: 'Buxoro' },
+  { code: 'and', name: 'Andijon' },
+  { code: 'fer', name: "Farg'ona" },
+  { code: 'nam', name: 'Namangan' },
+  { code: 'kar', name: 'Qashqadaryo' },
+  { code: 'sur', name: 'Surxondaryo' },
+  { code: 'jiz', name: 'Jizzax' },
+  { code: 'sir', name: 'Sirdaryo' },
+  { code: 'nav', name: 'Navoiy' },
+  { code: 'kho', name: 'Xorazm' },
   { code: 'kar2', name: "Qoraqalpog'iston" },
 ];
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { statsApi, type OrderSummary } from '@mypos/api-client';
+import { type OrderSummary, statsApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
@@ -133,13 +133,7 @@ function DateRangeToolbar({
   onPreset: (p: Preset) => void;
 }) {
   const t = useTranslations('reports');
-  const presets: Array<Exclude<Preset, 'custom'>> = [
-    'today',
-    'week',
-    'month',
-    'quarter',
-    'year',
-  ];
+  const presets: Array<Exclude<Preset, 'custom'>> = ['today', 'week', 'month', 'quarter', 'year'];
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-4 md:flex-row md:items-end md:justify-between dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">

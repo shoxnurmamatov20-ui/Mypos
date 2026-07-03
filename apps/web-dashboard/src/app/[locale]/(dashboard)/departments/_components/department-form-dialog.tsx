@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiError, departmentsApi, type Department } from '@mypos/api-client';
+import { ApiError, type Department, departmentsApi } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -51,9 +51,7 @@ export function DepartmentFormDialog({
         const body = err.body as
           | { message?: string; errors?: Record<string, string[]> }
           | undefined;
-        const firstErr = body?.errors
-          ? (Object.values(body.errors)[0]?.[0] ?? null)
-          : null;
+        const firstErr = body?.errors ? (Object.values(body.errors)[0]?.[0] ?? null) : null;
         toast.error(firstErr ?? body?.message ?? t('save_failed'));
       } else {
         toast.error(t('save_failed'));
@@ -144,18 +142,10 @@ export function DepartmentFormDialog({
   );
 }
 
-function Field({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-neutral-700">
-        {label}
-      </span>
+      <span className="mb-1 block text-sm font-medium text-neutral-700">{label}</span>
       {children}
     </label>
   );

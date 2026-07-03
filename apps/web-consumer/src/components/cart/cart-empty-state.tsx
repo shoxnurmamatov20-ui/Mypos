@@ -1,8 +1,8 @@
 'use client';
 
+import { ShoppingBag } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
-import { ShoppingBag } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type Props = {

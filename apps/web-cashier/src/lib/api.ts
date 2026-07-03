@@ -207,9 +207,7 @@ function mapItem(raw: RawMenuItem): MenuItem {
 const ORDER_TYPES: OrderType[] = ['dine_in', 'takeaway', 'delivery'];
 
 function mapOrder(raw: RawOrder): OrderSummary {
-  const type = ORDER_TYPES.includes(raw.type as OrderType)
-    ? (raw.type as OrderType)
-    : 'takeaway';
+  const type = ORDER_TYPES.includes(raw.type as OrderType) ? (raw.type as OrderType) : 'takeaway';
   return {
     id: raw.id,
     order_no: raw.order_no,
@@ -250,13 +248,7 @@ function mapPayment(raw: RawPayment): PaymentRow {
   };
 }
 
-const SHIFT_STATUSES: ShiftStatus[] = [
-  'scheduled',
-  'open',
-  'closed',
-  'missed',
-  'in_progress',
-];
+const SHIFT_STATUSES: ShiftStatus[] = ['scheduled', 'open', 'closed', 'missed', 'in_progress'];
 
 function mapShiftStatus(raw: string): ShiftStatus {
   return SHIFT_STATUSES.includes(raw as ShiftStatus) ? (raw as ShiftStatus) : 'scheduled';
@@ -378,13 +370,12 @@ export const api = {
   },
 
   menuCategories: () =>
-    getList<RawMenuCategory, MenuCategory>(
-      '/api/v1/menu/categories?active_only=1',
-      (c) => ({ id: c.id, name: c.name }),
-    ),
+    getList<RawMenuCategory, MenuCategory>('/api/v1/menu/categories?active_only=1', (c) => ({
+      id: c.id,
+      name: c.name,
+    })),
 
-  menuItems: () =>
-    getList<RawMenuItem, MenuItem>('/api/v1/menu/items?active_only=1', mapItem),
+  menuItems: () => getList<RawMenuItem, MenuItem>('/api/v1/menu/items?active_only=1', mapItem),
 
   orders: (status?: string) =>
     getList<RawOrder, OrderSummary>(

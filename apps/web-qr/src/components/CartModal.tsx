@@ -1,12 +1,12 @@
 'use client';
 
+import { ApiError, publicApi } from '@mypos/api-client';
+import { type Currency, formatMoney, type Locale as UtilsLocale } from '@mypos/utils';
+import { useMutation } from '@tanstack/react-query';
 import { Minus, Plus, Trash2, X } from 'lucide-react';
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { ApiError, publicApi } from '@mypos/api-client';
-import { formatMoney, type Currency, type Locale as UtilsLocale } from '@mypos/utils';
-import { type Locale, translate } from '@/lib/i18n';
 import { apiClient } from '@/lib/api';
+import { type Locale, translate } from '@/lib/i18n';
 import { useCartStore } from '@/stores/cart';
 
 type Props = {
@@ -19,15 +19,7 @@ type Props = {
   onPlaced: (orderNo: string) => void;
 };
 
-export function CartModal({
-  open,
-  onClose,
-  slug,
-  tableId,
-  locale,
-  currency,
-  onPlaced,
-}: Props) {
+export function CartModal({ open, onClose, slug, tableId, locale, currency, onPlaced }: Props) {
   const items = useCartStore((s) => s.items);
   const increment = useCartStore((s) => s.incrementQty);
   const decrement = useCartStore((s) => s.decrementQty);
@@ -72,9 +64,7 @@ export function CartModal({
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-white">
       <header className="flex items-center justify-between border-b border-neutral-200 px-4 py-3">
-        <h2 className="font-display text-xl font-bold">
-          {translate(locale, 'cart.title')}
-        </h2>
+        <h2 className="font-display text-xl font-bold">{translate(locale, 'cart.title')}</h2>
         <button
           type="button"
           onClick={onClose}
@@ -87,9 +77,7 @@ export function CartModal({
 
       <div className="flex-1 overflow-y-auto px-4 py-4">
         {items.length === 0 ? (
-          <p className="mt-10 text-center text-neutral-500">
-            {translate(locale, 'cart.empty')}
-          </p>
+          <p className="mt-10 text-center text-neutral-500">{translate(locale, 'cart.empty')}</p>
         ) : (
           <ul className="flex flex-col gap-3">
             {items.map((it) => (
@@ -173,9 +161,7 @@ export function CartModal({
             disabled={place.isPending}
             className="flex min-h-14 w-full items-center justify-center rounded-2xl bg-brand-500 text-base font-bold text-white shadow transition hover:bg-brand-600 disabled:opacity-60"
           >
-            {place.isPending
-              ? translate(locale, 'cart.placing')
-              : translate(locale, 'cart.place')}
+            {place.isPending ? translate(locale, 'cart.placing') : translate(locale, 'cart.place')}
           </button>
         </footer>
       ) : null}

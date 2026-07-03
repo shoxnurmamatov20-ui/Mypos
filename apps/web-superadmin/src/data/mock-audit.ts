@@ -306,7 +306,7 @@ export function generateMockAuditLogs(): AuditLog[] {
   // Spread across last 7 days = 7 * 24 * 60 = 10 080 minutes.
   // Use an exponential-ish curve so most events are recent.
   for (let i = 0; i < total; i += 1) {
-    const minutes = Math.round(((i + 1) ** 1.6) * 4);
+    const minutes = Math.round((i + 1) ** 1.6 * 4);
     entries.push(buildEntry(i, minutes));
   }
   return entries;

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { TranslatedSchema, UUIDSchema, MoneyAmountSchema } from './common';
+import { MoneyAmountSchema, TranslatedSchema, UUIDSchema } from './common';
 
 export const CreateMenuCategorySchema = z.object({
   locationId: UUIDSchema,

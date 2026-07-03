@@ -2,17 +2,9 @@
 
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
 import { useTheme } from 'next-themes';
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { useMemo } from 'react';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatCompactNumber, formatNumber } from '@/lib/format';
 import type { MockRevenuePoint } from '@/types/super-admin';

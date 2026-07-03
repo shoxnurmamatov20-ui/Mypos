@@ -16,9 +16,7 @@ export function PlaceOrderConfirm({ orderNo, locale, onBack }: Props) {
       <h2 className="font-display text-2xl font-bold text-neutral-900">
         {translate(locale, 'order.success.title')}
       </h2>
-      <p className="mt-2 text-neutral-600">
-        {translate(locale, 'order.success.number')}
-      </p>
+      <p className="mt-2 text-neutral-600">{translate(locale, 'order.success.number')}</p>
       <p className="mt-1 text-3xl font-bold text-brand-600">{orderNo}</p>
       <button
         type="button"

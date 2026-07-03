@@ -1,9 +1,4 @@
-import {
-  ordersApi,
-  type CreateOrderInput,
-  type Order,
-  type OrderStatus,
-} from '@mypos/api-client';
+import { type CreateOrderInput, type Order, type OrderStatus, ordersApi } from '@mypos/api-client';
 import { apiClient } from '../api.js';
 import type { CartItem, OrderMode } from '../types.js';
 

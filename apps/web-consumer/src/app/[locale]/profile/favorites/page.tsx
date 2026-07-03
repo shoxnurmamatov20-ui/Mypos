@@ -79,7 +79,11 @@ export default function FavoritesPage() {
             >
               <Link href={`/${locale}/restaurants/${r.slug}` as Route} className="flex gap-3 p-3">
                 {r.cover_url ? (
-                  <img src={r.cover_url} alt="" className="h-20 w-24 rounded-xl object-cover shrink-0" />
+                  <img
+                    src={r.cover_url}
+                    alt=""
+                    className="h-20 w-24 rounded-xl object-cover shrink-0"
+                  />
                 ) : (
                   <div className="h-20 w-24 rounded-xl bg-neutral-100 shrink-0 flex items-center justify-center">
                     <MapPin className="h-6 w-6 text-neutral-400" />

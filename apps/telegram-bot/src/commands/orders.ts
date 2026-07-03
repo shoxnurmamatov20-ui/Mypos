@@ -5,7 +5,7 @@ import type { BotContext } from '../types.js';
 
 export async function ordersCommand(ctx: BotContext): Promise<void> {
   const lang = ctx.lang;
-  let orders;
+  let orders: Awaited<ReturnType<typeof listRecentOrders>>;
   try {
     orders = await listRecentOrders();
   } catch (error) {

@@ -10,11 +10,7 @@ export default async function TenantMenuPage({ params, searchParams }: PageProps
   const sp = await searchParams;
   const tRaw = sp.t;
   const tableId =
-    typeof tRaw === 'string'
-      ? tRaw
-      : Array.isArray(tRaw) && tRaw.length > 0
-        ? tRaw[0]
-        : undefined;
+    typeof tRaw === 'string' ? tRaw : Array.isArray(tRaw) && tRaw.length > 0 ? tRaw[0] : undefined;
 
   return <MenuView slug={slug} tableId={tableId} />;
 }

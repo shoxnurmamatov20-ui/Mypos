@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { SeverityBadge } from '@/components/dashboard/badges';
 import { Modal } from '@/components/ui/modal';
-import { cn } from '@/lib/cn';
 import type { AuditLogRecord } from '@/lib/api-helpers';
+import { cn } from '@/lib/cn';
 import type { AuditSeverity } from '@/types/super-admin';
 
 type Props = {
@@ -65,19 +65,12 @@ export function AuditDetailModal({ entry, onClose }: Props) {
           <DetailRow
             label={t('modal_subject')}
             value={
-              entry.subject_label
-                ? `${entry.subject_type ?? '?'}: ${entry.subject_label}`
-                : '—'
+              entry.subject_label ? `${entry.subject_type ?? '?'}: ${entry.subject_label}` : '—'
             }
           />
           <DetailRow label={t('modal_tenant')} value={entry.tenant_id ?? '—'} mono />
           <DetailRow label={t('modal_ip')} value={entry.ip_address ?? '—'} mono />
-          <DetailRow
-            label={t('modal_user_agent')}
-            value={entry.user_agent ?? '—'}
-            mono
-            truncate
-          />
+          <DetailRow label={t('modal_user_agent')} value={entry.user_agent ?? '—'} mono truncate />
         </dl>
 
         {metadataHtml ? (
@@ -90,6 +83,7 @@ export function AuditDetailModal({ entry, onClose }: Props) {
             </p>
             <pre
               className="max-h-72 overflow-auto rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 p-3.5 font-mono text-[11.5px] leading-relaxed text-gray-800 dark:text-gray-200 tabular-nums"
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: highlightJson() HTML-escapes (&, <, >) before adding highlight spans — see its first line
               dangerouslySetInnerHTML={{ __html: metadataHtml }}
             />
           </section>
@@ -132,14 +126,17 @@ function DetailRow({ label, value, mono = false, truncate = false }: DetailRowPr
  * cleanly on both light (gray-50) and dark (gray-950) backgrounds.
  */
 function highlightJson(input: string): string {
-  const escaped = input
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+  const escaped = input.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
   return escaped.replace(
     /("(?:\\.|[^"\\])*")(\s*:)?|\b(true|false|null)\b|(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g,
-    (match, str: string | undefined, colon: string | undefined, lit: string | undefined, num: string | undefined) => {
+    (
+      match,
+      str: string | undefined,
+      colon: string | undefined,
+      lit: string | undefined,
+      num: string | undefined,
+    ) => {
       if (str !== undefined) {
         // Keys (when followed by ':') are emerald-700, string values are red-600.
         const cls = colon ? '#047857' : '#dc2626';

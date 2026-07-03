@@ -62,11 +62,7 @@ export class MyPosApiClient {
       } catch {
         errorBody = await response.text();
       }
-      throw new ApiError(
-        `HTTP ${response.status}`,
-        response.status,
-        errorBody,
-      );
+      throw new ApiError(`HTTP ${response.status}`, response.status, errorBody);
     }
 
     if (response.status === 204) {

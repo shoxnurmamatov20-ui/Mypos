@@ -61,12 +61,7 @@ const buildQueryString = (params: Record<string, unknown> | undefined): string =
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries
-      .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-      .join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 export const customersApi = {

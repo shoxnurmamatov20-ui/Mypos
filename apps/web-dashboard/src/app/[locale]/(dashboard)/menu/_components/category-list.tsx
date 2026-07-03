@@ -1,6 +1,6 @@
 'use client';
 
-import { menuApi, type MenuCategory } from '@mypos/api-client';
+import { type MenuCategory, menuApi } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';

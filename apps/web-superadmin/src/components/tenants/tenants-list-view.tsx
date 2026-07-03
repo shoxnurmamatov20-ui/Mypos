@@ -1,7 +1,7 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ApiError } from '@mypos/api-client';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Download, PauseCircle, PlayCircle, Plus, Upload, X } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
@@ -23,20 +23,15 @@ import { DeleteTenantModal } from './delete-tenant-modal';
 import { ImpersonateConfirmModal } from './impersonate-confirm-modal';
 import { SuspendTenantModal } from './suspend-tenant-modal';
 import type { TenantAction } from './tenant-action-menu';
-import { TenantsFilters, type OwnerFilter } from './tenants-filters';
-import { TenantsPagination, type PerPage } from './tenants-pagination';
+import { type OwnerFilter, TenantsFilters } from './tenants-filters';
+import { type PerPage, TenantsPagination } from './tenants-pagination';
 import {
   computeHealthCounts,
   filterByHealth,
-  TenantsStatusChips,
   type TenantHealth,
+  TenantsStatusChips,
 } from './tenants-status-chips';
-import {
-  TenantsTable,
-  type SortColumn,
-  type SortDir,
-  type SortState,
-} from './tenants-table';
+import { type SortColumn, type SortDir, type SortState, TenantsTable } from './tenants-table';
 
 type Props = { locale: string };
 
@@ -66,7 +61,9 @@ export function TenantsListView({ locale }: Props) {
   const [selected, setSelected] = useState<Set<string>>(() => new Set());
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState<PerPage>(25);
-  const [bulkAction, setBulkAction] = useState<'activate' | 'deactivate' | 'change_plan' | 'delete'>('activate');
+  const [bulkAction, setBulkAction] = useState<
+    'activate' | 'deactivate' | 'change_plan' | 'delete'
+  >('activate');
 
   const [suspendTarget, setSuspendTarget] = useState<TenantSummary | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<TenantSummary | null>(null);
@@ -182,7 +179,16 @@ export function TenantsListView({ locale }: Props) {
   // Reset to page 1 on filter / sort changes.
   useEffect(() => {
     setPage(1);
-  }, [debouncedQuery, planFilter, statusFilter, ownerFilter, regionFilter, healthFilter, sort, perPage]);
+  }, [
+    debouncedQuery,
+    planFilter,
+    statusFilter,
+    ownerFilter,
+    regionFilter,
+    healthFilter,
+    sort,
+    perPage,
+  ]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / perPage));
   const safePage = Math.min(page, totalPages);
@@ -339,7 +345,10 @@ export function TenantsListView({ locale }: Props) {
             </span>{' '}
             ta tanlangan
           </span>
-          <span className="hidden sm:inline text-[#62716d] dark:text-[#94a3b8] text-[11px]" aria-hidden="true">
+          <span
+            className="hidden sm:inline text-[#62716d] dark:text-[#94a3b8] text-[11px]"
+            aria-hidden="true"
+          >
             →
           </span>
           <select
@@ -497,7 +506,7 @@ function formatApiError(err: unknown): string {
       const first = Object.values(body.errors)[0];
       if (Array.isArray(first) && first[0]) return first[0];
     }
-    if (err.status === 401 || err.status === 403) return 'Ruxsat yo\'q';
+    if (err.status === 401 || err.status === 403) return "Ruxsat yo'q";
     return `HTTP ${err.status}`;
   }
   return 'Tarmoq xatosi';

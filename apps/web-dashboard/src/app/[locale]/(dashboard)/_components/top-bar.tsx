@@ -61,7 +61,9 @@ export function TopBar({ user, locale }: TopBarProps) {
             <Home className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden="true" />
             <span>{t('home')}</span>
           </Link>
-          <span className="text-[#62716d] dark:text-[#94a3b8] text-[15px] leading-none select-none opacity-60">›</span>
+          <span className="text-[#62716d] dark:text-[#94a3b8] text-[15px] leading-none select-none opacity-60">
+            ›
+          </span>
           <span className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#16221f] dark:text-white">
             <span className="relative flex h-[7px] w-[7px]">
               <span className="absolute inline-flex h-full w-full rounded-full bg-[#0f766e] opacity-50 animate-ping" />

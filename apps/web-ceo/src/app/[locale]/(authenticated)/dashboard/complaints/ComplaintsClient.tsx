@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { PageHeader } from '@/components/layout/page-header';
 import {
-  type Complaint,
+  buildComplaintsQuery,
   type ComplaintFilters,
   type ComplaintRegionsResponse,
   type ComplaintSeverity,
@@ -23,15 +23,13 @@ import {
   type ComplaintStatus,
   type ComplaintSummary,
   type ComplaintsResponse,
-  buildComplaintsQuery,
   ceoFetch,
   ceoMutate,
 } from '@/lib/api';
-import { cn } from '@/lib/cn';
 import { ComplaintDetailDrawer } from './_components/detail-drawer';
-import { ComplaintsTable } from './_components/table';
 import { FilterBar } from './_components/filter-bar';
 import { StatTile } from './_components/stat-tile';
+import { ComplaintsTable } from './_components/table';
 
 const PORTAL_URL = process.env.NEXT_PUBLIC_PORTAL_URL ?? 'http://localhost:3000/panel/portal';
 
@@ -169,11 +167,11 @@ export function ComplaintsClient({ locale }: { locale: string }) {
       if (ids.length === 0) return;
       if (!confirm(t('bulk_confirm', { count: ids.length }))) return;
       try {
-        await ceoMutate<{ data: { touched: number } }>(
-          '/api/v1/ceo/complaints/bulk',
-          'POST',
-          { action, ids, status: status ?? null },
-        );
+        await ceoMutate<{ data: { touched: number } }>('/api/v1/ceo/complaints/bulk', 'POST', {
+          action,
+          ids,
+          status: status ?? null,
+        });
         setSelected(new Set());
         reload();
       } catch {
@@ -333,12 +331,7 @@ function SummaryGrid({
 }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-      <StatTile
-        accent="amber"
-        icon={Inbox}
-        label={t('stat_open')}
-        value={summary?.open ?? 0}
-      />
+      <StatTile accent="amber" icon={Inbox} label={t('stat_open')} value={summary?.open ?? 0} />
       <StatTile
         accent="blue"
         icon={Clock}
@@ -351,12 +344,7 @@ function SummaryGrid({
         label={t('stat_resolved')}
         value={summary?.resolved ?? 0}
       />
-      <StatTile
-        accent="red"
-        icon={Flame}
-        label={t('stat_urgent')}
-        value={summary?.urgent ?? 0}
-      />
+      <StatTile accent="red" icon={Flame} label={t('stat_urgent')} value={summary?.urgent ?? 0} />
       <StatTile
         accent="orange"
         icon={AlertTriangle}
@@ -369,12 +357,7 @@ function SummaryGrid({
         label={t('stat_escalated')}
         value={summary?.escalated ?? 0}
       />
-      <StatTile
-        accent="slate"
-        icon={Filter}
-        label={t('stat_total')}
-        value={summary?.total ?? 0}
-      />
+      <StatTile accent="slate" icon={Filter} label={t('stat_total')} value={summary?.total ?? 0} />
       <StatTile
         accent="teal"
         icon={Search}

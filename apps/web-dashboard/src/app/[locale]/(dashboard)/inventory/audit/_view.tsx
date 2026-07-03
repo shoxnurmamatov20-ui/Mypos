@@ -1,34 +1,23 @@
 'use client';
 
-import {
-  auditSessionsApi,
-  type AuditSession,
-  type AuditStatus,
-} from '@mypos/api-client';
+import { type AuditSession, type AuditStatus, auditSessionsApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
-import {
-  CheckCircle2,
-  ClipboardCheck,
-  ClipboardList,
-  Eye,
-  PlayCircle,
-  Plus,
-} from 'lucide-react';
+import { CheckCircle2, ClipboardCheck, ClipboardList, Eye, PlayCircle, Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { apiClient } from '@/lib/api';
 import { DashStatCard } from '../../_components/stat-card';
 import { AuditSessionDetail } from '../_components/audit-session-detail';
 import { AuditSessionForm } from '../_components/audit-session-form';
+import { formatDateTime, startOfMonth } from '../_components/format';
 import { StatusBadge } from '../_components/status-badge';
 import {
   EmptyState,
   ErrorBanner,
+  primaryBtnClass,
   StatStripSkeleton,
   TableSkeleton,
-  primaryBtnClass,
 } from '../_components/ui-helpers';
-import { formatDateTime, startOfMonth } from '../_components/format';
 
 export function AuditView() {
   const t = useTranslations('inventory');
@@ -53,11 +42,7 @@ export function AuditView() {
     let totalDiscrepancy = 0;
     for (const s of sessions) {
       if (s.status === 'in_progress') inProgress += 1;
-      if (
-        s.status === 'completed' &&
-        s.completed_at &&
-        s.completed_at.slice(0, 10) >= monthStart
-      ) {
+      if (s.status === 'completed' && s.completed_at && s.completed_at.slice(0, 10) >= monthStart) {
         completedMonth += 1;
       }
       totalDiscrepancy += s.discrepancy_count ?? 0;
@@ -96,11 +81,7 @@ export function AuditView() {
       )}
 
       <div className="flex flex-wrap items-center justify-end">
-        <button
-          type="button"
-          onClick={() => setCreating(true)}
-          className={primaryBtnClass}
-        >
+        <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
           <Plus className="h-4 w-4" />
           {t('actions.new_audit')}
         </button>
@@ -115,11 +96,7 @@ export function AuditView() {
           icon={ClipboardCheck}
           title={t('empty.audit')}
           action={
-            <button
-              type="button"
-              onClick={() => setCreating(true)}
-              className={primaryBtnClass}
-            >
+            <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
               <Plus className="h-4 w-4" />
               {t('actions.new_audit')}
             </button>
@@ -203,10 +180,7 @@ export function AuditView() {
       )}
 
       {creating ? (
-        <AuditSessionForm
-          onClose={() => setCreating(false)}
-          onCreated={(id) => setActiveId(id)}
-        />
+        <AuditSessionForm onClose={() => setCreating(false)} onCreated={(id) => setActiveId(id)} />
       ) : null}
       {activeId ? (
         <AuditSessionDetail sessionId={activeId} onClose={() => setActiveId(null)} />

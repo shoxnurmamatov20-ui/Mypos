@@ -1,15 +1,15 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useEffect, useId, useState } from 'react';
 import { toast } from 'sonner';
 import { useSignageStore } from '@/stores/signage';
 import {
   Field,
-  Toggle,
   inputClass,
   primaryBtnClass,
   secondaryBtnClass,
+  Toggle,
 } from '../../settings/_components/settings-ui';
 
 /** Create a new (empty) playlist — name + active. Slides are managed in the editor. */
@@ -39,7 +39,10 @@ export function PlaylistFormDialog({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      onClick={onClose}
+    >
       <div
         role="dialog"
         aria-modal="true"
@@ -52,10 +55,20 @@ export function PlaylistFormDialog({ onClose }: { onClose: () => void }) {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Field label={t('name')}>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required maxLength={80} autoFocus className={inputClass} />
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              maxLength={80}
+              autoFocus
+              className={inputClass}
+            />
           </Field>
           <div className="flex items-center justify-between gap-4 py-1">
-            <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{t('active')}</span>
+            <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+              {t('active')}
+            </span>
             <Toggle checked={isActive} onChange={setIsActive} ariaLabel={t('active')} />
           </div>
           <div className="flex justify-end gap-2 border-t border-[rgba(22,34,31,0.06)] pt-4 dark:border-[rgba(255,255,255,0.05)]">

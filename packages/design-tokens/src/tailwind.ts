@@ -16,12 +16,12 @@
  * ```
  */
 
-import { brand, apple, surface, hairline, text, semantic, status, aiStage } from './colors';
-import { fontWeight, fontSize, lineHeight, letterSpacing, textStyle } from './typography';
-import { spacing, spacingScale } from './spacing';
+import { breakpoint } from './breakpoints';
+import { aiStage, apple, brand, hairline, semantic, status, surface, text } from './colors';
 import { radius } from './radius';
 import { shadow } from './shadows';
-import { breakpoint } from './breakpoints';
+import { spacing, spacingScale } from './spacing';
+import { fontSize, fontWeight, letterSpacing, lineHeight, textStyle } from './typography';
 
 const px = (n: number) => `${n}px`;
 
@@ -108,42 +108,92 @@ export const tailwindPreset = {
 
     // ─── Typography (SF Pro Display + SF Pro Text + Mono) ──────────────
     fontFamily: {
-      sans: ['SF Pro Text', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-      display: ['SF Pro Display', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+      sans: [
+        'SF Pro Text',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        'Segoe UI',
+        'Roboto',
+        'sans-serif',
+      ],
+      display: [
+        'SF Pro Display',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        'Segoe UI',
+        'Roboto',
+        'sans-serif',
+      ],
       mono: ['SF Mono', 'JetBrains Mono', 'ui-monospace', 'Menlo', 'Monaco', 'monospace'],
     },
 
     /** Apple's exact font-size ladder, paired with line-height + tracking */
     fontSize: {
-      'micro-legal': [px(fontSize.microLegal), { lineHeight: '1.30', letterSpacing: '-0.08px', fontWeight: '400' }],
-      'fine-print': [px(fontSize.finePrint), { lineHeight: '1.0', letterSpacing: '-0.12px', fontWeight: '400' }],
-      'nav-link': [px(fontSize.navLink), { lineHeight: '1.0', letterSpacing: '-0.12px', fontWeight: '400' }],
-      caption: [px(fontSize.caption), { lineHeight: '1.43', letterSpacing: '-0.224px', fontWeight: '400' }],
-      'caption-strong': [px(fontSize.caption), { lineHeight: '1.29', letterSpacing: '-0.224px', fontWeight: '600' }],
-      body: [px(fontSize.body), { lineHeight: '1.47', letterSpacing: '-0.374px', fontWeight: '400' }],
-      'body-strong': [px(fontSize.bodyStrong), { lineHeight: '1.24', letterSpacing: '-0.374px', fontWeight: '600' }],
+      'micro-legal': [
+        px(fontSize.microLegal),
+        { lineHeight: '1.30', letterSpacing: '-0.08px', fontWeight: '400' },
+      ],
+      'fine-print': [
+        px(fontSize.finePrint),
+        { lineHeight: '1.0', letterSpacing: '-0.12px', fontWeight: '400' },
+      ],
+      'nav-link': [
+        px(fontSize.navLink),
+        { lineHeight: '1.0', letterSpacing: '-0.12px', fontWeight: '400' },
+      ],
+      caption: [
+        px(fontSize.caption),
+        { lineHeight: '1.43', letterSpacing: '-0.224px', fontWeight: '400' },
+      ],
+      'caption-strong': [
+        px(fontSize.caption),
+        { lineHeight: '1.29', letterSpacing: '-0.224px', fontWeight: '600' },
+      ],
+      body: [
+        px(fontSize.body),
+        { lineHeight: '1.47', letterSpacing: '-0.374px', fontWeight: '400' },
+      ],
+      'body-strong': [
+        px(fontSize.bodyStrong),
+        { lineHeight: '1.24', letterSpacing: '-0.374px', fontWeight: '600' },
+      ],
       'button-large': [px(fontSize.buttonLarge), { lineHeight: '1.0', fontWeight: '300' }],
-      tagline: [px(fontSize.tagline), { lineHeight: '1.19', letterSpacing: '0.231px', fontWeight: '600' }],
+      tagline: [
+        px(fontSize.tagline),
+        { lineHeight: '1.19', letterSpacing: '0.231px', fontWeight: '600' },
+      ],
       'lead-airy': [px(fontSize.leadAiry), { lineHeight: '1.50', fontWeight: '300' }],
-      lead: [px(fontSize.lead), { lineHeight: '1.14', letterSpacing: '0.196px', fontWeight: '400' }],
-      'display-md': [px(fontSize.displayMd), { lineHeight: '1.47', letterSpacing: '-0.374px', fontWeight: '600' }],
-      'display-lg': [px(fontSize.displayLg), { lineHeight: '1.10', letterSpacing: '0', fontWeight: '600' }],
-      'hero-display': [px(fontSize.heroDisplay), { lineHeight: '1.07', letterSpacing: '-0.28px', fontWeight: '600' }],
+      lead: [
+        px(fontSize.lead),
+        { lineHeight: '1.14', letterSpacing: '0.196px', fontWeight: '400' },
+      ],
+      'display-md': [
+        px(fontSize.displayMd),
+        { lineHeight: '1.47', letterSpacing: '-0.374px', fontWeight: '600' },
+      ],
+      'display-lg': [
+        px(fontSize.displayLg),
+        { lineHeight: '1.10', letterSpacing: '0', fontWeight: '600' },
+      ],
+      'hero-display': [
+        px(fontSize.heroDisplay),
+        { lineHeight: '1.07', letterSpacing: '-0.28px', fontWeight: '600' },
+      ],
     },
 
     fontWeight: {
-      light: String(fontWeight.light),         // 300
-      regular: String(fontWeight.regular),     // 400
-      semibold: String(fontWeight.semibold),   // 600
-      bold: String(fontWeight.bold),           // 700
+      light: String(fontWeight.light), // 300
+      regular: String(fontWeight.regular), // 400
+      semibold: String(fontWeight.semibold), // 600
+      bold: String(fontWeight.bold), // 700
       // Note: 500 deliberately absent (Apple's discipline)
     },
 
     lineHeight: Object.fromEntries(Object.entries(lineHeight).map(([k, v]) => [k, String(v)])),
 
-    letterSpacing: Object.fromEntries(
-      Object.entries(letterSpacing).map(([k, v]) => [k, `${v}px`])
-    ),
+    letterSpacing: Object.fromEntries(Object.entries(letterSpacing).map(([k, v]) => [k, `${v}px`])),
 
     // ─── Spacing (Apple's 8px base + 17px md) ──────────────────────────
     spacing: {
@@ -153,31 +203,31 @@ export const tailwindPreset = {
       xxs: px(spacing.xxs),
       xs: px(spacing.xs),
       sm: px(spacing.sm),
-      md: px(spacing.md),                          // 17px — Apple signature
+      md: px(spacing.md), // 17px — Apple signature
       lg: px(spacing.lg),
       xl: px(spacing.xl),
       xxl: px(spacing.xxl),
-      'section-tight': px(spacing.sectionTight),   // 64px — footers, dense utility
-      section: px(spacing.section),                // 80px — Apple tile rhythm
+      'section-tight': px(spacing.sectionTight), // 64px — footers, dense utility
+      section: px(spacing.section), // 80px — Apple tile rhythm
     },
 
     // ─── Border Radius (Apple's discipline) ────────────────────────────
     borderRadius: {
       none: '0',
-      xs: px(radius.xs),       // 5px
-      sm: px(radius.sm),       // 8px — dark utility buttons
-      md: px(radius.md),       // 11px — pearl button
+      xs: px(radius.xs), // 5px
+      sm: px(radius.sm), // 8px — dark utility buttons
+      md: px(radius.md), // 11px — pearl button
       pearl: px(radius.pearl), // 11px — alias for md (Apple's "Pearl Button")
-      lg: px(radius.lg),       // 18px — utility cards
-      card: px(radius.card),   // 18px — alias for lg
-      pill: '9999px',          // PRIMARY CTAS — Apple's signature pill
+      lg: px(radius.lg), // 18px — utility cards
+      card: px(radius.card), // 18px — alias for lg
+      pill: '9999px', // PRIMARY CTAS — Apple's signature pill
       full: '9999px',
     },
 
     // ─── Shadows (Apple's discipline — minimal) ────────────────────────
     boxShadow: {
       none: 'none',
-      product: shadow.product,           // THE single drop-shadow (product imagery only)
+      product: shadow.product, // THE single drop-shadow (product imagery only)
       'hairline-ring': shadow.hairlineRing,
       'pearl-ring': shadow.pearlRing,
       focus: shadow.focus,
@@ -251,7 +301,7 @@ export const tailwindPreset = {
 
       // Apple's signature press scale — utility for `active:scale-95`
       scale: {
-        '95': '0.95',  // Apple's exact press transform
+        '95': '0.95', // Apple's exact press transform
       },
     },
   },

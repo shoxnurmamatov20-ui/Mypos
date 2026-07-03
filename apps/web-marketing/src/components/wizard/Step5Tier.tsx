@@ -69,10 +69,7 @@ export function Step5Tier() {
       aria-labelledby="step5-title"
       className="rounded-card border border-hairline-soft bg-canvas p-lg shadow-hairline-ring sm:p-xl"
     >
-      <h2
-        id="step5-title"
-        className="font-display font-semibold text-display-sm text-ink"
-      >
+      <h2 id="step5-title" className="font-display font-semibold text-display-sm text-ink">
         {t('title')}
       </h2>
       <p className="mt-xs text-caption text-ink-muted-80">{t('subtitle')}</p>
@@ -90,7 +87,10 @@ export function Step5Tier() {
       </div>
 
       {localError && (
-        <p role="alert" className="mt-md rounded-pearl bg-error-soft px-md py-xs text-caption text-error">
+        <p
+          role="alert"
+          className="mt-md rounded-pearl bg-error-soft px-md py-xs text-caption text-error"
+        >
           {tErr(localError)}
         </p>
       )}

@@ -146,9 +146,7 @@ export function ComplaintsTable({
                 <td className="px-3 py-2.5">
                   <select
                     value={c.status}
-                    onChange={(e) =>
-                      onInlineStatus(c.id, e.target.value as ComplaintStatus)
-                    }
+                    onChange={(e) => onInlineStatus(c.id, e.target.value as ComplaintStatus)}
                     className={cn(
                       'h-7 rounded-full px-2 text-[11px] font-semibold border-0',
                       STATUS_TONE[c.status] ?? STATUS_TONE.open,
@@ -168,10 +166,7 @@ export function ComplaintsTable({
                   ) : null}
                 </td>
                 <td className="px-3 py-2.5 text-[#16221f] dark:text-white">
-                  <div
-                    className="text-[12px] line-clamp-2 max-w-[280px]"
-                    title={c.summary ?? ''}
-                  >
+                  <div className="text-[12px] line-clamp-2 max-w-[280px]" title={c.summary ?? ''}>
                     {c.summary ?? '—'}
                   </div>
                 </td>

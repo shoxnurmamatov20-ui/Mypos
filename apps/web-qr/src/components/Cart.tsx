@@ -1,7 +1,7 @@
 'use client';
 
+import { type Currency, formatMoney, type Locale as UtilsLocale } from '@mypos/utils';
 import { ShoppingBag } from 'lucide-react';
-import { formatMoney, type Currency, type Locale as UtilsLocale } from '@mypos/utils';
 import { type Locale, translate } from '@/lib/i18n';
 import { useCartStore } from '@/stores/cart';
 

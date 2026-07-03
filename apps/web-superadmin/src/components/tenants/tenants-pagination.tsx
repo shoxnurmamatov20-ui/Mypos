@@ -104,10 +104,18 @@ export function TenantsPagination({
         <span className="text-[#62716d] dark:text-[#94a3b8] text-[11px] font-semibold">
           / <span className="tabular-nums">{totalPages}</span>
         </span>
-        <PaginateButton onClick={() => commit(page + 1)} disabled={page >= totalPages} title="Keyingi">
+        <PaginateButton
+          onClick={() => commit(page + 1)}
+          disabled={page >= totalPages}
+          title="Keyingi"
+        >
           <ChevronRight className="w-3 h-3" strokeWidth={2.5} aria-hidden="true" />
         </PaginateButton>
-        <PaginateButton onClick={() => commit(totalPages)} disabled={page >= totalPages} title="Oxiri">
+        <PaginateButton
+          onClick={() => commit(totalPages)}
+          disabled={page >= totalPages}
+          title="Oxiri"
+        >
           <ChevronsRight className="w-3 h-3" strokeWidth={2.5} aria-hidden="true" />
         </PaginateButton>
       </div>

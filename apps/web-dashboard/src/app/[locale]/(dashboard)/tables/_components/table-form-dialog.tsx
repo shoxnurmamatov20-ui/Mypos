@@ -2,11 +2,11 @@
 
 import {
   ApiError,
-  tablesApi,
   type Table,
   type TableCategory,
   type TableShape,
   type TableStatus,
+  tablesApi,
 } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -36,14 +36,10 @@ export function TableFormDialog({
   const [status, setStatus] = useState<TableStatus>(table?.status ?? 'available');
   const [shape, setShape] = useState<TableShape>(table?.shape ?? 'round');
   const [positionX, setPositionX] = useState<string>(
-    table?.position_x !== null && table?.position_x !== undefined
-      ? String(table.position_x)
-      : '',
+    table?.position_x !== null && table?.position_x !== undefined ? String(table.position_x) : '',
   );
   const [positionY, setPositionY] = useState<string>(
-    table?.position_y !== null && table?.position_y !== undefined
-      ? String(table.position_y)
-      : '',
+    table?.position_y !== null && table?.position_y !== undefined ? String(table.position_y) : '',
   );
   const [submitting, setSubmitting] = useState(false);
 
@@ -209,7 +205,9 @@ export function TableFormDialog({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{label}</span>
+      <span className="mb-1 block text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+        {label}
+      </span>
       {children}
     </label>
   );

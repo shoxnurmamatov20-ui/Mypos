@@ -9,12 +9,48 @@ import {
 import { useTranslations } from 'next-intl';
 
 const FEATURES = [
-  { key: 'pos',       Icon: Desktop,          ring: 'ring-[rgba(20,184,166,0.30)]', bg: 'bg-[rgba(20,184,166,0.15)]', color: 'text-[#14b8a6]' },
-  { key: 'kds',       Icon: Monitor,          ring: 'ring-blue-400/30',             bg: 'bg-blue-500/10',     color: 'text-blue-400' },
-  { key: 'qr_menu',   Icon: QrCode,           ring: 'ring-emerald-400/30',          bg: 'bg-emerald-500/10',  color: 'text-emerald-400' },
-  { key: 'analytics', Icon: ChartLine,        ring: 'ring-amber-400/30',            bg: 'bg-amber-500/10',    color: 'text-amber-400' },
-  { key: 'ai',        Icon: ChatTeardropText, ring: 'ring-purple-400/30',           bg: 'bg-purple-500/10',   color: 'text-purple-400' },
-  { key: 'telegram',  Icon: CreditCard,       ring: 'ring-cyan-400/30',             bg: 'bg-cyan-500/10',     color: 'text-cyan-400' },
+  {
+    key: 'pos',
+    Icon: Desktop,
+    ring: 'ring-[rgba(20,184,166,0.30)]',
+    bg: 'bg-[rgba(20,184,166,0.15)]',
+    color: 'text-[#14b8a6]',
+  },
+  {
+    key: 'kds',
+    Icon: Monitor,
+    ring: 'ring-blue-400/30',
+    bg: 'bg-blue-500/10',
+    color: 'text-blue-400',
+  },
+  {
+    key: 'qr_menu',
+    Icon: QrCode,
+    ring: 'ring-emerald-400/30',
+    bg: 'bg-emerald-500/10',
+    color: 'text-emerald-400',
+  },
+  {
+    key: 'analytics',
+    Icon: ChartLine,
+    ring: 'ring-amber-400/30',
+    bg: 'bg-amber-500/10',
+    color: 'text-amber-400',
+  },
+  {
+    key: 'ai',
+    Icon: ChatTeardropText,
+    ring: 'ring-purple-400/30',
+    bg: 'bg-purple-500/10',
+    color: 'text-purple-400',
+  },
+  {
+    key: 'telegram',
+    Icon: CreditCard,
+    ring: 'ring-cyan-400/30',
+    bg: 'bg-cyan-500/10',
+    color: 'text-cyan-400',
+  },
 ] as const;
 
 /** Always-dark feature grid section on the deep teal canvas. */

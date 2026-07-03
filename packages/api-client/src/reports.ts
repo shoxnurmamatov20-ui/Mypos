@@ -1,6 +1,6 @@
 import type { MyPosApiClient } from './client';
 import type { PaginatedResponse } from './menu';
-import type { OrderStatus, OrderType, OrderPaymentStatus } from './orders';
+import type { OrderPaymentStatus, OrderStatus, OrderType } from './orders';
 
 /**
  * Reports module — read-only aggregations consumed by manager / dashboard
@@ -247,7 +247,16 @@ export type MenuItemsReportResponse = {
 
 export type MenuItemsReportParams = DateRangeParams & {
   category_id?: string;
-  sort?: '-revenue' | '-quantity' | '-profit' | '-cancelled' | 'revenue' | 'quantity' | 'profit' | 'cancelled' | string;
+  sort?:
+    | '-revenue'
+    | '-quantity'
+    | '-profit'
+    | '-cancelled'
+    | 'revenue'
+    | 'quantity'
+    | 'profit'
+    | 'cancelled'
+    | string;
 };
 
 // ─── Cancelled Report ──────────────────────────────────────────────────────
@@ -366,10 +375,7 @@ const toQueryString = (
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 // ─── API ───────────────────────────────────────────────────────────────────

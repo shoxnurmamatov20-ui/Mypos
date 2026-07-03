@@ -120,9 +120,7 @@ export function Sidebar() {
               {group.items.map(({ id, href, icon: Icon }) => {
                 const fullHref = `/${locale}/${href}` as Route;
                 const isActive =
-                  href === 'overview'
-                    ? pathname === fullHref
-                    : pathname.startsWith(fullHref);
+                  href === 'overview' ? pathname === fullHref : pathname.startsWith(fullHref);
                 return (
                   <Link
                     key={id}

@@ -1,7 +1,7 @@
 'use client';
 
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { useTheme } from 'next-themes';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { MOCK_SENTIMENT } from '@/data/mock-feedback';
 
 /**
@@ -72,7 +72,8 @@ export function SentimentDonutCard() {
                 />
                 <span className="text-[11px] text-[#62716d] dark:text-[#94a3b8]">{s.label}</span>
                 <span className="text-[12px] font-bold text-[#16221f] dark:text-white tabular-nums">
-                  {s.count} <span className="text-[#62716d] dark:text-[#94a3b8] font-medium">({pct}%)</span>
+                  {s.count}{' '}
+                  <span className="text-[#62716d] dark:text-[#94a3b8] font-medium">({pct}%)</span>
                 </span>
               </div>
             );

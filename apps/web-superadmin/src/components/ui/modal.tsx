@@ -1,7 +1,7 @@
 'use client';
 
 import { X } from 'lucide-react';
-import { useEffect, type ReactNode } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { cn } from '@/lib/cn';
 
 type ModalProps = {
@@ -26,14 +26,7 @@ const SIZE_CLASS: Record<NonNullable<ModalProps['size']>, string> = {
  * card with a close button and `Esc` to dismiss. Locks body scroll
  * while open so background scrolling doesn't bleed through.
  */
-export function Modal({
-  open,
-  onClose,
-  title,
-  description,
-  children,
-  size = 'md',
-}: ModalProps) {
+export function Modal({ open, onClose, title, description, children, size = 'md' }: ModalProps) {
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
@@ -82,9 +75,7 @@ export function Modal({
               {title}
             </h2>
             {description ? (
-              <p className="mt-0.5 text-[11px] text-[#62716d] dark:text-[#94a3b8]">
-                {description}
-              </p>
+              <p className="mt-0.5 text-[11px] text-[#62716d] dark:text-[#94a3b8]">{description}</p>
             ) : null}
           </div>
           <button

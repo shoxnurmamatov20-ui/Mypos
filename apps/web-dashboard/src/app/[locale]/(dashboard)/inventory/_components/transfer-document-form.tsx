@@ -1,9 +1,9 @@
 'use client';
 
 import {
-  transferDocumentsApi,
   type CreateTransferDocumentInput,
   type Ingredient,
+  transferDocumentsApi,
 } from '@mypos/api-client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, Plus, Trash2 } from 'lucide-react';
@@ -13,12 +13,7 @@ import { toast } from 'sonner';
 import { apiClient } from '@/lib/api';
 import { DocDetailModal } from './doc-detail-modal';
 import { IngredientSearch } from './ingredient-search';
-import {
-  inputClass,
-  labelClass,
-  primaryBtnClass,
-  secondaryBtnClass,
-} from './ui-helpers';
+import { inputClass, labelClass, primaryBtnClass, secondaryBtnClass } from './ui-helpers';
 import { WarehouseSelect } from './warehouse-select';
 
 type Row = {
@@ -192,9 +187,7 @@ export function TransferDocumentForm({ onClose }: { onClose: () => void }) {
                 className="grid grid-cols-12 items-end gap-2 rounded-lg border border-[rgba(22,34,31,0.06)] bg-[#fafbfa] p-3 dark:border-[rgba(255,255,255,0.05)] dark:bg-[#0d1424]"
               >
                 <div className="col-span-12 md:col-span-6">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.ingredient') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.ingredient') : ''}</label>
                   <IngredientSearch
                     value={row.ingredient?.id ?? ''}
                     onChange={(ing) => updateRow(row.id, { ingredient: ing })}
@@ -202,9 +195,7 @@ export function TransferDocumentForm({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div className="col-span-6 md:col-span-2">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.quantity') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.quantity') : ''}</label>
                   <input
                     type="number"
                     step="0.001"
@@ -215,9 +206,7 @@ export function TransferDocumentForm({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div className="col-span-4 md:col-span-3">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.notes') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.notes') : ''}</label>
                   <input
                     type="text"
                     value={row.notes}

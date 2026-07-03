@@ -4,8 +4,8 @@ import { Settings } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/cn';
 import type { PlatformSettings } from '@/lib/api-helpers';
+import { cn } from '@/lib/cn';
 import { Field, SETTINGS_SELECT_CLASS, SettingsSection } from './settings-section';
 
 type Plan = 'free' | 'starter' | 'pro' | 'business' | 'enterprise';
@@ -180,9 +180,7 @@ export function GeneralSection({ settings, isLoading = false, onSave }: Props) {
           min={0}
           max={90}
           value={form.trial_days}
-          onChange={(e) =>
-            set('trial_days', Math.max(0, Number.parseInt(e.target.value, 10) || 0))
-          }
+          onChange={(e) => set('trial_days', Math.max(0, Number.parseInt(e.target.value, 10) || 0))}
           className={cn('w-full sm:max-w-[160px] tabular-nums')}
         />
       </Field>
@@ -233,10 +231,7 @@ function SectionSkeleton({ id }: { id: string }) {
       </div>
       <div className="space-y-3 pt-2">
         {Array.from({ length: 5 }, (_, idx) => (
-          <div
-            key={idx}
-            className="h-9 rounded animate-pulse bg-gray-200 dark:bg-gray-800"
-          />
+          <div key={idx} className="h-9 rounded animate-pulse bg-gray-200 dark:bg-gray-800" />
         ))}
       </div>
     </div>

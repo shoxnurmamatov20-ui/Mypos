@@ -23,30 +23,96 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 /** Feature × plan availability — true / false / 'limited'. */
 type Cell = boolean | 'limited';
-const FEATURES: ReadonlyArray<{ key: string; label: string; free: Cell; starter: Cell; pro: Cell; business: Cell }> = [
-  { key: 'pos',           label: 'POS terminal',          free: true,       starter: true,  pro: true,  business: true  },
-  { key: 'kds',           label: 'KDS oshxona ekrani',    free: false,      starter: true,  pro: true,  business: true  },
-  { key: 'qr',            label: 'QR menyu',              free: false,      starter: false, pro: true,  business: true  },
-  { key: 'tg',            label: 'Telegram bot',          free: false,      starter: false, pro: true,  business: true  },
-  { key: 'inv',           label: 'Inventar boshqaruvi',   free: false,      starter: 'limited', pro: true, business: true },
-  { key: 'loyalty',       label: 'Loyallik dasturi',      free: false,      starter: false, pro: true,  business: true  },
-  { key: 'multi',         label: 'Ko\'p filial',          free: false,      starter: false, pro: 'limited', business: true },
-  { key: 'ai',            label: 'AI yordamchi',          free: false,      starter: false, pro: false, business: true  },
-  { key: 'api',           label: 'API kirish',            free: false,      starter: false, pro: false, business: true  },
-  { key: 'support',       label: '24/7 ustuvor qo\'llab', free: false,      starter: false, pro: true,  business: true  },
-  { key: 'click',         label: 'Click va Payme',        free: true,       starter: true,  pro: true,  business: true  },
-  { key: 'report',        label: 'Hisobotlar',            free: 'limited', starter: true,  pro: true,  business: true  },
+const FEATURES: ReadonlyArray<{
+  key: string;
+  label: string;
+  free: Cell;
+  starter: Cell;
+  pro: Cell;
+  business: Cell;
+}> = [
+  { key: 'pos', label: 'POS terminal', free: true, starter: true, pro: true, business: true },
+  {
+    key: 'kds',
+    label: 'KDS oshxona ekrani',
+    free: false,
+    starter: true,
+    pro: true,
+    business: true,
+  },
+  { key: 'qr', label: 'QR menyu', free: false, starter: false, pro: true, business: true },
+  { key: 'tg', label: 'Telegram bot', free: false, starter: false, pro: true, business: true },
+  {
+    key: 'inv',
+    label: 'Inventar boshqaruvi',
+    free: false,
+    starter: 'limited',
+    pro: true,
+    business: true,
+  },
+  {
+    key: 'loyalty',
+    label: 'Loyallik dasturi',
+    free: false,
+    starter: false,
+    pro: true,
+    business: true,
+  },
+  {
+    key: 'multi',
+    label: "Ko'p filial",
+    free: false,
+    starter: false,
+    pro: 'limited',
+    business: true,
+  },
+  { key: 'ai', label: 'AI yordamchi', free: false, starter: false, pro: false, business: true },
+  { key: 'api', label: 'API kirish', free: false, starter: false, pro: false, business: true },
+  {
+    key: 'support',
+    label: "24/7 ustuvor qo'llab",
+    free: false,
+    starter: false,
+    pro: true,
+    business: true,
+  },
+  { key: 'click', label: 'Click va Payme', free: true, starter: true, pro: true, business: true },
+  { key: 'report', label: 'Hisobotlar', free: 'limited', starter: true, pro: true, business: true },
 ];
 
 const FAQ: ReadonlyArray<{ q: string; a: string }> = [
-  { q: 'Bepul trial qancha davom etadi?',       a: '14 kun to\'liq imkoniyatlar bilan. Kredit karta kerak emas.' },
-  { q: 'Tarifni o\'zgartirib bo\'ladimi?',      a: 'Ha — istalgan vaqtda yuqori yoki past tarifga o\'tasiz. Pro-rata hisobi qilinadi.' },
-  { q: 'Qaysi to\'lov usullari qabul qilinadi?', a: 'Click, Payme, Uzcard, Humo va Visa/Mastercard. Yuridik shaxslar uchun bank o\'tkazmasi.' },
-  { q: 'Yashirin to\'lovlar bormi?',            a: 'Yo\'q. Yulduz bilan belgilangan barcha narxlar yakuniy. SMS, eksport va to\'lov komissiyalari shaffof.' },
-  { q: 'Internet uzilsa qanday ishlaydi?',      a: 'POS terminal offline rejimda ishlay oladi. Internet qaytganda ma\'lumotlar avtomatik sinxronlanadi.' },
-  { q: 'Mavjud Excel/1C ma\'lumotlarimni ko\'chiramanmi?', a: 'Ha. Excel/CSV importi mavjud, 1C uchun maxsus migration utility. Demo qo\'ng\'irog\'ida yordam beramiz.' },
-  { q: 'Restoran necha xodim bilan ishlashi mumkin?', a: 'Tarifga qarab: Free 2, Starter 10, Pro 30, Business 100. Cheksiz xodim — Korxonaviy tarif.' },
-  { q: 'Bekor qilsam ma\'lumotlar yo\'qoladimi?', a: 'Yo\'q. 90 kun davomida to\'liq eksport qilish mumkin. CSV, JSON yoki PDF formatda yuklab oling.' },
+  {
+    q: 'Bepul trial qancha davom etadi?',
+    a: "14 kun to'liq imkoniyatlar bilan. Kredit karta kerak emas.",
+  },
+  {
+    q: "Tarifni o'zgartirib bo'ladimi?",
+    a: "Ha — istalgan vaqtda yuqori yoki past tarifga o'tasiz. Pro-rata hisobi qilinadi.",
+  },
+  {
+    q: "Qaysi to'lov usullari qabul qilinadi?",
+    a: "Click, Payme, Uzcard, Humo va Visa/Mastercard. Yuridik shaxslar uchun bank o'tkazmasi.",
+  },
+  {
+    q: "Yashirin to'lovlar bormi?",
+    a: "Yo'q. Yulduz bilan belgilangan barcha narxlar yakuniy. SMS, eksport va to'lov komissiyalari shaffof.",
+  },
+  {
+    q: 'Internet uzilsa qanday ishlaydi?',
+    a: "POS terminal offline rejimda ishlay oladi. Internet qaytganda ma'lumotlar avtomatik sinxronlanadi.",
+  },
+  {
+    q: "Mavjud Excel/1C ma'lumotlarimni ko'chiramanmi?",
+    a: "Ha. Excel/CSV importi mavjud, 1C uchun maxsus migration utility. Demo qo'ng'irog'ida yordam beramiz.",
+  },
+  {
+    q: 'Restoran necha xodim bilan ishlashi mumkin?',
+    a: 'Tarifga qarab: Free 2, Starter 10, Pro 30, Business 100. Cheksiz xodim — Korxonaviy tarif.',
+  },
+  {
+    q: "Bekor qilsam ma'lumotlar yo'qoladimi?",
+    a: "Yo'q. 90 kun davomida to'liq eksport qilish mumkin. CSV, JSON yoki PDF formatda yuklab oling.",
+  },
 ];
 
 export default async function PricingPage({ params }: Props) {
@@ -241,9 +307,7 @@ function CellTd({ value, featured = false }: { value: Cell; featured?: boolean }
   return (
     <td
       className={
-        featured
-          ? 'px-3 py-3 text-center bg-[rgba(255,0,55,0.04)]'
-          : 'px-3 py-3 text-center'
+        featured ? 'px-3 py-3 text-center bg-[rgba(255,0,55,0.04)]' : 'px-3 py-3 text-center'
       }
     >
       {value === true ? (

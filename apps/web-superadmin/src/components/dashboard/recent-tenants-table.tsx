@@ -6,17 +6,17 @@ import Link from 'next/link';
 import type { TenantSummary } from '@/types/super-admin';
 
 const STATUS_STYLE: Record<string, { color: string; label: string }> = {
-  active:    { color: '#10b981', label: 'Faol' },
-  trialing:  { color: '#3b82f6', label: 'Sinov' },
-  past_due:  { color: '#f59e0b', label: 'Kechikdi' },
-  suspended: { color: '#ef4444', label: 'To\'xtatilgan' },
+  active: { color: '#10b981', label: 'Faol' },
+  trialing: { color: '#3b82f6', label: 'Sinov' },
+  past_due: { color: '#f59e0b', label: 'Kechikdi' },
+  suspended: { color: '#ef4444', label: "To'xtatilgan" },
 };
 
 const PLAN_STYLE: Record<string, { color: string; label: string }> = {
-  free:       { color: '#94a3b8', label: 'Free' },
-  starter:    { color: '#60a5fa', label: 'Starter' },
-  pro:        { color: '#3b82f6', label: 'Pro' },
-  business:   { color: '#8b5cf6', label: 'Business' },
+  free: { color: '#94a3b8', label: 'Free' },
+  starter: { color: '#60a5fa', label: 'Starter' },
+  pro: { color: '#3b82f6', label: 'Pro' },
+  business: { color: '#8b5cf6', label: 'Business' },
   enterprise: { color: '#ec4899', label: 'Enterprise' },
 };
 
@@ -68,7 +68,10 @@ export function RecentTenantsTable({ tenants, locale }: Props) {
 
       {isEmpty ? (
         <div className="px-4 py-12 text-center">
-          <Building2 className="w-8 h-8 mx-auto mb-2 text-gray-300 dark:text-gray-700" strokeWidth={1.5} />
+          <Building2
+            className="w-8 h-8 mx-auto mb-2 text-gray-300 dark:text-gray-700"
+            strokeWidth={1.5}
+          />
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Tenant yo&apos;q</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
             Yangi tenant qo&apos;shilganda bu yerda ko&apos;rinadi
@@ -140,11 +143,21 @@ export function RecentTenantsTable({ tenants, locale }: Props) {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-y border-gray-100 dark:border-[rgba(255,255,255,0.06)] text-left text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide bg-gray-50 dark:bg-[#1a2235]">
-                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium">Nomi</th>
-                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium">Tarif</th>
-                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium">Holat</th>
-                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium">Buyurtma</th>
-                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium hidden lg:table-cell">Daromad</th>
+                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium">
+                    Nomi
+                  </th>
+                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium">
+                    Tarif
+                  </th>
+                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium">
+                    Holat
+                  </th>
+                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium">
+                    Buyurtma
+                  </th>
+                  <th scope="col" className="px-4 lg:px-6 py-2.5 font-medium hidden lg:table-cell">
+                    Daromad
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50 dark:divide-[rgba(255,255,255,0.06)]">
@@ -168,7 +181,9 @@ export function RecentTenantsTable({ tenants, locale }: Props) {
                             <p className="text-gray-900 dark:text-white font-medium truncate text-xs">
                               {tn.name}
                             </p>
-                            <p className="text-gray-400 dark:text-gray-500 text-xs truncate">{tn.slug}</p>
+                            <p className="text-gray-400 dark:text-gray-500 text-xs truncate">
+                              {tn.slug}
+                            </p>
                           </div>
                         </div>
                       </td>
@@ -197,7 +212,9 @@ export function RecentTenantsTable({ tenants, locale }: Props) {
                             {statusStyle.label}
                           </span>
                         ) : (
-                          <span className="text-gray-500 dark:text-gray-400 text-xs">{tn.status}</span>
+                          <span className="text-gray-500 dark:text-gray-400 text-xs">
+                            {tn.status}
+                          </span>
                         )}
                       </td>
                       <td className="px-4 lg:px-6 py-3 text-gray-700 dark:text-gray-300 tabular-nums text-xs">

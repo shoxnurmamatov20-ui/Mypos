@@ -54,10 +54,7 @@ export function Topbar() {
     >
       <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 lg:px-6 gap-3">
         {/* Breadcrumbs — hidden on mobile, visible from md+ */}
-        <nav
-          aria-label="Breadcrumb"
-          className="hidden md:flex items-center gap-1 min-w-0"
-        >
+        <nav aria-label="Breadcrumb" className="hidden md:flex items-center gap-1 min-w-0">
           <Link
             href={`/${locale}/dashboard` as Route}
             className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white font-semibold text-xs transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900"
@@ -71,10 +68,7 @@ export function Topbar() {
             strokeWidth={2}
           />
           <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-900 dark:text-white min-w-0">
-            <span
-              className="relative flex h-[7px] w-[7px] shrink-0"
-              aria-hidden="true"
-            >
+            <span className="relative flex h-[7px] w-[7px] shrink-0" aria-hidden="true">
               <span className="absolute inline-flex h-full w-full rounded-full bg-teal-600 dark:bg-teal-400 opacity-50 animate-ping" />
               <span className="relative inline-flex rounded-full h-[7px] w-[7px] bg-teal-700 dark:bg-teal-400 ring-[3px] ring-teal-500/10 dark:ring-teal-400/15" />
             </span>

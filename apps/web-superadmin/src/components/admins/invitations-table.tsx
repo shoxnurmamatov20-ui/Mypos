@@ -1,17 +1,10 @@
 'use client';
 
 import { format, formatDistanceToNow } from 'date-fns';
-import {
-  CheckCircle2,
-  CircleSlash,
-  Clock,
-  Trash2,
-  XCircle,
-  type LucideIcon,
-} from 'lucide-react';
+import { CheckCircle2, CircleSlash, Clock, type LucideIcon, Trash2, XCircle } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/cn';
 import type { InvitationRecord } from '@/lib/api-helpers';
+import { cn } from '@/lib/cn';
 import type { SuperAdminRole } from '@/stores/auth';
 import { RoleBadge } from './role-badge';
 

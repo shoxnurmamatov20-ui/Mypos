@@ -1,7 +1,8 @@
-export { Button } from './button';
 export type { ButtonProps, ButtonSize, ButtonVariant } from './button';
-export { Modal } from './modal';
+export { Button } from './button';
 export type { ModalProps, ModalSize } from './modal';
+export { Modal } from './modal';
+export type { SkeletonProps } from './skeleton';
 export {
   CartLineSkeleton,
   ListSkeleton,
@@ -11,4 +12,3 @@ export {
   RestaurantGridSkeleton,
   Skeleton,
 } from './skeleton';
-export type { SkeletonProps } from './skeleton';

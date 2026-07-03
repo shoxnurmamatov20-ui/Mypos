@@ -3,12 +3,12 @@
 import { format } from 'date-fns';
 import { ChevronLeft, ChevronRight, Inbox, Loader2 } from 'lucide-react';
 import type { Route } from 'next';
-import { useRouter, useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { PlanBadge, StatusBadge } from '@/components/dashboard/badges';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/cn';
 import type { SubscriptionRow } from '@/data/mock-billing';
+import { cn } from '@/lib/cn';
 import { formatNumber, formatUZS } from '@/lib/format';
 import type { TenantPlan, TenantStatus } from '@/types/super-admin';
 
@@ -106,9 +106,7 @@ export function SubscriptionsTable({
   return (
     <Card className="p-4 md:p-5">
       <CardHeader className="mb-4 flex-col md:flex-row gap-3 items-start md:items-center">
-        <CardTitle hint={t('subscriptions_subtitle')}>
-          {t('subscriptions_title')}
-        </CardTitle>
+        <CardTitle hint={t('subscriptions_subtitle')}>{t('subscriptions_title')}</CardTitle>
         {!compact ? (
           <div className="flex flex-col sm:flex-row flex-wrap gap-2 w-full md:w-auto md:ml-auto">
             <select
@@ -155,12 +153,7 @@ export function SubscriptionsTable({
             />
           </div>
         ) : null}
-        <table
-          className={cn(
-            'w-full text-sm',
-            compact ? 'min-w-[520px]' : 'min-w-[760px]',
-          )}
-        >
+        <table className={cn('w-full text-sm', compact ? 'min-w-[520px]' : 'min-w-[760px]')}>
           <thead>
             <tr className="border-b border-gray-200 dark:border-gray-800 text-left text-[10px] font-bold uppercase tracking-[0.05em] text-gray-500 dark:text-gray-400">
               <th className="px-4 md:px-5 py-2.5">Tenant</th>
@@ -169,9 +162,7 @@ export function SubscriptionsTable({
               <th className="px-3 py-2.5 text-right">{t('mrr_table_mrr')}</th>
               {compact ? null : (
                 <>
-                  <th className="px-3 py-2.5 hidden md:table-cell">
-                    {t('subscriptions_renews')}
-                  </th>
+                  <th className="px-3 py-2.5 hidden md:table-cell">{t('subscriptions_renews')}</th>
                   <th className="px-4 md:px-5 py-2.5 hidden lg:table-cell">
                     {t('subscriptions_last_invoice')}
                   </th>
@@ -191,9 +182,7 @@ export function SubscriptionsTable({
                       <Inbox className="h-5 w-5" strokeWidth={2} />
                     </div>
                     <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                      {hasActiveFilters
-                        ? "Filtrlarga mos obunalar yo'q"
-                        : t('no_subscriptions')}
+                      {hasActiveFilters ? "Filtrlarga mos obunalar yo'q" : t('no_subscriptions')}
                     </p>
                     {hasActiveFilters && !compact ? (
                       <button

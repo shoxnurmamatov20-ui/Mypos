@@ -14,11 +14,9 @@ export const PaginationSchema = z.object({
 });
 
 /** UZ phone: +998 XX XXX XX XX or simplified */
-export const UzbekPhoneSchema = z
-  .string()
-  .regex(/^\+?998\d{9}$/, {
-    message: 'Telefon raqami noto\'g\'ri formatda (+998XXXXXXXXX)',
-  });
+export const UzbekPhoneSchema = z.string().regex(/^\+?998\d{9}$/, {
+  message: "Telefon raqami noto'g'ri formatda (+998XXXXXXXXX)",
+});
 
 /** International phone — E.164 */
 export const PhoneSchema = z.string().regex(/^\+[1-9]\d{7,14}$/, {
@@ -29,19 +27,19 @@ export const EmailSchema = z.string().email();
 
 export const PasswordSchema = z
   .string()
-  .min(8, 'Parol kamida 8 belgi bo\'lishi kerak')
+  .min(8, "Parol kamida 8 belgi bo'lishi kerak")
   .max(128)
-  .regex(/[A-Z]/, 'Parolda katta harf bo\'lishi kerak')
-  .regex(/[a-z]/, 'Parolda kichik harf bo\'lishi kerak')
-  .regex(/[0-9]/, 'Parolda raqam bo\'lishi kerak');
+  .regex(/[A-Z]/, "Parolda katta harf bo'lishi kerak")
+  .regex(/[a-z]/, "Parolda kichik harf bo'lishi kerak")
+  .regex(/[0-9]/, "Parolda raqam bo'lishi kerak");
 
 /** Short PIN for PoS (4 digits) */
-export const PinSchema = z.string().regex(/^\d{4}$/, 'PIN 4 raqamdan iborat bo\'lishi kerak');
+export const PinSchema = z.string().regex(/^\d{4}$/, "PIN 4 raqamdan iborat bo'lishi kerak");
 
 /** Restaurant registration PIN (8 digits) */
 export const RestaurantPinSchema = z
   .string()
-  .regex(/^\d{8}$/, 'PIN kod 8 raqamdan iborat bo\'lishi kerak');
+  .regex(/^\d{8}$/, "PIN kod 8 raqamdan iborat bo'lishi kerak");
 
 /** i18n translated string — all 3 locales required */
 export const TranslatedSchema = z.object({

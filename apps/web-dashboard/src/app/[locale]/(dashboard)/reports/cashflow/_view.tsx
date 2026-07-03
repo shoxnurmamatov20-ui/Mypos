@@ -8,17 +8,17 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
+  daysAgo,
   EmptyCard,
   ErrorBanner,
   Field,
+  formatNumber,
+  inputClass,
   LoadingHint,
   PageTitle,
   SectionTitle,
   SimpleStat,
   TableShell,
-  daysAgo,
-  formatNumber,
-  inputClass,
   today,
 } from '../_components/report-helpers';
 
@@ -63,11 +63,7 @@ export function CashflowReportView() {
           value={formatUZS(summary?.total_outflow_minor ?? 0)}
           tone="muted"
         />
-        <SimpleStat
-          label={t('cashflow_report.stats_net')}
-          value={formatUZS(net)}
-          tone={netTone}
-        />
+        <SimpleStat label={t('cashflow_report.stats_net')} value={formatUZS(net)} tone={netTone} />
         <SimpleStat
           label={t('cashflow_report.stats_transactions')}
           value={formatNumber(summary?.transaction_count ?? 0)}
@@ -76,13 +72,27 @@ export function CashflowReportView() {
 
       <div className="flex flex-wrap items-end gap-3">
         <Field label={t('common.from_date')}>
-          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('common.to_date')}>
-          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('cashflow_report.f_group')}>
-          <select value={groupBy} onChange={(e) => setGroupBy(e.target.value as GroupBy)} className={inputClass}>
+          <select
+            value={groupBy}
+            onChange={(e) => setGroupBy(e.target.value as GroupBy)}
+            className={inputClass}
+          >
             <option value="day">{t('cashflow_report.g_day')}</option>
             <option value="week">{t('cashflow_report.g_week')}</option>
             <option value="month">{t('cashflow_report.g_month')}</option>
@@ -93,7 +103,11 @@ export function CashflowReportView() {
       {q.isLoading ? (
         <LoadingHint label={t('common.loading')} />
       ) : q.isError ? (
-        <ErrorBanner message={t('common.load_failed')} onRetry={() => q.refetch()} retryLabel={t('common.retry')} />
+        <ErrorBanner
+          message={t('common.load_failed')}
+          onRetry={() => q.refetch()}
+          retryLabel={t('common.retry')}
+        />
       ) : (
         <div className="space-y-6">
           {/* Series */}
@@ -111,16 +125,26 @@ export function CashflowReportView() {
                   <thead className="bg-[#f5f8f7] text-left text-xs text-[#62716d] dark:bg-[#0d1424] dark:text-[#94a3b8]">
                     <tr>
                       <th className="px-4 py-2.5 font-medium">{t('cashflow_report.col_period')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cashflow_report.col_inflow')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cashflow_report.col_outflow')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cashflow_report.col_net')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cashflow_report.col_transactions')}</th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cashflow_report.col_inflow')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cashflow_report.col_outflow')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cashflow_report.col_net')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cashflow_report.col_transactions')}
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
                     {series.map((s) => (
                       <tr key={s.period}>
-                        <td className="whitespace-nowrap px-4 py-2.5 text-[#16221f] dark:text-white">{s.period}</td>
+                        <td className="whitespace-nowrap px-4 py-2.5 text-[#16221f] dark:text-white">
+                          {s.period}
+                        </td>
                         <td className="whitespace-nowrap px-4 py-2.5 text-right tabular-nums text-emerald-600 dark:text-emerald-400">
                           {formatUZS(s.inflow_minor)}
                         </td>
@@ -154,10 +178,18 @@ export function CashflowReportView() {
                 <table className="w-full text-sm">
                   <thead className="bg-[#f5f8f7] text-left text-xs text-[#62716d] dark:bg-[#0d1424] dark:text-[#94a3b8]">
                     <tr>
-                      <th className="px-4 py-2.5 font-medium">{t('cashflow_report.col_provider')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cashflow_report.col_amount')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cashflow_report.col_count')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('cashflow_report.col_percent')}</th>
+                      <th className="px-4 py-2.5 font-medium">
+                        {t('cashflow_report.col_provider')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cashflow_report.col_amount')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cashflow_report.col_count')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('cashflow_report.col_percent')}
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">

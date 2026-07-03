@@ -1,7 +1,7 @@
+import { Bike, Clock, Star } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
-import { Bike, Clock, Star } from 'lucide-react';
-import { type Restaurant, getCuisineBg } from '@/data/restaurants';
+import { getCuisineBg, type Restaurant } from '@/data/restaurants';
 
 export type RestaurantCardVariant = 'horizontal' | 'vertical' | 'compact';
 

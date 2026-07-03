@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   output: 'standalone',
   basePath: '/panel/qr',
-  transpilePackages: ['@mypos/analytics', 
+  transpilePackages: [
+    '@mypos/analytics',
     '@mypos/api-client',
     '@mypos/design-tokens',
     '@mypos/ui',

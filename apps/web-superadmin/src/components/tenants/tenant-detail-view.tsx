@@ -1,7 +1,7 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ApiError } from '@mypos/api-client';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Building2, Loader2 } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
@@ -9,18 +9,15 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { Toast, useToast } from '@/components/ui/toast';
+import { buildMockAuditEvents, buildMockOrders } from '@/data/mock-tenant-detail';
 import {
   deleteTenant,
   fetchTenantDetail,
   impersonateTenant,
   suspendTenant,
-  updateTenant,
   type UpdateTenantPayload,
+  updateTenant,
 } from '@/lib/api-helpers';
-import {
-  buildMockAuditEvents,
-  buildMockOrders,
-} from '@/data/mock-tenant-detail';
 import type { TenantSummary } from '@/types/super-admin';
 import { DeleteTenantModal } from './delete-tenant-modal';
 import { EditSubscriptionModal } from './edit-subscription-modal';
@@ -74,10 +71,7 @@ export function TenantDetailView({ tenantId, locale }: Props) {
   const tenant = detailQuery.data as TenantSummary | undefined;
 
   const orders = useMemo(() => (tenant ? buildMockOrders(tenant.id, 5) : []), [tenant]);
-  const events = useMemo(
-    () => (tenant ? buildMockAuditEvents(tenant.id, 8) : []),
-    [tenant],
-  );
+  const events = useMemo(() => (tenant ? buildMockAuditEvents(tenant.id, 8) : []), [tenant]);
 
   // Synthesize trial / subscription end dates so the cards have something
   // useful to show until the backend exposes the real fields.
@@ -88,16 +82,16 @@ export function TenantDetailView({ tenantId, locale }: Props) {
           .slice(0, 10)
       : '';
   const trialEndsAt =
-    (tenant as TenantSummary & { trial_ends_at?: string | null } | undefined)?.trial_ends_at ??
+    (tenant as (TenantSummary & { trial_ends_at?: string | null }) | undefined)?.trial_ends_at ??
     defaultTrialEnds;
   const subscriptionEndsAt =
-    (tenant as TenantSummary & { subscription_ends_at?: string | null } | undefined)?.subscription_ends_at ??
+    (tenant as (TenantSummary & { subscription_ends_at?: string | null }) | undefined)
+      ?.subscription_ends_at ??
     tenant?.suspended_at ??
     null;
-  const notes =
-    (tenant as TenantSummary & { notes?: string | null } | undefined)?.notes ?? '';
+  const notes = (tenant as (TenantSummary & { notes?: string | null }) | undefined)?.notes ?? '';
   const ownerPhone =
-    (tenant as TenantSummary & { owner_phone?: string | null } | undefined)?.owner_phone ?? '';
+    (tenant as (TenantSummary & { owner_phone?: string | null }) | undefined)?.owner_phone ?? '';
 
   const invalidateAll = () => {
     void queryClient.invalidateQueries({ queryKey: ['super-admin', 'tenant', tenantId] });
@@ -249,10 +243,7 @@ export function TenantDetailView({ tenantId, locale }: Props) {
       </div>
 
       <div className="grid gap-4 md:gap-6 grid-cols-1 lg:grid-cols-2">
-        <TenantRecentOrders
-          orders={orders}
-          onViewAll={() => showToast(t('view_all'), 'info')}
-        />
+        <TenantRecentOrders orders={orders} onViewAll={() => showToast(t('view_all'), 'info')} />
         <TenantAuditLog
           events={events}
           locale={locale}
@@ -262,9 +253,7 @@ export function TenantDetailView({ tenantId, locale }: Props) {
 
       <TenantDangerZone
         onSuspend={() => setSuspendOpen(true)}
-        onCancel={() =>
-          updateMutation.mutate({ subscription_status: 'cancelled' })
-        }
+        onCancel={() => updateMutation.mutate({ subscription_status: 'cancelled' })}
         onDelete={() => setDeleteOpen(true)}
       />
 
@@ -340,7 +329,7 @@ function formatApiError(err: unknown): string {
       const first = Object.values(body.errors)[0];
       if (Array.isArray(first) && first[0]) return first[0];
     }
-    if (err.status === 401 || err.status === 403) return 'Ruxsat yo\'q';
+    if (err.status === 401 || err.status === 403) return "Ruxsat yo'q";
     return `HTTP ${err.status}`;
   }
   return 'Tarmoq xatosi';

@@ -1,6 +1,6 @@
 'use client';
 
-import { type Ingredient } from '@mypos/api-client';
+import type { Ingredient } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { AdjustStockDialog } from './adjust-stock-dialog';
@@ -64,18 +64,11 @@ export function IngredientList({
             </thead>
             <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
               {filtered.map((ing) => (
-                <tr
-                  key={ing.id}
-                  className="hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]"
-                >
+                <tr key={ing.id} className="hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]">
                   <td className="px-4 py-3">
-                    <div className="font-medium text-[#16221f] dark:text-white">
-                      {ing.name.uz}
-                    </div>
+                    <div className="font-medium text-[#16221f] dark:text-white">{ing.name.uz}</div>
                     {ing.sku && (
-                      <div className="text-xs text-[#62716d] dark:text-[#94a3b8]">
-                        {ing.sku}
-                      </div>
+                      <div className="text-xs text-[#62716d] dark:text-[#94a3b8]">{ing.sku}</div>
                     )}
                   </td>
                   <td className="px-4 py-3">

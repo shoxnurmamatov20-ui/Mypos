@@ -6,11 +6,7 @@ import { DispatchScreen } from './DispatchScreen';
  * from LoginForm to the target panel — this exists for old bookmarks /
  * mobile-portal SSO handoffs. No UI shown; immediate redirect.
  */
-export default async function DispatchPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function DispatchPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 

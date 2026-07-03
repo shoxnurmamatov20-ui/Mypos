@@ -1,11 +1,11 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { Search } from 'lucide-react';
 import type { Route } from 'next';
 import { useRouter } from 'next/navigation';
-import { Search } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
-import { useState, type FormEvent } from 'react';
+import { type FormEvent, useState } from 'react';
 
 /**
  * Landing hero. Mesh background + animated headline + search CTA.
@@ -30,10 +30,7 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/40 via-white to-white pb-16 pt-12 lg:pb-24 lg:pt-20">
       {/* Mesh blobs (decorative). */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-32 top-10 h-96 w-96 rounded-full bg-brand-200/40 blur-3xl" />
         <div className="absolute right-0 top-40 h-80 w-80 rounded-full bg-mint-200/40 blur-3xl" />
         <div className="absolute -bottom-20 left-1/3 h-72 w-72 rounded-full bg-purple-500/10 blur-3xl" />

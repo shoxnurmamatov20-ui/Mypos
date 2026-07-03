@@ -18,7 +18,7 @@ export type Currency = 'UZS' | 'USD' | 'EUR' | 'RUB' | 'KZT' | 'TRY';
 export type Locale = 'uz' | 'ru' | 'en';
 
 const SUBUNIT_FACTOR: Record<Currency, number> = {
-  UZS: 1,       // UZS tiyin is ignored in practice; 1 so'm = minimum
+  UZS: 1, // UZS tiyin is ignored in practice; 1 so'm = minimum
   USD: 100,
   EUR: 100,
   RUB: 100,

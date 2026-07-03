@@ -7,13 +7,7 @@ import { Button } from '@/components/ui/button';
 import type { OrderType } from '@/lib/api';
 import { cn } from '@/lib/cn';
 import { formatMoney, pickName } from '@/lib/format';
-import {
-  cartSubtotal,
-  cartTax,
-  cartTotal,
-  lineSubtotal,
-  useCartStore,
-} from '@/stores/cart';
+import { cartSubtotal, cartTax, cartTotal, lineSubtotal, useCartStore } from '@/stores/cart';
 
 const ORDER_TYPES: { id: OrderType; key: 'dine_in' | 'takeaway' | 'delivery' }[] = [
   { id: 'dine_in', key: 'dine_in' },

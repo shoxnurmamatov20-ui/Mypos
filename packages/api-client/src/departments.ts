@@ -1,5 +1,5 @@
 import type { MyPosApiClient } from './client';
-import type { CollectionResponse, ResourceResponse, PaginatedResponse } from './menu';
+import type { CollectionResponse, PaginatedResponse, ResourceResponse } from './menu';
 
 export type Department = {
   id: string;

@@ -1,5 +1,6 @@
 'use client';
 
+import type { Icon } from '@phosphor-icons/react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -25,7 +26,6 @@ import {
   TelegramLogo,
   UserCircle,
 } from '@phosphor-icons/react';
-import type { Icon } from '@phosphor-icons/react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -56,67 +56,115 @@ const INITIAL: FormData = {
 };
 
 const TYPES: ReadonlyArray<{ value: RestaurantType; label: string; Icon: Icon }> = [
-  { value: 'restaurant',  label: 'Restoran',     Icon: ForkKnife },
-  { value: 'cafe',        label: 'Kafe',         Icon: Coffee },
-  { value: 'fast-food',   label: 'Fast food',    Icon: Hamburger },
-  { value: 'osh-markazi', label: 'Osh markazi',  Icon: Storefront },
-  { value: 'pizzeria',    label: 'Pizzeria',     Icon: Pizza },
+  { value: 'restaurant', label: 'Restoran', Icon: ForkKnife },
+  { value: 'cafe', label: 'Kafe', Icon: Coffee },
+  { value: 'fast-food', label: 'Fast food', Icon: Hamburger },
+  { value: 'osh-markazi', label: 'Osh markazi', Icon: Storefront },
+  { value: 'pizzeria', label: 'Pizzeria', Icon: Pizza },
 ];
 
 const CITIES = [
-  'Toshkent', 'Samarqand', 'Buxoro', 'Andijon', 'Namangan',
-  "Farg'ona", 'Qarshi', 'Nukus', 'Termiz', 'Urganch', "Navoiy", 'Jizzax',
+  'Toshkent',
+  'Samarqand',
+  'Buxoro',
+  'Andijon',
+  'Namangan',
+  "Farg'ona",
+  'Qarshi',
+  'Nukus',
+  'Termiz',
+  'Urganch',
+  'Navoiy',
+  'Jizzax',
 ] as const;
 
 const BRANCH_OPTIONS: ReadonlyArray<{ value: BranchCount; label: string }> = [
-  { value: '1',    label: '1 ta filial' },
-  { value: '2-5',  label: '2–5 ta filial' },
+  { value: '1', label: '1 ta filial' },
+  { value: '2-5', label: '2–5 ta filial' },
   { value: '6-15', label: '6–15 ta filial' },
-  { value: '15+',  label: '15+ ta filial' },
+  { value: '15+', label: '15+ ta filial' },
 ];
 
 const PLANS: ReadonlyArray<{
-  value: Plan; label: string; price: string; period: string; tag?: string;
-  Icon: Icon; tint: string; bg: string;
+  value: Plan;
+  label: string;
+  price: string;
+  period: string;
+  tag?: string;
+  Icon: Icon;
+  tint: string;
+  bg: string;
   features: ReadonlyArray<string>;
   popular?: boolean;
 }> = [
   {
-    value: 'free', label: 'Bepul', price: '0', period: "doim",
-    Icon: Sparkle, tint: 'text-[#5eead4]', bg: 'bg-[rgba(20,184,166,0.15)]',
+    value: 'free',
+    label: 'Bepul',
+    price: '0',
+    period: 'doim',
+    Icon: Sparkle,
+    tint: 'text-[#5eead4]',
+    bg: 'bg-[rgba(20,184,166,0.15)]',
     features: ['1 ta kassa', '100 buyurtma/oy', 'Asosiy hisobotlar'],
   },
   {
-    value: 'starter', label: 'Starter', price: '199,000', period: 'oyiga',
+    value: 'starter',
+    label: 'Starter',
+    price: '199,000',
+    period: 'oyiga',
     tag: 'Eng mashhur',
-    Icon: Rocket, tint: 'text-amber-400', bg: 'bg-amber-500/15',
+    Icon: Rocket,
+    tint: 'text-amber-400',
+    bg: 'bg-amber-500/15',
     features: ['Cheksiz buyurtma', '2 ta kassa', 'Click + Payme', 'Telegram bot'],
     popular: true,
   },
   {
-    value: 'pro', label: 'Pro', price: '499,000', period: 'oyiga',
-    Icon: CrownSimple, tint: 'text-[#ff0037]', bg: 'bg-[rgba(255,0,55,0.15)]',
-    features: ['Hammasi + AI', "5 ta kassa", 'Inventar', 'Yandex/Wolt'],
+    value: 'pro',
+    label: 'Pro',
+    price: '499,000',
+    period: 'oyiga',
+    Icon: CrownSimple,
+    tint: 'text-[#ff0037]',
+    bg: 'bg-[rgba(255,0,55,0.15)]',
+    features: ['Hammasi + AI', '5 ta kassa', 'Inventar', 'Yandex/Wolt'],
   },
   {
-    value: 'business', label: 'Business', price: '1,499,000', period: 'oyiga',
-    Icon: Buildings, tint: 'text-blue-400', bg: 'bg-blue-500/15',
+    value: 'business',
+    label: 'Business',
+    price: '1,499,000',
+    period: 'oyiga',
+    Icon: Buildings,
+    tint: 'text-blue-400',
+    bg: 'bg-blue-500/15',
     features: ['Cheksiz filial', 'Dedicated manager', 'SLA 99.99%', 'White-label'],
   },
 ];
 
 const BENEFITS = [
-  { Icon: Sparkle,     title: '14 kun bepul',         body: 'Karta kerak emas' },
-  { Icon: Lightning,   title: '5 daqiqada',            body: "Bugun ishga tushadi" },
-  { Icon: ShieldCheck, title: "Bekor qilish — bemalol", body: 'Hech qanday majburiyat' },
-  { Icon: Headset,     title: 'Onboarding bepul',     body: 'Mutaxassis yordami' },
+  { Icon: Sparkle, title: '14 kun bepul', body: 'Karta kerak emas' },
+  { Icon: Lightning, title: '5 daqiqada', body: 'Bugun ishga tushadi' },
+  { Icon: ShieldCheck, title: 'Bekor qilish — bemalol', body: 'Hech qanday majburiyat' },
+  { Icon: Headset, title: 'Onboarding bepul', body: 'Mutaxassis yordami' },
 ] as const;
 
 const FAQ = [
-  { q: "14 kun tugagandan keyin nima bo'ladi?", a: "Hech narsa avtomatik to'lov olinmaydi. Sizdan tarifni tanlashingiz so'raladi. Tanlamasangiz — bepul tarif faollashadi." },
-  { q: "Bepul tariflda buyurtma soni cheklanganmi?", a: "Ha, oyiga 100 ta buyurtma. Ko'proq kerak bo'lsa — Starter tarifga o'tasiz (199,000 so'm/oy)." },
-  { q: "Onboarding qancha vaqt oladi?", a: "O'rtacha 1–3 kun: menyu kiritish, kassani sozlash, xodimlarni o'qitish. Bizning mutaxassis butun jarayonni boshqaradi — bepul." },
-  { q: "Eski POS'imdan ma'lumotlarni o'tkaza olamanmi?", a: "Ha — menyu, mijozlar, hisobotlar. Excel/CSV import qilamiz yoki API orqali to'g'ridan-to'g'ri o'tkazamiz." },
+  {
+    q: "14 kun tugagandan keyin nima bo'ladi?",
+    a: "Hech narsa avtomatik to'lov olinmaydi. Sizdan tarifni tanlashingiz so'raladi. Tanlamasangiz — bepul tarif faollashadi.",
+  },
+  {
+    q: 'Bepul tariflda buyurtma soni cheklanganmi?',
+    a: "Ha, oyiga 100 ta buyurtma. Ko'proq kerak bo'lsa — Starter tarifga o'tasiz (199,000 so'm/oy).",
+  },
+  {
+    q: 'Onboarding qancha vaqt oladi?',
+    a: "O'rtacha 1–3 kun: menyu kiritish, kassani sozlash, xodimlarni o'qitish. Bizning mutaxassis butun jarayonni boshqaradi — bepul.",
+  },
+  {
+    q: "Eski POS'imdan ma'lumotlarni o'tkaza olamanmi?",
+    a: "Ha — menyu, mijozlar, hisobotlar. Excel/CSV import qilamiz yoki API orqali to'g'ridan-to'g'ri o'tkazamiz.",
+  },
 ] as const;
 
 function StepIndicator({ current }: { current: number }) {
@@ -136,18 +184,22 @@ function StepIndicator({ current }: { current: number }) {
                     done
                       ? 'bg-[#5eead4] ring-[#5eead4] text-[#001B1B]'
                       : active
-                      ? 'bg-[#ff0037] ring-[#ff0037] text-white shadow-[0_8px_22px_-6px_rgba(255,0,55,0.5)]'
-                      : 'bg-white/[0.04] ring-white/15 text-white/50'
+                        ? 'bg-[#ff0037] ring-[#ff0037] text-white shadow-[0_8px_22px_-6px_rgba(255,0,55,0.5)]'
+                        : 'bg-white/[0.04] ring-white/15 text-white/50'
                   }`}
                 >
                   {done ? <CheckCircle size={14} weight="fill" /> : num}
                 </span>
-                <span className={`text-[10px] font-semibold uppercase tracking-wide ${active ? 'text-white' : done ? 'text-[#5eead4]' : 'text-white/40'}`}>
+                <span
+                  className={`text-[10px] font-semibold uppercase tracking-wide ${active ? 'text-white' : done ? 'text-[#5eead4]' : 'text-white/40'}`}
+                >
                   {label}
                 </span>
               </div>
               {idx < steps.length - 1 ? (
-                <div className={`h-px flex-1 -mt-4 transition-colors ${done ? 'bg-[#5eead4]/40' : 'bg-white/[0.08]'}`} />
+                <div
+                  className={`h-px flex-1 -mt-4 transition-colors ${done ? 'bg-[#5eead4]/40' : 'bg-white/[0.08]'}`}
+                />
               ) : null}
             </div>
           );
@@ -171,18 +223,21 @@ export function GetStartedFlow({ locale }: { locale: string }) {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]" />
+        <div
+          aria-hidden="true"
+          className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]"
+        />
         <div className="relative mx-auto max-w-3xl px-5 pt-20 sm:pt-24 pb-8 text-center">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(15,118,110,0.25)] bg-[rgba(15,118,110,0.10)] text-[#5eead4] text-[11px] font-bold uppercase tracking-[0.08em]">
             <Rocket size={11} weight="fill" />
             BEPUL BOSHLASH
           </span>
           <h1 className="mt-5 text-[32px] sm:text-[44px] lg:text-[52px] font-extrabold leading-[1.05] tracking-tight text-white">
-            5 daqiqada{' '}
-            <span className="gradient-teal">ishga tushiring</span>
+            5 daqiqada <span className="gradient-teal">ishga tushiring</span>
           </h1>
           <p className="mx-auto mt-4 max-w-[36rem] text-[14.5px] sm:text-[16px] leading-relaxed text-white/70">
-            14 kun bepul · Karta kerak emas · Hozir ariza qoldiring va bugun mutaxassisimiz siz bilan bog&apos;lansin.
+            14 kun bepul · Karta kerak emas · Hozir ariza qoldiring va bugun mutaxassisimiz siz
+            bilan bog&apos;lansin.
           </p>
         </div>
       </section>
@@ -207,11 +262,18 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                 <div className="mt-6 space-y-5">
                   {/* Name */}
                   <div>
-                    <label htmlFor="gs-rest" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+                    <label
+                      htmlFor="gs-rest"
+                      className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+                    >
                       Restoran nomi
                     </label>
                     <div className="relative">
-                      <ForkKnife size={14} weight="bold" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+                      <ForkKnife
+                        size={14}
+                        weight="bold"
+                        className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+                      />
                       <input
                         id="gs-rest"
                         type="text"
@@ -242,8 +304,16 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                                 : 'bg-white/[0.04] ring-white/[0.10] text-white/70 hover:ring-white/25 hover:text-white'
                             }`}
                           >
-                            <t.Icon size={20} weight={sel ? 'fill' : 'bold'} className={sel ? 'text-[#5eead4]' : 'text-white/55 group-hover:text-white/80'} />
-                            <span className="text-[11px] font-semibold text-center leading-tight">{t.label}</span>
+                            <t.Icon
+                              size={20}
+                              weight={sel ? 'fill' : 'bold'}
+                              className={
+                                sel ? 'text-[#5eead4]' : 'text-white/55 group-hover:text-white/80'
+                              }
+                            />
+                            <span className="text-[11px] font-semibold text-center leading-tight">
+                              {t.label}
+                            </span>
                           </button>
                         );
                       })}
@@ -252,7 +322,10 @@ export function GetStartedFlow({ locale }: { locale: string }) {
 
                   {/* City */}
                   <div>
-                    <label htmlFor="gs-city" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+                    <label
+                      htmlFor="gs-city"
+                      className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+                    >
                       Shahar
                     </label>
                     <select
@@ -262,16 +335,20 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                       className="w-full h-11 px-3.5 rounded-lg bg-white/[0.06] border border-white/15 text-white text-[13.5px] outline-none focus:border-[#5eead4]/60 transition-colors appearance-none"
                       style={{
                         backgroundImage:
-                          'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 12 12\' fill=\'%2394a3b8\'%3E%3Cpath d=\'M6 8.5L1.5 4h9z\'/%3E%3C/svg%3E")',
+                          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='%2394a3b8'%3E%3Cpath d='M6 8.5L1.5 4h9z'/%3E%3C/svg%3E\")",
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'right 0.85rem center',
                         backgroundSize: '12px',
                         paddingRight: '2.25rem',
                       }}
                     >
-                      <option value="" className="bg-[#001B1B]">Tanlang...</option>
+                      <option value="" className="bg-[#001B1B]">
+                        Tanlang...
+                      </option>
                       {CITIES.map((c) => (
-                        <option key={c} value={c} className="bg-[#001B1B]">{c}</option>
+                        <option key={c} value={c} className="bg-[#001B1B]">
+                          {c}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -331,16 +408,24 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                   Sizning ma&apos;lumotingiz
                 </h2>
                 <p className="mt-1.5 text-[13px] text-white/65">
-                  Bog&apos;lanish uchun — bizning mutaxassis ariza topshirilgandan keyin 30 daqiqada bog&apos;lanadi.
+                  Bog&apos;lanish uchun — bizning mutaxassis ariza topshirilgandan keyin 30 daqiqada
+                  bog&apos;lanadi.
                 </p>
 
                 <div className="mt-6 space-y-4">
                   <div>
-                    <label htmlFor="gs-name" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+                    <label
+                      htmlFor="gs-name"
+                      className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+                    >
                       Ism Familiya
                     </label>
                     <div className="relative">
-                      <UserCircle size={14} weight="bold" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+                      <UserCircle
+                        size={14}
+                        weight="bold"
+                        className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+                      />
                       <input
                         id="gs-name"
                         type="text"
@@ -352,7 +437,10 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="gs-phone" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+                    <label
+                      htmlFor="gs-phone"
+                      className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+                    >
                       Telefon raqam
                     </label>
                     <input
@@ -365,7 +453,10 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                     />
                   </div>
                   <div>
-                    <label htmlFor="gs-email" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+                    <label
+                      htmlFor="gs-email"
+                      className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+                    >
                       Email <span className="font-normal text-white/40">(ixtiyoriy)</span>
                     </label>
                     <input
@@ -408,7 +499,8 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                   Tarifni tanlang
                 </h2>
                 <p className="mt-1.5 text-[13px] text-white/65">
-                  Hozir tanlamasangiz — Bepul tarif faollashadi. Istalgan vaqtda o&apos;zgartirsangiz bo&apos;ladi.
+                  Hozir tanlamasangiz — Bepul tarif faollashadi. Istalgan vaqtda
+                  o&apos;zgartirsangiz bo&apos;ladi.
                 </p>
 
                 <div className="mt-6 space-y-2.5">
@@ -433,7 +525,9 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                         ) : null}
 
                         <div className="flex items-center gap-3">
-                          <span className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${pl.bg}`}>
+                          <span
+                            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${pl.bg}`}
+                          >
                             <pl.Icon size={18} weight="bold" className={pl.tint} />
                           </span>
                           <div className="min-w-0 flex-1">
@@ -460,7 +554,9 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                                 : 'bg-white/[0.04] ring-white/20'
                             }`}
                           >
-                            {sel ? <CheckCircle size={11} weight="fill" className="text-[#001B1B]" /> : null}
+                            {sel ? (
+                              <CheckCircle size={11} weight="fill" className="text-[#001B1B]" />
+                            ) : null}
                           </span>
                         </div>
                       </button>
@@ -471,7 +567,8 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                 <div className="mt-6 flex items-center gap-2.5 px-4 py-3 rounded-xl ring-1 ring-inset ring-[#5eead4]/20 bg-[rgba(20,184,166,0.06)]">
                   <ShieldCheck size={14} weight="fill" className="text-[#5eead4] shrink-0" />
                   <p className="text-[12px] leading-relaxed text-white/80">
-                    <strong className="text-white">Hammasi: 14 kun bepul.</strong> Karta kerak emas. Tugashidan oldin sizdan so&apos;raymiz.
+                    <strong className="text-white">Hammasi: 14 kun bepul.</strong> Karta kerak emas.
+                    Tugashidan oldin sizdan so&apos;raymiz.
                   </p>
                 </div>
 
@@ -509,7 +606,8 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                 <p className="mx-auto mt-3 max-w-[28rem] text-[13.5px] leading-relaxed text-white/70">
                   Sizning arizangiz qabul qilindi. Bizning mutaxassis{' '}
                   <strong className="text-white">{data.phone || 'telefoningiz'}</strong> orqali{' '}
-                  <span className="text-[#5eead4] font-bold">30 daqiqa ichida</span> bog&apos;lanadi.
+                  <span className="text-[#5eead4] font-bold">30 daqiqa ichida</span>{' '}
+                  bog&apos;lanadi.
                 </p>
 
                 {/* Application summary */}
@@ -546,11 +644,26 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                   </p>
                   <ol className="mt-3 space-y-2 max-w-[28rem] mx-auto text-left">
                     {[
-                      { Icon: ChatCircleDots, t: 'Mutaxassis qo\'ng\'iroq qiladi',  body: '30 daqiqa ichida · Demo va savol-javob' },
-                      { Icon: CalendarBlank,  t: 'Onboarding rejasi',                body: '1–3 kun · Menyu, kassa, xodimlar' },
-                      { Icon: Rocket,         t: 'Restoraningiz ishga tushadi',     body: "Mijozlar bilan ishlash boshlanadi" },
+                      {
+                        Icon: ChatCircleDots,
+                        t: "Mutaxassis qo'ng'iroq qiladi",
+                        body: '30 daqiqa ichida · Demo va savol-javob',
+                      },
+                      {
+                        Icon: CalendarBlank,
+                        t: 'Onboarding rejasi',
+                        body: '1–3 kun · Menyu, kassa, xodimlar',
+                      },
+                      {
+                        Icon: Rocket,
+                        t: 'Restoraningiz ishga tushadi',
+                        body: 'Mijozlar bilan ishlash boshlanadi',
+                      },
                     ].map((s, i) => (
-                      <li key={s.t} className="flex items-start gap-3 rounded-xl ring-1 ring-inset ring-white/[0.08] bg-white/[0.02] px-3.5 py-2.5">
+                      <li
+                        key={s.t}
+                        className="flex items-start gap-3 rounded-xl ring-1 ring-inset ring-white/[0.08] bg-white/[0.02] px-3.5 py-2.5"
+                      >
                         <span className="tabular inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[rgba(20,184,166,0.15)] ring-1 ring-inset ring-[#5eead4]/30 text-[#5eead4] text-[11px] font-bold">
                           {i + 1}
                         </span>
@@ -617,7 +730,8 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                 ))}
               </div>
               <p className="mt-3 text-[12.5px] leading-relaxed text-white/80 italic">
-                &ldquo;3 kunda ishga tushdik. Bizning eski POS dan ma&apos;lumotni o&apos;tkazdilar, xodimlarni o&apos;qitdilar. 1 oyda foydamiz 18% oshdi.&rdquo;
+                &ldquo;3 kunda ishga tushdik. Bizning eski POS dan ma&apos;lumotni o&apos;tkazdilar,
+                xodimlarni o&apos;qitdilar. 1 oyda foydamiz 18% oshdi.&rdquo;
               </p>
               <div className="mt-3 flex items-center gap-2.5">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-full ring-1 ring-inset ring-white/15 bg-[rgba(20,184,166,0.18)] text-[#5eead4] text-[11px] font-bold">
@@ -689,9 +803,7 @@ export function GetStartedFlow({ locale }: { locale: string }) {
       <section className="pb-14">
         <div className="mx-auto max-w-3xl px-5">
           <div className="text-center">
-            <p className="text-[12px] font-bold uppercase tracking-[0.10em] text-[#5eead4]">
-              FAQ
-            </p>
+            <p className="text-[12px] font-bold uppercase tracking-[0.10em] text-[#5eead4]">FAQ</p>
             <h2 className="mt-2 text-[24px] sm:text-[28px] font-extrabold tracking-tight text-white">
               Tez-tez beriladigan savollar
             </h2>
@@ -706,7 +818,11 @@ export function GetStartedFlow({ locale }: { locale: string }) {
                   </span>
                   <span className="min-w-0 flex-1 text-[14px] font-bold text-white">{f.q}</span>
                   <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full ring-1 ring-inset ring-white/15 bg-white/[0.05] text-white/70 group-open:bg-[#5eead4]/15 group-open:text-[#5eead4] group-open:ring-[#5eead4]/30 transition-colors">
-                    <ArrowRight size={11} weight="bold" className="group-open:rotate-90 transition-transform" />
+                    <ArrowRight
+                      size={11}
+                      weight="bold"
+                      className="group-open:rotate-90 transition-transform"
+                    />
                   </span>
                 </summary>
                 <div className="px-5 pb-5 pl-[62px] -mt-1 text-[13px] leading-relaxed text-white/70">

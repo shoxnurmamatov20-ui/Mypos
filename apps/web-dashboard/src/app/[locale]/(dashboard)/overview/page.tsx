@@ -6,11 +6,7 @@ export async function generateMetadata() {
   return { title: `${t('title')} — MyPOS` };
 }
 
-export default async function OverviewPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function OverviewPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   return <OverviewDashboard locale={locale} />;
 }

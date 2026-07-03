@@ -1,5 +1,6 @@
 'use client';
 
+import type { LucideIcon } from 'lucide-react';
 import {
   Building2,
   CreditCard,
@@ -12,7 +13,6 @@ import {
   UserCog,
   X,
 } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
@@ -23,13 +23,7 @@ import { useAuthStore } from '@/stores/auth';
 import { NotificationBell } from './notification-bell';
 import { ThemeToggle } from './theme-toggle';
 
-type NavItemId =
-  | 'dashboard'
-  | 'tenants'
-  | 'billing'
-  | 'audit'
-  | 'admins'
-  | 'settings';
+type NavItemId = 'dashboard' | 'tenants' | 'billing' | 'audit' | 'admins' | 'settings';
 
 type NavItem = {
   id: NavItemId;
@@ -137,12 +131,8 @@ export function Sidebar() {
           <ShieldCheck className="w-5 h-5 text-white" strokeWidth={2.2} />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-gray-900 dark:text-white font-semibold text-sm leading-tight">
-            MyPOS
-          </p>
-          <p className="text-gray-400 dark:text-gray-500 text-xs mt-0.5 truncate">
-            Super Admin
-          </p>
+          <p className="text-gray-900 dark:text-white font-semibold text-sm leading-tight">MyPOS</p>
+          <p className="text-gray-400 dark:text-gray-500 text-xs mt-0.5 truncate">Super Admin</p>
         </div>
         <button
           type="button"
@@ -155,10 +145,7 @@ export function Sidebar() {
       </div>
 
       {/* Navigation groups */}
-      <nav
-        aria-label="Primary"
-        className="flex-1 px-3 py-3 overflow-y-auto"
-      >
+      <nav aria-label="Primary" className="flex-1 px-3 py-3 overflow-y-auto">
         {NAV_GROUPS.map((group, gi) => (
           <div key={group.label} className={cn(gi > 0 && 'mt-3')}>
             <div className="px-3 pt-2 pb-1.5 text-[10px] font-bold tracking-[0.08em] uppercase text-gray-400 dark:text-gray-500">
@@ -168,9 +155,7 @@ export function Sidebar() {
               {group.items.map(({ id, href, icon: Icon }) => {
                 const fullHref = `/${locale}/${href}` as Route;
                 const isActive =
-                  href === 'dashboard'
-                    ? pathname === fullHref
-                    : pathname.startsWith(fullHref);
+                  href === 'dashboard' ? pathname === fullHref : pathname.startsWith(fullHref);
                 return (
                   <Link
                     key={id}

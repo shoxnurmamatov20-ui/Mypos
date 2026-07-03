@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { CheckCircle, Clock, Coins, type Icon, TrendUp } from '@phosphor-icons/react';
+import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { FadeUp } from './animations';
@@ -142,11 +142,7 @@ export function RoiCalculator() {
                   value={formatUZS(Math.max(0, monthlySavings), locale)}
                   label={t('monthly_savings')}
                 />
-                <Stat
-                  icon={TrendUp}
-                  value={`${Math.max(0, roiPercent)}%`}
-                  label={t('roi_label')}
-                />
+                <Stat icon={TrendUp} value={`${Math.max(0, roiPercent)}%`} label={t('roi_label')} />
                 <Stat
                   icon={Clock}
                   value={`${paybackDays > 365 ? '12+' : paybackDays} ${paybackDays > 365 ? t('months') : t('days')}`}
@@ -204,9 +200,7 @@ function SliderRow({
         <label htmlFor={id} className="text-caption-strong text-ink-muted-80 font-display">
           {label}
         </label>
-        <span className="tabular text-tagline text-coral font-display font-semibold">
-          {value}
-        </span>
+        <span className="tabular text-tagline text-coral font-display font-semibold">{value}</span>
       </div>
       <input
         id={id}
@@ -226,15 +220,7 @@ function SliderRow({
   );
 }
 
-function Stat({
-  icon: IconComp,
-  value,
-  label,
-}: {
-  icon: Icon;
-  value: string;
-  label: string;
-}) {
+function Stat({ icon: IconComp, value, label }: { icon: Icon; value: string; label: string }) {
   return (
     <div className="rounded-card bg-tile-dark-2 p-md">
       <IconComp size={20} weight="light" className="mb-xs text-on-dark-muted" aria-hidden="true" />

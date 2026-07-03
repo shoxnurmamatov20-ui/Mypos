@@ -1,14 +1,14 @@
 'use client';
 
-import { transferDocumentsApi, type TransferDocument } from '@mypos/api-client';
+import { type TransferDocument, transferDocumentsApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { apiClient } from '@/lib/api';
 import { DocDetailModal } from './doc-detail-modal';
+import { formatDate } from './format';
 import { StatusBadge } from './status-badge';
 import { CenteredSpinner, ErrorBanner, secondaryBtnClass } from './ui-helpers';
-import { formatDate } from './format';
 
 type Props = {
   id: string;
@@ -28,7 +28,11 @@ export function TransferDetail({ id, onClose }: Props) {
   return (
     <DocDetailModal
       title={doc?.doc_no ?? '...'}
-      subtitle={doc ? `${formatDate(doc.doc_date)}${doc.creator ? ` · ${doc.creator.name}` : ''}` : undefined}
+      subtitle={
+        doc
+          ? `${formatDate(doc.doc_date)}${doc.creator ? ` · ${doc.creator.name}` : ''}`
+          : undefined
+      }
       onClose={onClose}
       badge={doc ? <StatusBadge status={doc.status} /> : null}
       size="lg"

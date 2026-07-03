@@ -1,14 +1,14 @@
 'use client';
 
-import { incomingDocumentsApi, type IncomingDocument } from '@mypos/api-client';
+import { type IncomingDocument, incomingDocumentsApi } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { apiClient } from '@/lib/api';
 import { DocDetailModal } from './doc-detail-modal';
+import { formatDate } from './format';
 import { StatusBadge } from './status-badge';
 import { CenteredSpinner, ErrorBanner, secondaryBtnClass } from './ui-helpers';
-import { formatDate } from './format';
 
 type Props = {
   id: string;
@@ -55,9 +55,7 @@ export function IncomingDetail({ id, onClose }: Props) {
               <dt className="text-[11px] font-bold uppercase tracking-[0.04em] text-[#62716d] dark:text-[#94a3b8]">
                 {t('fields.supplier')}
               </dt>
-              <dd className="mt-0.5 text-[#16221f] dark:text-white">
-                {doc.supplier_name ?? '—'}
-              </dd>
+              <dd className="mt-0.5 text-[#16221f] dark:text-white">{doc.supplier_name ?? '—'}</dd>
             </div>
             {doc.supplier_inn ? (
               <div>

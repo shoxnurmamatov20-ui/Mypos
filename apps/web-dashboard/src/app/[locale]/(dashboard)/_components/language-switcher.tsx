@@ -2,8 +2,8 @@
 
 import { cn } from '@mypos/ui';
 import { ChevronDown, Globe } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
 const LOCALES = ['uz', 'ru', 'en', 'kz'] as const;
@@ -97,11 +97,14 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
               onClick={() => handleSelect(locale)}
               className={cn(
                 'flex w-full items-center justify-between px-3 py-2 text-[13px] text-[#16221f] dark:text-[#e2e8f0] hover:bg-[#eef4f3] dark:hover:bg-[#1a2235]',
-                locale === activeLocale && 'bg-teal-50 dark:bg-teal-950/50 font-semibold text-teal-700 dark:text-teal-300',
+                locale === activeLocale &&
+                  'bg-teal-50 dark:bg-teal-950/50 font-semibold text-teal-700 dark:text-teal-300',
               )}
             >
               <span>{LOCALE_LABELS[locale]}</span>
-              <span className="text-xs text-[#62716d] dark:text-[#94a3b8]">{LOCALE_SHORT[locale]}</span>
+              <span className="text-xs text-[#62716d] dark:text-[#94a3b8]">
+                {LOCALE_SHORT[locale]}
+              </span>
             </button>
           ))}
         </div>

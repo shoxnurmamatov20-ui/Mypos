@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   basePath: '/panel/portal',
-  transpilePackages: ['@mypos/analytics', 
+  transpilePackages: [
+    '@mypos/analytics',
     '@mypos/api-client',
     '@mypos/design-tokens',
     '@mypos/ui',

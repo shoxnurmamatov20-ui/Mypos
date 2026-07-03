@@ -6,7 +6,8 @@ type Props = { params: Promise<{ locale: string }> };
 
 export const metadata: Metadata = {
   title: 'Bepul boshlash — MyPOS',
-  description: "MyPOS bilan 5 daqiqada ishga tushiring. 14 kun bepul · Karta kerak emas · Toshkent + 11 viloyat.",
+  description:
+    'MyPOS bilan 5 daqiqada ishga tushiring. 14 kun bepul · Karta kerak emas · Toshkent + 11 viloyat.',
   robots: { index: false, follow: true },
 };
 

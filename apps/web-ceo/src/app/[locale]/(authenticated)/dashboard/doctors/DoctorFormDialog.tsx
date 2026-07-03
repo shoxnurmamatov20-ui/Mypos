@@ -4,15 +4,15 @@ import { X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import {
+  type ApiError,
   type Clinic,
   type ClinicDepartmentLite,
   type ClinicDepartmentsResponse,
+  ceoFetch,
+  ceoMutate,
   type DoctorListItem,
   type DoctorMutationResponse,
   type DoctorPayload,
-  ApiError,
-  ceoFetch,
-  ceoMutate,
 } from '@/lib/api';
 import { cn } from '@/lib/cn';
 
@@ -133,9 +133,7 @@ export function DoctorFormDialog({ clinics, doctor, onClose, onSaved }: Props) {
       onSaved();
     } catch (e) {
       const err = e as ApiError;
-      const body = err.body as
-        | { message?: string; errors?: Record<string, string[]> }
-        | null;
+      const body = err.body as { message?: string; errors?: Record<string, string[]> } | null;
       if (body?.errors) {
         const next: FieldErrors = {};
         for (const [k, msgs] of Object.entries(body.errors)) {
@@ -180,11 +178,7 @@ export function DoctorFormDialog({ clinics, doctor, onClose, onSaved }: Props) {
             </div>
           ) : null}
 
-          <Field
-            label={t('field_clinic')}
-            error={errors.clinic_id}
-            required
-          >
+          <Field label={t('field_clinic')} error={errors.clinic_id} required>
             <select
               value={form.clinic_id}
               onChange={(e) =>
@@ -306,9 +300,7 @@ function Field({
         {required ? <span className="text-red-500 ml-0.5">*</span> : null}
       </label>
       {children}
-      {error ? (
-        <p className="mt-1 text-[11px] text-[#b42318] dark:text-red-300">{error}</p>
-      ) : null}
+      {error ? <p className="mt-1 text-[11px] text-[#b42318] dark:text-red-300">{error}</p> : null}
     </div>
   );
 }

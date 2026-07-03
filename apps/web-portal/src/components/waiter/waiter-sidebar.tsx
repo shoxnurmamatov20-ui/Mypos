@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import {
   ForkKnife,
   GridFour,
@@ -16,7 +17,6 @@ import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { cn } from '@mypos/ui';
 import { logout as apiLogout } from '@/lib/api';
 import { clearWaiterSession, useWaiterSession } from '@/lib/waiter-session';
 
@@ -112,10 +112,7 @@ export function WaiterSidebar() {
             <div className="space-y-0.5">
               {group.items.map(({ id, icon: Icon }) => {
                 const href = `/${locale}/${id}` as Route;
-                const isActive =
-                  id === 'tables'
-                    ? pathname === href
-                    : pathname.startsWith(href);
+                const isActive = id === 'tables' ? pathname === href : pathname.startsWith(href);
                 return (
                   <Link
                     key={id}
@@ -149,9 +146,7 @@ export function WaiterSidebar() {
               {initial}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[13px] font-semibold text-[#16221f]">
-                {session.name}
-              </p>
+              <p className="truncate text-[13px] font-semibold text-[#16221f]">{session.name}</p>
               <p className="truncate text-[11px] uppercase tracking-wide text-[#9aa6a3]">
                 {t('brand.role')}
               </p>
@@ -186,9 +181,7 @@ export function WaiterSidebar() {
           <div className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-lg bg-gradient-to-br from-[#0f766e] to-[#0d5e58] text-white">
             <Storefront className="h-3.5 w-3.5" weight="fill" />
           </div>
-          <p className="truncate text-[14px] font-semibold text-[#16221f]">
-            {t('brand.role')}
-          </p>
+          <p className="truncate text-[14px] font-semibold text-[#16221f]">{t('brand.role')}</p>
         </div>
       </header>
 

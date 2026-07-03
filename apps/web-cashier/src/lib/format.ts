@@ -26,9 +26,7 @@ export function pickName(name: LocalizedName, locale: string): string {
  */
 export function formatMoney(amount: number, currency = "so'm"): string {
   const rounded = Math.round(amount);
-  const grouped = rounded
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const grouped = rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   return `${grouped} ${currency}`;
 }
 

@@ -7,7 +7,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/cn';
-import { useAuthStore, type SuperAdminRole } from '@/stores/auth';
+import { type SuperAdminRole, useAuthStore } from '@/stores/auth';
 
 const ROLE_LABEL_KEY: Record<SuperAdminRole, string> = {
   owner: 'role_owner',

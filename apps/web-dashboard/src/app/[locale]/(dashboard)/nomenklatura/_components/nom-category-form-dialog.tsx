@@ -1,16 +1,16 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
 import { cn } from '@mypos/ui';
+import { useTranslations } from 'next-intl';
+import { useEffect, useId, useState } from 'react';
+import { toast } from 'sonner';
 import { type NomCategory, type NomCatKind, useNomenclatureStore } from '@/stores/nomenclature';
 import {
   Field,
-  Toggle,
   inputClass,
   primaryBtnClass,
   secondaryBtnClass,
+  Toggle,
 } from '../../settings/_components/settings-ui';
 
 interface Props {
@@ -59,7 +59,10 @@ export function NomCategoryFormDialog({ kind, category, onClose, onSaved }: Prop
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      onClick={onClose}
+    >
       <div
         role="dialog"
         aria-modal="true"
@@ -100,7 +103,9 @@ export function NomCategoryFormDialog({ kind, category, onClose, onSaved }: Prop
           </Field>
 
           <div className="flex items-center justify-between gap-4 py-1">
-            <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{t('active')}</span>
+            <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+              {t('active')}
+            </span>
             <Toggle checked={isActive} onChange={setIsActive} ariaLabel={t('active')} />
           </div>
 
@@ -108,7 +113,11 @@ export function NomCategoryFormDialog({ kind, category, onClose, onSaved }: Prop
             <button type="button" onClick={onClose} className={secondaryBtnClass}>
               {t('cancel')}
             </button>
-            <button type="submit" disabled={submitting || name.trim().length === 0} className={cn(primaryBtnClass)}>
+            <button
+              type="submit"
+              disabled={submitting || name.trim().length === 0}
+              className={cn(primaryBtnClass)}
+            >
               {t('save')}
             </button>
           </div>

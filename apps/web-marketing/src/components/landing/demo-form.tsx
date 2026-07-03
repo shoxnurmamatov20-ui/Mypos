@@ -6,8 +6,8 @@ import { useState } from 'react';
 type Format = 'online' | 'office';
 
 const FORMATS: ReadonlyArray<{ value: Format; label: string; sub: string }> = [
-  { value: 'online', label: 'Onlayn',           sub: 'Zoom / Telegram' },
-  { value: 'office', label: 'Toshkent ofisi',   sub: 'Haqiqiy kassada' },
+  { value: 'online', label: 'Onlayn', sub: 'Zoom / Telegram' },
+  { value: 'office', label: 'Toshkent ofisi', sub: 'Haqiqiy kassada' },
 ];
 
 export function DemoForm() {
@@ -24,7 +24,8 @@ export function DemoForm() {
           Ariza qabul qilindi
         </h3>
         <p className="mx-auto mt-2 max-w-[28rem] text-[13.5px] leading-relaxed text-white/70">
-          Bizning mutaxassis 30 daqiqa ichida sizga qo&apos;ng&apos;iroq qiladi va aniq vaqtni belgilaymiz.
+          Bizning mutaxassis 30 daqiqa ichida sizga qo&apos;ng&apos;iroq qiladi va aniq vaqtni
+          belgilaymiz.
         </p>
         <button
           type="button"
@@ -77,11 +78,18 @@ export function DemoForm() {
       {/* Name + Phone */}
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label htmlFor="df-name" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+          <label
+            htmlFor="df-name"
+            className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+          >
             Ism Familiya
           </label>
           <div className="relative">
-            <UserCircle size={14} weight="bold" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+            <UserCircle
+              size={14}
+              weight="bold"
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+            />
             <input
               id="df-name"
               type="text"
@@ -92,7 +100,10 @@ export function DemoForm() {
           </div>
         </div>
         <div>
-          <label htmlFor="df-phone" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+          <label
+            htmlFor="df-phone"
+            className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+          >
             Telefon
           </label>
           <input
@@ -111,7 +122,11 @@ export function DemoForm() {
           Restoran nomi
         </label>
         <div className="relative">
-          <ForkKnife size={14} weight="bold" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+          <ForkKnife
+            size={14}
+            weight="bold"
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+          />
           <input
             id="df-rest"
             type="text"
@@ -125,7 +140,8 @@ export function DemoForm() {
       {/* Question */}
       <div>
         <label htmlFor="df-q" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
-          Demo&apos;da ko&apos;rmoqchi bo&apos;lgan xususiyat <span className="font-normal text-white/40">(ixtiyoriy)</span>
+          Demo&apos;da ko&apos;rmoqchi bo&apos;lgan xususiyat{' '}
+          <span className="font-normal text-white/40">(ixtiyoriy)</span>
         </label>
         <textarea
           id="df-q"

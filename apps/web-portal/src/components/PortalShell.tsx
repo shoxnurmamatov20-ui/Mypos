@@ -14,7 +14,9 @@ type PortalShellProps = {
 export function PortalShell({ children, variant = 'centered' }: PortalShellProps) {
   const alignClass = variant === 'topless' ? 'items-start pt-section' : 'items-center';
   return (
-    <main className={`relative min-h-screen flex justify-center px-md py-section bg-white text-black ${alignClass}`}>
+    <main
+      className={`relative min-h-screen flex justify-center px-md py-section bg-white text-black ${alignClass}`}
+    >
       <div className="absolute top-md right-md z-10">
         <LanguageSwitcher />
       </div>

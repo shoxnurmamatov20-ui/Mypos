@@ -11,7 +11,10 @@ export default async function SalesCategoriesPage() {
   const t = await getTranslations('nomenklatura');
   return (
     <div className="space-y-6">
-      <PageHeader title={t('sales_categories.title')} description={t('sales_categories.subtitle')} />
+      <PageHeader
+        title={t('sales_categories.title')}
+        description={t('sales_categories.subtitle')}
+      />
       <NomCategoryManager kind="sales" />
     </div>
   );

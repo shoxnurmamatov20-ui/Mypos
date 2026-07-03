@@ -15,8 +15,8 @@
  * fetched once per install.
  */
 
-import { headers } from 'next/headers';
 import type { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
 import { fetchBrandForHost } from '@/lib/brand';
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
@@ -61,9 +61,9 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
 
   // Tenant-branded manifest.
   const { brand, name, short_name } = tenant;
-  const tenantName = typeof name === 'string' ? name : (name.uz ?? name.ru ?? name.en ?? 'Restaurant');
-  const tagline =
-    brand.tagline?.uz ?? brand.tagline?.ru ?? brand.tagline?.en ?? 'Online buyurtma';
+  const tenantName =
+    typeof name === 'string' ? name : (name.uz ?? name.ru ?? name.en ?? 'Restaurant');
+  const tagline = brand.tagline?.uz ?? brand.tagline?.ru ?? brand.tagline?.en ?? 'Online buyurtma';
   const icon192 = brand.logo_url ?? '/icons/icon-192.png';
   const icon512 = brand.logo_url ?? '/icons/icon-512.png';
 

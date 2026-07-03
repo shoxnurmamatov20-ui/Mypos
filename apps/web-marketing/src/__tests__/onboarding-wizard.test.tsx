@@ -148,9 +148,9 @@ describe('useWizardStore form state', () => {
     useWizardStore.getState().setMenuMode('csv');
     expect(useWizardStore.getState().menu.mode).toBe('csv');
 
-    useWizardStore.getState().setMenuItems([
-      { name: 'Plov', description: '', category: 'main', priceUzs: 50000 },
-    ]);
+    useWizardStore
+      .getState()
+      .setMenuItems([{ name: 'Plov', description: '', category: 'main', priceUzs: 50000 }]);
     expect(useWizardStore.getState().menu.items).toHaveLength(1);
     expect(useWizardStore.getState().menu.items[0]?.name).toBe('Plov');
   });

@@ -3,13 +3,7 @@
 import type { OrderStatus } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 
-const STEP_SEQUENCE: OrderStatus[] = [
-  'pending',
-  'preparing',
-  'ready',
-  'served',
-  'completed',
-];
+const STEP_SEQUENCE: OrderStatus[] = ['pending', 'preparing', 'ready', 'served', 'completed'];
 
 export function StatusStepper({ status }: { status: OrderStatus }) {
   const t = useTranslations('orders');

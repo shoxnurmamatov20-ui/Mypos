@@ -1,9 +1,9 @@
 'use client';
 
 import {
-  inventoryApi,
   type CreateIngredientInput,
   type Ingredient,
+  inventoryApi,
   type StockMovementReason,
 } from '@mypos/api-client';
 import {
@@ -257,7 +257,13 @@ export function IngredientsClient() {
             id: 'stock',
             header: t('cols.current'),
             cell: (i: Ingredient) => (
-              <span className={i.low_stock ? 'text-amber-600 dark:text-amber-400 font-bold tabular-nums' : 'tabular-nums'}>
+              <span
+                className={
+                  i.low_stock
+                    ? 'text-amber-600 dark:text-amber-400 font-bold tabular-nums'
+                    : 'tabular-nums'
+                }
+              >
                 {i.current_stock.toFixed(2)} {i.unit}
               </span>
             ),
@@ -277,9 +283,7 @@ export function IngredientsClient() {
             id: 'cost',
             header: t('cols.cost'),
             cell: (i: Ingredient) => (
-              <span className="tabular-nums">
-                {(i.cost_per_unit ?? 0).toLocaleString('uz-UZ')}
-              </span>
+              <span className="tabular-nums">{(i.cost_per_unit ?? 0).toLocaleString('uz-UZ')}</span>
             ),
             align: 'right',
           },
@@ -368,13 +372,22 @@ export function IngredientsClient() {
         <div className="grid gap-3">
           <div className="grid grid-cols-3 gap-3">
             <FormField label={t('cols.name')} required>
-              <Input value={form.name_uz} onChange={(e) => setForm({ ...form, name_uz: e.target.value })} />
+              <Input
+                value={form.name_uz}
+                onChange={(e) => setForm({ ...form, name_uz: e.target.value })}
+              />
             </FormField>
             <FormField label="RU">
-              <Input value={form.name_ru} onChange={(e) => setForm({ ...form, name_ru: e.target.value })} />
+              <Input
+                value={form.name_ru}
+                onChange={(e) => setForm({ ...form, name_ru: e.target.value })}
+              />
             </FormField>
             <FormField label="EN">
-              <Input value={form.name_en} onChange={(e) => setForm({ ...form, name_en: e.target.value })} />
+              <Input
+                value={form.name_en}
+                onChange={(e) => setForm({ ...form, name_en: e.target.value })}
+              />
             </FormField>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -448,8 +461,8 @@ export function IngredientsClient() {
                 {adjusting.name.uz || adjusting.name.en}
               </p>
               <p className="mt-1 text-[12px] text-[#62716d] dark:text-[#94a3b8] tabular-nums">
-                {t('current')}: {adjusting.current_stock.toFixed(2)} {adjusting.unit} ·{' '}
-                {t('min')}: {(adjusting.min_stock ?? 0).toFixed(2)}
+                {t('current')}: {adjusting.current_stock.toFixed(2)} {adjusting.unit} · {t('min')}:{' '}
+                {(adjusting.min_stock ?? 0).toFixed(2)}
               </p>
             </div>
             <FormField label={t('delta')} helper={t('delta_hint')}>
@@ -464,7 +477,9 @@ export function IngredientsClient() {
             <FormField label={t('reason')}>
               <Select
                 value={adjustState.reason}
-                onChange={(v) => setAdjustState({ ...adjustState, reason: v as StockMovementReason })}
+                onChange={(v) =>
+                  setAdjustState({ ...adjustState, reason: v as StockMovementReason })
+                }
                 options={[
                   { value: 'purchase', label: t('reasons.purchase') },
                   { value: 'adjust', label: t('reasons.adjust') },

@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  wasteDocumentsApi,
   type CreateWasteDocumentInput,
   type Ingredient,
   type WasteReason,
+  wasteDocumentsApi,
 } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -15,12 +15,7 @@ import { toast } from 'sonner';
 import { apiClient } from '@/lib/api';
 import { DocDetailModal } from './doc-detail-modal';
 import { IngredientSearch } from './ingredient-search';
-import {
-  inputClass,
-  labelClass,
-  primaryBtnClass,
-  secondaryBtnClass,
-} from './ui-helpers';
+import { inputClass, labelClass, primaryBtnClass, secondaryBtnClass } from './ui-helpers';
 import { WarehouseSelect } from './warehouse-select';
 
 type Row = {
@@ -63,8 +58,7 @@ export function WasteDocumentForm({ onClose }: { onClose: () => void }) {
   }, [rows]);
 
   const mutation = useMutation({
-    mutationFn: (input: CreateWasteDocumentInput) =>
-      wasteDocumentsApi.create(apiClient, input),
+    mutationFn: (input: CreateWasteDocumentInput) => wasteDocumentsApi.create(apiClient, input),
     onSuccess: () => {
       toast.success(t('toast.created'));
       void qc.invalidateQueries({ queryKey: ['waste-documents'] });
@@ -214,9 +208,7 @@ export function WasteDocumentForm({ onClose }: { onClose: () => void }) {
                 className="grid grid-cols-12 items-end gap-2 rounded-lg border border-[rgba(22,34,31,0.06)] bg-[#fafbfa] p-3 dark:border-[rgba(255,255,255,0.05)] dark:bg-[#0d1424]"
               >
                 <div className="col-span-12 md:col-span-5">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.ingredient') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.ingredient') : ''}</label>
                   <IngredientSearch
                     value={row.ingredient?.id ?? ''}
                     onChange={(ing) =>
@@ -230,9 +222,7 @@ export function WasteDocumentForm({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div className="col-span-6 md:col-span-2">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.quantity') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.quantity') : ''}</label>
                   <input
                     type="number"
                     step="0.001"
@@ -243,9 +233,7 @@ export function WasteDocumentForm({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div className="col-span-6 md:col-span-2">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.unit_cost') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.unit_cost') : ''}</label>
                   <input
                     type="number"
                     step="1"
@@ -257,9 +245,7 @@ export function WasteDocumentForm({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div className="col-span-10 md:col-span-2">
-                  <label className={labelClass}>
-                    {idx === 0 ? t('fields.notes') : ''}
-                  </label>
+                  <label className={labelClass}>{idx === 0 ? t('fields.notes') : ''}</label>
                   <input
                     type="text"
                     value={row.notes}
@@ -283,9 +269,7 @@ export function WasteDocumentForm({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="mt-3 flex items-center justify-end gap-3 text-sm">
-            <span className="text-[#62716d] dark:text-[#94a3b8]">
-              {t('form.total_label')}
-            </span>
+            <span className="text-[#62716d] dark:text-[#94a3b8]">{t('form.total_label')}</span>
             <span className="text-base font-bold tabular-nums text-rose-600 dark:text-rose-400">
               {formatUZS(total)}
             </span>

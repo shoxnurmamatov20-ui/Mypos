@@ -44,8 +44,7 @@ export function MenuRowButton({
   tone = 'default',
   trailing,
 }: ButtonRowProps) {
-  const labelClass =
-    tone === 'danger' ? 'font-bold text-danger' : 'font-semibold text-neutral-900';
+  const labelClass = tone === 'danger' ? 'font-bold text-danger' : 'font-semibold text-neutral-900';
   return (
     <button type="button" onClick={onClick} className={ROW_CLASS}>
       <span className="text-2xl" aria-hidden="true">

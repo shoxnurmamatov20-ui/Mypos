@@ -75,9 +75,7 @@ export const useCartStore = create<CartState & CartActions>((set) => ({
 
   increment: (id) =>
     set((state) => ({
-      lines: state.lines.map((line) =>
-        line.id === id ? { ...line, qty: line.qty + 1 } : line,
-      ),
+      lines: state.lines.map((line) => (line.id === id ? { ...line, qty: line.qty + 1 } : line)),
     })),
 
   decrement: (id) =>

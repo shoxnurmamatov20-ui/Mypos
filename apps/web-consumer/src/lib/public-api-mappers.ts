@@ -24,10 +24,7 @@ import {
 } from './public-api';
 
 /** Convert a PublicRestaurant + active locale into the legacy Restaurant shape. */
-export function publicRestaurantToUi(
-  source: PublicRestaurant,
-  locale: PublicLocale,
-): Restaurant {
+export function publicRestaurantToUi(source: PublicRestaurant, locale: PublicLocale): Restaurant {
   return {
     id: source.id,
     slug: source.slug,
@@ -57,9 +54,7 @@ export function publicRestaurantsToUi(
   return list.map((r) => publicRestaurantToUi(r, locale));
 }
 
-export function publicMenuCategoryToUi(
-  source: PublicMenuCategoryResponse,
-): MockMenuCategory {
+export function publicMenuCategoryToUi(source: PublicMenuCategoryResponse): MockMenuCategory {
   return {
     id: source.id,
     name: source.name,
@@ -67,9 +62,7 @@ export function publicMenuCategoryToUi(
   };
 }
 
-export function publicMenuItemToUi(
-  source: PublicMenuItemResponse,
-): MockMenuItem {
+export function publicMenuItemToUi(source: PublicMenuItemResponse): MockMenuItem {
   return {
     id: source.id,
     categoryId: source.category_id,

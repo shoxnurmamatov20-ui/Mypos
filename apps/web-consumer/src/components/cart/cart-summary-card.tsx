@@ -1,8 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { formatSom } from '@/lib/format';
 import type { CartAmounts } from '@/lib/cart-fees';
+import { formatSom } from '@/lib/format';
 
 type Props = {
   amounts: CartAmounts;
@@ -24,9 +24,7 @@ export function CartSummaryCard({ amounts, primaryAction, variant }: Props) {
 
   return (
     <div className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6">
-      <h3 className="font-display text-lg font-extrabold text-neutral-900">
-        {t('summary_title')}
-      </h3>
+      <h3 className="font-display text-lg font-extrabold text-neutral-900">{t('summary_title')}</h3>
 
       <dl className="mt-4 flex flex-col gap-3 text-sm">
         <SummaryRow label={t('summary_subtotal')} value={formatSom(amounts.subtotal)} />
@@ -59,15 +57,7 @@ export function CartSummaryCard({ amounts, primaryAction, variant }: Props) {
   );
 }
 
-function SummaryRow({
-  label,
-  value,
-  accent,
-}: {
-  label: string;
-  value: string;
-  accent?: 'mint';
-}) {
+function SummaryRow({ label, value, accent }: { label: string; value: string; accent?: 'mint' }) {
   return (
     <div className="flex items-baseline justify-between">
       <dt className="text-neutral-500">{label}</dt>

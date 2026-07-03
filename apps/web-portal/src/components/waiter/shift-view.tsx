@@ -1,5 +1,6 @@
 'use client';
 
+import { Button, cn, PageHeader } from '@mypos/ui';
 import {
   CheckCircle,
   ClockCounterClockwise,
@@ -11,7 +12,6 @@ import {
 } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
-import { Button, cn, PageHeader } from '@mypos/ui';
 import { formatSomShort, getWaiterData } from '@/lib/waiter-data';
 import { useWaiterSession } from '@/lib/waiter-session';
 
@@ -70,10 +70,7 @@ export function ShiftView() {
       {/* Today's stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {stats.map(({ id, icon: StatIcon, value }) => (
-          <div
-            key={id}
-            className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-4"
-          >
+          <div key={id} className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-4">
             <span className="grid h-9 w-9 place-items-center rounded-lg bg-[#eef4f3] text-[#0f766e]">
               <StatIcon className="h-[18px] w-[18px]" weight="fill" />
             </span>

@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
@@ -7,8 +8,7 @@ import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { cn } from '@mypos/ui';
-import { type SemiProduct, useNomHydrated, useNomenclatureStore } from '@/stores/nomenclature';
+import { type SemiProduct, useNomenclatureStore, useNomHydrated } from '@/stores/nomenclature';
 import {
   inputClass,
   primaryBtnClass,
@@ -126,11 +126,19 @@ function SemiProductsInner() {
                     <td className="px-2 py-3">
                       <div className="flex items-center gap-2">
                         <span
-                          className={cn('inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full', !p.isActive && 'opacity-30')}
+                          className={cn(
+                            'inline-block h-2.5 w-2.5 flex-shrink-0 rounded-full',
+                            !p.isActive && 'opacity-30',
+                          )}
                           style={{ backgroundColor: catColor(p.categoryId) }}
                           aria-hidden
                         />
-                        <span className={cn('font-medium text-[#16221f] dark:text-[#e2e8f0]', !p.isActive && 'opacity-50')}>
+                        <span
+                          className={cn(
+                            'font-medium text-[#16221f] dark:text-[#e2e8f0]',
+                            !p.isActive && 'opacity-50',
+                          )}
+                        >
                           {p.name}
                         </span>
                         {!p.isActive && (
@@ -140,11 +148,17 @@ function SemiProductsInner() {
                         )}
                       </div>
                       {p.note && (
-                        <p className="mt-0.5 max-w-[28ch] truncate text-[12px] text-[#62716d] dark:text-[#94a3b8]">{p.note}</p>
+                        <p className="mt-0.5 max-w-[28ch] truncate text-[12px] text-[#62716d] dark:text-[#94a3b8]">
+                          {p.note}
+                        </p>
                       )}
                     </td>
-                    <td className="px-2 py-3 text-[#62716d] dark:text-[#94a3b8]">{catName(p.categoryId)}</td>
-                    <td className="px-2 py-3 text-[#62716d] dark:text-[#94a3b8]">{p.unit || '—'}</td>
+                    <td className="px-2 py-3 text-[#62716d] dark:text-[#94a3b8]">
+                      {catName(p.categoryId)}
+                    </td>
+                    <td className="px-2 py-3 text-[#62716d] dark:text-[#94a3b8]">
+                      {p.unit || '—'}
+                    </td>
                     <td className="px-2 py-3 text-right tabular-nums [font-feature-settings:'tnum'] text-[#16221f] dark:text-[#e2e8f0]">
                       {fmtQty(p.outputQty)}
                     </td>
@@ -177,7 +191,11 @@ function SemiProductsInner() {
       </SettingsCard>
 
       {dialog !== null && (
-        <SemiProductFormDialog product={editing} onClose={() => setDialog(null)} onSaved={() => setDialog(null)} />
+        <SemiProductFormDialog
+          product={editing}
+          onClose={() => setDialog(null)}
+          onSaved={() => setDialog(null)}
+        />
       )}
     </div>
   );

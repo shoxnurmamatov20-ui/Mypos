@@ -15,14 +15,14 @@ import {
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { KpiCard } from '@/components/dashboard/kpi-card';
-import { TenantsPagination, type PerPage } from '@/components/tenants/tenants-pagination';
-import { cn } from '@/lib/cn';
+import { type PerPage, TenantsPagination } from '@/components/tenants/tenants-pagination';
 import {
-  fetchAuditActions,
-  fetchAuditLogs,
   type AuditLogFilters,
   type AuditLogRecord,
+  fetchAuditActions,
+  fetchAuditLogs,
 } from '@/lib/api-helpers';
+import { cn } from '@/lib/cn';
 import { AuditDetailModal } from './audit-detail-modal';
 import {
   AuditSeverityChips,
@@ -264,9 +264,7 @@ export function AuditView() {
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
             {t('title')}
           </h1>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            {t('subtitle')}
-          </p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{t('subtitle')}</p>
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           <LiveIndicator live={isLive} t={t} />
@@ -353,11 +351,7 @@ export function AuditView() {
 
       {/* Severity chips */}
       <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-3 md:px-5 md:py-3.5">
-        <AuditSeverityChips
-          current={severityFilter}
-          onChange={setSeverityFilter}
-          counts={counts}
-        />
+        <AuditSeverityChips current={severityFilter} onChange={setSeverityFilter} counts={counts} />
       </div>
 
       {/* Filters card */}
@@ -575,10 +569,7 @@ function LiveIndicator({ live, t }: LiveIndicatorProps) {
   );
 }
 
-type FilterSelectProps = Omit<
-  React.SelectHTMLAttributes<HTMLSelectElement>,
-  'onChange'
-> & {
+type FilterSelectProps = Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> & {
   onChange: (value: string) => void;
 };
 
@@ -680,7 +671,10 @@ function TableSkeleton() {
       <div className="h-9 bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-800" />
       <ul className="divide-y divide-gray-100 dark:divide-gray-800">
         {Array.from({ length: 6 }, (_, idx) => (
-          <li key={idx} className="px-3 py-3 space-y-2 border-l-[3px] border-l-gray-200 dark:border-l-gray-800">
+          <li
+            key={idx}
+            className="px-3 py-3 space-y-2 border-l-[3px] border-l-gray-200 dark:border-l-gray-800"
+          >
             <div className="flex items-center gap-3">
               <div className="h-3 w-24 rounded animate-pulse bg-gray-200 dark:bg-gray-800" />
               <div className="h-5 w-20 rounded-full animate-pulse bg-gray-200 dark:bg-gray-800" />

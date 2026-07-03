@@ -7,13 +7,13 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { OrderCard, totalItemsInOrder } from '@/components/orders/order-card';
+import { type DateLocale, formatRelativeDate } from '@/lib/relative-date';
 import {
   deriveOrderStatus,
   loadAllMockOrders,
   type MockOrder,
   type MockOrderStatus,
 } from '@/lib/save-order';
-import { type DateLocale, formatRelativeDate } from '@/lib/relative-date';
 
 type FilterKey = 'all' | 'active' | 'completed';
 const FILTER_KEYS: readonly FilterKey[] = ['all', 'active', 'completed'];
@@ -48,10 +48,7 @@ export default function OrdersPage() {
     refetchInterval: REFETCH_INTERVAL_MS,
   });
 
-  const dateLabels = useMemo(
-    () => ({ today: t('today'), yesterday: t('yesterday') }),
-    [t],
-  );
+  const dateLabels = useMemo(() => ({ today: t('today'), yesterday: t('yesterday') }), [t]);
 
   const enriched: Enriched[] = useMemo(() => {
     const list = orders ?? [];

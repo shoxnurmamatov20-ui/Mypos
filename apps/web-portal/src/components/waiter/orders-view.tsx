@@ -1,15 +1,10 @@
 'use client';
 
+import { cn, PageHeader } from '@mypos/ui';
 import { Receipt, Users } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
-import { cn, PageHeader } from '@mypos/ui';
-import {
-  formatSom,
-  getWaiterData,
-  type OrderStatus,
-  type WaiterOrder,
-} from '@/lib/waiter-data';
+import { formatSom, getWaiterData, type OrderStatus, type WaiterOrder } from '@/lib/waiter-data';
 import { type PillTone, StatusPill } from './status-pill';
 
 const STATUS_TONE: Record<OrderStatus, PillTone> = {
@@ -99,10 +94,7 @@ function OrderCard({ order }: { order: WaiterOrder }) {
             </p>
           </div>
         </div>
-        <StatusPill
-          tone={STATUS_TONE[order.status]}
-          label={t(`orders.status.${order.status}`)}
-        />
+        <StatusPill tone={STATUS_TONE[order.status]} label={t(`orders.status.${order.status}`)} />
       </div>
 
       <div className="mt-3 flex items-center gap-1.5 text-[12px] text-[#62716d]">
@@ -117,9 +109,7 @@ function OrderCard({ order }: { order: WaiterOrder }) {
             <span className="text-[#16221f]">
               <span className="font-semibold tabular-nums">{item.qty}×</span> {item.name}
             </span>
-            <span className="tabular-nums text-[#62716d]">
-              {formatSom(item.price * item.qty)}
-            </span>
+            <span className="tabular-nums text-[#62716d]">{formatSom(item.price * item.qty)}</span>
           </div>
         ))}
       </div>

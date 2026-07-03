@@ -1,6 +1,6 @@
 'use client';
 
-import { departmentsApi, type Department } from '@mypos/api-client';
+import { type Department, departmentsApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -28,10 +28,7 @@ export function DepartmentsManager() {
   const total: number = departments.length;
   const activeCount = departments.filter((d) => d.is_active).length;
   const inactiveCount = total - activeCount;
-  const employeesTotal = departments.reduce(
-    (sum, d) => sum + (d.employees_count ?? 0),
-    0,
-  );
+  const employeesTotal = departments.reduce((sum, d) => sum + (d.employees_count ?? 0), 0);
 
   return (
     <div>

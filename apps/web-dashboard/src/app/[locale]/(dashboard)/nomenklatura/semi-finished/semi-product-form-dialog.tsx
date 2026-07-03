@@ -1,16 +1,16 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import { useTranslations } from 'next-intl';
 import { useEffect, useId, useState } from 'react';
 import { toast } from 'sonner';
-import { cn } from '@mypos/ui';
 import { type SemiProduct, useNomenclatureStore } from '@/stores/nomenclature';
 import {
   Field,
-  Toggle,
   inputClass,
   primaryBtnClass,
   secondaryBtnClass,
+  Toggle,
 } from '../../settings/_components/settings-ui';
 
 interface Props {
@@ -69,7 +69,10 @@ export function SemiProductFormDialog({ product, onClose, onSaved }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      onClick={onClose}
+    >
       <div
         role="dialog"
         aria-modal="true"
@@ -94,7 +97,12 @@ export function SemiProductFormDialog({ product, onClose, onSaved }: Props) {
           </Field>
 
           <Field label={t('category')}>
-            <select className={inputClass} value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required>
+            <select
+              className={inputClass}
+              value={categoryId}
+              onChange={(e) => setCategoryId(e.target.value)}
+              required
+            >
               <option value="" disabled>
                 {t('semi.select_category')}
               </option>
@@ -139,7 +147,9 @@ export function SemiProductFormDialog({ product, onClose, onSaved }: Props) {
           </Field>
 
           <div className="flex items-center justify-between gap-4 py-1">
-            <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{t('active')}</span>
+            <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+              {t('active')}
+            </span>
             <Toggle checked={isActive} onChange={setIsActive} ariaLabel={t('active')} />
           </div>
 
@@ -147,7 +157,11 @@ export function SemiProductFormDialog({ product, onClose, onSaved }: Props) {
             <button type="button" onClick={onClose} className={secondaryBtnClass}>
               {t('cancel')}
             </button>
-            <button type="submit" disabled={name.trim().length === 0 || !categoryId} className={primaryBtnClass}>
+            <button
+              type="submit"
+              disabled={name.trim().length === 0 || !categoryId}
+              className={primaryBtnClass}
+            >
               {t('save')}
             </button>
           </div>

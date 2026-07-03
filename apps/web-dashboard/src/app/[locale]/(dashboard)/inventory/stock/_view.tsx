@@ -1,28 +1,22 @@
 'use client';
 
-import { inventoryApi, type Ingredient } from '@mypos/api-client';
+import { type Ingredient, inventoryApi } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useQuery } from '@tanstack/react-query';
-import {
-  AlertTriangle,
-  Package,
-  PackageX,
-  PiggyBank,
-  Search,
-} from 'lucide-react';
+import { AlertTriangle, Package, PackageX, PiggyBank, Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { apiClient } from '@/lib/api';
 import { DashStatCard } from '../../_components/stat-card';
-import { WarehouseSelect } from '../_components/warehouse-select';
+import { formatNumber } from '../_components/format';
 import {
   EmptyState,
   ErrorBanner,
+  inputClass,
   StatStripSkeleton,
   TableSkeleton,
-  inputClass,
 } from '../_components/ui-helpers';
-import { formatNumber } from '../_components/format';
+import { WarehouseSelect } from '../_components/warehouse-select';
 
 export function StockBalanceView() {
   const t = useTranslations('inventory');
@@ -46,7 +40,7 @@ export function StockBalanceView() {
   const ingredients: Ingredient[] = query.data?.data ?? [];
 
   const stats = useMemo(() => {
-    let total = ingredients.length;
+    const total = ingredients.length;
     let low = 0;
     let out = 0;
     let value = 0;
@@ -121,10 +115,7 @@ export function StockBalanceView() {
       ) : query.isError ? (
         <ErrorBanner onRetry={() => void query.refetch()} />
       ) : ingredients.length === 0 ? (
-        <EmptyState
-          icon={Package}
-          title={t('empty.stock')}
-        />
+        <EmptyState icon={Package} title={t('empty.stock')} />
       ) : (
         <div className="overflow-hidden rounded-xl border border-[rgba(22,34,31,0.09)] bg-white dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]">
           <table className="w-full text-sm">

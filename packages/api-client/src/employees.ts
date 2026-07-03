@@ -5,13 +5,7 @@ export type EmployeeStatus = 'active' | 'on_leave' | 'terminated';
 export type ShiftStatus = 'scheduled' | 'open' | 'closed' | 'missed';
 export type ClockSource = 'manual' | 'pos' | 'mobile' | 'kiosk';
 
-export type EmployeePosition =
-  | 'owner'
-  | 'manager'
-  | 'cashier'
-  | 'waiter'
-  | 'chef'
-  | 'courier';
+export type EmployeePosition = 'owner' | 'manager' | 'cashier' | 'waiter' | 'chef' | 'courier';
 
 export type EmployeeUserSummary = {
   uuid: string;
@@ -157,10 +151,7 @@ const buildQueryString = (params: Record<string, unknown> | undefined): string =
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 export const employeesApi = {

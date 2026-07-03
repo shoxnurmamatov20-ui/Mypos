@@ -1,6 +1,6 @@
 'use client';
 
-import { tablesApi, type CreateTableCategoryInput, type TableCategory } from '@mypos/api-client';
+import { type CreateTableCategoryInput, type TableCategory, tablesApi } from '@mypos/api-client';
 import {
   Badge,
   Button,
@@ -205,13 +205,22 @@ export function TableCategoriesClient() {
       >
         <div className="grid gap-3">
           <FormField label={t('name_uz')} required>
-            <Input value={form.name_uz} onChange={(e) => setForm({ ...form, name_uz: e.target.value })} />
+            <Input
+              value={form.name_uz}
+              onChange={(e) => setForm({ ...form, name_uz: e.target.value })}
+            />
           </FormField>
           <FormField label={t('name_ru')}>
-            <Input value={form.name_ru} onChange={(e) => setForm({ ...form, name_ru: e.target.value })} />
+            <Input
+              value={form.name_ru}
+              onChange={(e) => setForm({ ...form, name_ru: e.target.value })}
+            />
           </FormField>
           <FormField label={t('name_en')}>
-            <Input value={form.name_en} onChange={(e) => setForm({ ...form, name_en: e.target.value })} />
+            <Input
+              value={form.name_en}
+              onChange={(e) => setForm({ ...form, name_en: e.target.value })}
+            />
           </FormField>
           <div className="grid grid-cols-2 gap-3">
             <FormField label={t('sort_order')}>

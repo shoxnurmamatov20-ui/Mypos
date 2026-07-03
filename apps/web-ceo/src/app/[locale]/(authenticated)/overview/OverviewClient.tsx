@@ -53,13 +53,7 @@ export function OverviewClient({ locale }: { locale: string }) {
   );
 }
 
-function Loaded({
-  data,
-  t,
-}: {
-  data: Data;
-  t: ReturnType<typeof useTranslations>;
-}) {
+function Loaded({ data, t }: { data: Data; t: ReturnType<typeof useTranslations> }) {
   const { metrics } = data;
   const max30 = Math.max(metrics.last_30_days.revenue_minor, 1);
   const pct = (n: number) => Math.min(100, Math.round((n / max30) * 100));
@@ -138,15 +132,7 @@ function Loaded({
   );
 }
 
-function PeriodRow({
-  label,
-  revenue,
-  orders,
-}: {
-  label: string;
-  revenue: number;
-  orders: number;
-}) {
+function PeriodRow({ label, revenue, orders }: { label: string; revenue: number; orders: number }) {
   return (
     <tr className="border-t border-[rgba(22,34,31,0.06)] dark:border-[rgba(255,255,255,0.06)]">
       <td className="py-2.5 font-semibold text-[#16221f] dark:text-white">{label}</td>

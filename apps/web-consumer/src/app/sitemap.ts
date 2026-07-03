@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
-import { publicConsumerApi } from '@/lib/public-api';
 import { routing } from '@/i18n/routing';
+import { publicConsumerApi } from '@/lib/public-api';
 
 const SITE_URL = 'https://mypos.uz';
 

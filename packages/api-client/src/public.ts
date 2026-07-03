@@ -41,19 +41,34 @@ export type PlaceQrOrderInput = {
   notes?: string | null;
 };
 
+export type SubmitOrderReviewInput = {
+  order_id: string;
+  rating: number;
+  food_rating?: number;
+  delivery_rating?: number;
+  comment?: string;
+  /** Anonymous flow — proves the caller was handed the order's tracking link. */
+  tracking_token?: string;
+};
+
+export type SubmitOrderReviewResponse = {
+  data: {
+    id: string;
+    order_id: string;
+    rating: number;
+    food_rating: number | null;
+    delivery_rating: number | null;
+    comment: string | null;
+  };
+};
+
 export const publicApi = {
   menu: {
     get: (client: MyPosApiClient, slug: string) =>
-      client.get<PublicMenuResponse>(
-        `/api/v1/public/menu/${encodeURIComponent(slug)}`,
-      ),
+      client.get<PublicMenuResponse>(`/api/v1/public/menu/${encodeURIComponent(slug)}`),
   },
   orders: {
-    place: (
-      client: MyPosApiClient,
-      slug: string,
-      input: PlaceQrOrderInput,
-    ) =>
+    place: (client: MyPosApiClient, slug: string, input: PlaceQrOrderInput) =>
       client.post<ResourceResponse<Order>>(
         `/api/v1/public/menu/${encodeURIComponent(slug)}/orders`,
         {
@@ -62,5 +77,7 @@ export const publicApi = {
           notes: input.notes ?? null,
         },
       ),
+    submitReview: (client: MyPosApiClient, input: SubmitOrderReviewInput) =>
+      client.post<SubmitOrderReviewResponse>('/api/v1/public/orders/review', input),
   },
 };

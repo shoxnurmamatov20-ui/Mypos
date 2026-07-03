@@ -12,13 +12,7 @@ export const STATUS_FILTERS: OrderStatus[] = [
   'cancelled',
 ];
 
-export const TYPE_FILTERS: OrderType[] = [
-  'dine_in',
-  'takeaway',
-  'delivery',
-  'qr_menu',
-  'telegram',
-];
+export const TYPE_FILTERS: OrderType[] = ['dine_in', 'takeaway', 'delivery', 'qr_menu', 'telegram'];
 
 export function OrdersFiltersToolbar({
   statusFilter,
@@ -116,15 +110,7 @@ export function OrdersFiltersToolbar({
   );
 }
 
-function Chip({
-  active,
-  onClick,
-  label,
-}: {
-  active: boolean;
-  onClick: () => void;
-  label: string;
-}) {
+function Chip({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
   return (
     <button
       type="button"

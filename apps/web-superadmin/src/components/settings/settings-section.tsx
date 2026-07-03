@@ -1,9 +1,9 @@
 'use client';
 
-import { Check, Loader2 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { useEffect, useState, type ReactNode } from 'react';
+import { Check, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { type ReactNode, useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/cn';
 
@@ -115,9 +115,7 @@ export function SettingsSection({
       </CardHeader>
       <div className="space-y-5">{children}</div>
       {footer ? (
-        <div className="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800">
-          {footer}
-        </div>
+        <div className="mt-5 pt-4 border-t border-gray-100 dark:border-gray-800">{footer}</div>
       ) : null}
     </Card>
   );
@@ -143,10 +141,7 @@ export function Field({ label, htmlFor, children, hint, required = false }: Fiel
   return (
     <div className="grid gap-2 sm:grid-cols-3 sm:items-start sm:gap-4">
       <div className="sm:pt-2.5">
-        <label
-          htmlFor={htmlFor}
-          className="block text-xs font-bold text-gray-900 dark:text-white"
-        >
+        <label htmlFor={htmlFor} className="block text-xs font-bold text-gray-900 dark:text-white">
           {label}
           {required ? (
             <span className="text-red-600 dark:text-red-400 ml-0.5" aria-hidden="true">
@@ -163,9 +158,7 @@ export function Field({ label, htmlFor, children, hint, required = false }: Fiel
       <div className="sm:col-span-2 space-y-1">
         {children}
         {hint ? (
-          <p className="sm:hidden text-[11px] text-gray-500 dark:text-gray-400">
-            {hint}
-          </p>
+          <p className="sm:hidden text-[11px] text-gray-500 dark:text-gray-400">{hint}</p>
         ) : null}
       </div>
     </div>

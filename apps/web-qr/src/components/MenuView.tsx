@@ -1,15 +1,10 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { type PublicMenuResponse, publicApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
-import { publicApi, type PublicMenuResponse } from '@mypos/api-client';
+import { useEffect, useMemo, useState } from 'react';
 import { apiClient } from '@/lib/api';
-import {
-  normalizeLocale,
-  pickTranslation,
-  translate,
-  type Locale,
-} from '@/lib/i18n';
+import { type Locale, normalizeLocale, pickTranslation, translate } from '@/lib/i18n';
 import { useCartStore } from '@/stores/cart';
 import { Cart } from './Cart';
 import { CartModal } from './CartModal';
@@ -48,7 +43,8 @@ export function MenuView({ slug, tableId }: Props) {
 
   const filteredItems = useMemo(() => {
     const all = menuQuery.data?.data.items ?? [];
-    let result = activeCategoryId === null ? all : all.filter((it) => it.category_id === activeCategoryId);
+    let result =
+      activeCategoryId === null ? all : all.filter((it) => it.category_id === activeCategoryId);
 
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -166,11 +162,7 @@ export function MenuView({ slug, tableId }: Props) {
 
       {tableId ? (
         <>
-          <Cart
-            locale={locale}
-            currency={currency}
-            onOpen={() => setCartOpen(true)}
-          />
+          <Cart locale={locale} currency={currency} onOpen={() => setCartOpen(true)} />
           <CartModal
             open={cartOpen}
             onClose={() => setCartOpen(false)}

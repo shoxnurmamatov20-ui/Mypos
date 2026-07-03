@@ -1,12 +1,12 @@
 'use client';
 
 import { format, formatDistanceToNow } from 'date-fns';
-import { ArrowDown, ArrowUp, ArrowUpDown, Bot, Server, ShieldCheck, User } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { ArrowDown, ArrowUp, ArrowUpDown, Bot, Server, ShieldCheck, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { SeverityBadge } from '@/components/dashboard/badges';
-import { cn } from '@/lib/cn';
 import type { AuditLogRecord } from '@/lib/api-helpers';
+import { cn } from '@/lib/cn';
 import type { AuditSeverity } from '@/types/super-admin';
 
 export type SortColumn = 'timestamp' | 'severity';
@@ -32,18 +32,34 @@ type ActorPresentation = {
 };
 
 const ACTOR_PRESENTATION: Record<ActorType, ActorPresentation> = {
-  user:        { icon: User,        bg: 'bg-blue-50 dark:bg-blue-500/15',     tint: 'text-blue-600 dark:text-blue-400'   },
-  super_admin: { icon: ShieldCheck, bg: 'bg-teal-50 dark:bg-teal-500/15',     tint: 'text-teal-700 dark:text-teal-400'   },
-  system:      { icon: Server,      bg: 'bg-gray-100 dark:bg-gray-800',       tint: 'text-gray-500 dark:text-gray-400'   },
-  api:         { icon: Bot,         bg: 'bg-purple-50 dark:bg-purple-500/15', tint: 'text-purple-600 dark:text-purple-400' },
+  user: {
+    icon: User,
+    bg: 'bg-blue-50 dark:bg-blue-500/15',
+    tint: 'text-blue-600 dark:text-blue-400',
+  },
+  super_admin: {
+    icon: ShieldCheck,
+    bg: 'bg-teal-50 dark:bg-teal-500/15',
+    tint: 'text-teal-700 dark:text-teal-400',
+  },
+  system: {
+    icon: Server,
+    bg: 'bg-gray-100 dark:bg-gray-800',
+    tint: 'text-gray-500 dark:text-gray-400',
+  },
+  api: {
+    icon: Bot,
+    bg: 'bg-purple-50 dark:bg-purple-500/15',
+    tint: 'text-purple-600 dark:text-purple-400',
+  },
 };
 
 /** 3px left border per row, colour-coded by severity. */
 const SEVERITY_BORDER: Record<ApiSeverity, string> = {
-  debug:    'border-l-blue-400 dark:border-l-blue-500',
-  info:     'border-l-blue-400 dark:border-l-blue-500',
-  warning:  'border-l-amber-400 dark:border-l-amber-500',
-  error:    'border-l-red-500 dark:border-l-red-500',
+  debug: 'border-l-blue-400 dark:border-l-blue-500',
+  info: 'border-l-blue-400 dark:border-l-blue-500',
+  warning: 'border-l-amber-400 dark:border-l-amber-500',
+  error: 'border-l-red-500 dark:border-l-red-500',
   critical: 'border-l-red-700 dark:border-l-red-400',
 };
 

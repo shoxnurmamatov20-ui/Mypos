@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  wasteDocumentsApi,
   type ListWasteDocumentsParams,
   type WasteDocument,
   type WasteReason,
+  wasteDocumentsApi,
 } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -22,24 +22,19 @@ import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { apiClient } from '@/lib/api';
 import { DashStatCard } from '../../_components/stat-card';
+import { daysAgo, formatDate, startOfMonth, today } from '../_components/format';
 import { ReasonBadge, StatusBadge } from '../_components/status-badge';
-import { WasteDetail } from '../_components/waste-detail';
-import { WasteDocumentForm } from '../_components/waste-document-form';
 import {
   EmptyState,
   ErrorBanner,
-  StatStripSkeleton,
-  TableSkeleton,
   inputClass,
   primaryBtnClass,
+  StatStripSkeleton,
+  TableSkeleton,
 } from '../_components/ui-helpers';
 import { WarehouseSelect } from '../_components/warehouse-select';
-import {
-  daysAgo,
-  formatDate,
-  startOfMonth,
-  today,
-} from '../_components/format';
+import { WasteDetail } from '../_components/waste-detail';
+import { WasteDocumentForm } from '../_components/waste-document-form';
 
 const REASONS: WasteReason[] = ['expired', 'damaged', 'lost', 'theft', 'other'];
 
@@ -193,11 +188,7 @@ export function WasteView() {
           icon={TrendingDown}
           title={t('empty.waste')}
           action={
-            <button
-              type="button"
-              onClick={() => setCreating(true)}
-              className={primaryBtnClass}
-            >
+            <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
               <Plus className="h-4 w-4" />
               {t('actions.new_waste')}
             </button>

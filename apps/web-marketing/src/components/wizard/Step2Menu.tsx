@@ -75,10 +75,7 @@ export function Step2Menu() {
       aria-labelledby="step2-title"
       className="rounded-card border border-hairline-soft bg-canvas p-lg shadow-hairline-ring sm:p-xl"
     >
-      <h2
-        id="step2-title"
-        className="font-display font-semibold text-display-sm text-ink"
-      >
+      <h2 id="step2-title" className="font-display font-semibold text-display-sm text-ink">
         {t('title')}
       </h2>
       <p className="mt-xs text-caption text-ink-muted-80">{t('subtitle')}</p>
@@ -143,7 +140,10 @@ export function Step2Menu() {
       </div>
 
       {error && (
-        <p role="alert" className="mt-md rounded-pearl bg-error-soft px-md py-xs text-caption text-error">
+        <p
+          role="alert"
+          className="mt-md rounded-pearl bg-error-soft px-md py-xs text-caption text-error"
+        >
           {tErr(error)}
         </p>
       )}
@@ -167,9 +167,15 @@ export function Step2Menu() {
             <table className="w-full divide-y divide-hairline-soft text-caption">
               <thead className="sticky top-0 bg-parchment text-fine-print text-ink-muted-48 uppercase tracking-wider">
                 <tr>
-                  <th className="px-sm py-xs text-left font-display font-semibold">{t('col_name')}</th>
-                  <th className="px-sm py-xs text-left font-display font-semibold">{t('col_category')}</th>
-                  <th className="px-sm py-xs text-right font-display font-semibold">{t('col_price')}</th>
+                  <th className="px-sm py-xs text-left font-display font-semibold">
+                    {t('col_name')}
+                  </th>
+                  <th className="px-sm py-xs text-left font-display font-semibold">
+                    {t('col_category')}
+                  </th>
+                  <th className="px-sm py-xs text-right font-display font-semibold">
+                    {t('col_price')}
+                  </th>
                   <th className="w-10" />
                 </tr>
               </thead>

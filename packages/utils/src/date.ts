@@ -42,9 +42,7 @@ export function minutesSince(date: Date, now: Date = new Date()): number {
 /** Today's start (midnight) in Tashkent */
 export function startOfToday(): Date {
   const now = new Date();
-  const uzDate = new Date(
-    now.toLocaleString('en-US', { timeZone: UZ_TIMEZONE }),
-  );
+  const uzDate = new Date(now.toLocaleString('en-US', { timeZone: UZ_TIMEZONE }));
   uzDate.setHours(0, 0, 0, 0);
   return uzDate;
 }

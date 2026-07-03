@@ -2,8 +2,8 @@
 
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
 import { useTheme } from 'next-themes';
+import { useMemo } from 'react';
 import {
   Area,
   AreaChart,
@@ -29,10 +29,7 @@ export function RevenueChart({ data, periodLabel }: RevenueChartProps) {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === 'dark';
 
-  const total = useMemo(
-    () => data.reduce((sum, d) => sum + d.revenue_minor, 0),
-    [data],
-  );
+  const total = useMemo(() => data.reduce((sum, d) => sum + d.revenue_minor, 0), [data]);
 
   const grid = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(22,34,31,0.06)';
   const tick = isDark ? '#94a3b8' : '#62716d';

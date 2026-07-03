@@ -1,6 +1,6 @@
 'use client';
 
-import { departmentsApi, type Department } from '@mypos/api-client';
+import { type Department, departmentsApi } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -26,8 +26,7 @@ export function DepartmentList({
       toast.success(t('deleted'));
       onChanged();
     } catch (err) {
-      const message =
-        err instanceof Error && err.message ? err.message : t('delete_failed');
+      const message = err instanceof Error && err.message ? err.message : t('delete_failed');
       toast.error(message);
     }
   };
@@ -55,9 +54,7 @@ export function DepartmentList({
       </div>
 
       {isLoading ? (
-        <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">
-          {t('loading')}
-        </div>
+        <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('loading')}</div>
       ) : departments.length === 0 ? (
         <div className="rounded-xl border border-dashed border-[rgba(22,34,31,0.12)] dark:border-[rgba(255,255,255,0.10)] p-12 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
           {t('empty')}
@@ -77,10 +74,7 @@ export function DepartmentList({
             </thead>
             <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
               {departments.map((d) => (
-                <tr
-                  key={d.id}
-                  className="hover:bg-[#f5f8f7] dark:hover:bg-[#0b1120]"
-                >
+                <tr key={d.id} className="hover:bg-[#f5f8f7] dark:hover:bg-[#0b1120]">
                   <td className="px-4 py-3 font-semibold text-[#16221f] dark:text-white">
                     {d.name}
                   </td>

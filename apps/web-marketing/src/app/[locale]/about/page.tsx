@@ -1,3 +1,4 @@
+import type { Icon } from '@phosphor-icons/react';
 import {
   ArrowRight,
   Briefcase,
@@ -15,7 +16,6 @@ import {
   Target,
   Users,
 } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -30,65 +30,92 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const COMPANY_STATS = [
-  { value: '2023',  label: "Tashkil topgan",      Icon: Rocket    },
-  { value: '500+',  label: "restoran",             Icon: Buildings },
-  { value: '12',    label: "shahar",               Icon: MapPin    },
-  { value: '40+',   label: "jamoa a'zosi",         Icon: Users     },
+  { value: '2023', label: 'Tashkil topgan', Icon: Rocket },
+  { value: '500+', label: 'restoran', Icon: Buildings },
+  { value: '12', label: 'shahar', Icon: MapPin },
+  { value: '40+', label: "jamoa a'zosi", Icon: Users },
 ] as const;
 
-const VALUES: ReadonlyArray<{ Icon: Icon; tint: string; bg: string; title: string; body: string }> = [
-  {
-    Icon: HandHeart, tint: 'text-[#ff0037]', bg: 'bg-[rgba(255,0,55,0.15)]',
-    title: "Mijozga yaqinlik",
-    body: 'Har bir mijoz to\'g\'ridan-to\'g\'ri jamoa rahbarlariga murojaat qila oladi. Biz har bir feedback\'ni jiddiy olamiz va product roadmap\'imizning 70% mijoz so\'rovi.',
-  },
-  {
-    Icon: Lightning, tint: 'text-amber-400', bg: 'bg-amber-500/15',
-    title: 'Tezlik va sifat',
-    body: 'Buyurtma 2 soniya, javob 5 daqiqa, deploy haftada 3 marta. Lekin tezlik sifatni qurbon qilmaydi — har xususiyat real restoranda sinaladi.',
-  },
-  {
-    Icon: Globe, tint: 'text-emerald-400', bg: 'bg-emerald-500/15',
-    title: "Mahalliy ekspertiza",
-    body: "Tashkent'da yaratilgan. UZ/RU/EN — barchasi birinchi class. Click va Payme bilan native integratsiya. O\'zbek restoran biznesining nyuansi bizga tanish.",
-  },
-  {
-    Icon: Eye, tint: 'text-blue-400', bg: 'bg-blue-500/15',
-    title: 'Ochiqlik',
-    body: 'Narxlar shaffof. Status page real-time. Roadmap public. Yashirin to\'lov yo\'q, yashirin xususiyat yo\'q. Sizning ma\'lumotingiz — sizniki.',
-  },
-];
+const VALUES: ReadonlyArray<{ Icon: Icon; tint: string; bg: string; title: string; body: string }> =
+  [
+    {
+      Icon: HandHeart,
+      tint: 'text-[#ff0037]',
+      bg: 'bg-[rgba(255,0,55,0.15)]',
+      title: 'Mijozga yaqinlik',
+      body: "Har bir mijoz to'g'ridan-to'g'ri jamoa rahbarlariga murojaat qila oladi. Biz har bir feedback'ni jiddiy olamiz va product roadmap'imizning 70% mijoz so'rovi.",
+    },
+    {
+      Icon: Lightning,
+      tint: 'text-amber-400',
+      bg: 'bg-amber-500/15',
+      title: 'Tezlik va sifat',
+      body: 'Buyurtma 2 soniya, javob 5 daqiqa, deploy haftada 3 marta. Lekin tezlik sifatni qurbon qilmaydi — har xususiyat real restoranda sinaladi.',
+    },
+    {
+      Icon: Globe,
+      tint: 'text-emerald-400',
+      bg: 'bg-emerald-500/15',
+      title: 'Mahalliy ekspertiza',
+      body: "Tashkent'da yaratilgan. UZ/RU/EN — barchasi birinchi class. Click va Payme bilan native integratsiya. O'zbek restoran biznesining nyuansi bizga tanish.",
+    },
+    {
+      Icon: Eye,
+      tint: 'text-blue-400',
+      bg: 'bg-blue-500/15',
+      title: 'Ochiqlik',
+      body: "Narxlar shaffof. Status page real-time. Roadmap public. Yashirin to'lov yo'q, yashirin xususiyat yo'q. Sizning ma'lumotingiz — sizniki.",
+    },
+  ];
 
-const TIMELINE: ReadonlyArray<{ year: string; quarter: string; title: string; body: string; Icon: Icon }> = [
+const TIMELINE: ReadonlyArray<{
+  year: string;
+  quarter: string;
+  title: string;
+  body: string;
+  Icon: Icon;
+}> = [
   {
-    year: '2023', quarter: 'Q2', Icon: Rocket,
-    title: "Loyiha boshlandi",
+    year: '2023',
+    quarter: 'Q2',
+    Icon: Rocket,
+    title: 'Loyiha boshlandi',
     body: "Toshkent'dagi 3 nafar restoran egasi va 2 nafar muhandis tomonidan asos solindi.",
   },
   {
-    year: '2023', quarter: 'Q4', Icon: Buildings,
+    year: '2023',
+    quarter: 'Q4',
+    Icon: Buildings,
     title: 'Birinchi 10 ta restoran',
-    body: "Osh Markazi, Pizza House va Cafe Aroma birinchi mijozlar — hozirgacha hamkor.",
+    body: 'Osh Markazi, Pizza House va Cafe Aroma birinchi mijozlar — hozirgacha hamkor.',
   },
   {
-    year: '2024', quarter: 'Q2', Icon: Sparkle,
+    year: '2024',
+    quarter: 'Q2',
+    Icon: Sparkle,
     title: 'AI yordamchi ishga tushdi',
     body: 'Claude asosida menyu tarjimasi, talab bashorati va inventar optimallashtirish.',
   },
   {
-    year: '2024', quarter: 'Q4', Icon: Globe,
-    title: "Kengayish: 100+ shahar",
-    body: 'Toshkent, Samarqand, Buxoro, Andijon, Namangan, Farg\'ona va boshqa shaharlarga yetib bordik.',
+    year: '2024',
+    quarter: 'Q4',
+    Icon: Globe,
+    title: 'Kengayish: 100+ shahar',
+    body: "Toshkent, Samarqand, Buxoro, Andijon, Namangan, Farg'ona va boshqa shaharlarga yetib bordik.",
   },
   {
-    year: '2025', quarter: 'Q2', Icon: Star,
+    year: '2025',
+    quarter: 'Q2',
+    Icon: Star,
     title: '500+ restoran milestone',
-    body: 'Markaziy Osiyo bo\'ylab eng tezroq o\'sayotgan POS platforma bo\'lib qoldik.',
+    body: "Markaziy Osiyo bo'ylab eng tezroq o'sayotgan POS platforma bo'lib qoldik.",
   },
   {
-    year: '2026', quarter: 'Q1', Icon: Heart,
-    title: "Bugun va kelajak",
-    body: '40+ jamoa a\'zosi · 1M+ oylik buyurtma · 98% mijoz mamnunligi. Markaziy Osiyo bo\'ylab kengayishni davom ettiramiz.',
+    year: '2026',
+    quarter: 'Q1',
+    Icon: Heart,
+    title: 'Bugun va kelajak',
+    body: "40+ jamoa a'zosi · 1M+ oylik buyurtma · 98% mijoz mamnunligi. Markaziy Osiyo bo'ylab kengayishni davom ettiramiz.",
   },
 ];
 
@@ -121,7 +148,12 @@ export default async function AboutPage({ params }: Props) {
           <div className="glass-card mx-auto mt-10 grid max-w-3xl grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden">
             {COMPANY_STATS.map((s) => (
               <div key={s.label} className="px-3 py-5 text-center bg-white/[0.02]">
-                <s.Icon size={18} weight="bold" className="mx-auto mb-2 text-[#5eead4]" aria-hidden="true" />
+                <s.Icon
+                  size={18}
+                  weight="bold"
+                  className="mx-auto mb-2 text-[#5eead4]"
+                  aria-hidden="true"
+                />
                 <div className="tabular text-[22px] sm:text-[24px] font-extrabold leading-none text-white">
                   {s.value}
                 </div>
@@ -144,12 +176,13 @@ export default async function AboutPage({ params }: Props) {
             </div>
             <p className="mt-4 text-[20px] sm:text-[24px] font-extrabold leading-[1.3] tracking-tight text-white">
               &ldquo;Markaziy Osiyodagi har bir restoranga{' '}
-              <span className="gradient-teal">global darajadagi texnologiya</span> berish —
-              sodda, qulay va arzon.&rdquo;
+              <span className="gradient-teal">global darajadagi texnologiya</span> berish — sodda,
+              qulay va arzon.&rdquo;
             </p>
             <p className="mt-5 text-[14px] sm:text-[15px] leading-relaxed text-white/70">
-              {t('mission')} Bizning yondashuv oddiy: restoran egasi POS texnologiyasini emas, mijozini va taomini boshqarishi kerak.
-              Biz shu uchun har bir interfeysni 2 soniyada o&apos;rganiladigan qilib, har bir hisobotni 1 bosishda olinadigan qilib yaratamiz.
+              {t('mission')} Bizning yondashuv oddiy: restoran egasi POS texnologiyasini emas,
+              mijozini va taomini boshqarishi kerak. Biz shu uchun har bir interfeysni 2 soniyada
+              o&apos;rganiladigan qilib, har bir hisobotni 1 bosishda olinadigan qilib yaratamiz.
             </p>
           </div>
         </div>
@@ -173,7 +206,9 @@ export default async function AboutPage({ params }: Props) {
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {VALUES.map((v) => (
               <article key={v.title} className="glass-card glass-card-hover rounded-2xl p-6">
-                <div className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${v.bg}`}>
+                <div
+                  className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${v.bg}`}
+                >
                   <v.Icon size={22} weight="bold" className={v.tint} />
                 </div>
                 <h3 className="mt-4 text-[17px] font-bold tracking-tight text-white">{v.title}</h3>
@@ -208,7 +243,9 @@ export default async function AboutPage({ params }: Props) {
                     <span className="text-white/40">·</span>
                     <span>{item.quarter}</span>
                   </div>
-                  <h3 className="mt-1.5 text-[15px] sm:text-[16px] font-bold text-white">{item.title}</h3>
+                  <h3 className="mt-1.5 text-[15px] sm:text-[16px] font-bold text-white">
+                    {item.title}
+                  </h3>
                   <p className="mt-1.5 text-[13px] leading-relaxed text-white/70">{item.body}</p>
                 </div>
               </li>
@@ -227,7 +264,11 @@ export default async function AboutPage({ params }: Props) {
               </div>
               <h3 className="mt-4 text-[15px] font-bold text-white">Bosh ofis</h3>
               <p className="mt-1.5 text-[13px] text-white/70 leading-relaxed">
-                Toshkent shahri,<br />Mirzo Ulug&apos;bek tumani,<br />Innovation Hub
+                Toshkent shahri,
+                <br />
+                Mirzo Ulug&apos;bek tumani,
+                <br />
+                Innovation Hub
               </p>
             </div>
             <div>
@@ -236,7 +277,11 @@ export default async function AboutPage({ params }: Props) {
               </div>
               <h3 className="mt-4 text-[15px] font-bold text-white">Ish vaqti</h3>
               <p className="mt-1.5 text-[13px] text-white/70 leading-relaxed">
-                Du–Ju: 09:00–19:00<br />Sh: 10:00–15:00<br />Texnik yordam: 24/7
+                Du–Ju: 09:00–19:00
+                <br />
+                Sh: 10:00–15:00
+                <br />
+                Texnik yordam: 24/7
               </p>
             </div>
             <div>
@@ -245,7 +290,10 @@ export default async function AboutPage({ params }: Props) {
               </div>
               <h3 className="mt-4 text-[15px] font-bold text-white">Karyera</h3>
               <p className="mt-1.5 text-[13px] text-white/70 leading-relaxed">
-                40+ jamoa a&apos;zosi<br />Doimo o&apos;sib boruvchi<br />
+                40+ jamoa a&apos;zosi
+                <br />
+                Doimo o&apos;sib boruvchi
+                <br />
                 <Link
                   href={`/${locale}/careers`}
                   className="inline-flex items-center gap-1 mt-1.5 text-[#5eead4] hover:text-white font-bold transition-colors"

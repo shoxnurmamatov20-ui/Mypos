@@ -1,12 +1,12 @@
 'use client';
 
-import { useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { type CategoryId, type Restaurant } from '@/data/restaurants';
+import { useMemo, useState } from 'react';
+import { RestaurantCardSkeleton } from '@/components/ui/skeleton';
+import type { CategoryId, Restaurant } from '@/data/restaurants';
+import { usePublicRestaurants } from '@/lib/hooks/use-public-restaurants';
 import { isPublicLocale, type PublicCuisine } from '@/lib/public-api';
 import { publicRestaurantsToUi } from '@/lib/public-api-mappers';
-import { usePublicRestaurants } from '@/lib/hooks/use-public-restaurants';
-import { RestaurantCardSkeleton } from '@/components/ui/skeleton';
 import { CuisineFilterChips } from './cuisine-filter-chips';
 import { RestaurantCard } from './restaurant-card';
 import { SortDropdown, type SortKey } from './sort-dropdown';
@@ -73,9 +73,7 @@ export function RestaurantsGrid() {
             <span
               aria-hidden="true"
               className={
-                openOnly
-                  ? 'h-2 w-2 rounded-full bg-white'
-                  : 'h-2 w-2 rounded-full bg-mint-500'
+                openOnly ? 'h-2 w-2 rounded-full bg-white' : 'h-2 w-2 rounded-full bg-mint-500'
               }
             />
             {t('filter_open')}

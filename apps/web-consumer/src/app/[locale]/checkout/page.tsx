@@ -1,8 +1,8 @@
 'use client';
 
+import { Loader2, Plus } from 'lucide-react';
 import type { Route } from 'next';
 import { useParams, useRouter } from 'next/navigation';
-import { Loader2, Plus } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { AddressCard } from '@/components/checkout/address-card';
@@ -10,20 +10,16 @@ import { CheckoutOrderSummary } from '@/components/checkout/order-summary';
 import { PaymentMethodGrid } from '@/components/checkout/payment-method-grid';
 import { computeCartFees } from '@/lib/cart-fees';
 import { formatSom } from '@/lib/format';
-import { saveMockOrder } from '@/lib/save-order';
 import {
   isPublicLocale,
-  publicConsumerApi,
   PublicApiError,
   type PublicOrderInput,
+  publicConsumerApi,
 } from '@/lib/public-api';
+import { saveMockOrder } from '@/lib/save-order';
 import { useAuthStore } from '@/stores/auth';
 import { selectCartTotal, useCartStore } from '@/stores/cart';
-import {
-  type PaymentMethod,
-  selectActiveAddress,
-  useCheckoutStore,
-} from '@/stores/checkout';
+import { type PaymentMethod, selectActiveAddress, useCheckoutStore } from '@/stores/checkout';
 
 /**
  * Checkout page — `/[locale]/checkout`.
@@ -112,7 +108,7 @@ export default function CheckoutPage() {
         city: activeAddress.city ?? null,
         notes: activeAddress.apartment
           ? `${activeAddress.apartment}${activeAddress.notes ? ` — ${activeAddress.notes}` : ''}`
-          : activeAddress.notes ?? null,
+          : (activeAddress.notes ?? null),
       },
       payment_method: paymentMethod,
       notes: orderNotes.trim() ? orderNotes.trim() : null,
@@ -174,9 +170,7 @@ export default function CheckoutPage() {
         <h1 className="font-display text-3xl font-extrabold text-neutral-900 sm:text-4xl">
           {t('title')}
         </h1>
-        <Stepper
-          labels={[t('step_address'), t('step_payment'), t('step_review')]}
-        />
+        <Stepper labels={[t('step_address'), t('step_payment'), t('step_review')]} />
       </header>
 
       <div className="mt-8 flex flex-col gap-8">

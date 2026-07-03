@@ -2,9 +2,16 @@
 
 import { Filter, Globe, Search, X } from 'lucide-react';
 import { useState } from 'react';
-import { translate, type Locale } from '@/lib/i18n';
+import { type Locale, translate } from '@/lib/i18n';
 
-const DIETARY_TAGS = ['vegan', 'vegetarian', 'gluten-free', 'lactose-free', 'spicy', 'halal'] as const;
+const DIETARY_TAGS = [
+  'vegan',
+  'vegetarian',
+  'gluten-free',
+  'lactose-free',
+  'spicy',
+  'halal',
+] as const;
 type DietaryTag = (typeof DIETARY_TAGS)[number];
 
 const TAG_LABEL_KEY: Record<DietaryTag, string> = {
@@ -140,7 +147,9 @@ export function MenuFilters({
                   setLangOpen(false);
                 }}
                 className={`flex items-center justify-between rounded-md px-3 py-2 text-sm font-semibold ${
-                  l === locale ? 'bg-brand-50 text-brand-700' : 'text-neutral-700 hover:bg-neutral-50'
+                  l === locale
+                    ? 'bg-brand-50 text-brand-700'
+                    : 'text-neutral-700 hover:bg-neutral-50'
                 }`}
               >
                 <span>{l === 'uz' ? "O'zbek" : l === 'ru' ? 'Русский' : 'English'}</span>

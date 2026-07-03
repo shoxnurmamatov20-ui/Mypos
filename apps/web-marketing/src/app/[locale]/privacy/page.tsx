@@ -1,3 +1,4 @@
+import type { Icon } from '@phosphor-icons/react';
 import {
   ArrowRight,
   CalendarBlank,
@@ -17,7 +18,6 @@ import {
   UserCircle,
   Warning,
 } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
@@ -37,23 +37,31 @@ type Principle = { Icon: Icon; tint: string; bg: string; title: string; body: st
 
 const PRINCIPLES: ReadonlyArray<Principle> = [
   {
-    Icon: Lock, tint: 'text-[#5eead4]', bg: 'bg-[rgba(20,184,166,0.15)]',
+    Icon: Lock,
+    tint: 'text-[#5eead4]',
+    bg: 'bg-[rgba(20,184,166,0.15)]',
     title: 'Shifrlash by default',
     body: "Barcha ma'lumotlar TLS 1.3 orqali uzatiladi · Diskda AES-256 · Parollar bcrypt + salt",
   },
   {
-    Icon: Database, tint: 'text-blue-400', bg: 'bg-blue-500/15',
+    Icon: Database,
+    tint: 'text-blue-400',
+    bg: 'bg-blue-500/15',
     title: "Ma'lumot — O'zbekistonda",
-    body: "Server UZCLOUD (Toshkent) · Backup Beeline DC · Hech qachon mamlakat tashqarisiga chiqmaydi",
+    body: 'Server UZCLOUD (Toshkent) · Backup Beeline DC · Hech qachon mamlakat tashqarisiga chiqmaydi',
   },
   {
-    Icon: Prohibit, tint: 'text-[#ff0037]', bg: 'bg-[rgba(255,0,55,0.15)]',
+    Icon: Prohibit,
+    tint: 'text-[#ff0037]',
+    bg: 'bg-[rgba(255,0,55,0.15)]',
     title: 'Hech kimga sotmaymiz',
     body: "Sizning ma'lumotingiz — sizniki. Reklama berasizmi, 3-tomonga sotamizmi — hech qachon",
   },
   {
-    Icon: Eye, tint: 'text-amber-400', bg: 'bg-amber-500/15',
-    title: 'To\'liq shaffof',
+    Icon: Eye,
+    tint: 'text-amber-400',
+    bg: 'bg-amber-500/15',
+    title: "To'liq shaffof",
     body: "Qanday ma'lumot yig'amiz · Qancha vaqt saqlaymiz · Kim ko'ra oladi — bu yerda yozilgan",
   },
 ];
@@ -73,7 +81,8 @@ const SECTIONS: ReadonlyArray<Section> = [
     id: 'collect',
     Icon: Database,
     title: "1. Biz qanday ma'lumotlarni yig'amiz",
-    intro: "MyPOS faqat sizga xizmat ko'rsatish uchun zarur bo'lgan ma'lumotlarni yig'adi. Hech qaysi qo'shimcha shaxsiy ma'lumot so'ralmaydi.",
+    intro:
+      "MyPOS faqat sizga xizmat ko'rsatish uchun zarur bo'lgan ma'lumotlarni yig'adi. Hech qaysi qo'shimcha shaxsiy ma'lumot so'ralmaydi.",
     items: [
       {
         label: "Hisob ma'lumotlari",
@@ -100,13 +109,13 @@ const SECTIONS: ReadonlyArray<Section> = [
     intro: "Yig'ilgan ma'lumotlardan faqat quyidagi maqsadlarda foydalanamiz:",
     bullets: [
       "Xizmat ko'rsatish — buyurtma, chek, hisobotlar",
-      "Texnik yordam — muammoni hal qilish va savollarga javob berish",
-      "Hisobchilik va soliq hisoboti — qonun talabiga muvofiq",
+      'Texnik yordam — muammoni hal qilish va savollarga javob berish',
+      'Hisobchilik va soliq hisoboti — qonun talabiga muvofiq',
       "Tizimni yaxshilash — yangi xususiyatlar va bug'larni topish",
       "Bog'lanish — muhim yangiliklar, tizim yangilanishlari (faqat ruxsat bilan)",
-      "Firibgarlik va xavfsizlik tahdidlarining oldini olish",
+      'Firibgarlik va xavfsizlik tahdidlarining oldini olish',
     ],
-    note: "Reklama, profil yaratish yoki 3-tomon xizmatlariga sotish uchun — HECH QACHON foydalanmaymiz.",
+    note: 'Reklama, profil yaratish yoki 3-tomon xizmatlariga sotish uchun — HECH QACHON foydalanmaymiz.',
   },
   {
     id: 'storage',
@@ -115,15 +124,15 @@ const SECTIONS: ReadonlyArray<Section> = [
     intro: "Sizning ma'lumotlaringiz xavfsiz va O'zbekiston hududidan tashqariga chiqmaydi.",
     items: [
       {
-        label: "Asosiy server",
+        label: 'Asosiy server',
         body: "UZCLOUD — Toshkent shahridagi sertifikatlangan ma'lumot markazi. Tier III sertifikat, 99.99% uptime kafolat.",
       },
       {
-        label: "Zaxira (backup)",
+        label: 'Zaxira (backup)',
         body: "Beeline DC — alohida ma'lumot markazi. Har 6 soatda zaxira nusxa olinadi, 30 kun saqlanadi.",
       },
       {
-        label: "Saqlash muddati",
+        label: 'Saqlash muddati',
         body: "Faol akkaunt — cheksiz. Bekor qilingan akkaunt — 90 kun ichida butunlay o'chiriladi (soliq hisoboti talabi bo'yicha moliyaviy ma'lumotlar 5 yil saqlanadi).",
       },
     ],
@@ -139,11 +148,11 @@ const SECTIONS: ReadonlyArray<Section> = [
         body: "Click, Payme, Uzcard — faqat tranzaksiyani amalga oshirish uchun zarur ma'lumotlar (summa, sana). Karta raqami biz tarafda hech qachon ko'rinmaydi.",
       },
       {
-        label: "Soliq idoralari",
+        label: 'Soliq idoralari',
         body: "Qonun talabi bo'yicha — Soliq qo'mitasi rasmiy so'rov yuborgan taqdirda, faqat soliq hisoboti uchun zarur ma'lumotlar.",
       },
       {
-        label: "MyPOS texnik xodimlari",
+        label: 'MyPOS texnik xodimlari',
         body: "Faqat texnik muammoni hal qilish uchun va siz ruxsat bergan taqdirda. Har bir kirish log qilinadi va siz ko'rishingiz mumkin.",
       },
     ],
@@ -152,8 +161,9 @@ const SECTIONS: ReadonlyArray<Section> = [
   {
     id: 'rights',
     Icon: Key,
-    title: "5. Sizning huquqlaringiz",
-    intro: "Siz ma'lumotlaringiz ustidan to'liq nazoratga egasiz. Quyidagi huquqlarni har qanday vaqtda amalga oshirishingiz mumkin:",
+    title: '5. Sizning huquqlaringiz',
+    intro:
+      "Siz ma'lumotlaringiz ustidan to'liq nazoratga egasiz. Quyidagi huquqlarni har qanday vaqtda amalga oshirishingiz mumkin:",
     bullets: [
       "Kirish — qanday ma'lumotlar saqlanganligini bilish",
       "To'g'rilash — noto'g'ri ma'lumotni o'zgartirish",
@@ -162,13 +172,14 @@ const SECTIONS: ReadonlyArray<Section> = [
       "Cheklash — ma'lum maqsadlarda foydalanishni taqiqlash",
       "Bog'lanmaslik — yangiliklar va xabarlarni o'chirish",
     ],
-    note: "Huquqlaringizdan foydalanish uchun: privacy@mypos.uz · 7 ish kunida javob beramiz.",
+    note: 'Huquqlaringizdan foydalanish uchun: privacy@mypos.uz · 7 ish kunida javob beramiz.',
   },
   {
     id: 'cookies',
     Icon: FileText,
     title: '6. Cookie va kuzatuv',
-    intro: "MyPOS faqat ishlash uchun zarur bo'lgan cookie'lardan foydalanadi. Reklama yoki kuzatuv cookie'lari yo'q.",
+    intro:
+      "MyPOS faqat ishlash uchun zarur bo'lgan cookie'lardan foydalanadi. Reklama yoki kuzatuv cookie'lari yo'q.",
     items: [
       {
         label: 'Zarur cookie',
@@ -187,14 +198,16 @@ const SECTIONS: ReadonlyArray<Section> = [
   {
     id: 'children',
     Icon: Warning,
-    title: "7. Bolalar va voyaga yetmaganlar",
-    intro: "MyPOS faqat 18+ yoshdagi tadbirkorlar uchun mo'ljallangan. 18 yoshga to'lmagan shaxslardan ma'lumot to'plamaymiz. Agar siz 18 yoshga to'lmagan bolaning ma'lumoti tizimimizda borligini aniqlasangiz, darhol privacy@mypos.uz manziliga xabar bering — biz uni darhol o'chirib tashlaymiz.",
+    title: '7. Bolalar va voyaga yetmaganlar',
+    intro:
+      "MyPOS faqat 18+ yoshdagi tadbirkorlar uchun mo'ljallangan. 18 yoshga to'lmagan shaxslardan ma'lumot to'plamaymiz. Agar siz 18 yoshga to'lmagan bolaning ma'lumoti tizimimizda borligini aniqlasangiz, darhol privacy@mypos.uz manziliga xabar bering — biz uni darhol o'chirib tashlaymiz.",
   },
   {
     id: 'changes',
     Icon: CalendarBlank,
-    title: '8. Siyosat o\'zgarishlari',
-    intro: "Ushbu siyosat vaqti-vaqti bilan yangilanishi mumkin. Har bir muhim o'zgarish haqida sizga email orqali 30 kun oldin xabar beramiz. So'nggi versiya har doim shu sahifada bo'ladi.",
+    title: "8. Siyosat o'zgarishlari",
+    intro:
+      "Ushbu siyosat vaqti-vaqti bilan yangilanishi mumkin. Har bir muhim o'zgarish haqida sizga email orqali 30 kun oldin xabar beramiz. So'nggi versiya har doim shu sahifada bo'ladi.",
   },
 ];
 
@@ -206,18 +219,21 @@ export default async function PrivacyPage({ params }: Props) {
     <main>
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#001B1B]">
-        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]" />
+        <div
+          aria-hidden="true"
+          className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]"
+        />
         <div className="relative mx-auto max-w-3xl px-5 pt-20 sm:pt-24 pb-10 text-center">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(15,118,110,0.25)] bg-[rgba(15,118,110,0.10)] text-[#5eead4] text-[11px] font-bold uppercase tracking-[0.08em]">
             <ShieldCheck size={11} weight="fill" />
             HUQUQIY
           </span>
           <h1 className="mt-5 text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold leading-[1.05] tracking-tight text-white">
-            Maxfiylik{' '}
-            <span className="gradient-teal">siyosati</span>
+            Maxfiylik <span className="gradient-teal">siyosati</span>
           </h1>
           <p className="mx-auto mt-4 max-w-[36rem] text-[15px] sm:text-[16px] leading-relaxed text-white/70">
-            Sizning ma&apos;lumotingiz — sizniki. Qanday yig&apos;amiz, qayerda saqlaymiz va qanday himoya qilamiz — barchasi shaffof.
+            Sizning ma&apos;lumotingiz — sizniki. Qanday yig&apos;amiz, qayerda saqlaymiz va qanday
+            himoya qilamiz — barchasi shaffof.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-2 text-[11.5px]">
@@ -248,10 +264,14 @@ export default async function PrivacyPage({ params }: Props) {
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {PRINCIPLES.map((p) => (
               <article key={p.title} className="glass-card glass-card-hover rounded-2xl p-5">
-                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${p.bg}`}>
+                <span
+                  className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${p.bg}`}
+                >
                   <p.Icon size={20} weight="bold" className={p.tint} />
                 </span>
-                <h3 className="mt-3.5 text-[14px] font-bold tracking-tight text-white">{p.title}</h3>
+                <h3 className="mt-3.5 text-[14px] font-bold tracking-tight text-white">
+                  {p.title}
+                </h3>
                 <p className="mt-1.5 text-[12px] leading-relaxed text-white/65">{p.body}</p>
               </article>
             ))}
@@ -275,7 +295,11 @@ export default async function PrivacyPage({ params }: Props) {
                       href={`#${s.id}`}
                       className="press group flex items-center gap-2 px-2.5 py-2 rounded-lg text-[12.5px] font-semibold text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                     >
-                      <s.Icon size={13} weight="bold" className="text-[#5eead4]/70 shrink-0 group-hover:text-[#5eead4] transition-colors" />
+                      <s.Icon
+                        size={13}
+                        weight="bold"
+                        className="text-[#5eead4]/70 shrink-0 group-hover:text-[#5eead4] transition-colors"
+                      />
                       <span className="truncate">{s.title.replace(/^\d+\.\s/, '')}</span>
                     </a>
                   </li>
@@ -302,18 +326,17 @@ export default async function PrivacyPage({ params }: Props) {
                 </div>
 
                 {s.intro ? (
-                  <p className="mt-4 text-[13.5px] leading-relaxed text-white/75">
-                    {s.intro}
-                  </p>
+                  <p className="mt-4 text-[13.5px] leading-relaxed text-white/75">{s.intro}</p>
                 ) : null}
 
                 {s.items ? (
                   <ul className="mt-4 space-y-3">
                     {s.items.map((it) => (
-                      <li key={it.label} className="rounded-xl ring-1 ring-inset ring-white/[0.08] bg-white/[0.02] px-4 py-3">
-                        <div className="text-[12.5px] font-bold text-white">
-                          {it.label}
-                        </div>
+                      <li
+                        key={it.label}
+                        className="rounded-xl ring-1 ring-inset ring-white/[0.08] bg-white/[0.02] px-4 py-3"
+                      >
+                        <div className="text-[12.5px] font-bold text-white">{it.label}</div>
                         <p className="mt-1 text-[12.5px] leading-relaxed text-white/65">
                           {it.body}
                         </p>
@@ -326,7 +349,11 @@ export default async function PrivacyPage({ params }: Props) {
                   <ul className="mt-4 space-y-2">
                     {s.bullets.map((b) => (
                       <li key={b} className="flex items-start gap-2.5 text-[13px] text-white/75">
-                        <CheckCircle size={14} weight="fill" className="mt-[3px] text-[#5eead4] shrink-0" />
+                        <CheckCircle
+                          size={14}
+                          weight="fill"
+                          className="mt-[3px] text-[#5eead4] shrink-0"
+                        />
                         <span className="leading-relaxed">{b}</span>
                       </li>
                     ))}
@@ -336,9 +363,7 @@ export default async function PrivacyPage({ params }: Props) {
                 {s.note ? (
                   <div className="mt-4 flex items-start gap-2.5 px-4 py-3 rounded-xl ring-1 ring-inset ring-[#ff0037]/20 bg-[rgba(255,0,55,0.06)]">
                     <Warning size={14} weight="fill" className="mt-[3px] text-[#ff0037] shrink-0" />
-                    <p className="text-[12px] leading-relaxed text-white/80">
-                      {s.note}
-                    </p>
+                    <p className="text-[12px] leading-relaxed text-white/80">{s.note}</p>
                   </div>
                 ) : null}
               </article>
@@ -424,9 +449,7 @@ export default async function PrivacyPage({ params }: Props) {
               <ChatCircleDots size={16} weight="bold" className="text-[#26A5E4]" />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="text-[13px] font-bold text-white">
-                Tezkor savol bormi?
-              </div>
+              <div className="text-[13px] font-bold text-white">Tezkor savol bormi?</div>
               <div className="text-[11.5px] text-white/55">
                 Telegramda yozing — privacy bo&apos;yicha mutaxassisimiz 1 soatda javob beradi.
               </div>

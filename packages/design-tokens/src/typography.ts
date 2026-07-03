@@ -22,7 +22,8 @@
 
 export const fontFamily = {
   /** Display sans — SF Pro Display for sizes ≥ 19px */
-  display: "'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+  display:
+    "'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   /** Body sans — SF Pro Text for sizes < 20px */
   text: "'SF Pro Text', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   /** Mono — for code, IDs, kitchen tickets, prices */
@@ -34,10 +35,10 @@ export const fontFamily = {
  * Weight 500 is intentionally absent.
  */
 export const fontWeight = {
-  light: 300,        // luxury moments only
-  regular: 400,      // body default
-  semibold: 600,     // display headings
-  bold: 700,         // extremely rare
+  light: 300, // luxury moments only
+  regular: 400, // body default
+  semibold: 600, // display headings
+  bold: 700, // extremely rare
 } as const;
 
 export const fontSize = {
@@ -46,9 +47,9 @@ export const fontSize = {
   navLink: 12,
   caption: 14,
   buttonUtility: 14,
-  body: 17,          // Apple's signature body size (NOT 16)
+  body: 17, // Apple's signature body size (NOT 16)
   bodyStrong: 17,
-  buttonLarge: 18,   // weight 300 luxury button
+  buttonLarge: 18, // weight 300 luxury button
   tagline: 21,
   leadAiry: 24,
   lead: 28,
@@ -67,7 +68,7 @@ export const lineHeight = {
   /** 1.07 — 56px hero-display */
   display: 1.07,
   /** 1.10 — 40px display-lg */
-  displayLg: 1.10,
+  displayLg: 1.1,
   /** 1.14 — 28px lead */
   leadDisplay: 1.14,
   /** 1.19 — 21px tagline */
@@ -77,7 +78,7 @@ export const lineHeight = {
   /** 1.29 — 14px caption-strong */
   captionStrong: 1.29,
   /** 1.30 — 10/12px micro/fine print */
-  microLegal: 1.30,
+  microLegal: 1.3,
   /** 1.43 — 14px caption (regular) */
   caption: 1.43,
   /** 1.47 — Apple's signature body line-height (17px/400) — also display-md */
@@ -85,18 +86,18 @@ export const lineHeight = {
   /** 1.47 — 34px display-md */
   displayMd: 1.47,
   /** 1.50 — 24px lead-airy */
-  leadAiry: 1.50,
+  leadAiry: 1.5,
   /** 2.41 — Apple's distinctive relaxed footer link leading */
   denseLink: 2.41,
 } as const;
 
 export const letterSpacing = {
   /** Apple's signature negative tracking — scales with size */
-  hero: -0.28,        // 56px hero
-  displayLg: 0,       // 40px display
-  displayMd: -0.374,  // 34px display
+  hero: -0.28, // 56px hero
+  displayLg: 0, // 40px display
+  displayMd: -0.374, // 34px display
   taglineWide: 0.231, // 21px tagline (positive)
-  leadWide: 0.196,    // 28px lead (positive)
+  leadWide: 0.196, // 28px lead (positive)
   bodyStrong: -0.374,
   body: -0.374,
   caption: -0.224,

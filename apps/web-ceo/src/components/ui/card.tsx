@@ -56,21 +56,14 @@ export function CardTitle({ children, className, hint }: CardTitleProps) {
       >
         {children}
       </h3>
-      {hint ? (
-        <p className="mt-1.5 text-xs text-[#62716d] dark:text-[#94a3b8]">{hint}</p>
-      ) : null}
+      {hint ? <p className="mt-1.5 text-xs text-[#62716d] dark:text-[#94a3b8]">{hint}</p> : null}
     </div>
   );
 }
 
 /** Optional standalone description (himoya pattern). */
-export function CardDescription({
-  className,
-  ...props
-}: HTMLAttributes<HTMLParagraphElement>) {
-  return (
-    <p className={cn('text-sm text-[#62716d] dark:text-[#94a3b8]', className)} {...props} />
-  );
+export function CardDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn('text-sm text-[#62716d] dark:text-[#94a3b8]', className)} {...props} />;
 }
 
 /** Optional content slot for stacked layouts (himoya pattern). */

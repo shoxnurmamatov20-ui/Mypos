@@ -8,7 +8,7 @@ import { useEffect } from 'react';
  * Locale-scoped error boundary — himoya/ShifoReyting styled. Catches
  * render/runtime errors inside the locale segment and offers a retry.
  */
-export default function Error({
+export default function LocaleErrorPage({
   error,
   reset,
 }: {

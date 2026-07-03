@@ -10,7 +10,8 @@ import { cn } from '@/lib/cn';
 import { formatCompactUZS, formatNumber } from '@/lib/format';
 
 const PORTAL_URL = process.env.NEXT_PUBLIC_PORTAL_URL ?? 'http://localhost:3000/panel/portal';
-const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL ?? 'http://localhost:3000/panel/manager';
+const DASHBOARD_URL =
+  process.env.NEXT_PUBLIC_DASHBOARD_URL ?? 'http://localhost:3000/panel/manager';
 
 type StatusVariant = 'success' | 'warning' | 'destructive' | 'secondary';
 

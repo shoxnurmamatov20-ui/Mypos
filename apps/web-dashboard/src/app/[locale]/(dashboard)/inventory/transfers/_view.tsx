@@ -1,9 +1,9 @@
 'use client';
 
 import {
-  transferDocumentsApi,
   type ListTransferDocumentsParams,
   type TransferDocument,
+  transferDocumentsApi,
 } from '@mypos/api-client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
@@ -21,24 +21,19 @@ import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { apiClient } from '@/lib/api';
 import { DashStatCard } from '../../_components/stat-card';
+import { daysAgo, formatDate, startOfMonth, today } from '../_components/format';
 import { StatusBadge } from '../_components/status-badge';
 import { TransferDetail } from '../_components/transfer-detail';
 import { TransferDocumentForm } from '../_components/transfer-document-form';
 import {
   EmptyState,
   ErrorBanner,
-  StatStripSkeleton,
-  TableSkeleton,
   inputClass,
   primaryBtnClass,
+  StatStripSkeleton,
+  TableSkeleton,
 } from '../_components/ui-helpers';
 import { useActiveWarehouses } from '../_components/warehouse-select';
-import {
-  daysAgo,
-  formatDate,
-  startOfMonth,
-  today,
-} from '../_components/format';
 
 export function TransfersView() {
   const t = useTranslations('inventory');
@@ -79,9 +74,7 @@ export function TransfersView() {
   const monthDocs = monthStatQuery.data?.data ?? [];
 
   const stats = useMemo(() => {
-    const pending = monthDocs.filter(
-      (d) => d.status === 'draft' || d.status === 'sent',
-    ).length;
+    const pending = monthDocs.filter((d) => d.status === 'draft' || d.status === 'sent').length;
     const completed = monthDocs.filter((d) => d.status === 'received').length;
     const warehouseCount = (warehousesQuery.data?.data?.length as number | undefined) ?? 0;
     return { pending, completed, warehouseCount };
@@ -162,11 +155,7 @@ export function TransfersView() {
           icon={ArrowLeftRight}
           title={t('empty.transfers')}
           action={
-            <button
-              type="button"
-              onClick={() => setCreating(true)}
-              className={primaryBtnClass}
-            >
+            <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
               <Plus className="h-4 w-4" />
               {t('actions.new_transfer')}
             </button>
@@ -245,9 +234,7 @@ export function TransfersView() {
       )}
 
       {creating ? <TransferDocumentForm onClose={() => setCreating(false)} /> : null}
-      {viewingId ? (
-        <TransferDetail id={viewingId} onClose={() => setViewingId(null)} />
-      ) : null}
+      {viewingId ? <TransferDetail id={viewingId} onClose={() => setViewingId(null)} /> : null}
     </>
   );
 }

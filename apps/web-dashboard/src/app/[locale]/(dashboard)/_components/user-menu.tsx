@@ -3,8 +3,8 @@
 import type { AuthUser } from '@mypos/api-client';
 import { cn } from '@mypos/ui';
 import { ChevronDown, LogOut, User } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { useAuthStore } from '@/stores/auth';
 
@@ -12,7 +12,7 @@ function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return 'U';
   const first = parts[0]?.[0] ?? '';
-  const last = parts.length > 1 ? parts[parts.length - 1]?.[0] ?? '' : '';
+  const last = parts.length > 1 ? (parts[parts.length - 1]?.[0] ?? '') : '';
   return `${first}${last}`.toUpperCase() || 'U';
 }
 
@@ -69,8 +69,12 @@ export function UserMenu({ user, locale }: UserMenuProps) {
           {getInitials(user.name)}
         </span>
         <span className="hidden text-left md:block">
-          <span className="block text-[12px] font-semibold text-[#16221f] dark:text-white leading-tight">{user.name}</span>
-          <span className="block text-[10px] text-[#62716d] dark:text-[#94a3b8] uppercase tracking-wide">{getPrimaryRole(user)}</span>
+          <span className="block text-[12px] font-semibold text-[#16221f] dark:text-white leading-tight">
+            {user.name}
+          </span>
+          <span className="block text-[10px] text-[#62716d] dark:text-[#94a3b8] uppercase tracking-wide">
+            {getPrimaryRole(user)}
+          </span>
         </span>
         <ChevronDown className="h-3 w-3 text-[#62716d] dark:text-[#94a3b8]" aria-hidden />
       </button>
@@ -82,7 +86,9 @@ export function UserMenu({ user, locale }: UserMenuProps) {
         >
           <div className="border-b border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] p-4">
             <p className="text-sm font-semibold text-[#16221f] dark:text-white">{user.name}</p>
-            <p className="mt-0.5 truncate text-xs text-[#62716d] dark:text-[#94a3b8]">{user.email}</p>
+            <p className="mt-0.5 truncate text-xs text-[#62716d] dark:text-[#94a3b8]">
+              {user.email}
+            </p>
             <div className="mt-2 flex flex-wrap gap-1">
               {user.roles.map((role) => (
                 <span

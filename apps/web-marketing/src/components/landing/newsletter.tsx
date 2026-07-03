@@ -1,7 +1,7 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, CircleNotch, Envelope } from '@phosphor-icons/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -43,7 +43,12 @@ export function Newsletter() {
             exit={{ opacity: 0 }}
             className="flex items-center gap-xs rounded-pearl bg-success-soft px-md py-xs"
           >
-            <CheckCircle size={20} weight="fill" className="shrink-0 text-success-text" aria-hidden="true" />
+            <CheckCircle
+              size={20}
+              weight="fill"
+              className="shrink-0 text-success-text"
+              aria-hidden="true"
+            />
             <p className="text-caption text-success-text">{t('success')}</p>
           </motion.div>
         ) : (

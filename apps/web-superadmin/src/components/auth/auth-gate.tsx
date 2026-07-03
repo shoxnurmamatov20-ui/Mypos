@@ -1,8 +1,8 @@
 'use client';
 
 import { type ReactNode, useEffect } from 'react';
-import { useAuthStore } from '@/stores/auth';
 import { storeToken } from '@/lib/api';
+import { useAuthStore } from '@/stores/auth';
 
 /**
  * AuthGate hydrates the session from localStorage on mount. It does **not**

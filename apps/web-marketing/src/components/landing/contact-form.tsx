@@ -6,11 +6,11 @@ import { useState } from 'react';
 type Topic = 'demo' | 'pricing' | 'support' | 'partnership' | 'other';
 
 const TOPICS: ReadonlyArray<{ value: Topic; label: string }> = [
-  { value: 'demo',        label: "Demo so'rash" },
-  { value: 'pricing',     label: 'Narxlar' },
-  { value: 'support',     label: 'Texnik yordam' },
+  { value: 'demo', label: "Demo so'rash" },
+  { value: 'pricing', label: 'Narxlar' },
+  { value: 'support', label: 'Texnik yordam' },
   { value: 'partnership', label: 'Hamkorlik' },
-  { value: 'other',       label: "Boshqa savol" },
+  { value: 'other', label: 'Boshqa savol' },
 ];
 
 const RESTAURANT_TYPES = [
@@ -88,7 +88,10 @@ export function ContactForm() {
       {/* Name + Phone */}
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label htmlFor="cf-name" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+          <label
+            htmlFor="cf-name"
+            className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+          >
             Ism Familiya
           </label>
           <input
@@ -100,7 +103,10 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="cf-phone" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+          <label
+            htmlFor="cf-phone"
+            className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+          >
             Telefon raqam
           </label>
           <input
@@ -116,7 +122,10 @@ export function ContactForm() {
       {/* Email + Restaurant */}
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label htmlFor="cf-email" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+          <label
+            htmlFor="cf-email"
+            className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+          >
             Email
           </label>
           <input
@@ -127,7 +136,10 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="cf-rest" className="block text-[11.5px] font-semibold text-white/80 mb-1.5">
+          <label
+            htmlFor="cf-rest"
+            className="block text-[11.5px] font-semibold text-white/80 mb-1.5"
+          >
             Restoran nomi
           </label>
           <div className="relative">
@@ -159,7 +171,10 @@ export function ContactForm() {
               className="press flex items-center gap-2 px-3 h-10 rounded-lg border border-white/[0.10] bg-white/[0.04] text-white/75 text-[12.5px] font-semibold cursor-pointer hover:border-white/25 hover:text-white transition-colors has-[:checked]:bg-[rgba(20,184,166,0.12)] has-[:checked]:border-[#5eead4]/45 has-[:checked]:text-white"
             >
               <input type="radio" name="size" value={rt} className="sr-only" />
-              <span className="h-3 w-3 rounded-full ring-1 ring-inset ring-white/25 shrink-0" aria-hidden="true" />
+              <span
+                className="h-3 w-3 rounded-full ring-1 ring-inset ring-white/25 shrink-0"
+                aria-hidden="true"
+              />
               {rt}
             </label>
           ))}
@@ -183,7 +198,10 @@ export function ContactForm() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-1">
         <p className="text-[11px] text-white/45">
           Yuborish bilan{' '}
-          <a href="#" className="font-semibold text-white/65 hover:text-[#5eead4] transition-colors">
+          <a
+            href="#"
+            className="font-semibold text-white/65 hover:text-[#5eead4] transition-colors"
+          >
             Maxfiylik siyosati
           </a>
           ga rozisiz

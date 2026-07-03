@@ -19,75 +19,77 @@
  * @see packages/design-tokens/DESIGN-apple.md
  */
 
+// Breakpoints
+export {
+  type Breakpoint,
+  breakpoint,
+  type Device,
+  device,
+  type TouchTarget,
+  touchTarget,
+} from './breakpoints';
 // Colors
 export {
-  colors,
-  brand,
+  aiStage,
   apple,
-  surface,
+  brand,
+  type ColorToken,
+  colors,
+  darkTheme,
   hairline,
-  text,
+  lightTheme,
   overlay,
+  type StatusKey,
   semantic,
   status,
-  aiStage,
-  lightTheme,
-  darkTheme,
-  tenantPresets,
-  type Theme,
+  surface,
   type TenantPreset,
-  type ColorToken,
-  type StatusKey,
+  type Theme,
+  tenantPresets,
+  text,
 } from './colors';
-
-// Typography
-export {
-  fontFamily,
-  fontWeight,
-  fontSize,
-  lineHeight,
-  letterSpacing,
-  fontFeatureSettings,
-  textStyle,
-  adjustTrackingForCyrillic,
-  type FontFamily,
-  type FontWeight,
-  type FontSize,
-  type TextStyle,
-} from './typography';
-
-// Spacing
-export { spacing, spacingScale, type SpacingToken, type SpacingScaleToken } from './spacing';
-
-// Radius
-export { radius, type RadiusToken } from './radius';
-
-// Shadows
-export { shadow, nativeShadow, type ShadowToken, type NativeShadowToken } from './shadows';
-
-// Breakpoints
-export { breakpoint, device, touchTarget, type Breakpoint, type Device, type TouchTarget } from './breakpoints';
-
 // Motion
 export {
-  duration,
-  easing,
-  pressTransform,
-  stagger,
-  keyframes,
   type Duration,
+  duration,
   type Easing,
+  easing,
+  keyframes,
+  pressTransform,
   type Stagger,
+  stagger,
 } from './motion';
+
+// Radius
+export { type RadiusToken, radius } from './radius';
+
+// Shadows
+export { type NativeShadowToken, nativeShadow, type ShadowToken, shadow } from './shadows';
+// Spacing
+export { type SpacingScaleToken, type SpacingToken, spacing, spacingScale } from './spacing';
+// Tailwind preset
+export { tailwindPreset, textStyleAsCSS } from './tailwind';
 
 // Tenant white-label
 export {
+  generateAllTenantStyles,
   generateRootTenantVars,
   generateTenantStyles,
-  generateAllTenantStyles,
-  validateTenantContrast,
   type TenantTheme,
+  validateTenantContrast,
 } from './tenant';
-
-// Tailwind preset
-export { tailwindPreset, textStyleAsCSS } from './tailwind';
+// Typography
+export {
+  adjustTrackingForCyrillic,
+  type FontFamily,
+  type FontSize,
+  type FontWeight,
+  fontFamily,
+  fontFeatureSettings,
+  fontSize,
+  fontWeight,
+  letterSpacing,
+  lineHeight,
+  type TextStyle,
+  textStyle,
+} from './typography';

@@ -1,14 +1,14 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { ApiError, resetPassword } from '@/lib/api';
 import { Field } from '@/components/Field';
+import { ApiError, resetPassword } from '@/lib/api';
 
 const schema = z
   .object({
@@ -84,9 +84,7 @@ export function ResetForm({ locale }: { locale: string }) {
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-white">
             ✓
           </div>
-          <h1 className="text-[18px] font-bold text-black leading-tight">
-            {t('success_title')}
-          </h1>
+          <h1 className="text-[18px] font-bold text-black leading-tight">{t('success_title')}</h1>
         </header>
         <p className="text-[14px] text-black/70 mb-6">{t('success_body')}</p>
         <Link

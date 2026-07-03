@@ -1,15 +1,10 @@
 'use client';
 
+import { cn, PageHeader } from '@mypos/ui';
 import { Armchair, Users } from '@phosphor-icons/react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
-import { cn, PageHeader } from '@mypos/ui';
-import {
-  formatSom,
-  getWaiterData,
-  type TableStatus,
-  type WaiterTable,
-} from '@/lib/waiter-data';
+import { formatSom, getWaiterData, type TableStatus, type WaiterTable } from '@/lib/waiter-data';
 import { type PillTone, StatusPill } from './status-pill';
 
 const STATUS_TONE: Record<TableStatus, PillTone> = {
@@ -56,10 +51,7 @@ export function TablesView() {
       {/* Status summary */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {STATUS_ORDER.map((status) => (
-          <div
-            key={status}
-            className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-4"
-          >
+          <div key={status} className="rounded-xl border border-[rgba(22,34,31,0.09)] bg-white p-4">
             <div className="flex items-center gap-2">
               <span className={cn('h-2 w-2 rounded-full', DOT[STATUS_TONE[status]])} />
               <p className="text-[11px] font-bold uppercase tracking-wide text-[#62716d]">
@@ -119,10 +111,7 @@ function TableCard({ table }: { table: WaiterTable }) {
           <p className="text-[15px] font-bold text-[#16221f]">{table.label}</p>
           <p className="mt-0.5 text-[12px] text-[#62716d]">{table.zone}</p>
         </div>
-        <StatusPill
-          tone={STATUS_TONE[table.status]}
-          label={t(`tables.status.${table.status}`)}
-        />
+        <StatusPill tone={STATUS_TONE[table.status]} label={t(`tables.status.${table.status}`)} />
       </div>
 
       <div className="mt-3 flex items-center gap-1.5 text-[12px] text-[#62716d]">

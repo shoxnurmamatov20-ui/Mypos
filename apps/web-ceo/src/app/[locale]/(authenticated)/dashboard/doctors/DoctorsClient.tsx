@@ -18,13 +18,13 @@ import { PageHeader } from '@/components/layout/page-header';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import {
+  type ApiError,
   type Clinic,
   type ClinicsResponse,
-  type DoctorListItem,
-  type DoctorsListResponse,
-  ApiError,
   ceoFetch,
   ceoMutate,
+  type DoctorListItem,
+  type DoctorsListResponse,
 } from '@/lib/api';
 import { cn } from '@/lib/cn';
 import { DoctorFormDialog } from './DoctorFormDialog';
@@ -207,10 +207,30 @@ function SummaryRow({
   t: ReturnType<typeof useTranslations>;
 }) {
   const cells = [
-    { label: t('stat_total'), value: summary.total, icon: Users, accent: 'bg-blue-50 text-blue-700' },
-    { label: t('stat_active'), value: summary.active, icon: CheckCircle2, accent: 'bg-emerald-50 text-emerald-700' },
-    { label: t('stat_inactive'), value: summary.inactive, icon: XCircle, accent: 'bg-gray-100 text-gray-700' },
-    { label: t('stat_clinics'), value: summary.clinics_count, icon: Stethoscope, accent: 'bg-indigo-50 text-indigo-700' },
+    {
+      label: t('stat_total'),
+      value: summary.total,
+      icon: Users,
+      accent: 'bg-blue-50 text-blue-700',
+    },
+    {
+      label: t('stat_active'),
+      value: summary.active,
+      icon: CheckCircle2,
+      accent: 'bg-emerald-50 text-emerald-700',
+    },
+    {
+      label: t('stat_inactive'),
+      value: summary.inactive,
+      icon: XCircle,
+      accent: 'bg-gray-100 text-gray-700',
+    },
+    {
+      label: t('stat_clinics'),
+      value: summary.clinics_count,
+      icon: Stethoscope,
+      accent: 'bg-indigo-50 text-indigo-700',
+    },
   ];
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -223,7 +243,9 @@ function SummaryRow({
             <p className="text-[11px] font-bold uppercase tracking-[0.04em] text-[#62716d] dark:text-[#94a3b8]">
               {c.label}
             </p>
-            <span className={cn('inline-flex h-6 w-6 items-center justify-center rounded-md', c.accent)}>
+            <span
+              className={cn('inline-flex h-6 w-6 items-center justify-center rounded-md', c.accent)}
+            >
               <c.icon className="h-3.5 w-3.5" strokeWidth={2.2} />
             </span>
           </div>
@@ -280,7 +302,9 @@ function FiltersBar({
       </select>
       <select
         value={filters.is_active}
-        onChange={(e) => onChange({ ...filters, is_active: e.target.value as Filters['is_active'] })}
+        onChange={(e) =>
+          onChange({ ...filters, is_active: e.target.value as Filters['is_active'] })
+        }
         className="h-9 px-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0b1120] text-[13px] text-[#16221f] dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
       >
         <option value="">{t('filter_status_any')}</option>
@@ -319,10 +343,7 @@ function DoctorsTable({
     return (
       <div className="p-6 space-y-2.5">
         {[1, 2, 3, 4, 5].map((n) => (
-          <div
-            key={n}
-            className="h-12 rounded-md bg-[#f8fafc] dark:bg-[#1a2235] animate-pulse"
-          />
+          <div key={n} className="h-12 rounded-md bg-[#f8fafc] dark:bg-[#1a2235] animate-pulse" />
         ))}
       </div>
     );
@@ -366,9 +387,7 @@ function DoctorsTable({
                   </div>
                 ) : null}
               </td>
-              <td className="px-3 py-3 text-[#62716d] dark:text-[#94a3b8]">
-                {d.specialty ?? '—'}
-              </td>
+              <td className="px-3 py-3 text-[#62716d] dark:text-[#94a3b8]">{d.specialty ?? '—'}</td>
               <td className="px-3 py-3 text-[#16221f] dark:text-white">
                 {d.clinic?.name ?? '—'}
                 {d.clinic?.region ? (

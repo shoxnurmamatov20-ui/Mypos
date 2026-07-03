@@ -2,19 +2,13 @@
 
 import { CreditCard, Inbox } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import {
-  Cell,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from 'recharts';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 const PLAN_STYLE: Record<string, { color: string; label: string }> = {
-  free:       { color: '#94a3b8', label: 'Free' },
-  starter:    { color: '#60a5fa', label: 'Starter' },
-  pro:        { color: '#3b82f6', label: 'Pro' },
-  business:   { color: '#8b5cf6', label: 'Business' },
+  free: { color: '#94a3b8', label: 'Free' },
+  starter: { color: '#60a5fa', label: 'Starter' },
+  pro: { color: '#3b82f6', label: 'Pro' },
+  business: { color: '#8b5cf6', label: 'Business' },
   enterprise: { color: '#ec4899', label: 'Enterprise' },
 };
 
@@ -52,7 +46,9 @@ export function PlanDonutCard({ planCounts, planTotal }: Props) {
           <div className="flex flex-col items-center justify-center h-[170px] text-gray-400 dark:text-gray-500">
             <Inbox className="w-7 h-7 mb-2" strokeWidth={1.5} aria-hidden="true" />
             <p className="text-sm">Tenant yo&apos;q</p>
-            <p className="text-xs text-gray-300 dark:text-gray-600 mt-1">Yangi tenant qo&apos;shing</p>
+            <p className="text-xs text-gray-300 dark:text-gray-600 mt-1">
+              Yangi tenant qo&apos;shing
+            </p>
           </div>
         ) : (
           <div className="relative">
@@ -109,7 +105,9 @@ export function PlanDonutCard({ planCounts, planTotal }: Props) {
                   style={{ background: style?.color ?? '#94a3b8' }}
                   aria-hidden="true"
                 />
-                <span className="text-gray-700 dark:text-gray-300 flex-1 truncate">{style?.label ?? d.plan}</span>
+                <span className="text-gray-700 dark:text-gray-300 flex-1 truncate">
+                  {style?.label ?? d.plan}
+                </span>
                 <span className="text-gray-400 dark:text-gray-500 tabular-nums">{pct}%</span>
                 <span className="text-gray-900 dark:text-white font-medium tabular-nums w-8 text-right">
                   {d.count}

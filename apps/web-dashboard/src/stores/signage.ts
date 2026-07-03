@@ -184,7 +184,9 @@ export const useSignageStore = create<SignageState>()(
       addPlaylist: (input) =>
         set((s) => ({ playlists: [...s.playlists, { ...input, id: uid(), slides: [] }] })),
       updatePlaylist: (id, patch) =>
-        set((s) => ({ playlists: s.playlists.map((pl) => (pl.id === id ? { ...pl, ...patch } : pl)) })),
+        set((s) => ({
+          playlists: s.playlists.map((pl) => (pl.id === id ? { ...pl, ...patch } : pl)),
+        })),
       deletePlaylist: (id) =>
         set((s) => ({
           playlists: s.playlists.filter((pl) => pl.id !== id),
@@ -202,14 +204,19 @@ export const useSignageStore = create<SignageState>()(
         set((s) => ({
           playlists: s.playlists.map((pl) =>
             pl.id === playlistId
-              ? { ...pl, slides: pl.slides.map((sl) => (sl.id === slideId ? { ...sl, ...patch } : sl)) }
+              ? {
+                  ...pl,
+                  slides: pl.slides.map((sl) => (sl.id === slideId ? { ...sl, ...patch } : sl)),
+                }
               : pl,
           ),
         })),
       removeSlide: (playlistId, slideId) =>
         set((s) => ({
           playlists: s.playlists.map((pl) =>
-            pl.id === playlistId ? { ...pl, slides: pl.slides.filter((sl) => sl.id !== slideId) } : pl,
+            pl.id === playlistId
+              ? { ...pl, slides: pl.slides.filter((sl) => sl.id !== slideId) }
+              : pl,
           ),
         })),
       moveSlide: (playlistId, slideId, dir) =>
@@ -249,7 +256,10 @@ export function canManageSignage(user: AuthUser | null): boolean {
 
 /** Total playlist duration in seconds. */
 export function playlistDuration(playlist: Playlist): number {
-  return playlist.slides.reduce((sum, sl) => sum + (Number.isFinite(sl.durationSec) ? sl.durationSec : 0), 0);
+  return playlist.slides.reduce(
+    (sum, sl) => sum + (Number.isFinite(sl.durationSec) ? sl.durationSec : 0),
+    0,
+  );
 }
 
 /** SSR/CSR hydration guard (localStorage is client-only). */

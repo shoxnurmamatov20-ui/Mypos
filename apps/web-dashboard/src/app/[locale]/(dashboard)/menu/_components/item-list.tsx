@@ -1,6 +1,6 @@
 'use client';
 
-import { menuApi, type MenuCategory, type MenuItem } from '@mypos/api-client';
+import { type MenuCategory, type MenuItem, menuApi } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -93,7 +93,9 @@ export function ItemList({
                   {formatUZS(item.price.effective_amount)}
                 </p>
                 {item.category && (
-                  <p className="mt-1 text-xs text-[#62716d] dark:text-[#94a3b8]">{item.category.name.uz}</p>
+                  <p className="mt-1 text-xs text-[#62716d] dark:text-[#94a3b8]">
+                    {item.category.name.uz}
+                  </p>
                 )}
                 <div className="mt-3 flex justify-end gap-3 text-xs">
                   <button

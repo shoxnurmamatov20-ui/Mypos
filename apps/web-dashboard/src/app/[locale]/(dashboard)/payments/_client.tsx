@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  paymentsApi,
   type Payment,
   type PaymentProvider,
   type PaymentStatus,
+  paymentsApi,
 } from '@mypos/api-client';
 import {
   Badge,

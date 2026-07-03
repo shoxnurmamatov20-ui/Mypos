@@ -19,13 +19,7 @@ export function DashboardShell({ locale, children }: DashboardShellProps) {
   );
 }
 
-function AuthenticatedLayout({
-  locale,
-  children,
-}: {
-  locale: string;
-  children: React.ReactNode;
-}) {
+function AuthenticatedLayout({ locale, children }: { locale: string; children: React.ReactNode }) {
   const user = useAuthStore((s) => s.user);
   useDashboardRealtime();
   if (!user) return null;
@@ -36,9 +30,7 @@ function AuthenticatedLayout({
       <div className="flex min-w-0 flex-1 flex-col">
         <TopBar user={user} locale={locale} />
         <main className="flex-1">
-          <div className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-            {children}
-          </div>
+          <div className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">{children}</div>
         </main>
       </div>
     </div>

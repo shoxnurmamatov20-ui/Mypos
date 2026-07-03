@@ -99,9 +99,7 @@ export function Comparison() {
                     </div>
                   </th>
                   <th className="p-md">
-                    <span className="text-tagline text-ink font-display font-semibold">
-                      AliPOS
-                    </span>
+                    <span className="text-tagline text-ink font-display font-semibold">AliPOS</span>
                   </th>
                   <th className="p-md">
                     <span className="text-tagline text-ink font-display font-semibold">
@@ -113,9 +111,7 @@ export function Comparison() {
               <tbody>
                 {FEATURES.map((feature) => (
                   <tr key={feature.key} className="border-b border-hairline-soft last:border-0">
-                    <td className="p-sm text-body text-ink">
-                      {t(`features.${feature.key}`)}
-                    </td>
+                    <td className="p-sm text-body text-ink">{t(`features.${feature.key}`)}</td>
                     <td className="bg-coral-tint p-sm">
                       <div className="flex justify-center">
                         <StatusIcon status={feature.mypos} />

@@ -8,18 +8,18 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
+  daysAgo,
   EmptyCard,
   ErrorBanner,
   Field,
+  formatNumber,
+  inputClass,
   LoadingHint,
   PageTitle,
   SectionTitle,
   SimpleStat,
   TableShell,
   TopRankList,
-  daysAgo,
-  formatNumber,
-  inputClass,
   today,
 } from '../_components/report-helpers';
 
@@ -86,10 +86,7 @@ export function ZReportView() {
           label={t('z_report.stats_avg_ticket')}
           value={formatUZS(totals?.avg_ticket_minor ?? 0)}
         />
-        <SimpleStat
-          label={t('z_report.stats_completed')}
-          value={formatNumber(completed)}
-        />
+        <SimpleStat label={t('z_report.stats_completed')} value={formatNumber(completed)} />
       </div>
 
       {q.isLoading ? (
@@ -143,9 +140,15 @@ export function ZReportView() {
                   <thead className="bg-[#f5f8f7] text-left text-xs text-[#62716d] dark:bg-[#0d1424] dark:text-[#94a3b8]">
                     <tr>
                       <th className="px-4 py-2.5 font-medium">{t('z_report.col_provider')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('z_report.col_count')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('z_report.col_amount')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('z_report.col_percent')}</th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('z_report.col_count')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('z_report.col_amount')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('z_report.col_percent')}
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
@@ -230,4 +233,3 @@ export function ZReportView() {
     </div>
   );
 }
-

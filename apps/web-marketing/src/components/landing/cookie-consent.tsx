@@ -2,8 +2,8 @@
 
 import { Cookie } from '@phosphor-icons/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { useLocale } from 'next-intl';
+import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'mypos_cookie_consent_v1';
 

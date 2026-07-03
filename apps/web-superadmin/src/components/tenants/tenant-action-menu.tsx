@@ -1,28 +1,14 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  Eye,
-  LogIn,
-  MoreVertical,
-  Pencil,
-  PauseCircle,
-  PlayCircle,
-  Trash2,
-} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { Eye, LogIn, MoreVertical, PauseCircle, Pencil, PlayCircle, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/cn';
 import type { TenantStatus } from '@/types/super-admin';
 
-export type TenantAction =
-  | 'view'
-  | 'edit'
-  | 'suspend'
-  | 'resume'
-  | 'impersonate'
-  | 'delete';
+export type TenantAction = 'view' | 'edit' | 'suspend' | 'resume' | 'impersonate' | 'delete';
 
 type Props = {
   status: TenantStatus;

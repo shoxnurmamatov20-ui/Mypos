@@ -29,10 +29,7 @@ export function useMenu() {
     queryKey: ['menu'],
     queryFn: async () => {
       try {
-        const [categories, items] = await Promise.all([
-          api.menuCategories(),
-          api.menuItems(),
-        ]);
+        const [categories, items] = await Promise.all([api.menuCategories(), api.menuItems()]);
         return { categories, items, live: true };
       } catch {
         return { categories: MOCK_CATEGORIES, items: MOCK_ITEMS, live: false };

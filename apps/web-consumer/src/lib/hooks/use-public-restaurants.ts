@@ -13,16 +13,16 @@
  * has hydrated).
  */
 
-import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
+import { type UseQueryOptions, useQuery } from '@tanstack/react-query';
 import { useLocale } from 'next-intl';
 import {
+  isPublicLocale,
   type PublicLocale,
   type PublicMenuResponse,
   type PublicOrderResponse,
   type PublicRestaurantResponse,
   type PublicRestaurantsListParams,
   type PublicRestaurantsListResponse,
-  isPublicLocale,
   publicConsumerApi,
 } from '../public-api';
 
@@ -32,12 +32,9 @@ export const publicQueryKeys = {
   all: ['public'] as const,
   restaurantsList: (params: PublicRestaurantsListParams) =>
     [...publicQueryKeys.all, 'restaurants', 'list', params] as const,
-  restaurant: (slug: string) =>
-    [...publicQueryKeys.all, 'restaurants', 'detail', slug] as const,
-  menu: (slug: string) =>
-    [...publicQueryKeys.all, 'menu', slug] as const,
-  orderTracking: (token: string) =>
-    [...publicQueryKeys.all, 'orders', 'track', token] as const,
+  restaurant: (slug: string) => [...publicQueryKeys.all, 'restaurants', 'detail', slug] as const,
+  menu: (slug: string) => [...publicQueryKeys.all, 'menu', slug] as const,
+  orderTracking: (token: string) => [...publicQueryKeys.all, 'orders', 'track', token] as const,
 };
 
 // ------------ Hooks ------------
@@ -50,10 +47,7 @@ function useResolvedLocale(): PublicLocale {
 /** List restaurants. Filter / sort happens server-side. */
 export function usePublicRestaurants(
   params: PublicRestaurantsListParams = {},
-  options?: Omit<
-    UseQueryOptions<PublicRestaurantsListResponse>,
-    'queryKey' | 'queryFn'
-  >,
+  options?: Omit<UseQueryOptions<PublicRestaurantsListResponse>, 'queryKey' | 'queryFn'>,
 ) {
   const locale = useResolvedLocale();
   return useQuery<PublicRestaurantsListResponse>({
@@ -67,10 +61,7 @@ export function usePublicRestaurants(
 /** Single restaurant by slug — usually hydrated by the server. */
 export function usePublicRestaurant(
   slug: string | null | undefined,
-  options?: Omit<
-    UseQueryOptions<PublicRestaurantResponse>,
-    'queryKey' | 'queryFn' | 'enabled'
-  >,
+  options?: Omit<UseQueryOptions<PublicRestaurantResponse>, 'queryKey' | 'queryFn' | 'enabled'>,
 ) {
   const locale = useResolvedLocale();
   return useQuery<PublicRestaurantResponse>({
@@ -85,10 +76,7 @@ export function usePublicRestaurant(
 /** Public menu for a restaurant. */
 export function usePublicMenu(
   slug: string | null | undefined,
-  options?: Omit<
-    UseQueryOptions<PublicMenuResponse>,
-    'queryKey' | 'queryFn' | 'enabled'
-  >,
+  options?: Omit<UseQueryOptions<PublicMenuResponse>, 'queryKey' | 'queryFn' | 'enabled'>,
 ) {
   const locale = useResolvedLocale();
   return useQuery<PublicMenuResponse>({
@@ -107,10 +95,7 @@ export function usePublicMenu(
  */
 export function usePublicOrderTracking(
   token: string | null | undefined,
-  options?: Omit<
-    UseQueryOptions<PublicOrderResponse>,
-    'queryKey' | 'queryFn' | 'enabled'
-  >,
+  options?: Omit<UseQueryOptions<PublicOrderResponse>, 'queryKey' | 'queryFn' | 'enabled'>,
 ) {
   const locale = useResolvedLocale();
   return useQuery<PublicOrderResponse>({

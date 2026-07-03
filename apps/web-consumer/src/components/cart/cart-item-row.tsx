@@ -1,8 +1,8 @@
 'use client';
 
 import { Minus, Plus, Trash2 } from 'lucide-react';
-import type { CartItem } from '@/stores/cart';
 import { formatSom } from '@/lib/format';
+import type { CartItem } from '@/stores/cart';
 
 type Props = {
   item: CartItem;
@@ -36,9 +36,7 @@ export function CartItemRow({ item, labels, onIncrement, onDecrement, onRemove }
         <h4 className="line-clamp-2 text-sm font-bold text-neutral-900 sm:text-base">
           {item.name}
         </h4>
-        {item.notes ? (
-          <p className="line-clamp-2 text-xs text-neutral-500">{item.notes}</p>
-        ) : null}
+        {item.notes ? <p className="line-clamp-2 text-xs text-neutral-500">{item.notes}</p> : null}
         <p className="mt-1 text-sm font-bold text-neutral-900">{formatSom(lineTotal)}</p>
       </div>
 

@@ -1,7 +1,7 @@
 'use client';
 
-import { CreditCard, Receipt, ShoppingBag, TrendingUp } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { CreditCard, Receipt, ShoppingBag, TrendingUp } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { formatCompactNumber, formatUZS } from '@/lib/format';
 import type { TenantSummary } from '@/types/super-admin';

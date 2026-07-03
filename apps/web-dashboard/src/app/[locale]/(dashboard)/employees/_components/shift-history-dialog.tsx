@@ -1,6 +1,6 @@
 'use client';
 
-import { clockApi, shiftsApi, type Employee, type Shift } from '@mypos/api-client';
+import { clockApi, type Employee, type Shift, shiftsApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -111,7 +111,9 @@ export function ShiftHistoryDialog({
           </div>
         </div>
 
-        <h3 className="mb-3 text-sm font-semibold text-[#16221f] dark:text-[#e2e8f0]">{t('shift_history')}</h3>
+        <h3 className="mb-3 text-sm font-semibold text-[#16221f] dark:text-[#e2e8f0]">
+          {t('shift_history')}
+        </h3>
         {shiftsQuery.isLoading ? (
           <div className="text-sm text-[#62716d] dark:text-[#94a3b8]">{tShift('loading')}</div>
         ) : shifts.length === 0 ? (
@@ -133,15 +135,24 @@ export function ShiftHistoryDialog({
               <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
                 {shifts.map((s) => (
                   <tr key={s.id}>
-                    <td className="px-3 py-2 text-[#16221f] dark:text-[#e2e8f0]">{formatDate(s.scheduled_start)}</td>
-                    <td className="px-3 py-2 text-[#16221f] dark:text-[#e2e8f0]">{formatDate(s.scheduled_end)}</td>
-                    <td className="px-3 py-2 text-[#62716d] dark:text-[#94a3b8]">{formatDate(s.actual_start)}</td>
-                    <td className="px-3 py-2 text-[#62716d] dark:text-[#94a3b8]">{formatDate(s.actual_end)}</td>
+                    <td className="px-3 py-2 text-[#16221f] dark:text-[#e2e8f0]">
+                      {formatDate(s.scheduled_start)}
+                    </td>
+                    <td className="px-3 py-2 text-[#16221f] dark:text-[#e2e8f0]">
+                      {formatDate(s.scheduled_end)}
+                    </td>
+                    <td className="px-3 py-2 text-[#62716d] dark:text-[#94a3b8]">
+                      {formatDate(s.actual_start)}
+                    </td>
+                    <td className="px-3 py-2 text-[#62716d] dark:text-[#94a3b8]">
+                      {formatDate(s.actual_end)}
+                    </td>
                     <td className="px-3 py-2">
                       <span
                         className={
                           'rounded-full px-2 py-0.5 text-xs font-medium ' +
-                          (STATUS_CLASS[s.status.value] ?? 'bg-[#eef4f3] dark:bg-[#1a2235] text-[#16221f] dark:text-[#e2e8f0]')
+                          (STATUS_CLASS[s.status.value] ??
+                            'bg-[#eef4f3] dark:bg-[#1a2235] text-[#16221f] dark:text-[#e2e8f0]')
                         }
                       >
                         {s.status.label}

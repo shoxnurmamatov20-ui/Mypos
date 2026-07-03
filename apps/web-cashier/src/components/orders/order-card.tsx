@@ -90,11 +90,7 @@ export function OrderCard({
           </Badge>
         </div>
         {action ? (
-          <Button
-            size="sm"
-            disabled={pending}
-            onClick={() => onAdvance(order.id, action.next)}
-          >
+          <Button size="sm" disabled={pending} onClick={() => onAdvance(order.id, action.next)}>
             {pending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}
             {t(action.labelKey)}
           </Button>

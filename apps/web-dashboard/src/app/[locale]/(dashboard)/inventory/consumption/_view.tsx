@@ -1,18 +1,14 @@
 'use client';
 
-import {
-  type Ingredient,
-  type StockMovement,
-  inventoryApi,
-} from '@mypos/api-client';
+import { type Ingredient, inventoryApi, type StockMovement } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, ChevronRight, PackageMinus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
-import { TableSkeleton, inputClass } from '../_components/ui-helpers';
 import { daysAgo, formatDateTime, today } from '../_components/format';
+import { inputClass, TableSkeleton } from '../_components/ui-helpers';
 
 type EnrichedMovement = StockMovement & {
   ingredient?: {
@@ -46,8 +42,7 @@ export function ConsumptionView() {
 
   const ingredientsQuery = useQuery({
     queryKey: ['inventory', 'ingredients', 'consumption-filter'],
-    queryFn: () =>
-      inventoryApi.ingredients.list(apiClient, { active_only: true, per_page: 500 }),
+    queryFn: () => inventoryApi.ingredients.list(apiClient, { active_only: true, per_page: 500 }),
     staleTime: 5 * 60_000,
   });
   const ingredients: Ingredient[] = ingredientsQuery.data?.data ?? [];
@@ -101,7 +96,10 @@ export function ConsumptionView() {
         <Field label={t('fields.reason')}>
           <select
             value={reason}
-            onChange={(e) => { setReason(e.target.value); setPage(1); }}
+            onChange={(e) => {
+              setReason(e.target.value);
+              setPage(1);
+            }}
             className={inputClass}
           >
             <option value="">{t('consumption.reason_all')}</option>
@@ -115,12 +113,17 @@ export function ConsumptionView() {
         <Field label={t('fields.ingredient')}>
           <select
             value={ingredientId}
-            onChange={(e) => { setIngredientId(e.target.value); setPage(1); }}
+            onChange={(e) => {
+              setIngredientId(e.target.value);
+              setPage(1);
+            }}
             className={inputClass}
           >
             <option value="">{t('consumption.reason_all')}</option>
             {ingredients.map((ing) => (
-              <option key={ing.id} value={ing.id}>{ing.name.uz}</option>
+              <option key={ing.id} value={ing.id}>
+                {ing.name.uz}
+              </option>
             ))}
           </select>
         </Field>
@@ -129,7 +132,10 @@ export function ConsumptionView() {
           <input
             type="date"
             value={dateFrom}
-            onChange={(e) => { setDateFrom(e.target.value); setPage(1); }}
+            onChange={(e) => {
+              setDateFrom(e.target.value);
+              setPage(1);
+            }}
             className={inputClass}
           />
         </Field>
@@ -138,7 +144,10 @@ export function ConsumptionView() {
           <input
             type="date"
             value={dateTo}
-            onChange={(e) => { setDateTo(e.target.value); setPage(1); }}
+            onChange={(e) => {
+              setDateTo(e.target.value);
+              setPage(1);
+            }}
             className={inputClass}
           />
         </Field>
@@ -198,7 +207,9 @@ export function ConsumptionView() {
 
           {lastPage > 1 ? (
             <div className="flex items-center justify-between border-t border-[rgba(22,34,31,0.06)] px-4 py-2.5 text-xs text-[#62716d] dark:border-[rgba(255,255,255,0.05)] dark:text-[#94a3b8]">
-              <span>{(page - 1) * perPage + 1}–{Math.min(page * perPage, total)} / {total}</span>
+              <span>
+                {(page - 1) * perPage + 1}–{Math.min(page * perPage, total)} / {total}
+              </span>
               <div className="flex items-center gap-1">
                 <button
                   type="button"
@@ -209,7 +220,9 @@ export function ConsumptionView() {
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
-                <span className="px-2">{page} / {lastPage}</span>
+                <span className="px-2">
+                  {page} / {lastPage}
+                </span>
                 <button
                   type="button"
                   onClick={() => setPage((p) => Math.min(lastPage, p + 1))}

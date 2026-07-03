@@ -2,8 +2,8 @@
 
 import type { PaymentMethodStat, TopItem, TopTable } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
-import { CreditCard, Table2, UtensilsCrossed } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { CreditCard, Table2, UtensilsCrossed } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type RankRow = {

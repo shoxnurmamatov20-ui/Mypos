@@ -31,7 +31,9 @@ type SentryLike = {
 
 async function dynamicImport(name: string): Promise<SentryLike | null> {
   try {
-    const mod = (await new Function('m', 'return import(m)')(name)) as { default?: SentryLike } & SentryLike;
+    const mod = (await new Function('m', 'return import(m)')(name)) as {
+      default?: SentryLike;
+    } & SentryLike;
     return (mod.default ?? mod) as SentryLike;
   } catch {
     return null;

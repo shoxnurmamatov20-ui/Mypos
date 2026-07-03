@@ -1,10 +1,6 @@
 import { Scenes } from 'telegraf';
+import { showCategories, showCategoryItems, showItemDetail } from '../commands/menu.js';
 import type { BotContext } from '../types.js';
-import {
-  showCategories,
-  showCategoryItems,
-  showItemDetail,
-} from '../commands/menu.js';
 
 /**
  * A lightweight scene kept for future stateful browsing flows (pagination,

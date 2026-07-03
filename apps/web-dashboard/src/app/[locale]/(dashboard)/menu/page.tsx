@@ -1,5 +1,5 @@
-import { getTranslations } from 'next-intl/server';
 import { PageHeader } from '@mypos/ui';
+import { getTranslations } from 'next-intl/server';
 import { MenuManager } from './_components/menu-manager';
 
 export async function generateMetadata() {

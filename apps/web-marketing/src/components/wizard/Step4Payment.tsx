@@ -26,10 +26,7 @@ export function Step4Payment() {
       aria-labelledby="step4-title"
       className="rounded-card border border-hairline-soft bg-canvas p-lg shadow-hairline-ring sm:p-xl"
     >
-      <h2
-        id="step4-title"
-        className="font-display font-semibold text-display-sm text-ink"
-      >
+      <h2 id="step4-title" className="font-display font-semibold text-display-sm text-ink">
         {t('title')}
       </h2>
       <p className="mt-xs text-caption text-ink-muted-80">{t('subtitle')}</p>
@@ -66,12 +63,7 @@ export function Step4Payment() {
                     {t(`providers.${provider}.title`)}
                   </span>
                   {selected && (
-                    <Check
-                      size={16}
-                      weight="bold"
-                      aria-label="selected"
-                      className="text-coral"
-                    />
+                    <Check size={16} weight="bold" aria-label="selected" className="text-coral" />
                   )}
                 </div>
                 <div className="mt-xxs text-fine-print text-ink-muted-80">

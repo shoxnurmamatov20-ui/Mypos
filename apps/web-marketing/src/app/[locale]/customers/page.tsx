@@ -34,16 +34,34 @@ type Stat = { value: string; label: string };
 type Section = { heading: string; text: string };
 
 const STORIES: readonly StoryConfig[] = [
-  { id: 'osh-markazi', CardIcon: BowlFood, metricIcon: TrendUp,      tint: 'text-amber-400',   bg: 'bg-amber-500/15' },
-  { id: 'pizza-house', CardIcon: Pizza,    metricIcon: Clock,        tint: 'text-[#ff0037]',   bg: 'bg-[rgba(255,0,55,0.15)]' },
-  { id: 'cafe-aroma',  CardIcon: Coffee,   metricIcon: Users,        tint: 'text-purple-400',  bg: 'bg-purple-500/15' },
+  {
+    id: 'osh-markazi',
+    CardIcon: BowlFood,
+    metricIcon: TrendUp,
+    tint: 'text-amber-400',
+    bg: 'bg-amber-500/15',
+  },
+  {
+    id: 'pizza-house',
+    CardIcon: Pizza,
+    metricIcon: Clock,
+    tint: 'text-[#ff0037]',
+    bg: 'bg-[rgba(255,0,55,0.15)]',
+  },
+  {
+    id: 'cafe-aroma',
+    CardIcon: Coffee,
+    metricIcon: Users,
+    tint: 'text-purple-400',
+    bg: 'bg-purple-500/15',
+  },
 ];
 
 const OVERALL_STATS = [
   { value: '500+', label: 'restoran ishonadi' },
-  { value: '1M+',  label: 'oylik buyurtma' },
-  { value: '98%',  label: 'mijozlar mamnun' },
-  { value: '40+',  label: 'brend hamkor' },
+  { value: '1M+', label: 'oylik buyurtma' },
+  { value: '98%', label: 'mijozlar mamnun' },
+  { value: '40+', label: 'brend hamkor' },
 ] as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -83,10 +101,7 @@ export default async function CustomersPage({ params }: Props) {
           {/* Overall stats — small chip row */}
           <div className="glass-card mx-auto mt-10 grid max-w-3xl grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl overflow-hidden">
             {OVERALL_STATS.map((s) => (
-              <div
-                key={s.label}
-                className="px-3 py-4 text-center bg-white/[0.02]"
-              >
+              <div key={s.label} className="px-3 py-4 text-center bg-white/[0.02]">
                 <div className="tabular text-[22px] sm:text-[24px] font-extrabold leading-none text-white">
                   {s.value}
                 </div>
@@ -110,7 +125,11 @@ export default async function CustomersPage({ params }: Props) {
             const sections = t.raw(`${key}.sections`) as Section[];
 
             return (
-              <article id={story.id} key={story.id} className="glass-card rounded-2xl overflow-hidden scroll-mt-24">
+              <article
+                id={story.id}
+                key={story.id}
+                className="glass-card rounded-2xl overflow-hidden scroll-mt-24"
+              >
                 {/* Cover header */}
                 <header className="flex flex-col items-start gap-5 p-6 sm:p-8 sm:flex-row sm:items-center">
                   <div

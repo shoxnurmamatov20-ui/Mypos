@@ -78,18 +78,62 @@ export interface WaiterData {
 
 const TABLES: readonly WaiterTable[] = [
   { id: 't1', label: '1-stol', seats: 2, zone: 'Asosiy zal', status: 'free' },
-  { id: 't2', label: '2-stol', seats: 4, zone: 'Asosiy zal', status: 'seated', guests: 3, occupiedFor: '24 daqiqa', total: 118_000, orderId: '#1042' },
+  {
+    id: 't2',
+    label: '2-stol',
+    seats: 4,
+    zone: 'Asosiy zal',
+    status: 'seated',
+    guests: 3,
+    occupiedFor: '24 daqiqa',
+    total: 118_000,
+    orderId: '#1042',
+  },
   { id: 't3', label: '3-stol', seats: 4, zone: 'Asosiy zal', status: 'free' },
-  { id: 't4', label: '4-stol', seats: 6, zone: 'Asosiy zal', status: 'bill', guests: 5, occupiedFor: '1 soat 12 daqiqa', total: 216_000, orderId: '#1039' },
-  { id: 't5', label: '5-stol', seats: 2, zone: 'Terassa', status: 'seated', guests: 2, occupiedFor: '8 daqiqa', total: 72_000, orderId: '#1045' },
+  {
+    id: 't4',
+    label: '4-stol',
+    seats: 6,
+    zone: 'Asosiy zal',
+    status: 'bill',
+    guests: 5,
+    occupiedFor: '1 soat 12 daqiqa',
+    total: 216_000,
+    orderId: '#1039',
+  },
+  {
+    id: 't5',
+    label: '5-stol',
+    seats: 2,
+    zone: 'Terassa',
+    status: 'seated',
+    guests: 2,
+    occupiedFor: '8 daqiqa',
+    total: 72_000,
+    orderId: '#1045',
+  },
   { id: 't6', label: '6-stol', seats: 4, zone: 'Terassa', status: 'reserved' },
-  { id: 't7', label: '7-stol', seats: 8, zone: 'VIP', status: 'seated', guests: 7, occupiedFor: '41 daqiqa', total: 449_000, orderId: '#1041' },
+  {
+    id: 't7',
+    label: '7-stol',
+    seats: 8,
+    zone: 'VIP',
+    status: 'seated',
+    guests: 7,
+    occupiedFor: '41 daqiqa',
+    total: 449_000,
+    orderId: '#1041',
+  },
   { id: 't8', label: '8-stol', seats: 2, zone: 'Terassa', status: 'free' },
 ];
 
 const ORDERS: readonly WaiterOrder[] = [
   {
-    id: '#1045', table: '5-stol', status: 'open', guests: 2, openedAt: '14:38',
+    id: '#1045',
+    table: '5-stol',
+    status: 'open',
+    guests: 2,
+    openedAt: '14:38',
     items: [
       { name: 'Lavash', qty: 2, price: 21_000 },
       { name: 'Coca-Cola', qty: 2, price: 15_000 },
@@ -97,7 +141,11 @@ const ORDERS: readonly WaiterOrder[] = [
     total: 72_000,
   },
   {
-    id: '#1042', table: '2-stol', status: 'sent', guests: 3, openedAt: '14:20',
+    id: '#1042',
+    table: '2-stol',
+    status: 'sent',
+    guests: 3,
+    openedAt: '14:20',
     items: [
       { name: 'Osh', qty: 2, price: 38_000 },
       { name: 'Achichuq salat', qty: 1, price: 18_000 },
@@ -106,7 +154,11 @@ const ORDERS: readonly WaiterOrder[] = [
     total: 118_000,
   },
   {
-    id: '#1041', table: '7-stol', status: 'ready', guests: 7, openedAt: '13:55',
+    id: '#1041',
+    table: '7-stol',
+    status: 'ready',
+    guests: 7,
+    openedAt: '13:55',
     items: [
       { name: 'Shashlik assorti', qty: 3, price: 95_000 },
       { name: 'Norin', qty: 2, price: 42_000 },
@@ -116,7 +168,11 @@ const ORDERS: readonly WaiterOrder[] = [
     total: 449_000,
   },
   {
-    id: '#1039', table: '4-stol', status: 'served', guests: 5, openedAt: '13:10',
+    id: '#1039',
+    table: '4-stol',
+    status: 'served',
+    guests: 5,
+    openedAt: '13:10',
     items: [
       { name: 'Lagʻmon', qty: 3, price: 34_000 },
       { name: 'Manti (6 dona)', qty: 2, price: 36_000 },
@@ -125,7 +181,11 @@ const ORDERS: readonly WaiterOrder[] = [
     total: 216_000,
   },
   {
-    id: '#1038', table: '1-stol', status: 'paid', guests: 2, openedAt: '12:40',
+    id: '#1038',
+    table: '1-stol',
+    status: 'paid',
+    guests: 2,
+    openedAt: '12:40',
     items: [
       { name: 'Somsa', qty: 4, price: 12_000 },
       { name: 'Choy (choynak)', qty: 2, price: 12_000 },

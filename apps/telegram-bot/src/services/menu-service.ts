@@ -1,8 +1,8 @@
 import {
-  publicApi,
   type PublicMenuCategory,
   type PublicMenuItem,
   type PublicMenuResponse,
+  publicApi,
 } from '@mypos/api-client';
 import { apiClient, tenantSlug } from '../api.js';
 
@@ -32,18 +32,12 @@ export async function listCategories(): Promise<PublicMenuCategory[]> {
   return menu.categories.filter((c) => c.is_active);
 }
 
-export async function listItemsByCategory(
-  categoryId: string,
-): Promise<PublicMenuItem[]> {
+export async function listItemsByCategory(categoryId: string): Promise<PublicMenuItem[]> {
   const menu = await loadMenu();
-  return menu.items.filter(
-    (i) => i.category_id === categoryId && i.is_active,
-  );
+  return menu.items.filter((i) => i.category_id === categoryId && i.is_active);
 }
 
-export async function findItem(
-  itemId: string,
-): Promise<PublicMenuItem | null> {
+export async function findItem(itemId: string): Promise<PublicMenuItem | null> {
   const menu = await loadMenu();
   return menu.items.find((i) => i.id === itemId) ?? null;
 }

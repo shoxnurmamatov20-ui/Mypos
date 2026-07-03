@@ -135,11 +135,27 @@ describe('cart store persistence', () => {
     const { useCartStore, selectCartTotal } = await import('../stores/cart');
 
     useCartStore.getState().addItem(
-      { id: 'a', restaurantSlug: 'r', name: 'A', priceMinor: 10000, quantity: 2, emoji: '', bgColor: '' },
+      {
+        id: 'a',
+        restaurantSlug: 'r',
+        name: 'A',
+        priceMinor: 10000,
+        quantity: 2,
+        emoji: '',
+        bgColor: '',
+      },
       'r',
     );
     useCartStore.getState().addItem(
-      { id: 'b', restaurantSlug: 'r', name: 'B', priceMinor: 5000, quantity: 3, emoji: '', bgColor: '' },
+      {
+        id: 'b',
+        restaurantSlug: 'r',
+        name: 'B',
+        priceMinor: 5000,
+        quantity: 3,
+        emoji: '',
+        bgColor: '',
+      },
       'r',
     );
 
@@ -150,7 +166,15 @@ describe('cart store persistence', () => {
     const { useCartStore } = await import('../stores/cart');
 
     useCartStore.getState().addItem(
-      { id: 'x', restaurantSlug: 'r', name: 'X', priceMinor: 5000, quantity: 1, emoji: '', bgColor: '' },
+      {
+        id: 'x',
+        restaurantSlug: 'r',
+        name: 'X',
+        priceMinor: 5000,
+        quantity: 1,
+        emoji: '',
+        bgColor: '',
+      },
       'r',
     );
     useCartStore.getState().removeItem('x');

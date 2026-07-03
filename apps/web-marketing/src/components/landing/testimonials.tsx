@@ -25,19 +25,14 @@ export function Testimonials() {
         <div className="glass-card mx-auto mt-10 grid max-w-3xl grid-cols-3 gap-px rounded-2xl overflow-hidden">
           {[
             { value: '500+', label: t('stat_restaurants') },
-            { value: '98%',  label: t('stat_satisfaction') },
-            { value: '40+',  label: t('stat_brands') },
+            { value: '98%', label: t('stat_satisfaction') },
+            { value: '40+', label: t('stat_brands') },
           ].map((s) => (
-            <div
-              key={s.label}
-              className="px-4 py-6 text-center bg-white/[0.02]"
-            >
+            <div key={s.label} className="px-4 py-6 text-center bg-white/[0.02]">
               <div className="tabular text-[28px] sm:text-[32px] font-extrabold leading-none text-white">
                 {s.value}
               </div>
-              <div className="mt-1.5 text-[12px] font-semibold text-white/60">
-                {s.label}
-              </div>
+              <div className="mt-1.5 text-[12px] font-semibold text-white/60">{s.label}</div>
             </div>
           ))}
         </div>
@@ -45,10 +40,7 @@ export function Testimonials() {
         {/* Quote cards */}
         <ul className="mt-10 grid gap-4 md:grid-cols-3">
           {KEYS.map((key) => (
-            <li
-              key={key}
-              className="glass-card relative rounded-2xl p-6"
-            >
+            <li key={key} className="glass-card relative rounded-2xl p-6">
               <Quotes
                 size={28}
                 weight="fill"
@@ -64,12 +56,8 @@ export function Testimonials() {
                 &ldquo;{t(`items.${key}.quote`)}&rdquo;
               </p>
               <div className="mt-5 border-t border-white/[0.08] pt-4">
-                <p className="text-[14px] font-bold text-white">
-                  {t(`items.${key}.author`)}
-                </p>
-                <p className="mt-0.5 text-[12.5px] text-white/60">
-                  {t(`items.${key}.role`)}
-                </p>
+                <p className="text-[14px] font-bold text-white">{t(`items.${key}.author`)}</p>
+                <p className="mt-0.5 text-[12.5px] text-white/60">{t(`items.${key}.role`)}</p>
               </div>
             </li>
           ))}

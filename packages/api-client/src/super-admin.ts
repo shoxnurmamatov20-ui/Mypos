@@ -1,9 +1,5 @@
 import type { MyPosApiClient } from './client';
-import type {
-  CollectionResponse,
-  PaginatedResponse,
-  ResourceResponse,
-} from './menu';
+import type { CollectionResponse, PaginatedResponse, ResourceResponse } from './menu';
 
 /**
  * Super-admin (SaaS owner panel) API. All endpoints sit under
@@ -31,42 +27,22 @@ import type {
 /**
  * Mirrors `App\Domain\SuperAdmin\Enums\SubscriptionPlan`.
  */
-export type SubscriptionPlan =
-  | 'free'
-  | 'starter'
-  | 'pro'
-  | 'business'
-  | 'enterprise';
+export type SubscriptionPlan = 'free' | 'starter' | 'pro' | 'business' | 'enterprise';
 
 /**
  * Mirrors `App\Domain\SuperAdmin\Enums\SubscriptionStatus`.
  */
-export type SubscriptionStatus =
-  | 'active'
-  | 'trialing'
-  | 'past_due'
-  | 'suspended'
-  | 'cancelled';
+export type SubscriptionStatus = 'active' | 'trialing' | 'past_due' | 'suspended' | 'cancelled';
 
 /**
  * Mirrors `App\Domain\SuperAdmin\Enums\SuperAdminRole`.
  */
-export type SuperAdminRole =
-  | 'owner'
-  | 'admin'
-  | 'support'
-  | 'finance'
-  | 'developer';
+export type SuperAdminRole = 'owner' | 'admin' | 'support' | 'finance' | 'developer';
 
 /**
  * Mirrors `App\Domain\SuperAdmin\Enums\AuditSeverity`.
  */
-export type AuditSeverity =
-  | 'debug'
-  | 'info'
-  | 'warning'
-  | 'error'
-  | 'critical';
+export type AuditSeverity = 'debug' | 'info' | 'warning' | 'error' | 'critical';
 
 /**
  * Mirrors `App\Domain\SuperAdmin\Enums\AuditActorType`.
@@ -615,20 +591,13 @@ export type MessageResponse = {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const buildQueryString = (
-  params: Record<string, unknown> | undefined,
-): string => {
+const buildQueryString = (params: Record<string, unknown> | undefined): string => {
   if (!params) return '';
   const entries = Object.entries(params).filter(
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries
-      .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-      .join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 // ─── API ─────────────────────────────────────────────────────────────────────
@@ -637,17 +606,11 @@ export const superAdminApi = {
   // ── Auth (PUBLIC, rate-limited) ─────────────────────────────────────────
   /** POST /api/v1/super-admin/login (rate-limited: 20 req / 15 min per IP). */
   login: (client: MyPosApiClient, input: SuperAdminLoginInput) =>
-    client.post<SuperAdminAuthResponse>(
-      '/api/v1/super-admin/login',
-      input,
-    ),
+    client.post<SuperAdminAuthResponse>('/api/v1/super-admin/login', input),
 
   /** POST /api/v1/super-admin/admins/accept-invitation (rate-limited: 5 req / 15 min per IP). */
   acceptInvitation: (client: MyPosApiClient, input: AcceptInvitationInput) =>
-    client.post<SuperAdminAuthResponse>(
-      '/api/v1/super-admin/admins/accept-invitation',
-      input,
-    ),
+    client.post<SuperAdminAuthResponse>('/api/v1/super-admin/admins/accept-invitation', input),
 
   // ── Session (authenticated) ─────────────────────────────────────────────
   /** GET /api/v1/super-admin/me */
@@ -661,19 +624,12 @@ export const superAdminApi = {
   // ── Dashboard ───────────────────────────────────────────────────────────
   /** GET /api/v1/super-admin/dashboard */
   dashboard: (client: MyPosApiClient) =>
-    client.get<ResourceResponse<DashboardKpis>>(
-      '/api/v1/super-admin/dashboard',
-    ),
+    client.get<ResourceResponse<DashboardKpis>>('/api/v1/super-admin/dashboard'),
 
   /** GET /api/v1/super-admin/dashboard/charts?range=30d */
-  dashboardCharts: (
-    client: MyPosApiClient,
-    params: DashboardChartsParams = {},
-  ) => {
+  dashboardCharts: (client: MyPosApiClient, params: DashboardChartsParams = {}) => {
     const qs = buildQueryString(params);
-    return client.get<DashboardChartsResponse>(
-      `/api/v1/super-admin/dashboard/charts${qs}`,
-    );
+    return client.get<DashboardChartsResponse>(`/api/v1/super-admin/dashboard/charts${qs}`);
   },
 
   // ── Tenants ─────────────────────────────────────────────────────────────
@@ -681,9 +637,7 @@ export const superAdminApi = {
     /** GET /api/v1/super-admin/tenants */
     list: (client: MyPosApiClient, params?: ListTenantsParams) => {
       const qs = buildQueryString(params);
-      return client.get<PaginatedResponse<TenantSummary>>(
-        `/api/v1/super-admin/tenants${qs}`,
-      );
+      return client.get<PaginatedResponse<TenantSummary>>(`/api/v1/super-admin/tenants${qs}`);
     },
 
     /** GET /api/v1/super-admin/tenants/{tenant} */
@@ -694,17 +648,10 @@ export const superAdminApi = {
 
     /** POST /api/v1/super-admin/tenants */
     create: (client: MyPosApiClient, input: CreateTenantInput) =>
-      client.post<ResourceResponse<TenantCreatedEnvelope>>(
-        '/api/v1/super-admin/tenants',
-        input,
-      ),
+      client.post<ResourceResponse<TenantCreatedEnvelope>>('/api/v1/super-admin/tenants', input),
 
     /** PATCH /api/v1/super-admin/tenants/{tenant} */
-    update: (
-      client: MyPosApiClient,
-      tenantId: string,
-      input: UpdateTenantInput,
-    ) =>
+    update: (client: MyPosApiClient, tenantId: string, input: UpdateTenantInput) =>
       client.patch<ResourceResponse<TenantDetail>>(
         `/api/v1/super-admin/tenants/${encodeURIComponent(tenantId)}`,
         input,
@@ -712,16 +659,10 @@ export const superAdminApi = {
 
     /** DELETE /api/v1/super-admin/tenants/{tenant} (soft delete). */
     delete: (client: MyPosApiClient, tenantId: string) =>
-      client.delete<MessageResponse>(
-        `/api/v1/super-admin/tenants/${encodeURIComponent(tenantId)}`,
-      ),
+      client.delete<MessageResponse>(`/api/v1/super-admin/tenants/${encodeURIComponent(tenantId)}`),
 
     /** POST /api/v1/super-admin/tenants/{tenant}/suspend */
-    suspend: (
-      client: MyPosApiClient,
-      tenantId: string,
-      input: SuspendTenantInput,
-    ) =>
+    suspend: (client: MyPosApiClient, tenantId: string, input: SuspendTenantInput) =>
       client.post<ResourceResponse<TenantDetail>>(
         `/api/v1/super-admin/tenants/${encodeURIComponent(tenantId)}/suspend`,
         input,
@@ -753,25 +694,18 @@ export const superAdminApi = {
     /** GET /api/v1/super-admin/audit-logs */
     list: (client: MyPosApiClient, params?: ListAuditLogsParams) => {
       const qs = buildQueryString(params);
-      return client.get<PaginatedResponse<AuditLog>>(
-        `/api/v1/super-admin/audit-logs${qs}`,
-      );
+      return client.get<PaginatedResponse<AuditLog>>(`/api/v1/super-admin/audit-logs${qs}`);
     },
 
     /** GET /api/v1/super-admin/audit-logs/actions — distinct values for filtering. */
     actions: (client: MyPosApiClient) =>
-      client.get<CollectionResponse<string>>(
-        '/api/v1/super-admin/audit-logs/actions',
-      ),
+      client.get<CollectionResponse<string>>('/api/v1/super-admin/audit-logs/actions'),
   },
 
   // ── Billing ─────────────────────────────────────────────────────────────
   billing: {
     /** GET /api/v1/super-admin/billing/subscriptions */
-    subscriptions: (
-      client: MyPosApiClient,
-      params?: ListBillingSubscriptionsParams,
-    ) => {
+    subscriptions: (client: MyPosApiClient, params?: ListBillingSubscriptionsParams) => {
       const qs = buildQueryString(params);
       return client.get<PaginatedResponse<TenantSummary>>(
         `/api/v1/super-admin/billing/subscriptions${qs}`,
@@ -780,9 +714,7 @@ export const superAdminApi = {
 
     /** GET /api/v1/super-admin/billing/mrr-breakdown */
     mrrBreakdown: (client: MyPosApiClient) =>
-      client.get<ResourceResponse<MrrBreakdown>>(
-        '/api/v1/super-admin/billing/mrr-breakdown',
-      ),
+      client.get<ResourceResponse<MrrBreakdown>>('/api/v1/super-admin/billing/mrr-breakdown'),
   },
 
   // ── Team management ────────────────────────────────────────────────────
@@ -796,9 +728,7 @@ export const superAdminApi = {
      * meta. If you only want the first page, no params are required.
      */
     list: (client: MyPosApiClient) =>
-      client.get<PaginatedResponse<SuperAdminUser>>(
-        '/api/v1/super-admin/admins',
-      ),
+      client.get<PaginatedResponse<SuperAdminUser>>('/api/v1/super-admin/admins'),
 
     /**
      * POST /api/v1/super-admin/admins/invite.
@@ -808,10 +738,7 @@ export const superAdminApi = {
      * (the backend does not send the email itself).
      */
     invite: (client: MyPosApiClient, input: InviteSuperAdminInput) =>
-      client.post<InviteSuperAdminResponse>(
-        '/api/v1/super-admin/admins/invite',
-        input,
-      ),
+      client.post<InviteSuperAdminResponse>('/api/v1/super-admin/admins/invite', input),
 
     /** GET /api/v1/super-admin/admins/invitations — pending only (max 100). */
     pendingInvitations: (client: MyPosApiClient) =>
@@ -821,24 +748,17 @@ export const superAdminApi = {
 
     /** DELETE /api/v1/super-admin/admins/{user} — revoke super-admin rights. */
     revoke: (client: MyPosApiClient, userUuid: string) =>
-      client.delete<MessageResponse>(
-        `/api/v1/super-admin/admins/${encodeURIComponent(userUuid)}`,
-      ),
+      client.delete<MessageResponse>(`/api/v1/super-admin/admins/${encodeURIComponent(userUuid)}`),
   },
 
   // ── Platform settings ──────────────────────────────────────────────────
   settings: {
     /** GET /api/v1/super-admin/settings */
     get: (client: MyPosApiClient) =>
-      client.get<ResourceResponse<PlatformSettings>>(
-        '/api/v1/super-admin/settings',
-      ),
+      client.get<ResourceResponse<PlatformSettings>>('/api/v1/super-admin/settings'),
 
     /** PATCH /api/v1/super-admin/settings */
     update: (client: MyPosApiClient, input: UpdatePlatformSettingsInput) =>
-      client.patch<ResourceResponse<PlatformSettings>>(
-        '/api/v1/super-admin/settings',
-        input,
-      ),
+      client.patch<ResourceResponse<PlatformSettings>>('/api/v1/super-admin/settings', input),
   },
 };

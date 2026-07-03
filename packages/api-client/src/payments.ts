@@ -1,13 +1,7 @@
 import type { MyPosApiClient } from './client';
 import type { PaginatedResponse, ResourceResponse } from './menu';
 
-export type PaymentProvider =
-  | 'cash'
-  | 'card'
-  | 'click'
-  | 'payme'
-  | 'uzum'
-  | 'apelsin';
+export type PaymentProvider = 'cash' | 'card' | 'click' | 'payme' | 'uzum' | 'apelsin';
 
 export type PaymentStatus =
   | 'pending'
@@ -82,12 +76,7 @@ export const paymentsApi = {
   get: (client: MyPosApiClient, id: string) =>
     client.get<ResourceResponse<Payment>>(`/api/v1/payments/${id}`),
   captureCash: (client: MyPosApiClient, id: string) =>
-    client.post<ResourceResponse<Payment>>(
-      `/api/v1/payments/${id}/capture`,
-    ),
+    client.post<ResourceResponse<Payment>>(`/api/v1/payments/${id}/capture`),
   refund: (client: MyPosApiClient, id: string, input: RefundPaymentInput) =>
-    client.post<ResourceResponse<Payment>>(
-      `/api/v1/payments/${id}/refund`,
-      input,
-    ),
+    client.post<ResourceResponse<Payment>>(`/api/v1/payments/${id}/refund`, input),
 };

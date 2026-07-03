@@ -1,11 +1,11 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/cn';
 import type { MrrByPlan } from '@/data/mock-billing';
+import { cn } from '@/lib/cn';
 import { formatNumber, formatPercent, formatUZS } from '@/lib/format';
 import type { TenantPlan } from '@/types/super-admin';
 
@@ -23,12 +23,14 @@ type Props = {
  *   free       → gray-400
  *   starter    → blue-600
  *   pro        → teal-500
+ *   plus       → indigo-500
  *   business   → purple-600
  *   enterprise → pink-600 (was amber — collides with status warning)
  */
 const PLAN_COLORS: Record<TenantPlan, string> = {
   enterprise: '#db2777',
   business: '#7c3aed',
+  plus: '#6366f1',
   pro: '#14b8a6',
   starter: '#2563eb',
   free: '#94a3b8',
@@ -53,9 +55,7 @@ export function MrrByPlanCard({ rows, compact = false }: Props) {
   return (
     <Card className="p-3 sm:p-4 md:p-5 overflow-hidden">
       <CardHeader className="mb-3 md:mb-4">
-        <CardTitle hint={t('mrr_by_plan_subtitle')}>
-          {t('mrr_by_plan_title')}
-        </CardTitle>
+        <CardTitle hint={t('mrr_by_plan_subtitle')}>{t('mrr_by_plan_title')}</CardTitle>
       </CardHeader>
 
       <div className={compact ? 'flex flex-col gap-4' : 'grid gap-6 lg:grid-cols-2'}>

@@ -15,12 +15,7 @@ export type MockOrder = {
 
 export type MockAuditEvent = {
   id: string;
-  type:
-    | 'login'
-    | 'plan_change'
-    | 'subscription_renewed'
-    | 'order_completed'
-    | 'payment';
+  type: 'login' | 'plan_change' | 'subscription_renewed' | 'order_completed' | 'payment';
   actor: string;
   detail?: string;
   created_at: string;

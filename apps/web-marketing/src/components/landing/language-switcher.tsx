@@ -1,15 +1,15 @@
 'use client';
 
 import { CaretDown } from '@phosphor-icons/react';
-import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useEffect, useRef, useState, useTransition } from 'react';
 
 const LOCALES = [
   { code: 'uz', short: "O'zb", label: "O'zbekcha" },
-  { code: 'ru', short: 'Рус',  label: 'Русский' },
-  { code: 'en', short: 'Eng',  label: 'English' },
-  { code: 'kz', short: 'Қаз',  label: 'Қазақша' },
+  { code: 'ru', short: 'Рус', label: 'Русский' },
+  { code: 'en', short: 'Eng', label: 'English' },
+  { code: 'kz', short: 'Қаз', label: 'Қазақша' },
 ] as const;
 
 interface Props {

@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  notificationsApi,
   type NotificationChannel,
   type NotificationLog,
   type NotificationStatus,
+  notificationsApi,
 } from '@mypos/api-client';
 import {
   Badge,
@@ -117,9 +117,7 @@ export function NotificationsLogClient() {
             id: 'subject',
             header: 'Subject',
             cell: (n: NotificationLog) => (
-              <span className="text-[12px] truncate max-w-[200px] block">
-                {n.subject ?? '—'}
-              </span>
+              <span className="text-[12px] truncate max-w-[200px] block">{n.subject ?? '—'}</span>
             ),
           },
           {

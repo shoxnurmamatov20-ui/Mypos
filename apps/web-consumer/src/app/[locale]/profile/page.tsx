@@ -95,9 +95,7 @@ export default function ProfilePage() {
         </div>
         <div className="min-w-0 flex-1">
           <p className="truncate text-xl font-bold text-neutral-900">{userName}</p>
-          {userContact ? (
-            <p className="truncate text-sm text-neutral-500">{userContact}</p>
-          ) : null}
+          {userContact ? <p className="truncate text-sm text-neutral-500">{userContact}</p> : null}
         </div>
       </section>
 

@@ -86,7 +86,10 @@ export const useFinanceStore = create<FinanceState>()(
 );
 
 /** Categories of one kind (income/expense). */
-export function categoriesByKind(categories: FinanceCategory[], kind: FinanceKind): FinanceCategory[] {
+export function categoriesByKind(
+  categories: FinanceCategory[],
+  kind: FinanceKind,
+): FinanceCategory[] {
   return categories.filter((c) => c.kind === kind);
 }
 

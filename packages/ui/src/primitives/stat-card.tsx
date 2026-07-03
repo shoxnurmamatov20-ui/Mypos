@@ -42,7 +42,9 @@ export function StatCard({ label, value, icon, delta, hint, className }: StatCar
         <div
           className={cn(
             'mt-3 inline-flex items-center gap-1 text-[12px] font-semibold',
-            delta.positive ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400',
+            delta.positive
+              ? 'text-emerald-600 dark:text-emerald-400'
+              : 'text-red-600 dark:text-red-400',
           )}
         >
           <span>{delta.positive ? '↑' : '↓'}</span>

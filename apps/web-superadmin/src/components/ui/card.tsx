@@ -30,12 +30,7 @@ type CardHeaderProps = {
 /** Top-of-card row: title on the left, action / link / chip on the right. */
 export function CardHeader({ children, className }: CardHeaderProps) {
   return (
-    <header
-      className={cn(
-        'mb-4 flex items-center justify-between gap-3',
-        className,
-      )}
-    >
+    <header className={cn('mb-4 flex items-center justify-between gap-3', className)}>
       {children}
     </header>
   );
@@ -63,39 +58,23 @@ export function CardTitle({ children, className, hint }: CardTitleProps) {
       >
         {children}
       </h3>
-      {hint ? (
-        <p className="mt-1.5 text-xs text-[#62716d] dark:text-[#94a3b8]">{hint}</p>
-      ) : null}
+      {hint ? <p className="mt-1.5 text-xs text-[#62716d] dark:text-[#94a3b8]">{hint}</p> : null}
     </div>
   );
 }
 
 /** Optional standalone description (himoya pattern). */
-export function CardDescription({
-  className,
-  ...props
-}: HTMLAttributes<HTMLParagraphElement>) {
-  return (
-    <p
-      className={cn('text-sm text-[#62716d] dark:text-[#94a3b8]', className)}
-      {...props}
-    />
-  );
+export function CardDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return <p className={cn('text-sm text-[#62716d] dark:text-[#94a3b8]', className)} {...props} />;
 }
 
 /** Optional content slot for stacked layouts (himoya pattern). */
-export function CardContent({
-  className,
-  ...props
-}: HTMLAttributes<HTMLDivElement>) {
+export function CardContent({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return <div className={cn('', className)} {...props} />;
 }
 
 /** Optional footer row for actions (himoya pattern). */
-export function CardFooter({
-  className,
-  ...props
-}: HTMLAttributes<HTMLDivElement>) {
+export function CardFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(

@@ -89,10 +89,7 @@ export function Step1Restaurant() {
       aria-labelledby="step1-title"
       className="rounded-card border border-hairline-soft bg-canvas p-lg shadow-hairline-ring sm:p-xl"
     >
-      <h2
-        id="step1-title"
-        className="font-display font-semibold text-display-sm text-ink"
-      >
+      <h2 id="step1-title" className="font-display font-semibold text-display-sm text-ink">
         {t('title')}
       </h2>
       <p className="mt-xs text-caption text-ink-muted-80">{t('subtitle')}</p>
@@ -247,7 +244,12 @@ export function Step1Restaurant() {
                 // biome-ignore lint/a11y/useAltText: decorative preview
                 <img src={restaurant.logoDataUrl} alt="" className="h-full w-full object-cover" />
               ) : (
-                <ImageSquare size={32} weight="duotone" className="text-ink-muted-48" aria-hidden="true" />
+                <ImageSquare
+                  size={32}
+                  weight="duotone"
+                  className="text-ink-muted-48"
+                  aria-hidden="true"
+                />
               )}
             </div>
             <div className="flex items-center gap-xs">
@@ -303,7 +305,10 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-xxs block font-display font-semibold text-caption-strong text-ink">
+      <label
+        htmlFor={id}
+        className="mb-xxs block font-display font-semibold text-caption-strong text-ink"
+      >
         {label}
         {required && <span className="ml-xxs text-error">*</span>}
       </label>

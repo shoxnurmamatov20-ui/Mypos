@@ -7,12 +7,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { apiClient } from '@/lib/api';
 import { DocDetailModal } from './doc-detail-modal';
-import {
-  inputClass,
-  labelClass,
-  primaryBtnClass,
-  secondaryBtnClass,
-} from './ui-helpers';
+import { inputClass, labelClass, primaryBtnClass, secondaryBtnClass } from './ui-helpers';
 import { WarehouseSelect } from './warehouse-select';
 
 type Props = {
@@ -29,8 +24,7 @@ export function AuditSessionForm({ onClose, onCreated }: Props) {
   const [notes, setNotes] = useState('');
 
   const mutation = useMutation({
-    mutationFn: (input: CreateAuditSessionInput) =>
-      auditSessionsApi.create(apiClient, input),
+    mutationFn: (input: CreateAuditSessionInput) => auditSessionsApi.create(apiClient, input),
     onSuccess: (res) => {
       toast.success(t('toast.created'));
       void qc.invalidateQueries({ queryKey: ['audit-sessions'] });

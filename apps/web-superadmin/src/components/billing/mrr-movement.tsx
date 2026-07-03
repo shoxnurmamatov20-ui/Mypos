@@ -1,20 +1,12 @@
 'use client';
 
 import { ArrowDownRight, ArrowUpRight, Equal } from 'lucide-react';
-import { useTheme } from 'next-themes';
 import { useTranslations } from 'next-intl';
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { useTheme } from 'next-themes';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/cn';
 import type { MrrMovementPoint, MrrSummary } from '@/data/mock-billing';
+import { cn } from '@/lib/cn';
 import { formatUZS } from '@/lib/format';
 
 type Props = {
@@ -54,9 +46,7 @@ export function MrrMovement({ summary, movement }: Props) {
   return (
     <Card className="p-3 sm:p-4 md:p-5 h-full overflow-hidden">
       <CardHeader className="mb-3 md:mb-4">
-        <CardTitle hint={t('mrr_movement_subtitle')}>
-          {t('mrr_movement_title')}
-        </CardTitle>
+        <CardTitle hint={t('mrr_movement_subtitle')}>{t('mrr_movement_title')}</CardTitle>
       </CardHeader>
 
       <div className="flex flex-col gap-4 md:gap-5 lg:flex-row">
@@ -176,15 +166,8 @@ type WaterfallRowProps = {
   divider?: boolean;
 };
 
-function WaterfallRow({
-  label,
-  value,
-  tone,
-  bold = false,
-  divider = false,
-}: WaterfallRowProps) {
-  const Icon =
-    tone === 'negative' ? ArrowDownRight : tone === 'net' ? Equal : ArrowUpRight;
+function WaterfallRow({ label, value, tone, bold = false, divider = false }: WaterfallRowProps) {
+  const Icon = tone === 'negative' ? ArrowDownRight : tone === 'net' ? Equal : ArrowUpRight;
   const colorClass =
     tone === 'negative'
       ? 'text-red-700 dark:text-red-400'

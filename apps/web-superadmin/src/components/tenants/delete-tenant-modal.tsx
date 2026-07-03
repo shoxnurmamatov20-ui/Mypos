@@ -44,12 +44,7 @@ export function DeleteTenantModal({
   const matches = confirm.trim() === expected.trim();
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      title={t('delete_modal_title')}
-      size="md"
-    >
+    <Modal open={open} onClose={onClose} title={t('delete_modal_title')} size="md">
       <div className="space-y-4">
         <div className="flex items-start gap-3 rounded-lg border border-red-300 dark:border-red-500/30 bg-red-50 dark:bg-red-500/10 p-3">
           <AlertTriangle

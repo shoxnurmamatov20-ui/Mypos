@@ -36,11 +36,7 @@ export function CommandPaletteTrigger() {
       title={`Qidiruv va buyruqlar (${isMac ? '⌘' : 'Ctrl'}+K)`}
       aria-label="Qidiruv va buyruqlar panelini ochish"
     >
-      <Search
-        className="h-3.5 w-3.5 opacity-60"
-        strokeWidth={2}
-        aria-hidden="true"
-      />
+      <Search className="h-3.5 w-3.5 opacity-60" strokeWidth={2} aria-hidden="true" />
       <span className="text-xs font-semibold">Qidiruv</span>
       <span className="flex items-center gap-0.5">
         <kbd className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-[10px] font-bold text-gray-500 dark:text-gray-400">

@@ -1,6 +1,6 @@
 'use client';
 
-import { employeesApi, type Employee, type EmployeeStatus } from '@mypos/api-client';
+import { type Employee, type EmployeeStatus, employeesApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -14,11 +14,12 @@ export function EmployeesManager() {
 
   const employeesQuery = useQuery({
     queryKey: ['employees', q, status],
-    queryFn: () => employeesApi.list(apiClient, {
-      q: q || undefined,
-      status: (status || undefined) as EmployeeStatus | undefined,
-      per_page: 50,
-    }),
+    queryFn: () =>
+      employeesApi.list(apiClient, {
+        q: q || undefined,
+        status: (status || undefined) as EmployeeStatus | undefined,
+        per_page: 50,
+      }),
   });
 
   const employees: Employee[] = employeesQuery.data?.data ?? [];

@@ -1,6 +1,12 @@
 import type { MyPosApiClient } from './client';
 import type { ResourceResponse } from './menu';
-import type { OrderItem, OrderItemModifier, OrderPaymentStatus, OrderStatus, OrderType } from './orders';
+import type {
+  OrderItem,
+  OrderItemModifier,
+  OrderPaymentStatus,
+  OrderStatus,
+  OrderType,
+} from './orders';
 import type { Payment } from './payments';
 import type { PublicMenuResponse } from './public';
 
@@ -225,9 +231,7 @@ export const kioskApi = {
    * belong to the calling device, to avoid leaking cross-kiosk existence.
    */
   getOrder: (client: MyPosApiClient, orderId: string) =>
-    client.get<ResourceResponse<KioskOrder>>(
-      `/api/v1/kiosk/orders/${encodeURIComponent(orderId)}`,
-    ),
+    client.get<ResourceResponse<KioskOrder>>(`/api/v1/kiosk/orders/${encodeURIComponent(orderId)}`),
 
   /**
    * Create a payment intent. For card/click/payme returns a `payment_url`

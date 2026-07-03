@@ -1,14 +1,10 @@
 'use client';
 
 import { ApiError } from '@mypos/api-client';
-import { apiClient } from './api';
 import { MOCK_DASHBOARD_KPIS, MOCK_REVENUE_CHART } from '@/data/mock-dashboard';
 import { MOCK_TENANTS } from '@/data/mock-tenants';
-import type {
-  DashboardKpis,
-  MockRevenuePoint,
-  TenantSummary,
-} from '@/types/super-admin';
+import type { DashboardKpis, MockRevenuePoint, TenantSummary } from '@/types/super-admin';
+import { apiClient } from './api';
 
 /**
  * Thin wrappers around the `/api/v1/super-admin/*` endpoints.
@@ -88,9 +84,7 @@ function mapBackendKpis(b: BackendKpis): DashboardKpis {
   const tile = (current: number, growthPct: number) => ({
     value: current,
     previous:
-      growthPct === 0 || growthPct === -100
-        ? current
-        : Math.round(current / (1 + growthPct / 100)),
+      growthPct === 0 || growthPct === -100 ? current : Math.round(current / (1 + growthPct / 100)),
     trend_pct: Number(growthPct.toFixed(2)),
   });
 
@@ -98,10 +92,7 @@ function mapBackendKpis(b: BackendKpis): DashboardKpis {
     mrr_minor: tile(b.revenue.mrr_total_minor, b.revenue.growth_30d_percent),
     active_tenants: tile(b.tenants.active, b.tenants.growth_30d),
     total_orders: tile(b.orders.this_month_count, b.orders.growth_today_percent),
-    nrr_pct: tile(
-      b.tenants.active > 0 ? 100 + b.tenants.growth_30d : 100,
-      b.tenants.growth_30d,
-    ),
+    nrr_pct: tile(b.tenants.active > 0 ? 100 + b.tenants.growth_30d : 100, b.tenants.growth_30d),
     trialing_tenants: b.tenants.trialing,
     at_risk_tenants: b.tenants.past_due + b.tenants.suspended,
   };
@@ -109,9 +100,7 @@ function mapBackendKpis(b: BackendKpis): DashboardKpis {
 
 export async function fetchDashboardKpis(): Promise<DashboardKpis> {
   try {
-    const res = await apiClient.get<Envelope<BackendKpis>>(
-      '/api/v1/super-admin/dashboard',
-    );
+    const res = await apiClient.get<Envelope<BackendKpis>>('/api/v1/super-admin/dashboard');
     return mapBackendKpis(res.data);
   } catch (err) {
     if (isApiUnavailable(err)) return MOCK_DASHBOARD_KPIS;
@@ -124,9 +113,7 @@ export async function fetchRevenueChart(): Promise<MockRevenuePoint[]> {
     const res = await apiClient.get<Envelope<BackendCharts>>(
       '/api/v1/super-admin/dashboard/charts',
     );
-    const ordersByDay = new Map(
-      (res.data.orders_by_day ?? []).map((o) => [o.date, o.count]),
-    );
+    const ordersByDay = new Map((res.data.orders_by_day ?? []).map((o) => [o.date, o.count]));
     return res.data.revenue_by_day.map((row) => ({
       date: row.date,
       revenue_minor: row.revenue_minor,
@@ -142,9 +129,7 @@ export async function fetchRevenueChart(): Promise<MockRevenuePoint[]> {
 
 export async function fetchTenants(): Promise<TenantSummary[]> {
   try {
-    const res = await apiClient.get<Envelope<TenantSummary[]>>(
-      '/api/v1/super-admin/tenants',
-    );
+    const res = await apiClient.get<Envelope<TenantSummary[]>>('/api/v1/super-admin/tenants');
     return res.data;
   } catch (err) {
     if (isApiUnavailable(err)) return MOCK_TENANTS;
@@ -191,7 +176,9 @@ export type UpdateTenantPayload = {
   default_currency?: string;
 };
 
-export async function fetchTenantDetail(id: string): Promise<TenantSummary & Record<string, unknown>> {
+export async function fetchTenantDetail(
+  id: string,
+): Promise<TenantSummary & Record<string, unknown>> {
   const res = await apiClient.get<Envelope<TenantSummary & Record<string, unknown>>>(
     `/api/v1/super-admin/tenants/${id}`,
   );
@@ -298,9 +285,7 @@ export async function fetchAuditLogs(
 
 export async function fetchAuditActions(): Promise<string[]> {
   try {
-    const res = await apiClient.get<Envelope<string[]>>(
-      '/api/v1/super-admin/audit-logs/actions',
-    );
+    const res = await apiClient.get<Envelope<string[]>>('/api/v1/super-admin/audit-logs/actions');
     return res.data;
   } catch (err) {
     if (isApiUnavailable(err)) return [];
@@ -371,9 +356,10 @@ export async function inviteAdmin(payload: {
   role?: 'owner' | 'admin' | 'support' | 'finance' | 'developer';
   name?: string;
 }): Promise<{ invitation: InvitationRecord; token: string }> {
-  const res = await apiClient.post<
-    Envelope<{ invitation: InvitationRecord; token: string }>
-  >('/api/v1/super-admin/admins/invite', payload);
+  const res = await apiClient.post<Envelope<{ invitation: InvitationRecord; token: string }>>(
+    '/api/v1/super-admin/admins/invite',
+    payload,
+  );
   return res.data;
 }
 
@@ -468,9 +454,7 @@ export type PlatformSettings = {
 
 export async function fetchSettings(): Promise<PlatformSettings> {
   try {
-    const res = await apiClient.get<Envelope<PlatformSettings>>(
-      '/api/v1/super-admin/settings',
-    );
+    const res = await apiClient.get<Envelope<PlatformSettings>>('/api/v1/super-admin/settings');
     return res.data;
   } catch (err) {
     if (isApiUnavailable(err)) return {};
@@ -478,12 +462,9 @@ export async function fetchSettings(): Promise<PlatformSettings> {
   }
 }
 
-export async function updateSettings(
-  patch: Partial<PlatformSettings>,
-): Promise<PlatformSettings> {
-  const res = await apiClient.patch<Envelope<PlatformSettings>>(
-    '/api/v1/super-admin/settings',
-    { settings: patch },
-  );
+export async function updateSettings(patch: Partial<PlatformSettings>): Promise<PlatformSettings> {
+  const res = await apiClient.patch<Envelope<PlatformSettings>>('/api/v1/super-admin/settings', {
+    settings: patch,
+  });
   return res.data;
 }

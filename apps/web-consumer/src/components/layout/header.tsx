@@ -1,8 +1,8 @@
 'use client';
 
+import { Menu as MenuIcon, Search, ShoppingCart } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
-import { Menu as MenuIcon, Search, ShoppingCart } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useAuthStore } from '@/stores/auth';

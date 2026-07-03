@@ -26,7 +26,7 @@ export function DashboardTooltip({ active, payload, variant }: DashboardTooltipP
 
   const formattedDate = rawDate
     ? format(new Date(rawDate), 'd MMM yyyy')
-    : (point?.payload?.label as string | undefined) ?? '';
+    : ((point?.payload?.label as string | undefined) ?? '');
 
   const formattedValue = variant === 'revenue' ? formatUZS(value) : formatNumber(value);
   const valueLabel = variant === 'revenue' ? 'tooltip_revenue' : 'tooltip_orders';

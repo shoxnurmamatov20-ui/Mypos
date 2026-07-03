@@ -32,8 +32,7 @@ export function KpiCard({
   trend,
   hint,
 }: KpiCardProps) {
-  const trendPositive =
-    trend === undefined ? undefined : trend.positive ?? trend.value >= 0;
+  const trendPositive = trend === undefined ? undefined : (trend.positive ?? trend.value >= 0);
 
   // min-w-0 + overflow-hidden lets the card shrink below its
   // intrinsic content width when packed in a grid (e.g. grid-cols-2 on

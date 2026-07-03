@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  ApiError,
-  ordersApi,
-  type Order,
-  type OrderStatus,
-} from '@mypos/api-client';
+import { ApiError, type Order, type OrderStatus, ordersApi } from '@mypos/api-client';
 import { formatUZS, minutesSince } from '@mypos/utils';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -89,9 +84,7 @@ export function OrderCard({
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <div className="text-2xl font-bold text-[#16221f] dark:text-white">
-            #{order.order_no}
-          </div>
+          <div className="text-2xl font-bold text-[#16221f] dark:text-white">#{order.order_no}</div>
           <div className="mt-0.5 text-xs text-[#62716d] dark:text-[#94a3b8]">
             {t(`orders.filters.type.${order.type}` as 'orders.filters.type.dine_in')}
           </div>
@@ -125,9 +118,7 @@ export function OrderCard({
           disabled={pending}
           className="w-full rounded-lg bg-[#0f766e] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#0d5e58] disabled:opacity-60 dark:bg-[#14b8a6] dark:hover:bg-[#0d9488]"
         >
-          {pending
-            ? t('orders.updating')
-            : t(action.labelKey as 'orders.actions.start_preparing')}
+          {pending ? t('orders.updating') : t(action.labelKey as 'orders.actions.start_preparing')}
         </button>
       )}
     </div>

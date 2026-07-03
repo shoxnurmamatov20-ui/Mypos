@@ -1,6 +1,6 @@
 'use client';
 
-import { warehousesApi, type Warehouse } from '@mypos/api-client';
+import { type Warehouse, warehousesApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { apiClient } from '@/lib/api';

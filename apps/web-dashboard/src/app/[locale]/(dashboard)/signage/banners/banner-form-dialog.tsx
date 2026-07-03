@@ -1,18 +1,18 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
 import { cn } from '@mypos/ui';
+import { useTranslations } from 'next-intl';
+import { useEffect, useId, useState } from 'react';
+import { toast } from 'sonner';
 import { type Banner, type BannerType, useSignageStore } from '@/stores/signage';
 import {
   Field,
-  Toggle,
   inputClass,
   primaryBtnClass,
-  type SegmentOption,
   SegmentedControl,
+  type SegmentOption,
   secondaryBtnClass,
+  Toggle,
 } from '../../settings/_components/settings-ui';
 
 interface Props {
@@ -78,7 +78,10 @@ export function BannerFormDialog({ banner, onClose, onSaved }: Props) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      onClick={onClose}
+    >
       <div
         role="dialog"
         aria-modal="true"
@@ -112,7 +115,12 @@ export function BannerFormDialog({ banner, onClose, onSaved }: Props) {
             />
           </Field>
 
-          <SegmentedControl options={typeOptions} value={type} onChange={setType} ariaLabel={t('type')} />
+          <SegmentedControl
+            options={typeOptions}
+            value={type}
+            onChange={setType}
+            ariaLabel={t('type')}
+          />
 
           <div className="grid grid-cols-2 gap-3">
             <Field label={t('banners.color')}>
@@ -142,15 +150,27 @@ export function BannerFormDialog({ banner, onClose, onSaved }: Props) {
 
           <div className="grid grid-cols-2 gap-3">
             <Field label={t('banners.start_date')}>
-              <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className={inputClass} />
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                className={inputClass}
+              />
             </Field>
             <Field label={t('banners.end_date')}>
-              <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className={inputClass} />
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                className={inputClass}
+              />
             </Field>
           </div>
 
           <div className="flex items-center justify-between gap-4 py-1">
-            <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">{t('active')}</span>
+            <span className="text-sm font-medium text-[#16221f] dark:text-[#e2e8f0]">
+              {t('active')}
+            </span>
             <Toggle checked={isActive} onChange={setIsActive} ariaLabel={t('active')} />
           </div>
 

@@ -13,16 +13,16 @@ type HealthItem = {
 };
 
 const STATUS_DOT: Record<Status, string> = {
-  ok:   'bg-[#18794e] shadow-[0_0_0_2px_rgba(34,197,94,0.18)]',
+  ok: 'bg-[#18794e] shadow-[0_0_0_2px_rgba(34,197,94,0.18)]',
   warn: 'bg-[#b7791f] shadow-[0_0_0_2px_rgba(245,158,11,0.20)]',
   down: 'bg-[#b42318] shadow-[0_0_0_2px_rgba(239,68,68,0.20)]',
 };
 
 const ITEMS: ReadonlyArray<HealthItem> = [
-  { label: 'DB',       value: 'OK',             status: 'ok',   title: "Ma'lumotlar bazasi" },
-  { label: 'Queue',    value: 'Idle',           status: 'ok',   title: 'Vazifalar navbati' },
+  { label: 'DB', value: 'OK', status: 'ok', title: "Ma'lumotlar bazasi" },
+  { label: 'Queue', value: 'Idle', status: 'ok', title: 'Vazifalar navbati' },
   { label: 'Telegram', value: 'Not configured', status: 'warn', title: 'Telegram integratsiyasi' },
-  { label: 'Cache',    value: 'OK',             status: 'ok',   title: 'Cache holati' },
+  { label: 'Cache', value: 'OK', status: 'ok', title: 'Cache holati' },
 ];
 
 /**

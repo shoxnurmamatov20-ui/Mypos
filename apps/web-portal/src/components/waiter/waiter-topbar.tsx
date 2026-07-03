@@ -41,9 +41,7 @@ export function WaiterTopbar() {
             <House className="h-3.5 w-3.5" weight="bold" />
             <span>{t('topbar.home')}</span>
           </Link>
-          <span className="select-none text-[15px] leading-none text-[#62716d] opacity-60">
-            ›
-          </span>
+          <span className="select-none text-[15px] leading-none text-[#62716d] opacity-60">›</span>
           <span className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#16221f]">
             <span className="relative flex h-[7px] w-[7px]">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0f766e] opacity-50" />

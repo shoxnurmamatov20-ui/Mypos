@@ -97,7 +97,7 @@ export function generateAllTenantStyles(): string {
       generateTenantStyles({
         slug: slug.replace(/([A-Z])/g, '-$1').toLowerCase(),
         ...preset,
-      })
+      }),
     );
   }
   return blocks.join('\n\n');
@@ -107,7 +107,10 @@ export function generateAllTenantStyles(): string {
  * Validate WCAG AA contrast (≥ 4.5:1) between primary and onPrimary.
  * Filament Brand Studio enforces this at upload time.
  */
-export function validateTenantContrast(primary: string, onPrimary = '#ffffff'): {
+export function validateTenantContrast(
+  primary: string,
+  onPrimary = '#ffffff',
+): {
   ratio: number;
   passes: boolean;
 } {
@@ -146,17 +149,14 @@ function hexToRgb(hex: string): [number, number, number] {
 }
 
 function rgbToHex(r: number, g: number, b: number): string {
-  const toHex = (n: number) =>
-    Math.max(0, Math.min(255, n))
-      .toString(16)
-      .padStart(2, '0');
+  const toHex = (n: number) => Math.max(0, Math.min(255, n)).toString(16).padStart(2, '0');
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
 function relativeLuminance(hex: string): number {
   const [r, g, b] = hexToRgb(hex).map((v) => {
     const channel = v / 255;
-    return channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+    return channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
   }) as [number, number, number];
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }

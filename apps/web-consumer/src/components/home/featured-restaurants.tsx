@@ -1,15 +1,15 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import type { Route } from 'next';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { RestaurantCard } from '@/components/restaurant/restaurant-card';
 import { RestaurantCardSkeleton } from '@/components/ui/skeleton';
+import { usePublicRestaurants } from '@/lib/hooks/use-public-restaurants';
 import { isPublicLocale } from '@/lib/public-api';
 import { publicRestaurantsToUi } from '@/lib/public-api-mappers';
-import { usePublicRestaurants } from '@/lib/hooks/use-public-restaurants';
 
 const FEATURED_LIMIT = 8;
 

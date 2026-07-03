@@ -1,20 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
 import { cn } from '@mypos/ui';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { toast } from 'sonner';
 import {
+  categoriesByKind,
   type FinanceCategory,
   type FinanceKind,
-  categoriesByKind,
   useFinanceHydrated,
   useFinanceStore,
 } from '@/stores/finance';
 import {
+  primaryBtnClass,
   SettingsCard,
   SettingsSkeleton,
-  primaryBtnClass,
   secondaryBtnClass,
 } from '../../settings/_components/settings-ui';
 import { CategoryFormDialog } from './category-form-dialog';
@@ -60,11 +60,7 @@ function CategoryManagerInner({ kind }: { kind: FinanceKind }) {
               ? `${list.length} ${t('categories.ops_count')}`
               : t('categories.empty')}
           </p>
-          <button
-            type="button"
-            onClick={() => setDialog('new')}
-            className={primaryBtnClass}
-          >
+          <button type="button" onClick={() => setDialog('new')} className={primaryBtnClass}>
             {t('categories.add')}
           </button>
         </div>

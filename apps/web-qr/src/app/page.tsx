@@ -8,9 +8,7 @@ export default function LandingPage() {
         <h1 className="font-display text-3xl font-bold text-brand-500">
           {translate('uz', 'app.landing.title')}
         </h1>
-        <p className="mt-3 text-neutral-600">
-          {translate('uz', 'app.landing.subtitle')}
-        </p>
+        <p className="mt-3 text-neutral-600">{translate('uz', 'app.landing.subtitle')}</p>
       </div>
     </main>
   );

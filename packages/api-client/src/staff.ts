@@ -1,29 +1,14 @@
-import type { MyPosApiClient } from './client';
 import type { AuthUser } from './auth';
-import type {
-  CollectionResponse,
-  PaginatedResponse,
-  ResourceResponse,
-} from './menu';
-import type {
-  CreateOrderInput,
-  Order,
-  OrderItem,
-  OrderItemModifier,
-  OrderStatus,
-} from './orders';
+import type { MyPosApiClient } from './client';
+import type { CollectionResponse, PaginatedResponse, ResourceResponse } from './menu';
+import type { CreateOrderInput, Order, OrderItem, OrderItemModifier, OrderStatus } from './orders';
 
 // ─── Enums (string unions) ───────────────────────────────────────────────────
 
 /**
  * Restaurant-floor positions (App\Domain\Employee\Enums\EmployeeRole).
  */
-export type StaffEmployeePosition =
-  | 'waiter'
-  | 'cook'
-  | 'cashier'
-  | 'manager'
-  | 'admin';
+export type StaffEmployeePosition = 'waiter' | 'cook' | 'cashier' | 'manager' | 'admin';
 
 /**
  * Employment statuses (App\Domain\Employee\Enums\EmployeeStatus).
@@ -39,12 +24,7 @@ export type StaffEmployeeStatus = 'active' | 'on_leave' | 'terminated';
  * NOTE: legacy data may also expose `in_progress` (the controller still
  * accepts it as a synonym for `open` in queries), so we widen the union.
  */
-export type StaffShiftStatus =
-  | 'scheduled'
-  | 'open'
-  | 'closed'
-  | 'missed'
-  | 'in_progress';
+export type StaffShiftStatus = 'scheduled' | 'open' | 'closed' | 'missed' | 'in_progress';
 
 export type StaffBreakReason = 'lunch' | 'rest' | 'personal' | 'other';
 
@@ -219,12 +199,7 @@ export type UpdateItemStatusInput = {
  * Backend stores it as a free string column, but in practice these are the
  * only values produced by the workflow (see UpdateOrderItemStatusAction).
  */
-export type KitchenItemStatus =
-  | 'pending'
-  | 'preparing'
-  | 'ready'
-  | 'served'
-  | 'cancelled';
+export type KitchenItemStatus = 'pending' | 'preparing' | 'ready' | 'served' | 'cancelled';
 
 export type KitchenOrderItem = {
   id: string;
@@ -282,20 +257,13 @@ export type StaffStatsParams = {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const buildQueryString = (
-  params: Record<string, unknown> | undefined,
-): string => {
+const buildQueryString = (params: Record<string, unknown> | undefined): string => {
   if (!params) return '';
   const entries = Object.entries(params).filter(
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries
-      .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-      .join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 // ─── API ─────────────────────────────────────────────────────────────────────
@@ -305,8 +273,7 @@ export const staffApi = {
   login: (client: MyPosApiClient, input: StaffLoginInput) =>
     client.post<StaffLoginResponse>('/api/v1/auth/staff-login', input),
 
-  me: (client: MyPosApiClient) =>
-    client.get<StaffMeResponse>('/api/v1/staff/me'),
+  me: (client: MyPosApiClient) => client.get<StaffMeResponse>('/api/v1/staff/me'),
 
   // Clock in/out
   clockIn: (client: MyPosApiClient, input: ClockInInput = {}) =>
@@ -321,30 +288,20 @@ export const staffApi = {
 
   shifts: (client: MyPosApiClient, params?: ListStaffShiftsParams) => {
     const qs = buildQueryString(params);
-    return client.get<PaginatedResponse<StaffShift>>(
-      `/api/v1/staff/shifts${qs}`,
-    );
+    return client.get<PaginatedResponse<StaffShift>>(`/api/v1/staff/shifts${qs}`);
   },
 
   // Breaks
   startBreak: (client: MyPosApiClient, input: StartBreakInput = {}) =>
-    client.post<ResourceResponse<StaffShiftBreak>>(
-      '/api/v1/staff/breaks/start',
-      input,
-    ),
+    client.post<ResourceResponse<StaffShiftBreak>>('/api/v1/staff/breaks/start', input),
 
   endBreak: (client: MyPosApiClient) =>
-    client.post<ResourceResponse<StaffShiftBreak>>(
-      '/api/v1/staff/breaks/end',
-      {},
-    ),
+    client.post<ResourceResponse<StaffShiftBreak>>('/api/v1/staff/breaks/end', {}),
 
   // Orders (waiter)
   myOrders: (client: MyPosApiClient, params?: ListMyOrdersParams) => {
     const qs = buildQueryString(params);
-    return client.get<PaginatedResponse<Order>>(
-      `/api/v1/staff/orders/my${qs}`,
-    );
+    return client.get<PaginatedResponse<Order>>(`/api/v1/staff/orders/my${qs}`);
   },
 
   createOrder: (client: MyPosApiClient, input: CreateOrderInput) =>
@@ -354,18 +311,12 @@ export const staffApi = {
     client: MyPosApiClient,
     orderId: string,
     input: UpdateStaffOrderStatusInput,
-  ) =>
-    client.patch<ResourceResponse<Order>>(
-      `/api/v1/staff/orders/${orderId}/status`,
-      input,
-    ),
+  ) => client.patch<ResourceResponse<Order>>(`/api/v1/staff/orders/${orderId}/status`, input),
 
   // Kitchen (cook)
   kitchenQueue: (client: MyPosApiClient, params?: ListKitchenQueueParams) => {
     const qs = buildQueryString(params);
-    return client.get<PaginatedResponse<KitchenOrder>>(
-      `/api/v1/staff/kitchen/queue${qs}`,
-    );
+    return client.get<PaginatedResponse<KitchenOrder>>(`/api/v1/staff/kitchen/queue${qs}`);
   },
 
   updateItemStatus: (

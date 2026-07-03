@@ -1,3 +1,4 @@
+import type { Icon } from '@phosphor-icons/react';
 import {
   ArrowRight,
   BookOpen,
@@ -21,7 +22,6 @@ import {
   Users,
   VideoCamera,
 } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
@@ -46,81 +46,111 @@ type DocCategory = {
 
 const CATEGORIES: ReadonlyArray<DocCategory> = [
   {
-    Icon: Rocket, tint: 'text-[#5eead4]', bg: 'bg-[rgba(20,184,166,0.15)]',
+    Icon: Rocket,
+    tint: 'text-[#5eead4]',
+    bg: 'bg-[rgba(20,184,166,0.15)]',
     title: 'Boshlash',
     body: "Birinchi kunda restoraningizni ishga tushiring. O'rnatish, menyu va xodimlar.",
-    count: '12 maqola', href: '#getting-started',
+    count: '12 maqola',
+    href: '#getting-started',
   },
   {
-    Icon: Storefront, tint: 'text-amber-400', bg: 'bg-amber-500/15',
-    title: "Sotuv va kassa",
+    Icon: Storefront,
+    tint: 'text-amber-400',
+    bg: 'bg-amber-500/15',
+    title: 'Sotuv va kassa',
     body: "Buyurtmalar, chek, to'lov turlari, smena boshqaruvi va kassa hisoboti.",
-    count: '24 maqola', href: '#sales',
+    count: '24 maqola',
+    href: '#sales',
   },
   {
-    Icon: Package, tint: 'text-emerald-400', bg: 'bg-emerald-500/15',
-    title: "Inventar va menyu",
-    body: "Ingredientlar, retseptlar, ombor, narxlash, kategoriyalar va modifikatorlar.",
-    count: '18 maqola', href: '#inventory',
+    Icon: Package,
+    tint: 'text-emerald-400',
+    bg: 'bg-emerald-500/15',
+    title: 'Inventar va menyu',
+    body: 'Ingredientlar, retseptlar, ombor, narxlash, kategoriyalar va modifikatorlar.',
+    count: '18 maqola',
+    href: '#inventory',
   },
   {
-    Icon: Users, tint: 'text-purple-400', bg: 'bg-purple-500/15',
+    Icon: Users,
+    tint: 'text-purple-400',
+    bg: 'bg-purple-500/15',
     title: 'Xodimlar va rollar',
-    body: 'Hodimlar qo\'shish, ruxsatlar, smenalar, ish vaqti va ish haqi hisobi.',
-    count: '15 maqola', href: '#staff',
+    body: "Hodimlar qo'shish, ruxsatlar, smenalar, ish vaqti va ish haqi hisobi.",
+    count: '15 maqola',
+    href: '#staff',
   },
   {
-    Icon: CurrencyCircleDollar, tint: 'text-[#ff0037]', bg: 'bg-[rgba(255,0,55,0.15)]',
-    title: 'To\'lov va billing',
-    body: "Click, Payme, Uzcard, naqd. Hisoblar, soliqlar va eksport.",
-    count: '14 maqola', href: '#payments',
+    Icon: CurrencyCircleDollar,
+    tint: 'text-[#ff0037]',
+    bg: 'bg-[rgba(255,0,55,0.15)]',
+    title: "To'lov va billing",
+    body: 'Click, Payme, Uzcard, naqd. Hisoblar, soliqlar va eksport.',
+    count: '14 maqola',
+    href: '#payments',
   },
   {
-    Icon: Plug, tint: 'text-blue-400', bg: 'bg-blue-500/15',
+    Icon: Plug,
+    tint: 'text-blue-400',
+    bg: 'bg-blue-500/15',
     title: 'Integratsiyalar',
-    body: "Yandex, Wolt, Telegram, soliq idoralari va boshqa xizmatlar.",
-    count: '21 maqola', href: '#integrations',
+    body: 'Yandex, Wolt, Telegram, soliq idoralari va boshqa xizmatlar.',
+    count: '21 maqola',
+    href: '#integrations',
   },
   {
-    Icon: Code, tint: 'text-cyan-400', bg: 'bg-cyan-500/15',
+    Icon: Code,
+    tint: 'text-cyan-400',
+    bg: 'bg-cyan-500/15',
     title: 'API havolasi',
-    body: "REST API endpoints, autentifikatsiya, webhooks va SDK.",
-    count: '40+ endpoint', href: '#api',
+    body: 'REST API endpoints, autentifikatsiya, webhooks va SDK.',
+    count: '40+ endpoint',
+    href: '#api',
   },
   {
-    Icon: ShieldCheck, tint: 'text-rose-400', bg: 'bg-rose-500/15',
+    Icon: ShieldCheck,
+    tint: 'text-rose-400',
+    bg: 'bg-rose-500/15',
     title: 'Xavfsizlik',
     body: "Ma'lumotlar himoyasi, ikki bosqichli autentifikatsiya va audit.",
-    count: '9 maqola', href: '#security',
+    count: '9 maqola',
+    href: '#security',
   },
 ];
 
 type PopularArticle = {
-  Icon: Icon; title: string; minutes: number; level: 'basic' | 'mid' | 'adv';
+  Icon: Icon;
+  title: string;
+  minutes: number;
+  level: 'basic' | 'mid' | 'adv';
 };
 
 const POPULAR: ReadonlyArray<PopularArticle> = [
-  { Icon: Rocket,        title: "Birinchi 30 daqiqada ishga tushish",   minutes: 8,  level: 'basic' },
-  { Icon: Storefront,    title: "Yangi buyurtma qabul qilish",            minutes: 4,  level: 'basic' },
-  { Icon: CreditCard,    title: "Click va Payme'ni ulash",                minutes: 6,  level: 'basic' },
-  { Icon: Package,       title: "Menyu va ingredientlarni import qilish", minutes: 12, level: 'mid'   },
-  { Icon: Users,         title: "Xodimlar va ruxsat darajalari",          minutes: 9,  level: 'mid'   },
-  { Icon: ClockClockwise, title: "Smena yopish va Z-hisobot",             minutes: 5,  level: 'basic' },
-  { Icon: Code,          title: "API kalitini olish va webhooks sozlash", minutes: 14, level: 'adv'   },
-  { Icon: ChatCircleDots,title: "Telegram bot bilan buyurtma qabul",      minutes: 11, level: 'mid'   },
+  { Icon: Rocket, title: 'Birinchi 30 daqiqada ishga tushish', minutes: 8, level: 'basic' },
+  { Icon: Storefront, title: 'Yangi buyurtma qabul qilish', minutes: 4, level: 'basic' },
+  { Icon: CreditCard, title: "Click va Payme'ni ulash", minutes: 6, level: 'basic' },
+  { Icon: Package, title: 'Menyu va ingredientlarni import qilish', minutes: 12, level: 'mid' },
+  { Icon: Users, title: 'Xodimlar va ruxsat darajalari', minutes: 9, level: 'mid' },
+  { Icon: ClockClockwise, title: 'Smena yopish va Z-hisobot', minutes: 5, level: 'basic' },
+  { Icon: Code, title: 'API kalitini olish va webhooks sozlash', minutes: 14, level: 'adv' },
+  { Icon: ChatCircleDots, title: 'Telegram bot bilan buyurtma qabul', minutes: 11, level: 'mid' },
 ];
 
 const LEVEL_LABEL: Record<PopularArticle['level'], { label: string; cls: string }> = {
-  basic: { label: "Boshlovchi", cls: 'bg-emerald-500/12 text-emerald-300 ring-emerald-500/25' },
-  mid:   { label: "O'rta",      cls: 'bg-amber-500/12 text-amber-300 ring-amber-500/25' },
-  adv:   { label: "Murakkab",   cls: 'bg-[rgba(255,0,55,0.12)] text-[#ff8aa1] ring-[rgba(255,0,55,0.25)]' },
+  basic: { label: 'Boshlovchi', cls: 'bg-emerald-500/12 text-emerald-300 ring-emerald-500/25' },
+  mid: { label: "O'rta", cls: 'bg-amber-500/12 text-amber-300 ring-amber-500/25' },
+  adv: {
+    label: 'Murakkab',
+    cls: 'bg-[rgba(255,0,55,0.12)] text-[#ff8aa1] ring-[rgba(255,0,55,0.25)]',
+  },
 };
 
 const QUICK_LINKS: ReadonlyArray<{ Icon: Icon; title: string; body: string; href: string }> = [
-  { Icon: BookOpen,    title: "Qo'llanmalar",   body: "Bosqichma-bosqich darslar",  href: '#guides'   },
-  { Icon: VideoCamera, title: 'Video darslar',  body: "YouTube'da 50+ video",        href: '#videos'   },
-  { Icon: Terminal,    title: 'API havolasi',   body: 'REST · Webhooks · SDK',       href: '#api'      },
-  { Icon: Lifebuoy,    title: 'Yordam',         body: "24/7 Telegram va telefon",    href: '#support'  },
+  { Icon: BookOpen, title: "Qo'llanmalar", body: 'Bosqichma-bosqich darslar', href: '#guides' },
+  { Icon: VideoCamera, title: 'Video darslar', body: "YouTube'da 50+ video", href: '#videos' },
+  { Icon: Terminal, title: 'API havolasi', body: 'REST · Webhooks · SDK', href: '#api' },
+  { Icon: Lifebuoy, title: 'Yordam', body: '24/7 Telegram va telefon', href: '#support' },
 ];
 
 export default async function DocsPage({ params }: Props) {
@@ -131,18 +161,21 @@ export default async function DocsPage({ params }: Props) {
     <main>
       {/* Hero with search */}
       <section className="relative overflow-hidden bg-[#001B1B]">
-        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]" />
+        <div
+          aria-hidden="true"
+          className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]"
+        />
         <div className="relative mx-auto max-w-3xl px-5 pt-20 sm:pt-24 pb-10 text-center">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(15,118,110,0.25)] bg-[rgba(15,118,110,0.10)] text-[#5eead4] text-[11px] font-bold uppercase tracking-[0.08em]">
             <BookOpen size={11} weight="fill" />
             HUJJATLAR
           </span>
           <h1 className="mt-5 text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold leading-[1.05] tracking-tight text-white">
-            Sizga kerakli javob —{' '}
-            <span className="gradient-teal">1 daqiqada</span>
+            Sizga kerakli javob — <span className="gradient-teal">1 daqiqada</span>
           </h1>
           <p className="mx-auto mt-4 max-w-[36rem] text-[15px] sm:text-[16px] leading-relaxed text-white/70">
-            Boshlash, API havolasi, integratsiya va eng ko&apos;p so&apos;raladigan savollar — barchasi bir joyda.
+            Boshlash, API havolasi, integratsiya va eng ko&apos;p so&apos;raladigan savollar —
+            barchasi bir joyda.
           </p>
 
           {/* Search input */}
@@ -228,15 +261,15 @@ export default async function DocsPage({ params }: Props) {
                 href={c.href}
                 className="glass-card glass-card-hover press group rounded-2xl p-5"
               >
-                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${c.bg}`}>
+                <span
+                  className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 ${c.bg}`}
+                >
                   <c.Icon size={20} weight="bold" className={c.tint} />
                 </span>
                 <h3 className="mt-3.5 text-[14.5px] font-bold tracking-tight text-white">
                   {c.title}
                 </h3>
-                <p className="mt-1.5 text-[12.5px] leading-relaxed text-white/65">
-                  {c.body}
-                </p>
+                <p className="mt-1.5 text-[12.5px] leading-relaxed text-white/65">{c.body}</p>
                 <div className="mt-3 flex items-center justify-between text-[11px] font-semibold">
                   <span className="text-white/45">{c.count}</span>
                   <span className="inline-flex items-center gap-0.5 text-[#5eead4] group-hover:translate-x-0.5 transition-transform">
@@ -316,11 +349,11 @@ export default async function DocsPage({ params }: Props) {
                 API · v1
               </span>
               <h2 className="mt-3 text-[24px] sm:text-[32px] font-extrabold tracking-tight text-white leading-[1.1]">
-                Restoraningizni{' '}
-                <span className="gradient-teal">dasturlash mumkin</span>
+                Restoraningizni <span className="gradient-teal">dasturlash mumkin</span>
               </h2>
               <p className="mt-3 text-[14px] leading-relaxed text-white/70">
-                40+ endpoint · Real-time webhooks · OAuth 2.0 · TS/PHP/Python SDK. Buyurtmadan eksportgacha — barchasi REST orqali.
+                40+ endpoint · Real-time webhooks · OAuth 2.0 · TS/PHP/Python SDK. Buyurtmadan
+                eksportgacha — barchasi REST orqali.
               </p>
               <div className="mt-5 flex flex-wrap items-center gap-2.5">
                 <Link
@@ -351,7 +384,7 @@ export default async function DocsPage({ params }: Props) {
                 </span>
               </div>
               <pre className="text-[11.5px] leading-relaxed text-white/85 px-4 py-3.5 overflow-x-auto font-mono tabular">
-{`curl -X POST https://api.mypos.uz/v1/orders \\
+                {`curl -X POST https://api.mypos.uz/v1/orders \\
   -H "Authorization: Bearer sk_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -383,9 +416,7 @@ export default async function DocsPage({ params }: Props) {
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 bg-[rgba(20,184,166,0.15)]">
                 <Question size={20} weight="bold" className="text-[#5eead4]" />
               </div>
-              <h3 className="mt-4 text-[18px] font-bold text-white">
-                Javob topa olmadingizmi?
-              </h3>
+              <h3 className="mt-4 text-[18px] font-bold text-white">Javob topa olmadingizmi?</h3>
               <p className="mt-2 text-[13.5px] leading-relaxed text-white/70">
                 FAQ bo&apos;limimizda 80+ tez-tez so&apos;raladigan savol javoblari mavjud.
               </p>
@@ -402,9 +433,7 @@ export default async function DocsPage({ params }: Props) {
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 bg-[rgba(255,0,55,0.15)]">
                 <Lifebuoy size={20} weight="bold" className="text-[#ff0037]" />
               </div>
-              <h3 className="mt-4 text-[18px] font-bold text-white">
-                Texnik yordam — 24/7
-              </h3>
+              <h3 className="mt-4 text-[18px] font-bold text-white">Texnik yordam — 24/7</h3>
               <p className="mt-2 text-[13.5px] leading-relaxed text-white/70">
                 Telegram, telefon yoki email — o&apos;rtacha javob 5 daqiqada.
               </p>

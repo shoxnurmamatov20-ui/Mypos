@@ -11,8 +11,8 @@ import {
   TelegramLogo,
   YoutubeLogo,
 } from '@phosphor-icons/react';
-import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { LanguageSwitcher } from './language-switcher';
 import { Logo } from './logo';
@@ -22,11 +22,36 @@ import { Logo } from './logo';
  * chip into its real brand identity (Telegram blue, YouTube red, etc.).
  */
 const SOCIAL = [
-  { Icon: TelegramLogo,  href: 'https://t.me/mypos_uz',          label: 'Telegram',  hover: 'hover:text-[#26A5E4] hover:border-[#26A5E4]/40' },
-  { Icon: InstagramLogo, href: 'https://instagram.com/mypos.uz', label: 'Instagram', hover: 'hover:text-[#E4405F] hover:border-[#E4405F]/40' },
-  { Icon: YoutubeLogo,   href: 'https://youtube.com/@mypos',     label: 'YouTube',   hover: 'hover:text-[#FF0000] hover:border-[#FF0000]/40' },
-  { Icon: LinkedinLogo,  href: 'https://linkedin.com/company/mypos', label: 'LinkedIn', hover: 'hover:text-[#0A66C2] hover:border-[#0A66C2]/40' },
-  { Icon: FacebookLogo,  href: 'https://facebook.com/mypos.uz',  label: 'Facebook',  hover: 'hover:text-[#1877F2] hover:border-[#1877F2]/40' },
+  {
+    Icon: TelegramLogo,
+    href: 'https://t.me/mypos_uz',
+    label: 'Telegram',
+    hover: 'hover:text-[#26A5E4] hover:border-[#26A5E4]/40',
+  },
+  {
+    Icon: InstagramLogo,
+    href: 'https://instagram.com/mypos.uz',
+    label: 'Instagram',
+    hover: 'hover:text-[#E4405F] hover:border-[#E4405F]/40',
+  },
+  {
+    Icon: YoutubeLogo,
+    href: 'https://youtube.com/@mypos',
+    label: 'YouTube',
+    hover: 'hover:text-[#FF0000] hover:border-[#FF0000]/40',
+  },
+  {
+    Icon: LinkedinLogo,
+    href: 'https://linkedin.com/company/mypos',
+    label: 'LinkedIn',
+    hover: 'hover:text-[#0A66C2] hover:border-[#0A66C2]/40',
+  },
+  {
+    Icon: FacebookLogo,
+    href: 'https://facebook.com/mypos.uz',
+    label: 'Facebook',
+    hover: 'hover:text-[#1877F2] hover:border-[#1877F2]/40',
+  },
 ] as const;
 
 /**
@@ -50,35 +75,38 @@ export function Footer() {
     }, 2500);
   };
 
-  const sections: ReadonlyArray<{ title: string; links: ReadonlyArray<{ label: string; href: string; external?: boolean; badge?: string }> }> = [
+  const sections: ReadonlyArray<{
+    title: string;
+    links: ReadonlyArray<{ label: string; href: string; external?: boolean; badge?: string }>;
+  }> = [
     {
       title: t('product'),
       links: [
-        { label: t('features'),     href: `/${locale}/features` },
-        { label: t('pricing'),      href: `/${locale}/pricing` },
-        { label: 'Yechimlar',       href: `/${locale}/solutions` },
+        { label: t('features'), href: `/${locale}/features` },
+        { label: t('pricing'), href: `/${locale}/pricing` },
+        { label: 'Yechimlar', href: `/${locale}/solutions` },
         { label: t('integrations'), href: `/${locale}/integrations` },
-        { label: 'API',             href: `/${locale}/api` },
-        { label: 'Demo',            href: `/${locale}/demo` },
+        { label: 'API', href: `/${locale}/api` },
+        { label: 'Demo', href: `/${locale}/demo` },
       ],
     },
     {
       title: 'Resurslar',
       links: [
-        { label: 'Hujjatlar',   href: `/${locale}/docs` },
-        { label: 'FAQ',         href: `/${locale}/faq` },
-        { label: 'Changelog',   href: `/${locale}/changelog`, badge: 'Yangi' },
-        { label: 'Mijozlar',    href: `/${locale}/customers` },
-        { label: t('blog'),     href: `/${locale}/blog` },
-        { label: t('status'),   href: 'https://status.mypos.uz', external: true },
+        { label: 'Hujjatlar', href: `/${locale}/docs` },
+        { label: 'FAQ', href: `/${locale}/faq` },
+        { label: 'Changelog', href: `/${locale}/changelog`, badge: 'Yangi' },
+        { label: 'Mijozlar', href: `/${locale}/customers` },
+        { label: t('blog'), href: `/${locale}/blog` },
+        { label: t('status'), href: 'https://status.mypos.uz', external: true },
       ],
     },
     {
       title: t('company'),
       links: [
-        { label: t('about'),    href: `/${locale}/about` },
-        { label: t('careers'),  href: `/${locale}/careers` },
-        { label: t('contact'),  href: `/${locale}/contact` },
+        { label: t('about'), href: `/${locale}/about` },
+        { label: t('careers'), href: `/${locale}/careers` },
+        { label: t('contact'), href: `/${locale}/contact` },
         { label: 'Bepul boshlash', href: `/${locale}/get-started`, badge: 'Bepul' },
       ],
     },
@@ -86,8 +114,8 @@ export function Footer() {
       title: 'Huquqiy',
       links: [
         { label: t('privacy'), href: `/${locale}/privacy` },
-        { label: t('terms'),   href: `/${locale}/terms` },
-        { label: 'Cookies',    href: `/${locale}/cookies` },
+        { label: t('terms'), href: `/${locale}/terms` },
+        { label: 'Cookies', href: `/${locale}/cookies` },
         { label: 'Xavfsizlik', href: `/${locale}/security` },
       ],
     },
@@ -102,9 +130,7 @@ export function Footer() {
             <h3 className="text-[15px] font-bold text-white">
               Yangilanishlardan boxabar bo&apos;ling
             </h3>
-            <p className="text-[12px] text-white/60 mt-0.5">
-              Oyiga 1 ta xat · Spam yo&apos;q
-            </p>
+            <p className="text-[12px] text-white/60 mt-0.5">Oyiga 1 ta xat · Spam yo&apos;q</p>
           </div>
           <form onSubmit={onSubmit} className="flex gap-2 w-full sm:w-auto sm:max-w-[24rem]">
             <input
@@ -131,9 +157,7 @@ export function Footer() {
           {/* Brand col */}
           <div className="sm:col-span-2 lg:col-span-2">
             <Logo />
-            <p className="mt-3 text-[12.5px] leading-relaxed text-white/60">
-              {t('tagline')}
-            </p>
+            <p className="mt-3 text-[12.5px] leading-relaxed text-white/60">{t('tagline')}</p>
             <ul className="mt-4 space-y-1.5 text-[12px] text-white/60">
               <li className="flex items-center gap-1.5">
                 <MapPin size={11} weight="bold" className="shrink-0 text-[#14b8a6]" />
@@ -204,8 +228,7 @@ export function Footer() {
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 text-[12.5px] text-white/60 hover:text-[#5eead4] transition-colors"
                         >
-                          {link.label} ↗
-                          {badgeEl}
+                          {link.label} ↗{badgeEl}
                         </a>
                       ) : (
                         <Link

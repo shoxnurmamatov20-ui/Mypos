@@ -1,6 +1,6 @@
 'use client';
 
-import { customersApi, type Customer, type LoyaltyTier } from '@mypos/api-client';
+import { type Customer, customersApi, type LoyaltyTier } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -71,17 +71,19 @@ export function CustomerList({
                     {initials.toUpperCase() || '?'}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="truncate font-semibold text-[#16221f] dark:text-white">{c.full_name}</h3>
+                    <h3 className="truncate font-semibold text-[#16221f] dark:text-white">
+                      {c.full_name}
+                    </h3>
                     <p className="truncate text-sm text-[#62716d] dark:text-[#94a3b8]">{c.phone}</p>
                     {c.email && (
-                      <p className="truncate text-xs text-[#62716d] dark:text-[#94a3b8]">{c.email}</p>
+                      <p className="truncate text-xs text-[#62716d] dark:text-[#94a3b8]">
+                        {c.email}
+                      </p>
                     )}
                   </div>
                   {tier && (
                     <span
-                      className={
-                        'rounded-full px-2 py-0.5 text-xs font-medium ' + TIER_CLASS[tier]
-                      }
+                      className={'rounded-full px-2 py-0.5 text-xs font-medium ' + TIER_CLASS[tier]}
                     >
                       {t(`tier.${tier}`)}
                     </span>

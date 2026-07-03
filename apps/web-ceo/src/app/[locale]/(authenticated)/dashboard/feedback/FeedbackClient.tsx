@@ -14,11 +14,12 @@ import {
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { PageHeader } from '@/components/layout/page-header';
 import { KpiCard } from '@/components/dashboard/kpi-card';
+import { PageHeader } from '@/components/layout/page-header';
 import {
   buildFeedbackQuery,
   ceoFetch,
+  ceoMutate,
   type FeedbackDetail,
   type FeedbackDetailResponse,
   type FeedbackListResponse,
@@ -60,9 +61,9 @@ export function FeedbackClient({ locale }: { locale: string }) {
 
   const [list, setList] = useState<LoadState<FeedbackListResponse>>({ kind: 'loading' });
   const [stats, setStats] = useState<LoadState<FeedbackStats>>({ kind: 'loading' });
-  const [restaurants, setRestaurants] = useState<
-    Array<{ id: string; name: string; slug: string }>
-  >([]);
+  const [restaurants, setRestaurants] = useState<Array<{ id: string; name: string; slug: string }>>(
+    [],
+  );
   const [selected, setSelected] = useState<FeedbackDetail | null>(null);
   const [selectedLoading, setSelectedLoading] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<string | null>(null);
@@ -141,9 +142,10 @@ export function FeedbackClient({ locale }: { locale: string }) {
   const handleDelete = async () => {
     if (!pendingDelete) return;
     try {
-      await ceoFetch<{ data: { deleted: boolean } }>(`/api/v1/ceo/feedback/${pendingDelete}`, {
-        method: 'DELETE',
-      });
+      await ceoMutate<{ data: { deleted: boolean } }>(
+        `/api/v1/ceo/feedback/${pendingDelete}`,
+        'DELETE',
+      );
       setPendingDelete(null);
       setSelected(null);
       reload();
@@ -243,11 +245,7 @@ export function FeedbackClient({ locale }: { locale: string }) {
 
       {/* Delete confirm */}
       {pendingDelete ? (
-        <DeleteModal
-          onCancel={() => setPendingDelete(null)}
-          onConfirm={handleDelete}
-          t={t}
-        />
+        <DeleteModal onCancel={() => setPendingDelete(null)} onConfirm={handleDelete} t={t} />
       ) : null}
     </div>
   );
@@ -336,7 +334,8 @@ function DistributionCard({
       <div className="space-y-2">
         {s.distribution.map((d) => {
           const pct = max > 0 ? (d.count / max) * 100 : 0;
-          const colour = d.rating >= 4 ? 'bg-emerald-500' : d.rating === 3 ? 'bg-amber-500' : 'bg-rose-500';
+          const colour =
+            d.rating >= 4 ? 'bg-emerald-500' : d.rating === 3 ? 'bg-amber-500' : 'bg-rose-500';
           return (
             <div key={d.rating} className="flex items-center gap-3">
               <div className="flex items-center gap-1 w-12 text-[12px] tabular-nums font-semibold text-[#16221f] dark:text-white">
@@ -540,7 +539,9 @@ function FeedbackTable({
                   className="inline-flex items-center gap-1 hover:text-[#16221f] dark:hover:text-white"
                 >
                   {t('th_created')}
-                  {sort === 'created_at' ? <span aria-hidden>{dir === 'asc' ? '▲' : '▼'}</span> : null}
+                  {sort === 'created_at' ? (
+                    <span aria-hidden>{dir === 'asc' ? '▲' : '▼'}</span>
+                  ) : null}
                 </button>
               </th>
               <th className="text-right px-4 py-2.5 font-bold">{t('th_actions')}</th>
@@ -577,7 +578,9 @@ function Row({
         {r.restaurant ?? <span className="text-[#62716d]">—</span>}
       </td>
       <td className="px-4 py-3 text-[#16221f] dark:text-white">
-        {r.customer_name ?? r.customer_phone ?? <span className="text-[#62716d]">{t('guest')}</span>}
+        {r.customer_name ?? r.customer_phone ?? (
+          <span className="text-[#62716d]">{t('guest')}</span>
+        )}
       </td>
       <td className="px-4 py-3 text-[#62716d] dark:text-[#94a3b8] tabular-nums">
         {r.order_no ?? '—'}
@@ -744,7 +747,10 @@ function DetailDrawer({
                 <RatingStars value={review.rating} />
               </div>
               <DetailField label={t('detail_restaurant')} value={review.restaurant} />
-              <DetailField label={t('detail_customer')} value={review.customer?.name ?? review.customer?.phone ?? t('guest')} />
+              <DetailField
+                label={t('detail_customer')}
+                value={review.customer?.name ?? review.customer?.phone ?? t('guest')}
+              />
               {review.order ? (
                 <DetailField label={t('detail_order')} value={`#${review.order.order_no}`} />
               ) : null}
@@ -752,7 +758,10 @@ function DetailDrawer({
                 <DetailField label={t('detail_food_rating')} value={`${review.food_rating} / 5`} />
               ) : null}
               {review.delivery_rating !== null ? (
-                <DetailField label={t('detail_delivery_rating')} value={`${review.delivery_rating} / 5`} />
+                <DetailField
+                  label={t('detail_delivery_rating')}
+                  value={`${review.delivery_rating} / 5`}
+                />
               ) : null}
               {review.comment ? (
                 <div>
@@ -764,7 +773,10 @@ function DetailDrawer({
                   </p>
                 </div>
               ) : null}
-              <DetailField label={t('detail_created')} value={review.created_at?.replace('T', ' ').slice(0, 16) ?? '—'} />
+              <DetailField
+                label={t('detail_created')}
+                value={review.created_at?.replace('T', ' ').slice(0, 16) ?? '—'}
+              />
             </>
           )}
         </div>
@@ -791,9 +803,7 @@ function DetailField({ label, value }: { label: string; value: string | null | u
       <p className="text-[11px] font-bold uppercase tracking-[0.04em] text-[#62716d] dark:text-[#94a3b8] mb-0.5">
         {label}
       </p>
-      <p className="text-[13px] text-[#16221f] dark:text-white tabular-nums">
-        {value ?? '—'}
-      </p>
+      <p className="text-[13px] text-[#16221f] dark:text-white tabular-nums">{value ?? '—'}</p>
     </div>
   );
 }
@@ -808,7 +818,11 @@ function DeleteModal({
   t: ReturnType<typeof useTranslations>;
 }) {
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-[2px] p-4" role="dialog" aria-modal="true">
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-[2px] p-4"
+      role="dialog"
+      aria-modal="true"
+    >
       <div className="w-full max-w-sm rounded-2xl bg-white dark:bg-[#111827] p-5 shadow-2xl border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)]">
         <h3 className="text-[15px] font-semibold text-[#16221f] dark:text-white mb-1">
           {t('delete_confirm_title')}

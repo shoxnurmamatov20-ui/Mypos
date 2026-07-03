@@ -21,7 +21,6 @@ type Props = {
 const MAX_PREVIEW_ITEMS = 3;
 
 export function OrderCard({ order, status, href, labels }: Props) {
-  const itemsCount = order.items.reduce((sum, i) => sum + i.quantity, 0);
   const preview = order.items.slice(0, MAX_PREVIEW_ITEMS);
   const extra = order.items.length - preview.length;
 
@@ -32,9 +31,7 @@ export function OrderCard({ order, status, href, labels }: Props) {
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-col">
-          <span className="font-mono text-sm font-bold text-neutral-900">
-            #{order.orderNo}
-          </span>
+          <span className="font-mono text-sm font-bold text-neutral-900">#{order.orderNo}</span>
           <span className="mt-0.5 text-xs text-neutral-500">{labels.dateText}</span>
         </div>
         <OrderStatusBadge status={status} label={labels.status} />

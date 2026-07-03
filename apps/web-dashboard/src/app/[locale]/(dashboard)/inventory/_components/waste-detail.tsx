@@ -1,14 +1,14 @@
 'use client';
 
-import { wasteDocumentsApi, type WasteDocument } from '@mypos/api-client';
+import { type WasteDocument, wasteDocumentsApi } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { apiClient } from '@/lib/api';
 import { DocDetailModal } from './doc-detail-modal';
+import { formatDate } from './format';
 import { ReasonBadge, StatusBadge } from './status-badge';
 import { CenteredSpinner, ErrorBanner, secondaryBtnClass } from './ui-helpers';
-import { formatDate } from './format';
 
 type Props = {
   id: string;

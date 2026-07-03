@@ -1,5 +1,5 @@
-import { getRequestConfig } from 'next-intl/server';
 import type { AbstractIntlMessages } from 'next-intl';
+import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
 
 type Messages = AbstractIntlMessages;
@@ -25,8 +25,12 @@ function deepMerge(base: Messages, over: Messages): Messages {
   for (const [k, v] of Object.entries(over as Record<string, unknown>)) {
     const baseV = out[k];
     if (
-      v && typeof v === 'object' && !Array.isArray(v) &&
-      baseV && typeof baseV === 'object' && !Array.isArray(baseV)
+      v &&
+      typeof v === 'object' &&
+      !Array.isArray(v) &&
+      baseV &&
+      typeof baseV === 'object' &&
+      !Array.isArray(baseV)
     ) {
       out[k] = deepMerge(baseV as Messages, v as Messages);
     } else {

@@ -1,6 +1,6 @@
 'use client';
 
-import { customersApi, type Customer } from '@mypos/api-client';
+import { type Customer, customersApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';

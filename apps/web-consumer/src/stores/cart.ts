@@ -96,14 +96,11 @@ export const useCartStore = create<CartState & CartActions>()(
           }
           return {
             ...s,
-            items: s.items.map((i) =>
-              i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i,
-            ),
+            items: s.items.map((i) => (i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i)),
           };
         }),
 
-      removeItem: (itemId) =>
-        set((s) => ({ ...s, items: s.items.filter((i) => i.id !== itemId) })),
+      removeItem: (itemId) => set((s) => ({ ...s, items: s.items.filter((i) => i.id !== itemId) })),
 
       setItemNotes: (itemId, notes) =>
         set((s) => ({

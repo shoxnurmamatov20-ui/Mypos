@@ -1,8 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
 import { useTheme } from 'next-themes';
+import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { formatNumber } from '@/lib/format';
@@ -12,12 +12,13 @@ type PlanDistributionChartProps = {
   tenants: TenantSummary[];
 };
 
-const PLAN_ORDER: TenantPlan[] = ['free', 'starter', 'pro', 'business', 'enterprise'];
+const PLAN_ORDER: TenantPlan[] = ['free', 'starter', 'pro', 'plus', 'business', 'enterprise'];
 
 const PLAN_COLORS: Record<TenantPlan, string> = {
   free: '#94a3b8',
   starter: '#60a5fa',
   pro: '#0f766e',
+  plus: '#6366f1',
   business: '#8b5cf6',
   enterprise: '#ec4899',
 };
@@ -41,7 +42,7 @@ export function PlanDistributionChart({ tenants }: PlanDistributionChartProps) {
         acc[plan] = 0;
         return acc;
       },
-      { free: 0, starter: 0, pro: 0, business: 0, enterprise: 0 },
+      { free: 0, starter: 0, pro: 0, plus: 0, business: 0, enterprise: 0 },
     );
     for (const tenant of tenants) counts[tenant.plan]++;
     return PLAN_ORDER.map((plan) => ({
@@ -85,9 +86,7 @@ export function PlanDistributionChart({ tenants }: PlanDistributionChartProps) {
                 borderRadius: 10,
                 fontSize: 12,
                 padding: '8px 12px',
-                boxShadow: isDark
-                  ? '0 4px 20px rgba(0,0,0,0.4)'
-                  : '0 4px 20px rgba(18,34,31,0.08)',
+                boxShadow: isDark ? '0 4px 20px rgba(0,0,0,0.4)' : '0 4px 20px rgba(18,34,31,0.08)',
               }}
               labelStyle={{ color: isDark ? '#94a3b8' : '#62716d' }}
               itemStyle={{ color: isDark ? '#fff' : '#16221f' }}
@@ -112,10 +111,7 @@ export function PlanDistributionChart({ tenants }: PlanDistributionChartProps) {
         {slices.map((slice) => {
           const pct = total > 0 ? (slice.count / total) * 100 : 0;
           return (
-            <li
-              key={slice.plan}
-              className="flex items-center justify-between gap-3 text-sm"
-            >
+            <li key={slice.plan} className="flex items-center justify-between gap-3 text-sm">
               <span className="flex items-center gap-2 text-[#16221f] dark:text-gray-300 min-w-0">
                 <span
                   className="inline-block h-2.5 w-2.5 rounded-sm flex-shrink-0"
@@ -128,7 +124,9 @@ export function PlanDistributionChart({ tenants }: PlanDistributionChartProps) {
                 <span className="font-bold text-[#16221f] dark:text-white">
                   {formatNumber(slice.count)}
                 </span>
-                <span className="text-xs text-[#62716d] dark:text-[#94a3b8]">{pct.toFixed(1)}%</span>
+                <span className="text-xs text-[#62716d] dark:text-[#94a3b8]">
+                  {pct.toFixed(1)}%
+                </span>
               </span>
             </li>
           );

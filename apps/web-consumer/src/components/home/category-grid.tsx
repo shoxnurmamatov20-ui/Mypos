@@ -1,10 +1,10 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import type { Route } from 'next';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
-import { CUISINE_CATEGORIES, type CategoryId } from '@/data/restaurants';
+import { type CategoryId, CUISINE_CATEGORIES } from '@/data/restaurants';
 
 /**
  * Visual style per cuisine. Tailwind classes are listed literally so the
@@ -61,10 +61,15 @@ export function CategoryGrid() {
                     href={href}
                     className={`group relative flex aspect-square flex-col items-center justify-center rounded-3xl px-2 transition active:scale-95 ${style.bg} hover:shadow-lg`}
                   >
-                    <span className="text-4xl transition group-hover:scale-110 sm:text-5xl" aria-hidden="true">
+                    <span
+                      className="text-4xl transition group-hover:scale-110 sm:text-5xl"
+                      aria-hidden="true"
+                    >
                       {cat.emoji}
                     </span>
-                    <span className={`mt-2 line-clamp-1 text-center text-xs font-bold sm:text-sm ${style.text}`}>
+                    <span
+                      className={`mt-2 line-clamp-1 text-center text-xs font-bold sm:text-sm ${style.text}`}
+                    >
                       {cat.label[locale]}
                     </span>
                   </Link>

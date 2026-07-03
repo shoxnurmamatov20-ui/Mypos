@@ -1,5 +1,4 @@
-import { setRequestLocale } from 'next-intl/server';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
 
 /**
@@ -36,7 +35,7 @@ export default async function AuthLayout({
               // eslint-disable-next-line react/no-array-index-key
               key={`decor-${i}`}
               className="flex items-center justify-center text-5xl"
-              style={{ transform: `rotate(${(i * 23) % 60 - 30}deg)` }}
+              style={{ transform: `rotate(${((i * 23) % 60) - 30}deg)` }}
             >
               {emoji}
             </span>
@@ -75,7 +74,9 @@ export default async function AuthLayout({
             </span>
           </div>
           <div className="flex flex-col">
-            <span className="font-display text-xl font-extrabold leading-none text-white">MyPOS</span>
+            <span className="font-display text-xl font-extrabold leading-none text-white">
+              MyPOS
+            </span>
             <span className="mt-1 text-xs text-white/80">{t('tagline')}</span>
           </div>
         </div>

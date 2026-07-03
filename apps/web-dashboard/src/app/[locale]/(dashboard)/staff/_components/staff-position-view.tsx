@@ -42,9 +42,7 @@ export function StaffPositionView({ title, description, position }: Props) {
         <h1 className="text-[20px] font-semibold tracking-tight text-[#16221f] dark:text-white">
           {title}
         </h1>
-        <p className="mt-1 text-[13px] text-[#62716d] dark:text-[#94a3b8]">
-          {description}
-        </p>
+        <p className="mt-1 text-[13px] text-[#62716d] dark:text-[#94a3b8]">{description}</p>
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -103,7 +101,9 @@ export function StaffPositionView({ title, description, position }: Props) {
                       {emp.user?.email ?? '—'}
                     </td>
                     <td className="px-4 py-2.5">
-                      <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${tone}`}>
+                      <span
+                        className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${tone}`}
+                      >
                         {emp.status?.label ?? status}
                       </span>
                     </td>

@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { StatusTimeline } from '@/components/orders/status-timeline';
 import { formatSom } from '@/lib/format';
+import { usePublicOrderTracking } from '@/lib/hooks/use-public-restaurants';
 import {
   buildTimelineSteps,
   computeEtaMinutes,
@@ -19,7 +20,6 @@ import {
   type PublicOrderTrackingStatus,
   pickTranslation,
 } from '@/lib/public-api';
-import { usePublicOrderTracking } from '@/lib/hooks/use-public-restaurants';
 import type { MockOrderStatus } from '@/lib/save-order';
 
 type Props = {
@@ -49,12 +49,9 @@ export function OrderTrackingView({ token, locale, initialData }: Props) {
       ? (locale as PublicLocale)
       : 'uz';
 
-  const { data, isLoading, refetch, dataUpdatedAt } = usePublicOrderTracking(
-    token,
-    {
-      initialData: initialData ?? undefined,
-    },
-  );
+  const { data, isLoading, refetch, dataUpdatedAt } = usePublicOrderTracking(token, {
+    initialData: initialData ?? undefined,
+  });
 
   const order = data?.data ?? initialData?.data ?? null;
 
@@ -70,17 +67,13 @@ export function OrderTrackingView({ token, locale, initialData }: Props) {
     return new Date();
   }, [tick, dataUpdatedAt]);
 
-  const status: MockOrderStatus = order
-    ? toMockStatus(order.status)
-    : 'pending';
+  const status: MockOrderStatus = order ? toMockStatus(order.status) : 'pending';
   const placedAt = order ? new Date(order.placed_at) : null;
   const etaMinutes = placedAt ? computeEtaMinutes(placedAt, status, now) : 0;
 
   const heroCopy = order ? buildHeroCopy(t, status) : null;
   const etaLabel =
-    status === 'delivered'
-      ? t('eta_delivered')
-      : t('eta_remaining', { minutes: etaMinutes });
+    status === 'delivered' ? t('eta_delivered') : t('eta_remaining', { minutes: etaMinutes });
 
   const stepLabels: TimelineStepLabels = useMemo(
     () => ({
@@ -95,9 +88,7 @@ export function OrderTrackingView({ token, locale, initialData }: Props) {
     [t],
   );
 
-  const steps = placedAt
-    ? buildTimelineSteps(placedAt, status, now, stepLabels)
-    : [];
+  const steps = placedAt ? buildTimelineSteps(placedAt, status, now, stepLabels) : [];
 
   if (isLoading && !order) {
     return (
@@ -134,9 +125,7 @@ export function OrderTrackingView({ token, locale, initialData }: Props) {
     );
   }
 
-  const restaurantName = order.restaurant
-    ? pickTranslation(order.restaurant.name, apiLocale)
-    : '—';
+  const restaurantName = order.restaurant ? pickTranslation(order.restaurant.name, apiLocale) : '—';
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
@@ -186,9 +175,7 @@ export function OrderTrackingView({ token, locale, initialData }: Props) {
           🍴
         </div>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-base font-bold text-neutral-900">
-            {restaurantName}
-          </p>
+          <p className="truncate text-base font-bold text-neutral-900">{restaurantName}</p>
           <p className="font-mono text-xs text-neutral-500">
             {t('title_prefix')} #{order.order_no}
           </p>
@@ -220,10 +207,7 @@ export function OrderTrackingView({ token, locale, initialData }: Props) {
       </section>
 
       <section className="mt-6 flex flex-col gap-2 rounded-2xl border border-neutral-200 bg-white p-5">
-        <SummaryRow
-          label={tCart('summary_subtotal')}
-          value={formatSom(order.amounts.subtotal)}
-        />
+        <SummaryRow label={tCart('summary_subtotal')} value={formatSom(order.amounts.subtotal)} />
         <SummaryRow
           label={tCart('summary_delivery')}
           value={
@@ -233,10 +217,7 @@ export function OrderTrackingView({ token, locale, initialData }: Props) {
           }
           freeColor={order.amounts.delivery_fee === 0}
         />
-        <SummaryRow
-          label={tCart('summary_service')}
-          value={formatSom(order.amounts.service_fee)}
-        />
+        <SummaryRow label={tCart('summary_service')} value={formatSom(order.amounts.service_fee)} />
         <div className="my-1 h-px bg-neutral-100" />
         <SummaryRow
           label={tCart('summary_total')}
@@ -282,10 +263,7 @@ function statusEmoji(status: MockOrderStatus): string {
 
 type HeroCopy = { title: string; subtitle: string };
 
-function buildHeroCopy(
-  t: ReturnType<typeof useTranslations>,
-  status: MockOrderStatus,
-): HeroCopy {
+function buildHeroCopy(t: ReturnType<typeof useTranslations>, status: MockOrderStatus): HeroCopy {
   switch (status) {
     case 'pending':
       return {
@@ -328,9 +306,7 @@ function SummaryRow({ label, value, emphasis, freeColor }: SummaryRowProps) {
     : freeColor
       ? 'text-sm font-bold text-mint-600'
       : 'text-sm font-medium text-neutral-900';
-  const labelClass = emphasis
-    ? 'text-lg font-bold text-neutral-900'
-    : 'text-sm text-neutral-500';
+  const labelClass = emphasis ? 'text-lg font-bold text-neutral-900' : 'text-sm text-neutral-500';
   return (
     <div className="flex items-center justify-between">
       <span className={labelClass}>{label}</span>

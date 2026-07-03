@@ -1,6 +1,6 @@
 'use client';
 
-import { shiftsApi, type Shift, type ShiftStatus } from '@mypos/api-client';
+import { type Shift, type ShiftStatus, shiftsApi } from '@mypos/api-client';
 import {
   Badge,
   type BadgeVariant,

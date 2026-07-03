@@ -1,6 +1,6 @@
 import type { MyPosApiClient } from './client';
-import type { CollectionResponse, PaginatedResponse, ResourceResponse } from './menu';
 import type { Ingredient } from './inventory';
+import type { CollectionResponse, PaginatedResponse, ResourceResponse } from './menu';
 
 // ---------------------------------------------------------------------------
 // Enums (matches App\Domain\Warehouse\Enums\*)
@@ -423,9 +423,7 @@ export const auditSessionsApi = {
    * AuditSessionPolicy::complete().
    */
   complete(client: MyPosApiClient, id: string) {
-    return client.post<ResourceResponse<AuditSession>>(
-      `/api/v1/audit-sessions/${id}/complete`,
-    );
+    return client.post<ResourceResponse<AuditSession>>(`/api/v1/audit-sessions/${id}/complete`);
   },
 
   delete(client: MyPosApiClient, id: string) {

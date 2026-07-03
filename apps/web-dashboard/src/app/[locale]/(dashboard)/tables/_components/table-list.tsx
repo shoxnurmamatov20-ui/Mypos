@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  tablesApi,
-  type Table,
-  type TableCategory,
-  type TableStatus,
-} from '@mypos/api-client';
+import { type Table, type TableCategory, type TableStatus, tablesApi } from '@mypos/api-client';
 import { cn } from '@mypos/ui';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -121,9 +116,7 @@ export function TableList({
                 <select
                   value={table.status}
                   disabled={updatingId === table.id}
-                  onChange={(e) =>
-                    handleStatusChange(table, e.target.value as TableStatus)
-                  }
+                  onChange={(e) => handleStatusChange(table, e.target.value as TableStatus)}
                   className="mt-1 w-full rounded-lg border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#1a2235] px-2 py-1 text-sm text-[#16221f] dark:text-white disabled:opacity-60"
                 >
                   {STATUS_VALUES.map((s) => (

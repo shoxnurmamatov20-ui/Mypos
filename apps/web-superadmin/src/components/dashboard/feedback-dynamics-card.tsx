@@ -1,5 +1,6 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import {
   CartesianGrid,
   Legend,
@@ -10,7 +11,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { useTheme } from 'next-themes';
 import { MOCK_FEEDBACK_DYNAMICS } from '@/data/mock-feedback';
 
 /**

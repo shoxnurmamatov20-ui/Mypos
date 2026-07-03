@@ -8,18 +8,18 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
+  daysAgo,
   EmptyCard,
   ErrorBanner,
   Field,
+  formatDate,
+  formatNumber,
+  inputClass,
   LoadingHint,
   PageTitle,
   SectionTitle,
   SimpleStat,
   TableShell,
-  daysAgo,
-  formatDate,
-  formatNumber,
-  inputClass,
   today,
 } from '../_components/report-helpers';
 
@@ -58,26 +58,36 @@ export function DebtorsReportView() {
           value={formatUZS(summary?.creditors_total_minor ?? 0)}
           tone="muted"
         />
-        <SimpleStat
-          label={t('debtors_report.stats_net')}
-          value={formatUZS(net)}
-          tone={netTone}
-        />
+        <SimpleStat label={t('debtors_report.stats_net')} value={formatUZS(net)} tone={netTone} />
       </div>
 
       <div className="flex flex-wrap items-end gap-3">
         <Field label={t('common.from_date')}>
-          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            className={inputClass}
+          />
         </Field>
         <Field label={t('common.to_date')}>
-          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className={inputClass} />
+          <input
+            type="date"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            className={inputClass}
+          />
         </Field>
       </div>
 
       {q.isLoading ? (
         <LoadingHint label={t('common.loading')} />
       ) : q.isError ? (
-        <ErrorBanner message={t('common.load_failed')} onRetry={() => q.refetch()} retryLabel={t('common.retry')} />
+        <ErrorBanner
+          message={t('common.load_failed')}
+          onRetry={() => q.refetch()}
+          retryLabel={t('common.retry')}
+        />
       ) : (
         <div className="space-y-6">
           {/* Debtors */}
@@ -96,14 +106,21 @@ export function DebtorsReportView() {
                     <tr>
                       <th className="px-4 py-2.5 font-medium">{t('debtors_report.col_name')}</th>
                       <th className="px-4 py-2.5 font-medium">{t('debtors_report.col_phone')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('debtors_report.col_orders')}</th>
-                      <th className="px-4 py-2.5 font-medium text-right">{t('debtors_report.col_owed')}</th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('debtors_report.col_orders')}
+                      </th>
+                      <th className="px-4 py-2.5 font-medium text-right">
+                        {t('debtors_report.col_owed')}
+                      </th>
                       <th className="px-4 py-2.5 font-medium">{t('debtors_report.col_oldest')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
                     {debtors.map((d) => (
-                      <tr key={d.customer_id} className="hover:bg-[#fafcfb] dark:hover:bg-[#0b1120]/40">
+                      <tr
+                        key={d.customer_id}
+                        className="hover:bg-[#fafcfb] dark:hover:bg-[#0b1120]/40"
+                      >
                         <td className="px-4 py-2.5 font-medium text-[#16221f] dark:text-white">
                           {d.name}
                         </td>

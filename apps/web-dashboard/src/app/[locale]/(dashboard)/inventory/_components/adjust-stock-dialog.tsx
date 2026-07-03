@@ -1,6 +1,6 @@
 'use client';
 
-import { inventoryApi, type Ingredient, type StockMovementReason } from '@mypos/api-client';
+import { type Ingredient, inventoryApi, type StockMovementReason } from '@mypos/api-client';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { toast } from 'sonner';

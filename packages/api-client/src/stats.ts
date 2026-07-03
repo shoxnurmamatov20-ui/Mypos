@@ -58,17 +58,12 @@ const buildQueryString = (params: Record<string, unknown> | undefined): string =
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 export const statsApi = {
   summary: (client: MyPosApiClient, params?: SummaryParams) => {
     const qs = buildQueryString(params);
-    return client.get<ResourceResponse<OrderSummary>>(
-      `/api/v1/orders/stats/summary${qs}`,
-    );
+    return client.get<ResourceResponse<OrderSummary>>(`/api/v1/orders/stats/summary${qs}`);
   },
 };

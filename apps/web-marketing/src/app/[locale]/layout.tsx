@@ -1,9 +1,9 @@
 import { AnalyticsBoot } from '@mypos/analytics';
+import { generateRootTenantVars } from '@mypos/design-tokens/tenant';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import { generateRootTenantVars } from '@mypos/design-tokens/tenant';
 import { CookieConsent } from '@/components/landing/cookie-consent';
 import { Footer } from '@/components/landing/footer';
 import { Header } from '@/components/landing/header';
@@ -68,6 +68,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: server-generated CSS custom properties only — no user input reaches generateRootTenantVars() */}
         <style dangerouslySetInnerHTML={{ __html: generateRootTenantVars() }} />
       </head>
       <body className="flex min-h-screen flex-col bg-[#001B1B] text-[#e2e8f0] antialiased">

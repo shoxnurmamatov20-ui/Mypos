@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  tablesApi,
-  type Table,
-  type TableCategory,
-} from '@mypos/api-client';
+import { type Table, type TableCategory, tablesApi } from '@mypos/api-client';
 import { cn } from '@mypos/ui';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';

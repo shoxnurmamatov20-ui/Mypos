@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@/lib/cn';
 import type { Invoice } from '@/data/mock-billing';
+import { cn } from '@/lib/cn';
 
 export type InvoiceStatusFilter = 'all' | Invoice['status'];
 

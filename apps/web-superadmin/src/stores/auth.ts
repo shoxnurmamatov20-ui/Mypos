@@ -65,10 +65,10 @@ export const useAuthStore = create<AuthState & AuthActions>((set) => ({
   login: async (email, password) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await apiClient.post<LoginResponse>(
-        '/api/v1/super-admin/login',
-        { email, password },
-      );
+      const res = await apiClient.post<LoginResponse>('/api/v1/super-admin/login', {
+        email,
+        password,
+      });
       const { token, user } = res.data;
       if (!user.is_super_admin) {
         // Backend should have rejected, but defend in depth.

@@ -78,8 +78,14 @@ export const useNomenclatureStore = create<NomState>()(
       updateCategory: (kind, id, patch) =>
         set((s) =>
           kind === 'semi'
-            ? { semiCategories: s.semiCategories.map((c) => (c.id === id ? { ...c, ...patch } : c)) }
-            : { salesCategories: s.salesCategories.map((c) => (c.id === id ? { ...c, ...patch } : c)) },
+            ? {
+                semiCategories: s.semiCategories.map((c) => (c.id === id ? { ...c, ...patch } : c)),
+              }
+            : {
+                salesCategories: s.salesCategories.map((c) =>
+                  c.id === id ? { ...c, ...patch } : c,
+                ),
+              },
         ),
       deleteCategory: (kind, id) =>
         set((s) =>

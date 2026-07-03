@@ -19,13 +19,10 @@ import type { ThemeProps } from './types';
  */
 export function PremiumTheme({ tenant, brand, restaurant, locale }: ThemeProps) {
   const tenantName =
-    typeof tenant.name === 'string'
-      ? tenant.name
-      : pickTranslation(tenant.name, locale);
+    typeof tenant.name === 'string' ? tenant.name : pickTranslation(tenant.name, locale);
   const heroTitle = pickTranslation(brand.hero_title, locale) || tenantName;
   const heroSubtitle =
-    pickTranslation(brand.hero_subtitle, locale) ||
-    pickTranslation(brand.tagline, locale);
+    pickTranslation(brand.hero_subtitle, locale) || pickTranslation(brand.tagline, locale);
 
   return (
     <section className="relative h-[80vh] min-h-[600px] overflow-hidden">
@@ -93,7 +90,9 @@ export function PremiumTheme({ tenant, brand, restaurant, locale }: ThemeProps) 
             style={{ backgroundColor: 'var(--color-brand-accent)' }}
           />
           <a
-            href={restaurant ? `/${locale}/restaurants/${restaurant.slug}` : `/${locale}/restaurants`}
+            href={
+              restaurant ? `/${locale}/restaurants/${restaurant.slug}` : `/${locale}/restaurants`
+            }
             className="text-sm font-semibold uppercase tracking-[0.3em] text-white"
           >
             Reserve · Order

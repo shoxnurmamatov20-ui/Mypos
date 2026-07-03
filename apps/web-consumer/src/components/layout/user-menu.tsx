@@ -1,12 +1,12 @@
 'use client';
 
+import type { AuthUser } from '@mypos/api-client';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, ListOrdered, LogOut, User } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import type { AuthUser } from '@mypos/api-client';
 import { useAuthStore } from '@/stores/auth';
 
 type Props = {
@@ -83,9 +83,7 @@ export function UserMenu({ user, locale, labels }: Props) {
           >
             <div className="border-b border-neutral-100 px-3 pb-3 pt-2">
               <p className="text-sm font-bold text-neutral-900">{user.name}</p>
-              {user.phone ? (
-                <p className="mt-0.5 text-xs text-neutral-500">{user.phone}</p>
-              ) : null}
+              {user.phone ? <p className="mt-0.5 text-xs text-neutral-500">{user.phone}</p> : null}
             </div>
 
             <div className="mt-2 flex flex-col gap-0.5">

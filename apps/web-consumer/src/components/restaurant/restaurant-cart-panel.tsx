@@ -1,15 +1,11 @@
 'use client';
 
+import { ShoppingBag } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { ShoppingBag } from 'lucide-react';
 import { formatSom } from '@/lib/format';
-import {
-  selectCartCount,
-  selectCartTotal,
-  useCartStore,
-} from '@/stores/cart';
+import { selectCartCount, selectCartTotal, useCartStore } from '@/stores/cart';
 
 type RestaurantCartPanelProps = {
   restaurantSlug: string;

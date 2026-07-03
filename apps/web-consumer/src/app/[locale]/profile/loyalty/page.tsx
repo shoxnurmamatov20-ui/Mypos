@@ -55,8 +55,7 @@ export default function LoyaltyPage() {
   const t = useTranslations('loyalty_page');
   const tCommon = useTranslations('common');
   const locale = useLocale();
-  const tierLocale: 'uz' | 'ru' | 'en' =
-    locale === 'ru' || locale === 'en' ? locale : 'uz';
+  const tierLocale: 'uz' | 'ru' | 'en' = locale === 'ru' || locale === 'en' ? locale : 'uz';
 
   const tierName = (key: TierKey) =>
     TIERS.find((tier) => tier.key === key)?.labels[tierLocale] ?? key;
@@ -113,16 +112,12 @@ export default function LoyaltyPage() {
                   {tier.emoji}
                 </span>
                 <div className="flex-1">
-                  <p className="text-base font-bold text-neutral-900">
-                    {tier.labels[tierLocale]}
-                  </p>
+                  <p className="text-base font-bold text-neutral-900">{tier.labels[tierLocale]}</p>
                   <p className="text-xs text-neutral-500">
                     {tier.minPoints}+ {t('points_label')}
                   </p>
                 </div>
-                {achieved ? (
-                  <Check className="h-5 w-5 text-mint-600" aria-hidden="true" />
-                ) : null}
+                {achieved ? <Check className="h-5 w-5 text-mint-600" aria-hidden="true" /> : null}
               </li>
             );
           })}

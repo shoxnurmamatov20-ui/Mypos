@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import {
   ArrowDownLeft,
   ArrowLeftRight,
@@ -58,7 +59,6 @@ import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
-import { cn } from '@mypos/ui';
 import { useAuthStore } from '@/stores/auth';
 
 type NavLeaf = { id: string; href: string; locked?: boolean };
@@ -267,7 +267,7 @@ export function Sidebar() {
   const logout = useAuthStore((s) => s.logout);
 
   const initial = (user?.name?.trim()?.charAt(0) ?? user?.email?.charAt(0) ?? 'M').toUpperCase();
-  const role = user?.is_super_admin ? 'super_admin' : user?.roles?.[0] ?? 'manager';
+  const role = user?.is_super_admin ? 'super_admin' : (user?.roles?.[0] ?? 'manager');
 
   const sectionWithActivePath = useMemo(() => {
     for (const s of SECTIONS) {
@@ -447,7 +447,8 @@ export function Sidebar() {
                                   <ItemIcon
                                     className={cn(
                                       'h-[14px] w-[14px] flex-shrink-0 transition-transform group-hover:scale-110',
-                                      SECTION_ICON_COLOR[section.id] ?? 'text-[#62716d] dark:text-[#94a3b8]',
+                                      SECTION_ICON_COLOR[section.id] ??
+                                        'text-[#62716d] dark:text-[#94a3b8]',
                                     )}
                                     strokeWidth={isActive ? 2.4 : 2}
                                   />

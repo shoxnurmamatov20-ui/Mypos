@@ -1,17 +1,9 @@
 'use client';
 
+import type { Locale } from 'date-fns';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { enUS, ru, uz } from 'date-fns/locale';
-import type { Locale } from 'date-fns';
-import {
-  Eye,
-  Inbox,
-  LogIn,
-  PauseCircle,
-  PlayCircle,
-  Trash2,
-  type LucideIcon,
-} from 'lucide-react';
+import { Eye, Inbox, LogIn, type LucideIcon, PauseCircle, PlayCircle, Trash2 } from 'lucide-react';
 import type { Route } from 'next';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -92,7 +84,9 @@ export function TenantsTable({
             strokeWidth={1.5}
             aria-hidden="true"
           />
-          <p className="text-sm font-semibold text-[#16221f] dark:text-white">Hech narsa topilmadi</p>
+          <p className="text-sm font-semibold text-[#16221f] dark:text-white">
+            Hech narsa topilmadi
+          </p>
           <p className="mt-1 text-xs text-[#62716d] dark:text-[#94a3b8]">
             Filtrlarni o&apos;zgartirib qayta urinib ko&apos;ring
           </p>
@@ -137,10 +131,20 @@ export function TenantsTable({
                   <Th>Egasi</Th>
                   <Th>Tarif</Th>
                   <Th>Holat</Th>
-                  <SortableTh sort={sort} column="mrr" onClick={() => onSortChange('mrr')} align="right">
+                  <SortableTh
+                    sort={sort}
+                    column="mrr"
+                    onClick={() => onSortChange('mrr')}
+                    align="right"
+                  >
                     MRR
                   </SortableTh>
-                  <SortableTh sort={sort} column="orders" onClick={() => onSortChange('orders')} align="right">
+                  <SortableTh
+                    sort={sort}
+                    column="orders"
+                    onClick={() => onSortChange('orders')}
+                    align="right"
+                  >
                     Buyurtma
                   </SortableTh>
                   <SortableTh
@@ -290,13 +294,28 @@ function DesktopRow({
         {formatRelative(row.last_active_at)}
       </td>
 
-      <td className="pr-3.5 py-2.5 text-right whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
-        <RowAction icon={Eye}      title="Ko'rish"        onClick={() => onAction('view', row)} />
-        <RowAction icon={LogIn}    title="Tizimga kirish" onClick={() => onAction('impersonate', row)} />
+      <td
+        className="pr-3.5 py-2.5 text-right whitespace-nowrap"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <RowAction icon={Eye} title="Ko'rish" onClick={() => onAction('view', row)} />
+        <RowAction
+          icon={LogIn}
+          title="Tizimga kirish"
+          onClick={() => onAction('impersonate', row)}
+        />
         {row.status === 'suspended' ? (
-          <RowAction icon={PlayCircle} title="Faollashtirish" onClick={() => onAction('resume', row)} />
+          <RowAction
+            icon={PlayCircle}
+            title="Faollashtirish"
+            onClick={() => onAction('resume', row)}
+          />
         ) : (
-          <RowAction icon={PauseCircle} title="To'xtatish" onClick={() => onAction('suspend', row)} />
+          <RowAction
+            icon={PauseCircle}
+            title="To'xtatish"
+            onClick={() => onAction('suspend', row)}
+          />
         )}
         <RowAction icon={Trash2} title="O'chirish" danger onClick={() => onAction('delete', row)} />
       </td>
@@ -382,7 +401,11 @@ function MobileRow({
 
       <div className="mt-2 flex items-center justify-end gap-1.5">
         <RowAction icon={Eye} title="Ko'rish" onClick={() => onAction('view', row)} />
-        <RowAction icon={LogIn} title="Tizimga kirish" onClick={() => onAction('impersonate', row)} />
+        <RowAction
+          icon={LogIn}
+          title="Tizimga kirish"
+          onClick={() => onAction('impersonate', row)}
+        />
         {row.status === 'suspended' ? (
           <RowAction
             icon={PlayCircle}
@@ -390,7 +413,11 @@ function MobileRow({
             onClick={() => onAction('resume', row)}
           />
         ) : (
-          <RowAction icon={PauseCircle} title="To'xtatish" onClick={() => onAction('suspend', row)} />
+          <RowAction
+            icon={PauseCircle}
+            title="To'xtatish"
+            onClick={() => onAction('suspend', row)}
+          />
         )}
         <RowAction icon={Trash2} title="O'chirish" danger onClick={() => onAction('delete', row)} />
       </div>

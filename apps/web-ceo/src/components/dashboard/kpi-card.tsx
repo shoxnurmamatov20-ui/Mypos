@@ -21,9 +21,16 @@ export type KpiCardProps = {
  * icon box top-left, optional trend chip top-right, UPPERCASE label,
  * big tabular number.
  */
-export function KpiCard({ icon: Icon, iconColor, iconBg, label, value, trend, hint }: KpiCardProps) {
-  const trendPositive =
-    trend === undefined ? undefined : (trend.positive ?? trend.value >= 0);
+export function KpiCard({
+  icon: Icon,
+  iconColor,
+  iconBg,
+  label,
+  value,
+  trend,
+  hint,
+}: KpiCardProps) {
+  const trendPositive = trend === undefined ? undefined : (trend.positive ?? trend.value >= 0);
 
   return (
     <article className="group flex flex-col rounded-[12px] border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] p-[16px_18px] transition-colors">
@@ -62,9 +69,7 @@ export function KpiCard({ icon: Icon, iconColor, iconBg, label, value, trend, hi
       <p className="mt-1.5 truncate text-[24px] font-black leading-none tabular-nums text-[#16221f] dark:text-white">
         {value}
       </p>
-      {hint ? (
-        <p className="mt-2 text-[11px] text-[#62716d] dark:text-[#94a3b8]">{hint}</p>
-      ) : null}
+      {hint ? <p className="mt-2 text-[11px] text-[#62716d] dark:text-[#94a3b8]">{hint}</p> : null}
     </article>
   );
 }

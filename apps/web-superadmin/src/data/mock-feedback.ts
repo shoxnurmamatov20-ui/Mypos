@@ -20,7 +20,20 @@ export type FeedbackPoint = {
   rating: number;
 };
 
-const MONTHS_UZ = ['yan', 'fev', 'mar', 'apr', 'may', 'iyun', 'iyul', 'avg', 'sen', 'okt', 'noy', 'dek'];
+const MONTHS_UZ = [
+  'yan',
+  'fev',
+  'mar',
+  'apr',
+  'may',
+  'iyun',
+  'iyul',
+  'avg',
+  'sen',
+  'okt',
+  'noy',
+  'dek',
+];
 
 function makeLabel(date: string): string {
   const d = new Date(date);
@@ -50,21 +63,26 @@ export const MOCK_FEEDBACK_DYNAMICS: FeedbackPoint[] = [
 
 /** Sentiment — for the Sentiment donut. Same shape, just totals. */
 export const MOCK_SENTIMENT = [
-  { key: 'positive', label: 'Ijobiy',  count: 248, color: '#059669' },
-  { key: 'neutral',  label: 'Neytral', count: 76,  color: '#94a3b8' },
-  { key: 'negative', label: 'Salbiy',  count: 32,  color: '#e11d48' },
+  { key: 'positive', label: 'Ijobiy', count: 248, color: '#059669' },
+  { key: 'neutral', label: 'Neytral', count: 76, color: '#94a3b8' },
+  { key: 'negative', label: 'Salbiy', count: 32, color: '#e11d48' },
 ] as const;
 
 /** Hodisa turi — system event severity counts (last 30d). */
 export const MOCK_EVENT_TYPES = [
-  { key: 'info',     label: "Ma'lumot",      count: 412, color: '#2563eb' },
-  { key: 'warning',  label: 'Ogohlantirish', count: 87,  color: '#d97706' },
-  { key: 'error',    label: 'Xato',          count: 24,  color: '#ea580c' },
-  { key: 'critical', label: 'Kritik',        count: 6,   color: '#e11d48' },
+  { key: 'info', label: "Ma'lumot", count: 412, color: '#2563eb' },
+  { key: 'warning', label: 'Ogohlantirish', count: 87, color: '#d97706' },
+  { key: 'error', label: 'Xato', count: 24, color: '#ea580c' },
+  { key: 'critical', label: 'Kritik', count: 6, color: '#e11d48' },
 ] as const;
 
 /** Last 7 days — fresh sign-ups / new tenants. */
-export const MOCK_LAST_7_DAYS: ReadonlyArray<{ date: string; label: string; signups: number; orders: number }> = [
+export const MOCK_LAST_7_DAYS: ReadonlyArray<{
+  date: string;
+  label: string;
+  signups: number;
+  orders: number;
+}> = [
   { signups: 4, orders: 142 },
   { signups: 7, orders: 168 },
   { signups: 3, orders: 154 },

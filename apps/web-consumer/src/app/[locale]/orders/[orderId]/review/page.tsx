@@ -63,7 +63,9 @@ export default function ReviewPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 text-center">
         <CheckCircle className="mx-auto h-16 w-16 text-emerald-500" />
-        <h1 className="mt-4 font-display text-2xl font-bold text-neutral-900">{t('thanks_title')}</h1>
+        <h1 className="mt-4 font-display text-2xl font-bold text-neutral-900">
+          {t('thanks_title')}
+        </h1>
         <p className="mt-2 text-sm text-neutral-600">{t('thanks_body')}</p>
         <div className="mt-6 inline-flex gap-1">
           {[1, 2, 3, 4, 5].map((n) => (

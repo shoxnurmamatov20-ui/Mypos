@@ -1,13 +1,7 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 
-export type BadgeVariant =
-  | 'default'
-  | 'neutral'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'info';
+export type BadgeVariant = 'default' | 'neutral' | 'success' | 'warning' | 'danger' | 'info';
 
 const VARIANTS: Record<BadgeVariant, string> = {
   default: 'bg-[#e6f3f1] text-[#0f766e] dark:bg-[#0f766e]/20 dark:text-[#5ed6c9]',

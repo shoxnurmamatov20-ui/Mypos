@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  menuApi,
   type CreateMenuItemInput,
   type MenuCategory,
   type MenuItem,
+  menuApi,
 } from '@mypos/api-client';
 import {
   Badge,
@@ -174,9 +174,10 @@ export function MenuItemsClient() {
     const input: CreateMenuItemInput = {
       category_id: form.category_id,
       name: { uz: form.name_uz, ru: form.name_ru, en: form.name_en },
-      description: form.description_uz || form.description_en
-        ? { uz: form.description_uz, ru: form.description_ru, en: form.description_en }
-        : null,
+      description:
+        form.description_uz || form.description_en
+          ? { uz: form.description_uz, ru: form.description_ru, en: form.description_en }
+          : null,
       price_amount: Number(form.price_amount) || 0,
       sku: form.sku || null,
       image_url: form.image_url || null,
@@ -365,13 +366,22 @@ export function MenuItemsClient() {
           </FormField>
           <div className="grid grid-cols-3 gap-3">
             <FormField label={t('name_uz')} required>
-              <Input value={form.name_uz} onChange={(e) => setForm({ ...form, name_uz: e.target.value })} />
+              <Input
+                value={form.name_uz}
+                onChange={(e) => setForm({ ...form, name_uz: e.target.value })}
+              />
             </FormField>
             <FormField label={t('name_ru')}>
-              <Input value={form.name_ru} onChange={(e) => setForm({ ...form, name_ru: e.target.value })} />
+              <Input
+                value={form.name_ru}
+                onChange={(e) => setForm({ ...form, name_ru: e.target.value })}
+              />
             </FormField>
             <FormField label={t('name_en')}>
-              <Input value={form.name_en} onChange={(e) => setForm({ ...form, name_en: e.target.value })} />
+              <Input
+                value={form.name_en}
+                onChange={(e) => setForm({ ...form, name_en: e.target.value })}
+              />
             </FormField>
           </div>
           <FormField label={t('description_uz')}>
@@ -401,7 +411,10 @@ export function MenuItemsClient() {
             </FormField>
           </div>
           <FormField label={t('image_url')}>
-            <Input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} />
+            <Input
+              value={form.image_url}
+              onChange={(e) => setForm({ ...form, image_url: e.target.value })}
+            />
           </FormField>
           <div className="grid grid-cols-2 gap-3">
             <FormField label={t('is_active')}>

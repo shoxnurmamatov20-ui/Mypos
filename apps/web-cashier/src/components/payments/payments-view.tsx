@@ -3,8 +3,8 @@
 import { Banknote, CreditCard, Receipt, Wallet } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
-import { usePayments } from '@/hooks/use-cashier-data';
 import { Badge, type BadgeVariant } from '@/components/ui/badge';
+import { usePayments } from '@/hooks/use-cashier-data';
 import type { PaymentMethod, PaymentStatus } from '@/lib/api';
 import { formatMoney, formatTime } from '@/lib/format';
 

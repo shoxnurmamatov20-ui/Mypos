@@ -1,17 +1,17 @@
 'use client';
 
-import { Search, X } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useLocale, useTranslations } from 'next-intl';
+import { Search, X } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { type CategoryId } from '@/data/restaurants';
 import { RestaurantCard } from '@/components/restaurant/restaurant-card';
-import { RestaurantCardSkeleton } from '@/components/ui/skeleton';
 import { SearchFilters, type SortKey } from '@/components/search/search-filters';
+import { RestaurantCardSkeleton } from '@/components/ui/skeleton';
+import type { CategoryId } from '@/data/restaurants';
+import { usePublicRestaurants } from '@/lib/hooks/use-public-restaurants';
 import { isPublicLocale, type PublicCuisine } from '@/lib/public-api';
 import { publicRestaurantsToUi } from '@/lib/public-api-mappers';
-import { usePublicRestaurants } from '@/lib/hooks/use-public-restaurants';
 
 const VALID_CUISINES: ReadonlyArray<CategoryId> = [
   'all',
@@ -196,12 +196,7 @@ export function SearchView() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.25, delay: Math.min(i, 8) * 0.03 }}
               >
-                <RestaurantCard
-                  restaurant={r}
-                  variant="vertical"
-                  locale={locale}
-                  labels={labels}
-                />
+                <RestaurantCard restaurant={r} variant="vertical" locale={locale} labels={labels} />
               </motion.li>
             ))}
           </ul>

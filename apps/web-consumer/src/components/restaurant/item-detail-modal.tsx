@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { type MockMenuItem, getItemBgClass } from '@/data/menus';
+import { getItemBgClass, type MockMenuItem } from '@/data/menus';
 import { formatSom } from '@/lib/format';
 import { useCartStore } from '@/stores/cart';
 
@@ -185,10 +185,7 @@ export function ItemDetailModal({
               </div>
 
               <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="item-notes"
-                  className="text-sm font-semibold text-neutral-700"
-                >
+                <label htmlFor="item-notes" className="text-sm font-semibold text-neutral-700">
                   {t('notes_label')}
                 </label>
                 <textarea

@@ -1,17 +1,22 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { cn } from '@mypos/ui';
-import { type Banner, type BannerType, useSignageHydrated, useSignageStore } from '@/stores/signage';
 import {
-  Toggle,
+  type Banner,
+  type BannerType,
+  useSignageHydrated,
+  useSignageStore,
+} from '@/stores/signage';
+import {
   inputClass,
   primaryBtnClass,
   SettingsCard,
   SettingsSkeleton,
+  Toggle,
 } from '../../settings/_components/settings-ui';
 import { BannerFormDialog } from './banner-form-dialog';
 
@@ -39,7 +44,11 @@ function BannersInner() {
   const [dialog, setDialog] = useState<DialogState>(null);
 
   const typeLabel = (ty: BannerType) =>
-    ty === 'promo' ? t('banners.type_promo') : ty === 'discount' ? t('banners.type_discount') : t('banners.type_new');
+    ty === 'promo'
+      ? t('banners.type_promo')
+      : ty === 'discount'
+        ? t('banners.type_discount')
+        : t('banners.type_new');
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -84,7 +93,9 @@ function BannersInner() {
 
       {filtered.length === 0 ? (
         <SettingsCard>
-          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">{t('banners.empty')}</p>
+          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
+            {t('banners.empty')}
+          </p>
         </SettingsCard>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -121,7 +132,9 @@ function BannersInner() {
               {/* Body */}
               <div className="flex flex-1 flex-col gap-2 p-3">
                 {b.description && (
-                  <p className="line-clamp-2 text-[13px] text-[#62716d] dark:text-[#94a3b8]">{b.description}</p>
+                  <p className="line-clamp-2 text-[13px] text-[#62716d] dark:text-[#94a3b8]">
+                    {b.description}
+                  </p>
                 )}
                 <p className="text-[12px] text-[#62716d] [font-feature-settings:'tnum'] dark:text-[#94a3b8]">
                   {periodText(b)}
@@ -158,7 +171,11 @@ function BannersInner() {
       )}
 
       {dialog !== null && (
-        <BannerFormDialog banner={editing} onClose={() => setDialog(null)} onSaved={() => setDialog(null)} />
+        <BannerFormDialog
+          banner={editing}
+          onClose={() => setDialog(null)}
+          onSaved={() => setDialog(null)}
+        />
       )}
     </div>
   );

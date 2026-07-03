@@ -1,15 +1,11 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ApiError } from '@mypos/api-client';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Toast, useToast } from '@/components/ui/toast';
-import {
-  fetchSettings,
-  updateSettings,
-  type PlatformSettings,
-} from '@/lib/api-helpers';
+import { fetchSettings, type PlatformSettings, updateSettings } from '@/lib/api-helpers';
 import { EmailSection } from './email-section';
 import { FeaturesSection } from './features-section';
 import { GeneralSection } from './general-section';
@@ -85,10 +81,7 @@ export function SettingsView() {
           className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-500/20"
           aria-hidden="true"
         >
-          <AlertCircle
-            className="h-6 w-6 text-red-600 dark:text-red-400"
-            strokeWidth={2}
-          />
+          <AlertCircle className="h-6 w-6 text-red-600 dark:text-red-400" strokeWidth={2} />
         </div>
         <div>
           <p className="text-base font-bold text-red-900 dark:text-red-200">
@@ -117,9 +110,7 @@ export function SettingsView() {
         <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
           {t('title')}
         </h1>
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          {t('subtitle')}
-        </p>
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{t('subtitle')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-4 md:gap-6">
@@ -136,11 +127,7 @@ export function SettingsView() {
             isLoading={isLoading}
             onSave={buildSaveHandler('features')}
           />
-          <EmailSection
-            settings={settings}
-            isLoading={isLoading}
-            onSent={onTestEmailSent}
-          />
+          <EmailSection settings={settings} isLoading={isLoading} onSent={onTestEmailSent} />
           <PaymentsSection isLoading={isLoading} />
           <NotificationsSection
             settings={settings}
@@ -150,12 +137,7 @@ export function SettingsView() {
         </div>
       </div>
 
-      <Toast
-        open={state.open}
-        message={state.message}
-        variant={state.variant}
-        onClose={close}
-      />
+      <Toast open={state.open} message={state.message} variant={state.variant} onClose={close} />
     </section>
   );
 }

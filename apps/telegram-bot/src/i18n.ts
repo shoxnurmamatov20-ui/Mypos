@@ -9,11 +9,11 @@ import type { Lang } from './types.js';
 type Dict = Record<string, string>;
 
 const uz: Dict = {
-  'welcome': "Assalomu alaykum! MyPOS demo restoran botiga xush kelibsiz.",
+  welcome: 'Assalomu alaykum! MyPOS demo restoran botiga xush kelibsiz.',
   'main_menu.menu': 'Menyu',
   'main_menu.cart': 'Savat ({count})',
   'main_menu.orders': 'Buyurtmalarim',
-  'main_menu.language': "Til: {lang}",
+  'main_menu.language': 'Til: {lang}',
   'main_menu.help': 'Yordam',
   'menu.pick_category': 'Kategoriyani tanlang:',
   'menu.pick_item': 'Taomni tanlang:',
@@ -22,30 +22,30 @@ const uz: Dict = {
   'menu.back': 'Orqaga',
   'cart.title': 'Savatingiz',
   'cart.empty': "Savatingiz bo'sh.",
-  'cart.line': "{i}) {name} x {qty} — {total}",
+  'cart.line': '{i}) {name} x {qty} — {total}',
   'cart.total': 'Jami: {total}',
   'cart.checkout': 'Buyurtma berish',
   'cart.clear': 'Savatni tozalash',
   'orders.title': 'Sizning buyurtmalaringiz',
   'orders.empty': 'Hali buyurtmalaringiz yoq.',
   'orders.line': '#{no} — {status} — {total}',
-  'checkout.ask_mode': "Qayerda tanavvul qilasiz?",
+  'checkout.ask_mode': 'Qayerda tanavvul qilasiz?',
   'checkout.mode_dine_in': 'Restoranda',
   'checkout.mode_delivery': 'Yetkazib berish',
   'checkout.ask_table': 'Stol raqamini yuboring:',
-  'checkout.ask_phone': "Telefon raqamingizni yuboring (+998...):",
+  'checkout.ask_phone': 'Telefon raqamingizni yuboring (+998...):',
   'checkout.ask_address': 'Manzilni yuboring:',
-  'checkout.summary': "Buyurtma xulosasi:\n{body}\n\nJami: {total}",
+  'checkout.summary': 'Buyurtma xulosasi:\n{body}\n\nJami: {total}',
   'checkout.confirm': 'Tasdiqlash',
   'checkout.cancel': 'Bekor qilish',
-  'checkout.placed': "Buyurtma qabul qilindi! Raqam: {order_no}",
-  'status.update': "Buyurtma #{order_no} — yangi holat: {status}",
+  'checkout.placed': 'Buyurtma qabul qilindi! Raqam: {order_no}',
+  'status.update': 'Buyurtma #{order_no} — yangi holat: {status}',
   'language.choose': 'Tilni tanlang:',
   'language.changed': 'Til ozgartirildi.',
   'help.text':
-    "Buyruqlar:\n/start — botni qayta ishga tushirish\n/menu — menyu\n/savat — savat\n/buyurtmalarim — buyurtmalar\n/til — tilni tanlash\n/help — yordam",
+    'Buyruqlar:\n/start — botni qayta ishga tushirish\n/menu — menyu\n/savat — savat\n/buyurtmalarim — buyurtmalar\n/til — tilni tanlash\n/help — yordam',
   'errors.generic': 'Kechirasiz, xatolik yuz berdi. Qayta urinib koring.',
-  'errors.network': "Tarmoq bilan bogliq xatolik. Internet ulanishini tekshiring.",
+  'errors.network': 'Tarmoq bilan bogliq xatolik. Internet ulanishini tekshiring.',
   'errors.menu_unavailable': 'Menyu hozircha mavjud emas.',
   'errors.invalid_phone': 'Telefon raqami notogri. Masalan: +998901234567',
   'errors.invalid_table': 'Stol raqami notogri.',
@@ -54,7 +54,7 @@ const uz: Dict = {
 };
 
 const ru: Dict = {
-  'welcome': 'Здравствуйте! Добро пожаловать в бот демо-ресторана MyPOS.',
+  welcome: 'Здравствуйте! Добро пожаловать в бот демо-ресторана MyPOS.',
   'main_menu.menu': 'Меню',
   'main_menu.cart': 'Корзина ({count})',
   'main_menu.orders': 'Мои заказы',
@@ -99,7 +99,7 @@ const ru: Dict = {
 };
 
 const en: Dict = {
-  'welcome': "Hello! Welcome to the MyPOS demo restaurant bot.",
+  welcome: 'Hello! Welcome to the MyPOS demo restaurant bot.',
   'main_menu.menu': 'Menu',
   'main_menu.cart': 'Cart ({count})',
   'main_menu.orders': 'My orders',
@@ -145,11 +145,7 @@ const en: Dict = {
 
 const DICTS: Record<Lang, Dict> = { uz, ru, en };
 
-export function t(
-  key: string,
-  lang: Lang = 'uz',
-  vars?: Record<string, string | number>,
-): string {
+export function t(key: string, lang: Lang = 'uz', vars?: Record<string, string | number>): string {
   const dict = DICTS[lang];
   const fallback = DICTS.uz[key] ?? key;
   const template = dict[key] ?? fallback;

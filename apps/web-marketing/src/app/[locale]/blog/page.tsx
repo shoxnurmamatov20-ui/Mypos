@@ -1,3 +1,4 @@
+import type { Icon } from '@phosphor-icons/react';
 import {
   ArrowRight,
   BookmarkSimple,
@@ -19,7 +20,6 @@ import {
   TrendUp,
   Users,
 } from '@phosphor-icons/react/dist/ssr';
-import type { Icon } from '@phosphor-icons/react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
@@ -29,19 +29,62 @@ type Props = { params: Promise<{ locale: string }> };
 
 export const metadata: Metadata = {
   title: 'Blog — MyPOS',
-  description: "Restoran biznesi, texnologiya va MyPOS yangiliklari. Markaziy Osiyo restoran egasiga maxsus.",
+  description:
+    'Restoran biznesi, texnologiya va MyPOS yangiliklari. Markaziy Osiyo restoran egasiga maxsus.',
 };
 
 type Category = { slug: string; label: string; Icon: Icon; tint: string; bg: string };
 
 const CATEGORIES: ReadonlyArray<Category> = [
-  { slug: 'all',          label: 'Hammasi',     Icon: Sparkle,                tint: 'text-[#5eead4]',    bg: 'bg-[rgba(20,184,166,0.15)]' },
-  { slug: 'business',     label: 'Biznes',      Icon: ChartLineUp,            tint: 'text-emerald-400',  bg: 'bg-emerald-500/15' },
-  { slug: 'tech',         label: 'Texnologiya', Icon: Lightbulb,              tint: 'text-amber-400',    bg: 'bg-amber-500/15' },
-  { slug: 'operations',   label: 'Operatsiya',  Icon: Storefront,             tint: 'text-blue-400',     bg: 'bg-blue-500/15' },
-  { slug: 'marketing',    label: 'Marketing',   Icon: TrendUp,                tint: 'text-purple-400',   bg: 'bg-purple-500/15' },
-  { slug: 'finance',      label: "Moliya",      Icon: CurrencyCircleDollar,   tint: 'text-[#ff0037]',    bg: 'bg-[rgba(255,0,55,0.15)]' },
-  { slug: 'product',      label: 'Mahsulot',    Icon: Package,                tint: 'text-cyan-400',     bg: 'bg-cyan-500/15' },
+  {
+    slug: 'all',
+    label: 'Hammasi',
+    Icon: Sparkle,
+    tint: 'text-[#5eead4]',
+    bg: 'bg-[rgba(20,184,166,0.15)]',
+  },
+  {
+    slug: 'business',
+    label: 'Biznes',
+    Icon: ChartLineUp,
+    tint: 'text-emerald-400',
+    bg: 'bg-emerald-500/15',
+  },
+  {
+    slug: 'tech',
+    label: 'Texnologiya',
+    Icon: Lightbulb,
+    tint: 'text-amber-400',
+    bg: 'bg-amber-500/15',
+  },
+  {
+    slug: 'operations',
+    label: 'Operatsiya',
+    Icon: Storefront,
+    tint: 'text-blue-400',
+    bg: 'bg-blue-500/15',
+  },
+  {
+    slug: 'marketing',
+    label: 'Marketing',
+    Icon: TrendUp,
+    tint: 'text-purple-400',
+    bg: 'bg-purple-500/15',
+  },
+  {
+    slug: 'finance',
+    label: 'Moliya',
+    Icon: CurrencyCircleDollar,
+    tint: 'text-[#ff0037]',
+    bg: 'bg-[rgba(255,0,55,0.15)]',
+  },
+  {
+    slug: 'product',
+    label: 'Mahsulot',
+    Icon: Package,
+    tint: 'text-cyan-400',
+    bg: 'bg-cyan-500/15',
+  },
 ] as const;
 
 type Post = {
@@ -61,73 +104,131 @@ type Post = {
 const POSTS: ReadonlyArray<Post> = [
   {
     slug: 'restoran-foyda-2026',
-    title: "Restoraningiz foydasini 30% oshirishning 7 ta isbotlangan usuli",
-    excerpt: "Markaziy Osiyodagi 500+ restoran ma'lumotlari asosida — qaysi taktikalar haqiqatan ishlaydi va qaysi biri vaqt isrofi. Real raqamlar, real misollar.",
-    category: 'business', author: 'Aziz Rahmonov', date: '2026-05-08', minutes: 12, views: '8.4K',
-    Icon: ChartLineUp, accent: 'from-emerald-500/30 via-emerald-500/10 to-transparent', featured: true,
+    title: 'Restoraningiz foydasini 30% oshirishning 7 ta isbotlangan usuli',
+    excerpt:
+      "Markaziy Osiyodagi 500+ restoran ma'lumotlari asosida — qaysi taktikalar haqiqatan ishlaydi va qaysi biri vaqt isrofi. Real raqamlar, real misollar.",
+    category: 'business',
+    author: 'Aziz Rahmonov',
+    date: '2026-05-08',
+    minutes: 12,
+    views: '8.4K',
+    Icon: ChartLineUp,
+    accent: 'from-emerald-500/30 via-emerald-500/10 to-transparent',
+    featured: true,
   },
   {
     slug: 'menyu-narxlash-strategiya',
-    title: "Menyu narxlash: foydani 22% oshirgan psixologik 5 ta usul",
-    excerpt: "Mijoz qanday narxni 'arzon' deb hisoblaydi? 9-effekt, anchor narx, 'choy menyusi' va boshqa Toshkent restoranlarida sinab ko'rilgan taktikalar.",
-    category: 'business', author: 'Madina Yusupova', date: '2026-05-05', minutes: 9, views: '12.1K',
-    Icon: ChartLineUp, accent: 'from-emerald-500/30 via-emerald-500/10 to-transparent',
+    title: 'Menyu narxlash: foydani 22% oshirgan psixologik 5 ta usul',
+    excerpt:
+      "Mijoz qanday narxni 'arzon' deb hisoblaydi? 9-effekt, anchor narx, 'choy menyusi' va boshqa Toshkent restoranlarida sinab ko'rilgan taktikalar.",
+    category: 'business',
+    author: 'Madina Yusupova',
+    date: '2026-05-05',
+    minutes: 9,
+    views: '12.1K',
+    Icon: ChartLineUp,
+    accent: 'from-emerald-500/30 via-emerald-500/10 to-transparent',
   },
   {
     slug: 'kassa-balansi-yopilmaydi',
-    title: "Kassa balansi kechqurun mos kelmasa: 7 ta sabab va yechim",
-    excerpt: "Eng ko'p uchraydigan muammo. Ofitsiant xatosi, qaytarish, dilling, hisobotda yo'qotish — har birini qanday topish va oldini olish.",
-    category: 'operations', author: 'Jamshid Tursunov', date: '2026-05-02', minutes: 8, views: '6.2K',
-    Icon: Coffee, accent: 'from-blue-500/30 via-blue-500/10 to-transparent',
+    title: 'Kassa balansi kechqurun mos kelmasa: 7 ta sabab va yechim',
+    excerpt:
+      "Eng ko'p uchraydigan muammo. Ofitsiant xatosi, qaytarish, dilling, hisobotda yo'qotish — har birini qanday topish va oldini olish.",
+    category: 'operations',
+    author: 'Jamshid Tursunov',
+    date: '2026-05-02',
+    minutes: 8,
+    views: '6.2K',
+    Icon: Coffee,
+    accent: 'from-blue-500/30 via-blue-500/10 to-transparent',
   },
   {
     slug: 'osh-markazi-keys',
     title: 'Osh Markazi: kunlik 800 tovuq somsadan startup gacha',
-    excerpt: "Toshkentdagi mashhur osh markazi qanday qilib POS'ga o'tdi va 6 oyda oborotini 2.5 baravar oshirdi.",
-    category: 'business', author: 'Dilnoza Sodiqova', date: '2026-04-28', minutes: 14, views: '15.3K',
-    Icon: Coffee, accent: 'from-emerald-500/30 via-emerald-500/10 to-transparent',
+    excerpt:
+      "Toshkentdagi mashhur osh markazi qanday qilib POS'ga o'tdi va 6 oyda oborotini 2.5 baravar oshirdi.",
+    category: 'business',
+    author: 'Dilnoza Sodiqova',
+    date: '2026-04-28',
+    minutes: 14,
+    views: '15.3K',
+    Icon: Coffee,
+    accent: 'from-emerald-500/30 via-emerald-500/10 to-transparent',
   },
   {
     slug: 'smena-yopish-checklist',
     title: "Smena yopish checklisti: 12 ta nuqta hech narsa o'tkazib yubormaslik uchun",
-    excerpt: "Z-hisobotdan kassa balansigacha — har kuni 5 daqiqada bajaring va xatolarni minimal qiling.",
-    category: 'operations', author: 'Jamshid Tursunov', date: '2026-04-24', minutes: 5, views: '4.8K',
-    Icon: Storefront, accent: 'from-blue-500/30 via-blue-500/10 to-transparent',
+    excerpt:
+      'Z-hisobotdan kassa balansigacha — har kuni 5 daqiqada bajaring va xatolarni minimal qiling.',
+    category: 'operations',
+    author: 'Jamshid Tursunov',
+    date: '2026-04-24',
+    minutes: 5,
+    views: '4.8K',
+    Icon: Storefront,
+    accent: 'from-blue-500/30 via-blue-500/10 to-transparent',
   },
   {
     slug: 'instagram-restoran-marketing',
-    title: "Instagram orqali restoraningizga kuniga 50+ mijoz olib kelish",
-    excerpt: "Toshkent restoranlarida ishlagan 5 ta haqiqiy strategiya — kontent, reels, geotag va influencer hamkorligi.",
-    category: 'marketing', author: 'Madina Yusupova', date: '2026-04-20', minutes: 10, views: '9.7K',
-    Icon: TrendUp, accent: 'from-purple-500/30 via-purple-500/10 to-transparent',
+    title: 'Instagram orqali restoraningizga kuniga 50+ mijoz olib kelish',
+    excerpt:
+      'Toshkent restoranlarida ishlagan 5 ta haqiqiy strategiya — kontent, reels, geotag va influencer hamkorligi.',
+    category: 'marketing',
+    author: 'Madina Yusupova',
+    date: '2026-04-20',
+    minutes: 10,
+    views: '9.7K',
+    Icon: TrendUp,
+    accent: 'from-purple-500/30 via-purple-500/10 to-transparent',
   },
   {
     slug: 'inventar-ish-tortish',
-    title: "Inventar ish tortish — 30% chiqimni qanday kamaytirdik",
-    excerpt: "Mishuck (ingredient yo'qotish) restoran foydasini yeydi. Bizning yangi inventar moduli buni qanday hal qiladi.",
-    category: 'operations', author: 'Bobur Ergashev', date: '2026-04-15', minutes: 9, views: '5.6K',
-    Icon: Package, accent: 'from-blue-500/30 via-blue-500/10 to-transparent',
+    title: 'Inventar ish tortish — 30% chiqimni qanday kamaytirdik',
+    excerpt:
+      "Mishuck (ingredient yo'qotish) restoran foydasini yeydi. Bizning yangi inventar moduli buni qanday hal qiladi.",
+    category: 'operations',
+    author: 'Bobur Ergashev',
+    date: '2026-04-15',
+    minutes: 9,
+    views: '5.6K',
+    Icon: Package,
+    accent: 'from-blue-500/30 via-blue-500/10 to-transparent',
   },
   {
     slug: 'soliq-2026-restoranlar',
-    title: "2026 yilgi yangi soliq qoidalari: restoran egasi nimani bilishi kerak",
-    excerpt: "QQS, daromad solig'i va kassa apparati talablari — hisobchi va yurist bilan tayyorlangan to'liq tahlil.",
-    category: 'finance', author: 'Nodira Karimova', date: '2026-04-10', minutes: 11, views: '7.2K',
-    Icon: CurrencyCircleDollar, accent: 'from-rose-500/30 via-rose-500/10 to-transparent',
+    title: '2026 yilgi yangi soliq qoidalari: restoran egasi nimani bilishi kerak',
+    excerpt:
+      "QQS, daromad solig'i va kassa apparati talablari — hisobchi va yurist bilan tayyorlangan to'liq tahlil.",
+    category: 'finance',
+    author: 'Nodira Karimova',
+    date: '2026-04-10',
+    minutes: 11,
+    views: '7.2K',
+    Icon: CurrencyCircleDollar,
+    accent: 'from-rose-500/30 via-rose-500/10 to-transparent',
   },
   {
     slug: 'xodimlar-motivatsiya',
-    title: "Ofitsiantlar kadr almashinuvini 70% kamaytirgan 4 ta yondashuv",
-    excerpt: "Markaziy Osiyoda restoranlar uchun eng yirik muammo — kadr aylanmasi. Real ish tajribasidan o'rganamiz.",
-    category: 'business', author: 'Aziz Rahmonov', date: '2026-04-05', minutes: 8, views: '11.4K',
-    Icon: Users, accent: 'from-emerald-500/30 via-emerald-500/10 to-transparent',
+    title: 'Ofitsiantlar kadr almashinuvini 70% kamaytirgan 4 ta yondashuv',
+    excerpt:
+      "Markaziy Osiyoda restoranlar uchun eng yirik muammo — kadr aylanmasi. Real ish tajribasidan o'rganamiz.",
+    category: 'business',
+    author: 'Aziz Rahmonov',
+    date: '2026-04-05',
+    minutes: 8,
+    views: '11.4K',
+    Icon: Users,
+    accent: 'from-emerald-500/30 via-emerald-500/10 to-transparent',
   },
 ];
 
 const FEATURED = POSTS.find((p) => p.featured) ?? POSTS[0]!;
 const REGULAR = POSTS.filter((p) => p !== FEATURED);
 
-const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map((c) => [c.slug, c])) as Record<string, Category>;
+const CATEGORY_MAP = Object.fromEntries(CATEGORIES.map((c) => [c.slug, c])) as Record<
+  string,
+  Category
+>;
 
 function fmtDate(iso: string) {
   const d = new Date(iso);
@@ -144,18 +245,21 @@ export default async function BlogPage({ params }: Props) {
     <main>
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#001B1B]">
-        <div aria-hidden="true" className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]" />
+        <div
+          aria-hidden="true"
+          className="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[500px]"
+        />
         <div className="relative mx-auto max-w-3xl px-5 pt-20 sm:pt-24 pb-10 text-center">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[rgba(15,118,110,0.25)] bg-[rgba(15,118,110,0.10)] text-[#5eead4] text-[11px] font-bold uppercase tracking-[0.08em]">
             <PenNib size={11} weight="fill" />
             BLOG
           </span>
           <h1 className="mt-5 text-[36px] sm:text-[48px] lg:text-[56px] font-extrabold leading-[1.05] tracking-tight text-white">
-            Restoran egasining{' '}
-            <span className="gradient-teal">qo&apos;llanmasi</span>
+            Restoran egasining <span className="gradient-teal">qo&apos;llanmasi</span>
           </h1>
           <p className="mx-auto mt-4 max-w-[36rem] text-[15px] sm:text-[16px] leading-relaxed text-white/70">
-            Markaziy Osiyodagi 500+ restoran tajribasi · Biznes maslahatlari · Texnologiya yangiliklari · Real raqamlar.
+            Markaziy Osiyodagi 500+ restoran tajribasi · Biznes maslahatlari · Texnologiya
+            yangiliklari · Real raqamlar.
           </p>
 
           {/* Search */}
@@ -207,7 +311,9 @@ export default async function BlogPage({ params }: Props) {
             className="glass-card glass-card-hover press group relative overflow-hidden rounded-3xl grid gap-6 lg:gap-10 lg:grid-cols-5 p-6 sm:p-8"
           >
             {/* Cover */}
-            <div className={`relative lg:col-span-2 aspect-[4/3] lg:aspect-auto rounded-2xl overflow-hidden ring-1 ring-inset ring-white/10 bg-gradient-to-br ${FEATURED.accent}`}>
+            <div
+              className={`relative lg:col-span-2 aspect-[4/3] lg:aspect-auto rounded-2xl overflow-hidden ring-1 ring-inset ring-white/10 bg-gradient-to-br ${FEATURED.accent}`}
+            >
               <div className="absolute inset-0 flex items-center justify-center">
                 <FEATURED.Icon size={88} weight="duotone" className="text-white/85" />
               </div>
@@ -220,7 +326,9 @@ export default async function BlogPage({ params }: Props) {
             {/* Body */}
             <div className="lg:col-span-3 flex flex-col">
               <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.08em]">
-                <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full ring-1 ring-inset ring-white/10 ${featuredCat.bg} ${featuredCat.tint}`}>
+                <span
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full ring-1 ring-inset ring-white/10 ${featuredCat.bg} ${featuredCat.tint}`}
+                >
                   <featuredCat.Icon size={11} weight="bold" />
                   {featuredCat.label}
                 </span>
@@ -233,14 +341,16 @@ export default async function BlogPage({ params }: Props) {
               <h2 className="mt-3 text-[24px] sm:text-[32px] font-extrabold tracking-tight text-white leading-[1.15]">
                 {FEATURED.title}
               </h2>
-              <p className="mt-3 text-[14px] leading-relaxed text-white/70">
-                {FEATURED.excerpt}
-              </p>
+              <p className="mt-3 text-[14px] leading-relaxed text-white/70">{FEATURED.excerpt}</p>
 
               <div className="mt-auto pt-5 flex items-center justify-between text-[12px]">
                 <div className="flex items-center gap-2.5">
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full ring-1 ring-inset ring-white/15 bg-[rgba(20,184,166,0.18)] text-[#5eead4] text-[11px] font-bold">
-                    {FEATURED.author.split(' ').map((s) => s[0]).join('').slice(0, 2)}
+                    {FEATURED.author
+                      .split(' ')
+                      .map((s) => s[0])
+                      .join('')
+                      .slice(0, 2)}
                   </span>
                   <div className="leading-tight">
                     <div className="font-semibold text-white">{FEATURED.author}</div>
@@ -279,9 +389,7 @@ export default async function BlogPage({ params }: Props) {
                 Barcha maqolalar
               </h2>
             </div>
-            <span className="text-[12px] text-white/55 tabular">
-              {POSTS.length} ta maqola
-            </span>
+            <span className="text-[12px] text-white/55 tabular">{POSTS.length} ta maqola</span>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -295,11 +403,15 @@ export default async function BlogPage({ params }: Props) {
                   className="glass-card glass-card-hover press group flex flex-col overflow-hidden rounded-2xl"
                 >
                   {/* Cover */}
-                  <div className={`relative aspect-[16/9] bg-gradient-to-br ${p.accent} ring-1 ring-inset ring-white/10`}>
+                  <div
+                    className={`relative aspect-[16/9] bg-gradient-to-br ${p.accent} ring-1 ring-inset ring-white/10`}
+                  >
                     <div className="absolute inset-0 flex items-center justify-center">
                       <p.Icon size={56} weight="duotone" className="text-white/80" />
                     </div>
-                    <span className={`absolute top-2.5 left-2.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full ring-1 ring-inset ring-white/10 text-[10px] font-bold uppercase tracking-[0.06em] backdrop-blur-md ${cat.bg} ${cat.tint}`}>
+                    <span
+                      className={`absolute top-2.5 left-2.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full ring-1 ring-inset ring-white/10 text-[10px] font-bold uppercase tracking-[0.06em] backdrop-blur-md ${cat.bg} ${cat.tint}`}
+                    >
                       <cat.Icon size={10} weight="bold" />
                       {cat.label}
                     </span>
@@ -377,7 +489,8 @@ export default async function BlogPage({ params }: Props) {
                   Haftalik newsletter
                 </h2>
                 <p className="mt-2 text-[13.5px] leading-relaxed text-white/70">
-                  Har juma — yangi maqolalar, restoran biznesi statistikasi va MyPOS yangiliklari. <span className="text-white">10,000+</span> restoran egasi obuna.
+                  Har juma — yangi maqolalar, restoran biznesi statistikasi va MyPOS yangiliklari.{' '}
+                  <span className="text-white">10,000+</span> restoran egasi obuna.
                 </p>
               </div>
 

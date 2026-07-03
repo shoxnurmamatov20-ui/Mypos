@@ -1,11 +1,6 @@
 import type { TenantPlan, TenantStatus, TenantSummary } from '@/types/super-admin';
 
-export type SortKey =
-  | 'mrr_desc'
-  | 'mrr_asc'
-  | 'created_desc'
-  | 'name_asc'
-  | 'last_active_desc';
+export type SortKey = 'mrr_desc' | 'mrr_asc' | 'created_desc' | 'name_asc' | 'last_active_desc';
 
 export type PlanFilter = TenantPlan | 'all';
 export type StatusFilter = TenantStatus | 'all';

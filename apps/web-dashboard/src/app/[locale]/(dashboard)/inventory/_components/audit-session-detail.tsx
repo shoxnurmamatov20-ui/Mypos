@@ -1,12 +1,13 @@
 'use client';
 
 import {
-  auditSessionsApi,
   type AuditSession,
+  auditSessionsApi,
   type UpdateAuditSessionInput,
 } from '@mypos/api-client';
 
 type UpdateAuditSessionItemInput = NonNullable<UpdateAuditSessionInput['items']>[number];
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { CheckCircle2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -17,8 +18,8 @@ import { DocDetailModal } from './doc-detail-modal';
 import { StatusBadge } from './status-badge';
 import {
   CenteredSpinner,
-  ErrorBanner,
   dangerBtnClass,
+  ErrorBanner,
   primaryBtnClass,
   secondaryBtnClass,
 } from './ui-helpers';
@@ -130,11 +131,7 @@ export function AuditSessionDetail({ sessionId, onClose }: Props) {
       footer={
         !isCompleted ? (
           <>
-            <button
-              type="button"
-              onClick={onClose}
-              className={secondaryBtnClass}
-            >
+            <button type="button" onClick={onClose} className={secondaryBtnClass}>
               {t('actions.cancel')}
             </button>
             <button

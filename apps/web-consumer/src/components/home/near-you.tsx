@@ -5,9 +5,9 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { RestaurantCard } from '@/components/restaurant/restaurant-card';
 import { RestaurantCardSkeleton } from '@/components/ui/skeleton';
+import { usePublicRestaurants } from '@/lib/hooks/use-public-restaurants';
 import { isPublicLocale } from '@/lib/public-api';
 import { publicRestaurantsToUi } from '@/lib/public-api-mappers';
-import { usePublicRestaurants } from '@/lib/hooks/use-public-restaurants';
 
 const NEAR_YOU_LIMIT = 12;
 
@@ -88,12 +88,7 @@ export function NearYou() {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.35, delay: (i % 6) * 0.05 }}
               >
-                <RestaurantCard
-                  restaurant={r}
-                  variant="vertical"
-                  locale={locale}
-                  labels={labels}
-                />
+                <RestaurantCard restaurant={r} variant="vertical" locale={locale} labels={labels} />
               </motion.li>
             ))}
           </ul>

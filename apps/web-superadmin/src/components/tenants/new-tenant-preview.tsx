@@ -1,11 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { TenantPlanBadge } from './tenant-plan-badge';
 import { cn } from '@/lib/cn';
 import { pickAvatarColor } from '@/lib/tenant-utils';
-import type { TrialDays } from './_new-tenant-schema';
 import type { TenantPlan } from '@/types/super-admin';
+import type { TrialDays } from './_new-tenant-schema';
+import { TenantPlanBadge } from './tenant-plan-badge';
 
 type Props = {
   name: string;
@@ -15,13 +15,7 @@ type Props = {
   ownerName: string;
 };
 
-export function NewTenantPreview({
-  name,
-  slug,
-  plan,
-  trialDays,
-  ownerName,
-}: Props) {
+export function NewTenantPreview({ name, slug, plan, trialDays, ownerName }: Props) {
   const t = useTranslations('tenant_new');
 
   const previewName = name || t('preview_default_name');

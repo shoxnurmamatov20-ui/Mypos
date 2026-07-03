@@ -93,17 +93,11 @@ export function FeaturesSection({ settings, isLoading = false, onSave: _onSave }
       {isLoading ? (
         <ul className="space-y-3" aria-busy="true">
           {FEATURES.map((feature) => (
-            <li
-              key={feature}
-              className="h-12 rounded animate-pulse bg-gray-200 dark:bg-gray-800"
-            />
+            <li key={feature} className="h-12 rounded animate-pulse bg-gray-200 dark:bg-gray-800" />
           ))}
         </ul>
       ) : (
-        <ul
-          className="divide-y divide-gray-100 dark:divide-gray-800/60"
-          role="list"
-        >
+        <ul className="divide-y divide-gray-100 dark:divide-gray-800/60" role="list">
           {FEATURES.map((feature) => (
             <li key={feature} className="py-3 px-1">
               <Switch

@@ -64,9 +64,7 @@ function TimelineDot({ state, isLast }: DotProps) {
       {!isLast ? (
         <div
           className={
-            state === 'past'
-              ? 'mt-1 h-12 w-0.5 bg-mint-500'
-              : 'mt-1 h-12 w-0.5 bg-neutral-200'
+            state === 'past' ? 'mt-1 h-12 w-0.5 bg-mint-500' : 'mt-1 h-12 w-0.5 bg-neutral-200'
           }
           aria-hidden="true"
         />

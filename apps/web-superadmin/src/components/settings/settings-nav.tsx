@@ -1,16 +1,11 @@
 'use client';
 
-import { Bell, CreditCard, Mail, Settings as SettingsIcon, ToggleLeft } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { Bell, CreditCard, Mail, Settings as SettingsIcon, ToggleLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/cn';
 
-export type SettingsSectionId =
-  | 'general'
-  | 'features'
-  | 'email'
-  | 'payments'
-  | 'notifications';
+export type SettingsSectionId = 'general' | 'features' | 'email' | 'payments' | 'notifications';
 
 type NavItem = {
   id: SettingsSectionId;
@@ -88,7 +83,9 @@ export function SettingsNav({ labels }: { labels: Record<SettingsSectionId, stri
       { rootMargin: '-80px 0px -40% 0px', threshold: [0.1, 0.3, 0.5, 0.7, 0.9] },
     );
 
-    sections.forEach((el) => observer.observe(el));
+    for (const el of sections) {
+      observer.observe(el);
+    }
     return () => observer.disconnect();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -149,10 +146,7 @@ export function SettingsNav({ labels }: { labels: Record<SettingsSectionId, stri
                 )}
                 aria-hidden="true"
               >
-                <Icon
-                  className={cn('h-3.5 w-3.5', isActive ? color : '')}
-                  strokeWidth={2}
-                />
+                <Icon className={cn('h-3.5 w-3.5', isActive ? color : '')} strokeWidth={2} />
               </span>
               <span className="truncate">{label}</span>
             </a>

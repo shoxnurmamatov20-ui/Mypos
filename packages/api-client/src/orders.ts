@@ -21,12 +21,7 @@ export type OrderStatus =
   | 'cancelled'
   | 'refunded';
 
-export type OrderPaymentStatus =
-  | 'unpaid'
-  | 'partial'
-  | 'paid'
-  | 'refunded'
-  | 'void';
+export type OrderPaymentStatus = 'unpaid' | 'partial' | 'paid' | 'refunded' | 'void';
 
 export type OrderItemModifier = {
   id: string;
@@ -117,12 +112,7 @@ const buildQueryString = (params: Record<string, unknown> | undefined): string =
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries
-      .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-      .join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 export const ordersApi = {
@@ -134,13 +124,6 @@ export const ordersApi = {
     client.get<ResourceResponse<Order>>(`/api/v1/orders/${id}`),
   create: (client: MyPosApiClient, input: CreateOrderInput) =>
     client.post<ResourceResponse<Order>>('/api/v1/orders', input),
-  updateStatus: (
-    client: MyPosApiClient,
-    id: string,
-    input: UpdateOrderStatusInput,
-  ) =>
-    client.patch<ResourceResponse<Order>>(
-      `/api/v1/orders/${id}/status`,
-      input,
-    ),
+  updateStatus: (client: MyPosApiClient, id: string, input: UpdateOrderStatusInput) =>
+    client.patch<ResourceResponse<Order>>(`/api/v1/orders/${id}/status`, input),
 };

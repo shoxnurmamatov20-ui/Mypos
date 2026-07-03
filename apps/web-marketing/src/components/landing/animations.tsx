@@ -26,6 +26,58 @@ export function FadeUp({ children, className, delay = 0 }: FadeUpProps) {
   );
 }
 
+interface StaggerGroupProps {
+  children: ReactNode;
+  className?: string;
+}
+
+/**
+ * Reveal container: children wrapped in <StaggerItem> cascade in one after
+ * another once the group scrolls into view.
+ */
+export function StaggerGroup({ children, className }: StaggerGroupProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial="hidden"
+      animate={inView ? 'visible' : 'hidden'}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.12 } },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+interface StaggerItemProps {
+  children: ReactNode;
+  className?: string;
+}
+
+export function StaggerItem({ children, className }: StaggerItemProps) {
+  return (
+    <motion.div
+      className={className}
+      variants={{
+        hidden: { opacity: 0, y: 24 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 interface AnimatedCounterProps {
   to: number;
   suffix?: string;

@@ -20,19 +20,17 @@
  *     Skip the entire suite gracefully via fs.existsSync.
  */
 
-import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { describe, expect, it } from 'vitest';
 
 // ESM-safe __dirname equivalent. `import.meta.url` is the canonical way to
 // derive the current file's path under Vite/Vitest's ESM runtime.
 // Falls back to a hardcoded relative path resolution if `import.meta.url` is
 // unavailable (CJS test runs).
 const dirname =
-  typeof __dirname !== 'undefined'
-    ? __dirname
-    : path.dirname(fileURLToPath(import.meta.url));
+  typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 const messagesDir = path.resolve(dirname, '..', '..', 'messages');
 const kzPath = path.join(messagesDir, 'kz.json');
@@ -124,8 +122,7 @@ describe('Phase 4 i18n — Kazakh (kz) bundle', () => {
     });
 
     // At least 30% of long strings should be predominantly Cyrillic.
-    expect(cyrillicSamples.length / Math.max(longLeaves.length, 1))
-      .toBeGreaterThan(0.3);
+    expect(cyrillicSamples.length / Math.max(longLeaves.length, 1)).toBeGreaterThan(0.3);
   });
 
   it('falls back to ru/en for missing keys (sibling bundle parity)', () => {

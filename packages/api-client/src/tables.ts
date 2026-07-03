@@ -1,9 +1,5 @@
 import type { MyPosApiClient } from './client';
-import type {
-  CollectionResponse,
-  ResourceResponse,
-  TranslatedString,
-} from './menu';
+import type { CollectionResponse, ResourceResponse, TranslatedString } from './menu';
 
 export type TableStatus = 'available' | 'occupied' | 'reserved' | 'disabled';
 export type TableShape = 'square' | 'round' | 'rectangle' | 'oval';
@@ -69,10 +65,7 @@ const buildQueryString = (params: Record<string, unknown> | undefined): string =
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 export const tablesApi = {
@@ -80,23 +73,11 @@ export const tablesApi = {
     list: (client: MyPosApiClient) =>
       client.get<CollectionResponse<TableCategory>>('/api/v1/tables/categories'),
     create: (client: MyPosApiClient, input: CreateTableCategoryInput) =>
-      client.post<ResourceResponse<TableCategory>>(
-        '/api/v1/tables/categories',
-        input,
-      ),
-    update: (
-      client: MyPosApiClient,
-      id: string,
-      input: UpdateTableCategoryInput,
-    ) =>
-      client.patch<ResourceResponse<TableCategory>>(
-        `/api/v1/tables/categories/${id}`,
-        input,
-      ),
+      client.post<ResourceResponse<TableCategory>>('/api/v1/tables/categories', input),
+    update: (client: MyPosApiClient, id: string, input: UpdateTableCategoryInput) =>
+      client.patch<ResourceResponse<TableCategory>>(`/api/v1/tables/categories/${id}`, input),
     delete: (client: MyPosApiClient, id: string) =>
-      client.delete<{ data: { message: string } }>(
-        `/api/v1/tables/categories/${id}`,
-      ),
+      client.delete<{ data: { message: string } }>(`/api/v1/tables/categories/${id}`),
   },
   tables: {
     list: (client: MyPosApiClient, params?: ListTablesParams) => {
@@ -109,15 +90,8 @@ export const tablesApi = {
       client.post<ResourceResponse<Table>>('/api/v1/tables', input),
     update: (client: MyPosApiClient, id: string, input: UpdateTableInput) =>
       client.patch<ResourceResponse<Table>>(`/api/v1/tables/${id}`, input),
-    updateStatus: (
-      client: MyPosApiClient,
-      id: string,
-      input: UpdateTableStatusInput,
-    ) =>
-      client.patch<ResourceResponse<Table>>(
-        `/api/v1/tables/${id}/status`,
-        input,
-      ),
+    updateStatus: (client: MyPosApiClient, id: string, input: UpdateTableStatusInput) =>
+      client.patch<ResourceResponse<Table>>(`/api/v1/tables/${id}/status`, input),
     delete: (client: MyPosApiClient, id: string) =>
       client.delete<{ data: { message: string } }>(`/api/v1/tables/${id}`),
   },

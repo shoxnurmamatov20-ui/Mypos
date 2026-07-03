@@ -1,9 +1,9 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import { Banknote, CreditCard, Globe, type LucideIcon, Smartphone } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
-import { cn } from '@mypos/ui';
 import {
   PAYMENT_METHODS,
   type PaymentMethodKey,
@@ -11,8 +11,8 @@ import {
   useSettingsStore,
 } from '@/stores/settings';
 import {
-  type SegmentOption,
   SegmentedControl,
+  type SegmentOption,
   SettingsCard,
   SettingsSkeleton,
   Toggle,
@@ -102,7 +102,9 @@ function PaymentForm() {
 
       <SettingsCard title={t('payment.default_method')} description={t('payment.default_hint')}>
         {enabledMethods.length === 0 ? (
-          <p className="text-sm text-[#62716d] dark:text-[#94a3b8]">{t('payment.no_methods_enabled')}</p>
+          <p className="text-sm text-[#62716d] dark:text-[#94a3b8]">
+            {t('payment.no_methods_enabled')}
+          </p>
         ) : (
           <SegmentedControl
             options={defaultOptions}

@@ -1,14 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Check, Home, MapPin } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { Check, Home, MapPin } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { formatSom } from '@/lib/format';
-import { type MockOrder, loadMockOrder } from '@/lib/save-order';
+import { loadMockOrder, type MockOrder } from '@/lib/save-order';
 
 /**
  * Order success page — `/[locale]/order-success/[orderId]`.
@@ -70,9 +70,11 @@ export default function OrderSuccessPage() {
   // Happy path. Prefer the public tracking URL when the API returned a
   // tracking token (new orders); fall back to the legacy `/orders/[id]`
   // route for orders saved before the tracking flow shipped.
-  const trackHref = (order.trackingToken
-    ? `/${localeFromParams}/track/${order.trackingToken}`
-    : `/${localeFromParams}/orders/${order.id}`) as Route;
+  const trackHref = (
+    order.trackingToken
+      ? `/${localeFromParams}/track/${order.trackingToken}`
+      : `/${localeFromParams}/orders/${order.id}`
+  ) as Route;
   const homeHref = `/${localeFromParams}` as Route;
 
   return (
@@ -129,11 +131,7 @@ export default function OrderSuccessPage() {
         transition={{ duration: 0.4, delay: 0.65 }}
         className="mx-auto mt-8 flex max-w-md flex-col gap-4 rounded-3xl bg-neutral-50 p-6 text-left sm:p-7"
       >
-        <DetailRow
-          label={t('order_number')}
-          value={`#${order.orderNo}`}
-          mono
-        />
+        <DetailRow label={t('order_number')} value={`#${order.orderNo}`} mono />
         <DetailRow label={t('estimated_delivery')} value={t('estimated_minutes')} />
         <DetailRow label={t('total_amount')} value={formatSom(order.amounts.total)} bold />
         <DetailRow

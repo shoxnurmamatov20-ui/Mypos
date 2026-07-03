@@ -1,6 +1,6 @@
 import { ArrowRight } from '@phosphor-icons/react/dist/ssr';
-import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 
 /** Closing CTA on the surface-tier teal section with a brighter inner card. */
 export function CtaSection() {

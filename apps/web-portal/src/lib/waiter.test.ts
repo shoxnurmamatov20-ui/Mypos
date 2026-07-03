@@ -11,25 +11,33 @@ import { formatSom, formatSomShort, getWaiterData } from './waiter-data';
 
 describe('resolvePostLoginTarget', () => {
   it('routes a waiter to the in-app waiter panel', () => {
+    // The '/panel/portal' basePath is intentional: the target is used in a
+    // raw `window.location.href` navigation, which does NOT auto-prepend
+    // Next's basePath (see resolvePostLoginTarget's comment).
     expect(resolvePostLoginTarget('waiter', 'uz')).toEqual({
       kind: 'internal',
-      path: '/uz/tables',
+      path: '/panel/portal/uz/tables',
     });
   });
 
   it('keeps the requested locale in the waiter path', () => {
     expect(resolvePostLoginTarget('waiter', 'ru')).toEqual({
       kind: 'internal',
-      path: '/ru/tables',
+      path: '/panel/portal/ru/tables',
     });
   });
 
-  it.each(['manager', 'owner', 'cashier', 'chef', 'courier', 'ceo', 'super_admin'])(
-    'hands the "%s" role off to the dispatch flow',
-    (role) => {
-      expect(resolvePostLoginTarget(role, 'uz')).toEqual({ kind: 'dispatch' });
-    },
-  );
+  it.each([
+    'manager',
+    'owner',
+    'cashier',
+    'chef',
+    'courier',
+    'ceo',
+    'super_admin',
+  ])('hands the "%s" role off to the dispatch flow', (role) => {
+    expect(resolvePostLoginTarget(role, 'uz')).toEqual({ kind: 'dispatch' });
+  });
 });
 
 describe('formatSom', () => {

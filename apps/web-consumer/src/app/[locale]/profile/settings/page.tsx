@@ -40,10 +40,7 @@ export default function SettingsPage() {
   const handleLanguagePress = (code: LanguageOption['code']) => {
     if (code === locale) return;
     const segments = pathname.split('/');
-    if (
-      segments[1] &&
-      routing.locales.includes(segments[1] as (typeof routing.locales)[number])
-    ) {
+    if (segments[1] && routing.locales.includes(segments[1] as (typeof routing.locales)[number])) {
       segments[1] = code;
     } else {
       segments.splice(1, 0, code);
@@ -114,16 +111,8 @@ export default function SettingsPage() {
           <SectionHeader>{t('notifications')}</SectionHeader>
           <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
             <ul className="divide-y divide-neutral-100">
-              <ToggleRow
-                label={t('notif_orders')}
-                value={notifOrders}
-                onChange={setNotifOrders}
-              />
-              <ToggleRow
-                label={t('notif_promos')}
-                value={notifPromos}
-                onChange={setNotifPromos}
-              />
+              <ToggleRow label={t('notif_orders')} value={notifOrders} onChange={setNotifOrders} />
+              <ToggleRow label={t('notif_promos')} value={notifPromos} onChange={setNotifPromos} />
               <ToggleRow
                 label={t('notif_recommendations')}
                 value={notifRecommendations}

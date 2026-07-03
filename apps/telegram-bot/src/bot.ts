@@ -1,17 +1,16 @@
-import { Scenes, Telegraf, session } from 'telegraf';
-import { t } from './i18n.js';
-import type { BotContext, BotSceneSession, BotSession } from './types.js';
-import { getSession } from './services/user-session.js';
-import { startCommand, homeAction } from './commands/start.js';
-import { menuCommand, showCategoryItems, showItemDetail } from './commands/menu.js';
+import { Scenes, session, Telegraf } from 'telegraf';
 import { cartCommand, renderCart } from './commands/cart.js';
-import { ordersCommand } from './commands/orders.js';
 import { helpCommand } from './commands/help.js';
 import { languageCommand, setLanguageAction } from './commands/language.js';
-import { addToCart, clearCart, removeFromCart } from './services/user-session.js';
-import { findItem } from './services/menu-service.js';
+import { menuCommand, showCategoryItems, showItemDetail } from './commands/menu.js';
+import { ordersCommand } from './commands/orders.js';
+import { homeAction, startCommand } from './commands/start.js';
+import { t } from './i18n.js';
 import { buildBrowseMenuScene } from './scenes/browse-menu.js';
-import { CHECKOUT_SCENE_ID, buildCheckoutScene } from './scenes/checkout.js';
+import { buildCheckoutScene, CHECKOUT_SCENE_ID } from './scenes/checkout.js';
+import { findItem } from './services/menu-service.js';
+import { addToCart, clearCart, getSession, removeFromCart } from './services/user-session.js';
+import type { BotContext, BotSceneSession, BotSession } from './types.js';
 
 /** Build & configure the Telegraf instance. Does NOT call `bot.launch()`. */
 export function buildBot(token: string): Telegraf<BotContext> {
@@ -80,9 +79,7 @@ function registerActions(bot: Telegraf<BotContext>): void {
     if (id === undefined || userId === undefined) return;
     const item = await findItem(id);
     if (item === null) {
-      await ctx.answerCbQuery(t('errors.menu_unavailable', ctx.lang)).catch(
-        () => undefined,
-      );
+      await ctx.answerCbQuery(t('errors.menu_unavailable', ctx.lang)).catch(() => undefined);
       return;
     }
     const display = item.name[ctx.lang] || item.name.uz;

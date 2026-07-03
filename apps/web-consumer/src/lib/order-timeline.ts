@@ -86,10 +86,7 @@ export function buildTimelineSteps(
     } else if (state === 'current') {
       detail = labels.inProgress;
     } else {
-      const remainingMin = Math.max(
-        1,
-        Math.ceil((stepTime.getTime() - now.getTime()) / 60_000),
-      );
+      const remainingMin = Math.max(1, Math.ceil((stepTime.getTime() - now.getTime()) / 60_000));
       detail = labels.approxMinutes(remainingMin);
     }
 
@@ -106,11 +103,7 @@ export function buildTimelineSteps(
  * Minutes remaining until delivery. Returns 0 for delivered orders or if
  * placedAt is in the future / invalid.
  */
-export function computeEtaMinutes(
-  placedAt: Date,
-  status: MockOrderStatus,
-  now: Date,
-): number {
+export function computeEtaMinutes(placedAt: Date, status: MockOrderStatus, now: Date): number {
   if (status === 'delivered') return 0;
   const deliveredAtMs = placedAt.getTime() + STEP_OFFSETS_MIN.delivered * 60_000;
   const remainingMs = deliveredAtMs - now.getTime();

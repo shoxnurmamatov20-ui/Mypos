@@ -29,9 +29,7 @@ export function Faq() {
     <section className="bg-canvas">
       <div className="mx-auto max-w-3xl px-md py-section sm:px-lg lg:px-xl">
         <div className="text-center">
-          <span className="text-tagline text-coral font-display">
-            {t('section_label')}
-          </span>
+          <span className="text-tagline text-coral font-display">{t('section_label')}</span>
           <h2 className="mt-sm text-display-lg text-ink font-display font-semibold">
             {t('title')}
           </h2>
@@ -62,10 +60,7 @@ export function Faq() {
                   />
                 </button>
                 {open ? (
-                  <div
-                    id={`faq-${key}`}
-                    className="pb-md text-body text-ink-muted-80"
-                  >
+                  <div id={`faq-${key}`} className="pb-md text-body text-ink-muted-80">
                     {t(`items.${key}.a`)}
                   </div>
                 ) : null}

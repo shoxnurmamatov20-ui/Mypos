@@ -108,9 +108,7 @@ export function Field({ label, children }: { label: string; children: ReactNode 
 /* ───── Section heading (used for sub-sections within a report page) ─────── */
 
 export function SectionTitle({ children }: { children: ReactNode }) {
-  return (
-    <h2 className="text-sm font-semibold text-[#16221f] dark:text-white">{children}</h2>
-  );
+  return <h2 className="text-sm font-semibold text-[#16221f] dark:text-white">{children}</h2>;
 }
 
 /* ───── Page title (matches consumption page top h1) ─────────────────────── */
@@ -180,9 +178,7 @@ export function EmptyCard({
       <div className="text-[#94a3b8]">{icon}</div>
       <p className="text-sm font-semibold text-[#16221f] dark:text-white">{title}</p>
       {description ? (
-        <p className="mx-auto max-w-md text-xs text-[#62716d] dark:text-[#94a3b8]">
-          {description}
-        </p>
+        <p className="mx-auto max-w-md text-xs text-[#62716d] dark:text-[#94a3b8]">{description}</p>
       ) : null}
     </div>
   );

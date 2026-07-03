@@ -47,9 +47,7 @@ export function CookieConsent() {
                 <Cookie className="h-5 w-5 text-brand-700" aria-hidden="true" />
               </span>
               <div className="flex-1">
-                <h3 className="font-display text-base font-bold text-neutral-900">
-                  {t('title')}
-                </h3>
+                <h3 className="font-display text-base font-bold text-neutral-900">{t('title')}</h3>
                 <p className="mt-1 text-sm leading-relaxed text-neutral-600">{t('message')}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   <button

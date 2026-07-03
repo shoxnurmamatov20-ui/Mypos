@@ -1,19 +1,19 @@
 'use client';
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { toast } from 'sonner';
 import { cn } from '@mypos/ui';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { toast } from 'sonner';
 import {
   type NomCategory,
   type NomCatKind,
-  useNomHydrated,
   useNomenclatureStore,
+  useNomHydrated,
 } from '@/stores/nomenclature';
 import {
+  primaryBtnClass,
   SettingsCard,
   SettingsSkeleton,
-  primaryBtnClass,
   secondaryBtnClass,
 } from '../../settings/_components/settings-ui';
 import { NomCategoryFormDialog } from './nom-category-form-dialog';
@@ -32,7 +32,9 @@ type DialogState = NomCategory | 'new' | null;
 
 function NomCategoryManagerInner({ kind }: { kind: NomCatKind }) {
   const t = useTranslations('nomenklatura');
-  const categories = useNomenclatureStore((s) => (kind === 'semi' ? s.semiCategories : s.salesCategories));
+  const categories = useNomenclatureStore((s) =>
+    kind === 'semi' ? s.semiCategories : s.salesCategories,
+  );
   const semiProducts = useNomenclatureStore((s) => (kind === 'semi' ? s.semiProducts : null));
   const deleteCategory = useNomenclatureStore((s) => s.deleteCategory);
 
@@ -43,7 +45,8 @@ function NomCategoryManagerInner({ kind }: { kind: NomCatKind }) {
 
   function handleDelete(cat: NomCategory) {
     const count = productCount(cat);
-    const message = count > 0 ? t('cat.confirm_delete_with_products', { count }) : t('confirm_delete');
+    const message =
+      count > 0 ? t('cat.confirm_delete_with_products', { count }) : t('confirm_delete');
     if (!confirm(message)) return;
     deleteCategory(kind, cat.id);
     toast.success(t('cat.deleted'));
@@ -77,7 +80,9 @@ function NomCategoryManagerInner({ kind }: { kind: NomCatKind }) {
             ))}
           </div>
         ) : (
-          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">{t('cat.empty')}</p>
+          <p className="py-8 text-center text-sm text-[#62716d] dark:text-[#94a3b8]">
+            {t('cat.empty')}
+          </p>
         )}
       </SettingsCard>
 
@@ -126,7 +131,9 @@ function NomCategoryCard({
           aria-hidden
         />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-[#16221f] dark:text-white">{category.name}</p>
+          <p className="truncate text-sm font-semibold text-[#16221f] dark:text-white">
+            {category.name}
+          </p>
           {count !== undefined && (
             <p className="mt-0.5 text-[12px] text-[#62716d] [font-feature-settings:'tnum'] dark:text-[#94a3b8]">
               {count} {labelCount}
@@ -144,7 +151,11 @@ function NomCategoryCard({
       </div>
 
       <div className="flex gap-2">
-        <button type="button" onClick={onEdit} className={cn(secondaryBtnClass, 'flex-1 text-center text-xs')}>
+        <button
+          type="button"
+          onClick={onEdit}
+          className={cn(secondaryBtnClass, 'flex-1 text-center text-xs')}
+        >
           {labelEdit}
         </button>
         <button

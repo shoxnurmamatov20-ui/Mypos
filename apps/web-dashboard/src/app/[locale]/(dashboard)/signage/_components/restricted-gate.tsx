@@ -26,8 +26,12 @@ export function RestrictedGate({ children }: { children: ReactNode }) {
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(22,34,31,0.06)] text-[#62716d] dark:bg-white/10 dark:text-[#94a3b8]">
             <Lock className="h-5 w-5" />
           </span>
-          <p className="text-base font-semibold text-[#16221f] dark:text-white">{t('restricted.title')}</p>
-          <p className="max-w-[34ch] text-sm text-[#62716d] dark:text-[#94a3b8]">{t('restricted.desc')}</p>
+          <p className="text-base font-semibold text-[#16221f] dark:text-white">
+            {t('restricted.title')}
+          </p>
+          <p className="max-w-[34ch] text-sm text-[#62716d] dark:text-[#94a3b8]">
+            {t('restricted.desc')}
+          </p>
         </div>
       </SettingsCard>
     );

@@ -1,20 +1,52 @@
 'use client';
 
-import { ArrowUp } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
 type Accent = 'teal' | 'violet' | 'green' | 'amber' | 'red' | 'blue' | 'indigo' | 'pink';
 
 const ACCENT: Record<Accent, { iconBg: string; iconColor: string; barColor: string }> = {
-  teal: { iconBg: 'bg-[rgba(15,118,110,0.10)]', iconColor: 'text-[#0f766e]', barColor: 'bg-[#0f766e]' },
-  violet: { iconBg: 'bg-[rgba(124,58,237,0.10)]', iconColor: 'text-[#7c3aed]', barColor: 'bg-[#7c3aed]' },
-  green: { iconBg: 'bg-[rgba(24,121,78,0.10)]', iconColor: 'text-[#18794e]', barColor: 'bg-[#18794e]' },
-  amber: { iconBg: 'bg-[rgba(183,121,31,0.10)]', iconColor: 'text-[#b7791f]', barColor: 'bg-[#b7791f]' },
-  red: { iconBg: 'bg-[rgba(180,35,24,0.10)]', iconColor: 'text-[#b42318]', barColor: 'bg-[#b42318]' },
-  blue: { iconBg: 'bg-[rgba(37,99,235,0.10)]', iconColor: 'text-[#2563eb]', barColor: 'bg-[#2563eb]' },
-  indigo: { iconBg: 'bg-[rgba(99,102,241,0.10)]', iconColor: 'text-[#6366f1]', barColor: 'bg-[#6366f1]' },
-  pink: { iconBg: 'bg-[rgba(219,39,119,0.10)]', iconColor: 'text-[#db2777]', barColor: 'bg-[#db2777]' },
+  teal: {
+    iconBg: 'bg-[rgba(15,118,110,0.10)]',
+    iconColor: 'text-[#0f766e]',
+    barColor: 'bg-[#0f766e]',
+  },
+  violet: {
+    iconBg: 'bg-[rgba(124,58,237,0.10)]',
+    iconColor: 'text-[#7c3aed]',
+    barColor: 'bg-[#7c3aed]',
+  },
+  green: {
+    iconBg: 'bg-[rgba(24,121,78,0.10)]',
+    iconColor: 'text-[#18794e]',
+    barColor: 'bg-[#18794e]',
+  },
+  amber: {
+    iconBg: 'bg-[rgba(183,121,31,0.10)]',
+    iconColor: 'text-[#b7791f]',
+    barColor: 'bg-[#b7791f]',
+  },
+  red: {
+    iconBg: 'bg-[rgba(180,35,24,0.10)]',
+    iconColor: 'text-[#b42318]',
+    barColor: 'bg-[#b42318]',
+  },
+  blue: {
+    iconBg: 'bg-[rgba(37,99,235,0.10)]',
+    iconColor: 'text-[#2563eb]',
+    barColor: 'bg-[#2563eb]',
+  },
+  indigo: {
+    iconBg: 'bg-[rgba(99,102,241,0.10)]',
+    iconColor: 'text-[#6366f1]',
+    barColor: 'bg-[#6366f1]',
+  },
+  pink: {
+    iconBg: 'bg-[rgba(219,39,119,0.10)]',
+    iconColor: 'text-[#db2777]',
+    barColor: 'bg-[#db2777]',
+  },
 };
 
 type DeltaTone = 'good' | 'bad' | 'flat';
@@ -77,9 +109,7 @@ export function StatCard({
               </span>
             ) : null}
           </div>
-          {sub ? (
-            <p className="text-[11px] text-[#62716d] dark:text-[#94a3b8]">{sub}</p>
-          ) : null}
+          {sub ? <p className="text-[11px] text-[#62716d] dark:text-[#94a3b8]">{sub}</p> : null}
         </div>
 
         <div

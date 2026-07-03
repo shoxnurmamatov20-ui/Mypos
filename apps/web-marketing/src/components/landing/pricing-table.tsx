@@ -1,6 +1,6 @@
 import { CheckCircle } from '@phosphor-icons/react/dist/ssr';
-import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 
 const PLANS = ['free', 'starter', 'pro', 'business'] as const;
 
@@ -44,20 +44,14 @@ export function PricingTable() {
                   </span>
                 ) : null}
 
-                <h3 className="text-[18px] font-extrabold text-white">
-                  {t(`plans.${plan}.name`)}
-                </h3>
-                <p className="mt-1 text-[12.5px] text-white/60">
-                  {t(`plans.${plan}.tagline`)}
-                </p>
+                <h3 className="text-[18px] font-extrabold text-white">{t(`plans.${plan}.name`)}</h3>
+                <p className="mt-1 text-[12.5px] text-white/60">{t(`plans.${plan}.tagline`)}</p>
 
                 <div className="mt-4 flex items-baseline">
                   <span className="tabular text-[36px] font-extrabold leading-none text-white">
                     {t(`plans.${plan}.price_usd`)}
                   </span>
-                  <span className="ml-1.5 text-[12px] text-white/60">
-                    {t('per_month')}
-                  </span>
+                  <span className="ml-1.5 text-[12px] text-white/60">{t('per_month')}</span>
                 </div>
 
                 <ul className="mt-5 flex-1 space-y-2">
@@ -66,11 +60,13 @@ export function PricingTable() {
                       <CheckCircle
                         size={16}
                         weight="fill"
-                        className={featured ? 'mt-0.5 shrink-0 text-[#5eead4]' : 'mt-0.5 shrink-0 text-emerald-400'}
+                        className={
+                          featured
+                            ? 'mt-0.5 shrink-0 text-[#5eead4]'
+                            : 'mt-0.5 shrink-0 text-emerald-400'
+                        }
                       />
-                      <span className="text-[13.5px] leading-relaxed text-white/90">
-                        {f}
-                      </span>
+                      <span className="text-[13.5px] leading-relaxed text-white/90">{f}</span>
                     </li>
                   ))}
                 </ul>

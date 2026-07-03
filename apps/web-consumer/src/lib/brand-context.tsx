@@ -16,7 +16,7 @@
  * truth always remains the SSR-resolved brand prop.
  */
 
-import { createContext, useContext, useEffect, useMemo, type ReactNode } from 'react';
+import { createContext, type ReactNode, useContext, useEffect, useMemo } from 'react';
 import type { Brand, ResolvedTenant } from './brand';
 import { MYPOS_DEFAULT_BRAND } from './brand';
 

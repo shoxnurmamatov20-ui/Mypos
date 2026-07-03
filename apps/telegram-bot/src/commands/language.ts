@@ -1,4 +1,4 @@
-import { t, SUPPORTED_LANGS } from '../i18n.js';
+import { SUPPORTED_LANGS, t } from '../i18n.js';
 import { languageKeyboard, mainMenuKeyboard } from '../keyboards.js';
 import { setLang } from '../services/user-session.js';
 import type { BotContext, Lang } from '../types.js';
@@ -14,10 +14,7 @@ export async function languageCommand(ctx: BotContext): Promise<void> {
   await ctx.answerCbQuery().catch(() => undefined);
 }
 
-export async function setLanguageAction(
-  ctx: BotContext,
-  next: string,
-): Promise<void> {
+export async function setLanguageAction(ctx: BotContext, next: string): Promise<void> {
   if (!isLang(next)) {
     await ctx.answerCbQuery().catch(() => undefined);
     return;

@@ -1,9 +1,9 @@
 'use client';
 
-import { authApi, ApiError } from '@mypos/api-client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
+import { ApiError, authApi } from '@mypos/api-client';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -83,9 +83,7 @@ export function LoginForm() {
           className="mt-1 block w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-neutral-900 placeholder-neutral-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           {...register('password')}
         />
-        {errors.password && (
-          <p className="mt-1 text-sm text-danger">{errors.password.message}</p>
-        )}
+        {errors.password && <p className="mt-1 text-sm text-danger">{errors.password.message}</p>}
       </div>
 
       <button

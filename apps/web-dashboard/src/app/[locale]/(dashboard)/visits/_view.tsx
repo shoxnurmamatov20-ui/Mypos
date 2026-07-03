@@ -96,9 +96,7 @@ export function VisitsView() {
                     {formatUZS(c.loyalty_account?.points_balance ?? 0)}
                   </td>
                   <td className="px-4 py-2.5 text-[#62716d] dark:text-[#94a3b8]">
-                    {c.last_visit_at
-                      ? new Date(c.last_visit_at).toLocaleDateString('ru-RU')
-                      : '—'}
+                    {c.last_visit_at ? new Date(c.last_visit_at).toLocaleDateString('ru-RU') : '—'}
                   </td>
                 </tr>
               ))}

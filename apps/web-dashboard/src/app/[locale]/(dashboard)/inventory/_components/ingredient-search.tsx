@@ -1,10 +1,10 @@
 'use client';
 
-import { inventoryApi, type Ingredient } from '@mypos/api-client';
+import { type Ingredient, inventoryApi } from '@mypos/api-client';
 import { useQuery } from '@tanstack/react-query';
+import { ChevronDown, Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ChevronDown, Search } from 'lucide-react';
 import { apiClient } from '@/lib/api';
 
 type Props = {

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { EmailSchema, PasswordSchema, UzbekPhoneSchema, LocaleSchema } from './common';
+import { EmailSchema, LocaleSchema, PasswordSchema, UzbekPhoneSchema } from './common';
 
 export const LoginSchema = z.object({
   identifier: z.string().min(3), // username, email, or phone
@@ -9,15 +9,15 @@ export const LoginSchema = z.object({
 export type LoginInput = z.infer<typeof LoginSchema>;
 
 export const RegisterOwnerSchema = z.object({
-  restaurantPin: z
-    .string()
-    .regex(/^\d{8}$/, 'Restoran PIN kodi 8 raqam bo\'lishi kerak'),
+  restaurantPin: z.string().regex(/^\d{8}$/, "Restoran PIN kodi 8 raqam bo'lishi kerak"),
   fullName: z.string().min(2).max(128),
   email: EmailSchema,
   phone: UzbekPhoneSchema,
   password: PasswordSchema,
   locale: LocaleSchema.optional().default('uz'),
-  acceptTerms: z.literal(true, { errorMap: () => ({ message: 'Shartlarni qabul qilishingiz kerak' }) }),
+  acceptTerms: z.literal(true, {
+    errorMap: () => ({ message: 'Shartlarni qabul qilishingiz kerak' }),
+  }),
 });
 export type RegisterOwnerInput = z.infer<typeof RegisterOwnerSchema>;
 

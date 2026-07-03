@@ -10,21 +10,31 @@ import { routing } from './routing';
  *   - We deep-merge the active locale ON TOP of ru so present keys still win.
  */
 async function loadMessagesWithFallback(locale: string): Promise<Record<string, unknown>> {
-  const active = ((await import(`../../messages/${locale}.json`)) as { default: Record<string, unknown> }).default;
+  const active = (
+    (await import(`../../messages/${locale}.json`)) as { default: Record<string, unknown> }
+  ).default;
   if (locale === 'ru' || locale === routing.defaultLocale) {
     return active;
   }
-  const ru = ((await import(`../../messages/ru.json`)) as { default: Record<string, unknown> }).default;
+  const ru = ((await import(`../../messages/ru.json`)) as { default: Record<string, unknown> })
+    .default;
   return deepMerge(ru, active);
 }
 
-function deepMerge(base: Record<string, unknown>, over: Record<string, unknown>): Record<string, unknown> {
+function deepMerge(
+  base: Record<string, unknown>,
+  over: Record<string, unknown>,
+): Record<string, unknown> {
   const out: Record<string, unknown> = { ...base };
   for (const [k, v] of Object.entries(over)) {
     const baseV = out[k];
     if (
-      v && typeof v === 'object' && !Array.isArray(v) &&
-      baseV && typeof baseV === 'object' && !Array.isArray(baseV)
+      v &&
+      typeof v === 'object' &&
+      !Array.isArray(v) &&
+      baseV &&
+      typeof baseV === 'object' &&
+      !Array.isArray(baseV)
     ) {
       out[k] = deepMerge(baseV as Record<string, unknown>, v as Record<string, unknown>);
     } else {

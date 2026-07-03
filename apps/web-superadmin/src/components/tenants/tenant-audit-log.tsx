@@ -1,8 +1,9 @@
 'use client';
 
+import type { Locale } from 'date-fns';
 import { formatDistanceToNowStrict } from 'date-fns';
 import { enUS, ru, uz } from 'date-fns/locale';
-import type { Locale } from 'date-fns';
+import type { LucideIcon } from 'lucide-react';
 import {
   ArrowRight,
   CreditCard,
@@ -12,7 +13,6 @@ import {
   ShoppingBag,
   TrendingUp,
 } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import type { MockAuditEvent } from '@/data/mock-tenant-detail';
@@ -94,7 +94,9 @@ export function TenantAuditLog({ events, locale, onViewAll }: Props) {
                   </p>
                   <p className="text-xs text-[#62716d] dark:text-[#94a3b8]">
                     <span className="font-mono">{event.actor}</span>
-                    <span className="mx-1.5" aria-hidden="true">·</span>
+                    <span className="mx-1.5" aria-hidden="true">
+                      ·
+                    </span>
                     <span>{relative}</span>
                   </p>
                 </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { CUISINE_CATEGORIES, type CategoryId } from '@/data/restaurants';
+import { type CategoryId, CUISINE_CATEGORIES } from '@/data/restaurants';
 
 export type SortKey = 'popularity' | 'delivery' | 'cheapest';
 

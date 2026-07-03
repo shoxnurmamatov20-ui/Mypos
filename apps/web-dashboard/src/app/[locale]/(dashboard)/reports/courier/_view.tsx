@@ -9,16 +9,16 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
+  daysAgo,
   EmptyCard,
   ErrorBanner,
   Field,
+  formatNumber,
+  inputClass,
   LoadingHint,
   PageTitle,
   SimpleStat,
   TableShell,
-  daysAgo,
-  formatNumber,
-  inputClass,
   today,
 } from '../_components/report-helpers';
 
@@ -69,7 +69,11 @@ export function CourierReportView() {
       {q.isLoading ? (
         <LoadingHint label={t('common.loading')} />
       ) : q.isError ? (
-        <ErrorBanner message={t('common.load_failed')} onRetry={() => q.refetch()} retryLabel={t('common.retry')} />
+        <ErrorBanner
+          message={t('common.load_failed')}
+          onRetry={() => q.refetch()}
+          retryLabel={t('common.retry')}
+        />
       ) : isLocked ? (
         <LockedCard
           title={t('courier_report.locked_title')}
@@ -81,15 +85,27 @@ export function CourierReportView() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <SimpleStat
               label={t('courier_report.stats_couriers')}
-              value={formatNumber('couriers_count' in (meta ?? {}) ? (meta as { couriers_count?: number }).couriers_count ?? 0 : 0)}
+              value={formatNumber(
+                'couriers_count' in (meta ?? {})
+                  ? ((meta as { couriers_count?: number }).couriers_count ?? 0)
+                  : 0,
+              )}
             />
             <SimpleStat
               label={t('courier_report.stats_deliveries')}
-              value={formatNumber('total_deliveries' in (meta ?? {}) ? (meta as { total_deliveries?: number }).total_deliveries ?? 0 : 0)}
+              value={formatNumber(
+                'total_deliveries' in (meta ?? {})
+                  ? ((meta as { total_deliveries?: number }).total_deliveries ?? 0)
+                  : 0,
+              )}
             />
             <SimpleStat
               label={t('courier_report.stats_revenue')}
-              value={formatUZS('total_revenue_minor' in (meta ?? {}) ? (meta as { total_revenue_minor?: number }).total_revenue_minor ?? 0 : 0)}
+              value={formatUZS(
+                'total_revenue_minor' in (meta ?? {})
+                  ? ((meta as { total_revenue_minor?: number }).total_revenue_minor ?? 0)
+                  : 0,
+              )}
             />
           </div>
 
@@ -105,15 +121,26 @@ export function CourierReportView() {
                 <thead className="bg-[#f5f8f7] text-left text-xs text-[#62716d] dark:bg-[#0d1424] dark:text-[#94a3b8]">
                   <tr>
                     <th className="px-4 py-2.5 font-medium">{t('courier_report.col_name')}</th>
-                    <th className="px-4 py-2.5 font-medium text-right">{t('courier_report.col_deliveries')}</th>
-                    <th className="px-4 py-2.5 font-medium text-right">{t('courier_report.col_avg_minutes')}</th>
-                    <th className="px-4 py-2.5 font-medium text-right">{t('courier_report.col_revenue')}</th>
+                    <th className="px-4 py-2.5 font-medium text-right">
+                      {t('courier_report.col_deliveries')}
+                    </th>
+                    <th className="px-4 py-2.5 font-medium text-right">
+                      {t('courier_report.col_avg_minutes')}
+                    </th>
+                    <th className="px-4 py-2.5 font-medium text-right">
+                      {t('courier_report.col_revenue')}
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[rgba(22,34,31,0.06)] dark:divide-[rgba(255,255,255,0.05)]">
                   {rows.map((c) => (
-                    <tr key={c.courier_id} className="hover:bg-[#fafcfb] dark:hover:bg-[#0b1120]/40">
-                      <td className="px-4 py-2.5 font-medium text-[#16221f] dark:text-white">{c.name}</td>
+                    <tr
+                      key={c.courier_id}
+                      className="hover:bg-[#fafcfb] dark:hover:bg-[#0b1120]/40"
+                    >
+                      <td className="px-4 py-2.5 font-medium text-[#16221f] dark:text-white">
+                        {c.name}
+                      </td>
                       <td className="px-4 py-2.5 text-right tabular-nums text-[#16221f] dark:text-white">
                         {formatNumber(c.deliveries_count)}
                       </td>

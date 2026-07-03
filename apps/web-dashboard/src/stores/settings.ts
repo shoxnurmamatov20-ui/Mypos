@@ -151,11 +151,16 @@ export const useSettingsStore = create<SettingsState>()(
       setPlace: (patch) => set((s) => ({ place: { ...s.place, ...patch } })),
       setDayHours: (day, patch) =>
         set((s) => ({
-          place: { ...s.place, hours: { ...s.place.hours, [day]: { ...s.place.hours[day], ...patch } } },
+          place: {
+            ...s.place,
+            hours: { ...s.place.hours, [day]: { ...s.place.hours[day], ...patch } },
+          },
         })),
       setPayment: (patch) => set((s) => ({ payment: { ...s.payment, ...patch } })),
       togglePaymentMethod: (key, value) =>
-        set((s) => ({ payment: { ...s.payment, enabled: { ...s.payment.enabled, [key]: value } } })),
+        set((s) => ({
+          payment: { ...s.payment, enabled: { ...s.payment.enabled, [key]: value } },
+        })),
       setPrinter: (patch) => set((s) => ({ printer: { ...s.printer, ...patch } })),
       setReceipt: (patch) => set((s) => ({ receipt: { ...s.receipt, ...patch } })),
       setProfile: (patch) => set((s) => ({ profile: { ...s.profile, ...patch } })),

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { TenantsListView } from '@/components/tenants/tenants-list-view';
 
 type PageProps = {

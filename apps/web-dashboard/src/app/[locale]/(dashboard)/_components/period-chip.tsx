@@ -1,8 +1,8 @@
 'use client';
 
+import { cn } from '@mypos/ui';
 import { Calendar, ChevronDown } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { cn } from '@mypos/ui';
 
 export type DashPeriod = 'today' | 'week' | 'month' | '90d';
 
@@ -49,7 +49,10 @@ export function PeriodChip({ value, onChange }: Props) {
         <Calendar className="h-3.5 w-3.5 text-[#0f766e] dark:text-teal-400" strokeWidth={2.2} />
         <span>{LABELS[value]}</span>
         <ChevronDown
-          className={cn('h-3 w-3 text-[#62716d] dark:text-[#94a3b8] transition-transform', open && 'rotate-180')}
+          className={cn(
+            'h-3 w-3 text-[#62716d] dark:text-[#94a3b8] transition-transform',
+            open && 'rotate-180',
+          )}
           strokeWidth={2.5}
         />
       </button>

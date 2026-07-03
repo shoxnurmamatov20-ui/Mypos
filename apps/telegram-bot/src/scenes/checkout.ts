@@ -1,5 +1,5 @@
-import { Scenes } from 'telegraf';
 import { isValidUZPhone, normalizeUZPhone } from '@mypos/utils';
+import { Scenes } from 'telegraf';
 import { t } from '../i18n.js';
 import { confirmKeyboard, formatPrice, modeKeyboard } from '../keyboards.js';
 import { placeOrder } from '../services/order-service.js';
@@ -78,14 +78,10 @@ export function buildCheckoutScene(): Scenes.BaseScene<BotContext> {
         tableId: null,
         phone: draft.phone,
         address: draft.address,
-        notes: draft.table_number
-          ? `Table: ${draft.table_number}`
-          : null,
+        notes: draft.table_number ? `Table: ${draft.table_number}` : null,
       });
       if (ctx.from?.id !== undefined) clearCart(ctx.from.id);
-      await ctx.reply(
-        t('checkout.placed', ctx.lang, { order_no: order.order_no }),
-      );
+      await ctx.reply(t('checkout.placed', ctx.lang, { order_no: order.order_no }));
     } catch (error) {
       console.error('X place order failed:', error);
       await ctx.reply(t('errors.generic', ctx.lang));
@@ -140,10 +136,7 @@ async function handleDeliveryText(
   }
 }
 
-async function showSummary(
-  ctx: BotContext,
-  draft: CheckoutDraft,
-): Promise<void> {
+async function showSummary(ctx: BotContext, draft: CheckoutDraft): Promise<void> {
   const session = ctx.userSession;
   const currency = session.cart[0]?.currency ?? 'UZS';
   const lines = session.cart

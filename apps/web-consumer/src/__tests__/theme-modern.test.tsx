@@ -11,8 +11,8 @@
  * their props, then assert the dispatcher routed correctly.
  */
 
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { isValidElement } from 'react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ResolvedTenant } from '../lib/brand';
 import { MYPOS_DEFAULT_BRAND } from '../lib/brand';
 
@@ -161,7 +161,8 @@ describe('TenantThemeShell dispatcher', () => {
       locale: 'ru',
     });
 
-    const props = el && (el as { props: { brand: { primary_color: string }; locale: string } }).props;
+    const props =
+      el && (el as { props: { brand: { primary_color: string }; locale: string } }).props;
     expect(props?.brand.primary_color).toBe('#ABCDEF');
     expect(props?.locale).toBe('ru');
   });

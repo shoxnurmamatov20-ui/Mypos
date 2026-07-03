@@ -1,7 +1,7 @@
 'use client';
 
-import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useState } from 'react';
 
 const LOCALES: Array<{ code: string; label: string; native: string }> = [
@@ -41,7 +41,13 @@ export function LanguageSwitcher() {
       >
         <span className="font-mono text-[11px] tracking-wider">{current.native}</span>
         <svg className="size-3 text-ink-muted-48" viewBox="0 0 12 12" fill="none">
-          <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d="M3 4.5L6 7.5L9 4.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
 

@@ -1,9 +1,9 @@
 'use client';
 
 import {
-  incomingDocumentsApi,
   type IncomingDocument,
   type IncomingStatus,
+  incomingDocumentsApi,
   type ListIncomingDocumentsParams,
 } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
@@ -24,25 +24,19 @@ import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { apiClient } from '@/lib/api';
 import { DashStatCard } from '../../_components/stat-card';
-import { IncomingDocumentForm } from '../_components/incoming-document-form';
+import { daysAgo, formatDate, startOfMonth, startOfWeek, today } from '../_components/format';
 import { IncomingDetail } from '../_components/incoming-detail';
+import { IncomingDocumentForm } from '../_components/incoming-document-form';
 import { StatusBadge } from '../_components/status-badge';
 import {
   EmptyState,
   ErrorBanner,
-  StatStripSkeleton,
-  TableSkeleton,
   inputClass,
   primaryBtnClass,
+  StatStripSkeleton,
+  TableSkeleton,
 } from '../_components/ui-helpers';
 import { WarehouseSelect } from '../_components/warehouse-select';
-import {
-  daysAgo,
-  formatDate,
-  startOfMonth,
-  startOfWeek,
-  today,
-} from '../_components/format';
 
 const STATUSES: IncomingStatus[] = ['draft', 'posted', 'cancelled'];
 
@@ -131,9 +125,7 @@ export function IncomingView() {
   return (
     <>
       {/* Stats strip */}
-      {todayStatQuery.isLoading ||
-      weekStatQuery.isLoading ||
-      monthStatQuery.isLoading ? (
+      {todayStatQuery.isLoading || weekStatQuery.isLoading || monthStatQuery.isLoading ? (
         <StatStripSkeleton />
       ) : (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
@@ -223,11 +215,7 @@ export function IncomingView() {
           icon={PackagePlus}
           title={t('empty.incoming')}
           action={
-            <button
-              type="button"
-              onClick={() => setCreating(true)}
-              className={primaryBtnClass}
-            >
+            <button type="button" onClick={() => setCreating(true)} className={primaryBtnClass}>
               <Plus className="h-4 w-4" />
               {t('actions.new_incoming')}
             </button>
@@ -318,9 +306,7 @@ export function IncomingView() {
       )}
 
       {creating ? <IncomingDocumentForm onClose={() => setCreating(false)} /> : null}
-      {viewingId ? (
-        <IncomingDetail id={viewingId} onClose={() => setViewingId(null)} />
-      ) : null}
+      {viewingId ? <IncomingDetail id={viewingId} onClose={() => setViewingId(null)} /> : null}
     </>
   );
 }

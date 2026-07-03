@@ -21,12 +21,7 @@ export function ImpersonateConfirmModal({ open, onClose, onConfirm, loading = fa
   const tCommon = useTranslations('common');
 
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      title={t('impersonate_confirm_title')}
-      size="sm"
-    >
+    <Modal open={open} onClose={onClose} title={t('impersonate_confirm_title')} size="sm">
       <div className="space-y-4">
         <div className="flex items-start gap-3 rounded-lg border border-amber-300 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10 p-3">
           <Shield

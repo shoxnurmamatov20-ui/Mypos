@@ -1,8 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ApiError } from '@mypos/api-client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
@@ -13,9 +13,8 @@ import { Controller, useForm, useWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Select, type SelectOption } from '@/components/ui/select';
 import { Toast, useToast } from '@/components/ui/toast';
-import { createTenant, type CreateTenantPayload } from '@/lib/api-helpers';
-import { NewTenantPreview } from './new-tenant-preview';
-import { PasswordStrengthMeter } from './password-strength-meter';
+import { type CreateTenantPayload, createTenant } from '@/lib/api-helpers';
+import type { TenantPlan } from '@/types/super-admin';
 import {
   type LocaleValue,
   NewTenantSchema,
@@ -23,7 +22,8 @@ import {
   slugify,
   type TrialDays,
 } from './_new-tenant-schema';
-import type { TenantPlan } from '@/types/super-admin';
+import { NewTenantPreview } from './new-tenant-preview';
+import { PasswordStrengthMeter } from './password-strength-meter';
 
 type Props = {
   locale: string;
@@ -114,7 +114,9 @@ export function NewTenantForm({ locale }: Props) {
     },
     onError: (err) => {
       if (err instanceof ApiError && err.status === 422) {
-        const body = err.body as { message?: string; errors?: Record<string, string[]> } | undefined;
+        const body = err.body as
+          | { message?: string; errors?: Record<string, string[]> }
+          | undefined;
         if (body?.errors) {
           // Map snake_case server keys back into the form's field names.
           for (const [key, msgs] of Object.entries(body.errors)) {
@@ -403,9 +405,7 @@ export function NewTenantForm({ locale }: Props) {
               disabled={submitting}
               className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#0f766e] hover:bg-[#0b5e57] px-5 text-sm font-bold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-60 w-full sm:w-auto active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0f766e] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#0b1120]"
             >
-              {submitting ? (
-                <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-              ) : null}
+              {submitting ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
               <span>{submitting ? t('submit_loading') : t('submit')}</span>
             </button>
           </div>

@@ -1,14 +1,14 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { ApiError } from '@mypos/api-client';
+import { useMutation } from '@tanstack/react-query';
 import { AlertCircle, AlertTriangle, Check, Copy, Mail, Shield } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Modal } from '@/components/ui/modal';
+import { type InvitationRecord, inviteAdmin } from '@/lib/api-helpers';
 import { cn } from '@/lib/cn';
-import { inviteAdmin, type InvitationRecord } from '@/lib/api-helpers';
 import type { SuperAdminRole } from '@/stores/auth';
 import { RoleBadge } from './role-badge';
 
@@ -226,7 +226,10 @@ export function InviteAdminModal({ open, onClose, onCreated }: Props) {
                 required
                 aria-invalid={Boolean(emailLiveError)}
                 aria-describedby={emailLiveError ? 'invite-email-error' : undefined}
-                className={cn('pl-9 w-full', emailLiveError && 'border-red-400 dark:border-red-500/60')}
+                className={cn(
+                  'pl-9 w-full',
+                  emailLiveError && 'border-red-400 dark:border-red-500/60',
+                )}
               />
             </div>
             {emailLiveError ? (

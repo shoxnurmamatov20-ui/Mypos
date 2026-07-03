@@ -1,12 +1,12 @@
 'use client';
 
+import { ArrowLeft, Bike, Clock, Heart, Share2, Star, Wallet } from 'lucide-react';
 import type { Route } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Bike, Clock, Heart, Share2, Star, Wallet } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { type MockMenuItem, type MockRestaurantMenu } from '@/data/menus';
-import { type Restaurant, getCuisineBg } from '@/data/restaurants';
+import type { MockMenuItem, MockRestaurantMenu } from '@/data/menus';
+import { getCuisineBg, type Restaurant } from '@/data/restaurants';
 import { formatDeliveryFee, formatSom } from '@/lib/format';
 import { ItemDetailModal } from './item-detail-modal';
 import { MenuItemCard } from './menu-item-card';
@@ -238,9 +238,7 @@ export function RestaurantDetail({ restaurant, menu, locale }: RestaurantDetailP
                         >
                           <span aria-hidden="true">{cat.emoji}</span>
                           <span>{cat.name[locale]}</span>
-                          <span
-                            className={isActive ? 'text-white/80' : 'text-neutral-400'}
-                          >
+                          <span className={isActive ? 'text-white/80' : 'text-neutral-400'}>
                             ({count})
                           </span>
                         </button>

@@ -21,9 +21,7 @@ export default function OrderTrackingError({
   return (
     <div className="mx-auto max-w-md px-6 py-24 text-center">
       <p className="text-5xl">⚠️</p>
-      <h2 className="mt-4 font-display text-2xl font-bold text-neutral-900">
-        {tErr('generic')}
-      </h2>
+      <h2 className="mt-4 font-display text-2xl font-bold text-neutral-900">{tErr('generic')}</h2>
       <button
         type="button"
         onClick={() => reset()}

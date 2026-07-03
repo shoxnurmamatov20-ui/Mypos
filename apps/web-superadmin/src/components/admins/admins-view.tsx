@@ -1,7 +1,7 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ApiError } from '@mypos/api-client';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   AlertCircle,
   Mail,
@@ -15,20 +15,17 @@ import {
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useState } from 'react';
 import { KpiCard } from '@/components/dashboard/kpi-card';
-import {
-  TenantsPagination,
-  type PerPage,
-} from '@/components/tenants/tenants-pagination';
+import { type PerPage, TenantsPagination } from '@/components/tenants/tenants-pagination';
 import { Toast, useToast } from '@/components/ui/toast';
-import { cn } from '@/lib/cn';
 import {
+  type AdminUserRecord,
   fetchAdmins,
   fetchInvitations,
-  revokeAdmin,
-  type AdminUserRecord,
   type InvitationRecord,
+  revokeAdmin,
 } from '@/lib/api-helpers';
-import { useAuthStore, type SuperAdminRole } from '@/stores/auth';
+import { cn } from '@/lib/cn';
+import { type SuperAdminRole, useAuthStore } from '@/stores/auth';
 import { ActiveAdminsTable } from './active-admins-table';
 import { InvitationsTable } from './invitations-table';
 import { InviteAdminModal } from './invite-admin-modal';
@@ -104,10 +101,7 @@ export function AdminsView() {
     queryFn: fetchInvitations,
   });
 
-  const admins = useMemo<AdminUserRecord[]>(
-    () => adminsQuery.data?.data ?? [],
-    [adminsQuery.data],
-  );
+  const admins = useMemo<AdminUserRecord[]>(() => adminsQuery.data?.data ?? [], [adminsQuery.data]);
   const invitations = useMemo<InvitationRecord[]>(
     () => invitationsQuery.data?.data ?? [],
     [invitationsQuery.data],
@@ -241,9 +235,7 @@ export function AdminsView() {
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
             {t('title')}
           </h1>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            {t('subtitle')}
-          </p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{t('subtitle')}</p>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -355,7 +347,9 @@ export function AdminsView() {
             aria-hidden="true"
           />
           <label htmlFor="admins-search" className="sr-only">
-            {tab === 'active' ? t('search_active_placeholder') : t('search_invitations_placeholder')}
+            {tab === 'active'
+              ? t('search_active_placeholder')
+              : t('search_invitations_placeholder')}
           </label>
           <input
             id="admins-search"
@@ -546,22 +540,14 @@ function TabChip({ active, count, onClick, panelId, children }: TabChipProps) {
       )}
     >
       {children}
-      <span
-        className={cn(
-          'tabular-nums font-bold',
-          active ? '' : 'text-gray-900 dark:text-white',
-        )}
-      >
+      <span className={cn('tabular-nums font-bold', active ? '' : 'text-gray-900 dark:text-white')}>
         {count}
       </span>
     </button>
   );
 }
 
-type FilterSelectProps = Omit<
-  React.SelectHTMLAttributes<HTMLSelectElement>,
-  'onChange'
-> & {
+type FilterSelectProps = Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> & {
   onChange: (value: string) => void;
 };
 

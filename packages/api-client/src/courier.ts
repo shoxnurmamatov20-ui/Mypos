@@ -37,11 +37,7 @@ export type CourierDeliveryAddress = {
  * `ActiveDeliveryResource::deriveCourierState()` — `Order.status` itself
  * stays at `ready` until completion, so the app reads `derived_state`.
  */
-export type DeliveryDerivedState =
-  | 'awaiting_pickup'
-  | 'delivering'
-  | 'delivered'
-  | 'cancelled';
+export type DeliveryDerivedState = 'awaiting_pickup' | 'delivering' | 'delivered' | 'cancelled';
 
 /**
  * Cancellation reasons accepted by the cancel endpoint
@@ -266,34 +262,22 @@ export type CourierEarningsResponse = {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const buildQueryString = (
-  params: Record<string, unknown> | undefined,
-): string => {
+const buildQueryString = (params: Record<string, unknown> | undefined): string => {
   if (!params) return '';
   const entries = Object.entries(params).filter(
     ([, v]) => v !== undefined && v !== null && v !== '',
   );
   if (entries.length === 0) return '';
-  return (
-    '?' +
-    entries
-      .map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`)
-      .join('&')
-  );
+  return '?' + entries.map(([k, v]) => `${k}=${encodeURIComponent(String(v))}`).join('&');
 };
 
 // ─── API ─────────────────────────────────────────────────────────────────────
 
 export const courierApi = {
   /** GET /api/v1/staff/courier/available */
-  available: (
-    client: MyPosApiClient,
-    params?: ListCourierAvailableParams,
-  ) => {
+  available: (client: MyPosApiClient, params?: ListCourierAvailableParams) => {
     const qs = buildQueryString(params);
-    return client.get<PaginatedResponse<AvailableOrder>>(
-      `/api/v1/staff/courier/available${qs}`,
-    );
+    return client.get<PaginatedResponse<AvailableOrder>>(`/api/v1/staff/courier/available${qs}`);
   },
 
   /** POST /api/v1/staff/courier/orders/{order}/accept */
@@ -311,22 +295,14 @@ export const courierApi = {
     ),
 
   /** POST /api/v1/staff/courier/orders/{order}/deliver */
-  deliver: (
-    client: MyPosApiClient,
-    orderId: string,
-    input: DeliverOrderInput = {},
-  ) =>
+  deliver: (client: MyPosApiClient, orderId: string, input: DeliverOrderInput = {}) =>
     client.post<ResourceResponse<ActiveDelivery>>(
       `/api/v1/staff/courier/orders/${orderId}/deliver`,
       input,
     ),
 
   /** POST /api/v1/staff/courier/orders/{order}/cancel */
-  cancel: (
-    client: MyPosApiClient,
-    orderId: string,
-    input: CancelDeliveryInput,
-  ) =>
+  cancel: (client: MyPosApiClient, orderId: string, input: CancelDeliveryInput) =>
     client.post<ResourceResponse<ActiveDelivery>>(
       `/api/v1/staff/courier/orders/${orderId}/cancel`,
       input,
@@ -334,10 +310,7 @@ export const courierApi = {
 
   /** POST /api/v1/staff/courier/location — hot path (~10 s/courier). */
   recordLocation: (client: MyPosApiClient, input: RecordLocationInput) =>
-    client.post<RecordLocationResponse>(
-      '/api/v1/staff/courier/location',
-      input,
-    ),
+    client.post<RecordLocationResponse>('/api/v1/staff/courier/location', input),
 
   /** GET /api/v1/staff/courier/active */
   active: (client: MyPosApiClient) =>
@@ -346,16 +319,12 @@ export const courierApi = {
   /** GET /api/v1/staff/courier/history */
   history: (client: MyPosApiClient, params?: ListCourierHistoryParams) => {
     const qs = buildQueryString(params);
-    return client.get<PaginatedResponse<DeliveryHistoryItem>>(
-      `/api/v1/staff/courier/history${qs}`,
-    );
+    return client.get<PaginatedResponse<DeliveryHistoryItem>>(`/api/v1/staff/courier/history${qs}`);
   },
 
   /** GET /api/v1/staff/courier/earnings */
   earnings: (client: MyPosApiClient, params: CourierEarningsParams = {}) => {
     const qs = buildQueryString(params);
-    return client.get<CourierEarningsResponse>(
-      `/api/v1/staff/courier/earnings${qs}`,
-    );
+    return client.get<CourierEarningsResponse>(`/api/v1/staff/courier/earnings${qs}`);
   },
 };

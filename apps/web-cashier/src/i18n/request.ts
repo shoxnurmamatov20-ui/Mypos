@@ -11,8 +11,7 @@ type Messages = AbstractIntlMessages;
  * deep-merged ON TOP of ru so present keys still win.
  */
 async function loadMessagesWithFallback(locale: string): Promise<Messages> {
-  const active = ((await import(`../../messages/${locale}.json`)) as { default: Messages })
-    .default;
+  const active = ((await import(`../../messages/${locale}.json`)) as { default: Messages }).default;
   if (locale === 'ru' || locale === routing.defaultLocale) {
     return active;
   }

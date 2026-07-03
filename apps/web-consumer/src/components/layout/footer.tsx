@@ -1,16 +1,8 @@
 'use client';
 
-import {
-  Facebook,
-  Instagram,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  Youtube,
-} from 'lucide-react';
-import Link from 'next/link';
+import { Facebook, Instagram, Mail, MapPin, Phone, Send, Youtube } from 'lucide-react';
 import type { Route } from 'next';
+import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './language-switcher';
 import { Newsletter } from './newsletter';
@@ -149,10 +141,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <nav
-            aria-label="Footer"
-            className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-3"
-          >
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-3">
             {columns.map((column) => (
               <FooterColumnView key={column.title} column={column} />
             ))}
