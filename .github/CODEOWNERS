@@ -1,22 +1,22 @@
 # CODEOWNERS — auto-request review from experts
 
 # Default owner
-* @founder
+* @NurmamatovYoqubjon20022006
 
 # Domain-specific
-/apps/api/                @founder
-/apps/web-dashboard/      @founder
-/apps/telegram-bot/       @founder
+/apps/api/                @NurmamatovYoqubjon20022006
+/apps/web-dashboard/      @NurmamatovYoqubjon20022006
+/apps/telegram-bot/       @NurmamatovYoqubjon20022006
 
-/packages/design-tokens/  @founder
-/packages/ui/             @founder
-/packages/api-client/     @founder
+/packages/design-tokens/  @NurmamatovYoqubjon20022006
+/packages/ui/             @NurmamatovYoqubjon20022006
+/packages/api-client/     @NurmamatovYoqubjon20022006
 
-/infra/                   @founder
-/docs/adr/                @founder
+/infra/                   @NurmamatovYoqubjon20022006
+/docs/adr/                @NurmamatovYoqubjon20022006
 
 # Security-sensitive — require review
-/apps/api/app/Domain/Auth/           @founder
-/apps/api/app/Domain/Payment/        @founder
-/apps/api/app/Domain/Tenant/         @founder
-/apps/api/app/Http/Middleware/       @founder
+/apps/api/app/Domain/Auth/           @NurmamatovYoqubjon20022006
+/apps/api/app/Domain/Payment/        @NurmamatovYoqubjon20022006
+/apps/api/app/Domain/Tenant/         @NurmamatovYoqubjon20022006
+/apps/api/app/Http/Middleware/       @NurmamatovYoqubjon20022006

@@ -11,14 +11,20 @@ test('CEO completes onboarding wizard and lands on /overview', async ({ page }) 
   await expect(page).toHaveTitle(/MyPOS/);
 
   // 2. Get-started wizard (5 steps)
-  await page.getByRole('link', { name: /Get started|Boshlash|Начать/i }).first().click();
+  await page
+    .getByRole('link', { name: /Get started|Boshlash|Начать/i })
+    .first()
+    .click();
   await expect(page).toHaveURL(/get-started/);
 
   await page.getByLabel(/Restaurant name|Restoran nomi/i).fill('Demo Cafe');
   await page.getByRole('button', { name: /Next|Keyingi/i }).click();
 
   // Step 2 (cuisine)
-  await page.getByRole('button', { name: /Uzbek|O'zbek/i }).first().click();
+  await page
+    .getByRole('button', { name: /Uzbek|O'zbek/i })
+    .first()
+    .click();
   await page.getByRole('button', { name: /Next|Keyingi/i }).click();
 
   // Step 3-5 stubbed to advance

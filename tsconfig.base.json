@@ -38,12 +38,5 @@
     "incremental": true,
     "composite": false
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    ".next",
-    "_legacy-*",
-    "apps/api"
-  ]
+  "exclude": ["node_modules", "dist", "build", ".next", "_legacy-*", "apps/api"]
 }

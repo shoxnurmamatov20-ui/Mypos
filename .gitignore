@@ -108,3 +108,8 @@ docs/api/openapi.yml.bak
 *.jks
 *.mobileprovision
 !infra/docker/*/*.key.example
+
+# Dropped screenshots / scratch images at repo root (not project assets)
+/image.png
+/1.png
+/2.png

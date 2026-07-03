@@ -7,7 +7,7 @@
 **MyPOS** — Markaziy Osiyo uchun Restaurant Operating System (SaaS).
 - Backend: **Laravel 12 + PHP 8.5**
 - Web: **Next.js 15 + React 19 + TypeScript 5.9**
-- DB: **MySQL 8.4** (XAMPP local) | Cache/Queue: **Redis 7.4** | Search: **Meilisearch** | Storage: **MinIO**
+- DB: **PostgreSQL 18** (ADR-0006; local: docker `postgres` service on 55432, native 5432, or `infra/scripts/dev-postgres.ps1` on 5433) | Cache/Queue: **Redis 7.4** | Search: **Meilisearch** | Storage: **MinIO**
 - Real-time: **Laravel Reverb**
 - Admin: **Filament 3** (CRUD) + **Next.js** (workflows)
 - Hosting: **UZCLOUD** (UZ) + **Beeline DC** (DR)
@@ -44,10 +44,16 @@ See `MYPOS_ULTRA_PLAN.md` on Desktop for the complete vision.
 
 ### 4. Multi-tenancy
 - Every tenant-scoped table has `tenant_id`.
-- Eloquent Global Scope (`BelongsToTenant` trait) filters automatically — **sole** tenant guard since 2026-05-10 MySQL revert.
-- ~~PostgreSQL RLS~~ — REMOVED (ADR-0005). App-layer is now the only enforcement layer.
-- Never call `withoutGlobalScopes()` outside `SuperAdminScope::unguard()` audit context — single bug = cross-tenant leak.
-- Never query across tenants except in super admin context.
+- **Two enforcement layers** since ADR-0006 (2026-07-02):
+  1. Eloquent Global Scope (`BelongsToTenant` trait) — fail-closed app layer.
+  2. PostgreSQL RLS policies keyed on the `app.current_tenant_id` GUC
+     (`SetTenantContext` middleware; super admins imprint `'*'` at DB level only).
+- New tenant-scoped tables MUST ship an RLS policy in their create migration
+  (`tenant_isolation_<table>` — copy the pattern from `2026_07_21_000001`).
+- Never call `withoutGlobalScopes()` without re-applying an explicit
+  `tenant_id` filter on the same query — single bug = cross-tenant leak
+  (RLS is the net behind you in production, not an excuse).
+- Never query across tenants except in super admin / CEO(owned-set) context.
 
 ### 5. i18n (UZ/RU/EN)
 - Translation keys: `domain.section.key` (e.g., `menu.item.created`).
@@ -69,10 +75,15 @@ See `MYPOS_ULTRA_PLAN.md` on Desktop for the complete vision.
 - Secrets via Doppler/Coolify (prod), `.env.local` (dev).
 
 ### 8. Database
-- Migrations: descriptive names, foreign keys, indexes on FK + lookup columns.
-- No raw SQL except in Repository layer (migrations OK).
+- Migrations: descriptive names, foreign keys, indexes on FK + lookup columns
+  (**PostgreSQL does NOT auto-index FK columns** — add them explicitly; a
+  safety-net sweep lives in `2026_07_21_000002_postgres_performance_indexes`).
+- No raw SQL except in Repository layer (migrations OK). Raw SQL must be
+  driver-portable or driver-branched (`ANY_VALUE` not `MAX()`-as-any-value,
+  bare boolean predicates not `= 1`, `Str::isUuid()` before uuid lookups).
 - Prevent N+1 via eager loading (`with()`).
 - Every tenant-scoped table: `tenant_id`, RLS policy.
+- JSON columns: use `jsonb()` (never `json()` — plain json is slower on PG).
 - Timestamps: `created_at`, `updated_at`, soft delete: `deleted_at`.
 
 ### 9. API design
