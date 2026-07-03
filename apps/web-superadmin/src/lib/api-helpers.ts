@@ -373,12 +373,13 @@ export type BillingSubscription = {
   id: string;
   name: string;
   slug: string;
-  subscription_plan: string;
-  subscription_status: string;
+  plan: string;
+  status: string;
   mrr_minor: number;
   trial_ends_at: string | null;
   subscription_ends_at: string | null;
-  owner_email?: string;
+  owner_name?: string | null;
+  owner_email?: string | null;
   created_at: string;
 };
 

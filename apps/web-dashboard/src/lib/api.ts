@@ -19,13 +19,28 @@ export function clearToken(): void {
   localStorage.removeItem(TOKEN_KEY);
 }
 
+const BASE_PATH = '/panel/manager';
+
+/**
+ * `window.location` bypasses Next's basePath handling, so build the login URL
+ * manually: keep the visitor's current locale when the pathname carries one.
+ */
+function loginUrl(): string {
+  const match =
+    typeof window === 'undefined'
+      ? null
+      : window.location.pathname.match(/^\/panel\/manager\/([a-z]{2})(\/|$)/);
+  const locale = match?.[1] ?? 'uz';
+  return `${BASE_PATH}/${locale}/login`;
+}
+
 export const apiClient = new MyPosApiClient({
   baseUrl: API_BASE_URL,
   getAuthToken: () => getStoredToken(),
   onUnauthorized: () => {
     clearToken();
     if (typeof window !== 'undefined') {
-      window.location.href = '/uz/login';
+      window.location.href = loginUrl();
     }
   },
 });

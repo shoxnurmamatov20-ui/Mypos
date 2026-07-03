@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   devIndicators: false,
   basePath: '/panel/manager',
+  async redirects() {
+    return [
+      // Singular alias — the canonical page lives at signage/banners.
+      {
+        source: '/:locale/signage/banner',
+        destination: '/:locale/signage/banners',
+        permanent: true,
+      },
+    ];
+  },
   transpilePackages: [
     '@mypos/analytics',
     '@mypos/api-client',

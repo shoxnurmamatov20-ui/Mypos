@@ -43,7 +43,9 @@ export function OrderCard({
 
   const action = nextQuickAction(order.status);
   const placedAt = order.placed_at ?? order.created_at;
-  const elapsed = minutesSince(new Date(placedAt));
+  // Clock skew / bad seed data can put placed_at in the future — never show
+  // a negative "minutes ago".
+  const elapsed = Math.max(0, minutesSince(new Date(placedAt)));
   const itemsCount = order.items.reduce((sum, it) => sum + it.quantity, 0);
   const isDineIn = order.type === 'dine_in';
 

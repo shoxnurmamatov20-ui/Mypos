@@ -116,8 +116,8 @@ export function BillingView() {
       subscriptions.map((sub) => ({
         tenant_id: sub.id,
         tenant_name: sub.name,
-        plan: sub.subscription_plan as TenantPlan,
-        status: sub.subscription_status as TenantStatus,
+        plan: sub.plan as TenantPlan,
+        status: sub.status as TenantStatus,
         mrr_minor: sub.mrr_minor,
         renews_at: sub.subscription_ends_at ?? sub.created_at,
         last_invoice_at: sub.subscription_ends_at ?? sub.created_at,

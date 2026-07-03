@@ -4,8 +4,9 @@ import { reportsApi } from '@mypos/api-client';
 import { formatUZS } from '@mypos/utils';
 import { useQuery } from '@tanstack/react-query';
 import { Bike, Lock } from 'lucide-react';
+import type { Route } from 'next';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { apiClient } from '@/lib/api';
 import {
@@ -171,6 +172,7 @@ function LockedCard({
   description: string;
   ctaLabel: string;
 }) {
+  const locale = useLocale();
   return (
     <div className="flex flex-col items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 p-6 dark:border-amber-500/30 dark:bg-amber-500/10 sm:flex-row sm:items-center">
       <div className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">
@@ -183,7 +185,7 @@ function LockedCard({
         </p>
       </div>
       <Link
-        href="/uz/settings"
+        href={`/${locale}/settings/place` as Route}
         className="inline-flex items-center justify-center rounded-lg bg-amber-600 px-4 py-2 text-xs font-semibold text-white hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-400"
       >
         {ctaLabel}
