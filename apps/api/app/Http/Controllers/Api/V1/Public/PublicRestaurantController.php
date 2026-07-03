@@ -112,14 +112,14 @@ class PublicRestaurantController extends Controller
         }
 
         if ($params['search'] !== null && $params['search'] !== '') {
-            // MySQL utf8mb4_unicode_ci collation makes LIKE case-insensitive
-            // by default — drop the redundant LOWER() wrapper that defeats
-            // any future btree index on `name`/`slug`. Postgres rollback path
-            // (ADR-0005) would need ILIKE here.
+            // ADR-0006: primary DB is PostgreSQL again, where LIKE is
+            // case-sensitive — use ILIKE there; MySQL's utf8mb4 collation
+            // keeps plain LIKE case-insensitive on that driver.
             $needle = $params['search'];
-            $query->where(function (Builder $q) use ($needle): void {
-                $q->where('name', 'like', '%' . $needle . '%')
-                    ->orWhere('slug', 'like', '%' . $needle . '%');
+            $op = $query->getConnection()->getDriverName() === 'pgsql' ? 'ilike' : 'like';
+            $query->where(function (Builder $q) use ($needle, $op): void {
+                $q->where('name', $op, '%' . $needle . '%')
+                    ->orWhere('slug', $op, '%' . $needle . '%');
             });
         }
 

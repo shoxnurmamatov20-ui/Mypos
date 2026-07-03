@@ -51,10 +51,13 @@ class TenantController extends Controller
         }
         if ($q !== '') {
             $like = '%' . $q . '%';
-            $query->where(function ($qq) use ($like): void {
-                $qq->where('slug', 'like', $like)
-                    ->orWhere('name', 'like', $like)
-                    ->orWhere('email', 'like', $like);
+            // Case-insensitive on PostgreSQL needs ILIKE (MySQL's utf8mb4
+            // collation made plain LIKE case-insensitive; PG does not).
+            $op = $query->getConnection()->getDriverName() === 'pgsql' ? 'ilike' : 'like';
+            $query->where(function ($qq) use ($like, $op): void {
+                $qq->where('slug', $op, $like)
+                    ->orWhere('name', $op, $like)
+                    ->orWhere('email', $op, $like);
             });
         }
 
@@ -64,7 +67,7 @@ class TenantController extends Controller
         // Bulk-resolve owners in O(1) extra query instead of O(N) per tenant.
         $tenants = $query->paginate($perPage);
         $tenantIds = collect($tenants->items())->pluck('id')->all();
-        $ownerMap = $this->resolveOwnersForTenants($tenantIds);
+        $ownerMap = app(\App\Domain\SuperAdmin\Services\TenantOwnerResolver::class)->mapByTenantIds($tenantIds);
         $tenants->getCollection()->transform(function (Tenant $t) use ($ownerMap): Tenant {
             $t->setRelation('owner', $ownerMap[$t->id] ?? null);
             return $t;
@@ -283,26 +286,4 @@ class TenantController extends Controller
      * @param  array<string>  $tenantIds
      * @return array<string, \App\Models\User>
      */
-    private function resolveOwnersForTenants(array $tenantIds): array
-    {
-        if ($tenantIds === []) {
-            return [];
-        }
-
-        $users = \App\Models\User::query()
-            ->whereIn('tenant_id', $tenantIds)
-            ->where('is_super_admin', false)
-            ->whereNull('deleted_at')
-            ->with('roles:id,name')
-            ->orderBy('created_at')
-            ->get();
-
-        $byTenant = $users->groupBy('tenant_id');
-        $result = [];
-        foreach ($byTenant as $tenantId => $candidates) {
-            $owner = $candidates->first(fn ($u): bool => $u->hasRole('owner'));
-            $result[(string) $tenantId] = $owner ?? $candidates->first();
-        }
-        return $result;
-    }
 }

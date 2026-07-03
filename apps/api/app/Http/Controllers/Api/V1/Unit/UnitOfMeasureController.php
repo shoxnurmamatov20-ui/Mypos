@@ -58,7 +58,9 @@ class UnitOfMeasureController extends Controller
         $unit = UnitOfMeasure::create($request->validated());
 
         return response()->json(
-            ['data' => UnitOfMeasureResource::make($unit)],
+            // refresh() picks up DB defaults (is_active=true, sort_order) the
+            // in-memory model doesn't have when the client omitted them.
+            ['data' => UnitOfMeasureResource::make($unit->refresh())],
             201,
         );
     }
