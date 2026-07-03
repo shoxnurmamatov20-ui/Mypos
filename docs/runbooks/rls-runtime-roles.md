@@ -58,6 +58,21 @@ sudo -u postgres psql -c "SELECT rolname, rolcanlogin, rolbypassrls FROM pg_role
 cd apps/api && php artisan test tests/Feature/Security/
 ```
 
+## Qo'shimcha: pg_stat_statements yoqish (superuser talab qiladi)
+
+Sekin so'rovlarni doimiy kuzatish uchun (hozir faqat `log_min_duration_statement=500ms` bor):
+
+```bash
+sudo -u postgres psql -c "ALTER SYSTEM SET shared_preload_libraries = 'pg_stat_statements'"
+sudo systemctl restart postgresql@18-main
+sudo -u postgres psql -d mypos -c "CREATE EXTENSION IF NOT EXISTS pg_stat_statements"
+# Tekshirish:
+sudo -u postgres psql -d mypos -c "SELECT query, calls, mean_exec_time FROM pg_stat_statements ORDER BY mean_exec_time DESC LIMIT 10"
+```
+
+Diqqat: `ALTER SYSTEM` + restart — qisqa downtime (~2-3 s) bilan keladi; ish
+vaqtidan tashqarida bajaring.
+
 ## Rollback (favqulodda)
 
 FPM pool'dan `env[DB_USERNAME]`/`env[DB_PASSWORD]` qatorlarini olib tashlab

@@ -66,6 +66,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        // Error tracking — no-op until SENTRY_LARAVEL_DSN is set (Doppler/
+        // Coolify). Registered first so custom render callbacks below still
+        // shape the HTTP response afterwards.
+        \Sentry\Laravel\Integration::handles($exceptions);
+
         // API hardening (2026-05-14): force JSON response shape for every
         // /api/* request. This makes the default AuthenticationException
         // return a clean 401 JSON instead of trying to redirect to a

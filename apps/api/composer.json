@@ -17,6 +17,7 @@
     "laravel/scout": "^11.1",
     "laravel/tinker": "^2.10.1",
     "predis/predis": "^3.4",
+    "sentry/sentry-laravel": "^4.26",
     "spatie/laravel-activitylog": "^5.0",
     "spatie/laravel-data": "^4.22",
     "spatie/laravel-medialibrary": "^11.21",
