@@ -387,7 +387,10 @@
     "invoice_status_pending": "Күтуде",
     "invoice_status_failed": "Қате",
     "invoice_download": "Жүктеу",
-    "no_subscriptions": "Жазылымдар жоқ"
+    "no_subscriptions": "Жазылымдар жоқ",
+    "invoices_empty_note": "Шот-фактура тізілімі әзірге бос — автоматты биллинг іске қосылғанда шоттар осы жерде көрінеді.",
+    "error_load_failed": "Биллинг деректерін жүктеу мүмкін болмады",
+    "error_retry": "Қайталау"
   },
   "audit_page": {
     "title": "Оқиғалар журналы",

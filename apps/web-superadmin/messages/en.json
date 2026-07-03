@@ -387,7 +387,10 @@
     "invoice_status_pending": "Pending",
     "invoice_status_failed": "Failed",
     "invoice_download": "Download",
-    "no_subscriptions": "No subscriptions"
+    "no_subscriptions": "No subscriptions",
+    "invoices_empty_note": "The invoice ledger is empty — invoices will appear here once automated billing starts issuing them.",
+    "error_load_failed": "Could not load billing data",
+    "error_retry": "Retry"
   },
   "audit_page": {
     "title": "Audit log",

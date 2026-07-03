@@ -387,7 +387,10 @@
     "invoice_status_pending": "Kutilmoqda",
     "invoice_status_failed": "Xato",
     "invoice_download": "Yuklab olish",
-    "no_subscriptions": "Obunalar topilmadi"
+    "no_subscriptions": "Obunalar topilmadi",
+    "invoices_empty_note": "Hisob-faktura reestri hozircha bo'sh — billing hisob-fakturalari avtomatik yaratila boshlaganda shu yerda ko'rinadi.",
+    "error_load_failed": "Hisob-kitob ma'lumotlarini yuklab bo'lmadi",
+    "error_retry": "Qayta urinish"
   },
   "audit_page": {
     "title": "Audit log",

@@ -389,6 +389,28 @@ export type MrrByPlanRow = {
   mrr_minor: number;
 };
 
+export type BillingInvoice = {
+  id: string;
+  number: string;
+  tenant_id: string;
+  tenant_name: string;
+  amount_minor: number;
+  status: 'paid' | 'pending' | 'failed';
+  issued_at: string;
+  paid_at: string | null;
+  due_at: string;
+};
+
+/** Invoice ledger — empty until the billing engine lands (stable contract). */
+export async function fetchBillingInvoices(): Promise<Paginated<BillingInvoice>> {
+  try {
+    return await apiClient.get<Paginated<BillingInvoice>>('/api/v1/super-admin/billing/invoices');
+  } catch (err) {
+    if (isApiUnavailable(err)) return { data: [], meta: { total: 0 } };
+    throw err;
+  }
+}
+
 export type MrrMovement = {
   new_mrr: number;
   expansion_mrr: number;

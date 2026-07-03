@@ -387,7 +387,10 @@
     "invoice_status_pending": "Ожидает",
     "invoice_status_failed": "Ошибка",
     "invoice_download": "Скачать",
-    "no_subscriptions": "Подписок нет"
+    "no_subscriptions": "Подписок нет",
+    "invoices_empty_note": "Реестр счетов пока пуст — счета появятся здесь, как только начнёт работать автоматический биллинг.",
+    "error_load_failed": "Не удалось загрузить данные биллинга",
+    "error_retry": "Повторить"
   },
   "audit_page": {
     "title": "Журнал событий",

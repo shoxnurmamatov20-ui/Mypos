@@ -51,4 +51,25 @@ class BillingController extends Controller
     {
         return response()->json(['data' => $service->compute()]);
     }
+
+    /**
+     * Invoice ledger. No invoicing engine exists yet (subscriptions are
+     * charged out-of-band), so this returns the stable empty contract the
+     * panel renders an honest empty state from — replacing the fabricated
+     * fixture rows it used to show. Shape per row, once the ledger lands:
+     * { id, number, tenant_id, tenant_name, amount_minor, status
+     *   (paid|pending|failed), issued_at, paid_at, due_at }.
+     */
+    public function invoices(Request $request): JsonResponse
+    {
+        return response()->json([
+            'data' => [],
+            'meta' => [
+                'total' => 0,
+                'per_page' => max(1, min(100, (int) $request->query('per_page', 25))),
+                'current_page' => 1,
+                'last_page' => 1,
+            ],
+        ]);
+    }
 }

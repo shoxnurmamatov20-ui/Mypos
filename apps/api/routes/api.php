@@ -512,6 +512,8 @@ Route::prefix('v1')->group(function () {
                 ->name('v1.super_admin.billing.subscriptions');
             Route::get('/billing/mrr-breakdown', [SuperAdminBillingController::class, 'mrrBreakdown'])
                 ->name('v1.super_admin.billing.mrr_breakdown');
+            Route::get('/billing/invoices', [SuperAdminBillingController::class, 'invoices'])
+                ->name('v1.super_admin.billing.invoices');
 
             // Team management
             Route::get('/admins', [SuperAdminTeamController::class, 'index'])

@@ -5,14 +5,10 @@ import { AlertCircle, Info, RefreshCw } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { SystemHealthBar } from '@/components/dashboard/system-health-bar';
-import {
-  MOCK_INVOICES,
-  MOCK_MRR_BY_PLAN,
-  MOCK_MRR_SUMMARY,
-  type MrrSummary,
-} from '@/data/mock-billing';
+import { MOCK_MRR_BY_PLAN, MOCK_MRR_SUMMARY, type MrrSummary } from '@/data/mock-billing';
 import {
   type BillingSubscription,
+  fetchBillingInvoices,
   fetchBillingSubscriptions,
   fetchMrrBreakdown,
   type MrrByPlanRow,
@@ -68,6 +64,12 @@ export function BillingView() {
   });
 
   const subscriptions: BillingSubscription[] = subscriptionsQuery.data?.data ?? [];
+
+  const invoicesQuery = useQuery({
+    queryKey: ['super-admin', 'billing', 'invoices'],
+    queryFn: fetchBillingInvoices,
+  });
+  const invoices = invoicesQuery.data?.data ?? [];
 
   // Compute MRR summary live from the breakdown.
   const summary: MrrSummary = useMemo(() => {
@@ -156,6 +158,8 @@ export function BillingView() {
   if (isErrorAll) {
     return (
       <ErrorState
+        title={t('error_load_failed')}
+        retryLabel={t('error_retry')}
         message={t('subtitle')}
         onRetry={() => {
           void mrrQuery.refetch();
@@ -214,24 +218,20 @@ export function BillingView() {
         isLoading={subscriptionsQuery.isFetching}
       />
 
-      {/* INVOICES — mock fixtures until backend ships /billing/invoices */}
-      <div
-        role="status"
-        className="rounded-xl border border-amber-300/60 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10 px-4 py-3 text-sm font-medium text-amber-900 dark:text-amber-200 flex items-start gap-3"
-      >
-        <Info
-          className="h-4 w-4 mt-0.5 shrink-0 text-amber-600 dark:text-amber-300"
-          aria-hidden="true"
-        />
-        <span>
-          Hisob-faktura ro&apos;yxati hozircha namunaviy ma&apos;lumot — backend endpoint (
-          <code className="font-mono text-[11px] bg-amber-100 dark:bg-amber-500/20 px-1 py-0.5 rounded">
-            /api/v1/super-admin/billing/invoices
-          </code>
-          ) yo&apos;l xaritasida.
-        </span>
-      </div>
-      <InvoicesTable invoices={MOCK_INVOICES} />
+      {/* INVOICES — live ledger (empty until the billing engine lands) */}
+      {invoices.length === 0 && !invoicesQuery.isPending ? (
+        <div
+          role="status"
+          className="rounded-xl border border-amber-300/60 dark:border-amber-500/40 bg-amber-50 dark:bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200 flex items-start gap-3"
+        >
+          <Info
+            className="h-4 w-4 mt-0.5 shrink-0 text-amber-600 dark:text-amber-300"
+            aria-hidden="true"
+          />
+          <span>{t('invoices_empty_note')}</span>
+        </div>
+      ) : null}
+      <InvoicesTable invoices={invoices} />
     </section>
   );
 }
@@ -261,7 +261,17 @@ function BillingSkeleton() {
   );
 }
 
-function ErrorState({ message, onRetry }: { message: string; onRetry: () => void }) {
+function ErrorState({
+  title,
+  retryLabel,
+  message,
+  onRetry,
+}: {
+  title: string;
+  retryLabel: string;
+  message: string;
+  onRetry: () => void;
+}) {
   return (
     <div
       role="alert"
@@ -275,9 +285,7 @@ function ErrorState({ message, onRetry }: { message: string; onRetry: () => void
         />
       </div>
       <div>
-        <p className="text-base font-bold text-red-900 dark:text-red-200">
-          Hisob-kitob ma&apos;lumotlarini yuklab bo&apos;lmadi
-        </p>
+        <p className="text-base font-bold text-red-900 dark:text-red-200">{title}</p>
         <p className="mt-1 text-sm text-red-700/80 dark:text-red-300/80">{message}</p>
       </div>
       <button
@@ -286,7 +294,7 @@ function ErrorState({ message, onRetry }: { message: string; onRetry: () => void
         className="inline-flex h-9 items-center gap-1.5 rounded-md border border-red-500/40 bg-white dark:bg-gray-900 px-4 text-sm font-bold text-red-700 dark:text-red-300 transition-colors duration-150 hover:bg-red-50 dark:hover:bg-red-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900"
       >
         <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" />
-        Qayta urinish
+        {retryLabel}
       </button>
     </div>
   );
