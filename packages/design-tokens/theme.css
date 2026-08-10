@@ -154,7 +154,16 @@
   --text-hero-display--letter-spacing: -0.28px;
   --text-hero-display--font-weight: 600;
 
-  /* ─── Spacing (Apple's 8px base + 17px md + 80px section) ───────── */
+  /* ─── Spacing (Apple's 8px base + 17px md + 80px section) ─────────
+     ⚠️ KNOWN COLLISION: Tailwind v4 resolves `max-w-<name>` from
+     `--container-*` and falls back to `--spacing-*`. Because this file
+     defines xs/sm/md/lg spacing but no containers, `max-w-sm` resolves to
+     12px instead of 24rem and collapses whatever carries it.
+
+     apps/web-dashboard/src/app/globals.css declares the container scale to
+     work around it locally. Declaring it here would fix every app at once,
+     but changes layout in six apps that currently render with the collapsed
+     widths — do that deliberately, not as a side effect. */
   --spacing-xxs: 4px;
   --spacing-xs: 8px;
   --spacing-sm: 12px;
