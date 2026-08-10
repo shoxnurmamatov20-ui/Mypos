@@ -21,7 +21,27 @@ import type { TranslatedString } from '@mypos/api-client';
 
 // ------------ Configuration ------------
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:58000';
+/**
+ * Base URL, resolved per execution context.
+ *
+ * These helpers are SSR-safe by design (see the docblock above), so they run
+ * in BOTH places and each needs a different base:
+ *
+ *   - Browser: empty string → the fetch path stays relative and resolves
+ *     against the current origin. That's what makes the app work on every
+ *     host it's served from (bare IP, *.mypos.uz, tenant custom domain)
+ *     instead of only the one host someone happened to hardcode. A scheme+
+ *     host baked in here is also what a browser blocks as mixed content
+ *     when the page itself is HTTPS.
+ *   - Server (SSR + `next build` static generation): Node's fetch REQUIRES
+ *     an absolute URL — a relative path throws / stalls the build. There is
+ *     no "current origin" server-side, so we go straight to Laravel over
+ *     loopback via INTERNAL_API_URL (never exposed to the client bundle).
+ */
+const API_BASE_URL =
+  typeof window === 'undefined'
+    ? (process.env.INTERNAL_API_URL ?? 'http://127.0.0.1:8000')
+    : (process.env.NEXT_PUBLIC_API_URL ?? '');
 
 /** Cache-revalidation window for browse endpoints (60s ISR). */
 const DEFAULT_REVALIDATE = 60;
