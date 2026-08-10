@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import { CookieConsent } from '@/components/landing/cookie-consent';
 import { Footer } from '@/components/landing/footer';
 import { Header } from '@/components/landing/header';
 import { Providers } from '@/components/providers';
@@ -78,7 +77,6 @@ export default async function LocaleLayout({
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
-            <CookieConsent />
           </NextIntlClientProvider>
         </Providers>
       </body>
