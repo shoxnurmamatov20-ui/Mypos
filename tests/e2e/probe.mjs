@@ -1,0 +1,20 @@
+import { chromium } from '@playwright/test';
+import fs from 'node:fs';
+const TOKEN = fs.readFileSync(process.argv[2], 'utf8').trim();
+const b = await chromium.launch();
+const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: 'dark' });
+await ctx.addInitScript((t) => { try { localStorage.setItem('mypos_auth_token', t); } catch {} }, TOKEN);
+const p = await ctx.newPage();
+await p.goto('http://127.0.0.1/panel/manager/uz/reports/orders', { waitUntil: 'networkidle' });
+await p.waitForTimeout(2500);
+console.log('html.class =', await p.evaluate(() => document.documentElement.className));
+console.log('--color-warning-soft =', await p.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--color-warning-soft')));
+console.log('--color-warning-text =', await p.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--color-warning-text')));
+const badge = await p.evaluate(() => {
+  const el = [...document.querySelectorAll('span,div')].find(e => e.textContent?.trim() === 'pending');
+  if (!el) return null;
+  const cs = getComputedStyle(el);
+  return { cls: el.className, bg: cs.backgroundColor, color: cs.color };
+});
+console.log('badge =', JSON.stringify(badge, null, 1));
+await b.close();
