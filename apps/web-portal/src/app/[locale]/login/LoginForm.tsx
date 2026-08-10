@@ -109,7 +109,12 @@ export function LoginForm() {
         // The hash carries the token so the target app's AuthGate can pick
         // it up on first paint, identical to the previous flow but without
         // the intermediate spinner.
-        const url = new URL(result.redirect_url);
+        //
+        // redirect_url is a same-origin path (e.g. `/panel/manager/uz/overview`)
+        // — resolve it against the current origin so it lands on whichever
+        // domain the user is actually on (default IP, *.mypos.uz, or a
+        // verified tenant custom domain) instead of a hardcoded host.
+        const url = new URL(result.redirect_url, window.location.origin);
         url.hash = `token=${encodeURIComponent(result.token)}&role=${encodeURIComponent(result.role)}`;
         window.location.href = url.toString();
         return;
