@@ -148,4 +148,32 @@ return [
     'not_tenant_aware_jobs' => [
         // ...
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Platform hostnames (2026-07-30)
+    |--------------------------------------------------------------------------
+    |
+    | Hostnames that belong to the PLATFORM itself rather than to any single
+    | tenant. `ResolveTenantFromDomain` lets these through untouched so the
+    | universal portal (where every role logs in) works on them; anything not
+    | listed here must match a verified `tenant_domains` row or gets a 404.
+    |
+    | Entries match exactly OR as a suffix, so `mypos.uz` also covers
+    | `admin.mypos.uz`. Bare IPs are always treated as platform traffic.
+    |
+    | Set PLATFORM_DOMAINS (comma-separated) to ADD hostnames without a code
+    | change — the deploy host is not always one we can predict. This exists
+    | because the list used to be a hardcoded const, which meant serving the
+    | platform on any new hostname 404'd every /api/* call, including login.
+    */
+    'platform_domains' => array_values(array_filter(array_map('trim', array_merge(
+        [
+            'mypos.uz',
+            'localhost',
+            '127.0.0.1',
+            '::1',
+        ],
+        explode(',', (string) env('PLATFORM_DOMAINS', ''))
+    )))),
 ];

@@ -16,22 +16,26 @@ use Illuminate\Support\Facades\Config;
  *   2. Highest-priority Spatie role        → matching `redirects` entry
  *   3. Nothing matched                     → `default`
  *
- * The host of the returned URL is also validated against
- * `auth_redirects.allowed_hosts` to prevent open-redirect XSS via crafted
- * URLs ending up in the response body.
+ * Every `auth_redirects` entry is a same-origin PATH, not an absolute URL —
+ * the frontend resolves it against `window.location.origin` (see
+ * LoginForm.tsx), so the user always lands back on whichever host they're
+ * already on. `isSafePath()` is defense-in-depth against that becoming an
+ * open redirect: a value starting with `//` is protocol-relative and the
+ * browser's `URL()` constructor would resolve it to a *different* host.
  */
 class PostLoginRedirector
 {
     public function resolveFor(User $user): string
     {
-        $url = $this->candidateUrl($user);
+        $path = $this->candidatePath($user);
 
-        if (! $this->hostIsAllowed($url)) {
-            // Defense-in-depth — never emit an external URL we don't control.
+        if (! $this->isSafePath($path)) {
+            // Defense-in-depth — never emit a value that could resolve to
+            // a host other than the one the request already came in on.
             return (string) Config::get('auth_redirects.default');
         }
 
-        return $url;
+        return $path;
     }
 
     public function resolveRoleFor(User $user): string
@@ -52,7 +56,7 @@ class PostLoginRedirector
         return 'default';
     }
 
-    private function candidateUrl(User $user): string
+    private function candidatePath(User $user): string
     {
         $role = $this->resolveRoleFor($user);
         $redirects = (array) Config::get('auth_redirects.redirects', []);
@@ -61,20 +65,8 @@ class PostLoginRedirector
             ?? (string) Config::get('auth_redirects.default');
     }
 
-    private function hostIsAllowed(string $url): bool
+    private function isSafePath(string $path): bool
     {
-        $host = parse_url($url, PHP_URL_HOST);
-        if (! is_string($host) || $host === '') {
-            return false;
-        }
-
-        $allowed = (array) Config::get('auth_redirects.allowed_hosts', []);
-        foreach ($allowed as $entry) {
-            if ($host === $entry || str_ends_with($host, '.' . $entry)) {
-                return true;
-            }
-        }
-
-        return false;
+        return str_starts_with($path, '/') && ! str_starts_with($path, '//');
     }
 }

@@ -19,13 +19,14 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * Runs **before** {@see SetTenantContext} so the resolved Tenant is bound
  * into the container as `currentTenant` — `SetTenantContext` then picks it
- * up. (Pre-2026-05-10 the GUC drove PostgreSQL RLS. Project is now on MySQL,
- * so the binding only feeds app-layer logging and `BelongsToTenant`.)
+ * up and sets the `app.current_tenant_id` GUC that PostgreSQL RLS policies
+ * key on (ADR-0006), in addition to feeding app-layer `BelongsToTenant`.
  *
  * Flow:
- *   1. If Host is one of our own platform hostnames (mypos.uz, *.mypos.uz,
- *      localhost, raw IP) → pass through unchanged. Auth-based tenant
- *      resolution will run downstream.
+ *   1. If Host is one of our own platform hostnames (see
+ *      `multitenancy.platform_domains` — mypos.uz + *.mypos.uz, localhost,
+ *      raw IP, plus anything in PLATFORM_DOMAINS) → pass through unchanged.
+ *      Auth-based tenant resolution will run downstream.
  *   2. Otherwise look up `tenant_domains.domain` (verified, not soft-deleted)
  *      and bind the parent Tenant in the container.
  *   3. Unknown / suspended → respond 404 so probing for valid hostnames
@@ -38,19 +39,20 @@ class ResolveTenantFromDomain
 {
     private const CACHE_TTL_SECONDS = 60;
 
-    /** Reserved hostnames that always belong to the platform itself. */
-    private const OWN_DOMAINS = [
-        'mypos.uz',
-        'app.mypos.uz',
-        'admin.mypos.uz',
-        'api.mypos.uz',
-        'qr.mypos.uz',
-        'kitchen.mypos.uz',
-        'order.mypos.uz',
-        'localhost',
-        '127.0.0.1',
-        '::1',
-    ];
+    /**
+     * Hostnames that belong to the platform itself, from
+     * `multitenancy.platform_domains` (extend via the PLATFORM_DOMAINS env
+     * var — see that config for why this is not a hardcoded const).
+     *
+     * @return list<string>
+     */
+    private function ownDomains(): array
+    {
+        /** @var list<string> $domains */
+        $domains = (array) config('multitenancy.platform_domains', []);
+
+        return $domains;
+    }
 
     public function handle(Request $request, Closure $next): Response
     {
@@ -129,7 +131,7 @@ class ResolveTenantFromDomain
      */
     private function isOwnDomain(string $host): bool
     {
-        foreach (self::OWN_DOMAINS as $own) {
+        foreach ($this->ownDomains() as $own) {
             if ($host === $own) {
                 return true;
             }

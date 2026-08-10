@@ -255,3 +255,40 @@ it('subsequent SetTenantContext middleware picks up the resolved tenant in the G
     // either the tenant-id or empty (terminate already fired).
     expect($response->json('guc'))->toBeIn([$tenant->id, '', null]);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Configurable platform hostnames (2026-07-30)
+|--------------------------------------------------------------------------
+|
+| The platform-hostname list used to be a hardcoded const, so serving the
+| portal on any hostname the code didn't already know about made this
+| middleware 404 every /api/* request — including login. It now reads
+| `multitenancy.platform_domains`, extendable via the PLATFORM_DOMAINS env
+| var. These lock in that behaviour so the outage can't silently return.
+*/
+
+it('passes through a hostname added via platform_domains config', function (): void {
+    config(['multitenancy.platform_domains' => ['mypos.uz', 'portal.example.test']]);
+    $path = registerProbeRoute();
+
+    $response = $this->getJson(probeUrl('portal.example.test', $path))->assertOk();
+
+    expect($response->json('bound'))->toBeFalse();
+});
+
+it('suffix-matches subdomains of a configured platform domain', function (): void {
+    config(['multitenancy.platform_domains' => ['example.test']]);
+    $path = registerProbeRoute();
+
+    $response = $this->getJson(probeUrl('anything.example.test', $path))->assertOk();
+
+    expect($response->json('bound'))->toBeFalse();
+});
+
+it('still 404s an unknown host that is not a configured platform domain', function (): void {
+    config(['multitenancy.platform_domains' => ['mypos.uz']]);
+    $path = registerProbeRoute();
+
+    $this->getJson(probeUrl('not-ours.example.test', $path))->assertNotFound();
+});
