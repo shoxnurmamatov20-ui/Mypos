@@ -29,7 +29,12 @@
     "created": "Жасалды",
     "updated": "Жаңартылды",
     "deleted": "Жойылды",
-    "retry": "Қайталау"
+    "retry": "Қайталау",
+    "per_page": "Бетте",
+    "of_total": "барлығы",
+    "page": "Бет",
+    "total": "Барлығы",
+    "all": "Барлығы"
   },
   "sidebar": {
     "panel_label": "Мейрамхана панелі",
@@ -133,7 +138,11 @@
       "people": "Адамдар",
       "business": "Бизнес",
       "system": "Жүйе"
-    }
+    },
+    "group_operations": "Операциялар",
+    "group_finance": "Қаржы және есептер",
+    "group_admin": "Басқару",
+    "search_empty": "Ештеңе табылмады"
   },
   "nav": {
     "dashboard": "Панель",
@@ -179,7 +188,12 @@
     "reports": "Есептер",
     "log": "Лог",
     "profile": "Профиль",
-    "new": "Жаңа"
+    "new": "Жаңа",
+    "notifications_unread": "{count} жаңа",
+    "notifications_empty": "Жаңа хабарлама жоқ",
+    "notifications_view_all": "Барлығын көру",
+    "theme_light": "Ашық режимге өту",
+    "theme_dark": "Күңгірт режимге өту"
   },
   "overview": {
     "title": "Басқару панелі",
@@ -189,7 +203,8 @@
     "period": {
       "today": "Бүгін",
       "week": "7 күн",
-      "month": "30 күн"
+      "month": "30 күн",
+      "90d": "90 күн"
     },
     "stats": {
       "orders": "Тапсырыстар",
@@ -205,7 +220,10 @@
       "restaurant": "Мейрамхана",
       "kitchen": "Ас үй",
       "cashier": "Касса",
-      "kds": "KDS"
+      "kds": "KDS",
+      "ok": "Жүйе жұмыс істеп тұр",
+      "degraded": "Жүйеде ақаулық",
+      "unknown": "Күй белгісіз"
     },
     "auto_refresh": "Әр {seconds} секунд сайын жаңарады",
     "sections": {

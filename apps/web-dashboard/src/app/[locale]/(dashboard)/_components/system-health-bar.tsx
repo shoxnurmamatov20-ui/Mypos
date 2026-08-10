@@ -1,75 +1,105 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { cn } from '@mypos/ui';
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { apiClient } from '@/lib/api';
 
-type Health = { id: string; label: string; tone: 'ok' | 'warn' | 'err' };
+type Status = 'ok' | 'warn' | 'down';
 
-const TONE_DOT: Record<Health['tone'], string> = {
-  ok: 'bg-emerald-500 shadow-[0_0_0_3px_rgba(16,185,129,0.18)]',
-  warn: 'bg-amber-500 shadow-[0_0_0_3px_rgba(245,158,11,0.18)]',
-  err: 'bg-rose-500 shadow-[0_0_0_3px_rgba(244,63,94,0.18)]',
-};
+type HealthComponent = { status: string; latency_ms?: number };
+type HealthResponse = { status: string; components?: Record<string, HealthComponent> };
 
-const TONE_TEXT: Record<Health['tone'], string> = {
-  ok: 'text-emerald-700 dark:text-emerald-400',
-  warn: 'text-amber-700 dark:text-amber-400',
-  err: 'text-rose-700 dark:text-rose-400',
+const STATUS_DOT: Record<Status, string> = {
+  ok: 'bg-[#18794e] shadow-[0_0_0_2px_rgba(34,197,94,0.18)]',
+  warn: 'bg-[#b7791f] shadow-[0_0_0_2px_rgba(245,158,11,0.20)]',
+  down: 'bg-[#b42318] shadow-[0_0_0_2px_rgba(239,68,68,0.20)]',
 };
 
 /**
- * Restaurant-side system health strip. 4 status dots + live UZ clock.
- * Values are decorative for now (mirror superadmin pattern); wire to
- * real `/api/v1/health/*` endpoints in a follow-up.
+ * `health-bar` — the super-admin status strip, rendered `[●] LABEL VALUE` with
+ * the wall clock on the right.
+ *
+ * One deliberate difference from the super-admin version: those four items are
+ * hardcoded there, so the strip can never report a problem. Here it reads
+ * `/api/v1/health`, which already returns db / redis / cache / queue with their
+ * measured latency — identical chrome, real values.
  */
+function toStatus(raw: string): Status {
+  return raw === 'ok' ? 'ok' : raw === 'degraded' ? 'warn' : 'down';
+}
+
+function formatTime(d: Date): string {
+  return new Intl.DateTimeFormat('uz-UZ', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    timeZone: 'Asia/Tashkent',
+  }).format(d);
+}
+
 export function SystemHealthBar() {
-  const t = useTranslations('overview.health');
-  const [time, setTime] = useState<string>('');
+  const [now, setNow] = useState<string>('');
+
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ['system-health'],
+    queryFn: () => apiClient.get<HealthResponse>('/api/v1/health'),
+    staleTime: 30_000,
+    refetchInterval: 60_000,
+  });
 
   useEffect(() => {
-    const tick = () => {
-      const d = new Date();
-      const fmt = new Intl.DateTimeFormat('uz-UZ', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        timeZone: 'Asia/Tashkent',
-      });
-      setTime(fmt.format(d));
-    };
-    tick();
-    const id = setInterval(tick, 1000);
+    setNow(formatTime(new Date()));
+    const id = setInterval(() => setNow(formatTime(new Date())), 1000);
     return () => clearInterval(id);
   }, []);
 
-  const items: Health[] = [
-    { id: 'restaurant', label: t('restaurant'), tone: 'ok' },
-    { id: 'kitchen', label: t('kitchen'), tone: 'ok' },
-    { id: 'cashier', label: t('cashier'), tone: 'ok' },
-    { id: 'kds', label: t('kds'), tone: 'ok' },
-  ];
+  const components = Object.entries(data?.components ?? {});
+  const unknown = isLoading || isError || !data;
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-[12px] border border-[rgba(22,34,31,0.09)] dark:border-[rgba(255,255,255,0.07)] bg-white dark:bg-[#111827] px-4 py-2.5">
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5">
-        {items.map((it) => (
-          <div key={it.id} className="flex items-center gap-2">
-            <span
-              className={`block h-[7px] w-[7px] rounded-full ${TONE_DOT[it.tone]}`}
-              aria-hidden
-            />
-            <span className={`text-[12px] font-semibold tabular-nums ${TONE_TEXT[it.tone]}`}>
-              {it.label}
-            </span>
-          </div>
-        ))}
-      </div>
-      <div className="flex items-center gap-2 text-[12px] text-[#62716d] dark:text-[#94a3b8]">
-        <span className="font-medium">Tashkent</span>
-        <span className="font-mono text-[#16221f] dark:text-white tabular-nums tracking-wider">
-          {time || '—'}
+    <div
+      className="flex flex-wrap items-center gap-3 rounded-lg border border-[rgba(22,34,31,0.09)] bg-white px-3.5 py-2 text-[12px] transition-colors sm:gap-[18px] dark:border-[rgba(255,255,255,0.07)] dark:bg-[#111827]"
+      role="status"
+      aria-label="Tizim holati"
+    >
+      {unknown ? (
+        <span className="inline-flex items-center gap-[7px]">
+          <span
+            className={cn('h-[7px] w-[7px] flex-shrink-0 rounded-full', STATUS_DOT.warn)}
+            aria-hidden="true"
+          />
+          <span className="font-semibold text-[#62716d] dark:text-[#94a3b8]">API</span>
+          <span className="font-bold text-[#16221f] dark:text-white">—</span>
         </span>
-      </div>
+      ) : (
+        components.map(([name, c]) => {
+          const status = toStatus(c.status);
+          return (
+            <span key={name} className="inline-flex items-center gap-[7px]">
+              <span
+                className={cn('h-[7px] w-[7px] flex-shrink-0 rounded-full', STATUS_DOT[status])}
+                aria-hidden="true"
+              />
+              <span className="font-semibold text-[#62716d] uppercase dark:text-[#94a3b8]">
+                {name}
+              </span>
+              <span className="font-bold text-[#16221f] tabular-nums dark:text-white">
+                {status === 'ok' && typeof c.latency_ms === 'number'
+                  ? `${c.latency_ms.toFixed(1)} ms`
+                  : c.status}
+              </span>
+            </span>
+          );
+        })
+      )}
+
+      <span
+        className="ml-auto text-[11px] font-medium tracking-[0.02em] text-[#62716d] tabular-nums dark:text-[#94a3b8]"
+        aria-live="off"
+      >
+        {now || '—'}
+      </span>
     </div>
   );
 }

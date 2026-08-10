@@ -29,7 +29,12 @@
     "created": "Created",
     "updated": "Updated",
     "deleted": "Deleted",
-    "retry": "Try again"
+    "retry": "Try again",
+    "per_page": "Per page",
+    "of_total": "of",
+    "page": "Page",
+    "total": "Total",
+    "all": "All"
   },
   "sidebar": {
     "panel_label": "Restaurant panel",
@@ -133,7 +138,11 @@
       "people": "People",
       "business": "Business",
       "system": "System"
-    }
+    },
+    "group_operations": "Operations",
+    "group_finance": "Finance & reports",
+    "group_admin": "Administration",
+    "search_empty": "Nothing found"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -179,7 +188,12 @@
     "reports": "Reports",
     "log": "Log",
     "profile": "Profile",
-    "new": "New"
+    "new": "New",
+    "notifications_unread": "{count} new",
+    "notifications_empty": "No new notifications",
+    "notifications_view_all": "View all",
+    "theme_light": "Switch to light mode",
+    "theme_dark": "Switch to dark mode"
   },
   "overview": {
     "title": "Dashboard",
@@ -189,7 +203,8 @@
     "period": {
       "today": "Today",
       "week": "7 days",
-      "month": "30 days"
+      "month": "30 days",
+      "90d": "90 days"
     },
     "stats": {
       "orders": "Orders",
@@ -205,7 +220,10 @@
       "restaurant": "Restaurant",
       "kitchen": "Kitchen",
       "cashier": "Cashier",
-      "kds": "KDS"
+      "kds": "KDS",
+      "ok": "All systems normal",
+      "degraded": "System degraded",
+      "unknown": "Status unknown"
     },
     "auto_refresh": "Auto-refreshes every {seconds} seconds",
     "sections": {

@@ -29,7 +29,12 @@
     "created": "Создано",
     "updated": "Обновлено",
     "deleted": "Удалено",
-    "retry": "Повторить"
+    "retry": "Повторить",
+    "per_page": "На странице",
+    "of_total": "всего",
+    "page": "Страница",
+    "total": "Всего",
+    "all": "Все"
   },
   "sidebar": {
     "panel_label": "Ресторан панель",
@@ -133,7 +138,11 @@
       "people": "Люди",
       "business": "Бизнес",
       "system": "Система"
-    }
+    },
+    "group_operations": "Операции",
+    "group_finance": "Финансы и отчёты",
+    "group_admin": "Управление",
+    "search_empty": "Ничего не найдено"
   },
   "nav": {
     "dashboard": "Панель",
@@ -179,7 +188,12 @@
     "reports": "Отчёты",
     "log": "Лог",
     "profile": "Профиль",
-    "new": "Новый"
+    "new": "Новый",
+    "notifications_unread": "{count} новых",
+    "notifications_empty": "Новых уведомлений нет",
+    "notifications_view_all": "Показать все",
+    "theme_light": "Светлая тема",
+    "theme_dark": "Тёмная тема"
   },
   "overview": {
     "title": "Панель управления",
@@ -189,7 +203,8 @@
     "period": {
       "today": "Сегодня",
       "week": "7 дней",
-      "month": "30 дней"
+      "month": "30 дней",
+      "90d": "90 дней"
     },
     "stats": {
       "orders": "Заказы",
@@ -205,7 +220,10 @@
       "restaurant": "Ресторан",
       "kitchen": "Кухня",
       "cashier": "Касса",
-      "kds": "KDS"
+      "kds": "KDS",
+      "ok": "Система работает",
+      "degraded": "Проблема в системе",
+      "unknown": "Статус неизвестен"
     },
     "auto_refresh": "Обновляется каждые {seconds} секунд",
     "sections": {

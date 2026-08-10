@@ -29,7 +29,12 @@
     "created": "Yaratildi",
     "updated": "Yangilandi",
     "deleted": "O'chirildi",
-    "retry": "Qayta urinish"
+    "retry": "Qayta urinish",
+    "per_page": "Sahifada",
+    "of_total": "jami",
+    "page": "Sahifa",
+    "total": "Jami",
+    "all": "Hammasi"
   },
   "sidebar": {
     "panel_label": "Restoran paneli",
@@ -133,7 +138,11 @@
       "people": "Odamlar",
       "business": "Biznes",
       "system": "Tizim"
-    }
+    },
+    "group_operations": "Operatsiya",
+    "group_finance": "Moliya va hisobot",
+    "group_admin": "Boshqaruv",
+    "search_empty": "Hech narsa topilmadi"
   },
   "nav": {
     "dashboard": "Boshqaruv paneli",
@@ -179,7 +188,12 @@
     "reports": "Hisobotlar",
     "log": "Log",
     "profile": "Profil",
-    "new": "Yangi"
+    "new": "Yangi",
+    "notifications_unread": "{count} yangi",
+    "notifications_empty": "Yangi bildirishnoma yo'q",
+    "notifications_view_all": "Barchasini ko'rish",
+    "theme_light": "Yorug' rejimga o'tish",
+    "theme_dark": "Tungi rejimga o'tish"
   },
   "overview": {
     "title": "Boshqaruv paneli",
@@ -189,7 +203,8 @@
     "period": {
       "today": "Bugun",
       "week": "7 kun",
-      "month": "30 kun"
+      "month": "30 kun",
+      "90d": "90 kun"
     },
     "stats": {
       "orders": "Buyurtmalar",
@@ -205,7 +220,10 @@
       "restaurant": "Restoran",
       "kitchen": "Oshxona",
       "cashier": "Kassa",
-      "kds": "KDS"
+      "kds": "KDS",
+      "ok": "Tizim ishlayapti",
+      "degraded": "Tizimda muammo",
+      "unknown": "Holat aniqlanmadi"
     },
     "auto_refresh": "Har {seconds} sekundda yangilanadi",
     "sections": {
