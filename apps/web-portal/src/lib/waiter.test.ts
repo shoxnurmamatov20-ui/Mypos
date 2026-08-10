@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { resolvePostLoginTarget } from './post-login';
-import { formatSom, formatSomShort, getWaiterData } from './waiter-data';
+import {
+  formatNum,
+  formatSom,
+  formatSomShort,
+  formatUzs,
+  getWaiterData,
+  WAITER_ZONES,
+} from './waiter-data';
 
 /**
  * Core waiter-panel logic. Pure functions only — no DOM, no new test deps.
@@ -81,5 +88,37 @@ describe('getWaiterData integrity', () => {
     expect(data.orders.length).toBeGreaterThan(0);
     expect(data.menu.length).toBeGreaterThan(0);
     expect(data.shift.activity.length).toBeGreaterThan(0);
+  });
+
+  it('populates every declared zone with tables', () => {
+    for (const zone of WAITER_ZONES) {
+      expect(data.tables.some((table) => table.zone === zone)).toBe(true);
+    }
+  });
+
+  it('gives every occupied table an occupant name and open time', () => {
+    const occupied = data.tables.filter(
+      (table) => table.status === 'seated' || table.status === 'bill',
+    );
+    expect(occupied.length).toBeGreaterThan(0);
+    for (const table of occupied) {
+      expect(table.occupantName, `${table.label} missing occupant`).toBeTruthy();
+      expect(table.openedAt, `${table.label} missing openedAt`).toMatch(/^\d{2}:\d{2}$/);
+    }
+  });
+
+  it('has at least one of the waiter’s own open bills for the home screen', () => {
+    const mine = data.tables.filter((table) => table.mine && table.total);
+    expect(mine.length).toBeGreaterThan(0);
+  });
+});
+
+describe('so‘m formatters', () => {
+  it('formatNum groups thousands without a unit', () => {
+    expect(formatNum(1_033_760)).toMatch(/^1\D?033\D?760$/);
+  });
+
+  it('formatUzs appends the "uzs" unit', () => {
+    expect(formatUzs(45_000)).toMatch(/^45\D?000 uzs$/);
   });
 });

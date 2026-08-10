@@ -70,15 +70,21 @@
     "nav": {
       "groupWork": "Work",
       "groupShift": "Shift",
+      "home": "Home",
       "tables": "Tables",
       "orders": "Orders",
       "menu": "Menu",
-      "shift": "My shift"
+      "shift": "My shift",
+      "account": "Account",
+      "newOrder": "New order"
     },
     "common": {
       "logout": "Sign out",
       "close": "Close",
-      "menu": "Menu"
+      "menu": "Menu",
+      "demo": "Demo data",
+      "back": "Back",
+      "refresh": "Refresh"
     },
     "topbar": {
       "home": "Waiter"
@@ -108,6 +114,7 @@
       "empty": "No orders in this status",
       "total": "Total",
       "guests": "{count} guests",
+      "markServed": "Mark served",
       "status": {
         "open": "Open",
         "sent": "In kitchen",
@@ -134,6 +141,12 @@
       "offShift": "Shift closed",
       "started": "Started: {time}",
       "activity": "Today's activity",
+      "events": {
+        "placed": "{id} sent to kitchen",
+        "ready": "{id} ready",
+        "served": "{id} served",
+        "paid": "{id} payment received"
+      },
       "stats": {
         "tables": "Tables served",
         "orders": "Orders",
@@ -141,6 +154,65 @@
         "tips": "Tips",
         "active": "Active tables"
       }
+    },
+    "newOrder": {
+      "title": "New order",
+      "back": "Tables",
+      "stepTable": "Choose a table",
+      "stepMenu": "{table} — pick dishes",
+      "changeTable": "change",
+      "guests": "Guests",
+      "cart": "Cart · {count}",
+      "send": "Send to kitchen",
+      "sending": "Sending…",
+      "success": "Order sent to the kitchen",
+      "error": "Could not send — try again.",
+      "offline": "Server unreachable — sending is disabled",
+      "goToOrders": "Go to orders",
+      "oneMore": "Take another order",
+      "searchPlaceholder": "Search dish…",
+      "cartCount": "Cart ({count})"
+    },
+    "account": {
+      "title": "Account",
+      "workTime": "Work hours",
+      "workTimeSummary": "Sales {sales} · Tips {tips}",
+      "orderHistory": "Order history",
+      "menuLink": "Menu",
+      "language": "Change language",
+      "switchAccount": "Switch account",
+      "addAccount": "Add account",
+      "role": "Waiter",
+      "logout": "Sign out"
+    },
+    "home": {
+      "title": "Home",
+      "empty": "No open bills yet",
+      "emptyHint": "Tap “+” to start a new order",
+      "tableNo": "Table {number} ({zone})",
+      "total": "Total {amount}",
+      "ordersCount": "Orders: {count}"
+    },
+    "zone": {
+      "title": "Place",
+      "pick": "Choose a zone",
+      "empty": "No zone found"
+    },
+    "table": {
+      "empty": "No tables",
+      "free": "Free"
+    },
+    "hisob": {
+      "header": "{number} ({zone})",
+      "tab": "Bill - {n}",
+      "add": "Add",
+      "empty": "This bill is empty — add dishes"
+    },
+    "product": {
+      "comment": "Comment",
+      "commentPlaceholder": "e.g. not spicy",
+      "addToCart": "Add to cart",
+      "inCart": "{count} in cart"
     }
   }
 }

@@ -1,9 +1,9 @@
 import { setRequestLocale } from 'next-intl/server';
-import { TablesView } from '@/components/waiter/tables-view';
+import { HomeView } from '@/components/waiter/home-view';
 
-export default async function TablesPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <TablesView />;
+  return <HomeView />;
 }

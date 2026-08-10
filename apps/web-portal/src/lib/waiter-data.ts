@@ -15,6 +15,8 @@ export interface WaiterTable {
   id: string;
   /** Display label, e.g. "12-stol". */
   label: string;
+  /** Bare table number shown on the zone grid tile (e.g. "4"). */
+  number?: string;
   seats: number;
   zone: string;
   status: TableStatus;
@@ -24,6 +26,14 @@ export interface WaiterTable {
   /** Current running bill in so'm. */
   total?: number;
   orderId?: string;
+  /** True when the open order on this table belongs to the current waiter. */
+  mine?: boolean;
+  /** Name of whoever opened the table (waiter/guest label). */
+  occupantName?: string;
+  /** When the table was opened, "HH:MM". */
+  openedAt?: string;
+  /** Total number of ordered line-items on the open bill. */
+  itemsCount?: number;
 }
 
 export interface WaiterOrderItem {
@@ -34,6 +44,8 @@ export interface WaiterOrderItem {
 
 export interface WaiterOrder {
   id: string;
+  /** Backend UUID — present only on live rows; fixtures omit it. */
+  apiId?: string;
   table: string;
   status: OrderStatus;
   guests: number;
@@ -43,10 +55,18 @@ export interface WaiterOrder {
 }
 
 export interface MenuItem {
+  /** Backend UUID — present only on live rows; fixtures omit it. */
+  id?: string;
   name: string;
   price: number;
   available: boolean;
   popular?: boolean;
+  /** Dish photo (backend `image_url`); fixtures fall back to an emoji tile. */
+  image?: string;
+  /** Decorative emoji used when no photo is available. */
+  emoji?: string;
+  /** Short description shown on the product detail screen. */
+  description?: string;
 }
 
 export interface MenuCategory {
@@ -76,55 +96,101 @@ export interface WaiterData {
   shift: ShiftStats;
 }
 
+/** The five zones the reference restaurant ("Joy") uses, in display order. */
+export const WAITER_ZONES: readonly string[] = [
+  'ZAL',
+  'TASHQARI',
+  'KABINA',
+  'LUX KABINA',
+  'BANKET KABINA',
+];
+
+type Occupancy = Partial<
+  Pick<
+    WaiterTable,
+    | 'status'
+    | 'guests'
+    | 'occupiedFor'
+    | 'total'
+    | 'orderId'
+    | 'mine'
+    | 'occupantName'
+    | 'openedAt'
+    | 'itemsCount'
+  >
+>;
+
+/** Builds `count` numbered tables for one zone, overlaying any occupancy. */
+function zoneTables(
+  zone: string,
+  count: number,
+  seats: number,
+  occupied: Record<number, Occupancy>,
+): WaiterTable[] {
+  return Array.from({ length: count }, (_unused, index) => {
+    const number = index + 1;
+    const occ = occupied[number];
+    return {
+      id: `${zone.toLowerCase().replace(/\s+/g, '-')}-${number}`,
+      label: `${number}-stol`,
+      number: String(number),
+      seats,
+      zone,
+      status: 'free',
+      ...occ,
+    } satisfies WaiterTable;
+  });
+}
+
 const TABLES: readonly WaiterTable[] = [
-  { id: 't1', label: '1-stol', seats: 2, zone: 'Asosiy zal', status: 'free' },
-  {
-    id: 't2',
-    label: '2-stol',
-    seats: 4,
-    zone: 'Asosiy zal',
-    status: 'seated',
-    guests: 3,
-    occupiedFor: '24 daqiqa',
-    total: 118_000,
-    orderId: '#1042',
-  },
-  { id: 't3', label: '3-stol', seats: 4, zone: 'Asosiy zal', status: 'free' },
-  {
-    id: 't4',
-    label: '4-stol',
-    seats: 6,
-    zone: 'Asosiy zal',
-    status: 'bill',
-    guests: 5,
-    occupiedFor: '1 soat 12 daqiqa',
-    total: 216_000,
-    orderId: '#1039',
-  },
-  {
-    id: 't5',
-    label: '5-stol',
-    seats: 2,
-    zone: 'Terassa',
-    status: 'seated',
-    guests: 2,
-    occupiedFor: '8 daqiqa',
-    total: 72_000,
-    orderId: '#1045',
-  },
-  { id: 't6', label: '6-stol', seats: 4, zone: 'Terassa', status: 'reserved' },
-  {
-    id: 't7',
-    label: '7-stol',
-    seats: 8,
-    zone: 'VIP',
-    status: 'seated',
-    guests: 7,
-    occupiedFor: '41 daqiqa',
-    total: 449_000,
-    orderId: '#1041',
-  },
-  { id: 't8', label: '8-stol', seats: 2, zone: 'Terassa', status: 'free' },
+  ...zoneTables('ZAL', 18, 4, {
+    1: {
+      status: 'seated',
+      occupantName: 'ILHOM',
+      openedAt: '18:05',
+      total: 214_000,
+      itemsCount: 4,
+    },
+    2: {
+      status: 'seated',
+      mine: true,
+      occupantName: 'FAZLIDDIN',
+      openedAt: '12:31',
+      guests: 6,
+      total: 1_033_760,
+      itemsCount: 7,
+    },
+    3: { status: 'seated', occupantName: 'laylo', openedAt: '18:21', total: 88_000, itemsCount: 2 },
+    13: {
+      status: 'seated',
+      occupantName: 'GULM',
+      openedAt: '13:51',
+      total: 176_000,
+      itemsCount: 3,
+    },
+  }),
+  ...zoneTables('TASHQARI', 8, 4, {
+    2: {
+      status: 'seated',
+      occupantName: 'AXROR',
+      openedAt: '19:02',
+      total: 132_000,
+      itemsCount: 3,
+    },
+  }),
+  ...zoneTables('KABINA', 6, 6, {
+    1: {
+      status: 'seated',
+      mine: true,
+      occupantName: 'FAZLIDDIN',
+      openedAt: '17:40',
+      guests: 4,
+      total: 399_840,
+      itemsCount: 3,
+    },
+  }),
+  ...zoneTables('LUX KABINA', 4, 8, {}),
+  ...zoneTables('BANKET KABINA', 2, 20, {}),
 ];
 
 const ORDERS: readonly WaiterOrder[] = [
@@ -196,39 +262,51 @@ const ORDERS: readonly WaiterOrder[] = [
 
 const MENU: readonly MenuCategory[] = [
   {
-    name: 'Issiq taomlar',
+    name: 'Birinchi ovqatlar',
     items: [
-      { name: 'Osh', price: 38_000, available: true, popular: true },
-      { name: 'Lagʻmon', price: 34_000, available: true },
-      { name: 'Norin', price: 42_000, available: true, popular: true },
-      { name: 'Manti (6 dona)', price: 36_000, available: true },
-      { name: 'Shashlik assorti', price: 95_000, available: true, popular: true },
-      { name: 'Dimlama', price: 44_000, available: false },
+      { name: 'Bostirma', price: 45_000, available: true, emoji: '🍲', popular: true },
+      { name: 'Qaynatma mol gusht', price: 30_000, available: true, emoji: '🥘' },
+      { name: 'Qaynatma quy gusht', price: 35_000, available: true, emoji: '🍜' },
+      { name: 'Tiftel', price: 30_000, available: true, emoji: '🍛' },
+      { name: 'Mastava', price: 28_000, available: true, emoji: '🥣' },
+      { name: 'Shorva', price: 26_000, available: false, emoji: '🍲' },
     ],
   },
   {
-    name: 'Salatlar',
+    name: 'Ikkinchi ovqat',
     items: [
-      { name: 'Achichuq salat', price: 18_000, available: true },
-      { name: 'Sezar', price: 45_000, available: true },
-      { name: 'Vinegret', price: 22_000, available: true },
+      { name: 'Osh', price: 38_000, available: true, emoji: '🍚', popular: true },
+      { name: 'Lagʻmon', price: 34_000, available: true, emoji: '🍜' },
+      { name: 'Norin', price: 42_000, available: true, emoji: '🍝', popular: true },
+      { name: 'Manti (6 dona)', price: 36_000, available: true, emoji: '🥟' },
+      { name: 'Dimlama', price: 44_000, available: false, emoji: '🥘' },
     ],
   },
   {
-    name: 'Ichimliklar',
+    name: 'Salat',
     items: [
-      { name: 'Choy (choynak)', price: 12_000, available: true },
-      { name: 'Coca-Cola', price: 15_000, available: true },
-      { name: 'Ayron', price: 14_000, available: true },
-      { name: 'Tabiiy sharbat', price: 25_000, available: true, popular: true },
+      { name: 'Aliviya', price: 35_000, available: true, emoji: '🥗', popular: true },
+      { name: 'Achichuq salat', price: 18_000, available: true, emoji: '🍅' },
+      { name: 'Sezar', price: 45_000, available: true, emoji: '🥬' },
+      { name: 'Vinegret', price: 22_000, available: true, emoji: '🥗' },
     ],
   },
   {
-    name: 'Shirinliklar',
+    name: 'Shashlik',
     items: [
-      { name: 'Tort (boʻlak)', price: 32_000, available: true },
-      { name: 'Muzqaymoq', price: 20_000, available: true },
-      { name: 'Chak-chak', price: 24_000, available: false },
+      { name: 'Shashlik assorti', price: 95_000, available: true, emoji: '🍢', popular: true },
+      { name: 'Mol gushti shashlik', price: 32_000, available: true, emoji: '🍖' },
+      { name: 'Jigar shashlik', price: 28_000, available: true, emoji: '🍢' },
+      { name: 'Tovuq shashlik', price: 26_000, available: true, emoji: '🍗' },
+    ],
+  },
+  {
+    name: 'Choy',
+    items: [
+      { name: 'Choy (choynak)', price: 12_000, available: true, emoji: '🍵' },
+      { name: 'Coca-Cola', price: 15_000, available: true, emoji: '🥤' },
+      { name: 'Ayron', price: 14_000, available: true, emoji: '🥛' },
+      { name: 'Tabiiy sharbat', price: 25_000, available: true, emoji: '🧃', popular: true },
     ],
   },
 ];
@@ -259,6 +337,16 @@ export function formatSomShort(amount: number): string {
   if (amount >= 1_000_000) return `${(amount / 1_000_000).toFixed(1)}M soʻm`;
   if (amount >= 1_000) return `${Math.round(amount / 1_000)}K soʻm`;
   return `${amount} soʻm`;
+}
+
+/** Plain grouped number, no unit — the red running-total on home/table tiles. */
+export function formatNum(amount: number): string {
+  return amount.toLocaleString('ru-RU').replace(/ /g, ' ');
+}
+
+/** "45 000 uzs" — the unit label the reference waiter app prints on prices. */
+export function formatUzs(amount: number): string {
+  return `${formatNum(amount)} uzs`;
 }
 
 /** Format a so'm amount with thin-space thousand separators. */

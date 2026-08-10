@@ -16,6 +16,8 @@ export interface WaiterSession {
   role: string;
   name: string;
   tenantName: string;
+  /** Waiter phone number, shown on the account screen when the login persisted it. */
+  phone?: string;
 }
 
 const KEYS = {
@@ -23,6 +25,7 @@ const KEYS = {
   role: 'mypos_role',
   name: 'mypos_name',
   tenant: 'mypos_tenant',
+  phone: 'mypos_phone',
 } as const;
 
 /** Read the persisted session. Returns `null` when nothing is stored. */
@@ -38,6 +41,7 @@ export function readWaiterSession(): WaiterSession | null {
     role,
     name: window.localStorage.getItem(KEYS.name) ?? 'Ofitsiant',
     tenantName: window.localStorage.getItem(KEYS.tenant) ?? 'MyPOS',
+    phone: window.localStorage.getItem(KEYS.phone) ?? undefined,
   };
 }
 
@@ -48,6 +52,7 @@ export function persistWaiterSession(session: WaiterSession): void {
   window.localStorage.setItem(KEYS.role, session.role);
   window.localStorage.setItem(KEYS.name, session.name);
   window.localStorage.setItem(KEYS.tenant, session.tenantName);
+  if (session.phone) window.localStorage.setItem(KEYS.phone, session.phone);
 }
 
 /** Wipe every session key — used on logout. */

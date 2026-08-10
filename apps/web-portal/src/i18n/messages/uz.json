@@ -70,15 +70,21 @@
     "nav": {
       "groupWork": "Ish",
       "groupShift": "Smena",
+      "home": "Bosh sahifa",
       "tables": "Stollar",
       "orders": "Buyurtmalar",
       "menu": "Menyu",
-      "shift": "Smenam"
+      "shift": "Smenam",
+      "account": "Akkaunt",
+      "newOrder": "Yangi buyurtma"
     },
     "common": {
       "logout": "Chiqish",
       "close": "Yopish",
-      "menu": "Menyu"
+      "menu": "Menyu",
+      "demo": "Namunaviy ma'lumot",
+      "back": "Orqaga",
+      "refresh": "Yangilash"
     },
     "topbar": {
       "home": "Ofitsiant"
@@ -108,6 +114,7 @@
       "empty": "Bu holatda buyurtma yo'q",
       "total": "Jami",
       "guests": "{count} mehmon",
+      "markServed": "Mehmonga berdim",
       "status": {
         "open": "Ochiq",
         "sent": "Oshxonada",
@@ -134,6 +141,12 @@
       "offShift": "Smena yopiq",
       "started": "Boshlandi: {time}",
       "activity": "Bugungi harakatlar",
+      "events": {
+        "placed": "{id} oshxonaga yuborildi",
+        "ready": "{id} tayyor",
+        "served": "{id} mehmonlarga berildi",
+        "paid": "{id} to'lov qabul qilindi"
+      },
       "stats": {
         "tables": "Xizmat ko'rsatilgan stol",
         "orders": "Buyurtmalar",
@@ -141,6 +154,65 @@
         "tips": "Choychaqa",
         "active": "Faol stollar"
       }
+    },
+    "newOrder": {
+      "title": "Yangi buyurtma",
+      "back": "Stollar",
+      "stepTable": "Stolni tanlang",
+      "stepMenu": "{table} — taom tanlang",
+      "changeTable": "almashtirish",
+      "guests": "Mehmonlar",
+      "cart": "Savat · {count} ta",
+      "send": "Oshxonaga yuborish",
+      "sending": "Yuborilmoqda…",
+      "success": "Buyurtma oshxonaga yuborildi",
+      "error": "Yuborib bo'lmadi — qayta urinib ko'ring.",
+      "offline": "Server bilan aloqa yo'q — yuborish vaqtincha o'chirilgan",
+      "goToOrders": "Buyurtmalarga o'tish",
+      "oneMore": "Yana buyurtma olish",
+      "searchPlaceholder": "Taomni qidirish…",
+      "cartCount": "Savat ({count})"
+    },
+    "account": {
+      "title": "Akkaunt",
+      "workTime": "Ish vaqti",
+      "workTimeSummary": "Savdo {sales} · Choychaqa {tips}",
+      "orderHistory": "Buyurtma tarixi",
+      "menuLink": "Menyu",
+      "language": "Tilni o'zgartirish",
+      "switchAccount": "Hisobni almashtirish",
+      "addAccount": "Hisob qo'shish",
+      "role": "Ofitsiant",
+      "logout": "Akkauntdan chiqish"
+    },
+    "home": {
+      "title": "Bosh sahifa",
+      "empty": "Hozircha ochiq hisob yo'q",
+      "emptyHint": "Yangi buyurtma boshlash uchun “+” tugmasini bosing",
+      "tableNo": "Stol raqami: {number} ({zone})",
+      "total": "Umumiy hisob {amount}",
+      "ordersCount": "Buyurtmalar soni: {count}"
+    },
+    "zone": {
+      "title": "Joy",
+      "pick": "Zonani tanlang",
+      "empty": "Zona topilmadi"
+    },
+    "table": {
+      "empty": "Stol yo'q",
+      "free": "Bo'sh"
+    },
+    "hisob": {
+      "header": "{number} ({zone})",
+      "tab": "Hisob - {n}",
+      "add": "Qo'shish",
+      "empty": "Bu hisob bo'sh — taom qo'shing"
+    },
+    "product": {
+      "comment": "Izoh",
+      "commentPlaceholder": "Masalan: achchiq bo'lmasin",
+      "addToCart": "Savatga qo'shish",
+      "inCart": "Savatda {count} ta"
     }
   }
 }
